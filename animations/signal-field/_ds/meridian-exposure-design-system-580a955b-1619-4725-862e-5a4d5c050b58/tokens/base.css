@@ -1,0 +1,25 @@
+/* ============================================================
+   Meridian — Base element defaults
+   Light-touch resets so specimen cards & kits inherit the
+   brand without per-file boilerplate.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font: var(--type-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'tnum' 1, 'lnum' 1; /* tabular, lining figures */
+}
+
+h1, h2, h3, h4 { color: var(--text-strong); margin: 0; }
+p { margin: 0; }
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Tabular numerals helper for any column of figures */
+.tnum { font-variant-numeric: tabular-nums lining-nums; }

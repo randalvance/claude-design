@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/tokens/colors.css">
+<link rel="stylesheet" href="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/tokens/typography.css">
+<link rel="stylesheet" href="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/tokens/layout.css">
+<link rel="stylesheet" href="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/tokens/base.css">
+<link rel="stylesheet" href="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/styles.css">
+<script src="_ds/meridian-exposure-design-system-580a955b-1619-4725-862e-5a4d5c050b58/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: #04102b; }
+  a { color: var(--blue-400); text-decoration: none; }
+  a:hover { color: var(--blue-300); text-decoration: underline; }
+  @keyframes om-sb {
+    0%, 100% { transform: scaleY(var(--lo, 0.3)); }
+    50%      { transform: scaleY(var(--hi, 1)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-om-sb] { animation: none !important; transform: scaleY(var(--lo, 0.3)) !important; }
+  }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; padding: 48px 40px 64px; box-sizing: border-box; background: #04102b; font-family: 'IBM Plex Sans', sans-serif;">
+  <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px;">
+
+    <header style="display: flex; flex-direction: column; gap: 10px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-400);">Motion pattern · dark</span>
+      <h1 style="font-family: 'Source Serif 4', serif; font-size: 40px; line-height: 1.1; font-weight: 600; color: #eef4ff; margin: 0;">Signal field — background processing</h1>
+      <p style="font-size: 17px; line-height: 1.55; color: #9cb0d4; margin: 0; max-width: 64ch; text-wrap: pretty;">A spectrum-analyser bar field along the lower edge of a dark card. Amplitude and tempo carry the state: wide and quick while work runs, low and slow while a job idles, flat once it settles.</p>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; align-items: start;">
+
+      <x-import component-from-global-scope="MeridianExposureDesignSystem_580a95.Card" dc-props="{{ cardProps }}" hint-size="100%,280px">
+        {{ barsActive }}
+        <div style="position: relative; padding: 24px 24px 116px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 19px; font-weight: 600; color: #eef4ff;">Board pack generation</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #7e93b8;">Q1 2026 · INITIATED 09:42</span>
+            </div>
+            <span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(48,127,226,0.5); background: rgba(48,127,226,0.14); font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); white-space: nowrap;">
+              <span style="width: 7px; height: 7px; border-radius: 999px; background: var(--blue-400); box-shadow: 0 0 8px var(--blue-400);"></span>Processing
+            </span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Source Serif 4', serif; font-size: 44px; line-height: 1; color: #ffffff; font-variant-numeric: tabular-nums;">68%</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7e93b8;">412 exposures · 2 min remaining</span>
+          </div>
+        </div>
+      </x-import>
+
+      <x-import component-from-global-scope="MeridianExposureDesignSystem_580a95.Card" dc-props="{{ cardProps }}" hint-size="100%,280px">
+        {{ barsIdle }}
+        <div style="position: relative; padding: 24px 24px 116px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 19px; font-weight: 600; color: #eef4ff;">Exposure listener</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #7e93b8;">LIVE FEED · LAST EVENT 09:44</span>
+            </div>
+            <span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(147,160,181,0.4); background: rgba(147,160,181,0.12); font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #b8c7e0; white-space: nowrap;">
+              <span style="width: 7px; height: 7px; border-radius: 999px; background: #93a0b5;"></span>Idle
+            </span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Source Serif 4', serif; font-size: 44px; line-height: 1; color: #ffffff; font-variant-numeric: tabular-nums;">0</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7e93b8;">jobs in flight · listening</span>
+          </div>
+        </div>
+      </x-import>
+
+      <x-import component-from-global-scope="MeridianExposureDesignSystem_580a95.Card" dc-props="{{ cardProps }}" hint-size="100%,280px">
+        {{ barsQueued }}
+        <div style="position: relative; padding: 24px 24px 116px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 19px; font-weight: 600; color: #eef4ff;">Limit revaluation</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #7e93b8;">NIGHTLY BATCH · QUEUED 09:51</span>
+            </div>
+            <span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(201,138,0,0.5); background: rgba(201,138,0,0.14); font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #e5bd63; white-space: nowrap;">
+              <span style="width: 7px; height: 7px; border-radius: 999px; background: var(--warning-500); box-shadow: 0 0 8px rgba(201,138,0,0.8);"></span>Queued
+            </span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Source Serif 4', serif; font-size: 44px; line-height: 1; color: #ffffff; font-variant-numeric: tabular-nums;">—</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7e93b8;">waiting on FX close · 18:00 GMT</span>
+          </div>
+        </div>
+      </x-import>
+
+      <x-import component-from-global-scope="MeridianExposureDesignSystem_580a95.Card" dc-props="{{ cardProps }}" hint-size="100%,280px">
+        {{ barsSettled }}
+        <div style="position: relative; padding: 24px 24px 116px; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 19px; font-weight: 600; color: #eef4ff;">Counterparty refresh</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #7e93b8;">COMPLETED 09:38</span>
+            </div>
+            <span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(26,138,82,0.5); background: rgba(26,138,82,0.14); font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #6fcf9a; white-space: nowrap;">Complete</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Source Serif 4', serif; font-size: 44px; line-height: 1; color: #ffffff; font-variant-numeric: tabular-nums;">100%</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7e93b8;">1,204 records reconciled</span>
+          </div>
+        </div>
+      </x-import>
+
+    </div>
+
+    <p style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.6; color: #6f84a8; margin: 0; max-width: 70ch; text-wrap: pretty;">The field is decorative — state is always stated by the pill and the figure. Motion holds still under prefers-reduced-motion.</p>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;paused&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bar field&quot;},&quot;barCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:32,&quot;min&quot;:10,&quot;max&quot;:56,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Bar field&quot;},&quot;cycleMs&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1200,&quot;min&quot;:600,&quot;max&quot;:2600,&quot;step&quot;:50,&quot;unit&quot;:&quot;ms&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Bar field&quot;},&quot;idleCalm&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.42,&quot;min&quot;:0.15,&quot;max&quot;:0.8,&quot;step&quot;:0.01,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Bar field&quot;},&quot;stripHeight&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:104,&quot;min&quot;:48,&quot;max&quot;:170,&quot;step&quot;:2,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Bar field&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#307FE2&quot;,&quot;options&quot;:[&quot;#307FE2&quot;,&quot;#5d9aeb&quot;,&quot;#4258B8&quot;,&quot;#94a6e6&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bar field&quot;}}">
+class Component extends DCLogic {
+  strip(opts) {
+    const {
+      count = 32, accent = '#307FE2', glow = 'rgba(48,127,226,0.55)', cycleMs = 1200,
+      height = 104, mode = 'active', amp = 1, opacity = 0.72, key = 's'
+    } = opts;
+    const active = mode !== 'off';
+    const bars = [];
+    for (let i = 0; i < count; i++) {
+      const w = Math.abs(Math.sin(i * 1.37) * 0.55 + Math.sin(i * 0.61 + 1.1) * 0.45);
+      const peak = (0.3 + w * 0.7) * amp;
+      const lo = active ? Math.max(0.07, peak * (mode === 'idle' ? 0.62 : 0.24)) : Math.max(0.05, peak * 0.22);
+      const hi = active ? Math.max(lo, peak) : lo;
+      const dur = cycleMs * (0.7 + ((i * 7) % 11) / 11 * 0.66);
+      const delay = -((i * 13) % 17) / 17 * dur;
+      bars.push(React.createElement('span', {
+        key: key + i,
+        'data-om-sb': active ? '1' : null,
+        style: {
+          flex: '1 1 0', minWidth: 2, maxWidth: 10, height: '100%',
+          borderRadius: '1px 1px 0 0', background: accent, opacity,
+          boxShadow: '0 0 10px ' + glow,
+          transformOrigin: 'bottom center',
+          transform: 'scaleY(' + lo + ')',
+          willChange: active ? 'transform' : 'auto',
+          '--lo': lo, '--hi': hi,
+          animation: active
+            ? 'om-sb ' + dur.toFixed(0) + 'ms ease-in-out ' + delay.toFixed(0) + 'ms infinite'
+            : 'none'
+        }
+      }));
+    }
+    const wrap = React.createElement('div', {
+      style: {
+        position: 'absolute', left: 0, right: 0, bottom: 0, height: height + 'px',
+        display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+        gap: 5, padding: '0 20px', boxSizing: 'border-box',
+        maskImage: 'linear-gradient(to top, #000 0%, rgba(0,0,0,0.92) 42%, rgba(0,0,0,0) 100%)',
+        WebkitMaskImage: 'linear-gradient(to top, #000 0%, rgba(0,0,0,0.92) 42%, rgba(0,0,0,0) 100%)'
+      }
+    }, bars);
+    const baseline = React.createElement('div', {
+      key: 'bl',
+      style: {
+        position: 'absolute', left: 0, right: 0, bottom: 0, height: 1,
+        background: accent, opacity: active ? 0.4 : 0.22
+      }
+    });
+    return React.createElement('div', {
+      'aria-hidden': 'true',
+      style: { position: 'absolute', left: 0, right: 0, bottom: 0, top: 0, pointerEvents: 'none' }
+    }, wrap, baseline);
+  }
+
+  renderVals() {
+    const count = this.props.barCount ?? 32;
+    const cycleMs = this.props.cycleMs ?? 1200;
+    const height = this.props.stripHeight ?? 104;
+    const accent = this.props.accent ?? '#307FE2';
+    const idleCalm = this.props.idleCalm ?? 0.42;
+    const paused = this.props.paused ?? false;
+    const glow = 'rgba(48,127,226,0.5)';
+    const m = (base) => (paused ? 'off' : base);
+    return {
+      cardProps: {
+        style: {
+          background: '#0a1c40',
+          border: '1px solid rgba(93,154,235,0.22)',
+          borderRadius: 'var(--radius-lg)',
+          boxShadow: '0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 24px rgba(4,16,43,0.6)'
+        },
+        bodyStyle: { position: 'relative', padding: 0, overflow: 'hidden' }
+      },
+      barsActive: this.strip({ count, accent, glow, cycleMs, height, mode: m('active'), amp: 1, opacity: 0.78, key: 'a' }),
+      barsIdle: this.strip({ count, accent, glow, cycleMs: cycleMs * 2.6, height, mode: m('idle'), amp: idleCalm, opacity: 0.5, key: 'i' }),
+      barsQueued: this.strip({ count, accent: '#c98a00', glow: 'rgba(201,138,0,0.45)', cycleMs: cycleMs * 3.2, height, mode: m('idle'), amp: idleCalm * 0.8, opacity: 0.45, key: 'q' }),
+      barsSettled: this.strip({ count, accent: '#5d9aeb', glow: 'rgba(93,154,235,0.2)', cycleMs, height, mode: 'off', amp: 0.5, opacity: 0.3, key: 'd' })
+    };
+  }
+}
+
+</script>
+</body>
+</html>
