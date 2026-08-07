@@ -1,0 +1,98 @@
+/* ============================================================
+   Meridian — Color tokens
+   A conservative, trustworthy financial palette built around a
+   deep navy and a clear corporate blue. High contrast is a
+   first principle: this app is read by senior board members,
+   so text/background pairs target WCAG AAA where possible.
+   ============================================================ */
+
+:root {
+  /* ---- Brand: base ramp ---------------------------------- */
+  --brand-deep:    #071D49;  /* primary-deep — sidebar, headings, ink */
+  --brand-primary: #4258B8;  /* primary — interpreted from #4258B (flagged) */
+  --brand-mid:     #307FE2;  /* primary-mid — links, active, accents */
+
+  /* Tints / shades derived from the brand for fills & states  */
+  --brand-900: #071D49;
+  --brand-800: #122a5e;
+  --brand-700: #1f3c80;
+  --brand-600: #2f4aa0;
+  --brand-500: #4258B8;
+  --brand-400: #5f78d6;
+  --brand-300: #94a6e6;
+  --brand-200: #c3cdf2;
+  --brand-100: #e4e9fa;
+  --brand-50:  #f2f5fd;
+
+  /* Corporate blue (accent / interactive) ramp */
+  --blue-700: #1b5fbd;
+  --blue-600: #2670d4;
+  --blue-500: #307FE2;
+  --blue-400: #5d9aeb;
+  --blue-300: #9cc3f3;
+  --blue-100: #e1eefc;
+  --blue-50:  #f0f7ff;
+
+  /* ---- Neutrals (cool-tinted gray) ----------------------- */
+  --ink-900: #0c1426;  /* primary text */
+  --ink-800: #1c2a44;
+  --ink-700: #33415c;  /* body text */
+  --ink-600: #4d5d78;  /* secondary text */
+  --ink-500: #6b7a94;  /* muted / captions */
+  --ink-400: #93a0b5;  /* disabled text, icons */
+  --ink-300: #c0c8d6;  /* borders (strong) */
+  --ink-200: #dbe1ea;  /* borders (default) */
+  --ink-150: #e7ebf1;  /* dividers */
+  --ink-100: #f0f3f7;  /* subtle fill */
+  --ink-50:  #f7f9fc;  /* page background */
+  --white:   #ffffff;
+
+  /* ---- Semantic / data-direction ------------------------- */
+  --positive-700: #0f6b3f;
+  --positive-500: #1a8a52;  /* gains, up */
+  --positive-100: #def0e6;
+  --positive-50:  #f0f9f3;
+
+  --negative-700: #a01b2b;
+  --negative-500: #c8203a;  /* losses, down, breaches */
+  --negative-100: #fadee2;
+  --negative-50:  #fdf2f4;
+
+  --warning-700: #9a6400;
+  --warning-500: #c98a00;  /* watch / near-limit */
+  --warning-100: #faecca;
+  --warning-50:  #fdf8ec;
+
+  --info-500: var(--blue-500);
+  --info-100: var(--blue-100);
+
+  /* ---- Categorical chart palette ------------------------- */
+  /* Ordered for pie/bar series; distinguishable, brand-rooted */
+  --chart-1: #071D49;
+  --chart-2: #307FE2;
+  --chart-3: #4258B8;
+  --chart-4: #1a8a52;
+  --chart-5: #c98a00;
+  --chart-6: #6b7a94;
+  --chart-7: #5d9aeb;
+  --chart-8: #94a6e6;
+
+  /* ---- Semantic surface / text aliases ------------------- */
+  --surface-page:     var(--ink-50);
+  --surface-card:     var(--white);
+  --surface-sunken:   var(--ink-100);
+  --surface-brand:    var(--brand-deep);
+  --surface-brand-soft: var(--brand-50);
+
+  --text-strong:   var(--ink-900);
+  --text-body:     var(--ink-700);
+  --text-muted:    var(--ink-500);
+  --text-on-brand: var(--white);
+  --text-link:     var(--blue-600);
+
+  --border-default: var(--ink-200);
+  --border-strong:  var(--ink-300);
+  --divider:        var(--ink-150);
+
+  --focus-ring: var(--blue-500);
+}
