@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Compact session rows</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d2a}
+a{color:inherit;text-decoration:none}a:hover{color:#ffffff}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+/* ---------- shared compact row: 44px ---------- */
+.row{position:relative;box-sizing:border-box;height:44px;display:flex;align-items:center;gap:10px;padding:0 4px 0 14px;border-radius:10px;background:transparent;border:1px solid transparent;transition:background .25s,transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s,filter .3s}
+.row:hover{background:rgba(255,255,255,.05)}
+.title{flex:1;min-width:0;font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.time{font-size:11.5px;white-space:nowrap}
+.slot{width:14px;height:14px;display:grid;place-items:center;flex:none}
+.more{width:28px;height:28px;flex:none;border-radius:7px;border:0;background:transparent;color:#8a90c4;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .2s,background .2s}
+.row:hover .more,.more:focus-visible{opacity:1}
+.more:hover{background:rgba(255,255,255,.1);color:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- BUSY ---------- */
+.busy-wrap{position:relative;border-radius:11px;padding:1px;overflow:hidden;background:rgba(124,131,255,.16)}
+.busy-wrap::before{content:"";position:absolute;inset:-400%;background:conic-gradient(from 0deg,transparent 0 72%,#7c83ff 88%,#d6d9ff 94%,transparent 100%);animation:spin 3.2s linear infinite}
+.busy-wrap .row{background:#1c1f55;border:0;height:42px}
+.ring{position:relative;width:13px;height:13px}
+.ring::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(124,131,255,.22);border-top-color:#c4c7ff;border-right-color:#7c83ff;animation:spin .85s cubic-bezier(.55,.15,.45,.85) infinite}
+.ring::after{content:"";position:absolute;inset:4.5px;border-radius:50%;background:#b4b8ff;animation:core 1.7s ease-in-out infinite}
+@keyframes core{50%{transform:scale(.5);opacity:.6}}
+.twinkle{animation:twinkle 2.4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(90deg) scale(.78)}}
+.shimmer{background:linear-gradient(90deg,#eef0ff 0%,#eef0ff 38%,#a9aeff 50%,#eef0ff 62%,#eef0ff 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 2.6s linear infinite}
+@keyframes shim{from{background-position:100% 0}to{background-position:0 0}}
+.bar{position:absolute;left:12px;right:12px;bottom:0;height:2px;overflow:hidden;border-radius:2px}
+.bar::after{content:"";position:absolute;top:0;bottom:0;width:35%;border-radius:2px;background:linear-gradient(90deg,transparent,#b4b8ff,transparent);animation:slide 1.6s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes slide{0%{left:-35%}100%{left:100%}}
+
+/* ---------- IDLE ---------- */
+.breathe{width:9px;height:9px;border-radius:50%;background:#34d399;animation:breathe 3.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.85);box-shadow:0 0 0 0 rgba(52,211,153,0)}50%{transform:scale(1.05);box-shadow:0 0 0 4px rgba(52,211,153,.16)}}
+
+/* ---------- ATTENTION ---------- */
+.attn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.5);animation:glow 2.4s ease-in-out infinite}
+.attn:hover{background:rgba(251,191,36,.12)}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 0 3px rgba(251,191,36,.12),0 0 18px -4px rgba(251,191,36,.35)}}
+.ripple{position:relative;width:9px;height:9px;border-radius:50%;background:#fbbf24}
+.ripple::before,.ripple::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fbbf24;animation:rip 2s cubic-bezier(.2,.6,.3,1) infinite}
+.ripple::after{animation-delay:1s}
+@keyframes rip{0%{transform:scale(1);opacity:.8}100%{transform:scale(3);opacity:0}}
+.shake{transform-origin:50% 10%;animation:shake 3s ease-in-out infinite}
+@keyframes shake{0%,78%,100%{transform:rotate(0)}81%{transform:rotate(16deg)}85%{transform:rotate(-13deg)}89%{transform:rotate(9deg)}93%{transform:rotate(-5deg)}97%{transform:rotate(2deg)}}
+.pill{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;background:#fbbf24;color:#1f1600;font:800 10.5px/1 Manrope,system-ui,sans-serif;letter-spacing:.02em;white-space:nowrap;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+
+/* ---------- INACTIVE ---------- */
+.inactive{opacity:.5;filter:saturate(.2)}
+.inactive:hover{opacity:.9;filter:saturate(1)}
+.hollow{width:9px;height:9px;border-radius:50%;border:2px solid #5d6297;box-sizing:border-box}
+
+/* ---------- DONE ---------- */
+.done{overflow:hidden}
+.check-c{stroke-dasharray:57;stroke-dashoffset:57;animation:draw .55s cubic-bezier(.65,0,.35,1) forwards}
+.check-p{stroke-dasharray:14;stroke-dashoffset:14;animation:draw .35s cubic-bezier(.65,0,.35,1) .45s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) .5s both}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.p{position:absolute;left:6px;top:6px;width:3px;height:3px;border-radius:50%;animation:burst .7s cubic-bezier(.2,.7,.3,1) .7s both}
+@keyframes burst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+.shine{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:10px}
+.shine::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-50%;background:linear-gradient(100deg,transparent,rgba(94,234,212,.16),transparent);animation:sweep 1.1s cubic-bezier(.6,0,.3,1) .8s both}
+@keyframes sweep{to{left:120%}}
+.rise{animation:rise .45s cubic-bezier(.2,.8,.2,1) .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ---------- sidebar chrome ---------- */
+.group{display:flex;align-items:center;gap:10px;height:40px;padding:0 14px;border-radius:10px;background:#2a2e66;font-size:14px;font-weight:800;color:#e6e8ff}
+.sw{width:12px;height:12px;border-radius:3px}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important}}
+</style>
+</helmet>
+
+<div style="width: 1280px; height: 720px; box-sizing: border-box; padding: 56px 64px; background: #0b0d2a; color: #eef0ff; font-family: Manrope, system-ui, sans-serif; display: flex; flex-direction: column; gap: 40px">
+
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <div style="font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8f95d6">Variant B · compact · 44px rows</div>
+    <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -.02em">Compact session rows</h1>
+  </div>
+
+  <div style="display: flex; gap: 72px; align-items: flex-start">
+
+    <!-- spec column -->
+    <div style="width: 440px; display: flex; flex-direction: column; gap: 18px">
+
+      <div style="display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 16px">
+        <div style="font-size: 13px; font-weight: 700; color: #b4b8ff"><span class="mono" style="color: #6f75b8">01 </span>Busy</div>
+        <div class="busy-wrap">
+          <div class="row">
+            <div class="slot"><div class="ring"></div></div>
+            <svg class="twinkle" width="13" height="13" viewBox="0 0 24 24" fill="#b4b8ff" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+            <a href="#" class="title shimmer">LEIB-117 - Static HTML File</a>
+            <span class="time mono" style="color: #c9ccff">{{elapsed}}</span>
+            <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 16px">
+        <div style="font-size: 13px; font-weight: 700; color: #6ee7b7"><span class="mono" style="color: #6f75b8">02 </span>Idle</div>
+        <div class="row">
+          <div class="slot"><div class="breathe"></div></div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#8f95d6" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+          <a href="#" class="title">Session List Redesign</a>
+          <span class="time mono" style="color: #8f95d6">9m 45s</span>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 16px">
+        <div style="font-size: 13px; font-weight: 700; color: #fcd34d"><span class="mono" style="color: #6f75b8">03 </span>Needs you</div>
+        <div class="row attn">
+          <div class="slot"><div class="ripple"></div></div>
+          <svg class="shake" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+          <a href="#" class="title">Total Removal of Admin Functi…</a>
+          <span class="pill">Reply</span>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 16px">
+        <div style="font-size: 13px; font-weight: 700; color: #a3a8de"><span class="mono" style="color: #6f75b8">04 </span>Inactive</div>
+        <div class="row inactive">
+          <div class="slot"><div class="hollow"></div></div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8f95d6" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
+          <a href="#" class="title" style="font-weight: 600; color: #c9ccef">Update Image Hash</a>
+          <span class="time mono" style="color: #8f95d6">2d ago</span>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 16px">
+        <div style="font-size: 13px; font-weight: 700; color: #5eead4"><span class="mono" style="color: #6f75b8">05 </span>Done</div>
+        <div class="row done">
+          <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}"><div class="shine"></div></sc-if>
+          <div class="slot" style="position: relative">
+            <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+              <svg class="pop" width="15" height="15" viewBox="0 0 22 22" fill="none" stroke="#5eead4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="check-c" cx="11" cy="11" r="9"></circle><path class="check-p" d="M7 11.3l2.8 2.7L15 8.6"></path></svg>
+              <span class="p" style="--dx: 0px; --dy: -11px; background: #5eead4"></span>
+              <span class="p" style="--dx: 10px; --dy: -6px; background: #b4b8ff"></span>
+              <span class="p" style="--dx: 10px; --dy: 6px; background: #fcd34d"></span>
+              <span class="p" style="--dx: 0px; --dy: 11px; background: #5eead4"></span>
+              <span class="p" style="--dx: -10px; --dy: 6px; background: #f9a8d4"></span>
+              <span class="p" style="--dx: -10px; --dy: -6px; background: #b4b8ff"></span>
+            </sc-if>
+          </div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#8f95d6" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+          <a href="#" class="title">LEIB-248 - Export Endpoint</a>
+          <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+            <span class="time mono rise" style="color: #5eead4">18m 19s</span>
+          </sc-if>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+      </div>
+
+      <button type="button" onClick="{{replay}}" style="align-self: flex-start; margin: 10px 0 0 128px; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); background: transparent; color: #d9dcff; font: 600 13px/1 Manrope, system-ui, sans-serif; cursor: pointer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>
+        Replay “Done”
+      </button>
+    </div>
+
+    <!-- in-context sidebar -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 14px">
+      <div style="font-size: 13px; font-weight: 700; color: #a3a8de">In the sidebar</div>
+      <div style="width: 420px; box-sizing: border-box; padding: 14px; border-radius: 16px; background: #10123a; border: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px">
+
+        <div class="group"><span class="sw" style="background: #f87171"></span>Large Exposure App<span class="mono" style="margin-left: auto; font-size: 12px; color: #b9bce6">2</span></div>
+        <div class="row attn">
+          <div class="slot"><div class="ripple"></div></div>
+          <svg class="shake" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+          <a href="#" class="title">Total Removal of Admin Functi…</a>
+          <span class="pill">Reply</span>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+        <div class="busy-wrap">
+          <div class="row">
+            <div class="slot"><div class="ring"></div></div>
+            <svg class="twinkle" width="13" height="13" viewBox="0 0 24 24" fill="#b4b8ff" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+            <a href="#" class="title shimmer">LEIB-117 - Static HTML File</a>
+            <span class="time mono" style="color: #c9ccff">{{elapsed}}</span>
+            <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+            <div class="bar"></div>
+          </div>
+        </div>
+
+        <div class="group" style="margin-top: 8px"><span class="sw" style="background: #4ade80"></span>Primepaw Dev<span class="mono" style="margin-left: auto; font-size: 12px; color: #b9bce6">2</span></div>
+        <div class="row">
+          <div class="slot"><div class="breathe"></div></div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#8f95d6" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+          <a href="#" class="title">Session List Redesign</a>
+          <span class="time mono" style="color: #8f95d6">9m 45s</span>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+        <div class="row done">
+          <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}"><div class="shine"></div></sc-if>
+          <div class="slot" style="position: relative">
+            <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+              <svg class="pop" width="15" height="15" viewBox="0 0 22 22" fill="none" stroke="#5eead4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="check-c" cx="11" cy="11" r="9"></circle><path class="check-p" d="M7 11.3l2.8 2.7L15 8.6"></path></svg>
+              <span class="p" style="--dx: 0px; --dy: -11px; background: #5eead4"></span>
+              <span class="p" style="--dx: 10px; --dy: -6px; background: #b4b8ff"></span>
+              <span class="p" style="--dx: 10px; --dy: 6px; background: #fcd34d"></span>
+              <span class="p" style="--dx: 0px; --dy: 11px; background: #5eead4"></span>
+              <span class="p" style="--dx: -10px; --dy: 6px; background: #f9a8d4"></span>
+              <span class="p" style="--dx: -10px; --dy: -6px; background: #b4b8ff"></span>
+            </sc-if>
+          </div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#8f95d6" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+          <a href="#" class="title">LEIB-248 - Export Endpoint</a>
+          <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+            <span class="time mono rise" style="color: #5eead4">18m 19s</span>
+          </sc-if>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+
+        <div class="group" style="margin-top: 8px"><span class="sw" style="background: #fb923c"></span>RPMD ACR Private Deploy<span class="mono" style="margin-left: auto; font-size: 12px; color: #b9bce6">1</span></div>
+        <div class="row inactive">
+          <div class="slot"><div class="hollow"></div></div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8f95d6" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
+          <a href="#" class="title" style="font-weight: 600; color: #c9ccef">Update Image Hash</a>
+          <span class="time mono" style="color: #8f95d6">2d ago</span>
+          <button type="button" class="more" aria-label="Session options"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { s: 1099, doneOn: true };
+  }
+  componentDidMount() {
+    this.tick = setInterval(() => this.setState({ s: this.state.s + 1 }), 1000);
+    this.loop = setInterval(() => this.doReplay(), 7000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.tick);
+    clearInterval(this.loop);
+    clearTimeout(this.t);
+  }
+  doReplay() {
+    this.setState({ doneOn: false });
+    clearTimeout(this.t);
+    this.t = setTimeout(() => this.setState({ doneOn: true }), 80);
+  }
+  renderVals() {
+    const s = this.state.s;
+    return {
+      elapsed: Math.floor(s / 60) + 'm ' + String(s % 60).padStart(2, '0') + 's',
+      doneOn: this.state.doneOn,
+      replay: () => this.doReplay()
+    };
+  }
+}
+</script>
+</body>
+</html>

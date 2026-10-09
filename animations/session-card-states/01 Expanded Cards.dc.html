@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Session card states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d2a}
+a{color:inherit;text-decoration:none}a:hover{color:#ffffff}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+/* ---------- shared card ---------- */
+.card{position:relative;border-radius:14px;background:#1a1d4a;border:1px solid rgba(255,255,255,.07);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,opacity .35s,filter .35s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(0,0,0,.6)}
+.more{width:32px;height:32px;border-radius:8px;border:0;background:transparent;color:#8a90c4;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .2s,background .2s}
+.card:hover .more,.more:focus-visible{opacity:1}
+.more:hover{background:rgba(255,255,255,.08);color:#fff}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- 1. BUSY ---------- */
+.busy-wrap{position:relative;border-radius:15px;padding:1px;overflow:hidden;background:rgba(124,131,255,.18);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.busy-wrap:hover{transform:translateY(-2px)}
+.busy-wrap::before{content:"";position:absolute;inset:-160%;background:conic-gradient(from 0deg,transparent 0 68%,rgba(124,131,255,.0) 70%,#7c83ff 86%,#d6d9ff 93%,transparent 100%);animation:spin 3.2s linear infinite}
+.busy-wrap .card{border:0;background:#1c1f55}
+.busy-wrap .card:hover{transform:none;box-shadow:none}
+.ring{position:relative;width:18px;height:18px}
+.ring::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(124,131,255,.22);border-top-color:#b4b8ff;border-right-color:#7c83ff;animation:spin .85s cubic-bezier(.55,.15,.45,.85) infinite}
+.ring::after{content:"";position:absolute;inset:6px;border-radius:50%;background:#b4b8ff;animation:core 1.7s ease-in-out infinite}
+@keyframes core{50%{transform:scale(.55);opacity:.6}}
+.twinkle{animation:twinkle 2.4s ease-in-out infinite;transform-origin:center}
+@keyframes twinkle{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(90deg) scale(.8)}}
+.ticker{height:18px;overflow:hidden}
+.ticker-inner{animation:tick 10s cubic-bezier(.75,0,.25,1) infinite}
+.ticker-inner div{height:18px;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@keyframes tick{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-18px)}50%,70%{transform:translateY(-36px)}75%,95%{transform:translateY(-54px)}100%{transform:translateY(-72px)}}
+.dots i{display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;margin-left:2px;animation:hop 1.2s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes hop{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-3px);opacity:1}}
+.bar{position:absolute;left:16px;right:16px;bottom:0;height:2px;overflow:hidden;border-radius:2px;background:rgba(124,131,255,.12)}
+.bar::after{content:"";position:absolute;top:0;bottom:0;width:35%;border-radius:2px;background:linear-gradient(90deg,transparent,#b4b8ff,transparent);animation:slide 1.6s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes slide{0%{left:-35%}100%{left:100%}}
+
+/* ---------- 2. IDLE ---------- */
+.breathe{width:10px;height:10px;border-radius:50%;background:#34d399;animation:breathe 3.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.85);box-shadow:0 0 0 0 rgba(52,211,153,.0)}50%{transform:scale(1.05);box-shadow:0 0 0 5px rgba(52,211,153,.16)}}
+.slow-dots i{display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;margin-left:3px;opacity:.2;animation:fadeDot 3.6s ease-in-out infinite}
+.slow-dots i:nth-child(2){animation-delay:.6s}.slow-dots i:nth-child(3){animation-delay:1.2s}
+@keyframes fadeDot{0%,100%{opacity:.2}30%{opacity:.9}}
+
+/* ---------- 3. ATTENTION ---------- */
+.attn{border-color:rgba(251,191,36,.55);background:#2a2547;animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 0 4px rgba(251,191,36,.14),0 0 22px -4px rgba(251,191,36,.35)}}
+.ripple{position:relative;width:10px;height:10px;border-radius:50%;background:#fbbf24}
+.ripple::before,.ripple::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fbbf24;animation:rip 2s cubic-bezier(.2,.6,.3,1) infinite}
+.ripple::after{animation-delay:1s}
+@keyframes rip{0%{transform:scale(1);opacity:.8}100%{transform:scale(3.2);opacity:0}}
+.shake{transform-origin:50% 10%;animation:shake 3s ease-in-out infinite}
+@keyframes shake{0%,78%,100%{transform:rotate(0)}81%{transform:rotate(16deg)}85%{transform:rotate(-13deg)}89%{transform:rotate(9deg)}93%{transform:rotate(-5deg)}97%{transform:rotate(2deg)}}
+.respond{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 12px;border-radius:8px;border:0;background:#fbbf24;color:#1f1600;font:700 12px/1 Manrope,system-ui,sans-serif;cursor:pointer;transition:transform .2s,background .2s}
+.respond:hover{background:#fcd34d;transform:translateY(-1px)}
+.respond svg{animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+
+/* ---------- 4. INACTIVE ---------- */
+.inactive{background:#15173a;border-color:rgba(255,255,255,.04);opacity:.55;filter:saturate(.2)}
+.inactive:hover{opacity:.9;filter:saturate(1)}
+.hollow{width:10px;height:10px;border-radius:50%;border:2px solid #5d6297;box-sizing:border-box}
+
+/* ---------- 5. DONE ---------- */
+.done{border-color:rgba(45,212,191,.28);overflow:hidden}
+.check-c{stroke-dasharray:57;stroke-dashoffset:57;animation:draw .55s cubic-bezier(.65,0,.35,1) forwards}
+.check-p{stroke-dasharray:14;stroke-dashoffset:14;animation:draw .35s cubic-bezier(.65,0,.35,1) .45s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) .5s both}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+.p{position:absolute;left:9px;top:9px;width:4px;height:4px;border-radius:50%;animation:burst .7s cubic-bezier(.2,.7,.3,1) .7s both}
+@keyframes burst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+.shine{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:14px}
+.shine::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-50%;background:linear-gradient(100deg,transparent,rgba(94,234,212,.14),transparent);animation:sweep 1.1s cubic-bezier(.6,0,.3,1) .8s both}
+@keyframes sweep{to{left:120%}}
+.rise{animation:rise .5s cubic-bezier(.2,.8,.2,1) .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.replay{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:transparent;color:#d9dcff;font:600 13px/1 Manrope,system-ui,sans-serif;cursor:pointer;transition:background .2s}
+.replay:hover{background:rgba(255,255,255,.06)}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important}}
+</style>
+</helmet>
+
+<div style="width: 1280px; height: 720px; box-sizing: border-box; padding: 56px 64px; background: #0b0d2a; color: #eef0ff; font-family: Manrope, system-ui, sans-serif; display: flex; flex-direction: column; gap: 40px">
+
+  <!-- header -->
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8f95d6">Sessions sidebar · list item</div>
+      <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -.02em">Session card states</h1>
+    </div>
+    <button type="button" class="replay" onClick="{{replay}}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>
+      Replay “Done”
+    </button>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 40px">
+
+    <!-- 1 BUSY -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: #b4b8ff"><span class="mono" style="color: #6f75b8">01</span>Busy</div>
+      <div class="busy-wrap">
+        <div class="card" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 8px 16px 16px">
+          <div style="padding-top: 2px"><div class="ring"></div></div>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <div style="display: flex; align-items: center; gap: 8px">
+              <svg class="twinkle" width="14" height="14" viewBox="0 0 24 24" fill="#b4b8ff" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+              <a href="#" style="flex: 1; min-width: 0; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">LEIB-117 · Static HTML File</a>
+              <span class="mono" style="font-size: 12px; color: #c9ccff">{{elapsed}}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px; font-size: 12.5px; color: #a3a8de">
+              <div class="ticker" style="flex: 1; min-width: 0">
+                <div class="ticker-inner">
+                  <div>Running bash · git status</div>
+                  <div>Reading static_report_cli.py</div>
+                  <div>Spawned implementer-agent</div>
+                  <div>Editing tests/test_static.py</div>
+                  <div>Running bash · git status</div>
+                </div>
+              </div>
+              <span class="dots" style="color: #b4b8ff; padding-right: 8px"><i></i><i></i><i></i></span>
+            </div>
+          </div>
+          <button type="button" class="more" aria-label="Session options"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 IDLE -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: #6ee7b7"><span class="mono" style="color: #6f75b8">02</span>Idle</div>
+      <div class="card" style="display: flex; gap: 12px; align-items: flex-start; padding: 15px 8px 15px 16px">
+        <div style="width: 18px; height: 18px; display: grid; place-items: center"><div class="breathe"></div></div>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#8f95d6" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+            <a href="#" style="flex: 1; min-width: 0; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Session List Redesign</a>
+            <span class="mono" style="font-size: 12px; color: #8f95d6">9m 45s</span>
+          </div>
+          <div style="font-size: 12.5px; color: #a3a8de">Waiting for your next prompt<span class="slow-dots"><i></i><i></i><i></i></span></div>
+        </div>
+        <button type="button" class="more" aria-label="Session options"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+      </div>
+    </div>
+
+    <!-- 3 ATTENTION -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: #fcd34d"><span class="mono" style="color: #6f75b8">03</span>Needs your attention</div>
+      <div class="card attn" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 8px 14px 16px">
+        <div style="width: 18px; height: 18px; display: grid; place-items: center"><div class="ripple"></div></div>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <svg class="shake" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+            <a href="#" style="flex: 1; min-width: 0; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Total Removal of Admin Functions</a>
+          </div>
+          <div style="font-size: 12.5px; color: #e9dcb0">Approve the migration plan to continue?</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+            <button type="button" class="respond">Respond<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+            <span class="mono" style="font-size: 12px; color: #d8c690">waiting 1m 12s</span>
+          </div>
+        </div>
+        <button type="button" class="more" aria-label="Session options"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+      </div>
+    </div>
+
+    <!-- 4 INACTIVE -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: #a3a8de"><span class="mono" style="color: #6f75b8">04</span>Inactive <span style="font-weight: 500; color: #7d83bf">· hover to wake</span></div>
+      <div class="card inactive" style="display: flex; gap: 12px; align-items: flex-start; padding: 15px 8px 15px 16px">
+        <div style="width: 18px; height: 18px; display: grid; place-items: center"><div class="hollow"></div></div>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8f95d6" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
+            <a href="#" style="flex: 1; min-width: 0; font-size: 15px; font-weight: 600; color: #c9ccef; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Update Image Hash</a>
+            <span class="mono" style="font-size: 12px; color: #8f95d6">2d</span>
+          </div>
+          <div style="font-size: 12.5px; color: #9ca1d1">Last active Tue, 4:12 PM</div>
+        </div>
+        <button type="button" class="more" aria-label="Session options"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+      </div>
+    </div>
+
+    <!-- 5 DONE -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: #5eead4"><span class="mono" style="color: #6f75b8">05</span>Done</div>
+      <div class="card done" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 8px 14px 16px">
+        <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+          <div class="shine"></div>
+        </sc-if>
+        <div style="position: relative; width: 22px; height: 22px; margin: -2px 0 0 -2px">
+          <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+            <svg class="pop" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5eead4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="check-c" cx="11" cy="11" r="9"></circle><path class="check-p" d="M7 11.3l2.8 2.7L15 8.6"></path></svg>
+            <span class="p" style="--dx: 0px; --dy: -15px; background: #5eead4"></span>
+            <span class="p" style="--dx: 13px; --dy: -8px; background: #b4b8ff"></span>
+            <span class="p" style="--dx: 13px; --dy: 9px; background: #fcd34d"></span>
+            <span class="p" style="--dx: 0px; --dy: 15px; background: #5eead4"></span>
+            <span class="p" style="--dx: -13px; --dy: 8px; background: #f9a8d4"></span>
+            <span class="p" style="--dx: -13px; --dy: -9px; background: #b4b8ff"></span>
+          </sc-if>
+        </div>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <a href="#" style="flex: 1; min-width: 0; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">LEIB-248 · Export Endpoint</a>
+            <span class="mono" style="font-size: 12px; color: #8f95d6">just now</span>
+          </div>
+          <sc-if value="{{doneOn}}" hint-placeholder-val="{{ true }}">
+            <div class="rise" style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #a3a8de">
+              <span>Finished in 18m 19s</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; background: rgba(45,212,191,.14); color: #99f6e4; font-weight: 700; font-size: 11.5px">PR opened</span>
+            </div>
+          </sc-if>
+        </div>
+        <button type="button" class="more" aria-label="Session options"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+      </div>
+    </div>
+
+    <!-- legend -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="font-size: 13px; font-weight: 700; color: #a3a8de">Status key</div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 20px; padding: 18px 20px; border-radius: 14px; border: 1px dashed rgba(255,255,255,.12); font-size: 13px; color: #c9ccef">
+        <div style="display: flex; align-items: center; gap: 10px"><div class="ring" style="transform: scale(.8)"></div>Working</div>
+        <div style="display: flex; align-items: center; gap: 10px"><div style="width: 18px; display: grid; place-items: center"><div class="breathe"></div></div>Idle</div>
+        <div style="display: flex; align-items: center; gap: 10px"><div style="width: 18px; display: grid; place-items: center"><div class="ripple"></div></div>Needs you</div>
+        <div style="display: flex; align-items: center; gap: 10px"><div style="width: 18px; display: grid; place-items: center"><div class="hollow"></div></div>Inactive</div>
+        <div style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="#5eead4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="9"></circle><path d="M7 11.3l2.8 2.7L15 8.6"></path></svg>Done</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { s: 1099, doneOn: true };
+  }
+  componentDidMount() {
+    this.tick = setInterval(() => this.setState({ s: this.state.s + 1 }), 1000);
+    this.loop = setInterval(() => this.doReplay(), 7000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.tick);
+    clearInterval(this.loop);
+    clearTimeout(this.t);
+  }
+  doReplay() {
+    this.setState({ doneOn: false });
+    clearTimeout(this.t);
+    this.t = setTimeout(() => this.setState({ doneOn: true }), 80);
+  }
+  renderVals() {
+    const s = this.state.s;
+    const m = Math.floor(s / 60);
+    const r = String(s % 60).padStart(2, '0');
+    return {
+      elapsed: m + 'm ' + r + 's',
+      doneOn: this.state.doneOn,
+      replay: () => this.doReplay()
+    };
+  }
+}
+</script>
+</body>
+</html>
