@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scramble decode loader</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.timer{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:500;color:#8A90A0;font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
+.c{display:inline-block;transition:color .2s}
+.c.scr{color:var(--accent);opacity:.85}
+</style>
+</helmet>
+<div style="--accent: {{accent}}; width: 560px; height: 320px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #FAFAFB; font-family: 'DM Sans', system-ui, sans-serif; color: #1B1D22">
+<div style="align-self: flex-end; max-width: 360px; background: #1B1D22; color: #FFFFFF; padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 15px; line-height: 1.4">Find anomalies in last week’s transactions.</div>
+<div role="status" aria-live="polite" aria-label="{{label}}" style="display: flex; align-items: center; gap: 12px; width: 380px; box-sizing: border-box; padding: 14px 18px; background: #14161B; border-radius: 12px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; color: #E8EAF0">
+<span style="color: {{accent}}; width: 14px; flex-shrink: 0">{{spin}}</span>
+<span style="white-space: pre"><sc-for list="{{chars}}" as="ch" hint-placeholder-count="20"><span class="c {{ch.cls}}">{{ch.c}}</span></sc-for></span>
+<span class="timer" aria-hidden="true" style="margin-left: auto">{{elapsed}}</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#7C93FF","options":["#7C93FF","#4ADE80","#FFB454","#FF7AB6"]},"speed":{"editor":"int","default":40,"min":20,"max":120,"step":5,"unit":"ms"},"$preview":{"width":560,"height":320}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { i: 0, f: 0 }; }
+msgs() { return ['Crunching the numbers…', 'Sniffing out outliers…', 'Following the money…', 'Decoding patterns…', 'Interrogating the data…']; }
+componentDidMount() { this.start = Date.now(); this.clock = setInterval(() => this.setState({ now: Date.now() }), 100); this.t = setInterval(() => this.tick(), this.props.speed ?? 40); }
+componentWillUnmount() { clearInterval(this.t); clearInterval(this.clock); }
+fmt(ms) { const s = ms / 1000; if (s < 60) return s.toFixed(1) + 's'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + 'm ' + String(r).padStart(2, '0') + 's'; }
+tick() {
+const s = this.state, msgs = this.msgs(), msg = msgs[s.i % msgs.length];
+if (s.f > msg.length * 2 + 50) this.setState({ i: s.i + 1, f: 0 });
+else this.setState({ f: s.f + 1 });
+}
+renderVals() {
+const s = this.state, msgs = this.msgs(), msg = msgs[s.i % msgs.length];
+const pool = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz0123456789#%&*+=<>/';
+const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+const revealed = Math.floor(s.f / 2);
+const shown = Math.min(msg.length, revealed + 6);
+const chars = [];
+for (let k = 0; k < shown; k++) {
+const target = msg[k];
+if (k < revealed) chars.push({ c: target === ' ' ? ' ' : target, cls: '' });
+else chars.push({ c: target === ' ' ? ' ' : pool[Math.floor(Math.random() * pool.length)], cls: 'scr' });
+}
+return {
+elapsed: this.fmt(Date.now() - (this.start || Date.now())),
+accent: this.props.accent ?? '#7C93FF',
+chars,
+label: msg,
+spin: frames[s.f % frames.length]
+};
+}
+}
+</script>
+</body>
+</html>

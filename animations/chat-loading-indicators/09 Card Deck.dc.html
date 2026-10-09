@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Card deck loader</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.timer{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:500;color:#6B7080;font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
+.deck{position:relative;width:320px;height:76px}
+.card{position:absolute;left:0;top:0;width:100%;height:52px;box-sizing:border-box;padding:0 16px;display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E6E8EC;border-radius:12px;box-shadow:0 6px 18px rgba(20,22,27,.08);font-size:15px;font-weight:500;color:#1B1D22;white-space:nowrap;transform-origin:50% 0;transition:transform .7s cubic-bezier(.2,.9,.25,1.1),opacity .6s ease;opacity:0;transform:translateY(24px) scale(.82);z-index:0}
+.card.top{opacity:1;transform:none;z-index:3}
+.card.next{opacity:.75;transform:translateY(10px) scale(.94);z-index:2}
+.card.next2{opacity:.4;transform:translateY(20px) scale(.88);z-index:1}
+.card.out{opacity:0;transform:translate(130px,-10px) rotate(14deg);z-index:4;transition:transform .6s cubic-bezier(.5,0,.75,0),opacity .6s ease}
+.pip{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pip 1s ease-in-out infinite}
+@keyframes pip{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.5);opacity:.4}}
+</style>
+</helmet>
+<div style="--accent: {{accent}}; width: 560px; height: 320px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #FAFAFB; font-family: 'DM Sans', system-ui, sans-serif; color: #1B1D22">
+<div style="align-self: flex-end; max-width: 360px; background: #1B1D22; color: #FFFFFF; padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 15px; line-height: 1.4">Review this pull request for edge cases.</div>
+<div style="display: flex; gap: 12px; align-items: flex-start">
+<div style="width: 32px; height: 32px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 10px">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="#FFFFFF"></path></svg>
+</div>
+<div class="deck" role="status" aria-live="polite" aria-label="{{label}}">
+<sc-for list="{{items}}" as="item" hint-placeholder-count="5">
+<div class="card {{item.cls}}" aria-hidden="true"><span class="pip"></span>{{item.t}}</div>
+</sc-for>
+</div>
+<span class="timer" aria-hidden="true" style="margin-top: 15px; padding: 4px 8px; border-radius: 6px; background: #EEF0F3">{{elapsed}}</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0F9D74","options":["#0F9D74","#3B5BFD","#E8590C","#8B3DFF"]},"interval":{"editor":"int","default":2200,"min":900,"max":6000,"step":100,"unit":"ms"},"$preview":{"width":560,"height":320}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { i: 0 }; }
+componentDidMount() { this.start = Date.now(); this.clock = setInterval(() => this.setState({ now: Date.now() }), 100); this.t = setInterval(() => this.setState((s) => ({ i: s.i + 1 })), this.props.interval ?? 2200); }
+componentWillUnmount() { clearInterval(this.t); clearInterval(this.clock); }
+fmt(ms) { const s = ms / 1000; if (s < 60) return s.toFixed(1) + 's'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + 'm ' + String(r).padStart(2, '0') + 's'; }
+renderVals() {
+const msgs = ['Reading every line…', 'Poking at edge cases…', 'Negotiating contracts…', 'Thinking like QA…', 'Hunting for nulls…'];
+const i = this.state.i, n = msgs.length, cur = i % n;
+const names = ['top', 'next', 'next2'];
+return {
+elapsed: this.fmt(Date.now() - (this.start || Date.now())),
+accent: this.props.accent ?? '#0F9D74',
+label: msgs[cur],
+items: msgs.map((t, k) => {
+const d = (k - cur + n) % n;
+const cls = d < 3 ? names[d] : (d === n - 1 && i > 0 ? 'out' : '');
+return { t, cls };
+})
+};
+}
+}
+</script>
+</body>
+</html>

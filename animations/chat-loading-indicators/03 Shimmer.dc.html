@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shimmer loader</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.timer{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:500;color:#6B7080;font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
+.spark{animation:spark 2.4s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes spark{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(.7)}100%{transform:rotate(360deg) scale(1)}}
+.slot{position:relative;height:24px;width:230px}
+.m{position:absolute;left:0;top:0;white-space:nowrap;line-height:24px;font-size:15px;font-weight:500;opacity:0;transform:translateY(6px);transition:opacity .6s ease,transform .6s ease}
+.m.in{opacity:1;transform:none}
+.m.out{opacity:0;transform:translateY(-6px)}
+.sheen{background:linear-gradient(90deg,#5F6472 0%,#5F6472 40%,var(--accent) 50%,#5F6472 60%,#5F6472 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 1.8s linear infinite}
+@keyframes sheen{from{background-position:100% 0}to{background-position:-150% 0}}
+</style>
+</helmet>
+<div style="--accent: {{accent}}; width: 560px; height: 320px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #FAFAFB; font-family: 'DM Sans', system-ui, sans-serif; color: #1B1D22">
+<div style="align-self: flex-end; max-width: 360px; background: #1B1D22; color: #FFFFFF; padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 15px; line-height: 1.4">What changed between v2 and v3 of the API?</div>
+<div role="status" aria-live="polite" style="display: flex; gap: 12px; align-items: center">
+<div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: {{accent}}">
+<svg class="spark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor"></path></svg>
+</div>
+<div class="slot">
+<sc-for list="{{items}}" as="item" hint-placeholder-count="5">
+<span class="m {{item.cls}}"><span class="sheen">{{item.t}}</span></span>
+</sc-for>
+</div>
+<span class="timer" aria-hidden="true">{{elapsed}}</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#8B3DFF","options":["#8B3DFF","#3B5BFD","#E8590C","#0F9D74"]},"interval":{"editor":"int","default":2400,"min":800,"max":6000,"step":100,"unit":"ms"},"$preview":{"width":560,"height":320}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { i: 0 }; }
+componentDidMount() { this.start = Date.now(); this.clock = setInterval(() => this.setState({ now: Date.now() }), 100); this.t = setInterval(() => this.setState((s) => ({ i: s.i + 1 })), this.props.interval ?? 2400); }
+componentWillUnmount() { clearInterval(this.t); clearInterval(this.clock); }
+fmt(ms) { const s = ms / 1000; if (s < 60) return s.toFixed(1) + 's'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + 'm ' + String(r).padStart(2, '0') + 's'; }
+renderVals() {
+const msgs = ['Reading the changelog…', 'Reminiscing…', 'Diffing the timelines…', 'Asking v2 what happened…', 'Connecting the dots…'];
+const i = this.state.i, n = msgs.length, cur = i % n, prev = (i - 1 + n) % n;
+return {
+elapsed: this.fmt(Date.now() - (this.start || Date.now())),
+accent: this.props.accent ?? '#8B3DFF',
+items: msgs.map((t, k) => ({ t, cls: k === cur ? 'in' : (i > 0 && k === prev ? 'out' : '') }))
+};
+}
+}
+</script>
+</body>
+</html>

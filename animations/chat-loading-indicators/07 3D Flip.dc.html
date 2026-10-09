@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3D flip loader</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.timer{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:500;color:#6B7080;font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
+.slot{position:relative;height:24px;perspective:300px}
+.m{position:absolute;left:0;top:0;white-space:nowrap;line-height:24px;font-size:15px;font-weight:500;color:#1B1D22;transform-origin:50% 50% -12px;transform:rotateX(-90deg);opacity:0;backface-visibility:hidden;transition:transform .7s cubic-bezier(.3,1.35,.5,1),opacity .35s ease}
+.m.in{transform:rotateX(0);opacity:1}
+.m.out{transform:rotateX(90deg);opacity:0;transition:transform .5s ease-in,opacity .35s ease}
+.track{position:relative;height:3px;border-radius:3px;background:#E6E8EC;overflow:hidden}
+.bar{position:absolute;top:0;left:0;height:100%;width:40%;border-radius:3px;background:var(--accent);animation:sweep 1.5s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+</style>
+</helmet>
+<div style="--accent: {{accent}}; width: 560px; height: 320px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #FAFAFB; font-family: 'DM Sans', system-ui, sans-serif; color: #1B1D22">
+<div style="align-self: flex-end; max-width: 360px; background: #1B1D22; color: #FFFFFF; padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 15px; line-height: 1.4">Compare these three pricing plans for me.</div>
+<div style="display: flex; gap: 12px; align-items: flex-start">
+<div style="width: 32px; height: 32px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="#FFFFFF"></path></svg>
+</div>
+<div role="status" aria-live="polite" style="display: flex; flex-direction: column; gap: 12px; width: 320px; box-sizing: border-box; padding: 14px 16px; background: #FFFFFF; border: 1px solid #E6E8EC; border-radius: 4px 18px 18px 18px">
+<div class="slot">
+<sc-for list="{{items}}" as="item" hint-placeholder-count="5">
+<span class="m {{item.cls}}">{{item.t}}</span>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<div class="track" style="flex: 1"><div class="bar"></div></div>
+<span class="timer" aria-hidden="true">{{elapsed}}</span>
+</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#3B5BFD","options":["#3B5BFD","#E8590C","#0F9D74","#8B3DFF"]},"interval":{"editor":"int","default":2200,"min":800,"max":6000,"step":100,"unit":"ms"},"$preview":{"width":560,"height":320}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { i: 0 }; }
+componentDidMount() { this.start = Date.now(); this.clock = setInterval(() => this.setState({ now: Date.now() }), 100); this.t = setInterval(() => this.setState((s) => ({ i: s.i + 1 })), this.props.interval ?? 2200); }
+componentWillUnmount() { clearInterval(this.t); clearInterval(this.clock); }
+fmt(ms) { const s = ms / 1000; if (s < 60) return s.toFixed(1) + 's'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + 'm ' + String(r).padStart(2, '0') + 's'; }
+renderVals() {
+const msgs = ['Crunching the numbers…', 'Reading the fine print…', 'Negotiating contracts…', 'Weighing the options…', 'Picking a winner…'];
+const i = this.state.i, n = msgs.length, cur = i % n, prev = (i - 1 + n) % n;
+return {
+elapsed: this.fmt(Date.now() - (this.start || Date.now())),
+accent: this.props.accent ?? '#3B5BFD',
+items: msgs.map((t, k) => ({ t, cls: k === cur ? 'in' : (i > 0 && k === prev ? 'out' : '') }))
+};
+}
+}
+</script>
+</body>
+</html>
