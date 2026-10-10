@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deck and timeline anatomy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221;font-family:"IBM Plex Sans",system-ui,sans-serif;color:#e7eaf4}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.n{width:22px;height:22px;border-radius:50%;background:#c9cfe8;color:#0d1221;font-size:12px;font-weight:600;display:grid;place-items:center;flex:none}
+.k{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;color:#8d96b5;background:#1b2340;padding:1px 6px;border-radius:4px}
+.bar{display:inline-block;width:5px;border-radius:2px 2px 1px 1px;vertical-align:bottom}
+</style>
+</helmet>
+<div style="width: 1280px; height: 820px; box-sizing: border-box; padding: 48px 56px; display: flex; flex-direction: column; gap: 28px">
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.01em">Deck + timeline anatomy</h1>
+    <p style="margin: 0; font-size: 14px; color: #8d96b5">Same rules as A, different metaphor: a collapsed turn is a deck of cards you fan open. Where A shows <em>what kinds</em> of steps, B shows <em>where the time went</em>.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start">
+    <div style="position: relative; padding-top: 14px">
+      <span style="position: absolute; left: 20px; right: 20px; top: 2px; height: 40px; border-radius: 12px; background: #1b2340; border: 1px solid #252d48; opacity: .4"></span>
+      <span style="position: absolute; left: 10px; right: 10px; top: 8px; height: 40px; border-radius: 12px; background: #1b2340; border: 1px solid #252d48; opacity: .7"></span>
+      <div style="position: relative; display: flex; align-items: center; gap: 14px; border: 1px solid #3a4677; background: #151b2f; border-radius: 12px; padding: 8px 14px; min-height: 48px; box-sizing: border-box; box-shadow: 0 8px 30px rgba(0,0,0,.35)">
+        <span style="position: relative; width: 34px; height: 34px; border-radius: 10px; background: #1b2340; display: grid; place-items: center; font-weight: 600; font-size: 14px; color: #7c9cff">9
+          <span style="position: absolute; right: -5px; top: -5px; width: 14px; height: 14px; border-radius: 50%; background: #ff7083; color: #fff; font-size: 9px; font-weight: 700; display: grid; place-items: center; border: 2px solid #151b2f; box-sizing: content-box">!</span>
+        </span>
+        <span style="display: flex; flex-direction: column">
+          <strong style="font-size: 13.5px; font-weight: 600; line-height: 1.2">Done, with 1 error</strong>
+          <span style="font-size: 11.5px; color: #8d96b5">7 tool calls · 3m 12s</span>
+        </span>
+        <span style="display: flex; align-items: flex-end; gap: 3px; height: 18px; padding: 0 4px" aria-hidden="true">
+          <i class="bar" style="height: 6.5px; background: #7c9cff"></i><i class="bar" style="height: 12.7px; background: #f0b64f"></i><i class="bar" style="height: 5.9px; background: #7c9cff"></i><i class="bar" style="height: 5.5px; background: #7c9cff"></i><i class="bar" style="height: 4.8px; background: #c9cfe8"></i><i class="bar" style="height: 18px; background: #ff7083"></i><i class="bar" style="height: 15.7px; background: #5fd4e8"></i><i class="bar" style="height: 4.8px; background: #c9cfe8"></i><i class="bar" style="height: 4.8px; background: #4fd1a0"></i>
+        </span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8d96b5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+      </div>
+      <span class="n" style="position: absolute; left: 24px; top: 0">1</span>
+      <span class="n" style="position: absolute; left: 150px; top: 0">2</span>
+      <span class="n" style="position: absolute; left: 300px; top: 0">3</span>
+      <span class="n" style="position: absolute; left: 60px; top: -14px">4</span>
+      <div style="margin-top: 18px; display: grid; grid-template-columns: 52px 20px minmax(0, 1fr); gap: 0 10px; position: relative">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5b6484; text-align: right; padding-top: 9px">0:16</span>
+        <span style="display: flex; justify-content: center; position: relative"><span style="position: absolute; top: 0; bottom: 0; width: 2px; background: #252d48"></span><span style="position: relative; width: 20px; height: 20px; border-radius: 50%; background: #151b2f; border: 2px solid #7c9cff; box-sizing: border-box; margin-top: 6px"></span></span>
+        <span style="padding: 6px 0 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12.5px; font-weight: 500">bash <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5b6484; font-weight: 400">0.8s</span></span><code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #8d96b5">grep -n "build:static" apps/large_exposure/frontend/package.json</code></span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5b6484; text-align: right; padding-top: 9px">0:17</span>
+        <span style="display: flex; justify-content: center; position: relative"><span style="position: absolute; top: 0; height: 14px; width: 2px; background: #252d48"></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#c9cfe8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 9px; position: relative" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg></span>
+        <span style="padding: 6px 0 4px"><span style="position: relative; display: block; font-size: 13px; line-height: 1.45; color: #dfe3f2; background: #1b2340; border-radius: 10px; padding: 8px 12px">The generator is referenced from four places. I’ll hand the removal to an implementer.</span></span>
+        <span class="n" style="position: absolute; left: -32px; top: 10px">5</span>
+        <span class="n" style="position: absolute; left: 58px; top: 10px">6</span>
+        <span class="n" style="position: absolute; right: -8px; top: 70px">7</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px; line-height: 1.5">
+      <div style="display: flex; gap: 10px"><span class="n">1</span><div><strong>Step count tile</strong><div style="color: #8d96b5">Breathing outline while working. Red <span class="k">!</span> if anything failed, green check otherwise.</div></div></div>
+      <div style="display: flex; gap: 10px"><span class="n">2</span><div><strong>Outcome, not activity</strong><div style="color: #8d96b5">“Done, with 1 error” leads; tool count and wall time are the subtitle.</div></div></div>
+      <div style="display: flex; gap: 10px"><span class="n">3</span><div><strong>Duration sparkline</strong><div style="color: #8d96b5">One bar per step, height on a log scale of its duration, colour by kind. The tall red bar is the 2m 18s subagent — you can see the cost before you open it.</div></div></div>
+      <div style="display: flex; gap: 10px"><span class="n">4</span><div><strong>Deck</strong><div style="color: #8d96b5">Two ghost cards peek out behind; a new step is dealt from the right while live. They tuck away as the timeline fans open.</div></div></div>
+      <div style="display: flex; gap: 10px"><span class="n">5</span><div><strong>Gutter clock</strong><div style="color: #8d96b5">Elapsed time at which each step started — reads like a log.</div></div></div>
+      <div style="display: flex; gap: 10px"><span class="n">6</span><div><strong>Rail + node</strong><div style="color: #8d96b5">Node ring colour = kind; running node gets a radar ring. Subagent calls hang off the node as a nested list.</div></div></div>
+      <div style="display: flex; gap: 10px"><span class="n">7</span><div><strong>Narration callout</strong><div style="color: #8d96b5">Intermediate text sits on the rail as a speech callout with no node ring — it isn’t a tool call.</div></div></div>
+      <div style="border-top: 1px solid #252d48; padding-top: 12px; color: #8d96b5">
+        <strong style="color: #e7eaf4">Pick A if</strong> you scan for <em>what happened</em> (kinds, errors). <strong style="color: #e7eaf4">Pick B if</strong> you scan for <em>why it took so long</em>. Both keep the reply outside and stay collapsed by default.
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":820}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

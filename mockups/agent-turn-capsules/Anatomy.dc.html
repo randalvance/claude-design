@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Capsule anatomy and motion rules</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221;font-family:"IBM Plex Sans",system-ui,sans-serif;color:#e7eaf4}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.n{width:22px;height:22px;border-radius:50%;background:#7c9cff;color:#0d1221;font-size:12px;font-weight:600;display:grid;place-items:center;flex:none}
+.k{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;color:#8d96b5;background:#1b2340;padding:1px 6px;border-radius:4px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+</style>
+</helmet>
+<div style="width: 1280px; height: 820px; box-sizing: border-box; padding: 48px 56px; display: flex; flex-direction: column; gap: 28px">
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.01em">Capsule anatomy</h1>
+    <p style="margin: 0; font-size: 14px; color: #8d96b5">One 44px row replaces the whole inlined tool log. Everything the agent did sits behind it; the reply you are meant to read never does.</p>
+  </div>
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: center; gap: 12px; border: 1px solid #3a4677; background: #151b2f; border-radius: 12px; padding: 8px 12px; min-height: 44px; box-sizing: border-box; box-shadow: 0 8px 30px rgba(0,0,0,.35)">
+      <span style="position: relative; width: 26px; height: 26px; border-radius: 50%; background: #1b2340; display: grid; place-items: center; color: #7c9cff; flex: none" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
+        <span style="position: absolute; right: -4px; bottom: -4px; width: 13px; height: 13px; border-radius: 50%; background: #4fd1a0; border: 2px solid #151b2f; box-sizing: content-box"></span>
+      </span>
+      <span style="display: flex; flex-direction: column">
+        <strong style="font-size: 13.5px; font-weight: 600; line-height: 1.2">Worked for 3m 12s</strong>
+        <span style="font-size: 11.5px; color: #8d96b5">7 steps</span>
+      </span>
+      <span style="display: flex; gap: 4px; padding: 0 4px" aria-hidden="true">
+        <i class="dot" style="background: #7c9cff"></i><i class="dot" style="background: #f0b64f"></i><i class="dot" style="background: #7c9cff"></i><i class="dot" style="background: #7c9cff"></i><i class="dot" style="background: #ff7083; box-shadow: 0 0 0 2px rgba(255,112,131,.25)"></i><i class="dot" style="background: #5fd4e8"></i><i class="dot" style="background: #4fd1a0"></i>
+      </span>
+      <span style="display: flex; gap: 6px">
+        <span style="font-size: 11px; padding: 2px 7px; border-radius: 999px; background: #1b2340; color: #8d96b5">4 bash</span>
+        <span style="font-size: 11px; padding: 2px 7px; border-radius: 999px; background: #1b2340; color: #8d96b5">1 edit</span>
+        <span style="font-size: 11px; padding: 2px 7px; border-radius: 999px; background: #1b2340; color: #8d96b5">1 ask</span>
+        <span style="font-size: 11px; padding: 2px 7px; border-radius: 999px; background: #1b2340; color: #8d96b5">1 subagent</span>
+        <span style="font-size: 11px; padding: 2px 7px; border-radius: 999px; background: rgba(255,112,131,.14); color: #ff7083">1 error</span>
+      </span>
+      <span style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #8d96b5; white-space: nowrap">bash · pytest tests/apps/large_exposure -q</span>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8d96b5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+    </div>
+    <span class="n" style="position: absolute; left: 14px; top: -14px">1</span>
+    <span class="n" style="position: absolute; left: 64px; top: -14px">2</span>
+    <span class="n" style="position: absolute; left: 208px; top: -14px">3</span>
+    <span class="n" style="position: absolute; left: 330px; top: -14px">4</span>
+    <span class="n" style="position: absolute; left: 820px; top: -14px">5</span>
+    <span class="n" style="position: absolute; right: 2px; top: -14px">6</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 28px; font-size: 13px; line-height: 1.5">
+    <div style="display: flex; gap: 10px"><span class="n">1</span><div><strong>Agent avatar</strong><div style="color: #8d96b5">Pulsing ring while working; green check pops in on completion.</div></div></div>
+    <div style="display: flex; gap: 10px"><span class="n">2</span><div><strong>Title + count</strong><div style="color: #8d96b5">“Working · 0:38” ticks live, settles to “Worked for 3m 12s”.</div></div></div>
+    <div style="display: flex; gap: 10px"><span class="n">3</span><div><strong>Step trail</strong><div style="color: #8d96b5">One dot per step, coloured by kind. Red = error, blinking = running. Dots pop in as steps start.</div></div></div>
+    <div style="display: flex; gap: 10px"><span class="n">4</span><div><strong>Count chips</strong><div style="color: #8d96b5">Kind totals; errors surface here even when collapsed so nothing is hidden.</div></div></div>
+    <div style="display: flex; gap: 10px"><span class="n">5</span><div><strong>Current step</strong><div style="color: #8d96b5">Live turns only: a shimmering mono line of what is running right now.</div></div></div>
+    <div style="display: flex; gap: 10px"><span class="n">6</span><div><strong>Chevron</strong><div style="color: #8d96b5">The whole row is one button; rotates 180° on expand. Keyboard: Tab, Enter.</div></div></div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; border-top: 1px solid #252d48; padding-top: 24px; font-size: 13px; line-height: 1.6">
+    <div>
+      <h2 style="margin: 0 0 8px; font-size: 14px; font-weight: 600">Motion</h2>
+      <ul style="margin: 0; padding-left: 18px; color: #8d96b5">
+        <li>Expand: <span class="k">grid-template-rows 0fr → 1fr</span>, 380 ms, ease-out — no measured heights.</li>
+        <li>Steps cascade in, 55 ms stagger, 6 px slide.</li>
+        <li>Success checks draw themselves (<span class="k">stroke-dashoffset</span>).</li>
+        <li>Reply slides up 8 px after the capsule settles.</li>
+        <li>Everything collapses to instant under <span class="k">prefers-reduced-motion</span>.</li>
+      </ul>
+    </div>
+    <div>
+      <h2 style="margin: 0 0 8px; font-size: 14px; font-weight: 600">Rules</h2>
+      <ul style="margin: 0; padding-left: 18px; color: #8d96b5">
+        <li>Collapsed by default, including the turn in progress.</li>
+        <li>The final reply renders outside the capsule, always.</li>
+        <li>Text is “final” only if nothing follows it in the turn. Earlier text is narration: a <em>said</em> step inside the capsule, set in prose, and the live shimmer line quotes the latest one.</li>
+        <li>Subagent steps nest their own calls one level deep; deeper goes to the Subagents tab.</li>
+        <li>Long commands truncate with ellipsis; hover a step for the full line.</li>
+        <li>Dot colours: <span class="dot" style="background:#7c9cff"></span> bash · <span class="dot" style="background:#9aa6cc"></span> read · <span class="dot" style="background:#4fd1a0"></span> edit · <span class="dot" style="background:#f0b64f"></span> ask · <span class="dot" style="background:#c58cff"></span> subagent · <span class="dot" style="background:#5fd4e8"></span> thinking · <span class="dot" style="background:#c9cfe8;border-radius:2px"></span> said (square)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":820}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

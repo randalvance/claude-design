@@ -1,0 +1,19 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-10T22:30:00Z"},
+  "title": "Agent Turn Capsule",
+  "launch": {"view": "focused", "file": "Main.dc.html"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1280, "h": 1180, "title": "Chat thread — live demo", "expand": "fill", "is_interactive": true},
+    "Anatomy.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 820, "title": "Capsule anatomy"},
+    "AltMain.dc.html": {"x": 0, "y": 1600, "w": 1280, "h": 1180, "title": "B · Deck + timeline — live demo", "expand": "fill", "is_interactive": true},
+    "AltAnatomy.dc.html": {"x": 1360, "y": 1600, "w": 1280, "h": 820, "title": "B · Deck anatomy"}
+  },
+  "order": ["Main.dc.html", "Anatomy.dc.html", "AltMain.dc.html", "AltAnatomy.dc.html"],
+  "notes": {
+    "t1": {"x": 0, "y": -300, "text": "A · Capsule — one row, dot trail, chips", "kind": "title1", "maxW": 2640},
+    "t2": {"x": 0, "y": 1300, "text": "B · Deck + timeline — stacked cards, duration bars, gutter rail", "kind": "title1", "maxW": 2640}
+  },
+  "designSystems": []
+}

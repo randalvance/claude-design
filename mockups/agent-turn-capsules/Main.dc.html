@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chat thread with collapsed agent turns</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221;font-family:"IBM Plex Sans",system-ui,sans-serif;color:#e7eaf4}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.page{--ink:#e7eaf4;--mute:#8d96b5;--dim:#5b6484;--line:#252d48;--surf:#151b2f;--surf2:#1b2340;--ok:#4fd1a0;--err:#ff7083;--warn:#f0b64f;--mono:"JetBrains Mono",ui-monospace,monospace}
+.user{align-self:flex-end;max-width:72%;background:#2a3566;color:#eef1ff;padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:14px;line-height:1.45}
+.turn{border:1px solid var(--line);background:var(--surf);border-radius:12px;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+.turn:hover{border-color:#36406a}
+.turn.open{border-color:#3a4677;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.turn.live{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.cap{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;min-height:44px;color:var(--ink);font:inherit}
+.cap:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.avatar{position:relative;width:26px;height:26px;border-radius:50%;background:var(--surf2);display:grid;place-items:center;color:var(--accent);flex:none}
+.avatar svg{width:14px;height:14px}
+.live .avatar::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--accent);animation:ring 1.6s ease-out infinite}
+.badge{position:absolute;right:-4px;bottom:-4px;width:13px;height:13px;border-radius:50%;background:var(--ok);color:#06251a;display:grid;place-items:center;border:2px solid var(--surf);animation:pop .5s cubic-bezier(.2,.8,.3,1.4) both}
+.badge svg{width:8px;height:8px}
+.cap-title{display:flex;flex-direction:column;min-width:0;flex:none}
+.cap-title strong{font-weight:600;font-size:13.5px;letter-spacing:-.01em;line-height:1.2}
+.cap-sub{font-size:11.5px;color:var(--mute);font-variant-numeric:tabular-nums;line-height:1.3}
+.trail{display:flex;gap:4px;align-items:center;flex:none;padding:0 4px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dim);animation:dotIn .35s cubic-bezier(.2,.9,.3,1.4) both}
+.dot.bash{background:#7c9cff}.dot.ask{background:var(--warn)}.dot.sub{background:#c58cff}.dot.think{background:#5fd4e8}.dot.edit{background:var(--ok)}.dot.read{background:#9aa6cc}
+.dot.say{background:#c9cfe8;border-radius:2px}
+.dot.err{background:var(--err);box-shadow:0 0 0 2px rgba(255,112,131,.25)}
+.dot.run{animation:dotIn .35s both,blink 1s ease-in-out .35s infinite}
+.chips{display:flex;gap:6px;flex-wrap:wrap;min-width:0}
+.chip{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--surf2);color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+.chip.err{background:rgba(255,112,131,.14);color:var(--err)}
+.now{margin-left:auto;min-width:0;flex:1;display:flex;justify-content:flex-end}
+.shimmer{font-family:var(--mono);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;background:linear-gradient(90deg,var(--mute) 0%,#ffffff 50%,var(--mute) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 1.8s linear infinite}
+.chev{width:16px;height:16px;flex:none;margin-left:auto;color:var(--mute);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.now+.chev{margin-left:0}
+.open .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.2,.8,.2,1)}
+.open .body{grid-template-rows:1fr}
+.body-in{min-height:0;overflow:hidden}
+.steps{list-style:none;margin:0;padding:6px 10px 10px;display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line)}
+.step{display:flex;gap:10px;align-items:flex-start;padding:7px 8px;border-radius:8px;opacity:0}
+.open .step{animation:stepIn .4s cubic-bezier(.2,.8,.2,1) both}
+.step:hover{background:var(--surf2)}
+.s-ic{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;flex:none;background:var(--surf2);color:var(--mute)}
+.s-ic svg{width:13px;height:13px}
+.step.bash .s-ic{color:#7c9cff}.step.ask .s-ic{color:var(--warn)}.step.sub .s-ic{color:#c58cff}.step.think .s-ic{color:#5fd4e8}.step.edit .s-ic{color:var(--ok)}.step.read .s-ic{color:#9aa6cc}
+.step.err .s-ic{background:rgba(255,112,131,.12);color:var(--err)}
+.step.say .s-ic{color:#c9cfe8}
+.step.say .s-detail{font-family:inherit;font-size:13px;font-style:italic;color:#d6dbec;white-space:normal;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.s-main{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.s-label{font-size:12.5px;font-weight:500;line-height:1.3}
+.s-detail{font-family:var(--mono);font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub{list-style:none;margin:6px 0 0;padding:4px 0 0 10px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.sub-row{font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;gap:8px;align-items:center;min-width:0}
+.sub-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--dim);flex:none}
+.sub-row.err{color:var(--err)}.sub-row.err .sdot{background:var(--err)}
+.s-meta{display:flex;align-items:center;gap:8px;flex:none;font-variant-numeric:tabular-nums;padding-top:2px}
+.s-time{font-size:11px;color:var(--dim)}
+.st{width:16px;height:16px;display:grid;place-items:center}
+.st svg{width:14px;height:14px}
+.st.ok{color:var(--ok)}.st.ok path{stroke-dasharray:24;stroke-dashoffset:24;animation:draw .5s .3s ease-out forwards}
+.st.err{color:var(--err)}
+.st.run{color:var(--accent)}.st.run svg{animation:spin .9s linear infinite}
+.reply{display:flex;gap:12px;animation:replyIn .55s cubic-bezier(.2,.8,.2,1) both;padding:4px 2px}
+.who{font-size:11.5px;color:var(--mute);margin-bottom:6px}
+.reply-body{font-size:14px;line-height:1.55;white-space:pre-line}
+.composer{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surf);border-radius:12px;padding:10px 12px}
+.composer input{all:unset;flex:1;font-size:14px;color:var(--ink);min-width:0}
+.composer input::placeholder{color:var(--dim)}
+.pill{font-size:11px;color:var(--mute);background:var(--surf2);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.replay{all:unset;cursor:pointer;font-size:12px;font-weight:500;color:#0d1221;background:var(--accent);padding:7px 12px;border-radius:8px;white-space:nowrap}
+.replay:hover{filter:brightness(1.1)}
+.replay:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+@keyframes dotIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes stepIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes replyIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:640px){.chips{display:none}.user{max-width:88%}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page" style="--accent: {{accent}}; --cap-pad: {{capPad}}; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box">
+  <header style="display: flex; align-items: center; gap: 12px; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; flex-wrap: wrap">
+    <strong style="font-size: 14px; font-weight: 600">LEIB-117 – Static HTML File</strong>
+    <span style="font-size: 12px; color: #8d96b5">Character 018 · Orchestrator</span>
+    <span class="pill" style="font-family: 'JetBrains Mono', monospace">feat/LEIB-117-static-file</span>
+    <span class="pill">#5404</span>
+  </header>
+
+  <main style="flex: 1; width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 28px 16px 20px; display: flex; flex-direction: column; gap: 18px">
+    <sc-for list="{{turns}}" as="t" hint-placeholder-count="2">
+      <div class="user">{{t.user}}</div>
+
+      <section class="turn {{t.cls}}" aria-label="Agent work for this turn">
+        <button class="cap" onClick="{{t.toggle}}" aria-expanded="{{t.open}}" style="padding: var(--cap-pad)">
+          <span class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
+            <sc-if value="{{t.done}}" hint-placeholder-val="{{true}}">
+              <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span>
+            </sc-if>
+          </span>
+          <span class="cap-title">
+            <strong>{{t.title}}</strong>
+            <span class="cap-sub">{{t.sub}}</span>
+          </span>
+          <span class="trail" aria-hidden="true">
+            <sc-for list="{{t.dots}}" as="d" hint-placeholder-count="5">
+              <i class="dot {{d.cls}}" style="animation-delay: {{d.delay}}"></i>
+            </sc-for>
+          </span>
+          <span class="chips">
+            <sc-for list="{{t.chips}}" as="c" hint-placeholder-count="3">
+              <span class="chip {{c.cls}}">{{c.text}}</span>
+            </sc-for>
+          </span>
+          <sc-if value="{{t.live}}" hint-placeholder-val="{{false}}">
+            <span class="now"><span class="shimmer">{{t.now}}</span></span>
+          </sc-if>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+        </button>
+
+        <div class="body">
+          <div class="body-in">
+            <ol class="steps">
+              <sc-for list="{{t.steps}}" as="s" hint-placeholder-count="4">
+                <li class="step {{s.cls}}" style="animation-delay: {{s.delay}}">
+                  <span class="s-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.icon}}"></path></svg></span>
+                  <span class="s-main">
+                    <span class="s-label">{{s.label}}</span>
+                    <code class="s-detail">{{s.detail}}</code>
+                    <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}">
+                      <ul class="sub">
+                        <sc-for list="{{s.sub}}" as="u" hint-placeholder-count="3">
+                          <li class="sub-row {{u.cls}}"><i class="sdot" aria-hidden="true"></i><span>{{u.text}}</span></li>
+                        </sc-for>
+                      </ul>
+                    </sc-if>
+                  </span>
+                  <span class="s-meta">
+                    <span class="s-time">{{s.time}}</span>
+                    <sc-if value="{{s.isOk}}" hint-placeholder-val="{{true}}">
+                      <span class="st ok" role="img" aria-label="Succeeded"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span>
+                    </sc-if>
+                    <sc-if value="{{s.isErr}}" hint-placeholder-val="{{false}}">
+                      <span class="st err" role="img" aria-label="Failed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M12 3l9.5 16.5H2.5z"></path></svg></span>
+                    </sc-if>
+                    <sc-if value="{{s.isRun}}" hint-placeholder-val="{{false}}">
+                      <span class="st run" role="img" aria-label="Running"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 3a9 9 0 0 1 9 9"></path></svg></span>
+                    </sc-if>
+                  </span>
+                </li>
+              </sc-for>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <sc-if value="{{t.hasReply}}" hint-placeholder-val="{{true}}">
+        <div class="reply">
+          <span class="avatar" aria-hidden="true" style="margin-top: 14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg></span>
+          <div style="min-width: 0; flex: 1">
+            <div class="who">Character 018 · Orchestrator</div>
+            <div class="reply-body">{{t.reply}}</div>
+          </div>
+        </div>
+      </sc-if>
+    </sc-for>
+  </main>
+
+  <footer style="width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 0 16px 24px; display: flex; flex-direction: column; gap: 10px">
+    <div class="composer">
+      <label class="sr" for="composer">Message the agent</label>
+      <input id="composer" type="text" placeholder="Message Character 018…">
+      <span class="pill">Bedrock: Claude Opus 5.5</span>
+      <span class="pill">Yolo Mode</span>
+      <button class="replay" onClick="{{replay}}">Replay live turn</button>
+    </div>
+    <div style="font-size: 11.5px; color: #5b6484; text-align: center">Click any capsule to expand its steps · the final reply always stays outside the capsule</div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#7c9cff","options":["#7c9cff","#5fd4e8","#c58cff","#f0b64f"]},"density":{"editor":"enum","default":"compact","options":["compact","cozy"]},"autoplay":{"editor":"boolean","default":true},"$preview":{"width":1280,"height":1180}}'>
+const ICON = {
+  bash: 'M4 17l6-5-6-5M12 19h8',
+  ask: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.6-2.5 2-2.5 4M12 17h.01',
+  sub: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9',
+  think: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z',
+  edit: 'M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z',
+  read: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5',
+  say: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z'
+};
+const CHIP_NAME = { bash: 'bash', read: 'read', edit: 'edit', ask: 'ask', sub: 'subagent' };
+const CHIP_ORDER = ['bash', 'read', 'edit', 'ask', 'sub'];
+
+const T1 = [
+  { k: 'bash', label: 'bash', detail: "git status --short; git log --oneline -1; git grep -nl 'build_static_generator\\|generate_static_html\\|static-html/README' -- . ':!*.lock' | head -30", time: '1.2s', st: 'ok' },
+  { k: 'ask', label: 'ask_user', detail: 'Confirm scope: remove the generator zip and the user guide, keep the static export?', time: '14s', st: 'ok' },
+  { k: 'bash', label: 'bash', detail: "grep -n '\"build:static\\|\"test:static' apps/large_exposure/frontend/package.json; git grep -n 'static_report_cli\\|LE_TEST_STATIC_REPORT' -- . | awk -F: '{print $1}' | sort | uniq -c", time: '0.8s', st: 'ok' },
+  { k: 'bash', label: 'bash', detail: "sed -n 550,640p tests/apps/large_exposure/test_static_report_html.py; grep -rn 'capture_flat_report\\|indexed_pdfs' apps/large_exposure/backend", time: '0.6s', st: 'ok' },
+  { k: 'say', label: 'said', detail: 'The generator is referenced from four places: two npm scripts, the CLI module and its test file. I’ll hand the mechanical removal to an implementer and keep the test rewrite for myself.', time: '', st: 'say' },
+  { k: 'sub', label: 'subagent → implementer-agent', detail: 'claude-opus-5-5 · "Remove the standalone offline-report tooling from the Large Exposure (LE) app, now that the static file is exportable…"', time: '2m 18s', st: 'err',
+    sub: [
+      { t: 'read  apps/large_exposure/backend/static_report_cli.py', c: 'ok' },
+      { t: 'edit  apps/large_exposure/frontend/package.json  (−3 scripts)', c: 'ok' },
+      { t: 'edit  apps/large_exposure/backend/static_report_cli.py', c: 'ok' },
+      { t: 'bash  pytest tests/apps/large_exposure -q → ImportError: circular import (services.report ↔ static_report_cli)', c: 'err' }
+    ] },
+  { k: 'think', label: 'thinking', detail: 'Re-spawning would redo the first three edits; the remaining fix is one import block.', time: '38s', st: 'ok' },
+  { k: 'say', label: 'said', detail: 'The subagent tripped on a circular import between services.report and static_report_cli. Rather than re-spawn, I’ll fix that last file directly.', time: '', st: 'say' },
+  { k: 'edit', label: 'edit', detail: 'apps/large_exposure/backend/static_report_cli.py (−212 lines) · docs/static-html/ removed', time: '0.3s', st: 'ok' }
+];
+
+const LIVE = [
+  { k: 'bash', label: 'bash', detail: 'pytest tests/apps/large_exposure -q → 41 passed, 1 failed', time: '41s', ms: 2200 },
+  { k: 'say', label: 'said', detail: '41 of 42 pass. The one failure is a shell-bundle test for the generator we just removed, so I’m deleting the test rather than the code.', time: '', ms: 2400 },
+  { k: 'read', label: 'read', detail: 'tests/apps/large_exposure/test_static_report_cli.py', time: '0.2s', ms: 900 },
+  { k: 'edit', label: 'edit', detail: 'tests/apps/large_exposure/test_static_report_cli.py (−96 lines, shell-bundle tests removed)', time: '0.4s', ms: 1400 },
+  { k: 'bash', label: 'bash', detail: 'pytest tests/apps/large_exposure -q → 42 passed in 38.1s', time: '38s', ms: 2600 },
+  { k: 'bash', label: 'bash', detail: 'git commit -am "LEIB-117: drop static generator zip + user guide" && gh pr create --fill', time: '3.1s', ms: 1600 }
+];
+
+function fmt(ms) {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const m = Math.floor(s / 60);
+  return m + ':' + String(s % 60).padStart(2, '0');
+}
+
+class Component extends DCLogic {
+  state = { open: {}, phase: 0, done: false, start: Date.now(), tick: 0 };
+
+  componentDidMount() { this.start(); }
+  componentWillUnmount() { this.stop(); }
+
+  start() {
+    this.stop();
+    this.setState({ phase: 0, done: false, start: Date.now() });
+    if ((this.props.autoplay ?? true) === false) return;
+    this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 500);
+    this.advance(0);
+  }
+  advance(i) {
+    if (i >= LIVE.length) {
+      this.timer = setTimeout(() => { this.setState({ done: true }); clearInterval(this.ticker); }, 700);
+      return;
+    }
+    this.setState({ phase: i + 1 });
+    this.timer = setTimeout(() => this.advance(i + 1), LIVE[i].ms);
+  }
+  stop() { clearTimeout(this.timer); clearInterval(this.ticker); }
+
+  buildTurn(id, user, steps, o) {
+    const open = !!this.state.open[id];
+    const live = !!o.live && !o.done;
+    const counts = {};
+    let errs = 0;
+    steps.forEach(s => { counts[s.k] = (counts[s.k] || 0) + 1; if (s.st === 'err') errs++; });
+    const chips = CHIP_ORDER.filter(k => counts[k]).map(k => ({ cls: '', text: counts[k] + ' ' + CHIP_NAME[k] }));
+    if (errs) chips.push({ cls: 'err', text: errs + (errs === 1 ? ' error' : ' errors') });
+    const cur = steps[steps.length - 1];
+    return {
+      id, user, open, live,
+      done: !live,
+      cls: (open ? 'open ' : '') + (live ? 'live' : 'done'),
+      title: live ? 'Working' : 'Worked for ' + o.elapsed,
+      sub: live ? steps.length + (steps.length === 1 ? ' step · ' : ' steps · ') + o.elapsed : steps.length + ' steps',
+      now: live && cur ? (cur.k === 'say' ? '“' + cur.detail + '”' : cur.label + ' · ' + cur.detail) : '',
+      dots: steps.map((s, i) => ({ cls: s.k + ' ' + s.st, delay: (i * 45) + 'ms' })),
+      chips,
+      steps: steps.map((s, i) => ({
+        label: s.label, detail: s.detail,
+        time: s.k === 'say' ? '' : (s.st === 'run' ? '…' : s.time),
+        cls: s.k + ' ' + s.st,
+        icon: ICON[s.k],
+        isOk: s.st === 'ok' && s.k !== 'say', isErr: s.st === 'err', isRun: s.st === 'run' && s.k !== 'say',
+        delay: (60 + i * 55) + 'ms',
+        hasSub: !!s.sub,
+        sub: (s.sub || []).map(u => ({ text: u.t, cls: u.c }))
+      })),
+      hasReply: !!o.reply,
+      reply: o.reply || '',
+      toggle: () => this.setState({ open: { ...this.state.open, [id]: !open } })
+    };
+  }
+
+  renderVals() {
+    const { phase, done, start } = this.state;
+    const liveSteps = LIVE.slice(0, phase).map((s, i) => ({ ...s, st: (i < phase - 1 || done) ? 'ok' : 'run' }));
+    const turns = [
+      this.buildTurn('t1', 'Now that static file is exportable, we don’t need the generator zip and the user guide', T1, {
+        elapsed: '3m 12s',
+        reply: 'Removed the generator zip and the user guide. The implementer subagent got most of the way but left a circular import in static_report_cli.py, so I finished that file directly instead of re-spawning.\n\nWhat changed: 3 npm scripts dropped from package.json, static_report_cli.py trimmed by 212 lines, docs/static-html/ deleted. Nothing else references the generator.\n\nShall I run the full suite and open the PR?'
+      }),
+      this.buildTurn('t2', 'Yes, run the full test suite and open a PR', liveSteps, {
+        live: true, done,
+        elapsed: done ? '1m 23s' : fmt(Date.now() - start),
+        reply: done ? 'All 42 tests pass. I also removed 96 lines of shell-bundle tests that only covered the deleted generator.\n\nPR #5405 is open against main: "LEIB-117: drop static generator zip + user guide". CI is running now.' : ''
+      })
+    ];
+    return {
+      accent: this.props.accent ?? '#7c9cff',
+      capPad: (this.props.density ?? 'compact') === 'cozy' ? '12px 16px' : '8px 12px',
+      turns,
+      replay: () => this.start()
+    };
+  }
+}
+</script>
+</body>
+</html>
