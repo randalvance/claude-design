@@ -9,8 +9,8 @@ Live canvas: https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis
 
 | File | What |
 |---|---|
-| `Main.dc.html` | Interactive composer in a thread: rich-text editor with floating format bar, model + effort popover (5-detent slider), fuel-gauge context meter with breakdown popover, YOLO switch, send. Sending appends a bubble and a live capsule. |
-| `States.dc.html` | Six static states: idle, typing + selection, model popover, Max effort, YOLO on, low fuel. |
+| `Main.dc.html` | Interactive composer in a thread: rich-text editor with floating format bar, model + effort popover (5-detent slider), fuel-gauge context meter with breakdown popover, YOLO switch, send. Sending appends a bubble and a live capsule; send morphs into a stop button (or ⎋) while the agent works. |
+| `States.dc.html` | Seven static states: idle, typing + selection, model popover, Max effort, YOLO on, low fuel, agent working (stop). |
 | `Anatomy.dc.html` | Numbered anatomy, motion spec table, the Max-effort moment, gauge geometry, rules. |
 | `canvas.json` | Canvas index (frames, order, notes). |
 

@@ -33,6 +33,8 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--dim);display:inline-block;animation:dotIn .35s cubic-bezier(.2,.9,.3,1.4) both}
 .dot.bash{background:#7c9cff}.dot.think{background:#5fd4e8}.dot.edit{background:var(--ok)}.dot.read{background:#9aa6cc}.dot.say{background:#c9cfe8;border-radius:2px}
 .dot.run{animation:dotIn .35s both,blink 1s ease-in-out .35s infinite}
+.dot.err{background:var(--err);box-shadow:0 0 0 2px rgba(255,112,131,.25)}
+.badge.stopped{background:var(--err);color:#fff}
 .chip{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--surf2);color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
 .shimmer{margin-left:auto;font-family:var(--mono);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(90deg,var(--mute) 0%,#ffffff 50%,var(--mute) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 1.8s linear infinite}
 .reply{display:flex;gap:12px;animation:bubbleIn .55s cubic-bezier(.2,.8,.2,1) both;padding:4px 2px}
@@ -125,6 +127,11 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .send.ready:hover svg{transform:translateY(-2px)}
 .send:active{transform:scale(.92)}
 .send.fly svg{animation:fly .5s cubic-bezier(.2,.8,.2,1) both}
+.send.stop{background:rgba(255,112,131,.16);color:var(--err);transform:scale(1.06);box-shadow:none}
+.send.stop::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--err);animation:ring 1.4s ease-out infinite;pointer-events:none}
+.send.stop:hover{background:var(--err);color:#0d1221}
+.send.stop svg{width:14px;height:14px;animation:pop .35s cubic-bezier(.2,.8,.3,1.4) both}
+.send{position:relative}
 .send:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .scrim{all:unset;position:fixed;inset:0;z-index:10;cursor:default}
 .pop{position:absolute;left:0;bottom:calc(100% + 10px);width:316px;background:#141a2e;border:1px solid #3a4677;border-radius:12px;box-shadow:0 16px 50px rgba(0,0,0,.5);padding:10px;z-index:20;transform-origin:bottom left;animation:popIn .26s cubic-bezier(.2,.9,.3,1.25) both;color:var(--ink);font-size:13px;box-sizing:border-box}
@@ -242,7 +249,8 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
       <section class="turn {{m.cls}}" aria-label="Agent work for this turn">
         <span class="avatar" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
-          <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+          <sc-if value="{{m.ok}}" hint-placeholder-val="{{false}}"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+          <sc-if value="{{m.stopped}}" hint-placeholder-val="{{false}}"><span class="badge stopped"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"></rect></svg></span></sc-if>
         </span>
         <span class="cap-title"><strong>{{m.title}}</strong><span class="cap-sub">{{m.sub}}</span></span>
         <span class="trail" aria-hidden="true"><sc-for list="{{m.dots}}" as="d" hint-placeholder-count="2"><i class="dot {{d.cls}}"></i></sc-for></span>
@@ -386,14 +394,15 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
             </button>
           </div>
           <span class="hint" aria-hidden="true">{{hint}}</span>
-          <button class="send {{sendCls}}" onClick="{{send}}" aria-label="Send message">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+          <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
+            <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3"></rect></svg></sc-if>
+            <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></sc-if>
           </button>
         </div>
       </div>
     </div>
     <div class="demo">
-      <span>Type, select text to format, ↵ to send · demo counts each character as 25 tokens so the gauge moves</span>
+      <span>Type, select text to format, ↵ to send, then hit the red square (or ⎋) to stop · demo counts each character as 25 tokens so the gauge moves</span>
       <button onClick="{{reset}}">Reset demo</button>
     </div>
   </footer>
@@ -483,9 +492,16 @@ class Component extends DCLogic {
     this.setState({ draft: el.textContent.length });
   }
 
+  busy() { return this.state.msgs.some((m) => !m.done); }
+
+  stop() {
+    clearInterval(this.ticker); clearTimeout(this.t4);
+    this.setState({ msgs: this.state.msgs.map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), steps: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) });
+  }
+
   send() {
     const el = this.ed;
-    if (!el || !el.textContent.trim()) return;
+    if (this.busy() || !el || !el.textContent.trim()) return;
     const out = [];
     walk(el, {}, out);
     const tokens = Math.max(40, el.textContent.length * TOKENS_PER_CHAR);
@@ -517,19 +533,21 @@ class Component extends DCLogic {
     const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
     const partsTotal = usedSum || 1;
 
+    const busy = this.busy();
     const msgs = st.msgs.map((m) => {
       const live = !m.done;
-      const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : 3;
+      const stopped = !!m.stopped;
+      const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.steps || 1) : 3);
       const kinds = ['think', 'read', 'bash'];
       return {
         segs: m.segs.map((s) => ({ text: s.text, cls: (s.b ? 'b ' : '') + (s.i ? 'i ' : '') + (s.c ? 'c ' : '') + (s.l ? 'l' : '') })),
-        done: !live, live,
+        done: !live, live, ok: !live && !stopped, stopped,
         cls: live ? 'live' : 'done',
-        title: live ? 'Working' : 'Worked for ' + (m.elapsed || '0:03'),
-        sub: live ? n + (n === 1 ? ' step · ' : ' steps · ') + fmtSec(Date.now() - m.start) : '3 steps',
+        title: live ? 'Working' : (stopped ? 'Stopped after ' + (m.elapsed || '0:01') : 'Worked for ' + (m.elapsed || '0:03')),
+        sub: live ? n + (n === 1 ? ' step · ' : ' steps · ') + fmtSec(Date.now() - m.start) : n + (n === 1 ? ' step' : ' steps'),
         now: live ? ['thinking · reading your message', 'read · last reply', 'bash · git status --short'][n - 1] : '',
-        dots: kinds.slice(0, n).map((k, i) => ({ cls: k + (live && i === n - 1 ? ' run' : '') })),
-        reply: st.yolo ? 'Done without asking. YOLO mode skipped 2 permission prompts along the way.' : 'Got it. One permission prompt is waiting for you above.'
+        dots: kinds.slice(0, n).map((k, i) => ({ cls: k + (live && i === n - 1 ? ' run' : '') + (stopped && i === n - 1 ? ' err' : '') })),
+        reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. YOLO mode skipped 2 permission prompts along the way.' : 'Got it. One permission prompt is waiting for you above.'
       };
     });
 
@@ -537,14 +555,14 @@ class Component extends DCLogic {
       accent: this.props.accent ?? '#7c9cff',
       compCls: [st.focus ? 'focus' : '', st.yolo ? 'yolo' : '', isMax ? 'max' : '', isLow ? 'lowfuel' : ''].join(' '),
       placeholder: isMax ? 'Max effort engaged. Give it the hard one…' : st.yolo ? 'Message Character 018 · no permission prompts' : 'Message Character 018…',
-      hint: st.draft > 0 ? '↵ send · ⇧↵ newline · select to format' : '↵ send · ⇧↵ newline',
+      hint: busy ? '⎋ stop · agent is working' : st.draft > 0 ? '↵ send · ⇧↵ newline · select to format' : '↵ send · ⇧↵ newline',
       msgs,
       // editor
       edRef: (el) => { if (el) this.ed = el; },
       onInput: (e) => this.onInputEl(e.currentTarget),
       onKeyDown: (e) => {
         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); }
-        if (e.key === 'Escape' && st.open) this.setState({ open: null });
+        if (e.key === 'Escape') { if (st.open) this.setState({ open: null }); else if (busy) this.stop(); }
       },
       onSel: () => this.updateSel(),
       onFocus: () => this.setState({ focus: true }),
@@ -598,8 +616,10 @@ class Component extends DCLogic {
         clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ yoloBurst: false }), 800);
       },
       // send
-      sendCls: (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''),
-      send: () => this.send(),
+      busy, notBusy: !busy,
+      sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''),
+      sendAria: busy ? 'Stop the agent' : 'Send message',
+      sendOrStop: () => busy ? this.stop() : this.send(),
       reset: () => { if (this.ed) this.ed.textContent = ''; clearInterval(this.ticker); this.setState({ used: { ...BASE }, msgs: [], draft: 0, open: null, effort: 2, yolo: false, model: 'fable', sel: null }); }
     };
   }
