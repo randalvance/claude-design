@@ -67,7 +67,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; font-size: 13px; line-height: 1.5; margin-top: 8px">
         <div style="display: flex; gap: 10px"><span class="n">1</span><div><strong>Rich text editor</strong><div style="color: #8d96b5">Contenteditable. Bold, italic, inline code and links; ⌘B / ⌘I work natively. Selecting text pops a floating format bar above the selection. ↵ sends, ⇧↵ breaks a line.</div></div></div>
-        <div style="display: flex; gap: 10px"><span class="n">2</span><div><strong>Model + effort pill</strong><div style="color: #8d96b5">Model dot colour, name, and a 5-bar effort meter. Click opens a dialog: model rows, then a 5-detent slider. The pill is the only place effort is shown while typing.</div></div></div>
+        <div style="display: flex; gap: 10px"><span class="n">2</span><div><strong>Model + effort pill</strong><div style="color: #8d96b5">Model dot colour, name, a 5-bar effort meter and an “auto” tag while effort is the model's default. Click opens a dialog: model rows (each naming its default), then a 5-detent slider with the default marked.</div></div></div>
         <div style="display: flex; gap: 10px"><span class="n">3</span><div><strong>Context gauge</strong><div style="color: #8d96b5">A fuel gauge: F is a fresh conversation, E is a full context. The arc is what's left. A ghost segment shows what the draft will burn. Click opens the breakdown by kind.</div></div></div>
         <div style="display: flex; gap: 10px"><span class="n">4</span><div><strong>YOLO switch</strong><div style="color: #8d96b5">Real <span class="k">role="switch"</span>. On: amber, lightning in the knob, composer border and send button follow. Placeholder changes to say prompts are skipped.</div></div></div>
         <div style="display: flex; gap: 10px"><span class="n">5</span><div><strong>Key hint</strong><div style="color: #8d96b5">Mono, dim, hidden under 640px. Gains “select to format” once there is text so the format bar is discoverable.</div></div></div>
@@ -139,6 +139,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
       </div>
       <div>
         <p class="h">Rules</p>
+        <div class="rule"><i></i><div><b>Thinking is adaptive, so the slider is effort, never a thinking budget.</b> No on/off switch and no token budget: the model decides how deeply to think per turn and effort caps it. Each model owns a default (Fable 5.1 and Sonnet 5.5 High, Opus 5.5 and Haiku 5.5 Medium); switching models snaps to it until the user overrides, and “Use model default” returns. “Show reasoning summary” is the only thinking-visibility control.</div></div>
         <div class="rule"><i></i><div><b>One popover at a time.</b> A transparent scrim button closes it; Escape closes from the editor.</div></div>
         <div class="rule"><i></i><div><b>Colours come from the thread.</b> Model dots, breakdown rows and the gauge reuse the capsule's kind palette; amber is reserved for YOLO and warnings.</div></div>
         <div class="rule"><i></i><div><b>Nothing animates without a cause.</b> Only Max effort and the live capsule loop; every other motion answers an input.</div></div>

@@ -6,13 +6,13 @@
   "pages": [],
   "boards": {
     "Main.dc.html": {"x": 0, "y": 0, "w": 1280, "h": 900, "title": "Composer — live demo", "expand": "fill", "is_interactive": true},
-    "States.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 1500, "title": "Composer states"},
-    "Anatomy.dc.html": {"x": 0, "y": 1940, "w": 2640, "h": 760, "title": "Anatomy + motion spec"}
+    "States.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 1600, "title": "Composer states"},
+    "Anatomy.dc.html": {"x": 0, "y": 2040, "w": 2640, "h": 760, "title": "Anatomy + motion spec"}
   },
   "order": ["Main.dc.html", "States.dc.html", "Anatomy.dc.html"],
   "notes": {
     "t1": {"x": 0, "y": -300, "text": "Prompt area — rich text, model + effort, context gauge, Yolo", "kind": "title1", "maxW": 2640},
-    "t2": {"x": 0, "y": 1640, "text": "Anatomy, motion and the Max-effort moment", "kind": "title1", "maxW": 2640}
+    "t2": {"x": 0, "y": 1740, "text": "Anatomy, motion and the Max-effort moment", "kind": "title1", "maxW": 2640}
   },
   "designSystems": []
 }

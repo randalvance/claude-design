@@ -21,3 +21,6 @@ Live canvas: https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis
 - Max effort is the only state that animates continuously: conic ring, flame slider,
   sparks, MAX tag. Everything else answers an input and respects `prefers-reduced-motion`.
 - Demo exaggeration: each typed character counts as 25 tokens so the needle visibly moves.
+- Adaptive thinking: the slider is effort, not a thinking budget. Each model carries its own
+  default effort (Fable 5.1 / Sonnet 5.5 High, Opus 5.5 / Haiku 5.5 Medium); switching models
+  snaps to it until the user overrides. "Show reasoning summary" is the only visibility control.

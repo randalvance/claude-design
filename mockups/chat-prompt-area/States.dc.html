@@ -115,6 +115,20 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .elab{display:flex;justify-content:space-between;margin:2px 4px 0;font-size:11px;color:var(--dim)}
 .elab span.on{color:var(--ink);font-weight:600}
 .elab span.maxl.on{background:linear-gradient(90deg,#f0b64f,#ff7083,#c58cff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:flicker 1.1s ease-in-out infinite}
+.mode{font-style:normal;font-weight:500;color:var(--mute);font-size:11px}
+.pop.max .mode{-webkit-text-fill-color:var(--mute)}
+.mdef{color:#aeb6d2}
+.defmark{position:absolute;top:13px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mute);background:#141a2e;transform:translateX(-50%);box-sizing:border-box}
+.elab span.def::after{content:"";display:block;width:3px;height:3px;border-radius:50%;background:var(--mute);margin:3px auto 0}
+.autotag{font-size:10px;color:var(--dim);letter-spacing:.04em;margin-left:-2px}
+.adapt{display:flex;gap:8px;align-items:flex-start;margin:10px 4px 2px;font-size:11.5px;line-height:1.45;color:var(--mute)}
+.adapt svg{width:13px;height:13px;flex:none;margin-top:2px;color:#5fd4e8}
+.lnk{flex:none;font-size:11.5px;font-weight:500;color:var(--accent);white-space:nowrap;align-self:flex-end}
+.row-sw{display:flex;align-items:center;justify-content:space-between;width:100%;box-sizing:border-box;padding:8px 10px;margin-top:6px;border-radius:8px;font-size:12.5px;color:var(--ink)}
+.mini-track{position:relative;width:26px;height:14px;border-radius:999px;background:#2f3858;flex:none}
+.mini-knob{position:absolute;left:2px;top:2px;width:10px;height:10px;border-radius:50%;background:#8d96b5}
+.row-sw.on .mini-track{background:#5fd4e8}
+.row-sw.on .mini-knob{transform:translateX(12px);background:#0d1221}
 .maxnote{margin:10px 2px 2px;padding:8px 10px;border-radius:8px;background:rgba(240,182,79,.1);border:1px solid rgba(240,182,79,.35);font-size:12px;color:#f6d08a;display:flex;gap:8px;align-items:flex-start;line-height:1.4}
 .maxnote .flame{flex:none;margin-top:1px}
 @keyframes spinAng{to{--ang:360deg}}
@@ -131,7 +145,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </helmet>
-<div style="width: 1280px; height: 1500px; box-sizing: border-box; padding: 44px 56px; display: flex; flex-direction: column; gap: 24px">
+<div style="width: 1280px; height: 1600px; box-sizing: border-box; padding: 44px 56px; display: flex; flex-direction: column; gap: 24px">
   <div style="display: flex; flex-direction: column; gap: 6px">
     <h1 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.01em">Composer states</h1>
     <p style="margin: 0; font-size: 14px; color: #8d96b5">Same 14px-radius surface as the capsule. The bottom bar borrows the capsule's chip language: every control is a 28px pill, and every signal is a colour the thread already uses.</p>
@@ -184,8 +198,8 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
     </div>
 
     <!-- 3 model popover, High -->
-    <div class="card" style="padding-top: 300px">
-      <div class="lbl"><strong>3 · Model + effort open</strong><span>Rows carry the model's dot colour; slider has five detents</span></div>
+    <div class="card" style="padding-top: 400px">
+      <div class="lbl"><strong>3 · Model + effort open</strong><span>Each row names its default effort; the hollow ring marks it on the slider</span></div>
       <div class="comp-wrap"><div class="composer">
         <div class="ed"><span class="ph">Message Character 018…</span></div>
         <div class="bar">
@@ -195,14 +209,16 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
               <div class="pop" role="dialog" aria-label="Model and effort">
                 <div class="pop-h"><span>Model</span></div>
                 <div style="display: flex; flex-direction: column; gap: 2px">
-                  <div class="mrow"><i class="mdot" style="background: #c58cff"></i><span class="mname">Fable 5.1</span><span class="mdesc">Most intelligent</span></div>
-                  <div class="mrow sel"><i class="mdot" style="background: #7c9cff"></i><span class="mname">Opus 5.5</span><span class="mdesc">Deep reasoning</span><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></div>
-                  <div class="mrow"><i class="mdot" style="background: #5fd4e8"></i><span class="mname">Sonnet 5.5</span><span class="mdesc">Fast and capable</span></div>
-                  <div class="mrow"><i class="mdot" style="background: #4fd1a0"></i><span class="mname">Haiku 5.5</span><span class="mdesc">Instant</span></div>
+                  <div class="mrow"><i class="mdot" style="background: #c58cff"></i><span class="mname">Fable 5.1</span><span class="mdesc">Most intelligent · <span class="mdef">High</span></span></div>
+                  <div class="mrow sel"><i class="mdot" style="background: #7c9cff"></i><span class="mname">Opus 5.5</span><span class="mdesc">Deep reasoning · <span class="mdef">Medium</span></span><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></div>
+                  <div class="mrow"><i class="mdot" style="background: #5fd4e8"></i><span class="mname">Sonnet 5.5</span><span class="mdesc">Fast and capable · <span class="mdef">High</span></span></div>
+                  <div class="mrow"><i class="mdot" style="background: #4fd1a0"></i><span class="mname">Haiku 5.5</span><span class="mdesc">Instant · <span class="mdef">Medium</span></span></div>
                 </div>
-                <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">Extra high</span></div>
-                <div class="sl"><div class="track"></div><div class="fill" style="width: 75%"></div><div class="ticks"><i></i><i></i><i></i><i></i><i></i></div><span class="thumb" style="left: 75%"></span></div>
-                <div class="elab"><span>Low</span><span>Medium</span><span>High</span><span class="on">Extra high</span><span class="maxl">Max</span></div>
+                <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">Extra high <em class="mode">· custom</em></span></div>
+                <div class="sl"><div class="track"></div><div class="fill" style="width: 75%"></div><div class="ticks"><i></i><i></i><i></i><i></i><i></i></div><i class="defmark" style="left: 25%"></i><span class="thumb" style="left: 75%"></span></div>
+                <div class="elab"><span>Low</span><span class="def">Medium</span><span>High</span><span class="on">Extra high</span><span class="maxl">Max</span></div>
+                <div class="adapt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg><span>Thinking is adaptive: Opus 5.5 decides when and how deeply to think on each turn. Effort sets the ceiling and the token spend.</span><span class="lnk">Use model default</span></div>
+                <div class="row-sw"><span>Show reasoning summary</span><span class="mini-track"><span class="mini-knob"></span></span></div>
               </div>
             </span>
             <button class="pill-btn"><svg class="g" viewBox="0 0 40 40" aria-hidden="true"><circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle><circle class="g-fill ok" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: 45.5 87.96"></circle><g class="nwrap"><line class="needle" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate(321deg)"></line></g><circle class="g-hub" cx="20" cy="20" r="2.4"></circle></svg><span>69%</span></button>
@@ -215,7 +231,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
     </div>
 
     <!-- 4 max effort -->
-    <div class="card max" style="padding-top: 300px">
+    <div class="card max" style="padding-top: 400px">
       <div class="lbl"><strong>4 · Max effort</strong><span>Conic ring orbits the composer, slider ignites, sparks rise, MAX tag on the pill</span></div>
       <div class="comp-wrap"><div class="glow"></div><div class="composer"><div class="ring"></div>
         <div class="ed"><span class="ph">Max effort engaged. Give it the hard one…</span></div>
@@ -226,12 +242,14 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
               <div class="pop max" role="dialog" aria-label="Model and effort">
                 <div class="pop-h"><span>Model</span></div>
                 <div style="display: flex; flex-direction: column; gap: 2px">
-                  <div class="mrow sel"><i class="mdot" style="background: #c58cff"></i><span class="mname">Fable 5.1</span><span class="mdesc">Most intelligent</span><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></div>
-                  <div class="mrow"><i class="mdot" style="background: #7c9cff"></i><span class="mname">Opus 5.5</span><span class="mdesc">Deep reasoning</span></div>
+                  <div class="mrow sel"><i class="mdot" style="background: #c58cff"></i><span class="mname">Fable 5.1</span><span class="mdesc">Most intelligent · <span class="mdef">High</span></span><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></div>
+                  <div class="mrow"><i class="mdot" style="background: #7c9cff"></i><span class="mname">Opus 5.5</span><span class="mdesc">Deep reasoning · <span class="mdef">Medium</span></span></div>
                 </div>
-                <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">Max</span></div>
-                <div class="sl"><div class="track"></div><div class="fill" style="width: 100%"></div><div class="ticks"><i></i><i></i><i></i><i></i><i></i></div><span class="thumb" style="left: 100%"></span><span class="sparks"><i style="--dx: -14px; --d: 0s"></i><i style="--dx: 10px; --d: .15s"></i><i style="--dx: -4px; --d: .3s"></i><i style="--dx: 16px; --d: .45s"></i><i style="--dx: -18px; --d: .6s"></i><i style="--dx: 4px; --d: .75s"></i><i style="--dx: -9px; --d: .9s"></i></span></div>
-                <div class="elab"><span>Low</span><span>Medium</span><span>High</span><span>Extra high</span><span class="maxl on">Max</span></div>
+                <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">Max <em class="mode">· custom</em></span></div>
+                <div class="sl"><div class="track"></div><div class="fill" style="width: 100%"></div><div class="ticks"><i></i><i></i><i></i><i></i><i></i></div><i class="defmark" style="left: 50%"></i><span class="thumb" style="left: 100%"></span><span class="sparks"><i style="--dx: -14px; --d: 0s"></i><i style="--dx: 10px; --d: .15s"></i><i style="--dx: -4px; --d: .3s"></i><i style="--dx: 16px; --d: .45s"></i><i style="--dx: -18px; --d: .6s"></i><i style="--dx: 4px; --d: .75s"></i><i style="--dx: -9px; --d: .9s"></i></span></div>
+                <div class="elab"><span>Low</span><span>Medium</span><span class="def">High</span><span>Extra high</span><span class="maxl on">Max</span></div>
+                <div class="adapt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg><span>Thinking is adaptive: Fable 5.1 decides when and how deeply to think on each turn. Effort sets the ceiling and the token spend.</span><span class="lnk">Use model default</span></div>
+                <div class="row-sw on"><span>Show reasoning summary</span><span class="mini-track"><span class="mini-knob"></span></span></div>
                 <div class="maxnote"><svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg><span>Max effort. Longest thinking, most tool calls, slowest replies. Save it for the gnarly ones.</span></div>
               </div>
             </span>
@@ -305,7 +323,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1500}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1600}}'>
 class Component extends DCLogic {
   renderVals() { return {}; }
 }

@@ -169,6 +169,24 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .elab span{transition:color .25s,transform .25s;display:inline-block}
 .elab span.on{color:var(--ink);font-weight:600;transform:translateY(-1px)}
 .elab span.maxl.on{background:linear-gradient(90deg,#f0b64f,#ff7083,#c58cff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:flicker 1.1s ease-in-out infinite}
+.mode{font-style:normal;font-weight:500;color:var(--mute);font-size:11px}
+.pop.max .mode{-webkit-text-fill-color:var(--mute)}
+.mdef{color:#aeb6d2}
+.defmark{position:absolute;top:13px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mute);background:#141a2e;transform:translateX(-50%);box-sizing:border-box;pointer-events:none;transition:left .35s cubic-bezier(.2,.8,.2,1)}
+.elab span.def::after{content:"";display:block;width:3px;height:3px;border-radius:50%;background:var(--mute);margin:3px auto 0}
+.autotag{font-size:10px;color:var(--dim);letter-spacing:.04em;margin-left:-2px}
+.adapt{display:flex;gap:8px;align-items:flex-start;margin:10px 4px 2px;font-size:11.5px;line-height:1.45;color:var(--mute)}
+.adapt svg{width:13px;height:13px;flex:none;margin-top:2px;color:#5fd4e8}
+.lnk{all:unset;cursor:pointer;flex:none;font-size:11.5px;font-weight:500;color:var(--accent);white-space:nowrap;align-self:flex-end}
+.lnk:hover{text-decoration:underline}
+.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.row-sw{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;box-sizing:border-box;padding:8px 10px;margin-top:6px;border-radius:8px;font-size:12.5px;color:var(--ink);transition:background .15s}
+.row-sw:hover{background:var(--surf2)}
+.row-sw:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mini-track{position:relative;width:26px;height:14px;border-radius:999px;background:#2f3858;transition:background .25s;flex:none}
+.mini-knob{position:absolute;left:2px;top:2px;width:10px;height:10px;border-radius:50%;background:#8d96b5;transition:transform .35s cubic-bezier(.34,1.6,.5,1),background .25s}
+.row-sw[aria-checked="true"] .mini-track{background:#5fd4e8}
+.row-sw[aria-checked="true"] .mini-knob{transform:translateX(12px);background:#0d1221}
 .maxnote{margin:10px 2px 2px;padding:8px 10px;border-radius:8px;background:rgba(240,182,79,.1);border:1px solid rgba(240,182,79,.35);font-size:12px;color:#f6d08a;display:flex;gap:8px;align-items:flex-start;line-height:1.4;animation:popIn .3s cubic-bezier(.2,.9,.3,1.25) both}
 .maxnote .flame{flex:none;margin-top:1px}
 .ctxpop{width:300px}
@@ -294,6 +312,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
                 <i class="mdot" style="background: {{modelColor}}" aria-hidden="true"></i>
                 <span>{{modelName}}</span>
                 <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+                <sc-if value="{{auto}}" hint-placeholder-val="{{true}}"><span class="autotag">auto</span></sc-if>
                 <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
                   <svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
                   <span class="maxtag">MAX</span>
@@ -309,16 +328,17 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
                       <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}">
                         <i class="dot" style="background: {{mo.color}}; animation: none" aria-hidden="true"></i>
                         <span class="mname">{{mo.name}}</span>
-                        <span class="mdesc">{{mo.desc}}</span>
+                        <span class="mdesc">{{mo.desc}} · <span class="mdef">{{mo.defLabel}}</span></span>
                         <sc-if value="{{mo.sel}}" hint-placeholder-val="{{false}}"><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
                       </button>
                     </sc-for>
                   </div>
-                  <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">{{effortLabel}}</span></div>
+                  <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">{{effortLabel}} <em class="mode">· {{effortMode}}</em></span></div>
                   <div class="sl">
                     <div class="track" aria-hidden="true"></div>
                     <div class="fill" style="width: {{effPct}}" aria-hidden="true"></div>
                     <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                    <i class="defmark" style="left: {{defPct}}" aria-hidden="true"></i>
                     <label class="sr" for="effort">Effort level</label>
                     <input id="effort" type="range" min="0" max="4" step="1" value="{{effort}}" onChange="{{setEffort}}" aria-valuetext="{{effortLabel}}">
                     <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
@@ -326,6 +346,15 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
                     </sc-if>
                   </div>
                   <div class="elab" aria-hidden="true"><sc-for list="{{elabs}}" as="e" hint-placeholder-count="5"><span class="{{e.cls}}">{{e.t}}</span></sc-for></div>
+                  <div class="adapt">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think on each turn. Effort sets the ceiling and the token spend.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">Use model default</button></sc-if>
+                  </div>
+                  <button class="row-sw" role="switch" aria-checked="{{showThink}}" onClick="{{toggleThink}}">
+                    <span class="row-sw-l">Show reasoning summary</span>
+                    <span class="mini-track" aria-hidden="true"><span class="mini-knob"></span></span>
+                  </button>
                   <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
                     <div class="maxnote">
                       <svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
@@ -409,10 +438,10 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#7c9cff","options":["#7c9cff","#5fd4e8","#c58cff","#f0b64f"]},"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1280,"height":900}}'>
 const MODELS = [
-  { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', color: '#c58cff' },
-  { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', color: '#7c9cff' },
-  { id: 'sonnet', name: 'Sonnet 5.5', desc: 'Fast and capable', color: '#5fd4e8' },
-  { id: 'haiku', name: 'Haiku 5.5', desc: 'Instant', color: '#4fd1a0' }
+  { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', color: '#c58cff', def: 2 },
+  { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', color: '#7c9cff', def: 1 },
+  { id: 'sonnet', name: 'Sonnet 5.5', desc: 'Fast and capable', color: '#5fd4e8', def: 2 },
+  { id: 'haiku', name: 'Haiku 5.5', desc: 'Instant', color: '#4fd1a0', def: 1 }
 ];
 const EFFORT = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
 const ARC = 65.97, CIRC = 87.96;
@@ -445,7 +474,7 @@ function walk(node, f, out) {
 }
 
 class Component extends DCLogic {
-  state = { model: 'fable', effort: 2, yolo: false, open: null, used: { ...BASE }, draft: 0, focus: false, sel: null, msgs: [], maxBurst: false, yoloBurst: false, refill: null, fly: false, tick: 0 };
+  state = { model: 'fable', effort: 2, auto: true, showThink: false, yolo: false, open: null, used: { ...BASE }, draft: 0, focus: false, sel: null, msgs: [], maxBurst: false, yoloBurst: false, refill: null, fly: false, tick: 0 };
 
   componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearTimeout(this.t4); clearInterval(this.ticker); }
 
@@ -544,7 +573,7 @@ class Component extends DCLogic {
         cls: live ? 'live' : 'done',
         title: live ? 'Working' : (stopped ? 'Stopped after ' + (m.elapsed || '0:01') : 'Worked for ' + (m.elapsed || '0:03')),
         sub: live ? n + (n === 1 ? ' step · ' : ' steps · ') + fmtSec(Date.now() - m.start) : n + (n === 1 ? ' step' : ' steps'),
-        now: live ? ['thinking · reading your message', 'read · last reply', 'bash · git status --short'][n - 1] : '',
+        now: live ? [st.showThink ? '“Checking what changed since the last turn before touching anything…”' : 'thinking · adaptive', 'read · last reply', 'bash · git status --short'][n - 1] : '',
         dots: kinds.slice(0, n).map((k, i) => ({ cls: k + (live && i === n - 1 ? ' run' : '') + (stopped && i === n - 1 ? ' err' : '') })),
         reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. YOLO mode skipped 2 permission prompts along the way.' : 'Got it. One permission prompt is waiting for you above.'
       };
@@ -576,20 +605,26 @@ class Component extends DCLogic {
       toggleModel: () => this.setState({ open: st.open === 'model' ? null : 'model' }),
       toggleCtx: () => this.setState({ open: st.open === 'ctx' ? null : 'ctx' }),
       modelName: model.name, modelColor: model.color,
-      models: MODELS.map((m) => ({ ...m, sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id }) })),
+      models: MODELS.map((m) => ({ ...m, defLabel: EFFORT[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
       ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
       effort: st.effort,
+      auto: st.auto, custom: !st.auto,
       effortLabel: EFFORT[st.effort],
+      effortMode: st.auto ? 'model default' : 'custom',
       effPct: (st.effort / 4 * 100) + '%',
-      elabs: EFFORT.map((t, i) => ({ t, cls: (i === st.effort ? 'on ' : '') + (i === 4 ? 'maxl' : '') })),
+      defPct: (model.def / 4 * 100) + '%',
+      elabs: EFFORT.map((t, i) => ({ t, cls: (i === st.effort ? 'on ' : '') + (i === 4 ? 'maxl ' : '') + (i === model.def ? 'def' : '') })),
       isMax, popCls: isMax ? 'max' : '',
       maxBurst: st.maxBurst,
       setEffort: (e) => {
         const v = Number(e.target.value);
         const wasMax = st.effort === 4;
-        this.setState({ effort: v, maxBurst: v === 4 && !wasMax });
+        this.setState({ effort: v, auto: false, maxBurst: v === 4 && !wasMax });
         if (v === 4 && !wasMax) { clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ maxBurst: false }), 900); }
       },
+      resetEffort: () => this.setState({ effort: model.def, auto: true }),
+      showThink: st.showThink,
+      toggleThink: () => this.setState({ showThink: !st.showThink }),
       // context gauge
       gaugeCls, isLow,
       gaugeBtnCls: isLow ? 'lowfuel' : '',
@@ -619,7 +654,7 @@ class Component extends DCLogic {
       sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''),
       sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
-      reset: () => { if (this.ed) this.ed.textContent = ''; clearInterval(this.ticker); this.setState({ used: { ...BASE }, msgs: [], draft: 0, open: null, effort: 2, yolo: false, model: 'fable', sel: null }); }
+      reset: () => { if (this.ed) this.ed.textContent = ''; clearInterval(this.ticker); this.setState({ used: { ...BASE }, msgs: [], draft: 0, open: null, effort: 2, auto: true, showThink: false, yolo: false, model: 'fable', sel: null }); }
     };
   }
 }
