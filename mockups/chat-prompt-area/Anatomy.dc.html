@@ -71,7 +71,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
         <div style="display: flex; gap: 10px"><span class="n">3</span><div><strong>Context gauge</strong><div style="color: #8d96b5">A fuel gauge: F is a fresh conversation, E is a full context. The arc is what's left. A ghost segment shows what the draft will burn. Click opens the breakdown by kind.</div></div></div>
         <div style="display: flex; gap: 10px"><span class="n">4</span><div><strong>YOLO switch</strong><div style="color: #8d96b5">Real <span class="k">role="switch"</span>. On: amber, lightning in the knob, composer border and send button follow. Placeholder changes to say prompts are skipped.</div></div></div>
         <div style="display: flex; gap: 10px"><span class="n">5</span><div><strong>Key hint</strong><div style="color: #8d96b5">Mono, dim, hidden under 640px. Gains “select to format” once there is text so the format bar is discoverable.</div></div></div>
-        <div style="display: flex; gap: 10px"><span class="n">6</span><div><strong>Send</strong><div style="color: #8d96b5">Dormant grey until there is text, then pops to the accent with a soft shadow. On send the arrow flies out the top and returns from below. While the agent works it becomes a red stop square with a pulsing ring; click or ⎋ halts the turn and the capsule settles to “Stopped”.</div></div></div>
+        <div style="display: flex; gap: 10px"><span class="n">6</span><div><strong>Send</strong><div style="color: #8d96b5">Dormant grey until there is text, then pops to the accent with a soft shadow. On send the arrow flies out the top and returns from below. While the agent works it becomes a still red stop square, no pulse, since it is an exit not an invitation; click or ⎋ halts the turn and the capsule settles to “Stopped”.</div></div></div>
       </div>
     </div>
 
@@ -89,7 +89,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
       <div class="row"><strong>Gauge moves</strong><span class="d">Arc eases to the new length; needle overshoots like a real meter.</span><span class="m">900ms · (.34,1.56,.64,1)</span></div>
       <div class="row"><strong>YOLO on</strong><span class="d">Knob slides 14px with overshoot; two rings burst from the track, amber then red.</span><span class="m">450ms · (.34,1.8,.5,1) · 700ms burst</span></div>
       <div class="row"><strong>Compact</strong><span class="d">Needle swings toward F; “+N k” floats up from the pill and fades.</span><span class="m">900ms · 1.2s float</span></div>
-      <div class="row"><strong>Agent working</strong><span class="d">Send crossfades to a red stop square that pops in; a ring pulses out of it until the turn ends or is stopped.</span><span class="m">350ms pop · 1.4s ring loop</span></div>
+      <div class="row"><strong>Agent working</strong><span class="d">Send crossfades to a red stop square that pops in once, then holds still; the live capsule's avatar ring carries the “working” motion.</span><span class="m">350ms pop · then static</span></div>
     </div>
 
     <!-- max effort moment -->

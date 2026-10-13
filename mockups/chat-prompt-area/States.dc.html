@@ -79,8 +79,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .yolo .send.ready{background:var(--warn);box-shadow:0 4px 14px rgba(240,182,79,.45)}
 .max .send.ready{background:linear-gradient(135deg,#f0b64f,#ff7083,#c58cff);background-size:200% 200%;animation:flame 1.6s linear infinite;color:#0d1221}
 .send{position:relative}
-.send.stop{background:rgba(255,112,131,.16);color:var(--err);transform:scale(1.06)}
-.send.stop::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--err);animation:ring 1.4s ease-out infinite}
+.send.stop{background:rgba(255,112,131,.16);color:var(--err)}
 .send.stop svg{width:14px;height:14px}
 .turn{border:1px solid #3f4a7a;background:var(--surf);border-radius:12px;display:flex;align-items:center;gap:12px;padding:8px 12px;min-height:44px;box-sizing:border-box;margin-bottom:12px}
 .avatar{position:relative;width:26px;height:26px;border-radius:50%;background:var(--surf2);display:grid;place-items:center;color:var(--accent);flex:none}
@@ -281,7 +280,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 
     <!-- 7 agent working: stop -->
     <div class="card">
-      <div class="lbl"><strong>7 · Agent working</strong><span>Send morphs into a red stop square with a pulsing ring; ⎋ in the editor also stops</span></div>
+      <div class="lbl"><strong>7 · Agent working</strong><span>Send becomes a quiet red stop square; the live capsule carries the motion, ⎋ in the editor also stops</span></div>
       <div class="comp-wrap">
         <section class="turn" aria-label="Agent work for this turn">
           <span class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg></span>
