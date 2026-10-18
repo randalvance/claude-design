@@ -1,0 +1,29 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-17T14:20:00Z"},
+  "title": "Agent Teams screens",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1360, "h": 1260, "title": "Create agent — desktop", "expand": "fill", "is_interactive": true},
+    "Chat.dc.html": {"x": 1440, "y": 0, "w": 1360, "h": 1100, "title": "Session chat — desktop", "expand": "fill", "is_interactive": true},
+    "Graph.dc.html": {"x": 2880, "y": 0, "w": 1360, "h": 900, "title": "Team graph — desktop", "expand": "fill", "is_interactive": true},
+    "Swimlanes.dc.html": {"x": 4320, "y": 0, "w": 1360, "h": 900, "title": "Team swimlanes — desktop", "expand": "fill", "is_interactive": true},
+    "Skills.dc.html": {"x": 5760, "y": 0, "w": 1360, "h": 1000, "title": "Skills editor — desktop", "expand": "fill", "is_interactive": true},
+    "Connectors.dc.html": {"x": 7200, "y": 0, "w": 1360, "h": 1180, "title": "Connectors and MCP servers — desktop", "expand": "fill", "is_interactive": true},
+    "Launch.dc.html": {"x": 8640, "y": 0, "w": 1360, "h": 1100, "title": "Start a session — desktop", "expand": "fill", "is_interactive": true},
+    "Space.dc.html": {"x": 0, "y": 1500, "w": 1360, "h": 1000, "title": "Team space — shared state", "expand": "fill", "is_interactive": true},
+    "Board.dc.html": {"x": 1440, "y": 1500, "w": 1360, "h": 940, "title": "Team board — kanban", "expand": "fill", "is_interactive": true},
+    "Compact.dc.html": {"x": 2880, "y": 1500, "w": 1360, "h": 1000, "title": "Compaction A — fold into summary (study · reduced-motion fallback)", "expand": "fill", "is_interactive": true},
+    "Compact2.dc.html": {"x": 4320, "y": 1500, "w": 1360, "h": 1000, "title": "Compaction B — the gauge drains (study)", "expand": "fill", "is_interactive": true},
+    "Compact3.dc.html": {"x": 5760, "y": 1500, "w": 1360, "h": 1000, "title": "Compaction C — robot compactor ✓ CHOSEN", "expand": "fill", "is_interactive": true}
+  },
+  "order": ["Main.dc.html", "Chat.dc.html", "Graph.dc.html", "Swimlanes.dc.html", "Skills.dc.html", "Connectors.dc.html", "Launch.dc.html", "Space.dc.html", "Board.dc.html", "Compact.dc.html", "Compact2.dc.html", "Compact3.dc.html"],
+  "notes": {
+    "t1": {"x": 0, "y": -300, "text": "Agent Teams — Create agent · Session chat · Team graph · Swimlanes · Skills · Connectors · Start a session", "kind": "title1", "maxW": 10000},
+    "t2": {"x": 0, "y": 1200, "text": "Team memory — shared space · kanban board · context compaction (C chosen; A is the reduced-motion fallback)", "kind": "title1", "maxW": 7120}
+  },
+  "designSystems": [
+    {"title": "Agent Teams", "namespace": "agent-teams-ds", "artifact": "https://claude.ai/artifact/DhusFk34yTB6vNqpvFvT66", "version": "1792246872-d3b3", "copiedAt": "2026-10-17T14:20:00Z"}
+  ]
+}

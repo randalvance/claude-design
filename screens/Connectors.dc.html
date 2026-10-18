@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Connectors and MCP servers</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.field{all:unset;box-sizing:border-box;display:block;width:100%;height:40px;padding:0 12px;border-radius:8px;background:#0f1527;border:1px solid #252d48;color:#e7eaf4;font:400 14px/1.4 "IBM Plex Sans",system-ui,sans-serif;transition:border-color .12s,box-shadow .12s}
+.field::placeholder{color:#5b6484}
+.field:hover{border-color:#36406a}
+.field:focus{border-color:#3a4677;box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.field.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px}
+textarea.field{height:auto;min-height:92px;padding:10px 12px;resize:vertical;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;line-height:1.55}
+.srch{all:unset;box-sizing:border-box;display:block;width:100%;height:32px;padding:0 10px 0 30px;border-radius:8px;background:#151b2f;border:1px solid #252d48;color:#e7eaf4;font:400 13px/1 "IBM Plex Sans",system-ui,sans-serif}
+.srch::placeholder{color:#5b6484}
+.row{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:8px 10px;border-radius:8px;border:1px solid transparent;transition:background .15s,border-color .15s}
+.row:hover{background:#1b2340}
+.row:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.row.on{background:#7c9cff2e;border-color:#3a4677}
+.row .ic{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#1b2340;color:var(--c,#8d96b5);flex:none;transition:box-shadow .25s}
+.row.on .ic{box-shadow:0 0 0 1px color-mix(in srgb,var(--c,#7c9cff) 60%,transparent),0 0 12px color-mix(in srgb,var(--c,#7c9cff) 40%,transparent)}
+.row b{font-size:13px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.row small{font:400 11px/1.3 "JetBrains Mono",ui-monospace,monospace;color:#8d96b5;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg{display:inline-flex;padding:2px;border-radius:8px;background:#0f1527;border:1px solid #252d48}
+.seg button{all:unset;cursor:pointer;height:28px;padding:0 12px;border-radius:6px;font:500 12.5px/1 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5;transition:background .15s,color .15s}
+.seg button:hover{color:#e7eaf4}
+.seg button:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.seg button.on{background:#1b2340;color:#e7eaf4}
+.perm{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font:500 11.5px/1 "IBM Plex Sans",system-ui,sans-serif;border:1px solid transparent;transition:background .2s,color .2s,border-color .2s,box-shadow .2s;min-width:64px;justify-content:center}
+.perm:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.perm.allow{background:#4fd1a024;color:#4fd1a0}
+.perm.ask{background:#f0b64f24;color:#f0b64f}
+.perm.deny{background:#ff708324;color:#ff7083}
+.perm:hover{border-color:currentColor}
+.tool{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr) auto auto;gap:12px;align-items:center;min-height:44px;padding:6px 12px;border-radius:8px;border:1px solid transparent}
+.tool:hover{background:#1b2340}
+.tool code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;color:#e7eaf4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tool span{font-size:12.5px;color:#8d96b5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tool .n{font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#5b6484;font-variant-numeric:tabular-nums}
+.thead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr) auto auto;gap:12px;padding:0 12px 6px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5b6484;border-bottom:1px solid #252d48}
+.env{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) auto;gap:8px;align-items:center}
+.stat{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:8px;background:#0f1527;border:1px solid #252d48;min-width:0}
+.stat b{font:500 16px/1.1 "JetBrains Mono",ui-monospace,monospace;color:#e7eaf4;font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;color:#8d96b5}
+.spark{display:flex;align-items:flex-end;gap:2px;height:28px}
+.spark i{flex:1;background:#7c9cff;border-radius:2px 2px 0 0;opacity:.75;min-width:3px}
+.spark i.slow{background:#f0b64f}.spark i.err{background:#ff7083}
+.out{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;line-height:1.55;color:#c9cfe8;background:#0f1527;border:1px solid #252d48;border-radius:8px;padding:10px 12px;white-space:pre-wrap;max-height:160px;overflow:auto}
+.out .k{color:#9db4ff}.out .s{color:#4fd1a0}.out .m{color:#5b6484}
+.hdr{display:flex;align-items:center;gap:12px;padding:16px 20px;border-radius:12px;background:#151b2f;border:1px solid #252d48;transition:border-color .3s,box-shadow .3s}
+.hdr.ok{border-color:rgba(79,209,160,.35)}
+.hdr.auth{border-color:#f0b64f;box-shadow:0 0 0 4px rgba(240,182,79,.14),0 0 22px -4px rgba(240,182,79,.35)}
+.hdr.err{border-color:#ff7083;box-shadow:0 0 0 1px rgba(255,112,131,.6),0 0 18px rgba(255,112,131,.4)}
+.hdr .big{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#1b2340;color:var(--c);box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 55%,transparent),0 0 18px color-mix(in srgb,var(--c) 35%,transparent)}
+@media (max-width:980px){.hide-sm{display:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+    <a href="Chat.dc.html" aria-label="Back" style="display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #8d96b5; border: 1px solid #252d48; background: #151b2f">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <span style="font-size: 11.5px; color: #8d96b5">Connectors / {{c.name}}</span>
+      <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2">Connectors and MCP servers</strong>
+    </div>
+    <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #8d96b5"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" idle="{{yes}}" label="Healthy"></x-import>5 connected · 1 needs auth · 1 failing</span>
+    <div style="margin-left: auto; display: flex; gap: 8px; align-items: center">
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" icon="search">Browse registry</x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="plus">Add server</x-import>
+    </div>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: stretch">
+
+    <!-- ===== list ===== -->
+    <nav aria-label="Connectors" style="flex: 1 1 260px; max-width: 290px; min-width: 0; background: #0f1527; border-right: 1px solid #252d48; display: flex; flex-direction: column; gap: 12px; padding: 16px 12px 20px; box-sizing: border-box">
+      <div style="position: relative">
+        <span style="position: absolute; left: 9px; top: 8px; color: #5b6484"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="search" size="{{fourteen}}"></x-import></span>
+        <label for="cn-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search connectors</label>
+        <input id="cn-search" class="srch" type="search" placeholder="Search connectors">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <sc-for list="{{list}}" as="l" hint-placeholder-count="7">
+          <button type="button" class="row {{l.cls}}" style="--c: {{l.color}}" aria-pressed="{{l.on}}" onClick="{{l.pick}}">
+            <span class="ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="{{l.icon}}" size="{{fourteen}}"></x-import></span>
+            <span style="min-width: 0; flex: 1"><b>{{l.name}}</b><small>{{l.sub}}</small></span>
+            <sc-if value="{{l.isOk}}" hint-placeholder-val="{{true}}"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="edit" pop="{{no}}" label="Connected"></x-import></sc-if>
+            <sc-if value="{{l.isAuth}}" hint-placeholder-val="{{false}}"><i class="at-dot at-dot--attn" role="img" aria-label="Needs auth"></i></sc-if>
+            <sc-if value="{{l.isErr}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" error="{{yes}}" pop="{{no}}" label="Failing"></x-import></sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <div style="margin-top: auto; padding: 12px; border-radius: 8px; border: 1px dashed #36406a; font-size: 12px; color: #8d96b5; line-height: 1.5">Paste an <span style="font-family: 'JetBrains Mono', monospace; color: #c9cfe8">mcp.json</span> or a <span style="font-family: 'JetBrains Mono', monospace; color: #c9cfe8">npx</span> command here to add a server.</div>
+    </nav>
+
+    <!-- ===== editor ===== -->
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 20px 24px 32px; box-sizing: border-box">
+
+      <!-- status header -->
+      <div class="hdr {{c.hdrCls}}" style="--c: {{c.color}}">
+        <span class="big"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="{{c.icon}}" size="{{twenty}}"></x-import></span>
+        <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1">
+          <span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><strong style="font-size: 16px; font-weight: 600; letter-spacing: -0.01em">{{c.name}}</strong><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{c.tone}}">{{c.status}}</x-import><x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">{{c.transport}}</x-import></span>
+          <span style="font-size: 12.5px; color: #8d96b5">{{c.statusLine}}</span>
+        </div>
+        <sc-if value="{{c.needsAuth}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="shield">Reconnect</x-import></sc-if>
+        <sc-if value="{{c.failing}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Button" variant="danger" icon="loader">Restart</x-import></sc-if>
+        <sc-if value="{{c.okState}}" hint-placeholder-val="{{true}}"><x-import component-from-global-scope="AgentTeamsDS.Toggle" label="Enabled" default-checked="{{yes}}"></x-import></sc-if>
+      </div>
+
+      <!-- stats -->
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+        <div class="stat"><b>{{c.calls}}</b><span>calls today</span></div>
+        <div class="stat"><b>{{c.p50}}</b><span>p50 latency</span></div>
+        <div class="stat"><b style="color: {{c.errColor}}">{{c.errs}}</b><span>errors</span></div>
+        <div class="stat"><div class="spark" aria-label="Latency, last 24 calls"><sc-for list="{{c.spark}}" as="b" hint-placeholder-count="24"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></div><span>latency trend</span></div>
+      </div>
+
+      <!-- connection -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Connection</h2>
+          <div class="seg" role="group" aria-label="Transport">
+            <button type="button" class="{{tStdio}}" onClick="{{setStdio}}">stdio</button>
+            <button type="button" class="{{tHttp}}" onClick="{{setHttp}}">Streamable HTTP</button>
+            <button type="button" class="{{tSse}}" onClick="{{setSse}}">SSE</button>
+          </div>
+          <span style="margin-left: auto; font-size: 12px; color: #8d96b5">Secrets stay in the OS keychain; agents never see them.</span>
+        </div>
+        <sc-if value="{{isStdio}}" hint-placeholder-val="{{true}}">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="cn-cmd" style="font-size: 13px; font-weight: 500">Command</label>
+            <input id="cn-cmd" class="field mono" type="text" value="{{c.command}}">
+          </div>
+        </sc-if>
+        <sc-if value="{{isRemote}}" hint-placeholder-val="{{false}}">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="cn-url" style="font-size: 13px; font-weight: 500">Endpoint</label>
+            <input id="cn-url" class="field mono" type="text" value="{{c.url}}">
+            <span style="font-size: 12px; color: #8d96b5">OAuth handled in the browser; the refresh token is stored per workspace.</span>
+          </div>
+        </sc-if>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 13px; font-weight: 500">Environment</span>
+          <sc-for list="{{c.env}}" as="e" hint-placeholder-count="2">
+            <div class="env"><input class="field mono" type="text" value="{{e.k}}" aria-label="Variable name"><input class="field mono" type="{{e.type}}" value="{{e.v}}" aria-label="Value"><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{e.tone}}">{{e.kind}}</x-import></div>
+          </sc-for>
+          <sc-if value="{{c.noEnv}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #5b6484">No variables — this server authenticates in the browser.</span></sc-if>
+          <div><x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="plus">Add variable</x-import></div>
+        </div>
+      </section>
+
+      <!-- tools -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px 20px 12px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Tools <span style="font-weight: 400; color: #8d96b5">· {{c.toolCount}} discovered</span></h2>
+          <span style="font-size: 12px; color: #8d96b5">Click a permission to cycle allow → ask → deny. Agent permissions apply on top.</span>
+          <div style="margin-left: auto; display: flex; gap: 6px">
+            <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" on-click="{{allowAll}}">Allow all</x-import>
+            <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" on-click="{{askAll}}">Ask for all</x-import>
+            <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="loader">Rediscover</x-import>
+          </div>
+        </div>
+        <div class="thead"><span>Tool</span><span>Does</span><span>Calls</span><span>Permission</span></div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <sc-for list="{{c.tools}}" as="t" hint-placeholder-count="6">
+            <div class="tool">
+              <code>{{t.name}}</code>
+              <span>{{t.desc}}</span>
+              <span class="n">{{t.calls}}</span>
+              <button type="button" class="perm {{t.perm}}" onClick="{{t.cycle}}" aria-label="{{t.aria}}"><i class="at-dot" style="background: currentColor; width: 6px; height: 6px" aria-hidden="true"></i>{{t.perm}}</button>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <!-- try it -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Try a call</h2>
+          <label for="cn-args" style="font-size: 12px; color: #8d96b5">Arguments for <span style="font-family: 'JetBrains Mono', monospace; color: #c9cfe8">{{c.tryTool}}</span></label>
+          <textarea id="cn-args" class="field" spellcheck="false">{{c.tryArgs}}</textarea>
+          <div><x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" size="sm" icon="send">Call as Builder</x-import></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 12px; color: #8d96b5; display: flex; gap: 8px; align-items: center">Result <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="ok">200 · {{c.tryMs}}</x-import></span>
+          <div class="out" aria-live="polite">{{c.tryOut}}</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== right rail ===== -->
+    <aside aria-label="Usage" style="flex: 1 1 300px; max-width: 340px; min-width: 0; border-left: 1px solid #252d48; background: #0f1527; display: flex; flex-direction: column; gap: 18px; padding: 20px 16px 24px; box-sizing: border-box">
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Available to</span>
+        <sc-for list="{{c.agents}}" as="a" hint-placeholder-count="5">
+          <div style="display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 2px 6px">
+            <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{a.name}}" id="{{a.name}}" glyph="{{a.glyph}}" size="{{twentySix}}"></x-import>
+            <span style="font-size: 13px; font-weight: 500; flex: 1">{{a.name}}</span>
+            <span style="font: 400 11px/1 'JetBrains Mono', monospace; color: #8d96b5">{{a.calls}}</span>
+            <x-import component-from-global-scope="AgentTeamsDS.Toggle" default-checked="{{a.on}}"></x-import>
+          </div>
+        </sc-for>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Recent calls</span>
+        <sc-for list="{{c.recent}}" as="r" hint-placeholder-count="5">
+          <div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 6px; border-radius: 8px; font-size: 12px">
+            <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{r.by}}" id="{{r.by}}" glyph="{{r.glyph}}" size="{{eighteen}}"></x-import>
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #e7eaf4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.call}}</span>
+              <span style="color: #8d96b5; font-variant-numeric: tabular-nums">{{r.meta}}</span>
+            </span>
+            <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{r.tone}}">{{r.code}}</x-import>
+          </div>
+        </sc-for>
+      </section>
+      <section style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48">
+        <span style="font-size: 12px; font-weight: 500">Safety</span>
+        <x-import component-from-global-scope="AgentTeamsDS.Toggle" label="Log every call" help="Arguments and results, 30 days." default-checked="{{yes}}"></x-import>
+        <x-import component-from-global-scope="AgentTeamsDS.Toggle" tone="danger" label="Allow in Yolo mode" help="Deny-listed tools still deny."></x-import>
+      </section>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.defs = {
+      github: { name: 'GitHub', icon: 'plug', color: 'var(--agent-1)', sub: 'mcp://github · 14 tools', state: 'ok', transport: 'stdio', command: 'npx -y @modelcontextprotocol/server-github', url: 'https://mcp.github.com/v1', calls: '1,204', p50: '180ms', errs: '3', toolCount: 14,
+        tools: [['list_pull_requests', 'List PRs on a repo with filters', 312, 'allow'], ['get_pull_request_diff', 'Fetch a PR diff', 288, 'allow'], ['create_pull_request', 'Open a PR from a branch', 41, 'ask'], ['merge_pull_request', 'Merge a PR', 0, 'deny'], ['create_issue_comment', 'Comment on an issue or PR', 96, 'ask'], ['search_code', 'Search code across the org', 467, 'allow']],
+        agents: [['Builder', 'wrench', '612', true], ['Reviewer', 'shield', '488', true], ['Scout', 'search', '104', true], ['Orchestrator', 'bot', '0', false], ['Planner', 'compass', '0', false]],
+        recent: [['Reviewer', 'shield', 'get_pull_request_diff #5404', '14:27 · 142ms', '200', 'ok'], ['Builder', 'wrench', 'create_pull_request feat/LEIB-117', '14:26 · asked you · 2.1s', '201', 'ok'], ['Scout', 'search', 'search_code "export_legacy"', '14:03 · 311ms', '200', 'ok'], ['Builder', 'wrench', 'merge_pull_request #5401', '13:48 · denied by policy', 'deny', 'err']],
+        tryTool: 'list_pull_requests', tryArgs: '{ "owner": "meridian", "repo": "exposure",\n  "state": "open", "per_page": 3 }', tryMs: '164ms', tryOut: '[\n  { "number": 5404, "title": "Static HTML file export", "head": "feat/LEIB-117-static-file", "draft": false },\n  { "number": 5398, "title": "Billing table migration (draft)", "draft": true },\n  { "number": 5391, "title": "Deploy canary for exporter", "draft": false }\n]' },
+      web: { name: 'Web search', icon: 'search', color: 'var(--agent-3)', sub: 'built-in · 2 tools', state: 'ok', transport: 'http', command: '', url: 'https://search.internal/mcp', calls: '86', p50: '640ms', errs: '0', toolCount: 2, tools: [['web_search', 'Search the web, returns snippets', 80, 'allow'], ['web_fetch', 'Fetch a page as text', 6, 'ask']], agents: [['Scout', 'search', '71', true], ['Planner', 'compass', '15', true], ['Builder', 'wrench', '0', false]], recent: [['Scout', 'search', 'web_search "pytest fixture path moved"', '14:12 · 702ms', '200', 'ok']], tryTool: 'web_search', tryArgs: '{ "q": "modelcontextprotocol streamable http", "n": 3 }', tryMs: '611ms', tryOut: '[ { "title": "Transports — MCP spec", "url": "https://modelcontextprotocol.io/…" }, … ]' },
+      pg: { name: 'Postgres (staging)', icon: 'wrench', color: 'var(--agent-2)', sub: 'mcp://db-staging · read-only', state: 'auth', transport: 'stdio', command: 'npx -y @modelcontextprotocol/server-postgres $DATABASE_URL', url: '', calls: '0', p50: '—', errs: '—', toolCount: 3, tools: [['query', 'Run a read-only SQL query', 0, 'ask'], ['list_tables', 'List tables and columns', 0, 'allow'], ['explain', 'EXPLAIN a query plan', 0, 'allow']], agents: [['Planner', 'compass', '0', true], ['Scout', 'search', '0', false]], recent: [['Planner', 'compass', 'list_tables', '14:17 · token expired', '401', 'warn']], tryTool: 'list_tables', tryArgs: '{ "schema": "billing" }', tryMs: '—', tryOut: '401 · credentials expired 2h ago. Reconnect to run calls.' },
+      slack: { name: 'Slack', icon: 'message', color: 'var(--agent-6)', sub: 'mcp://slack · 6 tools', state: 'ok', transport: 'http', command: '', url: 'https://mcp.slack.com/', calls: '12', p50: '390ms', errs: '0', toolCount: 6, tools: [['post_message', 'Post to a channel', 9, 'ask'], ['read_channel', 'Read recent messages', 3, 'allow'], ['search_messages', 'Search messages', 0, 'allow']], agents: [['Orchestrator', 'bot', '12', true]], recent: [['Orchestrator', 'bot', 'post_message #release-crew', '14:28 · asked you', '200', 'ok']], tryTool: 'read_channel', tryArgs: '{ "channel": "#release-crew", "limit": 5 }', tryMs: '402ms', tryOut: '[ { "user": "randal", "text": "LEIB-117 landing today?" }, … ]' },
+      linear: { name: 'Linear', icon: 'compass', color: 'var(--agent-5)', sub: 'mcp://linear · 9 tools', state: 'ok', transport: 'http', command: '', url: 'https://mcp.linear.app/sse', calls: '58', p50: '220ms', errs: '0', toolCount: 9, tools: [['get_issue', 'Fetch an issue', 40, 'allow'], ['update_issue', 'Change status or fields', 14, 'ask'], ['create_issue', 'Create an issue', 4, 'ask']], agents: [['Orchestrator', 'bot', '44', true], ['Planner', 'compass', '14', true]], recent: [['Orchestrator', 'bot', 'update_issue LEIB-117 → In review', '14:26', '200', 'ok']], tryTool: 'get_issue', tryArgs: '{ "id": "LEIB-117" }', tryMs: '208ms', tryOut: '{ "id": "LEIB-117", "title": "Static HTML file", "state": "In review" }' },
+      fs: { name: 'Filesystem', icon: 'file', color: 'var(--agent-8)', sub: 'built-in · worktree only', state: 'ok', transport: 'stdio', command: 'built-in · sandboxed to the session worktree', url: '', calls: '2,311', p50: '4ms', errs: '0', toolCount: 4, tools: [['read_file', 'Read a file in the worktree', 1402, 'allow'], ['write_file', 'Write a file', 611, 'allow'], ['list_dir', 'List a directory', 298, 'allow'], ['delete', 'Delete a path', 0, 'deny']], agents: [['Builder', 'wrench', '1,980', true], ['Scout', 'search', '331', true], ['Reviewer', 'shield', '0', true]], recent: [['Builder', 'wrench', 'write_file apps/export/legacy.py', '14:25 · 3ms', '200', 'ok']], tryTool: 'list_dir', tryArgs: '{ "path": "apps/export" }', tryMs: '3ms', tryOut: 'static.py\nlegacy.py\n__init__.py' },
+      sentry: { name: 'Sentry', icon: 'zap', color: 'var(--agent-7)', sub: 'mcp://sentry · failing', state: 'err', transport: 'sse', command: '', url: 'https://mcp.sentry.io/sse', calls: '7', p50: '—', errs: '7', toolCount: 5, tools: [['list_issues', 'Recent issues for a project', 7, 'allow'], ['get_event', 'One event with stack', 0, 'allow']], agents: [['Scout', 'search', '7', true]], recent: [['Scout', 'search', 'list_issues exposure-prod', '13:58 · ECONNRESET', '502', 'err']], tryTool: 'list_issues', tryArgs: '{ "project": "exposure-prod" }', tryMs: '—', tryOut: 'ECONNRESET after 3 retries. The server closed the stream mid-response; restarting usually clears it.' }
+    };
+    this.state = { sel: 'github', transport: null, perms: {} };
+  }
+  renderVals() {
+    const s = this.state; const d = this.defs[s.sel];
+    const transport = s.transport || d.transport;
+    const order = ['allow', 'ask', 'deny'];
+    const permOf = (name, def) => (s.perms[s.sel] && s.perms[s.sel][name]) || def;
+    const setPerm = (name, v) => this.setState({ perms: { ...s.perms, [s.sel]: { ...(s.perms[s.sel] || {}), [name]: v } } });
+    const setAll = (v) => { const m = {}; d.tools.forEach((t) => { m[t[0]] = v; }); this.setState({ perms: { ...s.perms, [s.sel]: m } }); };
+    const stateMap = { ok: { tone: 'ok', status: 'Connected', line: 'Healthy · last call 42s ago · protocol 2025-06-18', hdr: 'ok' }, auth: { tone: 'warn', status: 'Needs auth', line: 'Credentials expired 2h ago · 1 call waiting', hdr: 'auth' }, err: { tone: 'err', status: 'Failing', line: '7 of the last 7 calls failed · stream reset', hdr: 'err' } }[d.state];
+    const spark = [8, 10, 7, 9, 12, 9, 8, 14, 10, 9, 22, 11, 9, 8, 10, 13, 9, 26, 10, 9, 8, 11, 9, 10].map((v) => ({ h: Math.min(28, v) + 'px', cls: v > 20 ? 'err' : v > 12 ? 'slow' : '' }));
+    const ENV = { github: [['GITHUB_TOKEN', 'ghp_xxxxxxxxxxxxxxxx', 'keychain'], ['GITHUB_ORG', 'meridian', 'plain']], pg: [['DATABASE_URL', 'postgres://ro:xxxxx@staging:5432/billing', 'keychain']], fs: [['ROOT', '$WORKTREE', 'plain']], sentry: [['SENTRY_AUTH_TOKEN', 'sntrys_xxxxxxxx', 'keychain'], ['SENTRY_ORG', 'meridian', 'plain']] };
+    const env = (ENV[s.sel] || []).map(([k, v, kind]) => ({ k, v, kind, type: kind === 'keychain' ? 'password' : 'text', tone: kind === 'keychain' ? 'ok' : 'neutral' }));
+    return {
+      yes: true, no: false, fourteen: 14, eighteen: 18, twenty: 20, twentySix: 26,
+      list: Object.keys(this.defs).map((k) => { const x = this.defs[k]; const on = k === s.sel; return { name: x.name, sub: x.sub, icon: x.icon, color: x.color, on, cls: on ? 'on' : '', isOk: x.state === 'ok', isAuth: x.state === 'auth', isErr: x.state === 'err', pick: () => this.setState({ sel: k, transport: null }) }; }),
+      c: {
+        ...d, tone: stateMap.tone, status: stateMap.status, statusLine: stateMap.line, hdrCls: stateMap.hdr, transport: transport === 'http' ? 'streamable-http' : transport,
+        needsAuth: d.state === 'auth', failing: d.state === 'err', okState: d.state === 'ok', errColor: d.errs !== '0' && d.errs !== '—' ? '#ff7083' : '#e7eaf4', spark, env, noEnv: env.length === 0,
+        tools: d.tools.map(([name, desc, calls, def]) => { const perm = permOf(name, def); return { name, desc, calls, perm, aria: name + ' permission: ' + perm + '. Click to change.', cycle: () => setPerm(name, order[(order.indexOf(perm) + 1) % 3]) }; }),
+        agents: d.agents.map(([name, glyph, calls, on]) => ({ name, glyph, calls, on })),
+        recent: d.recent.map(([by, glyph, call, meta, code, tone]) => ({ by, glyph, call, meta, code, tone }))
+      },
+      isStdio: transport === 'stdio', isRemote: transport !== 'stdio',
+      tStdio: transport === 'stdio' ? 'on' : '', tHttp: transport === 'http' ? 'on' : '', tSse: transport === 'sse' ? 'on' : '',
+      setStdio: () => this.setState({ transport: 'stdio' }), setHttp: () => this.setState({ transport: 'http' }), setSse: () => this.setState({ transport: 'sse' }),
+      allowAll: () => setAll('allow'), askAll: () => setAll('ask')
+    };
+  }
+}
+</script>
+</body>
+</html>

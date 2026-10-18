@@ -1,0 +1,15 @@
+<!-- @dsCard group="Status" height=72 -->
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>body{margin:0;background:var(--bg-000);padding:16px;box-sizing:border-box}#root{display:flex;flex-wrap:wrap;gap:16px;align-items:center}</style></head>
+<body><div id="root" class="at-root"></div>
+<script>
+(function(){var D=window.AgentTeamsDS,h=React.createElement;
+function App(){var kinds=['bash','read','edit','ask','subagent','think','said'];return h(React.Fragment,null,
+ h('span',{className:'at-trail'},kinds.map(function(k,i){return h(D.StatusDot,{key:k,kind:k,delay:(i*80)+'ms'})})),
+ h('span',{className:'at-trail'},h(D.StatusDot,{kind:'bash'}),h(D.StatusDot,{kind:'bash',error:true}),h(D.StatusDot,{kind:'edit',running:true})),
+ h(D.StatusDot,{idle:true,label:'Idle'}),
+ kinds.map(function(k){return h('span',{key:k,style:{display:'inline-flex',gap:6,alignItems:'center',font:'12px var(--font-sans)',color:'var(--ink-300)'}},h(D.StatusDot,{kind:k,pop:false}),k)}));}
+ReactDOM.createRoot(document.getElementById('root')).render(App());})();
+</script></body></html>

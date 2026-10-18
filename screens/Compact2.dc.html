@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Session chat — compaction, gauge drain</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.ico{all:unset;box-sizing:border-box;cursor:pointer;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;color:#8d96b5;border:1px solid #252d48;background:#151b2f}
+.ico:hover{border-color:#36406a;color:#e7eaf4}
+.ico:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.day{display:flex;align-items:center;gap:12px;font-size:11px;color:#5b6484;font-variant-numeric:tabular-nums}
+.day::before,.day::after{content:"";flex:1;height:1px;background:#252d48}
+.reply{font-size:14px;line-height:1.55;color:#e7eaf4;padding:4px 2px 0 38px}
+.reply p{margin:0 0 10px}
+.reply code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;background:#1b2340;padding:1px 6px;border-radius:4px;color:#c9cfe8}
+.who{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#8d96b5}
+.who time{font-variant-numeric:tabular-nums;color:#5b6484}
+.demo{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font:500 12px/1 "IBM Plex Sans",system-ui,sans-serif;color:#0d1221;background:#7c9cff}
+.demo:hover{filter:brightness(1.1)}
+.demo:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.demo[disabled]{opacity:.4;cursor:default}
+
+/* ---- thread: old turns get pulled into the gauge ---- */
+.old{display:grid;grid-template-rows:1fr}
+.old.gone{grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1)}
+.old-in{min-height:0;display:flex;flex-direction:column;gap:18px}
+.old.gone .old-in{overflow:hidden}
+.msg{transition:transform 1.15s cubic-bezier(.55,0,.25,1),opacity .9s ease .2s,filter 1s ease;transform-origin:50% 50%;will-change:transform}
+.msg.pull{transform:translate(var(--px),var(--py)) scale(.12) rotate(var(--rot));opacity:0;filter:blur(1.5px) saturate(1.6)}
+.msg.pull:nth-child(1){transition-delay:.45s,.65s,.45s}.msg.pull:nth-child(2){transition-delay:.36s,.56s,.36s}.msg.pull:nth-child(3){transition-delay:.27s,.47s,.27s}.msg.pull:nth-child(4){transition-delay:.18s,.38s,.18s}.msg.pull:nth-child(5){transition-delay:.09s,.29s,.09s}.msg.pull:nth-child(6){transition-delay:0s,.2s,0s}
+
+/* ---- overlay + big gauge ---- */
+.veil{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s ease;background:radial-gradient(60% 55% at 50% 50%,rgba(124,156,255,.14),rgba(13,18,33,0) 60%),rgba(13,18,33,.55);backdrop-filter:blur(0px)}
+.veil.on{opacity:1}
+.big{position:absolute;left:50%;top:50%;width:240px;height:240px;transform:translate(-50%,-50%) scale(.2);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.3,1.25),opacity .4s ease;pointer-events:none;z-index:4}
+.big.on{transform:translate(-50%,-50%) scale(1);opacity:1}
+.big.back{transition:transform .6s cubic-bezier(.4,0,.2,1),opacity .5s ease .1s,filter .6s ease;transform:translate(-50%,-50%) scale(.88);opacity:0;filter:blur(6px)}
+.big svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.big .track{fill:none;stroke:#2a3566;stroke-width:7;stroke-linecap:round}
+.big .fill{fill:none;stroke:var(--g);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 2.3s cubic-bezier(.35,0,.15,1),stroke 1s ease;filter:drop-shadow(0 0 8px var(--g)) drop-shadow(0 0 22px color-mix(in srgb,var(--g) 55%,transparent))}
+.big .liq{fill:none;stroke:#ffffff;stroke-width:7;stroke-linecap:round;opacity:.35;stroke-dasharray:4 22;animation:liq 1.2s linear infinite;mix-blend-mode:overlay}
+@keyframes liq{to{stroke-dashoffset:-26}}
+.big .needle{stroke:#e7eaf4;stroke-width:2;stroke-linecap:round;transform-origin:50% 50%;transition:transform 2.3s cubic-bezier(.35,0,.15,1);filter:drop-shadow(0 0 4px rgba(255,255,255,.6))}
+.big .hub{fill:#e7eaf4}
+.big .halo{fill:none;stroke:var(--g);stroke-width:1;opacity:.35;transition:stroke 1s ease}
+.big .num{position:absolute;left:0;right:0;top:112px;text-align:center;font:500 34px/1 "JetBrains Mono",ui-monospace,monospace;color:#e7eaf4;letter-spacing:-.02em;font-variant-numeric:tabular-nums;text-shadow:0 0 18px color-mix(in srgb,var(--g) 70%,transparent);transition:text-shadow 1s}
+.big .num small{display:block;font:400 11px/1.6 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5;letter-spacing:.08em;text-transform:uppercase}
+.big .pct{position:absolute;left:0;right:0;top:188px;text-align:center;font:500 13px/1 "JetBrains Mono",ui-monospace,monospace;color:var(--g);transition:color 1s}
+.big.err{--g:#ff7083}.big.warn{--g:#f0b64f}.big.ok{--g:#7c9cff}.big.done{--g:#4fd1a0}
+/* shockwaves and exhaust */
+.wave{position:absolute;left:50%;top:50%;width:240px;height:240px;border-radius:50%;border:2px solid var(--c);transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none;animation:wave 1.3s cubic-bezier(.2,.7,.2,1) var(--d) both;box-shadow:0 0 24px color-mix(in srgb,var(--c) 60%,transparent),inset 0 0 24px color-mix(in srgb,var(--c) 30%,transparent)}
+@keyframes wave{0%{transform:translate(-50%,-50%) scale(.6);opacity:.9}100%{transform:translate(-50%,-50%) scale(3.2);opacity:0}}
+.flash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 50% at 50% 50%,rgba(79,209,160,.35),rgba(79,209,160,0) 70%);opacity:0;animation:flash .9s ease-out both}
+@keyframes flash{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+.ex{position:absolute;left:calc(50% + var(--x));top:calc(50% - 98px);width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 8px 2px color-mix(in srgb,var(--c) 70%,transparent);opacity:0;animation:rise 1.5s cubic-bezier(.3,0,.6,1) var(--d) infinite}
+@keyframes rise{0%{transform:translateY(0) scale(1);opacity:0}15%{opacity:1}100%{transform:translateY(-120px) translateX(var(--sx)) scale(.3);opacity:0}}
+.tick{position:absolute;left:50%;top:50%;width:1px;height:12px;background:#36406a;transform-origin:50% -98px;transform:translate(-50%,98px) rotate(var(--a))}
+/* summary + banner */
+.sum{opacity:0;transform:translateY(10px) scale(.97);transition:opacity .5s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.3,1.25),box-shadow .6s}
+.sum.in{opacity:1;transform:none}
+.sum.flash{box-shadow:0 0 0 1px rgba(79,209,160,.5),0 0 16px rgba(79,209,160,.3),0 0 48px rgba(124,156,255,.25)}
+.sum-ic{position:relative;width:26px;height:26px;border-radius:50%;background:#1b2340;display:grid;place-items:center;color:#5fd4e8;flex:none}
+.sum .at-step__detail{white-space:normal;font-family:inherit;font-size:13px;color:#c9cfe8;line-height:1.5}
+.ban{display:flex;align-items:center;gap:10px;height:36px;padding:0 12px;border-radius:8px;background:#151b2f;border:1px solid #252d48;font-size:12.5px;color:#8d96b5;transition:border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.ban.warn{border-color:rgba(240,182,79,.5);color:#f0b64f}
+.ban.busy{border-color:#7c9cff73;box-shadow:0 0 0 1px rgba(124,156,255,.55),0 0 18px rgba(124,156,255,.35);color:#e7eaf4}
+.ban.ok{border-color:rgba(79,209,160,.5);color:#4fd1a0}
+.ban .num{font:500 12px/1 "JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:#e7eaf4}
+.comp{transition:box-shadow .5s,filter .5s}
+.comp.dim{filter:brightness(.7)}
+.comp.flash{box-shadow:0 0 0 1px rgba(79,209,160,.5),0 0 22px rgba(79,209,160,.35)}
+@media (max-width:860px){.hide-sm{display:none}}
+@media (prefers-reduced-motion:reduce){.msg,.big,.veil,.sum{transition-duration:.01ms!important}.wave,.ex,.flash,.big .liq{animation:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: relative; z-index: 5">
+    <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{thirtyTwo}}" status="live"></x-import>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <strong style="font-size: 14px; font-weight: 600; letter-spacing: -0.01em">LEIB-117 – Static HTML file</strong>
+      <span style="display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: #8d96b5"><span>Builder</span><span style="display: inline-flex; align-items: center; gap: 5px; color: #9db4ff"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="bash" running="{{yes}}" pop="{{no}}"></x-import>Working · 0:38</span></span>
+    </div>
+    <span class="hide-sm" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; background: #1b2340; padding: 3px 8px; border-radius: 999px">feat/LEIB-117-static-file</span>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 10px">
+      <button type="button" class="demo" onClick="{{replay}}" disabled="{{running}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="loader" size="{{twelve}}"></x-import>{{demoLabel}}</button>
+      <button class="ico" type="button" aria-label="Session settings"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="wrench" size="{{fifteen}}"></x-import></button>
+    </div>
+  </header>
+
+  <!-- ===== thread (relative: the veil and the big gauge live here) ===== -->
+  <div id="stage" style="flex: 1; position: relative; display: flex; flex-direction: column">
+    <div style="flex: 1; width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 28px 16px 24px; display: flex; flex-direction: column; gap: 18px">
+      <div class="day"><span>Today · 14:02</span></div>
+
+      <div class="old {{oldCls}}">
+        <div class="old-in">
+          <div class="msg {{pullCls}}" style="--px: {{p0.x}}; --py: {{p0.y}}; --rot: -14deg; display: flex; flex-direction: column; align-items: flex-end"><x-import component-from-global-scope="AgentTeamsDS.Bubble" author="user">Export the large-exposure board as a static HTML file so the board pack can embed it. Keep the charts interactive.</x-import></div>
+          <div class="msg {{pullCls}}" style="--px: {{p1.x}}; --py: {{p1.y}}; --rot: 9deg"><x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" elapsed="3m 12s" steps="{{turn1}}"></x-import></div>
+          <div class="msg {{pullCls}}" style="--px: {{p2.x}}; --py: {{p2.y}}; --rot: -6deg; display: flex; flex-direction: column; gap: 6px">
+            <div class="who"><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{twentySix}}"></x-import><span>Builder</span><time>14:05</time></div>
+            <div class="reply"><p>Done. The exporter writes <code>dist/board.html</code> with the charts inlined as SVG plus a 9&nbsp;KB script. One thing I need from you: the legacy <code>export_legacy()</code> path still references the old fixture. Keep it, or remove it?</p></div>
+          </div>
+          <div class="msg {{pullCls}}" style="--px: {{p3.x}}; --py: {{p3.y}}; --rot: 12deg; display: flex; flex-direction: column; align-items: flex-end"><x-import component-from-global-scope="AgentTeamsDS.Bubble" author="user">Remove it. Then open the PR and ask Reviewer to look at the chart script.</x-import></div>
+          <div class="msg {{pullCls}}" style="--px: {{p4.x}}; --py: {{p4.y}}; --rot: -10deg"><x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" elapsed="2m 04s" steps="{{turn2}}"></x-import></div>
+          <div class="msg {{pullCls}}" style="--px: {{p5.x}}; --py: {{p5.y}}; --rot: 7deg; display: flex; flex-direction: column; gap: 6px">
+            <div class="who"><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{twentySix}}"></x-import><span>Builder</span><time>14:28</time></div>
+            <div class="reply"><p>Legacy path removed, suite green. Reviewer approved <code>dist/board.js</code> with two nits — debounce the hover handler, name the legend ids. Fixing both now.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{showSum}}" hint-placeholder-val="{{false}}">
+        <section class="at-turn sum {{sumCls}}" aria-label="Compacted earlier turns" style="border-color: #3a4677">
+          <button class="at-cap" onClick="{{toggleSum}}" aria-expanded="{{sumOpen}}">
+            <span class="sum-ic" aria-hidden="true"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="brain" size="{{fourteen}}"></x-import></span>
+            <span class="at-cap__title"><strong>Earlier · compacted</strong><span class="at-cap__sub">6 messages · 14:02–14:28 · kept the decisions</span></span>
+            <span class="at-cap__chips"><x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">184k → 71k</x-import><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="ok">freed 113k</x-import><x-import component-from-global-scope="AgentTeamsDS.Chip">2 decisions</x-import><x-import component-from-global-scope="AgentTeamsDS.Chip">3 files</x-import></span>
+            <x-import component-from-global-scope="AgentTeamsDS.Icon" name="chevron" class="at-chev"></x-import>
+          </button>
+          <div class="at-turn__body"><div class="at-turn__in">
+            <ol class="at-steps">
+              <li class="at-step at-step--said" style="animation-delay: 0ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="message" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">What was asked</span><code class="at-step__detail">Export the exposure board as a static, self-contained HTML file; charts stay interactive; remove the legacy exporter; open a PR; Reviewer checks the chart script.</code></span></li>
+              <li class="at-step at-step--edit" style="animation-delay: 55ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="pencil" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">What changed</span><code class="at-step__detail">apps/export/static.py (new render_static), tests/conftest.py (fixture path), apps/export/legacy.py (export_legacy removed). Suite: 6 tests green.</code></span></li>
+              <li class="at-step at-step--ask" style="animation-delay: 110ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="help" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">Decisions</span><code class="at-step__detail">14:24 — remove export_legacy(), no flag. Reviewer scope is dist/board.js only.</code></span></li>
+              <li class="at-step at-step--think" style="animation-delay: 165ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="brain" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">Still open</span><code class="at-step__detail">Two review nits (debounce hover, legend ids). PR not yet opened.</code></span></li>
+            </ol>
+          </div></div>
+        </section>
+      </sc-if>
+
+      <x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" live="{{yes}}" elapsed="0:38" steps="{{turn3}}" now="bash · pytest tests/apps/large_exposure -q"></x-import>
+    </div>
+
+    <!-- veil + big gauge -->
+    <div class="veil {{veilCls}}" aria-hidden="true"></div>
+    <sc-if value="{{showFx}}" hint-placeholder-val="{{false}}">
+      <div aria-hidden="true">
+        <sc-for list="{{waves}}" as="w" hint-placeholder-count="3"><i class="wave" style="--c: {{w.c}}; --d: {{w.d}}"></i></sc-for>
+        <sc-for list="{{exhaust}}" as="e" hint-placeholder-count="10"><i class="ex" style="--x: {{e.x}}; --sx: {{e.sx}}; --c: {{e.c}}; --d: {{e.d}}"></i></sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{showFlash}}" hint-placeholder-val="{{false}}"><div class="flash" aria-hidden="true"></div></sc-if>
+    <div id="big" class="big {{bigCls}}" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{pctNum}}" aria-label="Context being compacted">
+      <svg viewBox="0 0 100 100">
+        <circle class="halo" cx="50" cy="50" r="47"></circle>
+        <circle class="track" cx="50" cy="50" r="40" stroke-dasharray="167.6 251.3" transform="rotate(150 50 50)"></circle>
+        <circle class="fill" cx="50" cy="50" r="40" stroke-dasharray="167.6 251.3" stroke-dashoffset="{{dash}}" transform="rotate(150 50 50)"></circle>
+        <circle class="liq" cx="50" cy="50" r="40" stroke-dasharray="167.6 251.3" stroke-dashoffset="{{dash}}" transform="rotate(150 50 50)"></circle>
+        <line class="needle" x1="50" y1="50" x2="50" y2="16" style="transform: rotate({{angle}}deg)"></line>
+        <circle class="hub" cx="50" cy="50" r="3.5"></circle>
+      </svg>
+      <div class="num">{{bigK}}<small>tokens in context</small></div>
+      <div class="pct">{{pctLabel}}</div>
+    </div>
+  </div>
+
+  <!-- ===== composer ===== -->
+  <div style="position: sticky; bottom: 0; background: linear-gradient(180deg, rgba(13,18,33,0) 0%, #0d1221 28%); padding: 24px 16px 20px; z-index: 5">
+    <div style="max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px">
+      <div class="ban {{banCls}}" role="status" aria-live="polite">
+        <sc-if value="{{isIdle}}" hint-placeholder-val="{{true}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="zap" size="{{fourteen}}"></x-import><span>Context at <span class="num">92%</span> — Builder will compact before its next turn.</span><a href="#" style="margin-left: auto; font-size: 12px" onClick="{{replayLink}}">Compact now</a></sc-if>
+        <sc-if value="{{isBusy}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="brain" size="{{fourteen}}"></x-import><span class="at-shimmer" style="font-family: inherit; font-size: 12.5px">{{busyText}}</span></sc-if>
+        <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="check" size="{{fourteen}}"></x-import><span>Compacted. Freed <span class="num" style="color: #4fd1a0">113k</span> tokens; the summary above replaces the earlier turns.</span><a href="#" style="margin-left: auto; font-size: 12px" onClick="{{replayLink}}">Replay</a></sc-if>
+      </div>
+      <div id="comp" class="comp {{compCls}}" style="border-radius: 12px">
+        <x-import component-from-global-scope="AgentTeamsDS.Composer" agent="Builder" model="Opus 5.5" effort="{{two}}" context="{{ctx}}"></x-import>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"autoplay":{"editor":"boolean","default":true,"section":"Demo"},"$preview":{"width":1360,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    // phases: idle → lift (gauge grows at centre) → pull (old turns fly into it) → drain (arc + needle sweep 92→36, colour cools, exhaust + shockwaves) → settle (gauge flies back to the composer, summary appears) → done
+    this.state = { phase: 'idle', value: 0.92, k: 184, tone: 'err', sumOpen: false, pulls: null };
+    this.timers = [];
+  }
+  componentDidMount() { if (this.props.autoplay !== false) this.later(1600, () => this.run()); }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); clearInterval(this.tick); }
+  later(ms, fn) { this.timers.push(setTimeout(fn, ms)); }
+  rectOf(sel) { const el = document.querySelector(sel); return el ? el.getBoundingClientRect() : null; }
+  run() {
+    this.timers.forEach(clearTimeout); this.timers = []; clearInterval(this.tick);
+    this.setState({ phase: 'lift', value: 0.92, k: 184, tone: 'err', sumOpen: false, pulls: null });
+    this.later(650, () => {
+      // where each message must fly to: the big gauge's centre, in its own coordinates
+      const g = this.rectOf('#big'); const msgs = Array.from(document.querySelectorAll('.msg'));
+      const pulls = g ? msgs.map((m) => { const r = m.getBoundingClientRect(); return { x: Math.round(g.left + g.width / 2 - (r.left + r.width / 2)) + 'px', y: Math.round(g.top + g.height / 2 - (r.top + r.height / 2)) + 'px' }; }) : null;
+      this.setState({ phase: 'pull', pulls });
+    });
+    this.later(1250, () => {
+      this.setState({ phase: 'drain', value: 0.355 });
+      let k = 184; this.tick = setInterval(() => { k = Math.max(71, k - 2); this.setState({ k }); if (k <= 71) clearInterval(this.tick); }, 40);
+      this.later(900, () => this.setState({ tone: 'warn' }));
+      this.later(1700, () => this.setState({ tone: 'ok' }));
+      this.later(2350, () => this.setState({ tone: 'done' }));
+    });
+    // settle: the big gauge simply fades and softens in place while the composer's own meter takes over at 36%
+    this.later(4000, () => this.setState({ phase: 'settle' }));
+    this.later(4700, () => this.setState({ phase: 'done' }));
+  }
+  renderVals() {
+    const s = this.state, p = s.phase;
+    const running = p !== 'idle' && p !== 'done';
+    const LEN = 167.6; // 240° of r=40
+    const v = s.value;
+    const pulls = s.pulls || [];
+    const P = (i) => pulls[i] || { x: '0px', y: '0px' };
+    const waves = p === 'drain' || p === 'settle' ? [{ c: '#ff7083', d: '0.1s' }, { c: '#f0b64f', d: '1.0s' }, { c: '#7c9cff', d: '1.8s' }, { c: '#4fd1a0', d: '2.4s' }] : [];
+    const exhaust = p === 'drain' ? [-46, -30, -14, 2, 18, 34, 48, -38, -6, 26, 42, -22].map((x, i) => ({ x: x + 'px', sx: ((i % 3) - 1) * 18 + 'px', c: ['#ff7083', '#f0b64f', '#7c9cff', '#c58cff', '#5fd4e8'][i % 5], d: (i * 0.13) + 's' })) : [];
+    return {
+      yes: true, no: false, two: 2, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, twentySix: 26, thirtyTwo: 32,
+      ctx: p === 'settle' || p === 'done' ? 0.355 : 0.92,
+      running, demoLabel: running ? 'Compacting…' : (p === 'done' ? 'Replay compaction' : 'Compact now'),
+      replay: () => this.run(), replayLink: (e) => { e.preventDefault(); this.run(); },
+      oldCls: p === 'settle' || p === 'done' ? 'gone' : '', pullCls: p === 'pull' || p === 'drain' || p === 'settle' || p === 'done' ? 'pull' : '',
+      p0: P(0), p1: P(1), p2: P(2), p3: P(3), p4: P(4), p5: P(5),
+      veilCls: p === 'lift' || p === 'pull' || p === 'drain' ? 'on' : '',
+      bigCls: [p === 'lift' || p === 'pull' || p === 'drain' ? 'on' : '', p === 'settle' ? 'on back' : '', s.tone].join(' '),
+      dash: LEN * (1 - v), angle: -120 + 240 * v, pctNum: Math.round(v * 100), pctLabel: Math.round(v * 100) + '% of 200k',
+      bigK: s.k + 'k',
+      showFx: p === 'drain' || p === 'settle', waves, exhaust, showFlash: p === 'settle',
+      showSum: p === 'settle' || p === 'done', sumCls: [(p === 'settle' || p === 'done') && 'in', p === 'settle' && 'flash', s.sumOpen && 'at-turn--open'].filter(Boolean).join(' '),
+      sumOpen: s.sumOpen, toggleSum: () => this.setState({ sumOpen: !s.sumOpen }),
+      banCls: p === 'idle' ? 'warn' : p === 'done' ? 'ok' : 'busy',
+      isIdle: p === 'idle', isBusy: running, isDone: p === 'done',
+      busyText: p === 'lift' ? 'Compacting context…' : p === 'pull' ? 'Folding 6 messages into the summary…' : p === 'drain' ? 'Draining ' + s.k + 'k → 71k · keeping decisions and file paths' : 'Writing the summary…',
+      compCls: running ? 'dim' : (p === 'done' ? 'flash' : ''),
+      turn1: [
+        { kind: 'think', label: 'Planned the change', time: '4s' }, { kind: 'read', label: 'Read', detail: 'apps/export/static.py', time: '1s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '38s', status: 'error' },
+        { kind: 'said', detail: 'The fixture path moved in the last refactor; patching the import before re-running.' },
+        { kind: 'edit', label: 'Edited', detail: 'tests/conftest.py', time: '2s' }, { kind: 'edit', label: 'Edited', detail: 'apps/export/static.py', time: '6s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '41s' }, { kind: 'ask', label: 'Asked you', detail: 'Keep the legacy exporter?', time: '—' }
+      ],
+      turn2: [
+        { kind: 'edit', label: 'Edited', detail: 'apps/export/legacy.py (removed export_legacy)', time: '3s' },
+        { kind: 'subagent', label: 'Spawned Reviewer', detail: 'review dist/board.js for regressions', time: '1m 20s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '41s' }
+      ],
+      turn3: [
+        { kind: 'edit', label: 'Edited', detail: 'dist/board.js (debounce hover, legend ids)', time: '5s' },
+        { kind: 'bash', label: 'Running', detail: 'pytest tests/apps/large_exposure -q', status: 'running' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

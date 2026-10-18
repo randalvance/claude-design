@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Team swimlanes</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.ico{all:unset;box-sizing:border-box;cursor:pointer;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;color:#8d96b5;border:1px solid #252d48;background:#151b2f;transition:border-color .12s,color .12s}
+.ico:hover{border-color:#36406a;color:#e7eaf4}
+.ico:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.seg{display:inline-flex;padding:2px;border-radius:8px;background:#0f1527;border:1px solid #252d48}
+.seg button,.seg a{all:unset;cursor:pointer;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;font:500 12.5px/1 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5;transition:background .15s,color .15s}
+.seg button:hover,.seg a:hover{color:#e7eaf4}
+.seg button:focus-visible,.seg a:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.seg .on{background:#1b2340;color:#e7eaf4}
+.seg .on.live{color:#9db4ff;box-shadow:inset 0 0 0 1px rgba(124,156,255,.45),0 0 12px rgba(124,156,255,.25)}
+/* lanes */
+.lane{position:relative;height:72px;border-bottom:1px solid #1b2340}
+.lane:nth-child(even){background:rgba(27,35,64,.25)}
+.lane.sel{background:rgba(124,156,255,.06)}
+.tick{position:absolute;top:0;bottom:0;width:1px;background:#1b2340}
+.tick.major{background:#252d48}
+.bar{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;top:20px;height:32px;border-radius:8px;display:flex;align-items:center;gap:6px;padding:0 10px;font:500 12px/1 "IBM Plex Sans",system-ui,sans-serif;color:#0d1221;white-space:nowrap;overflow:hidden;background:var(--k);transition:box-shadow .2s,filter .15s}
+.bar:hover{filter:brightness(1.08)}
+.bar:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.bar.sel{box-shadow:0 0 0 2px #0d1221,0 0 0 3px var(--k),0 0 16px color-mix(in srgb,var(--k) 55%,transparent)}
+.bar.hollow{background:transparent;border:1px dashed color-mix(in srgb,var(--k) 55%,transparent);color:#8d96b5;font-weight:400}
+.bar.err{background:#ff7083;color:#0d1221}
+.bar.live{border-top-right-radius:2px;border-bottom-right-radius:2px;box-shadow:0 0 0 1px color-mix(in srgb,var(--k) 55%,transparent),0 0 18px color-mix(in srgb,var(--k) 35%,transparent)}
+.bar.live::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.28) 50%,transparent 100%);background-size:200% 100%;animation:at-shimmer 1.8s linear infinite}
+.bar .t{font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;opacity:.75;font-variant-numeric:tabular-nums}
+.bar.hollow .t{opacity:1}
+.now{position:absolute;top:0;bottom:0;width:2px;background:#7c9cff;box-shadow:0 0 10px rgba(124,156,255,.8);pointer-events:none}
+.now::before{content:"now";position:absolute;top:-22px;left:50%;transform:translateX(-50%);font:500 10px/1 "JetBrains Mono",ui-monospace,monospace;color:#0d1221;background:#7c9cff;padding:4px 6px;border-radius:999px}
+.hand{position:absolute;width:0;border-left:1.5px solid var(--k);transform:translateX(-1px);pointer-events:none;z-index:1}
+.hand.dashed{border-left-style:dashed}
+.hand i{position:absolute;left:-4.5px;width:7px;height:7px;border-radius:50%;background:var(--k);box-sizing:border-box}
+.hand i.to{background:#0d1221;border:1.5px solid var(--k)}
+.hand i.top{top:-4px}.hand i.bottom{bottom:-4px}
+.bar.short .t{display:none}
+.bar.tiny{padding:0;justify-content:center}
+.bar.tiny span{display:none}
+.hlabel{position:absolute;z-index:1;transform:translate(6px,-50%);display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 7px;border-radius:999px;background:#151b2f;border:1px solid #252d48;color:#c9cfe8;font:400 11px/1 "IBM Plex Sans",system-ui,sans-serif;white-space:nowrap;pointer-events:none}
+.hlabel i{width:6px;height:6px;border-radius:50%;background:var(--k)}
+.rule{position:relative;height:28px;border-bottom:1px solid #252d48;font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#5b6484;font-variant-numeric:tabular-nums}
+.rule span{position:absolute;bottom:8px;transform:translateX(-50%)}
+.lbl{display:flex;align-items:center;gap:10px;height:72px;padding:0 12px;border-bottom:1px solid #1b2340;box-sizing:border-box;min-width:0}
+.lbl.sel{background:rgba(124,156,255,.06)}
+.lbl b{font-size:13px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbl small{font:400 11px/1.3 "JetBrains Mono",ui-monospace,monospace;color:#8d96b5;display:block;margin-top:3px}
+.lg{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#8d96b5}
+.lg i{width:14px;height:8px;border-radius:3px;background:var(--k)}
+.lg i.h{background:transparent;border:1px dashed #5b6484}
+@media (max-width:900px){.hide-sm{display:none}}
+@media (prefers-reduced-motion:reduce){.bar.live::after{animation:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527">
+    <a href="Chat.dc.html" aria-label="Back to session" style="display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #8d96b5; border: 1px solid #252d48; background: #151b2f">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <span style="font-size: 11.5px; color: #8d96b5">Teams / Release crew</span>
+      <strong style="font-size: 14px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">LEIB-117 – Static HTML file · swimlanes</strong>
+    </div>
+    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #9db4ff">
+      <x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="bash" running="{{yes}}" pop="{{no}}"></x-import>
+      39 min elapsed · 2 agents working
+    </span>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+      <div class="seg" role="group" aria-label="View">
+        <button type="button" class="on live" aria-pressed="true">Live</button>
+        <button type="button" aria-pressed="false">Replay</button>
+      </div>
+      <div class="seg hide-sm" role="group" aria-label="Layout">
+        <a href="Graph.dc.html">Graph</a>
+        <button type="button" class="on" aria-pressed="true">Swimlanes</button>
+      </div>
+      <div class="seg hide-sm" role="group" aria-label="Scale">
+        <button type="button">15m</button>
+        <button type="button" class="on">40m</button>
+        <button type="button">All</button>
+      </div>
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="plus">Add agent</x-import>
+    </div>
+  </header>
+
+  <!-- legend -->
+  <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 12px 24px 0">
+    <span class="lg" style="--k: var(--kind-think)"><i></i>think</span>
+    <span class="lg" style="--k: var(--kind-read)"><i></i>read</span>
+    <span class="lg" style="--k: var(--kind-edit)"><i></i>edit</span>
+    <span class="lg" style="--k: var(--kind-bash)"><i></i>bash</span>
+    <span class="lg" style="--k: var(--kind-subagent)"><i></i>handoff</span>
+    <span class="lg" style="--k: var(--kind-ask)"><i></i>asked you</span>
+    <span class="lg" style="--k: var(--err)"><i></i>failed</span>
+    <span class="lg"><i class="h"></i>waiting</span>
+    <span style="margin-left: auto; font-size: 11.5px; color: #8d96b5" class="hide-sm">Click a bar to inspect that stretch. Dashed = idle, waiting on someone.</span>
+  </div>
+
+  <!-- timeline -->
+  <section aria-label="Timeline" style="margin: 12px 24px 0; border: 1px solid #252d48; border-radius: 12px; background: #151b2f; overflow: hidden; display: flex">
+    <!-- lane labels -->
+    <div style="flex: none; width: 168px; border-right: 1px solid #252d48; background: #0f1527">
+      <div class="rule" style="padding: 0 12px; display: flex; align-items: flex-end; padding-bottom: 8px; border-bottom-color: #252d48">agent · time →</div>
+      <sc-for list="{{lanes}}" as="l" hint-placeholder-count="6">
+        <div class="lbl {{l.cls}}">
+          <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{l.name}}" id="{{l.name}}" glyph="{{l.glyph}}" size="{{twentySix}}" status="{{l.status}}"></x-import>
+          <span style="min-width: 0"><b>{{l.name}}</b><small>{{l.sub}}</small></span>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- scrolling lanes -->
+    <div style="flex: 1; min-width: 0; overflow-x: auto">
+      <div style="position: relative; width: 1168px">
+        <div class="rule">
+          <sc-for list="{{ticks}}" as="k" hint-placeholder-count="9">
+            <span style="left: {{k.x}}">{{k.label}}</span>
+          </sc-for>
+        </div>
+        <div style="position: relative">
+          <!-- grid ticks -->
+          <sc-for list="{{ticks}}" as="k" hint-placeholder-count="9">
+            <i class="tick {{k.cls}}" style="left: {{k.x}}"></i>
+          </sc-for>
+
+          <!-- lanes with bars -->
+          <sc-for list="{{lanes}}" as="l" hint-placeholder-count="6">
+            <div class="lane {{l.cls}}">
+              <sc-for list="{{l.bars}}" as="b" hint-placeholder-count="4">
+                <button type="button" class="bar {{b.cls}}" style="left: {{b.x}}; width: {{b.w}}; --k: {{b.k}}" aria-pressed="{{b.sel}}" aria-label="{{b.aria}}" onClick="{{b.pick}}">
+                  <span style="overflow: hidden; text-overflow: ellipsis">{{b.label}}</span>
+                  <span class="t">{{b.dur}}</span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-for>
+
+          <!-- handoff connectors: a vertical run from the sender's lane to the receiver's, filled dot at the sender, ring at the receiver -->
+          <sc-for list="{{hands}}" as="h" hint-placeholder-count="7">
+            <span class="hand {{h.cls}}" style="left: {{h.xpx}}; top: {{h.top}}; height: {{h.h}}; --k: {{h.k}}" aria-hidden="true">
+              <i class="from {{h.fromEnd}}"></i><i class="to {{h.toEnd}}"></i>
+            </span>
+            <span class="hlabel" style="left: {{h.xpx}}; top: {{h.ympx}}; --k: {{h.k}}"><i></i>{{h.label}}</span>
+          </sc-for>
+
+          <!-- playhead -->
+          <div class="now" style="left: {{nowX}}"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- detail strip -->
+  <section aria-label="Selected stretch" style="margin: 16px 24px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Selected</span>
+        <strong style="font-size: 13.5px; font-weight: 600">{{sel.title}}</strong>
+        <span style="font: 400 11.5px/1 'JetBrains Mono', monospace; color: #8d96b5">{{sel.range}}</span>
+      </div>
+      <x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="{{sel.agent}}" agent-id="{{sel.agent}}" glyph="{{sel.glyph}}" live="{{sel.live}}" failed="{{sel.failed}}" elapsed="{{sel.dur}}" steps="{{sel.steps}}" now="{{sel.now}}" open="{{yes}}"></x-import>
+    </div>
+    <div style="flex: 1 1 300px; max-width: 360px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48"><b style="font: 500 18px/1.1 'JetBrains Mono', monospace">39m</b><span style="font-size: 11px; color: #8d96b5">wall clock</span></div>
+      <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48"><b style="font: 500 18px/1.1 'JetBrains Mono', monospace">61m</b><span style="font-size: 11px; color: #8d96b5">agent-minutes</span></div>
+      <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48"><b style="font: 500 18px/1.1 'JetBrains Mono', monospace; color: #f0b64f">6m</b><span style="font-size: 11px; color: #8d96b5">blocked on you</span></div>
+      <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48"><b style="font: 500 18px/1.1 'JetBrains Mono', monospace">7</b><span style="font-size: 11px; color: #8d96b5">handoffs</span></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 'builder-test' };
+  }
+  renderVals() {
+    const PX = 28;          // px per minute; 40 min = 1120px + 48px of lead-out
+    const START = 2;        // 14:02 = minute 0
+    const NOW = 39;         // 14:41
+    const LANE = 72, RULE = 28;
+    const K = { think: 'var(--kind-think)', read: 'var(--kind-read)', edit: 'var(--kind-edit)', bash: 'var(--kind-bash)', subagent: 'var(--kind-subagent)', ask: 'var(--kind-ask)', said: 'var(--kind-said)', err: 'var(--err)' };
+    const clock = (m) => '14:' + String(START + m).padStart(2, '0');
+    const dur = (a, b) => { const d = b - a; return d < 1 ? Math.round(d * 60) + 's' : (d % 1 ? d.toFixed(1) : d) + 'm'; };
+    const s = this.state;
+
+    const laneDefs = [
+      { id: 'you', name: 'You', glyph: 'message', sub: 'asked · answered once', status: '', bars: [
+        { id: 'you-ask', a: 0, b: 0.6, kind: 'said', label: 'asked for the export', steps: [{ kind: 'said', detail: 'Export the large-exposure board as a static HTML file so the board pack can embed it.' }] },
+        { id: 'you-answer', a: 22, b: 22.6, kind: 'said', label: 'answered: remove it', steps: [{ kind: 'said', detail: 'Remove it. Then open the PR and ask Reviewer to look at the chart script.' }] } ] },
+      { id: 'orch', name: 'Orchestrator', glyph: 'bot', sub: '9 turns · 41k tok', status: 'live', bars: [
+        { id: 'o-plan', a: 0.6, b: 3, kind: 'think', label: 'plan', steps: [{ kind: 'think', label: 'Planned the ticket', detail: 'Scout maps → Planner plans → Builder builds → Reviewer reviews', time: '2m 24s' }] },
+        { id: 'o-wait1', a: 3, b: 7, kind: 'subagent', hollow: true, label: 'waiting on Scout' },
+        { id: 'o-replan', a: 7, b: 9, kind: 'think', label: 're-plan', steps: [{ kind: 'read', label: 'Read Scout’s map', detail: '3 owning files · 12 tests', time: '20s' }, { kind: 'think', label: 'Sequenced Builder’s edits', time: '1m 40s' }] },
+        { id: 'o-wait2', a: 9, b: 22, kind: 'subagent', hollow: true, label: 'waiting on Builder · you' },
+        { id: 'o-route', a: 22, b: 24, kind: 'think', label: 'route answer', steps: [{ kind: 'think', label: 'Forwarded your decision', detail: 'remove export_legacy()', time: '1m 50s' }] },
+        { id: 'o-wait3', a: 24, b: NOW, kind: 'subagent', hollow: true, label: 'waiting on Builder · Reviewer', live: true } ] },
+      { id: 'planner', name: 'Planner', glyph: 'compass', sub: '3 turns · blocked 5m', status: 'error', bars: [
+        { id: 'p-plan', a: 2, b: 17, kind: 'read', label: 'plan migration', steps: [{ kind: 'read', label: 'Read', detail: 'docs/migrations.md · apps/export/legacy.py', time: '4m' }, { kind: 'think', label: 'Drafted the removal plan', time: '9m' }, { kind: 'said', detail: 'Two paths: keep export_legacy() behind a flag, or delete it. Needs a product call.' }] },
+        { id: 'p-ask', a: 17, b: 17.6, kind: 'ask', err: true, label: 'asked you', steps: [{ kind: 'ask', label: 'Asked you', detail: 'Keep the legacy exporter?', time: '—', status: 'error' }] },
+        { id: 'p-block', a: 17.6, b: 22, kind: 'err', hollow: true, label: 'blocked: needs a decision' } ] },
+      { id: 'builder', name: 'Builder', glyph: 'wrench', sub: '6 turns · 68k tok', status: 'live', bars: [
+        { id: 'b-read', a: 7, b: 9, kind: 'read', label: 'read', steps: [{ kind: 'read', label: 'Read', detail: 'apps/export/static.py', time: '1m 10s' }, { kind: 'read', label: 'Read', detail: 'tests/apps/large_exposure/', time: '50s' }] },
+        { id: 'b-edit1', a: 9, b: 12, kind: 'edit', label: 'edit static.py', steps: [{ kind: 'edit', label: 'Edited', detail: 'apps/export/static.py', time: '2m 30s' }] },
+        { id: 'b-test1', a: 12, b: 13, kind: 'bash', err: true, label: 'pytest ✕', steps: [{ kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '38s', status: 'error' }, { kind: 'said', detail: 'The fixture path moved in the last refactor; patching the import before re-running.' }] },
+        { id: 'b-edit2', a: 13, b: 15, kind: 'edit', label: 'fix fixture', steps: [{ kind: 'edit', label: 'Edited', detail: 'tests/conftest.py', time: '1m 20s' }] },
+        { id: 'b-test2', a: 15, b: 16, kind: 'bash', label: 'pytest ✓', steps: [{ kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '41s' }] },
+        { id: 'b-wait', a: 16, b: 24, kind: 'ask', hollow: true, label: 'waiting on you' },
+        { id: 'b-edit3', a: 24, b: 26, kind: 'edit', label: 'remove legacy', steps: [{ kind: 'edit', label: 'Edited', detail: 'apps/export/legacy.py (removed export_legacy)', time: '1m 48s' }] },
+        { id: 'builder-test', a: 26, b: NOW, kind: 'bash', live: true, label: 'pytest -q', steps: [{ kind: 'subagent', label: 'Spawned Reviewer', detail: 'review dist/board.js for regressions', time: '0:21' }, { kind: 'bash', label: 'Running', detail: 'pytest tests/apps/large_exposure -q', status: 'running' }], now: 'bash · pytest tests/apps/large_exposure -q' } ] },
+      { id: 'scout', name: 'Scout', glyph: 'search', sub: '2 turns · 9k tok', status: 'done', bars: [
+        { id: 's-map', a: 1, b: 6, kind: 'read', label: 'map owning files', steps: [{ kind: 'bash', label: 'Ran', detail: 'git log -3 -- apps/export', time: '12s' }, { kind: 'read', label: 'Mapped', detail: 'apps/export/** · 3 owners · 12 tests', time: '4m' }] },
+        { id: 's-report', a: 6, b: 6.6, kind: 'said', label: 'report', steps: [{ kind: 'said', detail: 'Three files own the exporter; twelve tests cover them. Handing the map to Builder.' }] } ] },
+      { id: 'reviewer', name: 'Reviewer', glyph: 'shield', sub: '4 turns · 22k tok', status: 'live', bars: [
+        { id: 'r-review', a: 26, b: 35, kind: 'read', label: 'review dist/board.js', steps: [{ kind: 'read', label: 'Read', detail: 'dist/board.js', time: '3m' }, { kind: 'think', label: 'Checked legend toggles', time: '5m 40s' }] },
+        { id: 'r-ok', a: 35, b: 35.6, kind: 'said', label: 'approved · 2 nits', steps: [{ kind: 'said', detail: 'Approved. Two nits: debounce the hover handler; name the legend ids.' }] },
+        { id: 'r-live', a: 37.5, b: NOW, kind: 'think', live: true, label: 'nits', steps: [{ kind: 'think', label: 'Re-checking after Builder’s fix', status: 'running' }], now: 'think · legend toggle regression' } ] }
+    ];
+
+    let selBar = null, selLane = null;
+    const lanes = laneDefs.map((l, li) => {
+      const bars = l.bars.map((b) => {
+        const selected = b.id === s.sel;
+        if (selected) { selBar = b; selLane = l; }
+        const w = Math.max(16, (b.b - b.a) * PX - 2);
+        return {
+          ...b, x: (b.a * PX) + 'px', w: w + 'px', k: K[b.kind],
+          cls: [b.hollow && 'hollow', b.err && 'err', b.live && 'live', selected && 'sel', w < 44 && 'tiny', w < 110 && 'short'].filter(Boolean).join(' '),
+          sel: selected, dur: b.live ? clock(b.a) + ' →' : dur(b.a, b.b),
+          aria: l.name + ' · ' + b.label + ' · ' + clock(b.a) + ' to ' + (b.live ? 'now' : clock(Math.ceil(b.b))),
+          pick: () => this.setState({ sel: b.id })
+        };
+      });
+      return { ...l, bars, cls: selLane && selLane.id === l.id ? 'sel' : '' };
+    });
+    const laneY = (id) => laneDefs.findIndex((l) => l.id === id) * LANE + LANE / 2;
+    const handDefs = [
+      { t: 0.6, from: 'you', to: 'orch', kind: 'subagent', label: 'ticket' },
+      { t: 1, from: 'orch', to: 'scout', kind: 'subagent', label: 'map files' },
+      { t: 2, from: 'orch', to: 'planner', kind: 'subagent', label: 'plan' },
+      { t: 6.6, from: 'scout', to: 'builder', kind: 'read', label: 'map', dash: '2 4' },
+      { t: 17.3, from: 'planner', to: 'you', kind: 'ask', label: 'needs a decision', dash: '2 4' },
+      { t: 22.6, from: 'you', to: 'orch', kind: 'subagent', label: 'remove it' },
+      { t: 26, from: 'builder', to: 'reviewer', kind: 'subagent', label: 'review' },
+      { t: 35.6, from: 'reviewer', to: 'builder', kind: 'read', label: '2 nits', dash: '2 4' }
+    ];
+    const hands = handDefs.map((h) => {
+      const y1 = laneY(h.from), y2 = laneY(h.to), down = y2 > y1;
+      return {
+        xpx: (h.t * PX) + 'px', top: Math.min(y1, y2) + 'px', h: Math.abs(y2 - y1) + 'px', ympx: ((y1 + y2) / 2) + 'px',
+        k: K[h.kind], label: h.label, cls: h.dash ? 'dashed' : '',
+        fromEnd: down ? 'top' : 'bottom', toEnd: down ? 'bottom' : 'top'
+      };
+    });
+    const ticks = [];
+    for (let m = 0; m <= 40; m += 5) ticks.push({ x: (m * PX) + 'px', label: clock(m), cls: m % 10 === 0 ? 'major' : '' });
+
+    const sb = selBar || laneDefs[3].bars[7], sl = selLane || laneDefs[3];
+    return {
+      yes: true, no: false, twentySix: 26,
+      lanes, hands, ticks, nowX: (NOW * PX) + 'px',
+      sel: {
+        title: sl.name + ' · ' + sb.label, agent: sl.name, glyph: sl.glyph,
+        range: clock(sb.a) + ' – ' + (sb.live ? 'now' : clock(Math.ceil(sb.b))) + ' · ' + dur(sb.a, sb.b),
+        dur: dur(sb.a, sb.b), live: !!sb.live, failed: !!sb.err, now: sb.now || '',
+        steps: sb.steps || [{ kind: sb.kind === 'err' ? 'ask' : sb.kind, label: sb.hollow ? 'Idle' : sb.label, detail: sb.hollow ? sb.label : '', time: dur(sb.a, sb.b) }]
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
