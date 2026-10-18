@@ -17,14 +17,14 @@ Mirror of the published system at https://claude.ai/artifact/DhusFk34yTB6vNqpvFv
 ## Use it
 
 ```html
-<link rel="stylesheet" href="design-system/tokens.css">
-<link rel="stylesheet" href="design-system/components/bundle.css">
+<link rel="stylesheet" href="design-systems/agent-teams/tokens.css">
+<link rel="stylesheet" href="design-systems/agent-teams/components/bundle.css">
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
-<script src="design-system/components/bundle.js"></script>
+<script src="design-systems/agent-teams/components/bundle.js"></script>
 <script>
   const { TurnCapsule, Composer, hueIndex } = window.AgentTeamsDS;
 </script>
 ```
 
-Add a token in `tokens.json`, then regenerate `tokens.css` (the system page does this on save; `screens/` links this folder directly, so keep both in step). Add an icon by pasting its Lucide inner markup into `ICONS` in `bundle.js`.
+Add a token in `tokens.json`, then regenerate `tokens.css` (the system page does this on save; `apps/agent-teams/screens/` links this folder directly, so keep both in step). Add an icon by pasting its Lucide inner markup into `ICONS` in `bundle.js`.

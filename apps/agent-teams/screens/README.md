@@ -1,10 +1,10 @@
 # Agent Teams — screens
 
-Twelve interactive artboards for the agent-teams app, built on the [Agent Teams design system](../design-system/README.md). Each is a fluid page at 1360px with working controls (click agents, cycle permissions, drag effort, replay animations).
+Twelve interactive artboards for the agent-teams app, built on the [Agent Teams design system](../../../design-systems/agent-teams/README.md). Each is a fluid page at 1360px with working controls (click agents, cycle permissions, drag effort, replay animations).
 
 Live canvas: https://claude.ai/artifact/NaBZvNXBYvMsXdRmX34362 · Design system: https://claude.ai/artifact/DhusFk34yTB6vNqpvFvT66
 
-Open any `.dc.html` from a static server (`python3 -m http.server` in this folder); `support.js` is the same DC runtime the `mockups/` folders ship, and `ds/agent-teams-ds` links to `../design-system` so the screens load the real tokens and component bundle.
+Open any `.dc.html` from a static server (`python3 -m http.server` in this folder); `support.js` is the same DC runtime the `mockups/` folders ship, and `ds/agent-teams-ds` links to `../../../design-systems/agent-teams` so the screens load the real tokens and component bundle.
 
 ## Boards
 
