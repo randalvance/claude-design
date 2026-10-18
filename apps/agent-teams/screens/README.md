@@ -11,7 +11,7 @@ Open any `.dc.html` from a static server (`python3 -m http.server` in this folde
 | File | Screen | Try |
 |---|---|---|
 | `Main.dc.html` | **Create agent** — identity, glyph, model + effort, instructions, skills, connectors, permissions, Yolo; live preview | Rename to re-hash the hue; effort to max; flip Yolo |
-| `Chat.dc.html` | **Session chat** — sessions sidebar, thread with done + live turns and a handoff, full composer | Open the model menu for the effort slider |
+| `Chat.dc.html` | **Session chat** — sessions sidebar, thread with done + live turns and a handoff, full composer; compaction built in (robot compactor; instant fold under reduced motion) | Open the model menu for the effort slider; press **Compact now** in the banner |
 | `Graph.dc.html` | **Team graph** — orthogonal edges, live motes, blocked edge, inspector follows selection | Click nodes; Live / Replay |
 | `Swimlanes.dc.html` | **Team swimlanes** — a lane per agent, bars by step kind, handoff connectors, now-line | Click a bar for its capsule |
 | `Skills.dc.html` | **Skills editor** — library, trigger line, Instructions / Resources / Permissions / Arguments | Type into "Would it trigger?" |

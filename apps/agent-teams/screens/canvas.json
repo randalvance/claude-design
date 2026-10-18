@@ -6,7 +6,7 @@
   "pages": [],
   "boards": {
     "Main.dc.html": {"x": 0, "y": 0, "w": 1360, "h": 1260, "title": "Create agent — desktop", "expand": "fill", "is_interactive": true},
-    "Chat.dc.html": {"x": 1440, "y": 0, "w": 1360, "h": 1100, "title": "Session chat — desktop", "expand": "fill", "is_interactive": true},
+    "Chat.dc.html": {"x": 1440, "y": 0, "w": 1360, "h": 1100, "title": "Session chat — desktop · compaction built in (Compact now)", "expand": "fill", "is_interactive": true},
     "Graph.dc.html": {"x": 2880, "y": 0, "w": 1360, "h": 900, "title": "Team graph — desktop", "expand": "fill", "is_interactive": true},
     "Swimlanes.dc.html": {"x": 4320, "y": 0, "w": 1360, "h": 900, "title": "Team swimlanes — desktop", "expand": "fill", "is_interactive": true},
     "Skills.dc.html": {"x": 5760, "y": 0, "w": 1360, "h": 1000, "title": "Skills editor — desktop", "expand": "fill", "is_interactive": true},
