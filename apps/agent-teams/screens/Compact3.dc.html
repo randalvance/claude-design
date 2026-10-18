@@ -105,7 +105,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .ban .num{font:500 12px/1 "JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:#e7eaf4}
 .comp{transition:box-shadow .5s,filter .5s;border-radius:12px}
 .comp.dim{filter:brightness(.7)}
-.comp.flash{box-shadow:0 0 0 1px rgba(79,209,160,.5),0 0 22px rgba(79,209,160,.35)}
+.comp.lit{box-shadow:0 0 0 1px rgba(79,209,160,.5),0 0 22px rgba(79,209,160,.35)}
 @media (max-width:860px){.hide-sm{display:none}}
 @media (prefers-reduced-motion:reduce){.msg,.scene,.veil,.sum,.slab,.lid,.bot{transition-duration:.01ms!important}.bot,.arm,.eye,.ant,.ring,.spark,.flash{animation:none!important}}
 </style>
@@ -329,7 +329,7 @@ class Component extends DCLogic {
       banCls: p === 'idle' ? 'warn' : p === 'done' ? 'ok' : 'busy',
       isIdle: p === 'idle', isBusy: running, isDone: p === 'done',
       busyText: p === 'lift' ? 'Compacting context…' : p === 'pull' ? 'Loading 6 messages into the compactor…' : p === 'stomp' ? 'Stomping · ' + k + 'k → 71k' : 'Writing the summary…',
-      compCls: running ? 'dim' : (p === 'done' ? 'flash' : ''),
+      compCls: running ? 'dim' : (p === 'done' ? 'lit' : ''),
       turn1: [
         { kind: 'think', label: 'Planned the change', time: '4s' }, { kind: 'read', label: 'Read', detail: 'apps/export/static.py', time: '1s' },
         { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '38s', status: 'error' },
