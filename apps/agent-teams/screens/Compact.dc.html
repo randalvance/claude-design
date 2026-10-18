@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Session chat — compacting context</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.ico{all:unset;box-sizing:border-box;cursor:pointer;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;color:#8d96b5;border:1px solid #252d48;background:#151b2f}
+.ico:hover{border-color:#36406a;color:#e7eaf4}
+.ico:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.day{display:flex;align-items:center;gap:12px;font-size:11px;color:#5b6484;font-variant-numeric:tabular-nums}
+.day::before,.day::after{content:"";flex:1;height:1px;background:#252d48}
+.reply{font-size:14px;line-height:1.55;color:#e7eaf4;padding:4px 2px 0 38px}
+.reply p{margin:0 0 10px}
+.reply code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;background:#1b2340;padding:1px 6px;border-radius:4px;color:#c9cfe8}
+.who{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#8d96b5}
+.who time{font-variant-numeric:tabular-nums;color:#5b6484}
+
+/* ---- the fold ---- */
+.old{display:grid;grid-template-rows:1fr;transition:grid-template-rows 1.6s cubic-bezier(.4,0,.2,1) .25s}
+.old.folding,.old.folded{grid-template-rows:0fr}
+.old.notrans,.old.notrans .msg{transition:none!important}
+.old-in{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:18px;transform-origin:50% 100%}
+.old .msg{transition:transform 1.4s cubic-bezier(.4,0,.2,1),opacity 1.6s ease .15s,filter 1.2s ease}
+.old.folding .msg{transform:translateY(var(--drop)) scale(.96);opacity:0;filter:blur(2px)}
+.old.folding .msg:nth-child(1){transition-delay:0ms,.15s,0ms}.old.folding .msg:nth-child(2){transition-delay:90ms,.24s,90ms}.old.folding .msg:nth-child(3){transition-delay:180ms,.33s,180ms}.old.folding .msg:nth-child(4){transition-delay:270ms,.42s,270ms}.old.folding .msg:nth-child(5){transition-delay:360ms,.51s,360ms}.old.folding .msg:nth-child(6){transition-delay:450ms,.6s,450ms}
+.fold-line{position:relative;height:0;margin:-9px 0}
+.fold-line::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#7c9cff 20%,#c3d1ff 50%,#7c9cff 80%,transparent);opacity:0;transition:opacity .4s}
+.fold-line.on::before{opacity:1;box-shadow:0 0 12px rgba(124,156,255,.8)}
+/* motes falling into the summary */
+.motes{position:absolute;left:0;right:0;top:0;height:220px;pointer-events:none;overflow:visible}
+.motes i{position:absolute;top:0;width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px 3px color-mix(in srgb,var(--c) 75%,transparent);opacity:0;animation:fall 1.7s cubic-bezier(.5,0,.3,1) var(--d) both}
+.motes i.sq{border-radius:2px}
+@keyframes fall{0%{transform:translateY(-180px) scale(.5);opacity:0}12%{opacity:1}78%{opacity:1}100%{transform:translateY(0) scale(1.1);opacity:0}}
+
+/* summary capsule */
+.sum{opacity:0;transform:translateY(8px) scale(.98);transition:opacity .5s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.3,1.2),box-shadow .6s}
+.sum.in{opacity:1;transform:none}
+.sum.flash{box-shadow:0 0 0 1px rgba(79,209,160,.5),0 0 16px rgba(79,209,160,.3),0 0 40px rgba(124,156,255,.25)}
+.sum-ic{position:relative;width:26px;height:26px;border-radius:50%;background:#1b2340;display:grid;place-items:center;color:#5fd4e8;flex:none}
+.sum-ic::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid #5fd4e8;opacity:0}
+.sum.flash .sum-ic::before{animation:at-ring 1.2s ease-out 2}
+.sum .at-step__detail{white-space:normal;font-family:inherit;font-size:13px;color:#c9cfe8;line-height:1.5}
+
+/* banner above composer */
+.ban{display:flex;align-items:center;gap:10px;height:36px;padding:0 12px;border-radius:8px;background:#151b2f;border:1px solid #252d48;font-size:12.5px;color:#8d96b5;transition:border-color .3s,box-shadow .3s,background .3s;overflow:hidden;position:relative}
+.ban.warn{border-color:rgba(240,182,79,.5);color:#f0b64f}
+.ban.busy{border-color:#7c9cff73;box-shadow:0 0 0 1px rgba(124,156,255,.55),0 0 18px rgba(124,156,255,.35);color:#e7eaf4}
+.ban.ok{border-color:rgba(79,209,160,.5);color:#4fd1a0}
+.ban .prog{position:absolute;left:0;bottom:0;height:2px;background:linear-gradient(90deg,#7c9cff,#c3d1ff);width:0;transition:width 2.6s cubic-bezier(.3,0,.2,1)}
+.ban.busy .prog{width:100%}
+.ban .num{font:500 12px/1 "JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:#e7eaf4}
+.ban .arrow{color:#5b6484}
+.demo{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font:500 12px/1 "IBM Plex Sans",system-ui,sans-serif;color:#0d1221;background:#7c9cff}
+.demo:hover{filter:brightness(1.1)}
+.demo:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.demo[disabled]{opacity:.4;cursor:default}
+@media (max-width:860px){.hide-sm{display:none}}
+@media (prefers-reduced-motion:reduce){.old,.old .msg,.sum,.ban .prog{transition-duration:.01ms!important}.motes i{animation:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+    <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{thirtyTwo}}" status="live"></x-import>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <strong style="font-size: 14px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">LEIB-117 – Static HTML file</strong>
+      <span style="display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: #8d96b5"><span>Builder</span><span style="display: inline-flex; align-items: center; gap: 5px; color: #9db4ff"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="bash" running="{{yes}}" pop="{{no}}"></x-import>Working · 0:38</span></span>
+    </div>
+    <span class="hide-sm" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; background: #1b2340; padding: 3px 8px; border-radius: 999px">feat/LEIB-117-static-file</span>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 10px">
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; color: #8d96b5">
+        <x-import component-from-global-scope="AgentTeamsDS.RadialMeter" value="{{ctx}}" size="{{thirtySix}}"></x-import>
+        <span class="hide-sm"><span style="font-family: 'JetBrains Mono', monospace; color: #e7eaf4">{{ctxK}}</span> / 200k</span>
+      </span>
+      <button type="button" class="demo" onClick="{{replay}}" disabled="{{running}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="loader" size="{{twelve}}"></x-import>{{demoLabel}}</button>
+      <button class="ico" type="button" aria-label="Session settings"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="wrench" size="{{fifteen}}"></x-import></button>
+    </div>
+  </header>
+
+  <div style="flex: 1; width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 28px 16px 24px; display: flex; flex-direction: column; gap: 18px; position: relative">
+
+    <!-- ===== Older turns: these fold ===== -->
+    <div class="day"><span>Today · 14:02</span></div>
+    <div class="old {{oldCls}}" aria-live="off">
+      <div class="old-in">
+        <div class="msg" style="--drop: 160px; display: flex; flex-direction: column; align-items: flex-end"><x-import component-from-global-scope="AgentTeamsDS.Bubble" author="user">Export the large-exposure board as a static HTML file so the board pack can embed it. Keep the charts interactive.</x-import></div>
+        <div class="msg" style="--drop: 130px"><x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" elapsed="3m 12s" steps="{{turn1}}"></x-import></div>
+        <div class="msg" style="--drop: 100px; display: flex; flex-direction: column; gap: 6px">
+          <div class="who"><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{twentySix}}"></x-import><span>Builder</span><time>14:05</time></div>
+          <div class="reply"><p>Done. The exporter writes <code>dist/board.html</code> with the charts inlined as SVG plus a 9&nbsp;KB script. One thing I need from you: the legacy <code>export_legacy()</code> path still references the old fixture. Keep it, or remove it?</p></div>
+        </div>
+        <div class="msg" style="--drop: 70px; display: flex; flex-direction: column; align-items: flex-end"><x-import component-from-global-scope="AgentTeamsDS.Bubble" author="user">Remove it. Then open the PR and ask Reviewer to look at the chart script.</x-import></div>
+        <div class="msg" style="--drop: 40px"><x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" elapsed="2m 04s" steps="{{turn2}}"></x-import></div>
+        <div class="msg" style="--drop: 20px; display: flex; flex-direction: column; gap: 6px">
+          <div class="who"><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{twentySix}}"></x-import><span>Builder</span><time>14:28</time></div>
+          <div class="reply"><p>Legacy path removed, suite green. Reviewer approved <code>dist/board.js</code> with two nits — debounce the hover handler, name the legend ids. Fixing both now.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- fold line + summary capsule -->
+    <div class="fold-line {{lineCls}}" aria-hidden="true"></div>
+    <div style="position: relative">
+      <sc-if value="{{showMotes}}" hint-placeholder-val="{{false}}">
+        <div class="motes" aria-hidden="true" style="top: -6px">
+          <i style="left: 12%; --c: #7c9cff; --d: 0ms"></i><i style="left: 23%; --c: #4fd1a0; --d: 120ms"></i><i class="sq" style="left: 31%; --c: #c9cfe8; --d: 60ms"></i><i style="left: 44%; --c: #f0b64f; --d: 200ms"></i><i style="left: 52%; --c: #7c9cff; --d: 40ms"></i><i style="left: 61%; --c: #c58cff; --d: 260ms"></i><i style="left: 70%; --c: #5fd4e8; --d: 150ms"></i><i class="sq" style="left: 78%; --c: #c9cfe8; --d: 320ms"></i><i style="left: 86%; --c: #4fd1a0; --d: 90ms"></i><i style="left: 93%; --c: #ff7083; --d: 230ms"></i>
+        </div>
+      </sc-if>
+      <sc-if value="{{showSum}}" hint-placeholder-val="{{true}}">
+        <section class="at-turn sum {{sumCls}}" aria-label="Compacted earlier turns" style="border-color: #3a4677">
+          <button class="at-cap" onClick="{{toggleSum}}" aria-expanded="{{sumOpen}}">
+            <span class="sum-ic" aria-hidden="true"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="brain" size="{{fourteen}}"></x-import></span>
+            <span class="at-cap__title"><strong>Earlier · compacted</strong><span class="at-cap__sub">6 messages · 14:02–14:28 · kept the decisions</span></span>
+            <span class="at-cap__chips">
+              <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">184k → 71k</x-import>
+              <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="ok">freed 113k</x-import>
+              <x-import component-from-global-scope="AgentTeamsDS.Chip">2 decisions</x-import>
+              <x-import component-from-global-scope="AgentTeamsDS.Chip">3 files</x-import>
+            </span>
+            <x-import component-from-global-scope="AgentTeamsDS.Icon" name="chevron" class="at-chev"></x-import>
+          </button>
+          <div class="at-turn__body"><div class="at-turn__in">
+            <ol class="at-steps">
+              <li class="at-step at-step--said" style="animation-delay: 0ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="message" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">What was asked</span><code class="at-step__detail">Export the exposure board as a static, self-contained HTML file; charts stay interactive; remove the legacy exporter; open a PR; Reviewer checks the chart script.</code></span></li>
+              <li class="at-step at-step--edit" style="animation-delay: 55ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="pencil" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">What changed</span><code class="at-step__detail">apps/export/static.py (new render_static), tests/conftest.py (fixture path), apps/export/legacy.py (export_legacy removed). Suite: 6 tests green.</code></span></li>
+              <li class="at-step at-step--ask" style="animation-delay: 110ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="help" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">Decisions</span><code class="at-step__detail">14:24 — remove export_legacy(), no flag. Reviewer scope is dist/board.js only.</code></span></li>
+              <li class="at-step at-step--think" style="animation-delay: 165ms"><span class="at-step__ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="brain" size="{{thirteen}}"></x-import></span><span class="at-step__main"><span class="at-step__label">Still open</span><code class="at-step__detail">Two review nits (debounce hover, legend ids). PR not yet opened.</code></span></li>
+            </ol>
+            <div style="display: flex; gap: 8px; align-items: center; padding: 0 10px 10px; font-size: 11.5px; color: #8d96b5">Tool output and intermediate narration were dropped. <a href="#" style="margin-left: auto">Show the original 6 messages</a></div>
+          </div></div>
+        </section>
+      </sc-if>
+    </div>
+
+    <!-- ===== Recent turns: these stay ===== -->
+    <x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" live="{{yes}}" elapsed="0:38" steps="{{turn3}}" now="bash · pytest tests/apps/large_exposure -q"></x-import>
+  </div>
+
+  <!-- ===== Composer ===== -->
+  <div style="position: sticky; bottom: 0; background: linear-gradient(180deg, rgba(13,18,33,0) 0%, #0d1221 28%); padding: 24px 16px 20px">
+    <div style="max-width: 920px; margin: 0 auto; position: relative; display: flex; flex-direction: column; gap: 8px">
+      <div class="ban {{banCls}}" role="status" aria-live="polite">
+        <sc-if value="{{isIdle}}" hint-placeholder-val="{{true}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="zap" size="{{fourteen}}"></x-import><span>Context at <span class="num">92%</span> — Builder will compact before its next turn.</span><a href="#" style="margin-left: auto; font-size: 12px" onClick="{{replayLink}}">Compact now</a></sc-if>
+        <sc-if value="{{isBusy}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="brain" size="{{fourteen}}"></x-import><span class="at-shimmer" style="font-family: inherit; font-size: 12.5px">Compacting context — summarising 6 messages, keeping decisions and file paths…</span><span style="margin-left: auto; display: inline-flex; gap: 6px; align-items: center"><span class="num">184k</span><span class="arrow">→</span><span class="num">{{liveK}}</span></span><span class="prog" aria-hidden="true"></span></sc-if>
+        <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="check" size="{{fourteen}}"></x-import><span>Compacted. Freed <span class="num" style="color: #4fd1a0">113k</span> tokens; the summary above replaces the earlier turns.</span><a href="#" style="margin-left: auto; font-size: 12px" onClick="{{replayLink}}">Replay</a></sc-if>
+      </div>
+      <x-import component-from-global-scope="AgentTeamsDS.Composer" agent="Builder" model="Opus 5.5" effort="{{two}}" context="{{ctx}}"></x-import>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"autoplay":{"editor":"boolean","default":true,"section":"Demo"},"$preview":{"width":1360,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    // phases: idle → busy (banner, meter starts draining) → fold (old turns collapse, motes fall) → summary (capsule pops, flash) → done
+    this.state = { phase: 'idle', sumOpen: false, liveK: 184, notrans: false };
+    this.timers = [];
+  }
+  componentDidMount() { if (this.props.autoplay !== false) this.later(1600, () => this.run()); }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); clearInterval(this.tick); }
+  later(ms, fn) { this.timers.push(setTimeout(fn, ms)); }
+  run() {
+    this.timers.forEach(clearTimeout); this.timers = []; clearInterval(this.tick);
+    // snap the old turns back open with no transition, then run the sequence
+    this.setState({ phase: 'busy', sumOpen: false, liveK: 184, notrans: true });
+    this.later(80, () => this.setState({ notrans: false }));
+    // live token readout counts down while the banner's bar fills
+    let k = 184; this.tick = setInterval(() => { k = Math.max(71, k - 3); this.setState({ liveK: k }); if (k <= 71) clearInterval(this.tick); }, 90);
+    this.later(1000, () => this.setState({ phase: 'fold' }));     // fold: messages drop 1.4s, grid closes 1.6s, motes fall 1.7s
+    this.later(3000, () => this.setState({ phase: 'summary' }));  // capsule pops in and flashes
+    this.later(4600, () => this.setState({ phase: 'done' }));
+  }
+  renderVals() {
+    const p = this.state.phase;
+    const running = p === 'busy' || p === 'fold' || p === 'summary';
+    const ctx = p === 'idle' ? 0.92 : p === 'busy' ? 0.92 : 0.355;
+    return {
+      yes: true, no: false, two: 2, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, twentySix: 26, thirtyTwo: 32, thirtySix: 36,
+      ctx, ctxK: p === 'idle' || p === 'busy' ? '184k' : '71k', liveK: this.state.liveK + 'k',
+      running, demoLabel: running ? 'Compacting…' : (p === 'done' ? 'Replay compaction' : 'Compact now'),
+      replay: () => this.run(), replayLink: (e) => { e.preventDefault(); this.run(); },
+      oldCls: [p === 'fold' || p === 'summary' ? 'folding' : p === 'done' ? 'folded' : '', this.state.notrans && 'notrans'].filter(Boolean).join(' '),
+      lineCls: p === 'fold' || p === 'summary' ? 'on' : '',
+      showMotes: p === 'fold' || p === 'summary',
+      showSum: p === 'summary' || p === 'done',
+      sumCls: [(p === 'summary' || p === 'done') && 'in', p === 'summary' && 'flash', this.state.sumOpen && 'at-turn--open'].filter(Boolean).join(' '),
+      sumOpen: this.state.sumOpen, toggleSum: () => this.setState({ sumOpen: !this.state.sumOpen }),
+      banCls: p === 'idle' ? 'warn' : p === 'done' ? 'ok' : 'busy',
+      isIdle: p === 'idle', isBusy: running, isDone: p === 'done',
+      turn1: [
+        { kind: 'think', label: 'Planned the change', time: '4s' }, { kind: 'read', label: 'Read', detail: 'apps/export/static.py', time: '1s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '38s', status: 'error' },
+        { kind: 'said', detail: 'The fixture path moved in the last refactor; patching the import before re-running.' },
+        { kind: 'edit', label: 'Edited', detail: 'tests/conftest.py', time: '2s' }, { kind: 'edit', label: 'Edited', detail: 'apps/export/static.py', time: '6s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '41s' }, { kind: 'ask', label: 'Asked you', detail: 'Keep the legacy exporter?', time: '—' }
+      ],
+      turn2: [
+        { kind: 'edit', label: 'Edited', detail: 'apps/export/legacy.py (removed export_legacy)', time: '3s' },
+        { kind: 'subagent', label: 'Spawned Reviewer', detail: 'review dist/board.js for regressions', time: '1m 20s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '41s' }
+      ],
+      turn3: [
+        { kind: 'edit', label: 'Edited', detail: 'dist/board.js (debounce hover, legend ids)', time: '5s' },
+        { kind: 'bash', label: 'Running', detail: 'pytest tests/apps/large_exposure -q', status: 'running' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

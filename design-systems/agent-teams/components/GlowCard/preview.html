@@ -1,0 +1,13 @@
+<!-- @dsCard group="Surfaces" height=150 width=760 -->
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>body{margin:0;background:var(--bg-000);padding:16px;box-sizing:border-box}#root{display:flex;flex-wrap:wrap;gap:16px;align-items:center}</style></head>
+<body><div id="root" class="at-root"></div>
+<script>
+(function(){var D=window.AgentTeamsDS,h=React.createElement;
+function App(){var s=['open','live','busy','attention','danger','selected','max'];return h('div',{style:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:16,width:'100%'}},
+ h(D.GlowCard,null,h('b',null,'Rest'),h('div',{style:{color:'var(--ink-300)',fontSize:12}},'flat, line-100')),
+ s.map(function(st){return h(D.GlowCard,{key:st,state:st},h('b',null,st),h('div',{style:{color:'var(--ink-300)',fontSize:12}},'glow-'+(st==='open'?'raised':st)))}));}
+ReactDOM.createRoot(document.getElementById('root')).render(App());})();
+</script></body></html>

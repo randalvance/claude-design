@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Session chat</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.nav{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:8px;color:#8d96b5;font:500 13px/1 "IBM Plex Sans",system-ui,sans-serif;transition:background .12s,color .12s}
+.nav:hover{background:#1b2340;color:#e7eaf4}
+.nav:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.nav.on{background:#7c9cff2e;color:#e7eaf4}
+.ico{all:unset;box-sizing:border-box;cursor:pointer;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;color:#8d96b5;border:1px solid #252d48;background:#151b2f;transition:border-color .12s,color .12s}
+.ico:hover{border-color:#36406a;color:#e7eaf4}
+.ico:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.day{display:flex;align-items:center;gap:12px;font-size:11px;color:#5b6484;font-variant-numeric:tabular-nums}
+.day::before,.day::after{content:"";flex:1;height:1px;background:#252d48}
+.reply{font-size:14px;line-height:1.55;color:#e7eaf4;padding:4px 2px 0 38px;animation:at-replyIn .55s cubic-bezier(.2,.8,.2,1) both}
+.reply p{margin:0 0 10px}
+.reply code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;background:#1b2340;padding:1px 6px;border-radius:4px;color:#c9cfe8}
+.reply ul{margin:0 0 10px;padding-left:20px}
+.who{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#8d96b5}
+.who time{font-variant-numeric:tabular-nums;color:#5b6484}
+.actions{display:flex;gap:4px;margin-left:38px;opacity:.7}
+@media (max-width:860px){.hide-sm{display:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <!-- ===== Sidebar ===== -->
+  <nav aria-label="Sessions" style="flex: 1 1 288px; max-width: 320px; min-width: 0; background: #0f1527; border-right: 1px solid #252d48; display: flex; flex-direction: column; gap: 16px; padding: 16px 12px 20px; box-sizing: border-box">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 4px">
+      <span style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #7c9cff; color: #0d1221"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="spark" size="{{sixteen}}"></x-import></span>
+      <strong style="font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Agent Teams</strong>
+      <span style="margin-left: auto"><x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" size="sm" icon="plus">New</x-import></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <button class="nav on" type="button"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="message" size="{{fifteen}}"></x-import>Sessions</button>
+      <button class="nav" type="button"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="users" size="{{fifteen}}"></x-import>Teams</button>
+      <button class="nav" type="button"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="bot" size="{{fifteen}}"></x-import>Agents</button>
+      <button class="nav" type="button"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="plug" size="{{fifteen}}"></x-import>Connectors</button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484; padding: 0 4px">Today</span>
+      <x-import component-from-global-scope="AgentTeamsDS.SessionCard" title="Static HTML file export" agent="Builder" agent-id="Builder" glyph="wrench" meta="feat/LEIB-117" time="0:38" state="busy" selected="{{yes}}"></x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.SessionCard" title="Migrate billing tables" agent="Planner" agent-id="Planner" glyph="compass" meta="needs a decision" time="5m" state="attention"></x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.SessionCard" title="Audit auth middleware" agent="Scout" agent-id="Scout" glyph="search" meta="main" time="2h" state="idle"></x-import>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484; padding: 0 4px">Yesterday</span>
+      <x-import component-from-global-scope="AgentTeamsDS.SessionCard" title="Weekly digest" agent="Scout" agent-id="Scout" glyph="search" meta="7 steps" time="1d" state="done"></x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.SessionCard" title="Deploy canary" agent="Builder" agent-id="Builder" glyph="wrench" meta="pytest failed" time="1d" state="failed"></x-import>
+    </div>
+  </nav>
+
+  <!-- ===== Thread ===== -->
+  <section aria-label="Session" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box">
+
+    <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+      <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{thirtyTwo}}" status="live"></x-import>
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <strong style="font-size: 14px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">LEIB-117 – Static HTML file</strong>
+        <span style="display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: #8d96b5">
+          <span>Builder</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px; color: #9db4ff"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="bash" running="{{yes}}" pop="{{no}}"></x-import>Working · 0:38</span>
+        </span>
+      </div>
+      <span class="hide-sm" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; background: #1b2340; padding: 3px 8px; border-radius: 999px">feat/LEIB-117-static-file</span>
+      <span class="hide-sm" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; background: #1b2340; padding: 3px 8px; border-radius: 999px">#5404</span>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 10px">
+        <span class="hide-sm" style="display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; color: #8d96b5">
+          Team
+          <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar.Stack" agents="{{team}}"></x-import>
+        </span>
+        <button class="ico" type="button" aria-label="Team graph"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="users" size="{{fifteen}}"></x-import></button>
+        <button class="ico" type="button" aria-label="Session settings"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="wrench" size="{{fifteen}}"></x-import></button>
+        <x-import component-from-global-scope="AgentTeamsDS.Button" variant="danger" size="sm">Stop</x-import>
+      </div>
+    </header>
+
+    <div style="flex: 1; width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 28px 16px 24px; display: flex; flex-direction: column; gap: 18px">
+
+      <div class="day"><span>Today · 14:02</span></div>
+
+      <!-- Turn 1 -->
+      <x-import component-from-global-scope="AgentTeamsDS.Bubble" author="user">Export the large-exposure board as a static HTML file so the board pack can embed it. Keep the charts interactive.</x-import>
+
+      <x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" elapsed="3m 12s" steps="{{turn1}}"></x-import>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <div class="who">
+          <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Builder" id="Builder" glyph="wrench" size="{{twentySix}}"></x-import>
+          <span>Builder</span><time datetime="2026-10-17T14:05">14:05</time>
+        </div>
+        <div class="reply">
+          <p>Done. The exporter now writes <code>dist/board.html</code> with the pie and trend charts inlined as self-contained SVG plus a 9&nbsp;KB script for hover and legend toggles — no network, no fonts to load.</p>
+          <ul>
+            <li><code>apps/export/static.py</code> — new <code>render_static()</code> entry point</li>
+            <li><code>tests/apps/large_exposure/test_static.py</code> — 6 tests, all green after the fixture fix</li>
+          </ul>
+          <p>One thing I need from you: the legacy <code>export_legacy()</code> path still references the old fixture. Keep it, or remove it in this change?</p>
+        </div>
+        <div class="actions">
+          <button class="ico" type="button" aria-label="Copy reply" style="width: 28px; height: 28px; border-color: transparent; background: transparent"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="file" size="{{fourteen}}"></x-import></button>
+          <button class="ico" type="button" aria-label="Replay turn" style="width: 28px; height: 28px; border-color: transparent; background: transparent"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="loader" size="{{fourteen}}"></x-import></button>
+        </div>
+      </div>
+
+      <!-- Turn 2 -->
+      <x-import component-from-global-scope="AgentTeamsDS.Bubble" author="user">Remove it. Then open the PR and ask Reviewer to look at the chart script.</x-import>
+
+      <x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="Builder" agent-id="Builder" glyph="wrench" live="{{yes}}" elapsed="0:38" steps="{{turn2}}" now="bash · pytest tests/apps/large_exposure -q"></x-import>
+
+      <!-- handoff notice -->
+      <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48; font-size: 12.5px; color: #8d96b5; align-self: flex-start">
+        <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="Reviewer" id="Reviewer" glyph="shield" size="{{twenty}}" status="live"></x-import>
+        <span><strong style="color: #e7eaf4; font-weight: 500">Reviewer</strong> joined — reviewing <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px">dist/board.js</span> in a subagent</span>
+        <a href="#" style="font-size: 12px; margin-left: 6px">Open</a>
+      </div>
+
+    </div>
+
+    <!-- ===== Composer ===== -->
+    <div style="position: sticky; bottom: 0; background: linear-gradient(180deg, rgba(13,18,33,0) 0%, #0d1221 28%); padding: 24px 16px 20px">
+      <div style="max-width: 920px; margin: 0 auto; position: relative; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="warn">Waiting on your answer</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">⌘↩ send · ⇧↩ newline</x-import>
+        </div>
+        <x-import component-from-global-scope="AgentTeamsDS.Composer" agent="Builder" model="Opus 5.5" effort="{{two}}" context="{{ctx}}"></x-import>
+        <span style="font-size: 11px; color: #5b6484; text-align: center">Builder can edit files and run shell commands in this worktree. It asks before pushing.</span>
+      </div>
+    </div>
+
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"context":{"editor":"range","default":0.34,"min":0,"max":1,"step":0.01,"section":"Composer"},"$preview":{"width":1360,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, no: false, two: 2, fourteen: 14, fifteen: 15, sixteen: 16, twenty: 20, twentySix: 26, thirtyTwo: 32,
+      ctx: this.props.context ?? 0.34,
+      team: [
+        { name: 'Orchestrator', id: 'Orchestrator', glyph: 'bot' },
+        { name: 'Builder', id: 'Builder', glyph: 'wrench' },
+        { name: 'Reviewer', id: 'Reviewer', glyph: 'shield' },
+        { name: 'Scout', id: 'Scout', glyph: 'search' }
+      ],
+      turn1: [
+        { kind: 'think', label: 'Planned the change', detail: '3 files to touch, tests first', time: '4s' },
+        { kind: 'read', label: 'Read', detail: 'apps/export/static.py', time: '1s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '38s', status: 'error' },
+        { kind: 'said', detail: 'The fixture path moved in the last refactor; patching the import before re-running.' },
+        { kind: 'edit', label: 'Edited', detail: 'tests/conftest.py', time: '2s' },
+        { kind: 'edit', label: 'Edited', detail: 'apps/export/static.py', time: '6s' },
+        { kind: 'bash', label: 'Ran', detail: 'pytest tests/apps/large_exposure -q', time: '41s' },
+        { kind: 'ask', label: 'Asked you', detail: 'Keep the legacy exporter?', time: '—' }
+      ],
+      turn2: [
+        { kind: 'edit', label: 'Edited', detail: 'apps/export/legacy.py (removed export_legacy)', time: '3s' },
+        { kind: 'subagent', label: 'Spawned Reviewer', detail: 'review dist/board.js for regressions', time: '0:21' },
+        { kind: 'bash', label: 'Running', detail: 'pytest tests/apps/large_exposure -q', status: 'running' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

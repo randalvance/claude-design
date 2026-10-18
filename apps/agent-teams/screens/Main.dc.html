@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create agent</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.field{all:unset;box-sizing:border-box;display:block;width:100%;height:40px;padding:0 12px;border-radius:8px;background:#0f1527;border:1px solid #252d48;color:#e7eaf4;font:400 14px/1.4 "IBM Plex Sans",system-ui,sans-serif;transition:border-color .12s,box-shadow .12s}
+.field::placeholder{color:#5b6484}
+.field:hover{border-color:#36406a}
+.field:focus{border-color:#3a4677;box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+textarea.field{height:auto;min-height:168px;padding:10px 12px;resize:vertical;line-height:1.55}
+.glyph{all:unset;box-sizing:border-box;cursor:pointer;width:44px;height:44px;border-radius:8px;display:grid;place-items:center;background:#1b2340;color:#8d96b5;border:1px solid transparent;transition:color .12s,border-color .12s,box-shadow .25s}
+.glyph:hover{color:#e7eaf4;border-color:#36406a}
+.glyph:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.glyph.on{color:#0d1221;background:var(--hue);border-color:var(--hue);box-shadow:0 0 0 1px var(--hue),0 0 14px color-mix(in srgb,var(--hue) 45%,transparent)}
+.model{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:4px;flex:1 1 150px;min-width:0;padding:12px 14px;border-radius:8px;background:#1b2340;border:1px solid transparent;color:#e7eaf4;transition:border-color .12s,box-shadow .25s,background .25s}
+.model:hover{border-color:#36406a}
+.model:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.model.on{border-color:#7c9cff;background:color-mix(in srgb,#7c9cff2e,#1b2340);box-shadow:0 0 0 1px rgba(124,156,255,.55),0 0 18px rgba(124,156,255,.35)}
+.model.on.max{border-color:#c3d1ff;box-shadow:0 0 0 1px #c3d1ff,0 0 24px rgba(124,156,255,.7),0 0 64px rgba(197,140,255,.45)}
+.conn{display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-radius:8px;background:#0f1527;border:1px solid #252d48}
+.conn:hover{border-color:#36406a}
+.tool{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:#1b2340;color:#8d96b5;font:500 12px/1 "IBM Plex Sans",system-ui,sans-serif;border:1px solid transparent;transition:color .12s,border-color .12s,background .2s}
+.tool:hover{border-color:#36406a;color:#e7eaf4}
+.tool:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.tool.on{color:#e7eaf4;background:#7c9cff2e;border-color:#3a4677}
+.tool i{width:6px;height:6px;border-radius:50%;background:var(--k)}
+.preview-card{transition:box-shadow .4s,border-color .4s}
+.preview-card.max{border-color:#c3d1ff;box-shadow:0 0 0 1px #c3d1ff,0 0 24px rgba(124,156,255,.7),0 0 64px rgba(197,140,255,.45)}
+.preview-card.yolo{border-color:#ff7083;box-shadow:0 0 0 1px rgba(255,112,131,.6),0 0 18px rgba(255,112,131,.4)}
+.hero{position:relative;display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:var(--hue);color:#0d1221;box-shadow:0 0 0 1px var(--hue),0 0 28px color-mix(in srgb,var(--hue) 50%,transparent);transition:background .4s,box-shadow .4s}
+.hero::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--hue);animation:at-ring 1.6s ease-out infinite}
+.preview-card .at-cap__chips{display:none}
+@media (max-width:720px){.hide-sm{display:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+    <a href="#" aria-label="Back to agents" style="display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #8d96b5; border: 1px solid #252d48; background: #151b2f">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <span style="font-size: 11.5px; color: #8d96b5">Agents / New</span>
+      <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2">Create agent</strong>
+    </div>
+    <span class="hide-sm" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; background: #1b2340; padding: 3px 8px; border-radius: 999px">draft · unsaved</span>
+    <div style="margin-left: auto; display: flex; gap: 8px; align-items: center">
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" icon="zap">Test run</x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="check">Save agent</x-import>
+    </div>
+  </header>
+
+  <main style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; width: 100%; max-width: 1360px; margin: 0 auto; box-sizing: border-box; padding: 28px 24px 48px">
+
+    <!-- ===== Form column ===== -->
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+      <!-- Identity -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; align-items: baseline; gap: 10px">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Identity</h2>
+          <span style="font-size: 12px; color: #8d96b5">Name, glyph and what it does. Its colour is assigned from the name.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="agent-name" style="font-size: 13px; font-weight: 500">Name</label>
+            <input id="agent-name" class="field" type="text" placeholder="e.g. Scout" value="{{name}}" onInput="{{setName}}" autocomplete="off">
+            <span style="font-size: 12px; color: #8d96b5">Shown on its avatar, in the sidebar and the team graph.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="agent-role" style="font-size: 13px; font-weight: 500">Role in a team</label>
+            <input id="agent-role" class="field" type="text" placeholder="e.g. Research and triage" autocomplete="off">
+            <span style="font-size: 12px; color: #8d96b5">One line other agents read when deciding who to hand off to.</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 13px; font-weight: 500">Glyph</span>
+          <div role="radiogroup" aria-label="Glyph" style="display: flex; gap: 8px; flex-wrap: wrap">
+            <sc-for list="{{glyphs}}" as="g" hint-placeholder-count="7">
+              <button type="button" role="radio" aria-checked="{{g.on}}" aria-label="{{g.id}}" class="glyph {{g.cls}}" style="--hue: {{hue}}" onClick="{{g.pick}}">
+                <x-import component-from-global-scope="AgentTeamsDS.Icon" name="{{g.id}}" size="{{eighteen}}"></x-import>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="agent-desc" style="font-size: 13px; font-weight: 500">Description</label>
+          <input id="agent-desc" class="field" type="text" placeholder="What this agent is for, in a sentence" autocomplete="off">
+        </div>
+      </section>
+
+      <!-- Model & effort -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; align-items: baseline; gap: 10px">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Model and effort</h2>
+          <span style="font-size: 12px; color: #8d96b5">Defaults for new sessions; the composer can override per message.</span>
+        </div>
+        <div role="radiogroup" aria-label="Model" style="display: flex; gap: 10px; flex-wrap: wrap">
+          <sc-for list="{{models}}" as="m" hint-placeholder-count="3">
+            <button type="button" role="radio" aria-checked="{{m.on}}" class="model {{m.cls}}" onClick="{{m.pick}}">
+              <span style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600">
+                <x-import component-from-global-scope="AgentTeamsDS.Icon" name="spark" size="{{fourteen}}"></x-import>
+                {{m.name}}
+              </span>
+              <span style="font-size: 12px; color: #8d96b5">{{m.blurb}}</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5">{{m.id}}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-end">
+          <div style="flex: 1 1 280px; min-width: 0">
+            <x-import component-from-global-scope="AgentTeamsDS.EffortSlider" value="{{effort}}" on-change="{{setEffort}}"></x-import>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 200px">
+            <label for="agent-budget" style="font-size: 13px; font-weight: 500">Context budget</label>
+            <div style="display: flex; align-items: center; gap: 12px">
+              <input id="agent-budget" class="field" type="text" value="200k tokens" style="flex: 1">
+              <x-import component-from-global-scope="AgentTeamsDS.RadialMeter" value="{{budgetUse}}" size="{{forty}}"></x-import>
+            </div>
+          </div>
+        </div>
+        <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; background: #7c9cff2e; border: 1px solid #3a4677; font-size: 12.5px; color: #c3d1ff">
+            <x-import component-from-global-scope="AgentTeamsDS.Icon" name="zap" size="{{fourteen}}"></x-import>
+            Max effort thinks longest and costs most. Good for planners and reviewers; heavy for chatty helpers.
+          </div>
+        </sc-if>
+      </section>
+
+      <!-- Instructions -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Instructions</h2>
+          <span style="font-size: 12px; color: #8d96b5">The system prompt. Markdown is fine.</span>
+          <span style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #5b6484">0 / 32k</span>
+        </div>
+        <label for="agent-prompt" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Instructions</label>
+        <textarea id="agent-prompt" class="field" placeholder="You are Scout. You research a codebase before anyone changes it: find the owning files, the tests that cover them, and the last three commits that touched them. Report, don't edit."></textarea>
+      </section>
+
+      <!-- Skills -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Skills</h2>
+          <span style="font-size: 12px; color: #8d96b5">Packaged instructions this agent can invoke.</span>
+          <div style="margin-left: auto">
+            <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="plus">Add skill</x-import>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent">code-review</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent">repo-map</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent">changelog-digest</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">+ 2 from team</x-import>
+        </div>
+      </section>
+
+      <!-- Connectors & MCP -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Connectors and MCP servers</h2>
+          <span style="font-size: 12px; color: #8d96b5">What it can reach. Off by default.</span>
+          <div style="margin-left: auto">
+            <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="plug">Add connector</x-import>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div class="conn">
+            <span style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #1b2340; color: #7c9cff"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="plug" size="{{fourteen}}"></x-import></span>
+            <span style="display: flex; flex-direction: column; min-width: 0; gap: 2px">
+              <strong style="font-size: 13px; font-weight: 600">GitHub</strong>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">mcp://github · 14 tools</span>
+            </span>
+            <span style="margin-left: auto"><x-import component-from-global-scope="AgentTeamsDS.Toggle" default-checked="{{yes}}"></x-import></span>
+          </div>
+          <div class="conn">
+            <span style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #1b2340; color: #5fd4e8"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="search" size="{{fourteen}}"></x-import></span>
+            <span style="display: flex; flex-direction: column; min-width: 0; gap: 2px">
+              <strong style="font-size: 13px; font-weight: 600">Web search</strong>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">built-in · 2 tools</span>
+            </span>
+            <span style="margin-left: auto"><x-import component-from-global-scope="AgentTeamsDS.Toggle" default-checked="{{yes}}"></x-import></span>
+          </div>
+          <div class="conn">
+            <span style="display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #1b2340; color: #c58cff"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="wrench" size="{{fourteen}}"></x-import></span>
+            <span style="display: flex; flex-direction: column; min-width: 0; gap: 2px">
+              <strong style="font-size: 13px; font-weight: 600">Postgres (staging)</strong>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8d96b5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">mcp://db-staging · read-only</span>
+            </span>
+            <span style="margin-left: auto"><x-import component-from-global-scope="AgentTeamsDS.Toggle"></x-import></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Permissions -->
+      <section class="{{permCls}}" style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: border-color .3s, box-shadow .3s">
+        <div style="display: flex; align-items: baseline; gap: 10px">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em">Permissions</h2>
+          <span style="font-size: 12px; color: #8d96b5">Which step kinds run without asking.</span>
+        </div>
+        <div role="group" aria-label="Allowed without asking" style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{tools}}" as="t" hint-placeholder-count="5">
+            <button type="button" aria-pressed="{{t.on}}" class="tool {{t.cls}}" style="--k: {{t.color}}" onClick="{{t.pick}}"><i aria-hidden="true"></i>{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid #252d48">
+          <x-import component-from-global-scope="AgentTeamsDS.Toggle" tone="danger" label="Yolo mode" help="Runs every tool without asking." checked="{{yolo}}" on-change="{{setYolo}}"></x-import>
+          <sc-if value="{{yolo}}" hint-placeholder-val="{{false}}">
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #ff7083">
+              <x-import component-from-global-scope="AgentTeamsDS.Icon" name="shield" size="{{fourteen}}"></x-import>
+              Edits, shell and connectors all run unattended.
+            </span>
+          </sc-if>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===== Preview column ===== -->
+    <aside style="flex: 1 1 340px; max-width: 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 92px">
+      <div class="preview-card {{previewCls}}" style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 24px 20px 20px; display: flex; flex-direction: column; gap: 18px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #8d96b5">Preview</span>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 8px 0 4px">
+          <span class="hero" style="--hue: {{hue}}" role="img" aria-label="{{displayName}} avatar">
+            <x-import component-from-global-scope="AgentTeamsDS.Icon" name="{{glyph}}" size="{{thirtyTwo}}"></x-import>
+          </span>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+            <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em">{{displayName}}</strong>
+            <span style="font-size: 12px; color: #8d96b5">Research and triage</span>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center">
+            <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent">{{modelName}}</x-import>
+            <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{effortTone}}">{{effortLabel}} effort</x-import>
+            <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{yoloTone}}">{{yoloLabel}}</x-import>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 14px; border-top: 1px solid #252d48">
+          <span style="font-size: 12px; color: #8d96b5">In the sidebar</span>
+          <x-import component-from-global-scope="AgentTeamsDS.SessionCard" title="Audit auth middleware" agent="{{displayName}}" agent-id="{{displayName}}" glyph="{{glyph}}" meta="main" time="0:38" state="busy"></x-import>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 12px; color: #8d96b5">In a thread</span>
+          <x-import component-from-global-scope="AgentTeamsDS.TurnCapsule" agent="{{displayName}}" agent-id="{{displayName}}" glyph="{{glyph}}" elapsed="1m 04s" steps="{{sampleSteps}}"></x-import>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 12px; color: #8d96b5">In the team graph</span>
+          <div style="display: flex; justify-content: center; gap: 56px; padding: 8px 0 22px">
+            <x-import component-from-global-scope="AgentTeamsDS.AgentNode" name="Orchestrator" hue="{{one}}" glyph="bot"></x-import>
+            <x-import component-from-global-scope="AgentTeamsDS.AgentNode" name="{{displayName}}" id="{{displayName}}" glyph="{{glyph}}" state="live"></x-import>
+          </div>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 12px; color: #5b6484; line-height: 1.5">The colour comes from a stable hash of the name, so the same agent looks the same everywhere. Rename it and watch the hue change.</p>
+    </aside>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1260}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'Scout', glyph: 'search', model: 1, effort: 2, yolo: false, tools: { read: true, bash: true, edit: false, ask: true, subagent: true } };
+  }
+  renderVals() {
+    const D = window.AgentTeamsDS || {};
+    const s = this.state;
+    const name = s.name.trim();
+    const displayName = name || 'Unnamed agent';
+    const hueIdx = D.hueIndex ? D.hueIndex(displayName) : 1;
+    const hue = 'var(--agent-' + hueIdx + ')';
+    const levels = D.EFFORT || ['low', 'medium', 'high', 'xhigh', 'max'];
+    const isMax = s.effort === levels.length - 1;
+    const modelList = [
+      { id: 'claude-opus-5-5', name: 'Opus 5.5', blurb: 'Deepest reasoning. Planners, reviewers.' },
+      { id: 'claude-sonnet-5-5', name: 'Sonnet 5.5', blurb: 'Fast and capable. Most agents.' },
+      { id: 'claude-haiku-5-5', name: 'Haiku 5.5', blurb: 'Cheapest. Routers and triage.' }
+    ];
+    const glyphIds = ['search', 'wrench', 'shield', 'compass', 'bot', 'zap', 'plug'];
+    const toolDefs = [
+      { id: 'read', label: 'read', color: 'var(--kind-read)' },
+      { id: 'bash', label: 'bash', color: 'var(--kind-bash)' },
+      { id: 'edit', label: 'edit', color: 'var(--kind-edit)' },
+      { id: 'ask', label: 'ask', color: 'var(--kind-ask)' },
+      { id: 'subagent', label: 'subagent', color: 'var(--kind-subagent)' }
+    ];
+    return {
+      name: s.name,
+      displayName,
+      hue,
+      glyph: s.glyph,
+      effort: s.effort,
+      isMax,
+      yolo: s.yolo,
+      budgetUse: 0.34,
+      modelName: modelList[s.model].name,
+      effortLabel: levels[s.effort],
+      effortTone: isMax ? 'accent' : 'neutral',
+      yoloLabel: s.yolo ? 'Yolo on' : 'Asks first',
+      yoloTone: s.yolo ? 'err' : 'ok',
+      previewCls: s.yolo ? 'yolo' : (isMax ? 'max' : ''),
+      permCls: s.yolo ? 'at-card--danger' : '',
+      yes: true, one: 1, fourteen: 14, eighteen: 18, forty: 40, thirtyTwo: 32,
+      setName: (e) => this.setState({ name: e.target.value }),
+      setEffort: (n) => this.setState({ effort: n }),
+      setYolo: (v) => this.setState({ yolo: v }),
+      glyphs: glyphIds.map((id) => ({ id, on: s.glyph === id, cls: s.glyph === id ? 'on' : '', pick: () => this.setState({ glyph: id }) })),
+      models: modelList.map((m, i) => ({ ...m, on: s.model === i, cls: (s.model === i ? 'on' : '') + (s.model === i && isMax ? ' max' : ''), pick: () => this.setState({ model: i }) })),
+      tools: toolDefs.map((t) => ({ ...t, on: !!s.tools[t.id], cls: s.tools[t.id] ? 'on' : '', pick: () => this.setState({ tools: { ...s.tools, [t.id]: !s.tools[t.id] } }) })),
+      sampleSteps: [
+        { kind: 'think', label: 'Planned the audit', time: '3s' },
+        { kind: 'read', label: 'Read', detail: 'src/auth/middleware.ts', time: '1s' },
+        { kind: 'bash', label: 'Ran', detail: 'git log -3 -- src/auth', time: '2s' },
+        { kind: 'said', detail: 'Two of the three recent commits touched token refresh; flagging for review.' },
+        { kind: 'subagent', label: 'Handed off to Reviewer', detail: 'token refresh regression check', time: '58s' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+/* Agent Teams — generated from tokens.json */
+:root, [data-theme="dark"] {
+  --bg-000:#0d1221;--bg-100:#0f1527;--surface-100:#151b2f;--surface-200:#1b2340;--surface-300:#2a3566;
+  --line-100:#252d48;--line-200:#36406a;--line-300:#3a4677;
+  --ink-100:#e7eaf4;--ink-200:#c9cfe8;--ink-300:#8d96b5;--ink-400:#5b6484;--ink-on-accent:#0d1221;
+  --accent:#7c9cff;--accent-bright:#9db4ff;--accent-soft:#c3d1ff;--accent-tint:#7c9cff2e;
+  --kind-bash:#7c9cff;--kind-read:#9aa6cc;--kind-edit:#4fd1a0;--kind-ask:#f0b64f;--kind-subagent:#c58cff;--kind-think:#5fd4e8;--kind-said:#c9cfe8;
+  --ok:#4fd1a0;--ok-tint:#4fd1a024;--warn:#f0b64f;--warn-tint:#f0b64f24;--err:#ff7083;--err-tint:#ff708324;--danger:#ff7083;
+  --agent-1:#7c9cff;--agent-2:#c58cff;--agent-3:#5fd4e8;--agent-4:#4fd1a0;--agent-5:#f0b64f;--agent-6:#f9a8d4;--agent-7:#5eead4;--agent-8:#b4b8ff;
+  --glow-accent:#7c9cff73;--glow-ok:#4fd1a059;--glow-warn:#f0b64f59;--glow-err:#ff708359;--glow-subagent:#c58cff66;
+  --edge:#36406a;--edge-active:#9db4ff;
+  --shadow-raised:0 8px 30px rgba(0, 0, 0, 0.35);
+  --focus-ring:0 0 0 2px #0d1221, 0 0 0 4px #7c9cff;
+  --glow-live:0 0 0 1px rgba(124, 156, 255, 0.55), 0 0 18px rgba(124, 156, 255, 0.35);
+  --glow-done:0 0 0 1px rgba(79, 209, 160, 0.5), 0 0 16px rgba(79, 209, 160, 0.3);
+  --glow-attention:0 0 0 4px rgba(240, 182, 79, 0.14), 0 0 22px -4px rgba(240, 182, 79, 0.35);
+  --glow-danger:0 0 0 1px rgba(255, 112, 131, 0.6), 0 0 18px rgba(255, 112, 131, 0.4);
+  --glow-max:0 0 0 1px #c3d1ff, 0 0 24px rgba(124, 156, 255, 0.7), 0 0 64px rgba(197, 140, 255, 0.45);
+}
+:root {
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-12:48px;
+  --radius-xs:2px;--radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:14px;--radius-pill:999px;
+  --font-sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}

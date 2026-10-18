@@ -1,0 +1,19 @@
+<!-- @dsCard group="Agents" height=200 width=640 -->
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>body{margin:0;background:var(--bg-000);padding:16px;box-sizing:border-box}#root{display:flex;flex-wrap:wrap;gap:16px;align-items:center}</style></head>
+<body><div id="root" class="at-root"></div>
+<script>
+(function(){var D=window.AgentTeamsDS,h=React.createElement;
+function App(){return h('div',{style:{position:'relative',width:600,height:170}},
+ h('svg',{width:600,height:170,style:{position:'absolute',inset:0}},
+  h('path',{className:'at-edge',d:'M88 60 C 200 60, 220 60, 300 60'}),
+  h('path',{className:'at-edge at-edge--active',d:'M328 60 C 420 60, 440 60, 512 60'}),
+  h('path',{className:'at-edge',d:'M300 60 C 240 120, 200 130, 140 130'})),
+ h('div',{style:{position:'absolute',left:32,top:32}},h(D.AgentNode,{name:'Orchestrator',glyph:'bot',hue:1,state:'live'})),
+ h('div',{style:{position:'absolute',left:272,top:32}},h(D.AgentNode,{name:'Builder',glyph:'wrench',hue:4,state:'selected'})),
+ h('div',{style:{position:'absolute',left:512,top:32}},h(D.AgentNode,{name:'Reviewer',glyph:'shield',hue:2,state:'live'})),
+ h('div',{style:{position:'absolute',left:112,top:102}},h(D.AgentNode,{name:'Scout',glyph:'search',hue:3,state:'failed'})));}
+ReactDOM.createRoot(document.getElementById('root')).render(App());})();
+</script></body></html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Start a session</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.seg{display:inline-flex;padding:2px;border-radius:8px;background:#0f1527;border:1px solid #252d48}
+.seg button{all:unset;cursor:pointer;height:28px;padding:0 12px;border-radius:6px;font:500 12.5px/1 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5;transition:background .15s,color .15s}
+.seg button:hover{color:#e7eaf4}
+.seg button:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.seg button.on{background:#1b2340;color:#e7eaf4}
+.pick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:12px;background:#151b2f;border:1px solid #252d48;transition:border-color .2s,box-shadow .25s,background .2s,transform .2s;min-width:0}
+.pick:hover{border-color:#36406a;transform:translateY(-1px)}
+.pick:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.pick.on{border-color:#3a4677;background:color-mix(in srgb,#7c9cff2e,#151b2f);box-shadow:0 0 0 1px color-mix(in srgb,var(--hue) 55%,transparent),0 0 18px color-mix(in srgb,var(--hue) 35%,transparent)}
+.pick h3{margin:0;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:#e7eaf4}
+.pick p{margin:0;font-size:12px;line-height:1.45;color:#8d96b5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pick .meta{display:flex;align-items:center;gap:8px;font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#5b6484;font-variant-numeric:tabular-nums}
+.chk{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:40px;padding:6px 10px;border-radius:8px;border:1px solid transparent;transition:background .15s,border-color .15s}
+.chk:hover{background:#1b2340}
+.chk:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.chk i{width:16px;height:16px;border-radius:4px;border:1.5px solid #5b6484;display:grid;place-items:center;flex:none;transition:background .15s,border-color .15s,box-shadow .2s}
+.chk.on i{background:#7c9cff;border-color:#7c9cff;color:#0d1221;box-shadow:0 0 10px rgba(124,156,255,.45)}
+.chk b{font-size:13px;font-weight:500;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chk small{font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#8d96b5}
+.field{all:unset;box-sizing:border-box;display:block;width:100%;height:36px;padding:0 10px 0 30px;border-radius:8px;background:#0f1527;border:1px solid #252d48;color:#e7eaf4;font:400 13px/1 "IBM Plex Sans",system-ui,sans-serif}
+.field::placeholder{color:#5b6484}
+.field:focus{border-color:#3a4677;box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.prev{position:sticky;top:92px;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:12px;background:#151b2f;border:1px solid #252d48;transition:border-color .3s,box-shadow .3s}
+.prev.ready{border-color:#7c9cff73;box-shadow:0 0 0 1px rgba(124,156,255,.55),0 0 18px rgba(124,156,255,.35)}
+.prev.yolo{border-color:#ff7083;box-shadow:0 0 0 1px rgba(255,112,131,.6),0 0 18px rgba(255,112,131,.4)}
+.kv{display:flex;align-items:center;gap:8px;font-size:12.5px;min-height:28px}
+.kv span:first-child{color:#8d96b5;width:96px;flex:none}
+.kv .v{color:#e7eaf4;min-width:0;flex:1;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.budget{display:flex;flex-direction:column;gap:6px}
+.bar{height:6px;border-radius:3px;background:#2a3566;overflow:hidden;display:flex}
+.bar i{height:100%;display:block}
+.start{transition:box-shadow .4s}
+.start.glow .at-btn--primary{box-shadow:0 0 0 1px rgba(124,156,255,.55),0 0 18px rgba(124,156,255,.35),0 0 44px rgba(197,140,255,.3)}
+@media (max-width:980px){.hide-sm{display:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+    <a href="Chat.dc.html" aria-label="Back to sessions" style="display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #8d96b5; border: 1px solid #252d48; background: #151b2f">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <span style="font-size: 11.5px; color: #8d96b5">Sessions / New</span>
+      <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2">Start a session</strong>
+    </div>
+    <div class="seg" role="group" aria-label="Who">
+      <button type="button" class="{{modeAgent}}" onClick="{{setAgent}}">One agent</button>
+      <button type="button" class="{{modeTeam}}" onClick="{{setTeam}}">A team</button>
+    </div>
+    <div style="margin-left: auto; display: flex; gap: 8px; align-items: center">
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost">Save as template</x-import>
+      <span class="start {{startCls}}" style="display: inline-flex; border-radius: 8px"><x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="send" disabled="{{notReady}}">Start session</x-import></span>
+    </div>
+  </header>
+
+  <main style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; width: 100%; max-width: 1360px; margin: 0 auto; box-sizing: border-box; padding: 24px 24px 48px">
+
+    <!-- ===== left: choices ===== -->
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+      <!-- 1 · who -->
+      <section style="display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em"><span style="color: #7c9cff; font-family: 'JetBrains Mono', monospace; margin-right: 6px">1</span>{{whoTitle}}</h2>
+          <span style="font-size: 12px; color: #8d96b5">{{whoHint}}</span>
+          <div style="margin-left: auto; position: relative; width: 220px">
+            <span style="position: absolute; left: 9px; top: 10px; color: #5b6484"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="search" size="{{fourteen}}"></x-import></span>
+            <label for="ln-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</label>
+            <input id="ln-search" class="field" type="search" placeholder="Search agents and teams">
+          </div>
+        </div>
+        <sc-if value="{{isAgent}}" hint-placeholder-val="{{true}}">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px">
+            <sc-for list="{{agents}}" as="a" hint-placeholder-count="6">
+              <button type="button" class="pick {{a.cls}}" style="--hue: {{a.hue}}" aria-pressed="{{a.on}}" onClick="{{a.pick}}">
+                <span style="display: flex; align-items: center; gap: 10px">
+                  <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{a.name}}" id="{{a.name}}" glyph="{{a.glyph}}" size="{{thirtyTwo}}" filled="{{a.on}}" status="{{a.status}}"></x-import>
+                  <span style="min-width: 0"><h3>{{a.name}}</h3><span style="font-size: 11.5px; color: #8d96b5">{{a.role}}</span></span>
+                </span>
+                <p>{{a.desc}}</p>
+                <span class="meta"><x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">{{a.model}}</x-import><span>{{a.last}}</span></span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{isTeam}}" hint-placeholder-val="{{false}}">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px">
+            <sc-for list="{{teams}}" as="t" hint-placeholder-count="3">
+              <button type="button" class="pick {{t.cls}}" style="--hue: var(--accent)" aria-pressed="{{t.on}}" onClick="{{t.pick}}">
+                <span style="display: flex; align-items: center; gap: 10px"><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar.Stack" agents="{{t.members}}" size="{{twentySix}}"></x-import><span style="min-width: 0"><h3>{{t.name}}</h3><span style="font-size: 11.5px; color: #8d96b5">{{t.size}} agents · led by {{t.lead}}</span></span></span>
+                <p>{{t.desc}}</p>
+                <span class="meta"><span>{{t.last}}</span></span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </section>
+
+      <!-- 2 · where -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em"><span style="color: #7c9cff; font-family: 'JetBrains Mono', monospace; margin-right: 6px">2</span>Where it works</h2>
+          <span style="font-size: 12px; color: #8d96b5">Repository and branch. A worktree keeps its edits off your checkout.</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent" mono="{{yes}}">meridian/exposure</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">main</x-import>
+          <span style="color: #5b6484">→</span>
+          <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">{{branchFull}}</x-import>
+          <span style="margin-left: auto"><x-import component-from-global-scope="AgentTeamsDS.Toggle" label="New worktree" default-checked="{{yes}}"></x-import></span>
+        </div>
+      </section>
+
+      <!-- 3 · context -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em"><span style="color: #7c9cff; font-family: 'JetBrains Mono', monospace; margin-right: 6px">3</span>Bring context</h2>
+          <span style="font-size: 12px; color: #8d96b5">From the team space. Pinned entries come along regardless.</span>
+          <a href="Space.dc.html" style="margin-left: auto; font-size: 12px">Open team space</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 12px">
+          <sc-for list="{{ctx}}" as="c" hint-placeholder-count="6">
+            <button type="button" class="chk {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}" disabled="{{c.pinned}}">
+              <i aria-hidden="true"><sc-if value="{{c.on}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="check" size="{{ten}}" stroke-width="{{four}}"></x-import></sc-if></i>
+              <x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="{{c.kind}}" pop="{{no}}"></x-import>
+              <b>{{c.title}}</b>
+              <sc-if value="{{c.pinned}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="warn">pinned</x-import></sc-if>
+              <small>{{c.tokens}}</small>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+
+      <!-- 4 · first message -->
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -0.01em"><span style="color: #7c9cff; font-family: 'JetBrains Mono', monospace; margin-right: 6px">4</span>First message</h2>
+          <span style="font-size: 12px; color: #8d96b5">Optional — you can also start empty and type in the thread. Model, effort and Yolo default from the agent.</span>
+        </div>
+        <div style="position: relative">
+          <x-import component-from-global-scope="AgentTeamsDS.Composer" agent="{{who.name}}" model="{{who.model}}" effort="{{who.effortIdx}}" context="{{startCtx}}" placeholder="Tell {{who.name}} what to do, or paste a ticket link…"></x-import>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <span style="font-size: 12px; color: #8d96b5; align-self: center">Quick starts:</span>
+          <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm">Review PR #5404</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm">Continue LEIB-117</x-import>
+          <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm">Weekly digest</x-import>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== right: what the agent will see ===== -->
+    <aside style="flex: 1 1 320px; max-width: 380px; min-width: 0">
+      <div class="prev {{prevCls}}">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{who.name}}" id="{{who.name}}" glyph="{{who.glyph}}" size="{{forty}}" filled="{{yes}}"></x-import>
+          <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+            <strong style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em">{{who.name}}</strong>
+            <span style="font-size: 12px; color: #8d96b5">{{who.role}}</span>
+          </div>
+        </div>
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">What it starts with</span>
+        <div class="kv"><span>Model</span><span class="v"><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent">{{who.model}}</x-import><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{who.effortTone}}">{{who.effort}} effort</x-import></span></div>
+        <div class="kv"><span>Permissions</span><span class="v"><sc-for list="{{who.perms}}" as="p" hint-placeholder-count="4"><x-import component-from-global-scope="AgentTeamsDS.Chip" kind="{{p}}">{{p}}</x-import></sc-for></span></div>
+        <div class="kv"><span>Yolo</span><span class="v"><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{who.yoloTone}}">{{who.yoloLabel}}</x-import></span></div>
+        <div class="kv"><span>Connectors</span><span class="v"><sc-for list="{{who.conns}}" as="c" hint-placeholder-count="3"><x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">{{c}}</x-import></sc-for></span></div>
+        <div class="kv"><span>Skills</span><span class="v"><sc-for list="{{who.skills}}" as="k" hint-placeholder-count="3"><x-import component-from-global-scope="AgentTeamsDS.Chip">{{k}}</x-import></sc-for></span></div>
+        <sc-if value="{{isTeam}}" hint-placeholder-val="{{false}}">
+          <div class="kv"><span>Team</span><span class="v"><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar.Stack" agents="{{teamMembers}}" size="{{twentySix}}"></x-import><span style="font-size: 12px; color: #8d96b5">{{who.name}} orchestrates; others join on handoff</span></span></div>
+        </sc-if>
+
+        <div class="budget" style="padding-top: 12px; border-top: 1px solid #252d48">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <x-import component-from-global-scope="AgentTeamsDS.RadialMeter" value="{{startCtx}}" size="{{fiftySix}}" label="at start"></x-import>
+            <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0">
+              <strong style="font: 500 14px/1 'JetBrains Mono', monospace">{{startK}}k <span style="color: #8d96b5; font-weight: 400">of 200k used before the first turn</span></strong>
+              <div class="bar" aria-hidden="true"><i style="width: {{wSys}}; background: #7c9cff"></i><i style="width: {{wPin}}; background: #f0b64f"></i><i style="width: {{wCtx}}; background: #5fd4e8"></i></div>
+              <span style="font-size: 11px; color: #8d96b5"><span style="color: #7c9cff">■</span> instructions {{kSys}}k · <span style="color: #f0b64f">■</span> pinned {{kPin}}k · <span style="color: #5fd4e8">■</span> chosen {{kCtx}}k</span>
+            </div>
+          </div>
+          <sc-if value="{{heavy}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #f0b64f">That's a lot to start with — the agent will compact sooner. Consider dropping an artifact.</span></sc-if>
+        </div>
+
+        <span class="start {{startCls}}" style="display: flex; border-radius: 8px"><x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="send" disabled="{{notReady}}">{{startLabel}}</x-import></span>
+        <span style="font-size: 11.5px; color: #5b6484; text-align: center">Opens the thread in a new worktree on <span style="font-family: 'JetBrains Mono', monospace">{{branchFull}}</span>.</span>
+      </div>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.agents = {
+      Builder: { glyph: 'wrench', role: 'Edits code, runs tests', desc: 'Makes the change, keeps the suite green, opens the PR. Asks before pushing.', model: 'Opus 5.5', effort: 'high', effortIdx: 2, perms: ['read', 'edit', 'bash', 'subagent'], yolo: false, conns: ['github', 'filesystem'], skills: ['code-review', 'pr-description', 'deploy-checklist'], last: 'used 2m ago', status: 'live', sys: 6 },
+      Scout: { glyph: 'search', role: 'Research and triage', desc: 'Maps a codebase before anyone changes it: owners, tests, recent commits. Never edits.', model: 'Sonnet 5.5', effort: 'medium', effortIdx: 1, perms: ['read', 'bash'], yolo: true, conns: ['github', 'web', 'filesystem'], skills: ['repo-map', 'changelog-digest'], last: 'used 40m ago', status: 'done', sys: 3 },
+      Reviewer: { glyph: 'shield', role: 'Reviews diffs for regressions', desc: 'Correctness first, style never. Hands fixes back to Builder with one-line briefs.', model: 'Opus 5.5', effort: 'max', effortIdx: 4, perms: ['read', 'bash', 'think'], yolo: false, conns: ['github'], skills: ['code-review'], last: 'used 11m ago', status: 'live', sys: 5 },
+      Planner: { glyph: 'compass', role: 'Breaks tickets into steps', desc: 'Writes the plan to the team space, flags decisions that need a human, hands out work.', model: 'Opus 5.5', effort: 'xhigh', effortIdx: 3, perms: ['read', 'ask', 'subagent'], yolo: false, conns: ['linear', 'postgres'], skills: ['migration-plan'], last: 'used 1h ago', status: 'ask', sys: 4 },
+      Orchestrator: { glyph: 'bot', role: 'Routes work, owns the plan', desc: 'Runs a team: assigns cards, watches the board, reports back to you.', model: 'Opus 5.5', effort: 'high', effortIdx: 2, perms: ['read', 'ask', 'subagent'], yolo: false, conns: ['github', 'linear', 'slack'], skills: ['incident-triage'], last: 'used 3m ago', status: 'live', sys: 7 },
+      Deployer: { glyph: 'plug', role: 'Ships and watches canaries', desc: 'Runs the deploy checklist, watches error rates for 15 minutes, rolls back on breach.', model: 'Sonnet 5.5', effort: 'medium', effortIdx: 1, perms: ['read', 'bash'], yolo: false, conns: ['github', 'sentry'], skills: ['deploy-checklist'], last: 'used 1d ago', status: '', sys: 4 }
+    };
+    this.teams = {
+      'Release crew': { lead: 'Orchestrator', members: ['Orchestrator', 'Planner', 'Builder', 'Scout', 'Reviewer'], desc: 'Ticket in, reviewed PR out. Scout maps, Planner plans, Builder builds, Reviewer reviews.', last: 'LEIB-117 · running now' },
+      'On-call pair': { lead: 'Orchestrator', members: ['Orchestrator', 'Scout', 'Deployer'], desc: 'Triage an alert, find the cause, roll back or hot-fix.', last: 'last run 3d ago' },
+      'Docs sweep': { lead: 'Scout', members: ['Scout', 'Builder'], desc: 'Weekly: changelog digest plus doc fixes for anything that shipped.', last: 'last run 6d ago' }
+    };
+    this.ctxItems = [
+      { id: 'repo', title: 'Repo conventions', kind: 'ask', tokens: 0.6, pinned: true },
+      { id: 'plan', title: 'Plan · LEIB-117 static export', kind: 'think', tokens: 1.2, on: true },
+      { id: 'owners', title: 'Owning files map', kind: 'edit', tokens: 0.9, on: true },
+      { id: 'sync', title: 'Sync after the failed test run', kind: 'subagent', tokens: 0.4 },
+      { id: 'glossary', title: 'Domain glossary', kind: 'ask', tokens: 0.5 },
+      { id: 'board', title: 'dist/board.html (artifact)', kind: 'edit', tokens: 38 }
+    ];
+    this.state = { mode: 'agent', agent: 'Builder', team: 'Release crew', ctx: { plan: true, owners: true } };
+  }
+  renderVals() {
+    const s = this.state; const isTeam = s.mode === 'team';
+    const leadName = isTeam ? this.teams[s.team].lead : s.agent;
+    const a = this.agents[leadName];
+    const av = (n) => ({ name: n, id: n, glyph: this.agents[n].glyph });
+    const ctx = this.ctxItems.map((c) => { const on = c.pinned || !!s.ctx[c.id]; return { ...c, on, cls: on ? 'on' : '', tokens: (c.tokens >= 10 ? Math.round(c.tokens) : c.tokens.toFixed(1)) + 'k', pick: () => this.setState({ ctx: { ...s.ctx, [c.id]: !s.ctx[c.id] } }) }; });
+    const kPin = this.ctxItems.filter((c) => c.pinned).reduce((n, c) => n + c.tokens, 0);
+    const kCtx = this.ctxItems.filter((c) => !c.pinned && s.ctx[c.id]).reduce((n, c) => n + c.tokens, 0);
+    const kSys = a.sys + (isTeam ? 2 : 0);
+    const total = kSys + kPin + kCtx; const startCtx = total / 200;
+    const pct = (k) => (k / 200 * 100) + '%';
+    const branch = (isTeam ? s.team : s.agent).toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + 'leib-117';
+    return {
+      yes: true, no: false, four: 4, ten: 10, fourteen: 14, twentySix: 26, thirtyTwo: 32, forty: 40, fiftySix: 56,
+      isAgent: !isTeam, isTeam, modeAgent: isTeam ? '' : 'on', modeTeam: isTeam ? 'on' : '',
+      setAgent: () => this.setState({ mode: 'agent' }), setTeam: () => this.setState({ mode: 'team' }),
+      whoTitle: isTeam ? 'Pick a team' : 'Pick an agent', whoHint: isTeam ? 'the lead orchestrates; the rest join on handoff' : 'colour and glyph are the agent’s own; the ring shows what it’s doing now',
+      agents: Object.keys(this.agents).map((n) => { const x = this.agents[n]; const on = !isTeam && n === s.agent; return { name: n, ...x, hue: 'var(--agent-' + (window.AgentTeamsDS ? window.AgentTeamsDS.hueIndex(n) : 1) + ')', on, cls: on ? 'on' : '', pick: () => this.setState({ agent: n }) }; }),
+      teams: Object.keys(this.teams).map((n) => { const t = this.teams[n]; const on = isTeam && n === s.team; return { name: n, ...t, size: t.members.length, members: t.members.map(av), on, cls: on ? 'on' : '', pick: () => this.setState({ team: n }) }; }),
+      teamMembers: isTeam ? this.teams[s.team].members.map(av) : [],
+      ctx, branch, branchFull: 'claude/' + branch,
+      who: { name: leadName, ...a, effortTone: a.effort === 'max' ? 'accent' : 'neutral', yoloLabel: a.yolo ? 'On — runs without asking' : 'Off — asks first', yoloTone: a.yolo ? 'err' : 'ok' },
+      startCtx, startK: Math.round(total), kSys, kPin: kPin.toFixed(1), kCtx: kCtx >= 10 ? Math.round(kCtx) : kCtx.toFixed(1), wSys: pct(kSys), wPin: pct(kPin), wCtx: pct(kCtx), heavy: total > 30,
+      prevCls: a.yolo ? 'yolo' : 'ready', startCls: a.effort === 'max' ? 'glow' : '', notReady: false,
+      startLabel: isTeam ? 'Start with ' + s.team : 'Start with ' + s.agent
+    };
+  }
+}
+</script>
+</body>
+</html>

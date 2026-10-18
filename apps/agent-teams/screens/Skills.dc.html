@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Skills editor</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.field{all:unset;box-sizing:border-box;display:block;width:100%;height:40px;padding:0 12px;border-radius:8px;background:#0f1527;border:1px solid #252d48;color:#e7eaf4;font:400 14px/1.4 "IBM Plex Sans",system-ui,sans-serif;transition:border-color .12s,box-shadow .12s}
+.field::placeholder{color:#5b6484}
+.field:hover{border-color:#36406a}
+.field:focus{border-color:#3a4677;box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.field.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px}
+textarea.field{height:auto;padding:12px 14px;resize:vertical;line-height:1.6;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;min-height:300px;tab-size:2}
+.srch{all:unset;box-sizing:border-box;display:block;width:100%;height:32px;padding:0 10px 0 30px;border-radius:8px;background:#151b2f;border:1px solid #252d48;color:#e7eaf4;font:400 13px/1 "IBM Plex Sans",system-ui,sans-serif}
+.srch::placeholder{color:#5b6484}
+.srch:focus{border-color:#3a4677;box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.row{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:8px 10px;border-radius:8px;border:1px solid transparent;transition:background .15s,border-color .15s}
+.row:hover{background:#1b2340}
+.row:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.row.on{background:#7c9cff2e;border-color:#3a4677}
+.row .ic{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#1b2340;color:var(--c,#8d96b5);flex:none}
+.row.on .ic{background:var(--c,#7c9cff);color:#0d1221;box-shadow:0 0 12px color-mix(in srgb,var(--c,#7c9cff) 45%,transparent)}
+.row b{font-size:13px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.row small{font:400 11px/1.3 "JetBrains Mono",ui-monospace,monospace;color:#8d96b5;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;gap:2px;border-bottom:1px solid #252d48}
+.tabs button{all:unset;cursor:pointer;height:36px;padding:0 12px;font:500 13px/1 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s,border-color .12s}
+.tabs button:hover{color:#e7eaf4}
+.tabs button:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff;border-radius:6px}
+.tabs button.on{color:#e7eaf4;border-bottom-color:#7c9cff;text-shadow:0 0 12px rgba(124,156,255,.45)}
+.pill{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:#1b2340;color:#8d96b5;font:500 12px/1 "IBM Plex Sans",system-ui,sans-serif;border:1px solid transparent;transition:color .12s,border-color .12s,background .2s}
+.pill:hover{border-color:#36406a;color:#e7eaf4}
+.pill:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.pill.on{color:#e7eaf4;background:#7c9cff2e;border-color:#3a4677}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--k)}
+.res{display:flex;align-items:center;gap:10px;min-height:40px;padding:6px 10px;border-radius:8px;background:#0f1527;border:1px solid #252d48}
+.hit{background:#7c9cff2e;color:#c3d1ff;border-radius:3px;padding:0 2px;box-shadow:0 0 0 1px rgba(124,156,255,.35)}
+.ver{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #1b2340;font-size:12px}
+.ver:last-child{border-bottom:0}
+.ver time{font:400 11px/1.4 "JetBrains Mono",ui-monospace,monospace;color:#5b6484;flex:none;width:64px}
+.drop{border:1px dashed #36406a;border-radius:8px;padding:14px;text-align:center;color:#8d96b5;font-size:12.5px;transition:border-color .2s,box-shadow .2s}
+.drop:hover{border-color:#7c9cff;box-shadow:0 0 0 1px rgba(124,156,255,.35),0 0 18px rgba(124,156,255,.2)}
+@media (max-width:980px){.hide-sm{display:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+    <a href="Chat.dc.html" aria-label="Back" style="display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #8d96b5; border: 1px solid #252d48; background: #151b2f">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <span style="font-size: 11.5px; color: #8d96b5">Skills / {{sk.slug}}</span>
+      <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2">{{sk.name}}</strong>
+    </div>
+    <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">v{{sk.version}}</x-import>
+    <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{sk.tone}}">{{sk.state}}</x-import>
+    <div style="margin-left: auto; display: flex; gap: 8px; align-items: center">
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" icon="zap">Dry run</x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="check">Publish v{{sk.next}}</x-import>
+    </div>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: stretch; min-height: 0">
+
+    <!-- ===== Library ===== -->
+    <nav aria-label="Skills" style="flex: 1 1 260px; max-width: 290px; min-width: 0; background: #0f1527; border-right: 1px solid #252d48; display: flex; flex-direction: column; gap: 12px; padding: 16px 12px 20px; box-sizing: border-box">
+      <div style="display: flex; align-items: center; gap: 8px">
+        <div style="position: relative; flex: 1">
+          <span style="position: absolute; left: 9px; top: 8px; color: #5b6484"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="search" size="{{fourteen}}"></x-import></span>
+          <label for="skill-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search skills</label>
+          <input id="skill-search" class="srch" type="search" placeholder="Search skills">
+        </div>
+        <x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" size="sm" icon="plus" aria-label="New skill"></x-import>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484; padding: 0 4px">Mine · 4</span>
+        <sc-for list="{{mine}}" as="s" hint-placeholder-count="4">
+          <button type="button" class="row {{s.cls}}" style="--c: {{s.color}}" aria-pressed="{{s.on}}" onClick="{{s.pick}}">
+            <span class="ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="{{s.icon}}" size="{{fourteen}}"></x-import></span>
+            <span style="min-width: 0; flex: 1"><b>{{s.name}}</b><small>{{s.slug}} · {{s.uses}}</small></span>
+            <sc-if value="{{s.draft}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="ask" pop="{{no}}" label="Draft"></x-import></sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484; padding: 0 4px">From team · 3</span>
+        <sc-for list="{{team}}" as="s" hint-placeholder-count="3">
+          <button type="button" class="row {{s.cls}}" style="--c: {{s.color}}" aria-pressed="{{s.on}}" onClick="{{s.pick}}">
+            <span class="ic"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="{{s.icon}}" size="{{fourteen}}"></x-import></span>
+            <span style="min-width: 0; flex: 1"><b>{{s.name}}</b><small>{{s.slug}} · {{s.uses}}</small></span>
+          </button>
+        </sc-for>
+      </div>
+      <div class="drop" style="margin-top: auto">Drop a <span style="font-family: 'JetBrains Mono', monospace; color: #c9cfe8">SKILL.md</span> folder here to import</div>
+    </nav>
+
+    <!-- ===== Editor ===== -->
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 20px 24px 32px; box-sizing: border-box">
+
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="sk-name" style="font-size: 13px; font-weight: 500">Name</label>
+          <input id="sk-name" class="field" type="text" value="{{sk.name}}" onInput="{{setName}}" autocomplete="off">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="sk-slug" style="font-size: 13px; font-weight: 500">Slug</label>
+          <input id="sk-slug" class="field mono" type="text" value="{{sk.slug}}" readonly>
+          <span style="font-size: 12px; color: #8d96b5">Agents invoke it as <span style="font-family: 'JetBrains Mono', monospace">/{{sk.slug}}</span>. Derived from the name.</span>
+        </div>
+        <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px">
+          <label for="sk-desc" style="font-size: 13px; font-weight: 500">When to use <span style="font-weight: 400; color: #8d96b5">— the trigger. Agents read this, not the body, to decide.</span></label>
+          <input id="sk-desc" class="field" type="text" value="{{sk.desc}}" onInput="{{setDesc}}" autocomplete="off">
+        </div>
+      </section>
+
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 4px 20px 0; flex-wrap: wrap">
+          <div class="tabs" style="flex: 1; min-width: 0">
+            <button type="button" class="{{tabInstr}}" onClick="{{goInstr}}">Instructions</button>
+            <button type="button" class="{{tabRes}}" onClick="{{goRes}}">Resources <span style="color: #5b6484">· 3</span></button>
+            <button type="button" class="{{tabPerm}}" onClick="{{goPerm}}">Permissions</button>
+            <button type="button" class="{{tabArgs}}" onClick="{{goArgs}}">Arguments <span style="color: #5b6484">· 2</span></button>
+          </div>
+          <span class="hide-sm" style="font: 400 11px/1 'JetBrains Mono', monospace; color: #5b6484">{{sk.words}} words · ~{{sk.tokens}} tokens</span>
+        </div>
+
+        <sc-if value="{{isInstr}}" hint-placeholder-val="{{true}}">
+          <div style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 10px">
+            <label for="sk-body" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Instructions</label>
+            <textarea id="sk-body" class="field" spellcheck="false" value="{{sk.body}}" onInput="{{setBody}}"></textarea>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 12px; color: #8d96b5">
+              Markdown. Keep it under 2k tokens — long skills are read less carefully.
+              <span style="margin-left: auto; display: inline-flex; gap: 6px">
+                <x-import component-from-global-scope="AgentTeamsDS.Chip" mono="{{yes}}">{{argsHint}}</x-import>
+              </span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isRes}}" hint-placeholder-val="{{false}}">
+          <div style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 8px">
+            <div class="res"><span style="color: #9aa6cc"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="file" size="{{fourteen}}"></x-import></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; flex: 1">references/checklist.md</span><span style="font-size: 11px; color: #8d96b5">4.1 KB</span><x-import component-from-global-scope="AgentTeamsDS.Chip">loaded on demand</x-import></div>
+            <div class="res"><span style="color: #7c9cff"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="terminal" size="{{fourteen}}"></x-import></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; flex: 1">scripts/diff-stats.sh</span><span style="font-size: 11px; color: #8d96b5">0.8 KB</span><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="warn">runs in sandbox</x-import></div>
+            <div class="res"><span style="color: #9aa6cc"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="file" size="{{fourteen}}"></x-import></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; flex: 1">references/severity.md</span><span style="font-size: 11px; color: #8d96b5">1.9 KB</span><x-import component-from-global-scope="AgentTeamsDS.Chip">loaded on demand</x-import></div>
+            <div class="drop" style="margin-top: 6px">Drop files, or <a href="#">pick from the repo</a>. Referenced by relative path from the instructions.</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isPerm}}" hint-placeholder-val="{{false}}">
+          <div style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 13px; font-weight: 500">Step kinds this skill may use</span>
+              <div role="group" aria-label="Allowed step kinds" style="display: flex; gap: 8px; flex-wrap: wrap">
+                <sc-for list="{{tools}}" as="t" hint-placeholder-count="6">
+                  <button type="button" aria-pressed="{{t.on}}" class="pill {{t.cls}}" style="--k: {{t.color}}" onClick="{{t.pick}}"><i aria-hidden="true"></i>{{t.label}}</button>
+                </sc-for>
+              </div>
+              <span style="font-size: 12px; color: #8d96b5">The agent's own permissions still apply on top; a skill can only narrow them.</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 12px; border-top: 1px solid #252d48">
+              <x-import component-from-global-scope="AgentTeamsDS.Toggle" label="Can spawn subagents" help="Lets the skill fan out review work." default-checked="{{yes}}"></x-import>
+              <x-import component-from-global-scope="AgentTeamsDS.Toggle" label="Network access" help="Fetch URLs named in the instructions."></x-import>
+              <x-import component-from-global-scope="AgentTeamsDS.Toggle" tone="danger" label="Allow in Yolo mode" help="Runs even when the agent is set to never ask." default-checked="{{yes}}"></x-import>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isArgs}}" hint-placeholder-val="{{false}}">
+          <div style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 8px">
+            <div class="res"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #c3d1ff">$TARGET</span><span style="font-size: 12.5px; flex: 1">Branch, PR number or path to review. Defaults to the current diff.</span><x-import component-from-global-scope="AgentTeamsDS.Chip">optional</x-import></div>
+            <div class="res"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #c3d1ff">$LEVEL</span><span style="font-size: 12.5px; flex: 1">low · medium · high. How many findings to surface.</span><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="accent">default: medium</x-import></div>
+            <div><x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="plus">Add argument</x-import></div>
+          </div>
+        </sc-if>
+      </section>
+    </main>
+
+    <!-- ===== Right rail ===== -->
+    <aside aria-label="Skill details" style="flex: 1 1 320px; max-width: 360px; min-width: 0; border-left: 1px solid #252d48; background: #0f1527; display: flex; flex-direction: column; gap: 18px; padding: 20px 16px 24px; box-sizing: border-box">
+
+      <!-- trigger tester -->
+      <section style="background: #151b2f; border: 1px solid #252d48; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px" class="{{testCls}}">
+        <div style="display: flex; align-items: baseline; gap: 8px">
+          <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Would it trigger?</span>
+          <span style="font-size: 11.5px; color: #8d96b5">type a user message</span>
+        </div>
+        <label for="sk-test" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Test message</label>
+        <input id="sk-test" class="field" type="text" value="{{test}}" onInput="{{setTest}}" placeholder="e.g. review this PR before I merge">
+        <div style="display: flex; align-items: center; gap: 14px">
+          <x-import component-from-global-scope="AgentTeamsDS.RadialMeter" value="{{score}}" size="{{sixtyFour}}" label="match"></x-import>
+          <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1">
+            <strong style="font-size: 13.5px; font-weight: 600; color: {{verdictColor}}">{{verdict}}</strong>
+            <span style="font-size: 12px; color: #8d96b5; line-height: 1.45">Matched: <sc-for list="{{hits}}" as="w" hint-placeholder-count="2"><span class="hit" style="margin-right: 4px">{{w}}</span></sc-for><sc-if value="{{noHits}}" hint-placeholder-val="{{false}}"><span>nothing from the trigger line</span></sc-if></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- used by -->
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Used by</span>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <sc-for list="{{sk.usedBy}}" as="a" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 4px 8px; border-radius: 8px">
+              <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{a.name}}" id="{{a.name}}" glyph="{{a.glyph}}" size="{{twentySix}}"></x-import>
+              <span style="font-size: 13px; font-weight: 500; flex: 1">{{a.name}}</span>
+              <span style="font: 400 11px/1 'JetBrains Mono', monospace; color: #8d96b5">{{a.runs}} runs · {{a.ok}}% ok</span>
+            </div>
+          </sc-for>
+        </div>
+        <div><x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" icon="plus">Attach to an agent</x-import></div>
+      </section>
+
+      <!-- versions -->
+      <section style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Versions</span>
+        <div style="display: flex; flex-direction: column">
+          <div class="ver"><time>draft</time><span style="color: #f0b64f">Unsaved edits · you, now</span></div>
+          <div class="ver"><time>v{{sk.version}}</time><span>Added severity reference; narrowed to read + bash · 2d</span></div>
+          <div class="ver"><time>v3</time><span>Split checklist into its own file · 9d</span></div>
+          <div class="ver"><time>v2</time><span>Trigger line rewritten after 3 misfires · 20d</span></div>
+        </div>
+        <a href="#" style="font-size: 12px">Compare draft to v{{sk.version}}</a>
+      </section>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.skills = {
+      'code-review': { name: 'Code review', icon: 'shield', color: 'var(--agent-2)', version: 4, state: 'Published', tone: 'ok', uses: '3 agents', usedBy: [{ name: 'Reviewer', glyph: 'shield', runs: 142, ok: 97 }, { name: 'Builder', glyph: 'wrench', runs: 38, ok: 92 }, { name: 'Orchestrator', glyph: 'bot', runs: 11, ok: 100 }],
+        desc: 'Review a diff, PR or branch for correctness bugs before merge. Use when asked to review, check, audit or look over code changes.',
+        body: '# Code review\n\nReview the target for correctness first, style never.\n\n## Steps\n1. Read the diff (`$TARGET`, default: working tree). Use `scripts/diff-stats.sh` for a size summary.\n2. For each changed function, ask: what input breaks this?\n3. Rank findings by `references/severity.md`. Report at most the top N for `$LEVEL`.\n4. Never fix anything. Hand fixes to Builder with a one-line brief each.\n\n## Output\nA list: file:line, one sentence, the failing input. No praise, no summary paragraph.' },
+      'repo-map': { name: 'Repo map', icon: 'compass', color: 'var(--agent-3)', version: 2, state: 'Published', tone: 'ok', uses: '2 agents', usedBy: [{ name: 'Scout', glyph: 'search', runs: 61, ok: 100 }, { name: 'Orchestrator', glyph: 'bot', runs: 19, ok: 100 }],
+        desc: 'Map which files own a feature and which tests cover them. Use before any edit when the owning files are not already known.',
+        body: '# Repo map\n\nFind owners, never edit.\n\n1. `git log -3 -- <path>` for each candidate path.\n2. List the tests that import the owning modules.\n3. Hand the map to whoever asked, as a table: file · owner · last touched · tests.' },
+      'changelog-digest': { name: 'Changelog digest', icon: 'file', color: 'var(--agent-5)', version: 1, state: 'Published', tone: 'ok', uses: '1 agent', usedBy: [{ name: 'Scout', glyph: 'search', runs: 7, ok: 86 }],
+        desc: 'Summarise merged PRs for a period into a changelog. Use when asked for release notes, a weekly digest or what shipped.',
+        body: '# Changelog digest\n\nGroup merged PRs by area. One line each, user-facing wording, link the PR. Skip chores unless they changed behaviour.' },
+      'migration-plan': { name: 'Migration plan', icon: 'wrench', color: 'var(--agent-4)', version: 0, state: 'Draft', tone: 'warn', uses: 'not attached', draft: true, usedBy: [],
+        desc: 'Plan a schema or data migration with a rollback path. Use when a change touches tables, indexes or stored data.',
+        body: '# Migration plan\n\n_Draft._ Produce: forward migration, backfill strategy, rollback, and the metric that proves it worked.' },
+      'incident-triage': { name: 'Incident triage', icon: 'zap', color: 'var(--agent-6)', version: 5, state: 'Team', tone: 'accent', uses: '4 agents', team: true, usedBy: [{ name: 'Orchestrator', glyph: 'bot', runs: 23, ok: 96 }],
+        desc: 'Triage a production alert: scope, blast radius, likely cause, first mitigation. Use when a message mentions an alert, outage or pager.',
+        body: '# Incident triage\n\nOwned by the platform team. Read-only here.' },
+      'pr-description': { name: 'PR description', icon: 'message', color: 'var(--agent-7)', version: 3, state: 'Team', tone: 'accent', uses: '2 agents', team: true, usedBy: [{ name: 'Builder', glyph: 'wrench', runs: 52, ok: 98 }],
+        desc: 'Write a pull request description from the diff and the ticket. Use when opening or updating a PR.',
+        body: '# PR description\n\nOwned by the platform team. Read-only here.' },
+      'deploy-checklist': { name: 'Deploy checklist', icon: 'plug', color: 'var(--agent-8)', version: 7, state: 'Team', tone: 'accent', uses: '1 agent', team: true, usedBy: [{ name: 'Builder', glyph: 'wrench', runs: 14, ok: 100 }],
+        desc: 'Walk the deploy checklist for a service. Use when asked to deploy, ship, release or roll out.',
+        body: '# Deploy checklist\n\nOwned by the platform team. Read-only here.' }
+    };
+    this.state = { sel: 'code-review', tab: 'instr', test: 'review this PR before I merge', edits: {}, tools: { read: true, bash: true, edit: false, ask: true, subagent: true, think: true } };
+  }
+  slugify(s) { return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  renderVals() {
+    const s = this.state;
+    const base = this.skills[s.sel];
+    const ed = s.edits[s.sel] || {};
+    const sk = { ...base, ...ed };
+    sk.slug = this.slugify(sk.name);
+    sk.next = (base.version || 0) + 1;
+    sk.words = sk.body.split(/\s+/).filter(Boolean).length;
+    sk.tokens = Math.round(sk.words * 1.35);
+    const setEdit = (k) => (e) => this.setState({ edits: { ...s.edits, [s.sel]: { ...(s.edits[s.sel] || {}), [k]: e.target.value } } });
+
+    const STOP = new Set(['a', 'an', 'the', 'or', 'and', 'to', 'for', 'of', 'when', 'use', 'it', 'is', 'this', 'that', 'before', 'any', 'not', 'are', 'in', 'on', 'with', 'what', 'as', 'be', 'by', 'from', 'into', 'at', 'if', 'i', 'me', 'my']);
+    const stem = (w) => w.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/(ing|ed|es|s)$/, '');
+    const trig = sk.desc.split(/\s+/).map(stem).filter((w) => w.length > 2 && !STOP.has(w));
+    const trigSet = new Set(trig);
+    const words = s.test.split(/\s+/).filter(Boolean);
+    const hits = [];
+    words.forEach((w) => { const st = stem(w); if (st.length > 2 && trigSet.has(st) && hits.indexOf(w) < 0) hits.push(w); });
+    const score = Math.min(1, hits.length === 0 ? 0 : 0.28 + hits.length * 0.24);
+    const verdict = score >= 0.7 ? 'Yes — strong match' : score >= 0.45 ? 'Probably — one more cue would help' : hits.length ? 'Weak — likely skipped' : 'No — nothing matches the trigger';
+    const verdictColor = score >= 0.7 ? '#4fd1a0' : score >= 0.45 ? '#f0b64f' : '#ff7083';
+
+    const row = (id) => { const k = this.skills[id]; const on = id === s.sel; return { id, name: k.name, slug: this.slugify((s.edits[id] && s.edits[id].name) || k.name), icon: k.icon, color: k.color, uses: k.uses, draft: !!k.draft, on, cls: on ? 'on' : '', pick: () => this.setState({ sel: id, tab: 'instr' }) }; };
+    const toolDefs = [
+      { id: 'think', label: 'think', color: 'var(--kind-think)' }, { id: 'read', label: 'read', color: 'var(--kind-read)' }, { id: 'bash', label: 'bash', color: 'var(--kind-bash)' },
+      { id: 'edit', label: 'edit', color: 'var(--kind-edit)' }, { id: 'ask', label: 'ask', color: 'var(--kind-ask)' }, { id: 'subagent', label: 'subagent', color: 'var(--kind-subagent)' }
+    ];
+    const tab = (t) => (s.tab === t ? 'on' : '');
+    return {
+      yes: true, no: false, fourteen: 14, twentySix: 26, sixtyFour: 64,
+      sk,
+      mine: ['code-review', 'repo-map', 'changelog-digest', 'migration-plan'].map(row),
+      team: ['incident-triage', 'pr-description', 'deploy-checklist'].map(row),
+      setName: setEdit('name'), setDesc: setEdit('desc'), setBody: setEdit('body'),
+      tabInstr: tab('instr'), tabRes: tab('res'), tabPerm: tab('perm'), tabArgs: tab('args'),
+      isInstr: s.tab === 'instr', isRes: s.tab === 'res', isPerm: s.tab === 'perm', isArgs: s.tab === 'args',
+      goInstr: () => this.setState({ tab: 'instr' }), goRes: () => this.setState({ tab: 'res' }), goPerm: () => this.setState({ tab: 'perm' }), goArgs: () => this.setState({ tab: 'args' }),
+      argsHint: '$TARGET · $LEVEL available',
+      tools: toolDefs.map((t) => ({ ...t, on: !!s.tools[t.id], cls: s.tools[t.id] ? 'on' : '', pick: () => this.setState({ tools: { ...s.tools, [t.id]: !s.tools[t.id] } }) })),
+      test: s.test, setTest: (e) => this.setState({ test: e.target.value }),
+      score, verdict, verdictColor, hits, noHits: hits.length === 0,
+      testCls: score >= 0.7 ? 'at-card--live' : ''
+    };
+  }
+}
+</script>
+</body>
+</html>
