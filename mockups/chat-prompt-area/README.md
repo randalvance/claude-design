@@ -15,13 +15,15 @@ Live canvas: https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis
 | `Anatomy.dc.html` | Numbered anatomy, motion spec table, the Max-effort moment, gauge geometry, rules. |
 | `Paper.dc.html` | Page "Paper": the full shell (icon rail, workspace sessions, chat) as cut paper. Sessions are folder tabs over ruled index cards with a highlighter stroke on the selected row, a stepped paper pinwheel on busy rows and sticker badges. Sheets with hard offset shadows for depth, kraft notes with tape for the user, folder tabs, index-card composer, rubber-stamp YOLO and MAX. Every animation runs on `steps()` at 8–12 fps so it reads as stop motion: capsules boil while working, notes drop in, stamps thump down. |
 | `Future.dc.html` | Page "Futuristic": the full shell as a HUD console. The sessions panel is a mono manifest with cyan bracket on the selected row, blinking amber segment on busy rows and amber square badges. Bracket corners, 1 px lines, mono microlabels, cyan accent with amber for YOLO and Max. Scan line across the working capsule, panels unclip, the reply types in. |
+| `Saas.dc.html` | Page "Professional SaaS": the full shell as a conventional B2B product. White cards on a cool grey ground, 1 px borders, one indigo accent, Inter + JetBrains Mono. Rail with labelled icons and a brand tile; sessions panel with search, New button, All/Active segmented control and collapsible workspace groups with counts; status is a pill (Running, Done, Needs review). Chat header with breadcrumb, status pill and branch chip; underline tabs; capsules are bordered cards with a progress bar while working. Composer is a bordered card with a radio-list model menu and a segmented effort control. Motion is 150–250 ms eases, no bounce. |
 | `canvas.json` | Canvas index (pages, frames, order, notes). |
 
 ## Notes
 
-- The canvas has three pages: App shell (the full interface, states and anatomy), Paper and
-  Futuristic (one full-shell variant each on the same faked sessions, same interactions:
-  session switching, tabs, expanding capsules, model + effort popover, gauge, YOLO, send/stop).
+- The canvas has four pages: App shell (the full interface, states and anatomy), Paper,
+  Futuristic and Professional SaaS (one full-shell variant each on the same faked sessions,
+  same interactions: session switching, tabs, expanding capsules, model + effort popover,
+  gauge, YOLO, send/stop).
 
 - The gauge reads like a fuel gauge: F is a fresh conversation, E is a full context window.
   The arc is what is left; a ghost segment previews what the current draft will consume.
