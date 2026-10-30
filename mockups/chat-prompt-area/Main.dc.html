@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Chat composer with model, effort, context gauge and Yolo</title>
+<title>Agent chat app shell with sessions panel and composer</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -16,32 +16,173 @@ body{margin:0;background:#0d1221;font-family:"IBM Plex Sans",system-ui,sans-seri
 a{color:#9db4ff}a:hover{color:#c3d1ff}
 .page{--ink:#e7eaf4;--mute:#8d96b5;--dim:#5b6484;--line:#252d48;--surf:#151b2f;--surf2:#1b2340;--ok:#4fd1a0;--err:#ff7083;--warn:#f0b64f;--mono:"JetBrains Mono",ui-monospace,monospace}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.pill{font-size:11px;color:var(--mute);background:var(--surf2);padding:3px 8px;border-radius:999px;white-space:nowrap}
+button{font:inherit}
+.ic{width:18px;height:18px;flex:none}
+.ic-s{width:14px;height:14px;flex:none}
+
+/* ---------- app frame ---------- */
+.app{display:flex;flex-wrap:wrap;height:100vh;overflow:hidden}
+.rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0 8px;background:#0a0f1c;border-right:1px solid var(--line);box-sizing:border-box;overflow:auto}
+.logo{width:34px;height:34px;display:grid;place-items:center;color:#c58cff;margin-bottom:8px}
+.rail-btn{all:unset;cursor:pointer;position:relative;width:56px;padding:7px 0 6px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:500;transition:background .15s,color .15s}
+.rail-btn:hover{background:var(--surf2);color:var(--ink)}
+.rail-btn.on{background:rgba(124,156,255,.14);color:var(--accent)}
+.rail-btn:focus-visible{outline:2px solid var(--accent)}
+.rail-btn .nb{position:absolute;top:2px;right:6px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--err);color:#fff;font-size:10px;font-weight:600;display:grid;place-items:center;box-sizing:border-box}
+.rail .spacer{flex:1}
+
+.panel{width:320px;flex:none;display:flex;flex-direction:column;background:#0f1527;border-right:1px solid var(--line);box-sizing:border-box;min-height:0}
+.panel-top{padding:12px 12px 8px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px;border-radius:9px;background:var(--surf);border:1px solid var(--line);color:var(--mute);min-width:0;flex:1}
+.search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.search input::placeholder{color:var(--dim)}
+.kbd{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:4px;padding:1px 5px;white-space:nowrap}
+.sel-btn{all:unset;cursor:pointer;height:34px;padding:0 12px;border-radius:9px;background:var(--accent);color:#0d1221;font-size:12.5px;font-weight:600;display:grid;place-items:center}
+.sel-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.filt{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;border-radius:9px;background:var(--surf);border:1px solid var(--line);font-size:12.5px;color:var(--ink);min-width:0}
+.filt:hover{border-color:#3a4677}
+.filt:focus-visible{outline:2px solid var(--accent)}
+.filt.on{border-color:color-mix(in srgb,var(--accent) 50%,var(--line));color:var(--accent)}
+.list{flex:1;overflow:auto;padding:8px;display:flex;flex-direction:column;gap:6px;min-height:0}
+.ws{border-radius:10px;overflow:hidden}
+.ws-h{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:8px 10px;background:var(--surf2);font-size:13px;font-weight:600;color:var(--ink);border-radius:10px;transition:background .15s}
+.ws-h:hover{background:#222b4a}
+.ws-h:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.ws-h .chev{width:14px;height:14px;color:var(--mute);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.ws.closed .ws-h .chev{transform:rotate(-90deg)}
+.ws-dot{width:9px;height:9px;border-radius:3px;flex:none}
+.ws-h .name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ws-h .cnt{font-size:11.5px;color:var(--mute);font-variant-numeric:tabular-nums}
+.attn{width:16px;height:16px;border-radius:50%;background:var(--warn);color:#0d1221;font-size:10px;font-weight:700;display:grid;place-items:center;flex:none}
+.ws-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s cubic-bezier(.2,.8,.2,1)}
+.ws.closed .ws-body{grid-template-rows:0fr}
+.ws-in{min-height:0;overflow:hidden}
+.rows{display:flex;flex-direction:column;gap:1px;padding:4px 0 2px}
+.row{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:7px 8px 7px 12px;border-radius:8px;color:var(--ink);font-size:12.5px;transition:background .15s}
+.row:hover{background:var(--surf2)}
+.row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.row.on{background:rgba(124,156,255,.18);box-shadow:inset 2px 0 0 var(--accent)}
+.row.attn{box-shadow:inset 2px 0 0 var(--warn)}
+.row .src{display:flex;gap:4px;color:var(--dim);flex:none}
+.row .src svg{width:12px;height:12px}
+.row .src .j{color:#5fa0ff}
+.row .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .dur{font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
+.row.busy .dur{color:var(--warn)}
+.row .nb{position:absolute;left:-2px;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:var(--err);color:#fff;font-size:10px;font-weight:600;display:grid;place-items:center}
+.row.attn{padding-left:20px}
+.spin{width:12px;height:12px;color:var(--warn);animation:spin 1.6s linear infinite;flex:none}
+.done-chip{font-size:10px;font-weight:600;color:var(--ok);background:rgba(79,209,160,.14);padding:1px 6px;border-radius:999px;flex:none}
+.sub-nb{font-size:9px;color:var(--mute);background:var(--surf2);border-radius:999px;padding:0 4px;line-height:14px;flex:none}
+
+.chat{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;min-height:0;position:relative}
+.top{display:flex;align-items:center;gap:14px;padding:10px 18px 0;flex-wrap:wrap}
+.ttl{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
+.ttl svg{color:var(--accent)}
+.ttl .cp{all:unset;cursor:pointer;color:var(--dim);display:grid;place-items:center}
+.ttl .cp:hover{color:var(--ink)}
+.meta{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--mute);flex-wrap:wrap}
+.meta .st{display:inline-flex;align-items:center;gap:5px;color:var(--ink)}
+.meta .st i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.meta .st.busy i{background:var(--warn);animation:blink 1s ease-in-out infinite}
+.meta .st.attn i{background:var(--err)}
+.pill{font-size:11px;color:var(--mute);background:var(--surf2);padding:3px 8px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.pill.br{font-family:var(--mono);color:#9db4ff}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--mute);font-size:12.5px}
+.ib{all:unset;cursor:pointer;width:28px;height:28px;border-radius:7px;display:grid;place-items:center;color:var(--mute)}
+.ib:hover{background:var(--surf2);color:var(--ink)}
+.ib:focus-visible{outline:2px solid var(--accent)}
+.tabs{display:flex;gap:2px;padding:8px 18px 0;border-bottom:1px solid var(--line);overflow-x:auto;flex:none}
+.tab{all:unset;cursor:pointer;padding:8px 10px 9px;font-size:13px;font-weight:500;color:var(--mute);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .15s}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);border-radius:4px}
+.content{flex:1;min-height:0;overflow:auto;padding:22px 18px 10px}
+.wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px;animation:bubbleIn .35s cubic-bezier(.2,.8,.2,1) both}
+
 .user{align-self:flex-end;max-width:72%;background:#2a3566;color:#eef1ff;padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:14px;line-height:1.45;white-space:pre-wrap;word-break:break-word;animation:bubbleIn .5s cubic-bezier(.2,.9,.3,1.15) both}
 .user .b{font-weight:600;color:#fff}.user .i{font-style:italic}.user .c{font-family:var(--mono);font-size:12.5px;background:rgba(13,18,33,.45);padding:1px 5px;border-radius:4px}.user .l{text-decoration:underline;color:#c3d1ff}
-.turn{border:1px solid var(--line);background:var(--surf);border-radius:12px;display:flex;align-items:center;gap:12px;padding:8px 12px;min-height:44px;box-sizing:border-box;transition:border-color .25s;animation:bubbleIn .45s cubic-bezier(.2,.9,.3,1.1) both}
-.turn.live{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
-.avatar{position:relative;width:26px;height:26px;border-radius:50%;background:var(--surf2);display:grid;place-items:center;color:var(--accent);flex:none}
-.avatar svg{width:14px;height:14px}
-.live .avatar::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--accent);animation:ring 1.6s ease-out infinite}
-.badge{position:absolute;right:-4px;bottom:-4px;width:13px;height:13px;border-radius:50%;background:var(--ok);color:#06251a;display:grid;place-items:center;border:2px solid var(--surf);animation:pop .5s cubic-bezier(.2,.8,.3,1.4) both}
-.badge svg{width:8px;height:8px}
-.cap-title{display:flex;flex-direction:column;min-width:0}
-.cap-title strong{font-weight:600;font-size:13.5px;letter-spacing:-.01em;line-height:1.2}
-.cap-sub{font-size:11.5px;color:var(--mute);font-variant-numeric:tabular-nums;line-height:1.3}
+.said{font-size:14px;line-height:1.55;color:#d6dbec}
+.said code,.reply-body code{font-family:var(--mono);font-size:12px;background:var(--surf2);padding:1px 6px;border-radius:5px;color:#c3d1ff}
+.reply-body{font-size:14px;line-height:1.6}
+.reply-body p{margin:0 0 10px}
+.reply-body ul{margin:4px 0 0;padding-left:20px}
+.reply-body li{margin:4px 0}
+
+/* deck capsule */
+.deck{position:relative;margin-top:6px}
+.deck::before,.deck::after{content:"";position:absolute;left:14px;right:14px;top:-7px;height:14px;border-radius:12px 12px 0 0;background:#1b2340;border:1px solid var(--line);border-bottom:0;z-index:0}
+.deck::after{left:7px;right:7px;top:-4px;background:#182038}
+.cap{position:relative;z-index:1;all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:8px 14px 8px 10px;min-height:48px;border:1px solid #2e3860;background:#1a2242;border-radius:12px;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.cap:hover{border-color:#3f4b7d}
+.cap:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.deck.open .cap{border-radius:12px 12px 0 0;border-color:#3f4b7d}
+.deck.live .cap{border-color:color-mix(in srgb,var(--accent) 45%,#2e3860)}
+.tb{position:relative;width:52px;height:32px;border-radius:9px;background:#2a3a7a;color:#c3d1ff;font-family:var(--mono);font-size:11.5px;display:grid;place-items:center;flex:none}
+.live .tb{background:#243066}
+.tb .ok{position:absolute;right:-5px;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--ok);color:#06251a;display:grid;place-items:center;border:2px solid #1a2242;animation:pop .5s cubic-bezier(.2,.8,.3,1.4) both}
+.tb .ok svg{width:8px;height:8px}
+.tb .ok.stopped{background:var(--err);color:#fff}
+.tb .ring{position:absolute;inset:-3px;border-radius:11px;border:2px solid var(--accent);animation:ring 1.6s ease-out infinite}
+.cap-t{display:flex;flex-direction:column;min-width:0}
+.cap-t strong{font-size:13.5px;font-weight:600;line-height:1.2}
+.cap-s{font-size:11.5px;color:var(--mute);font-variant-numeric:tabular-nums;line-height:1.3}
 .trail{display:flex;gap:4px;align-items:center;padding:0 4px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--dim);display:inline-block;animation:dotIn .35s cubic-bezier(.2,.9,.3,1.4) both}
-.dot.bash{background:#7c9cff}.dot.think{background:#5fd4e8}.dot.edit{background:var(--ok)}.dot.read{background:#9aa6cc}.dot.say{background:#c9cfe8;border-radius:2px}
+.dot.bash{background:#7c9cff}.dot.think{background:#5fd4e8}.dot.edit{background:var(--ok)}.dot.read{background:#9aa6cc}.dot.say{background:#c9cfe8;border-radius:2px}.dot.ask{background:var(--warn)}.dot.sub{background:#c58cff}
 .dot.run{animation:dotIn .35s both,blink 1s ease-in-out .35s infinite}
 .dot.err{background:var(--err);box-shadow:0 0 0 2px rgba(255,112,131,.25)}
-.badge.stopped{background:var(--err);color:#fff}
-.chip{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--surf2);color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
 .shimmer{margin-left:auto;font-family:var(--mono);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(90deg,var(--mute) 0%,#ffffff 50%,var(--mute) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 1.8s linear infinite}
-.reply{display:flex;gap:12px;animation:bubbleIn .55s cubic-bezier(.2,.8,.2,1) both;padding:4px 2px}
-.who{font-size:11.5px;color:var(--mute);margin-bottom:6px}
-.reply-body{font-size:14px;line-height:1.55}
+.cap .chev{width:16px;height:16px;flex:none;margin-left:auto;color:var(--mute);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.shimmer+.chev{margin-left:0}
+.open .cap .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)}
+.open .body{grid-template-rows:1fr}
+.body-in{min-height:0;overflow:hidden}
+.steps{list-style:none;margin:0;padding:6px 10px 10px;display:flex;flex-direction:column;gap:2px;border:1px solid #3f4b7d;border-top:0;border-radius:0 0 12px 12px;background:#151b2f}
+.step{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:8px;font-size:12.5px;opacity:0}
+.open .step{animation:stepIn .4s cubic-bezier(.2,.8,.2,1) both}
+.step:hover{background:var(--surf2)}
+.step .k{font-weight:500;min-width:52px}
+.step .d{font-family:var(--mono);font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.step .tm{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+
+/* other tabs */
+.card{border:1px solid var(--line);background:var(--surf);border-radius:12px;padding:12px 14px}
+.card h3{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.frow{display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:13px}
+.frow:first-of-type{border-top:0}
+.frow .p{font-family:var(--mono);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plus{color:var(--ok);font-family:var(--mono);font-size:11.5px}.minus{color:var(--err);font-family:var(--mono);font-size:11.5px}
+.todo{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px;width:100%;box-sizing:border-box}
+.todo:first-of-type{border-top:0}
+.todo:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:6px}
+.box{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--dim);display:grid;place-items:center;color:#0d1221;flex:none;transition:background .2s,border-color .2s}
+.box svg{width:10px;height:10px;opacity:0;transition:opacity .2s}
+.todo.done .box{background:var(--ok);border-color:var(--ok)}
+.todo.done .box svg{opacity:1}
+.todo.done span{color:var(--mute);text-decoration:line-through}
+.term{font-family:var(--mono);font-size:12px;line-height:1.6;color:#c9cfe8;background:#0a0f1c;border:1px solid var(--line);border-radius:12px;padding:12px 14px;white-space:pre-wrap}
+.term .g{color:var(--ok)}.term .y{color:var(--warn)}.term .m{color:var(--dim)}.term .b{color:#9db4ff}
+.empty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:60px 20px;color:var(--mute);font-size:13px;text-align:center}
+.empty svg{width:28px;height:28px;color:var(--dim)}
+.chip{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--surf2);color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.rside{width:36px;flex:none;border-left:1px solid var(--line);background:#0f1527;display:flex;flex-direction:column;align-items:center;padding-top:14px;gap:10px}
+.vtab{all:unset;cursor:pointer;position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:500;color:var(--mute);padding:10px 6px;border-radius:7px}
+.vtab:hover{color:var(--ink);background:var(--surf2)}
+.vtab.on{color:var(--accent)}
+.vtab:focus-visible{outline:2px solid var(--accent)}
+.vtab .nb{position:absolute;left:-4px;bottom:-4px;transform:rotate(180deg);width:15px;height:15px;border-radius:50%;background:var(--accent);color:#0d1221;font-size:9.5px;font-weight:700;display:grid;place-items:center}
+.drawer{position:absolute;right:0;top:0;bottom:0;width:280px;background:#0f1527;border-left:1px solid var(--line);padding:14px;box-sizing:border-box;z-index:8;animation:slideIn .3s cubic-bezier(.2,.8,.2,1) both;display:flex;flex-direction:column;gap:10px}
+.drawer h3{margin:0;font-size:13px;font-weight:600}
+.art{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surf);font-size:12.5px}
+.art svg{color:var(--accent)}
+.art .m{font-size:11px;color:var(--mute);font-family:var(--mono)}
 
 /* ---------- composer ---------- */
+.foot{padding:4px 18px 14px;flex:none}
+.foot-in{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
 .comp-wrap{position:relative}
 .glow{position:absolute;inset:-10px;border-radius:24px;background:conic-gradient(from var(--ang),#ff7083,#f0b64f,#c58cff,#7c9cff,#ff7083);filter:blur(22px);opacity:0;transition:opacity .6s;animation:spinAng 5s linear infinite;pointer-events:none}
 .max .glow{opacity:.28}
@@ -53,7 +194,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .ring{position:absolute;inset:-1px;border-radius:15px;padding:1.5px;pointer-events:none;opacity:0;transition:opacity .5s;background:conic-gradient(from var(--ang),#ff7083,#f0b64f,#c58cff,#7c9cff,#ff7083);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spinAng 4s linear infinite}
 .max .ring{opacity:1}
 .ed-wrap{position:relative}
-.editor{min-height:54px;max-height:220px;overflow:auto;padding:14px 16px 6px;font-size:14.5px;line-height:1.5;outline:none;color:var(--ink);white-space:pre-wrap;word-break:break-word;caret-color:var(--accent)}
+.editor{min-height:50px;max-height:200px;overflow:auto;padding:13px 16px 6px;font-size:14.5px;line-height:1.5;outline:none;color:var(--ink);white-space:pre-wrap;word-break:break-word;caret-color:var(--accent)}
 .yolo .editor{caret-color:var(--warn)}
 .editor:empty::before{content:attr(data-placeholder);color:var(--dim);pointer-events:none;transition:color .3s}
 .max .editor:empty::before{background:linear-gradient(90deg,#f0b64f,#ff7083,#c58cff,#7c9cff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 3s linear infinite}
@@ -84,6 +225,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .max .ebars i.on{background:linear-gradient(180deg,#f0b64f,#ff7083);animation:barFlick 1s ease-in-out infinite}
 .max .ebars i:nth-child(2){animation-delay:.1s}.max .ebars i:nth-child(3){animation-delay:.2s}.max .ebars i:nth-child(4){animation-delay:.3s}.max .ebars i:nth-child(5){animation-delay:.4s}
 .maxtag{font-size:10px;font-weight:600;letter-spacing:.06em;background:linear-gradient(90deg,#f0b64f,#ff7083,#c58cff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:flicker 1.1s ease-in-out infinite}
+.autotag{font-size:10px;color:var(--dim);letter-spacing:.04em;margin-left:-2px}
 .flame{width:13px;height:13px;color:#f0b64f;animation:flameWob .7s ease-in-out infinite alternate;transform-origin:50% 100%}
 .chev{width:12px;height:12px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
 .pill-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
@@ -98,7 +240,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .needle.low{stroke:var(--err)}
 .g-hub{fill:#fff}
 .g-big{width:150px;height:150px}
-.g-big .g-track{stroke-width:3.5;stroke:#252d48}.g-big .g-fill{stroke-width:3.5}.g-big .g-draft{stroke-width:3.5}.g-big .needle{stroke-width:1.4}.g-big .g-hub{r:1.6}
+.g-big .g-track{stroke-width:3.5;stroke:#252d48}.g-big .g-fill{stroke-width:3.5}.g-big .g-draft{stroke-width:3.5}.g-big .needle{stroke-width:1.4}
 .g-big text{font-family:var(--mono);font-size:4.2px;fill:var(--mute)}
 .g-big .tick{stroke:#3a4677;stroke-width:.8;stroke-linecap:round}
 .gpct{font-variant-numeric:tabular-nums}
@@ -119,7 +261,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .burst{position:absolute;left:50%;top:50%;width:16px;height:16px;border-radius:50%;border:2px solid var(--warn);transform:translate(-50%,-50%);animation:burst .7s ease-out forwards;pointer-events:none}
 .burst.b2{animation-delay:.12s;border-color:#ff7083}
 .hint{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--dim);white-space:nowrap}
-.send{all:unset;cursor:pointer;width:32px;height:32px;border-radius:50%;background:var(--surf2);color:var(--dim);display:grid;place-items:center;transition:background .25s,color .25s,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;flex:none}
+.send{all:unset;position:relative;cursor:pointer;width:32px;height:32px;border-radius:50%;background:var(--surf2);color:var(--dim);display:grid;place-items:center;transition:background .25s,color .25s,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;flex:none}
 .send svg{width:16px;height:16px;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .send.ready{background:var(--accent);color:#0d1221;transform:scale(1.06);box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 45%,transparent)}
 .yolo .send.ready{background:var(--warn);box-shadow:0 4px 14px rgba(240,182,79,.45)}
@@ -130,14 +272,19 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .send.stop{background:rgba(255,112,131,.16);color:var(--err);transform:none;box-shadow:none}
 .send.stop:hover{background:var(--err);color:#0d1221}
 .send.stop svg{width:14px;height:14px;animation:pop .35s cubic-bezier(.2,.8,.3,1.4) both}
-.send{position:relative}
 .send:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.mic{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--mute)}
+.mic:hover{background:var(--surf2);color:var(--ink)}
+.mic:focus-visible{outline:2px solid var(--accent)}
 .scrim{all:unset;position:fixed;inset:0;z-index:10;cursor:default}
 .pop{position:absolute;left:0;bottom:calc(100% + 10px);width:316px;background:#141a2e;border:1px solid #3a4677;border-radius:12px;box-shadow:0 16px 50px rgba(0,0,0,.5);padding:10px;z-index:20;transform-origin:bottom left;animation:popIn .26s cubic-bezier(.2,.9,.3,1.25) both;color:var(--ink);font-size:13px;box-sizing:border-box}
 .pop.max{border-color:rgba(240,182,79,.5);box-shadow:0 16px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,112,131,.15),0 0 40px rgba(240,182,79,.18)}
 .pop-h{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:6px 8px 4px}
 .pop-h .val{text-transform:none;letter-spacing:0;font-size:12px;color:var(--ink);font-weight:600;transition:color .3s}
 .pop.max .pop-h .val{background:linear-gradient(90deg,#f0b64f,#ff7083,#c58cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mode{font-style:normal;font-weight:500;color:var(--mute);font-size:11px}
+.pop.max .mode{-webkit-text-fill-color:var(--mute)}
+.mdef{color:#aeb6d2}
 .mrow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;padding:8px 10px;border-radius:8px;transition:background .15s,transform .15s}
 .mrow:hover{background:var(--surf2)}
 .mrow:active{transform:scale(.985)}
@@ -153,6 +300,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .pop.max .sl .fill{background:linear-gradient(90deg,var(--accent),#c58cff,#ff7083,#f0b64f,#ff7083);background-size:200% 100%;animation:flame 1.4s linear infinite;box-shadow:0 0 10px rgba(255,112,131,.6)}
 .sl .ticks{position:absolute;left:-1px;right:-1px;top:15px;display:flex;justify-content:space-between;pointer-events:none}
 .sl .ticks i{width:6px;height:6px;border-radius:50%;background:#2f3858;border:1px solid #141a2e}
+.defmark{position:absolute;top:13px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mute);background:#141a2e;transform:translateX(-50%);box-sizing:border-box;pointer-events:none;transition:left .35s cubic-bezier(.2,.8,.2,1)}
 .sl input{position:absolute;inset:0;width:100%;height:36px;margin:0;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
 .sl input::-webkit-slider-runnable-track{height:4px;background:transparent}
 .sl input::-moz-range-track{height:4px;background:transparent}
@@ -169,12 +317,7 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .elab span{transition:color .25s,transform .25s;display:inline-block}
 .elab span.on{color:var(--ink);font-weight:600;transform:translateY(-1px)}
 .elab span.maxl.on{background:linear-gradient(90deg,#f0b64f,#ff7083,#c58cff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:flicker 1.1s ease-in-out infinite}
-.mode{font-style:normal;font-weight:500;color:var(--mute);font-size:11px}
-.pop.max .mode{-webkit-text-fill-color:var(--mute)}
-.mdef{color:#aeb6d2}
-.defmark{position:absolute;top:13px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mute);background:#141a2e;transform:translateX(-50%);box-sizing:border-box;pointer-events:none;transition:left .35s cubic-bezier(.2,.8,.2,1)}
 .elab span.def::after{content:"";display:block;width:3px;height:3px;border-radius:50%;background:var(--mute);margin:3px auto 0}
-.autotag{font-size:10px;color:var(--dim);letter-spacing:.04em;margin-left:-2px}
 .adapt{display:flex;gap:8px;align-items:flex-start;margin:10px 4px 2px;font-size:11.5px;line-height:1.45;color:var(--mute)}
 .adapt svg{width:13px;height:13px;flex:none;margin-top:2px;color:#5fd4e8}
 .lnk{all:unset;cursor:pointer;flex:none;font-size:11.5px;font-weight:500;color:var(--accent);white-space:nowrap;align-self:flex-end}
@@ -205,16 +348,20 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 .act:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .act.ghost{background:var(--surf2);color:var(--mute)}
 .act.ghost:hover{color:var(--ink)}
-.demo{display:flex;align-items:center;gap:8px;justify-content:center;font-size:11.5px;color:#5b6484;flex-wrap:wrap}
-.demo button{all:unset;cursor:pointer;color:#8d96b5;background:#151b2f;border:1px solid #252d48;padding:3px 9px;border-radius:999px;font-size:11px;transition:color .2s,border-color .2s}
+.demo{display:flex;align-items:center;gap:8px;justify-content:center;font-size:11px;color:#5b6484;flex-wrap:wrap}
+.demo button{all:unset;cursor:pointer;color:#8d96b5;background:#151b2f;border:1px solid #252d48;padding:2px 9px;border-radius:999px;font-size:11px;transition:color .2s,border-color .2s}
 .demo button:hover{color:#e7eaf4;border-color:#3a4677}
 .demo button:focus-visible{outline:2px solid #7c9cff}
+
 @keyframes spinAng{to{--ang:360deg}}
-@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.35);opacity:0}}
 @keyframes dotIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
 @keyframes bubbleIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes stepIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
 @keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes popIn{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
@@ -230,213 +377,449 @@ a{color:#9db4ff}a:hover{color:#c3d1ff}
 @keyframes breathe{0%,100%{opacity:.25}50%{opacity:.55}}
 @keyframes jitter{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2deg)}}
 @keyframes floatUp{0%{opacity:0;transform:translate(-50%,6px)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-22px)}}
-@media (max-width:640px){.hint{display:none}.user{max-width:88%}.pop{width:min(316px,calc(100vw - 40px))}}
+@media (max-width:1000px){.panel{width:260px}}
+@media (max-width:860px){.app{height:auto;min-height:100vh;overflow:visible}.rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.rail .spacer{display:none}.logo{margin:0 6px 0 0}.panel{width:100%;max-height:40vh;border-right:0;border-bottom:1px solid var(--line)}.rside{display:none}.chat{min-height:70vh}.hint,.user{max-width:88%}.hint{display:none}.pop{width:min(316px,calc(100vw - 40px))}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </helmet>
-<div class="page {{compCls}}" style="--accent: {{accent}}; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box">
-  <header style="display: flex; align-items: center; gap: 12px; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; flex-wrap: wrap">
-    <strong style="font-size: 14px; font-weight: 600">LEIB-117 – Static HTML File</strong>
-    <span style="font-size: 12px; color: #8d96b5">Character 018 · Orchestrator</span>
-    <span class="pill" style="font-family: 'JetBrains Mono', monospace">feat/LEIB-117-static-file</span>
-    <span class="pill">#5404</span>
-  </header>
+<div class="page {{compCls}}" style="--accent: {{accent}}">
+<div class="app">
 
-  <main style="flex: 1; width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 28px 16px 12px; display: flex; flex-direction: column; gap: 18px; justify-content: flex-end">
-    <div class="user">Run the full suite and open a PR when it's green.</div>
-    <section class="turn" aria-label="Agent work for this turn">
-      <span class="avatar" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
-        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span>
-      </span>
-      <span class="cap-title"><strong>Worked for 1m 23s</strong><span class="cap-sub">6 steps</span></span>
-      <span class="trail" aria-hidden="true"><i class="dot bash"></i><i class="dot say"></i><i class="dot read"></i><i class="dot edit"></i><i class="dot bash"></i><i class="dot bash"></i></span>
-      <span style="display: flex; gap: 6px"><span class="chip">3 bash</span><span class="chip">1 read</span><span class="chip">1 edit</span></span>
-    </section>
-    <div class="reply">
-      <span class="avatar" aria-hidden="true" style="margin-top: 14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg></span>
-      <div style="min-width: 0; flex: 1">
-        <div class="who">Character 018 · Orchestrator</div>
-        <div class="reply-body">All 42 tests pass. PR #5405 is open against main and CI is running now.</div>
+  <!-- ---------- icon rail ---------- -->
+  <nav class="rail" aria-label="Primary">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="rail-btn {{n.cls}}" onClick="{{n.pick}}" aria-current="{{n.cur}}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="spacer"></span>
+    <button class="rail-btn" aria-label="Settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <!-- ---------- sessions panel ---------- -->
+  <aside class="panel" aria-label="Sessions">
+    <div class="panel-top">
+      <div style="display: flex; gap: 8px">
+        <label class="search"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search sessions…" aria-label="Search sessions"><span class="kbd">Ctrl K</span></label>
+        <button class="sel-btn">Select</button>
+      </div>
+      <div style="display: flex; gap: 8px">
+        <button class="filt" style="flex: 1" aria-haspopup="listbox"><span style="flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">All Workspaces</span><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+        <button class="filt {{activeCls}}" onClick="{{toggleActive}}" aria-pressed="{{activeOnly}}"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>Active</button>
       </div>
     </div>
+    <div class="list">
+      <sc-for list="{{workspaces}}" as="w" hint-placeholder-count="4">
+        <section class="ws {{w.cls}}">
+          <button class="ws-h" onClick="{{w.toggle}}" aria-expanded="{{w.open}}">
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            <i class="ws-dot" style="background: {{w.color}}" aria-hidden="true"></i>
+            <span class="name">{{w.name}}</span>
+            <sc-if value="{{w.attn}}" hint-placeholder-val="{{false}}"><span class="attn" aria-label="Needs attention">!</span></sc-if>
+            <span class="cnt">{{w.count}}</span>
+          </button>
+          <div class="ws-body"><div class="ws-in">
+            <div class="rows">
+              <sc-for list="{{w.sessions}}" as="s" hint-placeholder-count="3">
+                <button class="row {{s.cls}}" onClick="{{s.pick}}" aria-current="{{s.cur}}">
+                  <sc-if value="{{s.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{s.attn}}</span></sc-if>
+                  <span class="src" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg>
+                    <sc-if value="{{s.jira}}" hint-placeholder-val="{{false}}"><svg class="j" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l5 5-5 5-5-5zM7 12l5 5-5 5-5-5zM17 12l5 5-5 5-5-5z"></path></svg></sc-if>
+                  </span>
+                  <sc-if value="{{s.isDone}}" hint-placeholder-val="{{false}}"><span class="done-chip">Done</span></sc-if>
+                  <span class="t">{{s.t}}</span>
+                  <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}"><span class="sub-nb" title="Subagents">{{s.sub}}</span></sc-if>
+                  <sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"></path></svg></sc-if>
+                  <span class="dur">{{s.dur}}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div></div>
+        </section>
+      </sc-for>
+    </div>
+  </aside>
 
-    <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
-      <div class="user"><sc-for list="{{m.segs}}" as="sg" hint-placeholder-count="1"><span class="{{sg.cls}}">{{sg.text}}</span></sc-for></div>
-      <section class="turn {{m.cls}}" aria-label="Agent work for this turn">
-        <span class="avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
-          <sc-if value="{{m.ok}}" hint-placeholder-val="{{false}}"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
-          <sc-if value="{{m.stopped}}" hint-placeholder-val="{{false}}"><span class="badge stopped"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"></rect></svg></span></sc-if>
-        </span>
-        <span class="cap-title"><strong>{{m.title}}</strong><span class="cap-sub">{{m.sub}}</span></span>
-        <span class="trail" aria-hidden="true"><sc-for list="{{m.dots}}" as="d" hint-placeholder-count="2"><i class="dot {{d.cls}}"></i></sc-for></span>
-        <sc-if value="{{m.live}}" hint-placeholder-val="{{false}}"><span class="shimmer">{{m.now}}</span></sc-if>
-      </section>
-      <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}">
-        <div class="reply">
-          <span class="avatar" aria-hidden="true" style="margin-top: 14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg></span>
-          <div style="min-width: 0; flex: 1">
-            <div class="who">Character 018 · Orchestrator</div>
-            <div class="reply-body">{{m.reply}}</div>
+  <!-- ---------- chat ---------- -->
+  <main class="chat">
+    <header class="top">
+      <div class="ttl">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
+        <span>{{cur.t}}</span>
+        <button class="cp" aria-label="Copy session link"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg></button>
+      </div>
+      <div class="meta">
+        <span>{{cur.role}}</span><span>·</span><span>{{cur.ws}}</span>
+        <span class="st {{cur.stCls}}"><i aria-hidden="true"></i>{{cur.stLabel}}</span>
+        <span class="pill br"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="6" cy="18" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><path d="M6 8.5v7M18 10.5c0 4-12 3-12 5"></path></svg>{{cur.branch}}</span>
+      </div>
+      <div class="top-r">
+        <button class="ib" aria-label="Zoom out"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5M8 11h6"></path></svg></button>
+        <span style="font-variant-numeric: tabular-nums">100%</span>
+        <button class="ib" aria-label="Zoom in"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5M8 11h6M11 8v6"></path></svg></button>
+        <button class="ib" aria-label="Open in editor"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
+        <button class="ib" aria-label="Delete session"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
+        <button class="ib" aria-label="Close session"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Session views">
+      <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="9"><button class="tab {{tb.cls}}" onClick="{{tb.pick}}" aria-current="{{tb.cur}}">{{tb.label}}</button></sc-for>
+    </nav>
+
+    <div class="content">
+      <!-- CHAT -->
+      <sc-if value="{{isChat}}" hint-placeholder-val="{{true}}">
+        <div class="wrap">
+          <sc-for list="{{thread}}" as="it" hint-placeholder-count="4">
+            <sc-if value="{{it.isUser}}" hint-placeholder-val="{{false}}"><div class="user">{{it.text}}</div></sc-if>
+            <sc-if value="{{it.isSaid}}" hint-placeholder-val="{{false}}"><p class="said" style="margin: 0">{{it.text}}</p></sc-if>
+            <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
+              <section class="deck {{it.cls}}" aria-label="Agent work">
+                <button class="cap" onClick="{{it.toggle}}" aria-expanded="{{it.open}}">
+                  <span class="tb">{{it.time}}
+                    <sc-if value="{{it.ok}}" hint-placeholder-val="{{true}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+                    <sc-if value="{{it.stopped}}" hint-placeholder-val="{{false}}"><span class="ok stopped"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"></rect></svg></span></sc-if>
+                    <sc-if value="{{it.live}}" hint-placeholder-val="{{false}}"><span class="ring" aria-hidden="true"></span></sc-if>
+                  </span>
+                  <span class="cap-t"><strong>{{it.title}}</strong><span class="cap-s">{{it.sub}}</span></span>
+                  <span class="trail" aria-hidden="true"><sc-for list="{{it.dots}}" as="d" hint-placeholder-count="3"><i class="dot {{d.cls}}"></i></sc-for></span>
+                  <sc-if value="{{it.live}}" hint-placeholder-val="{{false}}"><span class="shimmer">{{it.now}}</span></sc-if>
+                  <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
+                <div class="body"><div class="body-in">
+                  <ol class="steps">
+                    <sc-for list="{{it.steps}}" as="s" hint-placeholder-count="2">
+                      <li class="step" style="animation-delay: {{s.delay}}"><i class="dot {{s.k}}" aria-hidden="true" style="animation: none"></i><span class="k">{{s.label}}</span><code class="d">{{s.detail}}</code><span class="tm">{{s.time}}</span></li>
+                    </sc-for>
+                  </ol>
+                </div></div>
+              </section>
+            </sc-if>
+          </sc-for>
+
+          <sc-if value="{{isIssueCreator}}" hint-placeholder-val="{{true}}">
+            <div class="reply-body">
+              <p>I created issue #664: <a href="https://example.com/gic-developer-sandbox/primepaw/issues/664">https://github.com/gic-developer-sandbox/primepaw/issues/664</a></p>
+              <p>I labelled it <code>enhancement</code>. I didn't read the body back or link it to other issues.</p>
+              <p>I found why this happens. In <code>task-detail-view.tsx</code>, local cards already render markdown. Synced cards (GitHub issues and Jira) show their description as plain text. A code comment says that's because tracker text is untrusted. Both sources are markdown, so headings, lists and links show up raw.</p>
+              <p>The plain-text rule is about untrusted HTML, and the app's markdown renderer is already safe against that. It builds a virtual DOM and drops raw HTML, and <code>markdown-preview.tsx</code> warns against adding <code>rehype-raw</code>. So the issue asks to render markdown with the same renderer as the rest of the app, with raw HTML never enabled.</p>
+              <p>The issue also covers:</p>
+              <ul>
+                <li><b>Links:</b> only safe schemes (no <code>javascript:</code> links), opened in a new tab.</li>
+                <li><b>Images:</b> they should not load automatically, because remote images in an issue body would make the browser fetch from third-party hosts as soon as the card opens.</li>
+                <li><b>Layout:</b> long descriptions and wide tables are contained.</li>
+                <li><b>Task lists:</b> they render read-only.</li>
+              </ul>
+            </div>
+          </sc-if>
+          <sc-if value="{{isRum}}" hint-placeholder-val="{{false}}">
+            <div class="reply-body">
+              <p>The RUM SDK is now initialised in <code>app/root.tsx</code> behind the <code>DATADOG_RUM_ENABLED</code> flag, with the client token read from the runtime config rather than the bundle. Session replay is off by default.</p>
+              <p>Still running: the e2e suite against staging to confirm no CSP violations from <code>browser-intake-datadoghq.com</code>. I'll open the PR once it's green.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{isGeneric}}" hint-placeholder-val="{{false}}">
+            <div class="reply-body"><p>{{cur.reply}}</p></div>
+          </sc-if>
+
+          <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
+            <div class="user"><sc-for list="{{m.segs}}" as="sg" hint-placeholder-count="1"><span class="{{sg.cls}}">{{sg.text}}</span></sc-for></div>
+            <section class="deck {{m.cls}}" aria-label="Agent work for this turn">
+              <button class="cap" onClick="{{m.toggle}}" aria-expanded="{{m.open}}">
+                <span class="tb">{{m.time}}
+                  <sc-if value="{{m.ok}}" hint-placeholder-val="{{false}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+                  <sc-if value="{{m.stopped}}" hint-placeholder-val="{{false}}"><span class="ok stopped"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"></rect></svg></span></sc-if>
+                  <sc-if value="{{m.live}}" hint-placeholder-val="{{false}}"><span class="ring" aria-hidden="true"></span></sc-if>
+                </span>
+                <span class="cap-t"><strong>{{m.title}}</strong><span class="cap-s">{{m.sub}}</span></span>
+                <span class="trail" aria-hidden="true"><sc-for list="{{m.dots}}" as="d" hint-placeholder-count="2"><i class="dot {{d.cls}}"></i></sc-for></span>
+                <sc-if value="{{m.live}}" hint-placeholder-val="{{false}}"><span class="shimmer">{{m.now}}</span></sc-if>
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <div class="body"><div class="body-in">
+                <ol class="steps">
+                  <sc-for list="{{m.steps}}" as="s" hint-placeholder-count="2">
+                    <li class="step" style="animation-delay: {{s.delay}}"><i class="dot {{s.k}}" aria-hidden="true" style="animation: none"></i><span class="k">{{s.label}}</span><code class="d">{{s.detail}}</code><span class="tm">{{s.time}}</span></li>
+                  </sc-for>
+                </ol>
+              </div></div>
+            </section>
+            <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><div class="reply-body"><p>{{m.reply}}</p></div></sc-if>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- GIT -->
+      <sc-if value="{{isGit}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <div class="card"><h3>Working tree · {{cur.branch}}</h3>
+            <div class="frow"><span class="chip">M</span><span class="p">app/components/task-detail-view.tsx</span><span class="plus">+38</span><span class="minus">−12</span></div>
+            <div class="frow"><span class="chip">M</span><span class="p">app/components/markdown-preview.tsx</span><span class="plus">+6</span><span class="minus">−1</span></div>
+            <div class="frow"><span class="chip">A</span><span class="p">app/lib/safe-link.ts</span><span class="plus">+41</span><span class="minus">−0</span></div>
+            <div class="frow"><span class="chip">M</span><span class="p">tests/task-detail-view.test.tsx</span><span class="plus">+57</span><span class="minus">−3</span></div>
+          </div>
+          <div class="card"><h3>Recent commits</h3>
+            <div class="frow"><span class="chip" style="font-family: var(--mono)">a91f3c0</span><span class="p" style="font-family: inherit">Render synced card descriptions as markdown</span><span class="chip">2m ago</span></div>
+            <div class="frow"><span class="chip" style="font-family: var(--mono)">7d2e8b4</span><span class="p" style="font-family: inherit">Add safe-link helper and tests</span><span class="chip">14m ago</span></div>
+            <div class="frow"><span class="chip" style="font-family: var(--mono)">c46b20f</span><span class="p" style="font-family: inherit">Merge release-primepaw into main</span><span class="chip">6h ago</span></div>
           </div>
         </div>
       </sc-if>
-    </sc-for>
-  </main>
 
-  <footer style="width: 100%; max-width: 920px; margin: 0 auto; box-sizing: border-box; padding: 0 16px 22px; display: flex; flex-direction: column; gap: 10px">
-    <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
-    <div class="comp-wrap">
-      <div class="glow" aria-hidden="true"></div>
-      <div class="composer">
-        <div class="ring" aria-hidden="true"></div>
-        <div class="ed-wrap">
-          <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
-            <div class="fmt" role="toolbar" aria-label="Text formatting" style="left: {{selX}}; top: {{selY}}">
-              <button type="button" onMouseDown="{{fmtBold}}" aria-label="Bold"><span style="font-weight: 700">B</span></button>
-              <button type="button" onMouseDown="{{fmtItalic}}" aria-label="Italic"><span style="font-style: italic; font-family: Georgia, serif">I</span></button>
-              <button type="button" onMouseDown="{{fmtCode}}" aria-label="Inline code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
-              <button type="button" onMouseDown="{{fmtLink}}" aria-label="Link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
-              <span class="sep" aria-hidden="true"></span>
-              <button type="button" onMouseDown="{{fmtClear}}" aria-label="Clear formatting"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-            </div>
-          </sc-if>
-          <label class="sr" for="composer">Message the agent</label>
-          <div id="composer" class="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Message the agent" data-placeholder="{{placeholder}}" ref="{{edRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onKeyUp="{{onSel}}" onMouseUp="{{onSel}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></div>
+      <!-- GITHUB -->
+      <sc-if value="{{isGithub}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <div class="card"><h3>Issues created in this session</h3>
+            <div class="frow"><span class="chip" style="color: var(--ok)">open</span><span class="p" style="font-family: inherit">#664 Render synced task descriptions as markdown</span><span class="chip">enhancement</span></div>
+          </div>
+          <div class="card"><h3>Pull requests</h3>
+            <div class="frow"><span class="chip" style="color: var(--warn)">draft</span><span class="p" style="font-family: inherit">#5412 feat(primepaw): markdown for synced cards</span><span class="chip">CI running</span></div>
+          </div>
         </div>
-        <div class="bar">
-          <div class="tools">
-            <span class="tool">
-              <button class="pill-btn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
-                <i class="mdot" style="background: {{modelColor}}" aria-hidden="true"></i>
-                <span>{{modelName}}</span>
-                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
-                <sc-if value="{{auto}}" hint-placeholder-val="{{true}}"><span class="autotag">auto</span></sc-if>
-                <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
-                  <svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-                  <span class="maxtag">MAX</span>
-                </sc-if>
-                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"></path></svg>
-                <sc-if value="{{maxBurst}}" hint-placeholder-val="{{false}}"><i class="burst" aria-hidden="true"></i><i class="burst b2" aria-hidden="true"></i></sc-if>
-              </button>
-              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
-                <div class="pop {{popCls}}" role="dialog" aria-label="Model and effort">
-                  <div class="pop-h"><span>Model</span></div>
-                  <div style="display: flex; flex-direction: column; gap: 2px">
-                    <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
-                      <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}">
-                        <i class="dot" style="background: {{mo.color}}; animation: none" aria-hidden="true"></i>
-                        <span class="mname">{{mo.name}}</span>
-                        <span class="mdesc">{{mo.desc}} · <span class="mdef">{{mo.defLabel}}</span></span>
-                        <sc-if value="{{mo.sel}}" hint-placeholder-val="{{false}}"><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
-                      </button>
-                    </sc-for>
-                  </div>
-                  <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">{{effortLabel}} <em class="mode">· {{effortMode}}</em></span></div>
-                  <div class="sl">
-                    <div class="track" aria-hidden="true"></div>
-                    <div class="fill" style="width: {{effPct}}" aria-hidden="true"></div>
-                    <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-                    <i class="defmark" style="left: {{defPct}}" aria-hidden="true"></i>
-                    <label class="sr" for="effort">Effort level</label>
-                    <input id="effort" type="range" min="0" max="4" step="1" value="{{effort}}" onChange="{{setEffort}}" aria-valuetext="{{effortLabel}}">
-                    <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
-                      <span class="sparks" aria-hidden="true"><i style="--dx: -14px; --d: 0s"></i><i style="--dx: 10px; --d: .15s"></i><i style="--dx: -4px; --d: .3s"></i><i style="--dx: 16px; --d: .45s"></i><i style="--dx: -18px; --d: .6s"></i><i style="--dx: 4px; --d: .75s"></i><i style="--dx: -9px; --d: .9s"></i></span>
-                    </sc-if>
-                  </div>
-                  <div class="elab" aria-hidden="true"><sc-for list="{{elabs}}" as="e" hint-placeholder-count="5"><span class="{{e.cls}}">{{e.t}}</span></sc-for></div>
-                  <div class="adapt">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
-                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think on each turn. Effort sets the ceiling and the token spend.</span>
-                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">Use model default</button></sc-if>
-                  </div>
-                  <button class="row-sw" role="switch" aria-checked="{{showThink}}" onClick="{{toggleThink}}">
-                    <span class="row-sw-l">Show reasoning summary</span>
-                    <span class="mini-track" aria-hidden="true"><span class="mini-knob"></span></span>
-                  </button>
-                  <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
-                    <div class="maxnote">
-                      <svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-                      <span>Max effort. Longest thinking, most tool calls, slowest replies. Save it for the gnarly ones.</span>
-                    </div>
-                  </sc-if>
+      </sc-if>
+
+      <!-- TODOS -->
+      <sc-if value="{{isTodos}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <div class="card"><h3>Todos · {{todoDone}} of {{todoTotal}}</h3>
+            <sc-for list="{{todos}}" as="td" hint-placeholder-count="4">
+              <button class="todo {{td.cls}}" onClick="{{td.toggle}}" aria-pressed="{{td.done}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span><span>{{td.t}}</span></button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- TOOLS -->
+      <sc-if value="{{isTools}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <div class="card"><h3>Tool calls this session</h3>
+            <div class="frow"><i class="dot bash" style="animation: none"></i><span class="p" style="font-family: inherit">bash</span><span class="chip">14 calls · 1m 12s</span></div>
+            <div class="frow"><i class="dot read" style="animation: none"></i><span class="p" style="font-family: inherit">read</span><span class="chip">9 calls · 4s</span></div>
+            <div class="frow"><i class="dot edit" style="animation: none"></i><span class="p" style="font-family: inherit">edit</span><span class="chip">4 calls · 2s</span></div>
+            <div class="frow"><i class="dot ask" style="animation: none"></i><span class="p" style="font-family: inherit">gh issue create</span><span class="chip">1 call · 3s</span></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- SUBAGENTS -->
+      <sc-if value="{{isSub}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <div class="card"><h3>Subagents</h3>
+            <div class="frow"><i class="dot sub" style="animation: none"></i><span class="p" style="font-family: inherit">implementer-agent · Sonnet 5.5</span><span class="chip">done · 2m 18s</span></div>
+            <div class="frow"><i class="dot sub" style="animation: none"></i><span class="p" style="font-family: inherit">reviewer · Haiku 5.5</span><span class="chip">done · 41s</span></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- TERMINAL -->
+      <sc-if value="{{isTerm}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <pre class="term" style="margin: 0"><span class="b">$</span> pnpm test -- task-detail-view
+<span class="m">› vitest run tests/task-detail-view.test.tsx</span>
+ <span class="g">✓</span> renders local card markdown <span class="m">(12 ms)</span>
+ <span class="g">✓</span> renders synced card markdown without raw html <span class="m">(9 ms)</span>
+ <span class="g">✓</span> blocks javascript: links <span class="m">(3 ms)</span>
+ <span class="y">↻</span> images stay unloaded until clicked <span class="m">(running)</span>
+
+<span class="m">Test Files  1 passed | Tests  3 passed, 1 running</span></pre>
+        </div>
+      </sc-if>
+
+      <!-- LOGS -->
+      <sc-if value="{{isLogs}}" hint-placeholder-val="{{false}}">
+        <div class="wrap">
+          <pre class="term" style="margin: 0"><span class="m">11:32:04</span> <span class="b">llm</span>   turn 12 · bedrock/claude-sonnet-5-5 · effort high · 4.1k in / 612 out
+<span class="m">11:32:09</span> <span class="b">tool</span>  bash · exit 0 · 1.2s
+<span class="m">11:32:21</span> <span class="b">tool</span>  gh issue create · exit 0 · 3.0s
+<span class="m">11:32:22</span> <span class="g">ok</span>    turn complete · 55s · context 138k/200k</pre>
+        </div>
+      </sc-if>
+
+      <!-- BROWSER -->
+      <sc-if value="{{isBrowser}}" hint-placeholder-val="{{false}}">
+        <div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M3 9h18M7 6.5h.01M10 6.5h.01"></path></svg><strong style="color: var(--ink)">No page open</strong><span>The agent hasn't used the browser in this session.</span></div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{drawerOpen}}" hint-placeholder-val="{{false}}">
+      <aside class="drawer" aria-label="Artifacts">
+        <div style="display: flex; align-items: center; justify-content: space-between"><h3>Artifacts</h3><button class="ib" onClick="{{toggleDrawer}}" aria-label="Close artifacts"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+        <div class="art"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5"></path></svg><div><div>issue-664-draft.md</div><div class="m">3.2 KB · 11:32</div></div></div>
+      </aside>
+    </sc-if>
+
+    <!-- ---------- composer ---------- -->
+    <footer class="foot">
+      <div class="foot-in">
+        <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
+        <div class="comp-wrap">
+          <div class="glow" aria-hidden="true"></div>
+          <div class="composer">
+            <div class="ring" aria-hidden="true"></div>
+            <div class="ed-wrap">
+              <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
+                <div class="fmt" role="toolbar" aria-label="Text formatting" style="left: {{selX}}; top: {{selY}}">
+                  <button type="button" onMouseDown="{{fmtBold}}" aria-label="Bold"><span style="font-weight: 700">B</span></button>
+                  <button type="button" onMouseDown="{{fmtItalic}}" aria-label="Italic"><span style="font-style: italic; font-family: Georgia, serif">I</span></button>
+                  <button type="button" onMouseDown="{{fmtCode}}" aria-label="Inline code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
+                  <button type="button" onMouseDown="{{fmtLink}}" aria-label="Link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+                  <span class="sep" aria-hidden="true"></span>
+                  <button type="button" onMouseDown="{{fmtClear}}" aria-label="Clear formatting"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
                 </div>
               </sc-if>
-            </span>
+              <label class="sr" for="composer">Message the agent</label>
+              <div id="composer" class="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Message the agent" data-placeholder="{{placeholder}}" ref="{{edRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onKeyUp="{{onSel}}" onMouseUp="{{onSel}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></div>
+            </div>
+            <div class="bar">
+              <button class="mic" aria-label="Attach file"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8l9-9a3.5 3.5 0 0 1 5 5l-9 9a1.5 1.5 0 0 1-2.1-2.1l8-8"></path></svg></button>
+              <div class="tools">
+                <span class="tool">
+                  <button class="pill-btn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                    <i class="mdot" style="background: {{modelColor}}" aria-hidden="true"></i>
+                    <span>{{modelName}}</span>
+                    <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+                    <sc-if value="{{auto}}" hint-placeholder-val="{{true}}"><span class="autotag">auto</span></sc-if>
+                    <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
+                      <svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                      <span class="maxtag">MAX</span>
+                    </sc-if>
+                    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"></path></svg>
+                    <sc-if value="{{maxBurst}}" hint-placeholder-val="{{false}}"><i class="burst" aria-hidden="true"></i><i class="burst b2" aria-hidden="true"></i></sc-if>
+                  </button>
+                  <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                    <div class="pop {{popCls}}" role="dialog" aria-label="Model and effort">
+                      <div class="pop-h"><span>Model</span></div>
+                      <div style="display: flex; flex-direction: column; gap: 2px">
+                        <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                          <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}">
+                            <i class="dot" style="background: {{mo.color}}; animation: none" aria-hidden="true"></i>
+                            <span class="mname">{{mo.name}}</span>
+                            <span class="mdesc">{{mo.desc}} · <span class="mdef">{{mo.defLabel}}</span></span>
+                            <sc-if value="{{mo.sel}}" hint-placeholder-val="{{false}}"><svg class="mck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
+                          </button>
+                        </sc-for>
+                      </div>
+                      <div class="pop-h" style="margin-top: 8px"><span>Effort</span><span class="val">{{effortLabel}} <em class="mode">· {{effortMode}}</em></span></div>
+                      <div class="sl">
+                        <div class="track" aria-hidden="true"></div>
+                        <div class="fill" style="width: {{effPct}}" aria-hidden="true"></div>
+                        <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                        <i class="defmark" style="left: {{defPct}}" aria-hidden="true"></i>
+                        <label class="sr" for="effort">Effort level</label>
+                        <input id="effort" type="range" min="0" max="4" step="1" value="{{effort}}" onChange="{{setEffort}}" aria-valuetext="{{effortLabel}}">
+                        <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
+                          <span class="sparks" aria-hidden="true"><i style="--dx: -14px; --d: 0s"></i><i style="--dx: 10px; --d: .15s"></i><i style="--dx: -4px; --d: .3s"></i><i style="--dx: 16px; --d: .45s"></i><i style="--dx: -18px; --d: .6s"></i><i style="--dx: 4px; --d: .75s"></i><i style="--dx: -9px; --d: .9s"></i></span>
+                        </sc-if>
+                      </div>
+                      <div class="elab" aria-hidden="true"><sc-for list="{{elabs}}" as="e" hint-placeholder-count="5"><span class="{{e.cls}}">{{e.t}}</span></sc-for></div>
+                      <div class="adapt">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"></path></svg>
+                        <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think on each turn. Effort sets the ceiling and the token spend.</span>
+                        <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">Use model default</button></sc-if>
+                      </div>
+                      <button class="row-sw" role="switch" aria-checked="{{showThink}}" onClick="{{toggleThink}}">
+                        <span class="row-sw-l">Show reasoning summary</span>
+                        <span class="mini-track" aria-hidden="true"><span class="mini-knob"></span></span>
+                      </button>
+                      <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}">
+                        <div class="maxnote">
+                          <svg class="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                          <span>Max effort. Longest thinking, most tool calls, slowest replies. Save it for the gnarly ones.</span>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </span>
 
-            <span class="tool">
-              <button class="pill-btn {{gaugeBtnCls}}" onClick="{{toggleCtx}}" aria-expanded="{{ctxOpen}}" aria-haspopup="dialog" aria-label="{{ctxAria}}">
-                <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
-                  <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
-                  <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
-                  <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
-                  <g class="nwrap"><line class="needle {{gaugeCls}}" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line></g>
-                  <circle class="g-hub" cx="20" cy="20" r="2.4"></circle>
-                </svg>
-                <span class="gpct">{{pct}}%</span>
-                <sc-if value="{{isLow}}" hint-placeholder-val="{{false}}"><i class="lamp" aria-hidden="true"></i></sc-if>
-                <sc-if value="{{refill}}" hint-placeholder-val="{{false}}"><span class="refill" aria-hidden="true">{{refillText}}</span></sc-if>
-              </button>
-              <sc-if value="{{ctxOpen}}" hint-placeholder-val="{{false}}">
-                <div class="pop ctxpop" role="dialog" aria-label="Context window">
-                  <div class="ctx-top">
-                    <svg class="g g-big" viewBox="0 0 40 40" role="img" aria-label="{{ctxAria}}">
+                <span class="tool">
+                  <button class="pill-btn {{gaugeBtnCls}}" onClick="{{toggleCtx}}" aria-expanded="{{ctxOpen}}" aria-haspopup="dialog" aria-label="{{ctxAria}}">
+                    <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
                       <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
                       <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
                       <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
-                      <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(225 20 20)"></line>
-                      <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(292.5 20 20)"></line>
-                      <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5"></line>
-                      <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(67.5 20 20)"></line>
-                      <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(135 20 20)"></line>
-                      <text x="7.5" y="34.5">E</text>
-                      <text x="30" y="34.5">F</text>
-                      <g class="nwrap"><line class="needle {{gaugeCls}}" x1="20" y1="20" x2="31" y2="20" style="transform: rotate({{needleDeg}}deg)"></line></g>
-                      <circle class="g-hub" cx="20" cy="20" r="1.6"></circle>
+                      <g class="nwrap"><line class="needle {{gaugeCls}}" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line></g>
+                      <circle class="g-hub" cx="20" cy="20" r="2.4"></circle>
                     </svg>
-                    <div class="ctx-num">
-                      <strong>{{leftK}} left</strong>
-                      <span>of {{totalK}} context · {{usedK}} used</span>
-                      <sc-if value="{{isLow}}" hint-placeholder-val="{{false}}"><span style="color: #ff7083; font-weight: 500">Low fuel · compact soon</span></sc-if>
+                    <span class="gpct">{{pct}}%</span>
+                    <sc-if value="{{isLow}}" hint-placeholder-val="{{false}}"><i class="lamp" aria-hidden="true"></i></sc-if>
+                    <sc-if value="{{refill}}" hint-placeholder-val="{{false}}"><span class="refill" aria-hidden="true">{{refillText}}</span></sc-if>
+                  </button>
+                  <sc-if value="{{ctxOpen}}" hint-placeholder-val="{{false}}">
+                    <div class="pop ctxpop" role="dialog" aria-label="Context window">
+                      <div class="ctx-top">
+                        <svg class="g g-big" viewBox="0 0 40 40" role="img" aria-label="{{ctxAria}}">
+                          <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                          <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                          <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                          <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(225 20 20)"></line>
+                          <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(292.5 20 20)"></line>
+                          <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5"></line>
+                          <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(67.5 20 20)"></line>
+                          <line class="tick" x1="20" y1="2.5" x2="20" y2="4.5" transform="rotate(135 20 20)"></line>
+                          <text x="7.5" y="34.5">E</text>
+                          <text x="30" y="34.5">F</text>
+                          <g class="nwrap"><line class="needle {{gaugeCls}}" x1="20" y1="20" x2="31" y2="20" style="transform: rotate({{needleDeg}}deg)"></line></g>
+                          <circle class="g-hub" cx="20" cy="20" r="1.6"></circle>
+                        </svg>
+                        <div class="ctx-num">
+                          <strong>{{leftK}} left</strong>
+                          <span>of {{totalK}} context · {{usedK}} used</span>
+                          <sc-if value="{{isLow}}" hint-placeholder-val="{{false}}"><span style="color: #ff7083; font-weight: 500">Low fuel · compact soon</span></sc-if>
+                        </div>
+                      </div>
+                      <div class="stack" aria-hidden="true"><sc-for list="{{parts}}" as="p" hint-placeholder-count="4"><i style="width: {{p.w}}; background: {{p.color}}"></i></sc-for></div>
+                      <sc-for list="{{parts}}" as="p" hint-placeholder-count="4">
+                        <div class="prow"><i class="dot" style="background: {{p.color}}" aria-hidden="true"></i><span>{{p.name}}</span><span class="n">{{p.k}}</span></div>
+                      </sc-for>
+                      <div style="display: flex; gap: 8px; justify-content: flex-end; padding: 8px 4px 2px">
+                        <button class="act ghost" onClick="{{burn}}">Simulate +40k</button>
+                        <button class="act" onClick="{{compact}}">Compact context</button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="stack" aria-hidden="true"><sc-for list="{{parts}}" as="p" hint-placeholder-count="4"><i style="width: {{p.w}}; background: {{p.color}}"></i></sc-for></div>
-                  <sc-for list="{{parts}}" as="p" hint-placeholder-count="4">
-                    <div class="prow"><i class="dot" style="background: {{p.color}}" aria-hidden="true"></i><span>{{p.name}}</span><span class="n">{{p.k}}</span></div>
-                  </sc-for>
-                  <div style="display: flex; gap: 8px; justify-content: flex-end; padding: 8px 4px 2px">
-                    <button class="act ghost" onClick="{{burn}}">Simulate +40k</button>
-                    <button class="act" onClick="{{compact}}">Compact context</button>
-                  </div>
-                </div>
-              </sc-if>
-            </span>
+                  </sc-if>
+                </span>
 
-            <button class="sw" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
-              <span class="track" aria-hidden="true">
-                <span class="knob"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path></svg></span>
-                <sc-if value="{{yoloBurst}}" hint-placeholder-val="{{false}}"><i class="burst" aria-hidden="true"></i><i class="burst b2" aria-hidden="true"></i></sc-if>
-              </span>
-              <span>YOLO</span>
-            </button>
+                <button class="sw" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+                  <span class="track" aria-hidden="true">
+                    <span class="knob"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path></svg></span>
+                    <sc-if value="{{yoloBurst}}" hint-placeholder-val="{{false}}"><i class="burst" aria-hidden="true"></i><i class="burst b2" aria-hidden="true"></i></sc-if>
+                  </span>
+                  <span>YOLO</span>
+                </button>
+
+                <span class="pill" title="Working directory"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{cur.ws}}</span>
+              </div>
+              <span class="hint" aria-hidden="true">{{hint}}</span>
+              <button class="mic" aria-label="Voice input"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+              <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
+                <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3"></rect></svg></sc-if>
+                <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></sc-if>
+              </button>
+            </div>
           </div>
-          <span class="hint" aria-hidden="true">{{hint}}</span>
-          <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
-            <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3"></rect></svg></sc-if>
-            <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></sc-if>
-          </button>
+        </div>
+        <div class="demo">
+          <span>Click sessions and tabs · type, select to format, ↵ to send, red square or ⎋ stops · demo counts each character as 25 tokens</span>
+          <button onClick="{{reset}}">Reset demo</button>
         </div>
       </div>
-    </div>
-    <div class="demo">
-      <span>Type, select text to format, ↵ to send, then hit the red square (or ⎋) to stop · demo counts each character as 25 tokens so the gauge moves</span>
-      <button onClick="{{reset}}">Reset demo</button>
-    </div>
-  </footer>
+    </footer>
+  </main>
+
+  <!-- ---------- right rail ---------- -->
+  <aside class="rside" aria-label="Side panels">
+    <button class="vtab {{drawerCls}}" onClick="{{toggleDrawer}}" aria-pressed="{{drawerOpen}}">Artifacts<span class="nb">1</span></button>
+    <button class="vtab">GameRoom</button>
+  </aside>
+</div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#7c9cff","options":["#7c9cff","#5fd4e8","#c58cff","#f0b64f"]},"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1280,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#7c9cff","options":["#7c9cff","#5fd4e8","#c58cff","#f0b64f"]},"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1440,"height":900}}'>
 const MODELS = [
   { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', color: '#c58cff', def: 2 },
   { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', color: '#7c9cff', def: 1 },
@@ -445,7 +828,7 @@ const MODELS = [
 ];
 const EFFORT = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
 const ARC = 65.97, CIRC = 87.96;
-const BASE = { system: 9000, messages: 22000, tools: 27000, thinking: 4000 };
+const BASE = { system: 9000, messages: 48000, tools: 72000, thinking: 9000 };
 const PARTS = [
   { key: 'system', name: 'System + skills', color: '#9aa6cc' },
   { key: 'messages', name: 'Messages', color: '#c9cfe8' },
@@ -454,8 +837,99 @@ const PARTS = [
 ];
 const TOKENS_PER_CHAR = 25;
 
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+const TABS = ['Chat', 'Git', 'GitHub', 'Todos', 'Tools', 'Subagents', 'Browser', 'Terminal', 'Logs'];
+
+const WS = [
+  { id: 'primepaw', name: 'Primepaw Dev', color: '#4fd1a0', sessions: [
+    { id: 's1', t: 'dark factory: the curator creates the nightly digest', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
+    { id: 's2', t: 'Pull latest main and release-primepaw into feature', st: 'busy', dur: '4m 55s', role: 'Implementer', branch: 'feat/LEIB-281' },
+    { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
+  { id: 'le', name: 'Large Exposure App', color: '#ff7ab8', attn: true, sessions: [
+    { id: 's4', t: 'Sticky Sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-sessions' },
+    { id: 's5', t: 'LEIB-272 - Datadog RUM', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/LEIB-272-datadog-rum' },
+    { id: 's6', t: 'Ticket Creation', st: 'idle', dur: '1m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's7', t: 'Generate App Icon', st: 'idle', dur: '2m 50s', role: 'Implementer', branch: 'main' },
+    { id: 's8', t: 'Filter JSON by Date and Correlate with Logs', st: 'idle', dur: '1m 02s', role: 'Implementer', branch: 'main' },
+    { id: 's9', t: 'Migrate RPMDACR EKS cluster to private subnets', st: 'done', dur: '34s', role: 'Orchestrator', branch: 'feat/eks-private' },
+    { id: 's10', t: 'MyAccess Role Filling In', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
+    { id: 's11', t: 'Fill MyAccess Take On Form', st: 'idle', dur: '45m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's12', t: 'Cross-instance access security vulnerability', st: 'idle', dur: '46m 18s', role: 'Orchestrator', branch: 'fix/LEIB-266' },
+    { id: 's13', t: 'Find Recent LEIB-Prefixed Pull Requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's14', t: 'Guardrails Check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's15', t: 'Stale PR LEIB-205 Still Relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's16', t: 'BITRA Answers', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
+  { id: 'acr', name: 'RPMD ACR Private Deploy', color: '#f0b64f', sessions: [
+    { id: 's17', t: 'Update Image Hash', st: 'idle', dur: '29m 03s', role: 'Implementer', branch: 'main' },
+    { id: 's18', t: 'Find and move preprod deployed images', st: 'busy', dur: '31m 15s', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
+  { id: 'tf', name: 'RPMD ACR Private TF', color: '#9aa6cc', sessions: [
+    { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12m 08s', role: 'Orchestrator', branch: 'main' } ] }
+];
+
+const CAP = (id, time, sub, dots, steps) => ({ k: 'cap', id, time, sub, dots, steps });
+const SAID = (text) => ({ k: 'said', text });
+const USER = (text) => ({ k: 'user', text });
+
+const THREADS = {
+  s3: [
+    USER('Create a GitHub issue for synced task cards showing markdown as plain text. Look at how local cards render first.'),
+    CAP('c1', '13s', '2 LLM calls · 1 tool call', ['think', 'read'], [
+      { k: 'think', label: 'thinking', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
+      { k: 'read', label: 'read', detail: 'app/components/task-detail-view.tsx', time: '0.3s' } ]),
+    SAID('Line 562 renders markdown but line 516 renders plain text, so I\'ll check what separates them.'),
+    CAP('c2', '31s', '4 LLM calls · 4 tool calls', ['bash', 'read', 'read', 'bash'], [
+      { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- app/components/task-detail-view.tsx", time: '1.1s' },
+      { k: 'read', label: 'read', detail: 'app/components/markdown-preview.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'app/lib/sync/github.ts', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'grep -rn "rehype-raw" app/ | head', time: '0.4s' } ]),
+    SAID('Local cards render markdown, but synced cards (GitHub issues, Jira) deliberately show plain text. That is what the ticket needs to change.'),
+    CAP('c3', '10s', '1 LLM call · 1 tool call · turn 55s', ['ask'], [
+      { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced task descriptions as markdown" --label enhancement', time: '3.0s' } ])
+  ],
+  s5: [
+    USER('Enable Datadog RUM in the Large Exposure frontend. Keep the client token out of the bundle and gate it behind a flag.'),
+    CAP('r1', '48s', '5 LLM calls · 6 tool calls', ['read', 'read', 'bash', 'edit', 'edit', 'bash'], [
+      { k: 'read', label: 'read', detail: 'app/root.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'app/config/runtime.ts', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm add @datadog/browser-rum', time: '9.4s' },
+      { k: 'edit', label: 'edit', detail: 'app/root.tsx (+24)', time: '0.3s' },
+      { k: 'edit', label: 'edit', detail: 'app/config/runtime.ts (+6)', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm typecheck → 0 errors', time: '21s' } ]),
+    SAID('The SDK is wired behind DATADOG_RUM_ENABLED. Before opening a PR I want the e2e run against staging to confirm the CSP allows the intake host.'),
+    { k: 'cap', id: 'r2', live: true, time: '1h 53m', sub: '3 steps · 1h 53m', dots: ['bash', 'read', 'bash'], now: 'bash · pnpm e2e --env staging --grep rum', steps: [
+      { k: 'bash', label: 'bash', detail: 'pnpm e2e --env staging --grep rum', time: '…' } ] }
+  ]
+};
+const GENERIC = [
+  USER('Pick this up from where the last session left off and summarise the state.'),
+  CAP('g1', '21s', '3 LLM calls · 2 tool calls', ['think', 'read', 'bash'], [
+    { k: 'think', label: 'thinking', detail: 'Read the last reply and the working tree first', time: '6s' },
+    { k: 'read', label: 'read', detail: 'last reply · 1.4k tokens', time: '0.2s' },
+    { k: 'bash', label: 'bash', detail: 'git status --short && git log --oneline -3', time: '0.9s' } ])
+];
+const GENERIC_REPLY = {
+  s1: 'The curator now writes the digest to docs/digest/2026-10-30.md and opens a draft PR each night. Two sources still return 403; I\'m retrying them with the service account.',
+  s2: 'Merged origin/main and release-primepaw into the feature branch. One conflict in package.json resolved in favour of the release pin. Tests are running.',
+  s4: 'Sticky sessions are enabled on the ALB target group with a 12h cookie. Verifying the health check still passes across both AZs.',
+  s9: 'Migration complete. Both node groups moved to private subnets and the NAT gateway route is in place. Nothing else to do here.',
+  s18: 'Found 14 preprod images tagged with the old registry. Moving them in batches of five so the registry rate limit isn\'t hit.'
+};
+
 function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
 function fmtSec(ms) { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+function findSession(id) { for (const w of WS) { const s = w.sessions.find((x) => x.id === id); if (s) return { ...s, ws: w.name }; } return null; }
 
 function walk(node, f, out) {
   node.childNodes.forEach((n) => {
@@ -474,12 +948,16 @@ function walk(node, f, out) {
 }
 
 class Component extends DCLogic {
-  state = { model: 'fable', effort: 2, auto: true, showThink: false, yolo: false, open: null, used: { ...BASE }, draft: 0, focus: false, sel: null, msgs: [], maxBurst: false, yoloBurst: false, refill: null, fly: false, tick: 0 };
+  state = { sid: 's3', tab: 'Chat', openWs: { primepaw: true, le: true, acr: true, tf: false }, openCaps: {}, activeOnly: false, drawer: false,
+    todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the GitHub issue', d: true }, { t: 'Link the issue to LEIB-273', d: false }] },
+    model: 'sonnet', effort: 2, auto: true, showThink: false, yolo: true, open: null, used: { ...BASE }, draft: 0, focus: false, sel: null, msgs: {}, maxBurst: false, yoloBurst: false, refill: null, fly: false, tick: 0 };
 
   componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearTimeout(this.t4); clearInterval(this.ticker); }
 
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
   usedSum(u) { return u.system + u.messages + u.tools + u.thinking; }
+  curMsgs() { return this.state.msgs[this.state.sid] || []; }
+  busy() { return this.curMsgs().some((m) => !m.done); }
 
   updateSel() {
     const s = window.getSelection();
@@ -490,24 +968,18 @@ class Component extends DCLogic {
     this.setState({ sel: { x: Math.round(r.left - w.left + r.width / 2), y: Math.round(r.top - w.top) } });
   }
 
-  fmt(cmd, arg) {
+  fmt(cmd) {
     return (e) => {
       e.preventDefault();
       if (cmd === 'code') {
-        const s = window.getSelection();
-        const txt = s ? s.toString() : '';
-        if (!txt) return;
+        const s = window.getSelection(); const txt = s ? s.toString() : ''; if (!txt) return;
         const esc = txt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         document.execCommand('insertHTML', false, '<code>' + esc + '</code>');
       } else if (cmd === 'link') {
-        const s = window.getSelection();
-        const txt = (s ? s.toString() : '').trim();
-        if (!txt) return;
+        const s = window.getSelection(); const txt = (s ? s.toString() : '').trim(); if (!txt) return;
         const url = /^https?:\/\//i.test(txt) ? txt : 'https://example.com/' + encodeURIComponent(txt.toLowerCase().replace(/\s+/g, '-'));
         document.execCommand('createLink', false, url);
-      } else {
-        document.execCommand(cmd, false, arg || null);
-      }
+      } else { document.execCommand(cmd, false, null); }
       this.onInputEl(this.ed);
       setTimeout(() => this.updateSel(), 0);
     };
@@ -516,36 +988,46 @@ class Component extends DCLogic {
   onInputEl(el) {
     if (!el) return;
     this.ed = el;
-    if (!el.textContent.trim() && !el.querySelector('code,a,b,i')) { if (el.textContent === '' && el.childNodes.length) el.textContent = ''; }
+    if (el.textContent === '' && el.childNodes.length) el.textContent = '';
     this.setState({ draft: el.textContent.length });
   }
 
-  busy() { return this.state.msgs.some((m) => !m.done); }
+  setMsgs(sid, list) { this.setState({ msgs: { ...this.state.msgs, [sid]: list } }); }
 
   stop() {
     clearInterval(this.ticker); clearTimeout(this.t4);
-    this.setState({ msgs: this.state.msgs.map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), steps: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) });
+    const sid = this.state.sid;
+    this.setMsgs(sid, this.curMsgs().map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), steps: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }));
   }
 
   send() {
     const el = this.ed;
     if (this.busy() || !el || !el.textContent.trim()) return;
-    const out = [];
-    walk(el, {}, out);
+    const out = []; walk(el, {}, out);
     const tokens = Math.max(40, el.textContent.length * TOKENS_PER_CHAR);
     el.textContent = '';
-    const id = Date.now();
+    const id = Date.now(); const sid = this.state.sid;
     const used = { ...this.state.used, messages: this.state.used.messages + tokens };
-    const msgs = [...this.state.msgs, { id, segs: out, start: id, done: false }];
-    this.setState({ msgs, draft: 0, used, sel: null, fly: true, open: null });
+    this.setState({ msgs: { ...this.state.msgs, [sid]: [...this.curMsgs(), { id, segs: out, start: id, done: false }] }, draft: 0, used, sel: null, fly: true, open: null });
     clearTimeout(this.t3); this.t3 = setTimeout(() => this.setState({ fly: false }), 520);
     clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400);
     clearTimeout(this.t4);
     this.t4 = setTimeout(() => {
       clearInterval(this.ticker);
       const u = { ...this.state.used, thinking: this.state.used.thinking + 600, tools: this.state.used.tools + 900 };
-      this.setState({ msgs: this.state.msgs.map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m), used: u });
+      this.setState({ used: u, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } });
     }, 2600);
+  }
+
+  capView(c, sid) {
+    const open = !!this.state.openCaps[sid + c.id];
+    return {
+      isCap: true, open, cls: (open ? 'open ' : '') + (c.live ? 'live' : ''), live: !!c.live, ok: !c.live, stopped: false,
+      time: c.time, title: c.live ? 'Working' : 'Done', sub: c.sub, now: c.now || '',
+      dots: c.dots.map((k, i) => ({ cls: k + (c.live && i === c.dots.length - 1 ? ' run' : '') })),
+      steps: c.steps.map((s, i) => ({ ...s, delay: (50 + i * 55) + 'ms' })),
+      toggle: () => this.setState({ openCaps: { ...this.state.openCaps, [sid + c.id]: !open } })
+    };
   }
 
   renderVals() {
@@ -560,32 +1042,71 @@ class Component extends DCLogic {
     const isMax = st.effort === 4;
     const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
     const partsTotal = usedSum || 1;
-
+    const cur = findSession(st.sid) || findSession('s3');
     const busy = this.busy();
-    const msgs = st.msgs.map((m) => {
-      const live = !m.done;
-      const stopped = !!m.stopped;
+    const liveSession = cur.st === 'busy' && st.sid !== 's5' ? false : cur.st === 'busy';
+    const stCls = busy || cur.st === 'busy' ? 'busy' : cur.attn ? 'attn' : '';
+    const stLabel = busy || cur.st === 'busy' ? 'Busy' : cur.attn ? 'Needs attention' : 'Idle';
+
+    const items = (THREADS[st.sid] || GENERIC).map((it) => it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text });
+
+    const msgs = this.curMsgs().map((m) => {
+      const live = !m.done; const stopped = !!m.stopped;
       const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.steps || 1) : 3);
       const kinds = ['think', 'read', 'bash'];
+      const open = !!st.openCaps[m.id];
       return {
         segs: m.segs.map((s) => ({ text: s.text, cls: (s.b ? 'b ' : '') + (s.i ? 'i ' : '') + (s.c ? 'c ' : '') + (s.l ? 'l' : '') })),
-        done: !live, live, ok: !live && !stopped, stopped,
-        cls: live ? 'live' : 'done',
-        title: live ? 'Working' : (stopped ? 'Stopped after ' + (m.elapsed || '0:01') : 'Worked for ' + (m.elapsed || '0:03')),
-        sub: live ? n + (n === 1 ? ' step · ' : ' steps · ') + fmtSec(Date.now() - m.start) : n + (n === 1 ? ' step' : ' steps'),
+        done: !live, live, ok: !live && !stopped, stopped, open,
+        cls: (open ? 'open ' : '') + (live ? 'live' : ''),
+        time: live ? fmtSec(Date.now() - m.start) : (m.elapsed || '0:03'),
+        title: live ? 'Working' : (stopped ? 'Stopped' : 'Done'),
+        sub: live ? n + (n === 1 ? ' step' : ' steps') : (stopped ? n + ' steps · interrupted' : '3 LLM calls · 3 tool calls'),
         now: live ? [st.showThink ? '“Checking what changed since the last turn before touching anything…”' : 'thinking · adaptive', 'read · last reply', 'bash · git status --short'][n - 1] : '',
         dots: kinds.slice(0, n).map((k, i) => ({ cls: k + (live && i === n - 1 ? ' run' : '') + (stopped && i === n - 1 ? ' err' : '') })),
-        reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. YOLO mode skipped 2 permission prompts along the way.' : 'Got it. One permission prompt is waiting for you above.'
+        steps: [{ k: 'think', label: 'thinking', detail: 'adaptive · reading your message', time: '2s' }, { k: 'read', label: 'read', detail: 'last reply', time: '0.2s' }, { k: 'bash', label: 'bash', detail: 'git status --short', time: '0.4s' }].slice(0, n).map((s, i) => ({ ...s, delay: (50 + i * 55) + 'ms' })),
+        reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. YOLO mode skipped 2 permission prompts along the way.' : 'Got it. One permission prompt is waiting for you above.',
+        toggle: () => this.setState({ openCaps: { ...st.openCaps, [m.id]: !open } })
       };
     });
+
+    const todos = (st.todos[st.sid] || [{ t: 'Summarise the current state', d: true }, { t: 'Confirm next step with the user', d: false }]).map((t, i) => ({
+      t: t.t, done: t.d, cls: t.d ? 'done' : '',
+      toggle: () => { const list = (st.todos[st.sid] || [{ t: 'Summarise the current state', d: true }, { t: 'Confirm next step with the user', d: false }]).map((x, j) => j === i ? { ...x, d: !x.d } : x); this.setState({ todos: { ...st.todos, [st.sid]: list } }); }
+    }));
 
     return {
       accent: this.props.accent ?? '#7c9cff',
       compCls: [st.focus ? 'focus' : '', st.yolo ? 'yolo' : '', isMax ? 'max' : '', isLow ? 'lowfuel' : ''].join(' '),
-      placeholder: isMax ? 'Max effort engaged. Give it the hard one…' : st.yolo ? 'Message Character 018 · no permission prompts' : 'Message Character 018…',
+      // shell
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'sessions' ? 'on' : '', cur: n.id === 'sessions' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
+      activeOnly: st.activeOnly, activeCls: st.activeOnly ? 'on' : '',
+      toggleActive: () => this.setState({ activeOnly: !st.activeOnly }),
+      workspaces: WS.map((w) => {
+        const open = !!st.openWs[w.id];
+        const sessions = w.sessions.filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
+        return {
+          name: w.name, color: w.color, attn: !!w.attn, count: sessions.length, open, cls: open ? '' : 'closed',
+          toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
+          sessions: sessions.map((s) => ({
+            t: s.t, dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+            cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
+            pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null, sel: null })
+          }))
+        };
+      }),
+      cur: { t: cur.t, role: cur.role, ws: cur.ws, branch: cur.branch, stCls, stLabel, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
+      tabs: TABS.map((t) => ({ label: t, cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
+      isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isGithub: st.tab === 'GitHub', isTodos: st.tab === 'Todos', isTools: st.tab === 'Tools', isSub: st.tab === 'Subagents', isBrowser: st.tab === 'Browser', isTerm: st.tab === 'Terminal', isLogs: st.tab === 'Logs',
+      thread: items,
+      isIssueCreator: st.sid === 's3', isRum: st.sid === 's5', isGeneric: st.sid !== 's3' && st.sid !== 's5',
+      todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
+      drawerOpen: st.drawer, drawerCls: st.drawer ? 'on' : '',
+      toggleDrawer: () => this.setState({ drawer: !st.drawer }),
+      // composer
+      placeholder: isMax ? 'Max effort engaged. Give it the hard one…' : st.yolo ? 'Message the agent · no permission prompts' : 'Message the agent…',
       hint: busy ? '⎋ stop · agent is working' : st.draft > 0 ? '↵ send · ⇧↵ newline · select to format' : '↵ send · ⇧↵ newline',
       msgs,
-      // editor
       edRef: (el) => { if (el) this.ed = el; },
       onInput: (e) => this.onInputEl(e.currentTarget),
       onKeyDown: (e) => {
@@ -595,11 +1116,8 @@ class Component extends DCLogic {
       onSel: () => this.updateSel(),
       onFocus: () => this.setState({ focus: true }),
       onBlur: () => { clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ focus: false, sel: null }), 120); },
-      hasSel: !!st.sel,
-      selX: (st.sel ? st.sel.x : 0) + 'px',
-      selY: (st.sel ? st.sel.y : 0) + 'px',
+      hasSel: !!st.sel, selX: (st.sel ? st.sel.x : 0) + 'px', selY: (st.sel ? st.sel.y : 0) + 'px',
       fmtBold: this.fmt('bold'), fmtItalic: this.fmt('italic'), fmtCode: this.fmt('code'), fmtLink: this.fmt('link'), fmtClear: this.fmt('removeFormat'),
-      // model + effort
       modelOpen: st.open === 'model', ctxOpen: st.open === 'ctx', anyOpen: !!st.open,
       closeAll: () => this.setState({ open: null }),
       toggleModel: () => this.setState({ open: st.open === 'model' ? null : 'model' }),
@@ -607,29 +1125,20 @@ class Component extends DCLogic {
       modelName: model.name, modelColor: model.color,
       models: MODELS.map((m) => ({ ...m, defLabel: EFFORT[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
       ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
-      effort: st.effort,
-      auto: st.auto, custom: !st.auto,
-      effortLabel: EFFORT[st.effort],
-      effortMode: st.auto ? 'model default' : 'custom',
-      effPct: (st.effort / 4 * 100) + '%',
-      defPct: (model.def / 4 * 100) + '%',
+      effort: st.effort, auto: st.auto, custom: !st.auto,
+      effortLabel: EFFORT[st.effort], effortMode: st.auto ? 'model default' : 'custom',
+      effPct: (st.effort / 4 * 100) + '%', defPct: (model.def / 4 * 100) + '%',
       elabs: EFFORT.map((t, i) => ({ t, cls: (i === st.effort ? 'on ' : '') + (i === 4 ? 'maxl ' : '') + (i === model.def ? 'def' : '') })),
-      isMax, popCls: isMax ? 'max' : '',
-      maxBurst: st.maxBurst,
+      isMax, popCls: isMax ? 'max' : '', maxBurst: st.maxBurst,
       setEffort: (e) => {
-        const v = Number(e.target.value);
-        const wasMax = st.effort === 4;
+        const v = Number(e.target.value); const wasMax = st.effort === 4;
         this.setState({ effort: v, auto: false, maxBurst: v === 4 && !wasMax });
         if (v === 4 && !wasMax) { clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ maxBurst: false }), 900); }
       },
       resetEffort: () => this.setState({ effort: model.def, auto: true }),
-      showThink: st.showThink,
-      toggleThink: () => this.setState({ showThink: !st.showThink }),
-      // context gauge
-      gaugeCls, isLow,
-      gaugeBtnCls: isLow ? 'lowfuel' : '',
-      pct: Math.round(remaining * 100),
-      needleDeg: Math.round(135 + 270 * remaining),
+      showThink: st.showThink, toggleThink: () => this.setState({ showThink: !st.showThink }),
+      gaugeCls, isLow, gaugeBtnCls: isLow ? 'lowfuel' : '',
+      pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
       arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC,
       draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC,
       draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
@@ -643,18 +1152,13 @@ class Component extends DCLogic {
         this.setState({ used: { system: 9000, messages: 5000, tools: 3000, thinking: 1000 }, refill: '+' + kfmt(Math.max(0, freed)), open: null });
         clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ refill: null }), 1200);
       },
-      // yolo
       yolo: st.yolo, yoloBurst: st.yoloBurst,
-      toggleYolo: () => {
-        this.setState({ yolo: !st.yolo, yoloBurst: !st.yolo });
-        clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ yoloBurst: false }), 800);
-      },
-      // send
+      toggleYolo: () => { this.setState({ yolo: !st.yolo, yoloBurst: !st.yolo }); clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ yoloBurst: false }), 800); },
       busy, notBusy: !busy,
       sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''),
       sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
-      reset: () => { if (this.ed) this.ed.textContent = ''; clearInterval(this.ticker); this.setState({ used: { ...BASE }, msgs: [], draft: 0, open: null, effort: 2, auto: true, showThink: false, yolo: false, model: 'fable', sel: null }); }
+      reset: () => { if (this.ed) this.ed.textContent = ''; clearInterval(this.ticker); this.setState({ sid: 's3', tab: 'Chat', used: { ...BASE }, msgs: {}, openCaps: {}, draft: 0, open: null, effort: 2, auto: true, showThink: false, yolo: true, model: 'sonnet', sel: null, drawer: false, activeOnly: false }); }
     };
   }
 }
