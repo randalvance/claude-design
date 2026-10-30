@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Futuristic chat window</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#05070b;font-family:"Space Grotesk",system-ui,sans-serif;color:#e3ecf3}
+a{color:#43e5c9}a:hover{color:#8ff3e0}
+.page{--ink:#e3ecf3;--mute:#8da0b3;--dim:#5b6c7d;--line:#1a2633;--line2:#263546;--panel:#0a0f16;--panel2:#0e1620;--acc:#43e5c9;--acc-dim:rgba(67,229,201,.14);--amber:#f2b35b;--err:#ff6b7a;--violet:#9a8cff;--mono:"JetBrains Mono",ui-monospace,monospace;min-height:100vh;box-sizing:border-box;padding:28px 24px 32px;display:flex;justify-content:center;background-image:radial-gradient(#121b26 1px,transparent 1px);background-size:24px 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit}
+.ic{width:16px;height:16px;flex:none}
+.micro{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+.win{position:relative;width:100%;max-width:1040px;background:var(--panel);border:1px solid var(--line2);display:flex;flex-direction:column;min-height:800px;box-shadow:0 0 0 1px rgba(67,229,201,.06),0 30px 60px -30px rgba(0,0,0,.8)}
+.brk{position:absolute;width:16px;height:16px;border:2px solid var(--acc);pointer-events:none}
+.brk.tl{top:-2px;left:-2px;border-right:0;border-bottom:0}.brk.tr{top:-2px;right:-2px;border-left:0;border-bottom:0}.brk.bl{bottom:-2px;left:-2px;border-right:0;border-top:0}.brk.br{bottom:-2px;right:-2px;border-left:0;border-top:0}
+.top{display:flex;align-items:flex-end;gap:20px;padding:18px 24px 0;flex-wrap:wrap}
+.ttl{display:flex;flex-direction:column;gap:4px}
+.ttl h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.ttl h1 .cp{all:unset;cursor:pointer;color:var(--dim);display:grid;place-items:center}
+.ttl h1 .cp:hover{color:var(--acc)}
+.meta{display:flex;align-items:center;gap:14px;padding-bottom:6px;flex-wrap:wrap}
+.meta .k{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.led{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--acc);padding:4px 10px;border:1px solid var(--line2)}
+.led i{width:6px;height:6px;background:var(--acc);box-shadow:0 0 8px var(--acc)}
+.led.busy{color:var(--amber);border-color:rgba(242,179,91,.4)}
+.led.busy i{background:var(--amber);box-shadow:0 0 8px var(--amber);animation:blink .8s steps(1) infinite}
+.br{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;color:var(--ink);padding:4px 10px;border:1px solid var(--line2);background:var(--panel2)}
+.top-r{margin-left:auto;display:flex;gap:2px;padding-bottom:4px}
+.ib{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;color:var(--mute);border:1px solid transparent;transition:border-color .15s,color .15s}
+.ib:hover{color:var(--acc);border-color:var(--line2)}
+.ib:focus-visible{outline:2px solid var(--acc)}
+
+.tabs{display:flex;gap:0;padding:14px 24px 0;border-bottom:1px solid var(--line2);overflow-x:auto}
+.tab{all:unset;cursor:pointer;display:flex;align-items:baseline;gap:8px;padding:8px 14px 10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s;white-space:nowrap}
+.tab .n{font-size:9.5px;color:var(--dim)}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--acc);border-bottom-color:var(--acc);text-shadow:0 0 12px rgba(67,229,201,.5)}
+.tab:focus-visible{outline:2px solid var(--acc)}
+.content{flex:1;padding:24px 24px 12px;display:flex;flex-direction:column;gap:18px;position:relative}
+
+.umsg{align-self:flex-end;max-width:70%;position:relative;background:var(--panel2);border:1px solid var(--line2);padding:12px 16px 12px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word;animation:unclip .35s linear both}
+.umsg .brk{width:10px;height:10px;border-color:var(--mute)}
+.umsg .ts{position:absolute;right:10px;top:-8px;background:var(--panel);padding:0 6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim)}
+.said{margin:0;font-size:15px;line-height:1.55;color:#c5d2dd;max-width:720px;padding-left:14px;border-left:1px dashed var(--line2)}
+.reply{font-size:15px;line-height:1.6;max-width:760px;color:var(--ink)}
+.reply p{margin:0 0 10px}
+.reply ul{margin:4px 0 0;padding-left:20px}
+.reply li{margin:4px 0}
+.reply code,.step code{font-family:var(--mono);font-size:12.5px;background:var(--acc-dim);color:var(--acc);padding:1px 6px}
+.typed{animation:unclip .9s steps(24) both}
+
+.deck{position:relative;max-width:760px}
+.cap{all:unset;position:relative;cursor:pointer;display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;padding:9px 14px;min-height:58px;background:var(--panel2);border:1px solid var(--line2);color:var(--ink);overflow:hidden;transition:border-color .15s,background .15s}
+.cap:hover{border-color:#34485e;background:#111b27}
+.cap:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.open .cap{border-color:#34485e}
+.live .cap{border-color:rgba(67,229,201,.45)}
+.live .cap::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,transparent,rgba(67,229,201,.14),transparent);animation:scan 1.6s linear infinite;pointer-events:none}
+.tb{position:relative;min-width:52px;height:34px;padding:0 8px;border:1px solid var(--line2);background:var(--panel);font-family:var(--mono);font-size:12px;color:var(--ink);display:grid;place-items:center;flex:none;box-sizing:border-box}
+.tb .ok{position:absolute;right:-6px;top:-6px;width:14px;height:14px;background:var(--acc);color:#05070b;display:grid;place-items:center;animation:popd .25s linear both}
+.tb .ok svg{width:8px;height:8px}
+.tb .ok.stopped{background:var(--err)}
+.live .tb{color:var(--acc);border-color:rgba(67,229,201,.5)}
+.cap-t{display:flex;flex-direction:column;min-width:0;gap:2px}
+.cap-t strong{font-size:13.5px;font-weight:600;letter-spacing:.02em}
+.cap-s{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.trail{display:flex;gap:3px;align-items:center;padding:0 6px}
+.seg{width:14px;height:5px;background:var(--dim);display:inline-block;animation:popd .25s linear both}
+.seg.bash{background:#5aa8ff}.seg.think{background:var(--acc)}.seg.edit{background:#7ee08a}.seg.read{background:#8da0b3}.seg.say{background:#e3ecf3}.seg.ask{background:var(--amber)}.seg.sub{background:var(--violet)}.seg.err{background:var(--err);box-shadow:0 0 6px var(--err)}
+.seg.run{animation:popd .25s linear both,blink .6s steps(1) .25s infinite;box-shadow:0 0 8px currentColor}
+.now{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--acc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.now::before{content:"> "}
+.cap .chev{width:14px;height:14px;flex:none;margin-left:auto;color:var(--mute);transition:transform .25s linear}
+.now+.chev{margin-left:0}
+.open .cap .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s linear}
+.open .body{grid-template-rows:1fr}
+.body-in{min-height:0;overflow:hidden}
+.steps{list-style:none;margin:0;padding:6px 12px 10px;background:var(--panel);border:1px solid #34485e;border-top:0;display:flex;flex-direction:column;gap:1px}
+.step{display:flex;gap:12px;align-items:center;padding:6px 6px;font-size:12.5px;opacity:0;border-left:1px solid transparent}
+.open .step{animation:unclip .3s linear both}
+.step:hover{background:var(--panel2)}
+.step .ix{font-family:var(--mono);font-size:10px;color:var(--dim);min-width:18px}
+.step .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;min-width:68px;color:var(--mute)}
+.step code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:none;color:var(--ink);padding:0}
+.step .tm{font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+.panel{max-width:760px;border:1px solid var(--line2);background:var(--panel2);padding:4px 16px 8px;position:relative}
+.panel h3{margin:10px 0 8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.lrow{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.lrow code{font-family:var(--mono);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plus{color:#7ee08a;font-family:var(--mono);font-size:11.5px}.minus{color:var(--err);font-family:var(--mono);font-size:11.5px}
+.todo{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.todo:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.box{width:16px;height:16px;border:1px solid var(--mute);display:grid;place-items:center;flex:none;transition:background .15s,border-color .15s}
+.box svg{width:10px;height:10px;opacity:0;color:#05070b}
+.todo.done .box{background:var(--acc);border-color:var(--acc);box-shadow:0 0 8px rgba(67,229,201,.5)}
+.todo.done .box svg{opacity:1}
+.todo.done span{color:var(--mute);text-decoration:line-through}
+.empty{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:48px 0;text-align:center}
+
+.foot{padding:6px 24px 18px;position:relative}
+.foot-in{max-width:992px;position:relative}
+.scrim{all:unset;position:fixed;inset:0;z-index:10;cursor:default}
+.console{position:relative;background:var(--panel2);border:1px solid var(--line2);transition:border-color .2s,box-shadow .3s}
+.focus .console{border-color:rgba(67,229,201,.55);box-shadow:0 0 0 1px rgba(67,229,201,.2),0 0 28px rgba(67,229,201,.12)}
+.yolo .console{border-color:rgba(242,179,91,.45)}
+.yolo.focus .console{box-shadow:0 0 0 1px rgba(242,179,91,.2),0 0 28px rgba(242,179,91,.12)}
+.max .console{border-color:var(--amber);box-shadow:0 0 0 1px rgba(242,179,91,.35),0 0 40px rgba(242,179,91,.18)}
+.console .brk{width:10px;height:10px;border-width:1.5px}
+.max .console .brk{border-color:var(--amber)}
+.cstrip{display:flex;align-items:center;gap:16px;padding:8px 14px;border-bottom:1px solid var(--line)}
+.cstrip .micro.acc{color:var(--acc)}
+.max .cstrip .micro.max{color:var(--amber);animation:blink .5s steps(1) infinite}
+.ed{display:flex;gap:10px;padding:12px 14px 4px}
+.ed .caret{font-family:var(--mono);font-size:15px;line-height:24px;color:var(--acc);flex:none}
+.max .ed .caret{color:var(--amber)}
+.ta{display:block;flex:1;min-width:0;min-height:48px;max-height:196px;resize:none;border:0;background:transparent;font:inherit;font-size:14.5px;line-height:24px;color:var(--ink);outline:none;padding:0;overflow:auto}
+.ta::placeholder{color:var(--dim)}
+.max .ta::placeholder{color:rgba(242,179,91,.7)}
+.bar{display:flex;align-items:center;gap:10px;padding:8px 10px 10px 14px;flex-wrap:wrap}
+.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tool{position:relative;display:inline-flex}
+.chip{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px;border:1px solid var(--line2);background:var(--panel);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);transition:border-color .15s,color .15s;white-space:nowrap}
+.chip:hover{border-color:var(--acc)}
+.chip:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.chip[aria-expanded="true"]{border-color:var(--acc);color:var(--acc)}
+.chip .lab{color:var(--dim)}
+.ebars{display:flex;align-items:flex-end;gap:2px;height:12px}
+.ebars i{width:3px;background:var(--line2)}
+.ebars i.on{background:var(--acc);box-shadow:0 0 6px rgba(67,229,201,.6)}
+.max .ebars i.on{background:var(--amber);box-shadow:0 0 6px rgba(242,179,91,.7);animation:blink .5s steps(1) infinite}
+.max .ebars i:nth-child(2){animation-delay:.1s}.max .ebars i:nth-child(3){animation-delay:.2s}.max .ebars i:nth-child(4){animation-delay:.3s}.max .ebars i:nth-child(5){animation-delay:.4s}
+.gauge{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 6px;border:1px solid var(--line2);font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink)}
+.g{width:24px;height:24px}
+.g-track{fill:none;stroke:var(--line2);stroke-width:3.5;stroke-dasharray:65.97 87.96}
+.g-ticks{fill:none;stroke:var(--line2);stroke-width:1;stroke-dasharray:1 3.6}
+.g-fill{fill:none;stroke-width:3.5;transition:stroke-dasharray .6s linear}
+.g-fill.ok{stroke:var(--acc)}.g-fill.mid{stroke:var(--amber)}.g-fill.low{stroke:var(--err)}
+.g-draft{fill:none;stroke:#fff;opacity:.4;stroke-width:3.5;transition:stroke-dasharray .2s linear,stroke-dashoffset .2s linear}
+.needle{stroke:#fff;stroke-width:1.8;stroke-linecap:round;transform-origin:20px 20px;transition:transform .6s linear}
+.hub{fill:#fff}
+.sw{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px 0 8px;border:1px solid var(--line2);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);position:relative;overflow:hidden;transition:border-color .2s,color .2s}
+.sw:hover{border-color:var(--amber)}
+.sw:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+.sw .tr{position:relative;width:26px;height:12px;border:1px solid var(--mute);box-sizing:border-box;flex:none}
+.sw .kn{position:absolute;left:1px;top:1px;width:8px;height:8px;background:var(--mute);transition:transform .2s steps(3)}
+.sw[aria-checked="true"]{color:var(--amber);border-color:rgba(242,179,91,.6)}
+.sw[aria-checked="true"] .tr{border-color:var(--amber)}
+.sw[aria-checked="true"] .kn{transform:translateX(14px);background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.sw[aria-checked="true"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:repeating-linear-gradient(135deg,var(--amber) 0 5px,transparent 5px 10px);opacity:.8}
+.hint{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--dim);white-space:nowrap}
+.send{all:unset;position:relative;cursor:pointer;width:36px;height:36px;border:1px solid var(--line2);background:var(--panel);color:var(--dim);display:grid;place-items:center;transition:background .2s,color .2s,border-color .2s,box-shadow .3s;flex:none}
+.send svg{width:16px;height:16px}
+.send.ready{background:var(--acc);border-color:var(--acc);color:#05070b;box-shadow:0 0 18px rgba(67,229,201,.45)}
+.yolo .send.ready{background:var(--amber);border-color:var(--amber);box-shadow:0 0 18px rgba(242,179,91,.45)}
+.max .send.ready{background:var(--amber);border-color:#fff;box-shadow:0 0 24px rgba(242,179,91,.7)}
+.send.fly svg{animation:fly .45s linear both}
+.send.stop{background:rgba(255,107,122,.14);border-color:var(--err);color:var(--err);box-shadow:none}
+.send.stop:hover{background:var(--err);color:#05070b}
+.send.stop svg{width:14px;height:14px;animation:popd .25s linear both}
+.send:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.pop{position:absolute;left:0;bottom:calc(100% + 12px);width:300px;background:var(--panel);border:1px solid var(--acc);box-shadow:0 0 0 1px rgba(67,229,201,.15),0 20px 50px rgba(0,0,0,.6);padding:12px;z-index:20;transform-origin:bottom left;animation:unclip .25s linear both;box-sizing:border-box}
+.pop.max{border-color:var(--amber);box-shadow:0 0 0 1px rgba(242,179,91,.2),0 0 40px rgba(242,179,91,.2)}
+.pop .brk{width:8px;height:8px;border-width:1.5px}
+.pop.max .brk{border-color:var(--amber)}
+.pop-h{display:flex;justify-content:space-between;align-items:baseline;margin:2px 2px 8px}
+.pop-h .val{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.pop.max .pop-h .val{color:var(--amber)}
+.pop-h .mode{color:var(--dim)}
+.mrow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;padding:7px 8px;font-size:13px;font-weight:500;border:1px solid transparent;transition:background .15s,border-color .15s}
+.mrow:hover{background:var(--panel2)}
+.mrow:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.mrow.sel{border-color:var(--line2);background:var(--panel2)}
+.mrow .mk{width:8px;height:8px;border:1px solid var(--mute);flex:none}
+.mrow.sel .mk{background:var(--acc);border-color:var(--acc);box-shadow:0 0 8px var(--acc)}
+.mrow .mdesc{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.efs{display:flex;gap:4px;margin:4px 2px 0}
+.ef{all:unset;cursor:pointer;position:relative;flex:1;height:26px;border:1px solid var(--line2);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);transition:background .15s,color .15s,border-color .15s}
+.ef:hover{border-color:var(--mute)}
+.ef:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ef.on{background:var(--acc);border-color:var(--acc);color:#05070b;box-shadow:0 0 10px rgba(67,229,201,.5)}
+.ef.def::after{content:"";position:absolute;left:50%;bottom:-7px;width:4px;height:2px;background:var(--mute);transform:translateX(-50%)}
+.ef.maxon{background:var(--amber);border-color:var(--amber);box-shadow:0 0 14px rgba(242,179,91,.7);animation:blink .5s steps(1) infinite}
+.adapt{display:flex;gap:8px;align-items:flex-start;margin:14px 2px 0;font-size:12px;line-height:1.45;color:var(--mute)}
+.lnk{all:unset;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.lnk:hover{text-decoration:underline}
+.lnk:focus-visible{outline:2px solid var(--acc)}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--dim);margin-top:12px;flex-wrap:wrap}
+.demo button{all:unset;cursor:pointer;color:var(--mute);border:1px solid var(--line2);padding:3px 10px;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.demo button:hover{color:var(--acc);border-color:var(--acc)}
+.demo button:focus-visible{outline:2px solid var(--acc)}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes scan{to{left:100%}}
+@keyframes unclip{from{clip-path:inset(0 100% 0 0);opacity:.4}to{clip-path:inset(0 0 0 0);opacity:1}}
+@keyframes popd{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes fly{0%{transform:translateY(0)}40%{transform:translateY(-18px);opacity:0}41%{transform:translateY(18px);opacity:0}100%{transform:none;opacity:1}}
+@media (max-width:760px){.page{padding:12px}.umsg{max-width:92%}.hint{display:none}.top{padding:14px 14px 0}.tabs,.content,.foot{padding-left:14px;padding-right:14px}.pop{width:min(300px,calc(100vw - 40px))}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page {{cls}}">
+<div class="win">
+  <span class="brk tl" aria-hidden="true"></span><span class="brk tr" aria-hidden="true"></span><span class="brk bl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+  <header class="top">
+    <div class="ttl">
+      <span class="micro">Session · LH-0218 · Orchestrator</span>
+      <h1>Issue Creator <button class="cp" aria-label="Copy session link"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1"></rect><path d="M5 15V5a1 1 0 0 1 1-1h10"></path></svg></button></h1>
+    </div>
+    <div class="meta">
+      <span class="k">Lighthouse Web</span>
+      <span class="led {{stCls}}"><i aria-hidden="true"></i>{{stLabel}}</span>
+      <span class="br"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="6" cy="18" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><path d="M6 8.5v7M18 10.5c0 4-12 3-12 5"></path></svg>main</span>
+    </div>
+    <div class="top-r">
+      <button class="ib" aria-label="Open in editor"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
+      <button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
+      <button class="ib" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Session views">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab {{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}"><span class="n">{{t.n}}</span>{{t.label}}</button></sc-for>
+  </nav>
+
+  <div class="content">
+    <sc-if value="{{isChat}}" hint-placeholder-val="{{true}}">
+      <sc-for list="{{thread}}" as="it" hint-placeholder-count="6">
+        <sc-if value="{{it.isUser}}" hint-placeholder-val="{{false}}"><div class="umsg"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span><span class="ts">YOU · {{it.ts}}</span>{{it.text}}</div></sc-if>
+        <sc-if value="{{it.isSaid}}" hint-placeholder-val="{{false}}"><p class="said">{{it.text}}</p></sc-if>
+        <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
+          <section class="deck {{it.cls}}" aria-label="Agent work">
+            <button class="cap" onClick="{{it.toggle}}" aria-expanded="{{it.open}}">
+              <span class="tb">{{it.time}}
+                <sc-if value="{{it.ok}}" hint-placeholder-val="{{true}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+              </span>
+              <span class="cap-t"><strong>{{it.title}}</strong><span class="cap-s">{{it.sub}}</span></span>
+              <span class="trail" aria-hidden="true"><sc-for list="{{it.dots}}" as="d" hint-placeholder-count="3"><i class="seg {{d.cls}}"></i></sc-for></span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <div class="body"><div class="body-in">
+              <ol class="steps">
+                <sc-for list="{{it.steps}}" as="s" hint-placeholder-count="2">
+                  <li class="step" style="animation-delay: {{s.delay}}"><span class="ix">{{s.ix}}</span><span class="k">{{s.label}}</span><code>{{s.detail}}</code><span class="tm">{{s.time}}</span></li>
+                </sc-for>
+              </ol>
+            </div></div>
+          </section>
+        </sc-if>
+      </sc-for>
+
+      <div class="reply typed">
+        <p>I created issue #218: <a href="https://example.com/acme/lighthouse/issues/218">example.com/acme/lighthouse/issues/218</a> and labelled it <code>enhancement</code>.</p>
+        <p>In <code>card-detail.tsx</code>, local cards already render markdown. Synced cards from the tracker show their description as plain text because tracker text is untrusted. The app's markdown view already drops raw HTML, so the issue asks to render synced descriptions with the same view, with <code>allowRawHtml</code> never enabled.</p>
+        <ul>
+          <li><b>Links:</b> safe schemes only, opened in a new tab.</li>
+          <li><b>Images:</b> never load automatically, since a remote image would make the browser fetch from a third-party host as soon as the card opens.</li>
+          <li><b>Task lists:</b> render read-only.</li>
+        </ul>
+      </div>
+
+      <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
+        <div class="umsg"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span><span class="ts">YOU · {{m.ts}}</span>{{m.text}}</div>
+        <section class="deck {{m.cls}}" aria-label="Agent work for this turn">
+          <button class="cap" onClick="{{m.toggle}}" aria-expanded="{{m.open}}">
+            <span class="tb">{{m.time}}
+              <sc-if value="{{m.ok}}" hint-placeholder-val="{{false}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+              <sc-if value="{{m.stopped}}" hint-placeholder-val="{{false}}"><span class="ok stopped"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12"></rect></svg></span></sc-if>
+            </span>
+            <span class="cap-t"><strong>{{m.title}}</strong><span class="cap-s">{{m.sub}}</span></span>
+            <span class="trail" aria-hidden="true"><sc-for list="{{m.dots}}" as="d" hint-placeholder-count="2"><i class="seg {{d.cls}}"></i></sc-for></span>
+            <sc-if value="{{m.live}}" hint-placeholder-val="{{false}}"><span class="now">{{m.now}}</span></sc-if>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <div class="body"><div class="body-in">
+            <ol class="steps">
+              <sc-for list="{{m.steps}}" as="s" hint-placeholder-count="2">
+                <li class="step" style="animation-delay: {{s.delay}}"><span class="ix">{{s.ix}}</span><span class="k">{{s.label}}</span><code>{{s.detail}}</code><span class="tm">{{s.time}}</span></li>
+              </sc-for>
+            </ol>
+          </div></div>
+        </section>
+        <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><div class="reply typed"><p>{{m.reply}}</p></div></sc-if>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{isGit}}" hint-placeholder-val="{{false}}">
+      <div class="panel"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+        <h3>Working tree · main</h3>
+        <div class="lrow"><i class="seg edit" style="animation: none" aria-hidden="true"></i><code>src/cards/card-detail.tsx</code><span class="plus">+38</span><span class="minus">−12</span></div>
+        <div class="lrow"><i class="seg edit" style="animation: none" aria-hidden="true"></i><code>src/ui/markdown-view.tsx</code><span class="plus">+6</span><span class="minus">−1</span></div>
+        <div class="lrow"><i class="seg bash" style="animation: none" aria-hidden="true"></i><code>src/lib/safe-link.ts</code><span class="plus">+41</span><span class="minus">−0</span></div>
+        <div class="lrow"><i class="seg edit" style="animation: none" aria-hidden="true"></i><code>tests/card-detail.test.tsx</code><span class="plus">+57</span><span class="minus">−3</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isTodos}}" hint-placeholder-val="{{false}}">
+      <div class="panel"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+        <h3>Todos · {{todoDone}} / {{todoTotal}}</h3>
+        <sc-for list="{{todos}}" as="td" hint-placeholder-count="4">
+          <button class="todo {{td.cls}}" onClick="{{td.toggle}}" aria-pressed="{{td.done}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span><span>{{td.t}}</span></button>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isOther}}" hint-placeholder-val="{{false}}">
+      <p class="empty">// {{tabName}} · no data in this session</p>
+    </sc-if>
+  </div>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
+      <div class="console">
+        <span class="brk tl" aria-hidden="true"></span><span class="brk tr" aria-hidden="true"></span><span class="brk bl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+        <div class="cstrip">
+          <span class="micro acc">Input</span>
+          <span class="micro">{{modelName}} · {{effortLabel}}</span>
+          <span class="micro">ctx {{pct}}%</span>
+          <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="micro max">◆ Max effort</span></sc-if>
+          <sc-if value="{{yolo}}" hint-placeholder-val="{{true}}"><span class="micro" style="color: #f2b35b; margin-left: auto">Yolo armed</span></sc-if>
+        </div>
+        <div class="ed">
+          <span class="caret" aria-hidden="true">›</span>
+          <label class="sr" for="ta">Message the agent</label>
+          <textarea id="ta" class="ta" rows="2" placeholder="{{placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea>
+        </div>
+        <div class="bar">
+          <div class="tools">
+            <span class="tool">
+              <button class="chip" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span class="lab">Model</span><span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop {{popCls}}" role="dialog" aria-label="Model and effort">
+                  <span class="brk tl" aria-hidden="true"></span><span class="brk tr" aria-hidden="true"></span><span class="brk bl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+                  <div class="pop-h"><span class="micro">Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="mk" aria-hidden="true"></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span class="micro">Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">Use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="gauge" role="img" aria-label="{{ctxAria}}">
+              <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
+                <circle class="g-ticks" cx="20" cy="20" r="18" transform="rotate(135 20 20)" style="stroke-dasharray: 1 3.6; stroke-dashoffset: 0"></circle>
+                <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                <line class="needle" x1="20" y1="20" x2="30" y2="20" style="transform: rotate({{needleDeg}}deg)"></line>
+                <circle class="hub" cx="20" cy="20" r="2"></circle>
+              </svg>
+              <span>{{pct}}%</span>
+            </span>
+
+            <button class="sw" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              <span class="tr" aria-hidden="true"><span class="kn"></span></span>
+              <span>Yolo</span>
+            </button>
+          </div>
+          <span class="hint" aria-hidden="true">{{hint}}</span>
+          <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
+            <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14"></rect></svg></sc-if>
+            <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></sc-if>
+          </button>
+        </div>
+      </div>
+      <div class="demo"><span>type · ↵ send · red square or ⎋ stops · 25 tokens per character</span><button onClick="{{reset}}">Reset demo</button></div>
+    </div>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1120,"height":880}}'>
+const MODELS = [
+  { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', def: 2 },
+  { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', def: 1 },
+  { id: 'sonnet', name: 'Sonnet 5.5', desc: 'Fast and capable', def: 2 },
+  { id: 'haiku', name: 'Haiku 5.5', desc: 'Instant', def: 1 }
+];
+const EFFORT = ['Low', 'Med', 'High', 'X-hi', 'Max'];
+const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
+const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
+const TABS = ['Chat', 'Git', 'Todos', 'Tools', 'Terminal', 'Logs'];
+const THREAD = [
+  { k: 'user', ts: '11:31:08', text: 'Open an issue for synced cards showing markdown as plain text. Check how local cards render it first.' },
+  { k: 'cap', id: 'c1', time: '13s', sub: '2 LLM calls · 1 tool call', dots: ['think', 'read'], steps: [
+    { k: 'think', label: 'think', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
+    { k: 'read', label: 'read', detail: 'src/cards/card-detail.tsx', time: '0.3s' } ] },
+  { k: 'said', text: 'Line 212 renders markdown but line 180 renders plain text, so I\'ll check what separates them.' },
+  { k: 'cap', id: 'c2', time: '31s', sub: '4 LLM calls · 4 tool calls', dots: ['bash', 'read', 'read', 'bash'], steps: [
+    { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- src/cards/card-detail.tsx", time: '1.1s' },
+    { k: 'read', label: 'read', detail: 'src/ui/markdown-view.tsx', time: '0.2s' },
+    { k: 'read', label: 'read', detail: 'src/sync/tracker.ts', time: '0.2s' },
+    { k: 'bash', label: 'bash', detail: 'grep -rn "allowRawHtml" src/ | head', time: '0.4s' } ] },
+  { k: 'said', text: 'Local cards render markdown, but synced cards from the tracker deliberately show plain text. That is what the ticket needs to change.' },
+  { k: 'cap', id: 'c3', time: '10s', sub: '1 LLM call · 1 tool call · turn 55s', dots: ['ask'], steps: [
+    { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced card descriptions as markdown" --label enhancement', time: '3.0s' } ] }
+];
+const LIVE_STEPS = [
+  { k: 'think', label: 'think', detail: 'adaptive · reading your message', time: '2s' },
+  { k: 'read', label: 'read', detail: 'last reply', time: '0.2s' },
+  { k: 'bash', label: 'bash', detail: 'git status --short', time: '0.4s' }
+];
+const NOW = ['think · adaptive', 'read · last reply', 'bash · git status --short'];
+function fmtSec(ms) { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
+function clock(t) { const d = new Date(t); return [d.getHours(), d.getMinutes(), d.getSeconds()].map((x) => String(x).padStart(2, '0')).join(':'); }
+function ix(i) { return String(i + 1).padStart(2, '0'); }
+
+class Component extends DCLogic {
+  state = { tab: 'Chat', open: null, caps: {}, msgs: [], model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: BASE, tick: 0,
+    todos: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] };
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
+  total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
+  busy() { return this.state.msgs.some((m) => !m.done); }
+  stop() {
+    clearInterval(this.ticker); clearTimeout(this.t3);
+    this.setState({ msgs: this.state.msgs.map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), n: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) });
+  }
+  send() {
+    const el = this.ta;
+    if (this.busy() || !el || !el.value.trim()) return;
+    const text = el.value.trim(); const id = Date.now();
+    el.value = ''; el.style.height = '';
+    this.setState({ msgs: [...this.state.msgs, { id, text, start: id, done: false }], draft: 0, used: this.state.used + Math.max(40, text.length * TPC), fly: true, open: null });
+    clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ fly: false }), 500);
+    clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400);
+    clearTimeout(this.t3);
+    this.t3 = setTimeout(() => {
+      clearInterval(this.ticker);
+      this.setState({ used: this.state.used + 1500, msgs: this.state.msgs.map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) });
+    }, 2600);
+  }
+  capView(c) {
+    const open = !!this.state.caps[c.id];
+    return { isCap: true, open, cls: open ? 'open' : '', ok: true, time: c.time, title: 'Done', sub: c.sub,
+      dots: c.dots.map((k) => ({ cls: k })), steps: c.steps.map((s, i) => ({ ...s, ix: ix(i), delay: (30 + i * 60) + 'ms' })),
+      toggle: () => this.setState({ caps: { ...this.state.caps, [c.id]: !open } }) };
+  }
+  renderVals() {
+    const st = this.state; const total = this.total();
+    const used = Math.min(total - 1000, st.used);
+    const remaining = (total - used) / total;
+    const draftTok = Math.min(remaining * total, st.draft * TPC); const draftFrac = draftTok / total;
+    const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
+    const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
+    const busy = this.busy();
+    const msgs = st.msgs.map((m) => {
+      const live = !m.done; const stopped = !!m.stopped;
+      const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.n || 1) : 3);
+      const open = !!st.caps[m.id];
+      return { text: m.text, ts: clock(m.start), done: !live, live, ok: !live && !stopped, stopped, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''),
+        time: live ? fmtSec(Date.now() - m.start) : (m.elapsed || '0:03'), title: live ? 'Working' : stopped ? 'Stopped' : 'Done',
+        sub: live ? n + (n === 1 ? ' step' : ' steps') : stopped ? n + ' steps · interrupted' : '3 LLM calls · 3 tool calls',
+        now: live ? NOW[n - 1] : '',
+        dots: LIVE_STEPS.slice(0, n).map((s, i) => ({ cls: s.k + (live && i === n - 1 ? ' run' : '') + (stopped && i === n - 1 ? ' err' : '') })),
+        steps: LIVE_STEPS.slice(0, n).map((s, i) => ({ ...s, ix: ix(i), delay: (30 + i * 60) + 'ms' })),
+        reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. Yolo skipped two permission prompts along the way.' : 'Done. One permission prompt is waiting for you above.',
+        toggle: () => this.setState({ caps: { ...st.caps, [m.id]: !open } }) };
+    });
+    const todos = st.todos.map((t, i) => ({ t: t.t, done: t.d, cls: t.d ? 'done' : '', toggle: () => this.setState({ todos: st.todos.map((x, j) => j === i ? { ...x, d: !x.d } : x) }) }));
+    return {
+      cls: [st.focus ? 'focus' : '', isMax ? 'max' : '', st.yolo ? 'yolo' : ''].join(' '),
+      stCls: busy ? 'busy' : '', stLabel: busy ? 'Busy' : 'Idle',
+      tabs: TABS.map((t, i) => ({ label: t, n: ix(i), cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
+      isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab.toLowerCase(),
+      thread: THREAD.map((it) => it.k === 'cap' ? this.capView(it) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text, ts: it.ts || '' }),
+      msgs, todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
+      placeholder: isMax ? 'Max effort engaged. Give it the hard one…' : st.yolo ? 'Message the agent · no permission prompts' : 'Message the agent…',
+      hint: busy ? '⎋ stop · agent working' : '↵ send · ⇧↵ newline',
+      taRef: (el) => { if (el) this.ta = el; },
+      onInput: (e) => { const el = e.currentTarget; this.ta = el; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); },
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (st.open) this.setState({ open: null }); else if (busy) this.stop(); } },
+      onFocus: () => this.setState({ focus: true }),
+      onBlur: () => { clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ focus: false }), 120); },
+      modelOpen: st.open === 'model', anyOpen: !!st.open, popCls: isMax ? 'max' : '',
+      toggleModel: () => this.setState({ open: st.open === 'model' ? null : 'model' }),
+      closeAll: () => this.setState({ open: null }),
+      modelName: model.name,
+      models: MODELS.map((m) => ({ ...m, defLabel: EFFORT_FULL[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
+      ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
+      efforts: EFFORT.map((t, i) => ({ t, on: i === st.effort, cls: (i === st.effort ? 'on ' : '') + (i === model.def ? 'def ' : '') + (i === 4 && st.effort === 4 ? 'maxon' : ''), pick: () => this.setState({ effort: i, auto: false }) })),
+      effortLabel: EFFORT_FULL[st.effort], effortMode: st.auto ? 'default' : 'custom', custom: !st.auto, isMax,
+      resetEffort: () => this.setState({ effort: model.def, auto: true }),
+      gaugeCls, pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
+      arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC, draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC, draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
+      ctxAria: 'Context window: ' + Math.round(remaining * 100) + ' percent left, ' + kfmt(total - used) + ' of ' + kfmt(total) + ' tokens',
+      yolo: st.yolo, toggleYolo: () => this.setState({ yolo: !st.yolo }),
+      busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
+      sendOrStop: () => busy ? this.stop() : this.send(),
+      reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ tab: 'Chat', open: null, caps: {}, msgs: [], model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: BASE }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
