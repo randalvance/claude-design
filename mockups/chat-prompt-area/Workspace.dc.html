@@ -107,16 +107,35 @@ button,input,textarea{font:inherit}
 .pin.is-on{color:var(--red);transform:rotate(-15deg)}
 .pin:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .pin svg{width:15px;height:15px}
-.mrow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid transparent;width:100%;box-sizing:border-box;transition:transform .2s steps(2),background .2s steps(2)}
-.mrow:hover{background:var(--paper-2)}
-.mrow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.mrow.is-on{background:var(--highlighter);border-color:var(--highlighter-2);transform:rotate(-.4deg)}
-.mrow .rd{width:14px;height:14px;border:2px solid var(--ink);border-radius:50%;box-sizing:border-box;flex:none;background:var(--sheet)}
-.mrow.is-on .rd{background:var(--ink);box-shadow:inset 0 0 0 3px var(--highlighter)}
-.mrow .kb{display:inline-flex;gap:2px;flex:none}
-.mrow .kb i{width:4px;background:var(--ink);display:block}
-.mrow .mn{font-weight:800;font-size:13.5px}
-.mrow .mh{margin-left:auto;font-family:var(--font-hand);font-size:15px;color:var(--mute);text-align:right}
+.pp-btn.sm{height:30px}
+.pp-dashed.red{color:var(--red);border-color:var(--red)}
+.pp-dashed.red:hover{background:#c8553d1a;color:var(--red-2);border-color:var(--red-2)}
+.kb{display:inline-flex;gap:2px;flex:none;align-items:flex-start}
+.kb i{width:4px;background:var(--ink);display:block}
+.kboard{position:relative;background:var(--kraft);box-shadow:3px 3px 0 var(--kraft-2);padding:14px 14px 12px;transform:rotate(-.6deg);animation:drop .3s steps(4) both}
+.kboard::before{content:"";position:absolute;left:50%;top:-8px;width:56px;height:14px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.kb-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.kb-n{font-family:var(--font-serif);font-size:16px;font-weight:600}
+.kb-m{margin-left:auto;font-family:var(--font-hand);font-size:15px;color:var(--mute);text-align:right}
+.kcols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.kcol{background:var(--sheet);border:1px solid var(--line);padding:6px;min-height:70px;display:flex;flex-direction:column;gap:4px;box-shadow:1px 1px 0 var(--shadow)}
+.kc-t{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;margin-bottom:2px}
+.kslip{display:block;height:9px;background:var(--paper-2);border:1px solid var(--line)}
+.kslip:nth-child(odd){transform:rotate(-.6deg)}
+.kmore{font-family:var(--font-hand);font-size:13px;color:var(--mute);line-height:1}
+.kb-acts{display:flex;gap:8px;margin-top:12px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.kempty{border:1.5px dashed var(--bar);padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;font-family:var(--font-hand);font-size:17px;color:var(--mute);transform:rotate(-.3deg)}
+.kpick{margin-top:12px;background:var(--sheet-warm);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);padding:10px;animation:drop .25s steps(4) both}
+.pp-search{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);color:var(--mute);box-sizing:border-box;width:100%}
+.pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.pp-search input::placeholder{color:var(--faint);font-family:var(--font-hand);font-size:16px}
+.brows{margin-top:8px;display:flex;flex-direction:column}
+.brow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:7px 8px;width:100%;box-sizing:border-box;transition:background .2s steps(2)}
+.brow:hover{background:var(--highlighter)}
+.brow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.brow .bn{font-weight:800;font-size:13px}
+.brow .bm{margin-left:auto;font-family:var(--font-hand);font-size:14.5px;color:var(--mute);text-align:right}
+.brow.is-busy .bn{color:var(--mute)}
 .krow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px dashed var(--line);width:100%;box-sizing:border-box;transition:background .2s steps(2)}
 .krow:last-of-type{border-bottom:0;padding-bottom:2px}
 .krow:hover{background:var(--paper-2)}
@@ -253,11 +272,32 @@ button,input,textarea{font:inherit}
 
         <div class="col">
           <section class="sheet">
-            <h2>Kanban board<span class="hh">one board per workspace</span></h2>
-            <div class="bd" role="radiogroup" aria-label="Kanban board">
-              <sc-for list="{{boards}}" as="b" hint-placeholder-count="4">
-                <button class="mrow {{b.cls}}" role="radio" aria-checked="{{b.on}}" onClick="{{b.pick}}"><span class="rd" aria-hidden="true"></span><span class="kb" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="mn">{{b.name}}</span><span class="mh">{{b.note}}</span></button>
-              </sc-for>
+            <h2>Kanban board<span class="hh">{{boardHint}}</span></h2>
+            <div class="bd">
+              <sc-if value="{{linked}}" hint-placeholder-val="{{true}}">
+                <div class="kboard">
+                  <div class="kb-h"><span class="kb-n">{{board.name}}</span><span class="kb-m">{{board.meta}}</span></div>
+                  <div class="kcols">
+                    <sc-for list="{{board.cols}}" as="c" hint-placeholder-count="3">
+                      <div class="kcol"><span class="kc-t"><span>{{c.name}}</span><span>{{c.count}}</span></span><sc-for list="{{c.slips}}" as="s" hint-placeholder-count="3"><i class="kslip" aria-hidden="true"></i></sc-for><sc-if value="{{c.hasMore}}" hint-placeholder-val="{{false}}"><span class="kmore">{{c.more}}</span></sc-if></div>
+                    </sc-for>
+                  </div>
+                  <div class="kb-acts"><button class="pp-dashed red" onClick="{{unlink}}">Unlink</button><button class="pp-dashed" onClick="{{openPick}}">Change</button><button class="pp-btn ghost sm">Open board</button></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{unlinked}}" hint-placeholder-val="{{false}}">
+                <div class="kempty"><span>No board linked. Sessions here make no cards.</span><button class="pp-btn sm" onClick="{{openPick}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Link a board</button></div>
+              </sc-if>
+              <sc-if value="{{picking}}" hint-placeholder-val="{{false}}">
+                <div class="kpick" role="dialog" aria-label="Link a board">
+                  <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a board in Kanban" aria-label="Find a board" ref="{{bqRef}}" onInput="{{onBq}}"></label>
+                  <div class="brows">
+                    <sc-for list="{{boardList}}" as="b" hint-placeholder-count="4"><button class="brow {{b.cls}}" onClick="{{b.link}}"><span class="kb" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="bn">{{b.name}}</span><span class="bm">{{b.note}}</span></button></sc-for>
+                    <sc-if value="{{noBoards}}" hint-placeholder-val="{{false}}"><div class="empty">No board called “{{bq}}” in Kanban</div></sc-if>
+                  </div>
+                  <div class="kb-acts"><button class="pp-dashed" onClick="{{closePick}}">Cancel</button><button class="pp-dashed" onClick="{{newBoard}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Make a new board “{{newBoardName}}”</button></div>
+                </div>
+              </sc-if>
             </div>
           </section>
 
@@ -344,12 +384,15 @@ const COLORS = [
   { id: 'purple', hex: '#8b6bb3', label: 'Purple' },
   { id: 'teal', hex: '#4a8f99', label: 'Teal' }
 ];
+// The Kanban collection: every project board on this machine, and which workspace already files cards on it.
 const BOARDS = [
-  { id: 'lighthouse-q4', name: 'Lighthouse Q4', note: '23 cards · 4 in progress' },
-  { id: 'billing', name: 'Billing migration', note: '41 cards · shared with Orbit Billing' },
-  { id: 'chores', name: 'Platform chores', note: '12 cards' },
-  { id: 'none', name: 'No board', note: 'sessions here make no cards' }
+  { id: 'lighthouse-q4', name: 'Lighthouse Q4', cols: [['To do', 11], ['Doing', 4], ['Done', 8]], with: null },
+  { id: 'docs-backlog', name: 'Docs backlog', cols: [['To do', 5], ['Doing', 1], ['Done', 1]], with: null },
+  { id: 'billing', name: 'Billing migration', cols: [['To do', 18], ['Doing', 6], ['Done', 17]], with: 'Orbit Billing' },
+  { id: 'chores', name: 'Platform chores', cols: [['To do', 7], ['Doing', 2], ['Done', 3]], with: 'Fleet Infra' },
+  { id: 'harbor', name: 'Harbor 1.0', cols: [['To do', 14], ['Doing', 5], ['Done', 11]], with: 'Harbor Mobile' }
 ];
+const cardsOf = (b) => b.cols.reduce((n, c) => n + c[1], 0);
 const AGENTS = [
   { id: 'curator', name: 'Curator', note: 'nightly changelog', sprite: 'curator' },
   { id: 'implementer', name: 'Implementer', note: 'scoped tickets to PRs', sprite: 'implementer' },
@@ -392,7 +435,9 @@ const INIT = {
     { id: 4, text: 'Hero image sources live in Figma, not in the repo. Export at 2× only.', meta: 'learned 2 weeks ago · from “Landing hero refresh”', pinned: false },
     { id: 5, text: 'Lighthouse CI fails the build under 90 on mobile; check before pushing.', meta: 'learned 3 weeks ago · from “Font loading”', pinned: false }
   ],
+  boards: BOARDS,
   board: 'lighthouse-q4',
+  picking: false, bq: '',
   agents: { curator: true, implementer: true, issue: true, reviewer: true },
   skills: { changelog: true, issue: true, review: true, support: true },
   mcps: { github: true, fs: true, browser: true, slack: true },
@@ -429,6 +474,9 @@ class Component extends DCLogic {
     const mcpOn = MCPS.filter((s) => st.mcps[s.id]).length;
     const used = new Set(st.dirs.map((d) => d.path));
     const nextDir = DIR_POOL.find((p) => !used.has(p));
+    const linkedBoard = st.boards.find((b) => b.id === st.board) || null;
+    const bq = st.bq.trim().toLowerCase();
+    const pickable = st.boards.filter((b) => b.id !== st.board && (!bq || b.name.toLowerCase().includes(bq)));
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'workspaces' ? 'is-on' : '', cur: n.id === 'workspaces' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
       alive: !st.gone, gone: st.gone, confirm: st.confirm,
@@ -451,7 +499,23 @@ class Component extends DCLogic {
       factRef: (el) => { if (el) this.els.fact = el; },
       factKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.addFact(); } },
       addFact: () => this.addFact(),
-      boards: BOARDS.map((b) => ({ ...b, on: st.board === b.id, cls: st.board === b.id ? 'is-on' : '', pick: () => this.edit({ board: b.id }) })),
+      boardHint: linkedBoard ? 'linked · sessions here file cards on it' : 'nothing linked · sessions here make no cards',
+      linked: !!linkedBoard, unlinked: !linkedBoard, picking: st.picking,
+      board: linkedBoard ? {
+        name: linkedBoard.name,
+        meta: cardsOf(linkedBoard) + ' cards · ' + linkedBoard.cols[1][1] + ' in progress' + (linkedBoard.with ? ' · also with ' + linkedBoard.with : ''),
+        cols: linkedBoard.cols.map(([name, count]) => ({ name, count, slips: Array.from({ length: Math.min(count, 4) }, (_, i) => ({ i })), hasMore: count > 4, more: '+' + (count - 4) + ' more' }))
+      } : { name: '', meta: '', cols: [] },
+      unlink: () => this.edit({ board: null, picking: false, bq: '' }),
+      openPick: () => this.setState({ picking: true, bq: '' }),
+      closePick: () => this.setState({ picking: false, bq: '' }),
+      bqRef: (el) => { if (!el) return; this.els.bq = el; if (document.activeElement !== el && el.value !== st.bq) el.value = st.bq; },
+      onBq: (e) => this.setState({ bq: e.currentTarget.value }),
+      bq: st.bq,
+      boardList: pickable.map((b) => ({ name: b.name, note: cardsOf(b) + ' cards' + (b.with ? ' · with ' + b.with : ''), cls: b.with ? 'is-busy' : '', link: () => this.edit({ board: b.id, picking: false, bq: '' }) })),
+      noBoards: pickable.length === 0,
+      newBoardName: (st.name.trim() || 'New workspace') + ' board',
+      newBoard: () => { const nb = { id: 'board-' + st.nextId, name: (st.name.trim() || 'New workspace') + ' board', cols: [['To do', 0], ['Doing', 0], ['Done', 0]], with: null }; this.edit({ boards: [...st.boards, nb], board: nb.id, picking: false, bq: '', nextId: st.nextId + 1 }); },
       agents: AGENTS.map((a) => ({ ...a, px: px(SPRITES[a.sprite]), on: !!st.agents[a.id], toggle: () => this.edit({ agents: { ...st.agents, [a.id]: !st.agents[a.id] } }) })),
       agentOn, agentN: AGENTS.length,
       skills: SKILLS.map((k) => ({ ...k, on: !!st.skills[k.id], cls: st.skills[k.id] ? '' : 'is-off', toggle: () => this.edit({ skills: { ...st.skills, [k.id]: !st.skills[k.id] } }) })),
