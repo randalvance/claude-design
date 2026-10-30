@@ -107,13 +107,19 @@ button,input,textarea{font:inherit}
 .pin.is-on{color:var(--red);transform:rotate(-15deg)}
 .pin:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .pin svg{width:15px;height:15px}
+.kwrap{position:relative}
 .mrow{display:flex;align-items:center;gap:8px;padding:3px 6px 3px 10px;border:1px solid transparent;transition:transform .2s steps(2),background .2s steps(2)}
-.mrow:hover{background:var(--paper-2)}
 .mrow.is-on{background:var(--highlighter);border-color:var(--highlighter-2);transform:rotate(-.4deg)}
-.mhit{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;flex:1;min-width:0;padding:6px 0}
-.mhit:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mrow.is-empty{border:1.5px dashed var(--bar)}
+.mhit{display:flex;align-items:center;gap:10px;flex:1;min-width:0;padding:6px 0}
 .kb{display:inline-flex;gap:2px;flex:none;align-items:flex-start}
 .kb i{width:4px;background:var(--ink);display:block}
+.kb.faint i{background:var(--bar)}
+.pop{position:absolute;left:0;right:0;top:100%;margin-top:6px;z-index:6;background:var(--sheet);border:1px solid var(--line);box-shadow:3px 3px 0 var(--shadow);padding:6px;transform:rotate(-.6deg);animation:drop .2s steps(3) both}
+.pop-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--font-hand);font-size:15px;color:var(--mute);padding:2px 2px 6px 8px}
+.prow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:7px 8px;width:100%;box-sizing:border-box;transition:background .15s steps(2)}
+.prow:hover{background:var(--highlighter)}
+.prow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
 .mn{font-weight:800;font-size:13.5px;white-space:nowrap}
 .mh{font-family:var(--font-hand);font-size:15px;color:var(--mute);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .macts{margin-left:auto;display:inline-flex;gap:6px;flex:none}
@@ -260,14 +266,25 @@ button,input,textarea{font:inherit}
         <div class="col">
           <section class="sheet">
             <h2>Kanban board<span class="hh">{{boardHint}}</span></h2>
-            <div class="bd">
-              <sc-for list="{{boardRows}}" as="b" hint-placeholder-count="5">
-                <div class="mrow {{b.cls}}">
-                  <button class="mhit" onClick="{{b.link}}" aria-pressed="{{b.on}}" aria-label="{{b.aria}}"><span class="kb" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="mn">{{b.name}}</span><span class="mh">{{b.note}}</span></button>
-                  <sc-if value="{{b.on}}" hint-placeholder-val="{{false}}"><span class="macts"><button class="mini open">Open board</button><button class="mini red" onClick="{{unlink}}">Unlink</button></span></sc-if>
-                  <sc-if value="{{b.off}}" hint-placeholder-val="{{true}}"><span class="macts"><button class="mini" onClick="{{b.link}}"><svg class="pp-ic" style="width: 12px; height: 12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Link</button></span></sc-if>
+            <div class="bd kwrap">
+              <sc-if value="{{linked}}" hint-placeholder-val="{{true}}">
+                <div class="mrow is-on">
+                  <span class="mhit as-text"><span class="kb" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="mn">{{board.name}}</span><span class="mh">{{board.note}}</span></span>
+                  <span class="macts"><button class="mini open">Open board</button><button class="mini red" onClick="{{unlink}}">Unlink</button></span>
                 </div>
-              </sc-for>
+              </sc-if>
+              <sc-if value="{{unlinked}}" hint-placeholder-val="{{false}}">
+                <div class="mrow is-empty">
+                  <span class="mhit as-text"><span class="kb faint" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="mh">No board linked · sessions here make no cards</span></span>
+                  <span class="macts"><button class="mini" onClick="{{openPick}}" aria-expanded="{{picking}}"><svg class="pp-ic" style="width: 12px; height: 12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Link a board</button></span>
+                </div>
+              </sc-if>
+              <sc-if value="{{picking}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Link a board">
+                  <div class="pop-h"><span>Boards in Kanban · pick one</span><button class="x" onClick="{{closePick}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+                  <sc-for list="{{boardList}}" as="b" hint-placeholder-count="5"><button class="prow" onClick="{{b.link}}"><span class="kb" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="mn">{{b.name}}</span><span class="mh">{{b.note}}</span></button></sc-for>
+                </div>
+              </sc-if>
             </div>
           </section>
 
@@ -407,6 +424,7 @@ const INIT = {
   ],
   boards: BOARDS,
   board: 'lighthouse-q4',
+  picking: false,
   agents: { curator: true, implementer: true, issue: true, reviewer: true },
   skills: { changelog: true, issue: true, review: true, support: true },
   mcps: { github: true, fs: true, browser: true, slack: true },
@@ -467,11 +485,12 @@ class Component extends DCLogic {
       factKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.addFact(); } },
       addFact: () => this.addFact(),
       boardHint: linkedBoard ? 'linked to ' + linkedBoard.name + ' · sessions here file cards on it' : 'nothing linked · sessions here make no cards',
-      boardRows: st.boards.map((b) => {
-        const on = st.board === b.id;
-        return { name: b.name, note: cardsOf(b) + ' cards' + (b.with ? ' · with ' + b.with : ''), on, off: !on, cls: on ? 'is-on' : '', aria: (on ? 'Linked: ' : 'Link ') + b.name, link: () => { if (!on) this.edit({ board: b.id }); } };
-      }),
-      unlink: () => this.edit({ board: null }),
+      linked: !!linkedBoard, unlinked: !linkedBoard, picking: st.picking,
+      board: linkedBoard ? { name: linkedBoard.name, note: cardsOf(linkedBoard) + ' cards' + (linkedBoard.with ? ' · also with ' + linkedBoard.with : '') } : { name: '', note: '' },
+      boardList: st.boards.map((b) => ({ name: b.name, note: cardsOf(b) + ' cards' + (b.with ? ' · with ' + b.with : ''), link: () => this.edit({ board: b.id, picking: false }) })),
+      openPick: () => this.setState({ picking: !st.picking }),
+      closePick: () => this.setState({ picking: false }),
+      unlink: () => this.edit({ board: null, picking: false }),
       agents: AGENTS.map((a) => ({ ...a, px: px(SPRITES[a.sprite]), on: !!st.agents[a.id], toggle: () => this.edit({ agents: { ...st.agents, [a.id]: !st.agents[a.id] } }) })),
       agentOn, agentN: AGENTS.length,
       skills: SKILLS.map((k) => ({ ...k, on: !!st.skills[k.id], cls: st.skills[k.id] ? '' : 'is-off', toggle: () => this.edit({ skills: { ...st.skills, [k.id]: !st.skills[k.id] } }) })),
