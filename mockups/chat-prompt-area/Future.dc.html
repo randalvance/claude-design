@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Futuristic chat window</title>
+<title>Futuristic chat app</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -13,27 +13,87 @@
 <style>
 body{margin:0;background:#05070b;font-family:"Space Grotesk",system-ui,sans-serif;color:#e3ecf3}
 a{color:#43e5c9}a:hover{color:#8ff3e0}
-.page{--ink:#e3ecf3;--mute:#8da0b3;--dim:#5b6c7d;--line:#1a2633;--line2:#263546;--panel:#0a0f16;--panel2:#0e1620;--acc:#43e5c9;--acc-dim:rgba(67,229,201,.14);--amber:#f2b35b;--err:#ff6b7a;--violet:#9a8cff;--mono:"JetBrains Mono",ui-monospace,monospace;min-height:100vh;box-sizing:border-box;padding:28px 24px 32px;display:flex;justify-content:center;background-image:radial-gradient(#121b26 1px,transparent 1px);background-size:24px 24px}
+.page{--ink:#e3ecf3;--mute:#8da0b3;--dim:#5b6c7d;--line:#1a2633;--line2:#263546;--panel:#0a0f16;--panel2:#0e1620;--acc:#43e5c9;--acc-dim:rgba(67,229,201,.14);--amber:#f2b35b;--err:#ff6b7a;--violet:#9a8cff;--mono:"JetBrains Mono",ui-monospace,monospace;min-height:100vh;box-sizing:border-box;padding:24px 20px 28px;display:flex;justify-content:center;background-image:radial-gradient(#121b26 1px,transparent 1px);background-size:24px 24px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 button{font:inherit}
 .ic{width:16px;height:16px;flex:none}
 .micro{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
-.win{position:relative;width:100%;max-width:1040px;background:var(--panel);border:1px solid var(--line2);display:flex;flex-direction:column;min-height:800px;box-shadow:0 0 0 1px rgba(67,229,201,.06),0 30px 60px -30px rgba(0,0,0,.8)}
-.brk{position:absolute;width:16px;height:16px;border:2px solid var(--acc);pointer-events:none}
+.app{position:relative;width:100%;max-width:1400px;display:flex;background:var(--panel);border:1px solid var(--line2);min-height:820px;box-shadow:0 0 0 1px rgba(67,229,201,.06),0 30px 60px -30px rgba(0,0,0,.8)}
+.brk{position:absolute;width:16px;height:16px;border:2px solid var(--acc);pointer-events:none;z-index:2}
 .brk.tl{top:-2px;left:-2px;border-right:0;border-bottom:0}.brk.tr{top:-2px;right:-2px;border-left:0;border-bottom:0}.brk.bl{bottom:-2px;left:-2px;border-right:0;border-top:0}.brk.br{bottom:-2px;right:-2px;border-left:0;border-top:0}
+
+/* ---------- rail ---------- */
+.rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 0 10px;background:#070a10;border-right:1px solid var(--line2);box-sizing:border-box;overflow:auto}
+.logo{width:36px;height:36px;display:grid;place-items:center;color:var(--acc);margin-bottom:8px;filter:drop-shadow(0 0 6px rgba(67,229,201,.5))}
+.rb{all:unset;cursor:pointer;position:relative;width:56px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--mute);font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;transition:color .15s,background .15s}
+.rb svg{width:18px;height:18px}
+.rb:hover{color:var(--ink);background:var(--panel2)}
+.rb.on{color:var(--acc);box-shadow:inset 2px 0 0 var(--acc);background:var(--acc-dim);text-shadow:0 0 10px rgba(67,229,201,.6)}
+.rb:focus-visible{outline:2px solid var(--acc)}
+.rb .nb{position:absolute;top:2px;right:6px;min-width:14px;height:14px;padding:0 3px;background:var(--amber);color:#05070b;font-size:9px;font-weight:600;display:grid;place-items:center;box-sizing:border-box}
+.rail .sp{flex:1}
+
+/* ---------- sessions panel ---------- */
+.panel{width:300px;flex:none;display:flex;flex-direction:column;background:#080c12;border-right:1px solid var(--line2);box-sizing:border-box;min-height:0}
+.ptop{padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line2)}
+.srch{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background:var(--panel);border:1px solid var(--line2);flex:1;min-width:0;color:var(--acc);font-family:var(--mono);font-size:13px;box-sizing:border-box}
+.srch input{all:unset;flex:1;min-width:0;font-family:var(--mono);font-size:12px;color:var(--ink)}
+.srch input::placeholder{color:var(--dim)}
+.kbd{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--dim);border:1px solid var(--line2);padding:1px 4px;white-space:nowrap}
+.pbtn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--acc);color:#05070b;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;display:grid;place-items:center;box-shadow:0 0 14px rgba(67,229,201,.35)}
+.pbtn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.filt{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:var(--panel);border:1px solid var(--line2);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);min-width:0;box-sizing:border-box;transition:border-color .15s,color .15s}
+.filt:hover{border-color:var(--mute)}
+.filt:focus-visible{outline:2px solid var(--acc)}
+.filt.on{border-color:var(--acc);color:var(--acc)}
+.list{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.wsh{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:7px 10px;background:var(--panel2);border:1px solid var(--line2);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);transition:border-color .15s}
+.wsh:hover{border-color:#34485e}
+.wsh:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.wsh .chev{width:12px;height:12px;color:var(--mute);transition:transform .2s linear}
+.ws.closed .wsh .chev{transform:rotate(-90deg)}
+.wsd{width:8px;height:8px;flex:none}
+.wsh .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wsh .cnt{color:var(--mute)}
+.attn{width:14px;height:14px;background:var(--amber);color:#05070b;font-size:10px;font-weight:700;display:grid;place-items:center;flex:none;font-family:var(--mono)}
+.wsb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .25s linear}
+.ws.closed .wsb{grid-template-rows:0fr}
+.wsi{min-height:0;overflow:hidden}
+.rows{display:flex;flex-direction:column;border:1px solid var(--line);border-top:0;padding:2px 0}
+.row{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:7px 10px 7px 14px;font-size:12.5px;color:var(--ink);transition:background .15s}
+.row:hover{background:var(--panel2)}
+.row:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.row.on{background:var(--acc-dim);box-shadow:inset 2px 0 0 var(--acc)}
+.row.attn{box-shadow:inset 2px 0 0 var(--err);padding-left:22px}
+.row.on.attn{box-shadow:inset 2px 0 0 var(--acc)}
+.row .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .dur{font-family:var(--mono);font-size:10.5px;color:var(--mute);white-space:nowrap}
+.row.busy .dur{color:var(--amber)}
+.row .nb{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:14px;height:14px;background:var(--err);color:#fff;font-family:var(--mono);font-size:9px;font-weight:600;display:grid;place-items:center}
+.pulse{width:10px;height:4px;background:var(--amber);box-shadow:0 0 6px var(--amber);animation:blink .6s steps(1) infinite;flex:none}
+.donechip{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(67,229,201,.5);padding:1px 5px;flex:none}
+.subn{font-family:var(--mono);font-size:9px;color:var(--mute);border:1px solid var(--line2);padding:0 4px;line-height:14px;flex:none}
+.src{display:flex;gap:3px;color:var(--dim);flex:none}
+.src svg{width:12px;height:12px}
+.src .j{color:#5aa8ff}
+
+/* ---------- chat window ---------- */
+.win{position:relative;flex:1;min-width:0;display:flex;flex-direction:column}
 .top{display:flex;align-items:flex-end;gap:20px;padding:18px 24px 0;flex-wrap:wrap}
-.ttl{display:flex;flex-direction:column;gap:4px}
-.ttl h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.ttl{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ttl h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
 .ttl h1 .cp{all:unset;cursor:pointer;color:var(--dim);display:grid;place-items:center}
 .ttl h1 .cp:hover{color:var(--acc)}
 .meta{display:flex;align-items:center;gap:14px;padding-bottom:6px;flex-wrap:wrap}
 .meta .k{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
-.led{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--acc);padding:4px 10px;border:1px solid var(--line2)}
+.led{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--acc);padding:4px 10px;border:1px solid var(--line2);white-space:nowrap}
 .led i{width:6px;height:6px;background:var(--acc);box-shadow:0 0 8px var(--acc)}
 .led.busy{color:var(--amber);border-color:rgba(242,179,91,.4)}
 .led.busy i{background:var(--amber);box-shadow:0 0 8px var(--amber);animation:blink .8s steps(1) infinite}
-.br{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;color:var(--ink);padding:4px 10px;border:1px solid var(--line2);background:var(--panel2)}
+.led.attn{color:var(--err);border-color:rgba(255,107,122,.4)}
+.led.attn i{background:var(--err);box-shadow:0 0 8px var(--err)}
+.br{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;color:var(--ink);padding:4px 10px;border:1px solid var(--line2);background:var(--panel2);white-space:nowrap}
 .top-r{margin-left:auto;display:flex;gap:2px;padding-bottom:4px}
 .ib{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;color:var(--mute);border:1px solid transparent;transition:border-color .15s,color .15s}
 .ib:hover{color:var(--acc);border-color:var(--line2)}
@@ -65,7 +125,7 @@ button{font:inherit}
 .open .cap{border-color:#34485e}
 .live .cap{border-color:rgba(67,229,201,.45)}
 .live .cap::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,transparent,rgba(67,229,201,.14),transparent);animation:scan 1.6s linear infinite;pointer-events:none}
-.tb{position:relative;min-width:52px;height:34px;padding:0 8px;border:1px solid var(--line2);background:var(--panel);font-family:var(--mono);font-size:12px;color:var(--ink);display:grid;place-items:center;flex:none;box-sizing:border-box}
+.tb{position:relative;min-width:52px;height:34px;padding:0 8px;border:1px solid var(--line2);background:var(--panel);font-family:var(--mono);font-size:12px;color:var(--ink);display:grid;place-items:center;flex:none;box-sizing:border-box;white-space:nowrap}
 .tb .ok{position:absolute;right:-6px;top:-6px;width:14px;height:14px;background:var(--acc);color:#05070b;display:grid;place-items:center;animation:popd .25s linear both}
 .tb .ok svg{width:8px;height:8px}
 .tb .ok.stopped{background:var(--err)}
@@ -86,7 +146,7 @@ button{font:inherit}
 .open .body{grid-template-rows:1fr}
 .body-in{min-height:0;overflow:hidden}
 .steps{list-style:none;margin:0;padding:6px 12px 10px;background:var(--panel);border:1px solid #34485e;border-top:0;display:flex;flex-direction:column;gap:1px}
-.step{display:flex;gap:12px;align-items:center;padding:6px 6px;font-size:12.5px;opacity:0;border-left:1px solid transparent}
+.step{display:flex;gap:12px;align-items:center;padding:6px 6px;font-size:12.5px;opacity:0}
 .open .step{animation:unclip .3s linear both}
 .step:hover{background:var(--panel2)}
 .step .ix{font-family:var(--mono);font-size:10px;color:var(--dim);min-width:18px}
@@ -94,8 +154,8 @@ button{font:inherit}
 .step code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:none;color:var(--ink);padding:0}
 .step .tm{font-family:var(--mono);font-size:11px;color:var(--dim)}
 
-.panel{max-width:760px;border:1px solid var(--line2);background:var(--panel2);padding:4px 16px 8px;position:relative}
-.panel h3{margin:10px 0 8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.pnl{max-width:760px;border:1px solid var(--line2);background:var(--panel2);padding:4px 16px 8px;position:relative}
+.pnl h3{margin:10px 0 8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500}
 .lrow{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
 .lrow code{font-family:var(--mono);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .plus{color:#7ee08a;font-family:var(--mono);font-size:11.5px}.minus{color:var(--err);font-family:var(--mono);font-size:11.5px}
@@ -118,7 +178,7 @@ button{font:inherit}
 .max .console{border-color:var(--amber);box-shadow:0 0 0 1px rgba(242,179,91,.35),0 0 40px rgba(242,179,91,.18)}
 .console .brk{width:10px;height:10px;border-width:1.5px}
 .max .console .brk{border-color:var(--amber)}
-.cstrip{display:flex;align-items:center;gap:16px;padding:8px 14px;border-bottom:1px solid var(--line)}
+.cstrip{display:flex;align-items:center;gap:16px;padding:8px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .cstrip .micro.acc{color:var(--acc)}
 .max .cstrip .micro.max{color:var(--amber);animation:blink .5s steps(1) infinite}
 .ed{display:flex;gap:10px;padding:12px 14px 4px}
@@ -135,21 +195,22 @@ button{font:inherit}
 .chip:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
 .chip[aria-expanded="true"]{border-color:var(--acc);color:var(--acc)}
 .chip .lab{color:var(--dim)}
+.dirchip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--line2);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--mute);white-space:nowrap;box-sizing:border-box}
 .ebars{display:flex;align-items:flex-end;gap:2px;height:12px}
 .ebars i{width:3px;background:var(--line2)}
 .ebars i.on{background:var(--acc);box-shadow:0 0 6px rgba(67,229,201,.6)}
 .max .ebars i.on{background:var(--amber);box-shadow:0 0 6px rgba(242,179,91,.7);animation:blink .5s steps(1) infinite}
 .max .ebars i:nth-child(2){animation-delay:.1s}.max .ebars i:nth-child(3){animation-delay:.2s}.max .ebars i:nth-child(4){animation-delay:.3s}.max .ebars i:nth-child(5){animation-delay:.4s}
-.gauge{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 6px;border:1px solid var(--line2);font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink)}
+.gauge{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 6px;border:1px solid var(--line2);font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink);box-sizing:border-box}
 .g{width:24px;height:24px}
 .g-track{fill:none;stroke:var(--line2);stroke-width:3.5;stroke-dasharray:65.97 87.96}
-.g-ticks{fill:none;stroke:var(--line2);stroke-width:1;stroke-dasharray:1 3.6}
+.g-ticks{fill:none;stroke:var(--line2);stroke-width:1}
 .g-fill{fill:none;stroke-width:3.5;transition:stroke-dasharray .6s linear}
 .g-fill.ok{stroke:var(--acc)}.g-fill.mid{stroke:var(--amber)}.g-fill.low{stroke:var(--err)}
 .g-draft{fill:none;stroke:#fff;opacity:.4;stroke-width:3.5;transition:stroke-dasharray .2s linear,stroke-dashoffset .2s linear}
 .needle{stroke:#fff;stroke-width:1.8;stroke-linecap:round;transform-origin:20px 20px;transition:transform .6s linear}
 .hub{fill:#fff}
-.sw{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px 0 8px;border:1px solid var(--line2);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);position:relative;overflow:hidden;transition:border-color .2s,color .2s}
+.sw{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px 0 8px;border:1px solid var(--line2);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);position:relative;overflow:hidden;transition:border-color .2s,color .2s;box-sizing:border-box}
 .sw:hover{border-color:var(--amber)}
 .sw:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
 .sw .tr{position:relative;width:26px;height:12px;border:1px solid var(--mute);box-sizing:border-box;flex:none}
@@ -205,27 +266,87 @@ button{font:inherit}
 @keyframes unclip{from{clip-path:inset(0 100% 0 0);opacity:.4}to{clip-path:inset(0 0 0 0);opacity:1}}
 @keyframes popd{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes fly{0%{transform:translateY(0)}40%{transform:translateY(-18px);opacity:0}41%{transform:translateY(18px);opacity:0}100%{transform:none;opacity:1}}
-@media (max-width:760px){.page{padding:12px}.umsg{max-width:92%}.hint{display:none}.top{padding:14px 14px 0}.tabs,.content,.foot{padding-left:14px;padding-right:14px}.pop{width:min(300px,calc(100vw - 40px))}}
+@media (max-width:1000px){.panel{width:250px}}
+@media (max-width:860px){.page{padding:12px}.app{flex-direction:column}.rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line2);padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{width:100%;max-height:40vh;border-right:0;border-bottom:1px solid var(--line2)}.umsg{max-width:92%}.hint{display:none}.top{padding:14px 14px 0}.tabs,.content,.foot{padding-left:14px;padding-right:14px}.pop{width:min(300px,calc(100vw - 40px))}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </helmet>
 <div class="page {{cls}}">
-<div class="win">
+<div class="app">
   <span class="brk tl" aria-hidden="true"></span><span class="brk tr" aria-hidden="true"></span><span class="brk bl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+
+  <nav class="rail" aria-label="Primary">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="rb {{n.cls}}" onClick="{{n.pick}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="sp"></span>
+    <button class="rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <aside class="panel" aria-label="Sessions">
+    <div class="ptop">
+      <div style="display: flex; gap: 8px">
+        <label class="srch"><span aria-hidden="true">›</span><input type="search" placeholder="search sessions" aria-label="Search sessions"><span class="kbd">CTRL K</span></label>
+        <button class="pbtn">Select</button>
+      </div>
+      <div style="display: flex; gap: 8px">
+        <button class="filt" style="flex: 1" aria-haspopup="listbox"><span style="flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">All workspaces</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+        <button class="filt {{activeCls}}" onClick="{{toggleActive}}" aria-pressed="{{activeOnly}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>Active</button>
+      </div>
+    </div>
+    <div class="list">
+      <sc-for list="{{workspaces}}" as="w" hint-placeholder-count="4">
+        <section class="ws {{w.cls}}">
+          <button class="wsh" onClick="{{w.toggle}}" aria-expanded="{{w.open}}">
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            <i class="wsd" style="background: {{w.color}}" aria-hidden="true"></i>
+            <span class="nm">{{w.name}}</span>
+            <sc-if value="{{w.attn}}" hint-placeholder-val="{{false}}"><span class="attn" aria-label="Needs attention">!</span></sc-if>
+            <span class="cnt">{{w.count}}</span>
+          </button>
+          <div class="wsb"><div class="wsi">
+            <div class="rows">
+              <sc-for list="{{w.sessions}}" as="s" hint-placeholder-count="3">
+                <button class="row {{s.cls}}" onClick="{{s.pick}}" aria-current="{{s.cur}}">
+                  <sc-if value="{{s.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{s.attn}}</span></sc-if>
+                  <span class="src" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="4" y="8" width="16" height="12"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg>
+                    <sc-if value="{{s.jira}}" hint-placeholder-val="{{false}}"><svg class="j" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l5 5-5 5-5-5zM7 12l5 5-5 5-5-5zM17 12l5 5-5 5-5-5z"></path></svg></sc-if>
+                  </span>
+                  <sc-if value="{{s.isDone}}" hint-placeholder-val="{{false}}"><span class="donechip">Done</span></sc-if>
+                  <span class="t">{{s.t}}</span>
+                  <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}"><span class="subn" title="Subagents">×{{s.sub}}</span></sc-if>
+                  <sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><i class="pulse" aria-hidden="true"></i></sc-if>
+                  <span class="dur">{{s.dur}}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div></div>
+        </section>
+      </sc-for>
+    </div>
+  </aside>
+
+<main class="win">
   <header class="top">
     <div class="ttl">
-      <span class="micro">Session · LH-0218 · Orchestrator</span>
-      <h1>Issue Creator <button class="cp" aria-label="Copy session link"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1"></rect><path d="M5 15V5a1 1 0 0 1 1-1h10"></path></svg></button></h1>
+      <span class="micro">Session · {{cur.branch}} · {{cur.role}}</span>
+      <h1>{{cur.t}} <button class="cp" aria-label="Copy session link"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><rect x="9" y="9" width="11" height="11"></rect><path d="M5 15V5a1 1 0 0 1 1-1h10"></path></svg></button></h1>
     </div>
     <div class="meta">
-      <span class="k">Lighthouse Web</span>
+      <span class="k">{{cur.ws}}</span>
       <span class="led {{stCls}}"><i aria-hidden="true"></i>{{stLabel}}</span>
-      <span class="br"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="6" cy="18" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><path d="M6 8.5v7M18 10.5c0 4-12 3-12 5"></path></svg>main</span>
+      <span class="br"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="6" cy="18" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><path d="M6 8.5v7M18 10.5c0 4-12 3-12 5"></path></svg>{{cur.branch}}</span>
     </div>
     <div class="top-r">
-      <button class="ib" aria-label="Open in editor"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
-      <button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
-      <button class="ib" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+      <button class="ib" aria-label="Open in editor"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
+      <button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
+      <button class="ib" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
     </div>
   </header>
 
@@ -246,7 +367,8 @@ button{font:inherit}
               </span>
               <span class="cap-t"><strong>{{it.title}}</strong><span class="cap-s">{{it.sub}}</span></span>
               <span class="trail" aria-hidden="true"><sc-for list="{{it.dots}}" as="d" hint-placeholder-count="3"><i class="seg {{d.cls}}"></i></sc-for></span>
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+              <sc-if value="{{it.live}}" hint-placeholder-val="{{false}}"><span class="now">{{it.now}}</span></sc-if>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
             </button>
             <div class="body"><div class="body-in">
               <ol class="steps">
@@ -259,15 +381,18 @@ button{font:inherit}
         </sc-if>
       </sc-for>
 
-      <div class="reply typed">
-        <p>I created issue #218: <a href="https://example.com/acme/lighthouse/issues/218">example.com/acme/lighthouse/issues/218</a> and labelled it <code>enhancement</code>.</p>
-        <p>In <code>card-detail.tsx</code>, local cards already render markdown. Synced cards from the tracker show their description as plain text because tracker text is untrusted. The app's markdown view already drops raw HTML, so the issue asks to render synced descriptions with the same view, with <code>allowRawHtml</code> never enabled.</p>
-        <ul>
-          <li><b>Links:</b> safe schemes only, opened in a new tab.</li>
-          <li><b>Images:</b> never load automatically, since a remote image would make the browser fetch from a third-party host as soon as the card opens.</li>
-          <li><b>Task lists:</b> render read-only.</li>
-        </ul>
-      </div>
+      <sc-if value="{{isIssue}}" hint-placeholder-val="{{true}}">
+        <div class="reply typed">
+          <p>I created issue #218: <a href="https://example.com/acme/lighthouse/issues/218">example.com/acme/lighthouse/issues/218</a> and labelled it <code>enhancement</code>.</p>
+          <p>In <code>card-detail.tsx</code>, local cards already render markdown. Synced cards from the tracker show their description as plain text because tracker text is untrusted. The app's markdown view already drops raw HTML, so the issue asks to render synced descriptions with the same view, with <code>allowRawHtml</code> never enabled.</p>
+          <ul>
+            <li><b>Links:</b> safe schemes only, opened in a new tab.</li>
+            <li><b>Images:</b> never load automatically, since a remote image would make the browser fetch from a third-party host as soon as the card opens.</li>
+            <li><b>Task lists:</b> render read-only.</li>
+          </ul>
+        </div>
+      </sc-if>
+      <sc-if value="{{isGeneric}}" hint-placeholder-val="{{false}}"><div class="reply typed"><p>{{cur.reply}}</p></div></sc-if>
 
       <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
         <div class="umsg"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span><span class="ts">YOU · {{m.ts}}</span>{{m.text}}</div>
@@ -280,7 +405,7 @@ button{font:inherit}
             <span class="cap-t"><strong>{{m.title}}</strong><span class="cap-s">{{m.sub}}</span></span>
             <span class="trail" aria-hidden="true"><sc-for list="{{m.dots}}" as="d" hint-placeholder-count="2"><i class="seg {{d.cls}}"></i></sc-for></span>
             <sc-if value="{{m.live}}" hint-placeholder-val="{{false}}"><span class="now">{{m.now}}</span></sc-if>
-            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <div class="body"><div class="body-in">
             <ol class="steps">
@@ -295,8 +420,8 @@ button{font:inherit}
     </sc-if>
 
     <sc-if value="{{isGit}}" hint-placeholder-val="{{false}}">
-      <div class="panel"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
-        <h3>Working tree · main</h3>
+      <div class="pnl"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+        <h3>Working tree · {{cur.branch}}</h3>
         <div class="lrow"><i class="seg edit" style="animation: none" aria-hidden="true"></i><code>src/cards/card-detail.tsx</code><span class="plus">+38</span><span class="minus">−12</span></div>
         <div class="lrow"><i class="seg edit" style="animation: none" aria-hidden="true"></i><code>src/ui/markdown-view.tsx</code><span class="plus">+6</span><span class="minus">−1</span></div>
         <div class="lrow"><i class="seg bash" style="animation: none" aria-hidden="true"></i><code>src/lib/safe-link.ts</code><span class="plus">+41</span><span class="minus">−0</span></div>
@@ -305,7 +430,7 @@ button{font:inherit}
     </sc-if>
 
     <sc-if value="{{isTodos}}" hint-placeholder-val="{{false}}">
-      <div class="panel"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+      <div class="pnl"><span class="brk tl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
         <h3>Todos · {{todoDone}} / {{todoTotal}}</h3>
         <sc-for list="{{todos}}" as="td" hint-placeholder-count="4">
           <button class="todo {{td.cls}}" onClick="{{td.toggle}}" aria-pressed="{{td.done}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span><span>{{td.t}}</span></button>
@@ -363,7 +488,7 @@ button{font:inherit}
 
             <span class="gauge" role="img" aria-label="{{ctxAria}}">
               <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
-                <circle class="g-ticks" cx="20" cy="20" r="18" transform="rotate(135 20 20)" style="stroke-dasharray: 1 3.6; stroke-dashoffset: 0"></circle>
+                <circle class="g-ticks" cx="20" cy="20" r="18" transform="rotate(135 20 20)" style="stroke-dasharray: 1 3.6"></circle>
                 <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
                 <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
                 <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
@@ -377,6 +502,8 @@ button{font:inherit}
               <span class="tr" aria-hidden="true"><span class="kn"></span></span>
               <span>Yolo</span>
             </button>
+
+            <span class="dirchip" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3 5h6l2 2h10v13H3z"></path></svg>{{cur.ws}}</span>
           </div>
           <span class="hint" aria-hidden="true">{{hint}}</span>
           <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
@@ -385,13 +512,14 @@ button{font:inherit}
           </button>
         </div>
       </div>
-      <div class="demo"><span>type · ↵ send · red square or ⎋ stops · 25 tokens per character</span><button onClick="{{reset}}">Reset demo</button></div>
+      <div class="demo"><span>click sessions and tabs · type · ↵ send · red square or ⎋ stops · 25 tokens per character</span><button onClick="{{reset}}">Reset demo</button></div>
     </div>
   </footer>
+</main>
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1120,"height":880}}'>
+<script type="text/x-dc" data-dc-script data-props='{"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1440,"height":900}}'>
 const MODELS = [
   { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', def: 2 },
   { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', def: 1 },
@@ -402,61 +530,130 @@ const EFFORT = ['Low', 'Med', 'High', 'X-hi', 'Max'];
 const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
 const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
 const TABS = ['Chat', 'Git', 'Todos', 'Tools', 'Terminal', 'Logs'];
-const THREAD = [
-  { k: 'user', ts: '11:31:08', text: 'Open an issue for synced cards showing markdown as plain text. Check how local cards render it first.' },
-  { k: 'cap', id: 'c1', time: '13s', sub: '2 LLM calls · 1 tool call', dots: ['think', 'read'], steps: [
-    { k: 'think', label: 'think', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
-    { k: 'read', label: 'read', detail: 'src/cards/card-detail.tsx', time: '0.3s' } ] },
-  { k: 'said', text: 'Line 212 renders markdown but line 180 renders plain text, so I\'ll check what separates them.' },
-  { k: 'cap', id: 'c2', time: '31s', sub: '4 LLM calls · 4 tool calls', dots: ['bash', 'read', 'read', 'bash'], steps: [
-    { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- src/cards/card-detail.tsx", time: '1.1s' },
-    { k: 'read', label: 'read', detail: 'src/ui/markdown-view.tsx', time: '0.2s' },
-    { k: 'read', label: 'read', detail: 'src/sync/tracker.ts', time: '0.2s' },
-    { k: 'bash', label: 'bash', detail: 'grep -rn "allowRawHtml" src/ | head', time: '0.4s' } ] },
-  { k: 'said', text: 'Local cards render markdown, but synced cards from the tracker deliberately show plain text. That is what the ticket needs to change.' },
-  { k: 'cap', id: 'c3', time: '10s', sub: '1 LLM call · 1 tool call · turn 55s', dots: ['ask'], steps: [
-    { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced card descriptions as markdown" --label enhancement', time: '3.0s' } ] }
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
+const WS = [
+  { id: 'lighthouse', name: 'Lighthouse Web', color: '#43e5c9', sessions: [
+    { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
+    { id: 's2', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4m 55s', role: 'Implementer', branch: 'feat/LH-281' },
+    { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
+  { id: 'orbit', name: 'Orbit Billing', color: '#ff7ab8', attn: true, sessions: [
+    { id: 's4', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
+    { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/ORB-272-telemetry' },
+    { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2m 50s', role: 'Implementer', branch: 'main' },
+    { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1m 02s', role: 'Implementer', branch: 'main' },
+    { id: 's9', t: 'Move worker pool to private subnets', st: 'done', dur: '34s', role: 'Orchestrator', branch: 'feat/private-workers' },
+    { id: 's10', t: 'Fill in access-request roles', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
+    { id: 's11', t: 'Onboarding form autofill', st: 'idle', dur: '45m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's12', t: 'Cross-tenant access audit', st: 'idle', dur: '46m 18s', role: 'Orchestrator', branch: 'fix/ORB-266' },
+    { id: 's13', t: 'Find recent ORB-prefixed pull requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's14', t: 'Guardrails check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's15', t: 'Is stale PR ORB-205 still relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's16', t: 'Support answers draft', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
+  { id: 'fleet', name: 'Fleet Infra Deploy', color: '#f2b35b', sessions: [
+    { id: 's17', t: 'Update image digest', st: 'idle', dur: '29m 03s', role: 'Implementer', branch: 'main' },
+    { id: 's18', t: 'Find and move preprod images', st: 'busy', dur: '31m 15s', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
+  { id: 'tf', name: 'Fleet Infra Terraform', color: '#8da0b3', sessions: [
+    { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12m 08s', role: 'Orchestrator', branch: 'main' } ] }
+];
+const THREADS = {
+  s3: [
+    { k: 'user', ts: '11:31:08', text: 'Open an issue for synced cards showing markdown as plain text. Check how local cards render it first.' },
+    { k: 'cap', id: 'c1', time: '13s', sub: '2 LLM calls · 1 tool call', dots: ['think', 'read'], steps: [
+      { k: 'think', label: 'think', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
+      { k: 'read', label: 'read', detail: 'src/cards/card-detail.tsx', time: '0.3s' } ] },
+    { k: 'said', text: 'Line 212 renders markdown but line 180 renders plain text, so I\'ll check what separates them.' },
+    { k: 'cap', id: 'c2', time: '31s', sub: '4 LLM calls · 4 tool calls', dots: ['bash', 'read', 'read', 'bash'], steps: [
+      { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- src/cards/card-detail.tsx", time: '1.1s' },
+      { k: 'read', label: 'read', detail: 'src/ui/markdown-view.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'src/sync/tracker.ts', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'grep -rn "allowRawHtml" src/ | head', time: '0.4s' } ] },
+    { k: 'said', text: 'Local cards render markdown, but synced cards from the tracker deliberately show plain text. That is what the ticket needs to change.' },
+    { k: 'cap', id: 'c3', time: '10s', sub: '1 LLM call · 1 tool call · turn 55s', dots: ['ask'], steps: [
+      { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced card descriptions as markdown" --label enhancement', time: '3.0s' } ] }
+  ],
+  s5: [
+    { k: 'user', ts: '09:38:41', text: 'Enable browser telemetry in the Orbit checkout. Keep the client token out of the bundle and gate it behind a flag.' },
+    { k: 'cap', id: 'r1', time: '48s', sub: '5 LLM calls · 6 tool calls', dots: ['read', 'read', 'bash', 'edit', 'edit', 'bash'], steps: [
+      { k: 'read', label: 'read', detail: 'src/root.tsx', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm add @acme/browser-telemetry', time: '9.4s' },
+      { k: 'edit', label: 'edit', detail: 'src/root.tsx (+24)', time: '0.3s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm typecheck → 0 errors', time: '21s' } ] },
+    { k: 'said', text: 'The SDK is wired behind TELEMETRY_ENABLED. Before opening a PR I want the e2e run against staging to confirm the CSP allows the intake host.' },
+    { k: 'cap', id: 'r2', live: true, time: '1h 53m', sub: '3 steps · 1h 53m', dots: ['bash', 'read', 'bash'], now: 'bash · pnpm e2e --env staging', steps: [
+      { k: 'bash', label: 'bash', detail: 'pnpm e2e --env staging --grep telemetry', time: '…' } ] }
+  ]
+};
+const GENERIC = [
+  { k: 'user', ts: '10:02:17', text: 'Pick this up from where the last session left off and summarise the state.' },
+  { k: 'cap', id: 'g1', time: '21s', sub: '3 LLM calls · 2 tool calls', dots: ['think', 'read', 'bash'], steps: [
+    { k: 'think', label: 'think', detail: 'Read the last reply and the working tree first', time: '6s' },
+    { k: 'read', label: 'read', detail: 'last reply · 1.4k tokens', time: '0.2s' },
+    { k: 'bash', label: 'bash', detail: 'git status --short && git log --oneline -3', time: '0.9s' } ] }
+];
+const GENERIC_REPLY = {
+  s1: 'The curator now writes the digest to docs/changelog/2026-10-30.md and opens a draft PR each night. Two feeds still return 403; I\'m retrying them with the service account.',
+  s2: 'Rebased onto origin/main and release-2.4. One conflict in package.json resolved in favour of the release pin. Tests are running.',
+  s4: 'Sticky checkout sessions are enabled on the load balancer with a 12h cookie. Verifying the health check still passes across both zones.',
+  s9: 'Move complete. Both worker pools are on private subnets and the NAT route is in place. Nothing else to do here.',
+  s18: 'Found 14 preprod images tagged with the old registry. Moving them in batches of five so the registry rate limit isn\'t hit.'
+};
 const LIVE_STEPS = [
   { k: 'think', label: 'think', detail: 'adaptive · reading your message', time: '2s' },
   { k: 'read', label: 'read', detail: 'last reply', time: '0.2s' },
   { k: 'bash', label: 'bash', detail: 'git status --short', time: '0.4s' }
 ];
 const NOW = ['think · adaptive', 'read · last reply', 'bash · git status --short'];
+const DEFAULT_TODOS = [{ t: 'Summarise the current state', d: true }, { t: 'Confirm next step with the user', d: false }];
 function fmtSec(ms) { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
 function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
 function clock(t) { const d = new Date(t); return [d.getHours(), d.getMinutes(), d.getSeconds()].map((x) => String(x).padStart(2, '0')).join(':'); }
 function ix(i) { return String(i + 1).padStart(2, '0'); }
+function findSession(id) { for (const w of WS) { const s = w.sessions.find((x) => x.id === id); if (s) return { ...s, ws: w.name }; } return null; }
 
 class Component extends DCLogic {
-  state = { tab: 'Chat', open: null, caps: {}, msgs: [], model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: BASE, tick: 0,
-    todos: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] };
+  state = { sid: 's3', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: BASE, tick: 0,
+    todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
   componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
-  busy() { return this.state.msgs.some((m) => !m.done); }
+  curMsgs() { return this.state.msgs[this.state.sid] || []; }
+  busy() { return this.curMsgs().some((m) => !m.done); }
   stop() {
     clearInterval(this.ticker); clearTimeout(this.t3);
-    this.setState({ msgs: this.state.msgs.map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), n: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) });
+    const sid = this.state.sid;
+    this.setState({ msgs: { ...this.state.msgs, [sid]: this.curMsgs().map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), n: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) } });
   }
   send() {
     const el = this.ta;
     if (this.busy() || !el || !el.value.trim()) return;
-    const text = el.value.trim(); const id = Date.now();
+    const text = el.value.trim(); const id = Date.now(); const sid = this.state.sid;
     el.value = ''; el.style.height = '';
-    this.setState({ msgs: [...this.state.msgs, { id, text, start: id, done: false }], draft: 0, used: this.state.used + Math.max(40, text.length * TPC), fly: true, open: null });
+    this.setState({ msgs: { ...this.state.msgs, [sid]: [...this.curMsgs(), { id, text, start: id, done: false }] }, draft: 0, used: this.state.used + Math.max(40, text.length * TPC), fly: true, open: null });
     clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ fly: false }), 500);
     clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400);
     clearTimeout(this.t3);
     this.t3 = setTimeout(() => {
       clearInterval(this.ticker);
-      this.setState({ used: this.state.used + 1500, msgs: this.state.msgs.map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) });
+      this.setState({ used: this.state.used + 1500, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } });
     }, 2600);
   }
-  capView(c) {
-    const open = !!this.state.caps[c.id];
-    return { isCap: true, open, cls: open ? 'open' : '', ok: true, time: c.time, title: 'Done', sub: c.sub,
-      dots: c.dots.map((k) => ({ cls: k })), steps: c.steps.map((s, i) => ({ ...s, ix: ix(i), delay: (30 + i * 60) + 'ms' })),
-      toggle: () => this.setState({ caps: { ...this.state.caps, [c.id]: !open } }) };
+  capView(c, sid) {
+    const key = sid + c.id; const open = !!this.state.caps[key]; const live = !!c.live;
+    return { isCap: true, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''), ok: !live, live, time: c.time, title: live ? 'Working' : 'Done', sub: c.sub, now: c.now || '',
+      dots: c.dots.map((k, i) => ({ cls: k + (live && i === c.dots.length - 1 ? ' run' : '') })), steps: c.steps.map((s, i) => ({ ...s, ix: ix(i), delay: (30 + i * 60) + 'ms' })),
+      toggle: () => this.setState({ caps: { ...this.state.caps, [key]: !open } }) };
   }
   renderVals() {
     const st = this.state; const total = this.total();
@@ -466,7 +663,9 @@ class Component extends DCLogic {
     const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
     const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
     const busy = this.busy();
-    const msgs = st.msgs.map((m) => {
+    const cur = findSession(st.sid) || findSession('s3');
+    const sessionBusy = busy || cur.st === 'busy';
+    const msgs = this.curMsgs().map((m) => {
       const live = !m.done; const stopped = !!m.stopped;
       const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.n || 1) : 3);
       const open = !!st.caps[m.id];
@@ -479,13 +678,28 @@ class Component extends DCLogic {
         reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. Yolo skipped two permission prompts along the way.' : 'Done. One permission prompt is waiting for you above.',
         toggle: () => this.setState({ caps: { ...st.caps, [m.id]: !open } }) };
     });
-    const todos = st.todos.map((t, i) => ({ t: t.t, done: t.d, cls: t.d ? 'done' : '', toggle: () => this.setState({ todos: st.todos.map((x, j) => j === i ? { ...x, d: !x.d } : x) }) }));
+    const todoList = st.todos[st.sid] || DEFAULT_TODOS;
+    const todos = todoList.map((t, i) => ({ t: t.t, done: t.d, cls: t.d ? 'done' : '', toggle: () => this.setState({ todos: { ...st.todos, [st.sid]: todoList.map((x, j) => j === i ? { ...x, d: !x.d } : x) } }) }));
     return {
       cls: [st.focus ? 'focus' : '', isMax ? 'max' : '', st.yolo ? 'yolo' : ''].join(' '),
-      stCls: busy ? 'busy' : '', stLabel: busy ? 'Busy' : 'Idle',
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'sessions' ? 'on' : '', cur: n.id === 'sessions' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
+      activeOnly: st.activeOnly, activeCls: st.activeOnly ? 'on' : '',
+      toggleActive: () => this.setState({ activeOnly: !st.activeOnly }),
+      workspaces: WS.map((w) => {
+        const open = !!st.openWs[w.id];
+        const sessions = w.sessions.filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
+        return { name: w.name, color: w.color, attn: !!w.attn, count: sessions.length, open, cls: open ? '' : 'closed',
+          toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
+          sessions: sessions.map((s) => ({ t: s.t, dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+            cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
+            pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
+      }),
+      cur: { t: cur.t, role: cur.role, ws: cur.ws, branch: cur.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
+      stCls: sessionBusy ? 'busy' : cur.attn ? 'attn' : '', stLabel: sessionBusy ? 'Busy' : cur.attn ? 'Attention' : 'Idle',
       tabs: TABS.map((t, i) => ({ label: t, n: ix(i), cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
       isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab.toLowerCase(),
-      thread: THREAD.map((it) => it.k === 'cap' ? this.capView(it) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text, ts: it.ts || '' }),
+      thread: (THREADS[st.sid] || GENERIC).map((it) => it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text, ts: it.ts || '' }),
+      isIssue: st.sid === 's3', isGeneric: !THREADS[st.sid],
       msgs, todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
       placeholder: isMax ? 'Max effort engaged. Give it the hard one…' : st.yolo ? 'Message the agent · no permission prompts' : 'Message the agent…',
       hint: busy ? '⎋ stop · agent working' : '↵ send · ⇧↵ newline',
@@ -509,7 +723,7 @@ class Component extends DCLogic {
       yolo: st.yolo, toggleYolo: () => this.setState({ yolo: !st.yolo }),
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
-      reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ tab: 'Chat', open: null, caps: {}, msgs: [], model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: BASE }); }
+      reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: 's3', tab: 'Chat', open: null, caps: {}, msgs: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: BASE, activeOnly: false, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
     };
   }
 }
