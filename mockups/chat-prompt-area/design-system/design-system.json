@@ -1,0 +1,218 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-30T09:39:21Z"
+  },
+  "title": "Paper Chat",
+  "namespace": "PaperChat",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Icons"
+  ],
+  "assetGroups": {
+    "Icons": {
+      "name": "Icons",
+      "tile": "s",
+      "order": [
+        "mark.svg",
+        "home.svg",
+        "agents.svg",
+        "sessions.svg",
+        "skills.svg",
+        "workspaces.svg",
+        "memory.svg",
+        "mcps.svg",
+        "workflows.svg",
+        "kanban.svg",
+        "pull-requests.svg",
+        "background.svg",
+        "settings.svg",
+        "search.svg",
+        "plus.svg",
+        "chevron-down.svg",
+        "check.svg",
+        "copy.svg",
+        "trash.svg",
+        "share.svg",
+        "code.svg",
+        "agent.svg",
+        "branch.svg",
+        "send.svg",
+        "stop.svg",
+        "pinwheel.svg"
+      ],
+      "files": {
+        "mark.svg": {
+          "name": "mark.svg",
+          "blob": "7107ef2f04d7e4c3ea4fd5c01876e719",
+          "size": 324,
+          "type": "image/svg+xml"
+        },
+        "home.svg": {
+          "name": "home.svg",
+          "blob": "e3aaabb4f1cd5c55cbdadc57d6e55e0f",
+          "size": 236,
+          "type": "image/svg+xml"
+        },
+        "agents.svg": {
+          "name": "agents.svg",
+          "blob": "a6cf125acf37acd0ad1047051f6f2544",
+          "size": 233,
+          "type": "image/svg+xml"
+        },
+        "sessions.svg": {
+          "name": "sessions.svg",
+          "blob": "7dc807a91a5fc0ca8eeb5b1214e85fa3",
+          "size": 234,
+          "type": "image/svg+xml"
+        },
+        "skills.svg": {
+          "name": "skills.svg",
+          "blob": "cf12677cbb487dced70a4e7272f9efcc",
+          "size": 248,
+          "type": "image/svg+xml"
+        },
+        "workspaces.svg": {
+          "name": "workspaces.svg",
+          "blob": "fd1054084503226baa0bdf6e147fad8b",
+          "size": 252,
+          "type": "image/svg+xml"
+        },
+        "memory.svg": {
+          "name": "memory.svg",
+          "blob": "da2dfb580a7724a35da329797bc55dd0",
+          "size": 318,
+          "type": "image/svg+xml"
+        },
+        "mcps.svg": {
+          "name": "mcps.svg",
+          "blob": "b460cadc05d0b34360c50438df85884f",
+          "size": 225,
+          "type": "image/svg+xml"
+        },
+        "workflows.svg": {
+          "name": "workflows.svg",
+          "blob": "b350a5ca91359d8c615b1fabbf1713c1",
+          "size": 273,
+          "type": "image/svg+xml"
+        },
+        "kanban.svg": {
+          "name": "kanban.svg",
+          "blob": "1bea543aa150c174fe9d2766c9b82d3a",
+          "size": 218,
+          "type": "image/svg+xml"
+        },
+        "pull-requests.svg": {
+          "name": "pull-requests.svg",
+          "blob": "a98ee0540f6e6ef6e9a93466e45461d3",
+          "size": 326,
+          "type": "image/svg+xml"
+        },
+        "background.svg": {
+          "name": "background.svg",
+          "blob": "667a0627481ded0235e0a183e34acd71",
+          "size": 211,
+          "type": "image/svg+xml"
+        },
+        "settings.svg": {
+          "name": "settings.svg",
+          "blob": "0ea673d2660e96ea36404172d6180819",
+          "size": 761,
+          "type": "image/svg+xml"
+        },
+        "search.svg": {
+          "name": "search.svg",
+          "blob": "5eba683601735f8e5bbaa94910fc7d55",
+          "size": 233,
+          "type": "image/svg+xml"
+        },
+        "plus.svg": {
+          "name": "plus.svg",
+          "blob": "8ddfc43db97210eebb4b568220fd8213",
+          "size": 195,
+          "type": "image/svg+xml"
+        },
+        "chevron-down.svg": {
+          "name": "chevron-down.svg",
+          "blob": "65c881e4fca5e650c3788982187aca98",
+          "size": 191,
+          "type": "image/svg+xml"
+        },
+        "check.svg": {
+          "name": "check.svg",
+          "blob": "af0740890104b01a3d956f33293eaaa2",
+          "size": 193,
+          "type": "image/svg+xml"
+        },
+        "copy.svg": {
+          "name": "copy.svg",
+          "blob": "95f37a6a3b0ca5742af55813c70066be",
+          "size": 258,
+          "type": "image/svg+xml"
+        },
+        "trash.svg": {
+          "name": "trash.svg",
+          "blob": "8cca25ff75da80c46aa323b111ab67fc",
+          "size": 229,
+          "type": "image/svg+xml"
+        },
+        "share.svg": {
+          "name": "share.svg",
+          "blob": "ef87363342994ffa26a2bc060a5fbce0",
+          "size": 325,
+          "type": "image/svg+xml"
+        },
+        "code.svg": {
+          "name": "code.svg",
+          "blob": "b145f836bc2626bccf4903fe9f7c5a8e",
+          "size": 206,
+          "type": "image/svg+xml"
+        },
+        "agent.svg": {
+          "name": "agent.svg",
+          "blob": "3745e992159f11e46cad84090cd16101",
+          "size": 260,
+          "type": "image/svg+xml"
+        },
+        "branch.svg": {
+          "name": "branch.svg",
+          "blob": "9891eeedaf041f76d74fe07a90f904d8",
+          "size": 328,
+          "type": "image/svg+xml"
+        },
+        "send.svg": {
+          "name": "send.svg",
+          "blob": "0fd20c194ceb658af2246fe28db2bc91",
+          "size": 200,
+          "type": "image/svg+xml"
+        },
+        "stop.svg": {
+          "name": "stop.svg",
+          "blob": "51d580d75d713fea0978ffd11e9fe59d",
+          "size": 136,
+          "type": "image/svg+xml"
+        },
+        "pinwheel.svg": {
+          "name": "pinwheel.svg",
+          "blob": "42ed97b5aba3c4c0d4c2907ea06f2907",
+          "size": 154,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Randal Vance Cunanan",
+    "at": "2026-10-30T09:39:21Z",
+    "via": "Claude Code",
+    "note": "First version, built from the Paper variant of the Chat Prompt Area canvas"
+  }
+}

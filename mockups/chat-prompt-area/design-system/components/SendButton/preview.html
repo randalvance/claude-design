@@ -1,0 +1,26 @@
+<!-- @dsCard group="Actions" height=100 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SendButton — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);padding:16px;box-sizing:border-box}
+.pv{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.pv-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.pv-l{font-family:var(--font-hand);font-size:15px;color:var(--mute);margin:0}
+
+</style>
+</head>
+<body class="pp-root">
+<div class="pv" style="align-items:center">
+<div class="pv-col"><p class="pv-l">empty</p><button class="pp-send" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button></div>
+<div class="pv-col"><p class="pv-l">ready</p><button class="pp-send is-ready" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button></div>
+<div class="pv-col is-max"><p class="pv-l">ready, Max effort</p><button class="pp-send is-ready" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button></div>
+<div class="pv-col"><p class="pv-l">stop (never pulses)</p><button class="pp-send is-stop" aria-label="Stop the agent"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect></svg></button></div>
+</div>
+</body>
+</html>

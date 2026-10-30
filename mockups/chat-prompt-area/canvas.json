@@ -1,29 +1,155 @@
 {
   "v": 3,
-  "createdOnFiles": {"v": 1, "at": "2026-10-13T15:10:00Z"},
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-13T15:10:00Z"
+  },
   "title": "Chat Prompt Area",
-  "launch": {"view": "focused", "file": "Main.dc.html"},
+  "launch": {
+    "view": "focused",
+    "file": "Main.dc.html"
+  },
   "pages": [
-    {"id": "shell", "name": "App shell"},
-    {"id": "paper", "name": "Paper"},
-    {"id": "future", "name": "Futuristic"},
-    {"id": "saas", "name": "Professional SaaS"}
+    {
+      "id": "shell",
+      "name": "App shell"
+    },
+    {
+      "id": "paper",
+      "name": "Paper"
+    },
+    {
+      "id": "future",
+      "name": "Futuristic"
+    },
+    {
+      "id": "saas",
+      "name": "Professional SaaS"
+    }
   ],
   "boards": {
-    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 900, "title": "App shell — sessions panel + chat, live demo", "page": "shell", "expand": "fill", "is_interactive": true},
-    "States.dc.html": {"x": 1520, "y": 0, "w": 1280, "h": 1600, "title": "Composer states", "page": "shell"},
-    "Anatomy.dc.html": {"x": 0, "y": 2040, "w": 2800, "h": 760, "title": "Anatomy + motion spec", "page": "shell"},
-    "Paper.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 900, "title": "App shell — paper, live demo", "page": "paper", "expand": "fill", "is_interactive": true},
-    "Future.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 900, "title": "App shell — futuristic, live demo", "page": "future", "expand": "fill", "is_interactive": true},
-    "Saas.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 900, "title": "App shell — professional SaaS, live demo", "page": "saas", "expand": "fill", "is_interactive": true}
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "App shell — sessions panel + chat, live demo",
+      "page": "shell",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "States.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 1280,
+      "h": 1600,
+      "title": "Composer states",
+      "page": "shell"
+    },
+    "Anatomy.dc.html": {
+      "x": 0,
+      "y": 2040,
+      "w": 2800,
+      "h": 760,
+      "title": "Anatomy + motion spec",
+      "page": "shell"
+    },
+    "Paper.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "App shell — paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Future.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "App shell — futuristic, live demo",
+      "page": "future",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Saas.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "App shell — professional SaaS, live demo",
+      "page": "saas",
+      "expand": "fill",
+      "is_interactive": true
+    }
   },
-  "order": ["Main.dc.html", "States.dc.html", "Anatomy.dc.html", "Paper.dc.html", "Future.dc.html", "Saas.dc.html"],
+  "order": [
+    "Main.dc.html",
+    "States.dc.html",
+    "Anatomy.dc.html",
+    "Paper.dc.html",
+    "Future.dc.html",
+    "Saas.dc.html"
+  ],
   "notes": {
-    "t1": {"x": 0, "y": -300, "text": "App shell — icon rail, workspace sessions, chat with capsules, composer", "kind": "title1", "maxW": 2800, "page": "shell"},
-    "t2": {"x": 0, "y": 1740, "text": "Anatomy, motion and the Max-effort moment", "kind": "title1", "maxW": 2800, "page": "shell"},
-    "p1": {"x": 1520, "y": 0, "w": 320, "text": "Paper: every surface is a cut sheet with a hard offset shadow, so depth comes from stacking, not blur. Motion runs on steps() at 8–12 fps like a stop-motion puppet: capsules boil while working, notes drop in, the YOLO and MAX stamps thump down. Sessions are folder tabs over ruled index cards; the selected one is highlighter.", "fill": "orange", "page": "paper"},
-    "f1": {"x": 1520, "y": 0, "w": 320, "text": "Futuristic: a HUD console. Bracket corners, 1 px lines, mono microlabels, one cyan accent with amber for YOLO/Max. Motion is linear and mechanical: a scan line sweeps the working capsule, panels unclip, the reply types itself in. Sessions are a mono manifest; busy rows carry a blinking amber segment.", "fill": "teal", "page": "future"},
-    "s1": {"x": 1520, "y": 0, "w": 320, "text": "Professional SaaS: white cards on a cool grey ground, 1 px borders, one indigo accent and Inter throughout. Status is a pill (Running, Done, Needs review), workspaces are collapsible groups with a count, and the composer is a bordered card with a segmented effort control. Motion is quiet: 150–250 ms eases, a progress bar across the working capsule, no bounce.", "fill": "blue", "page": "saas"}
+    "t1": {
+      "x": 0,
+      "y": -300,
+      "text": "App shell — icon rail, workspace sessions, chat with capsules, composer",
+      "kind": "title1",
+      "maxW": 2800,
+      "page": "shell"
+    },
+    "t2": {
+      "x": 0,
+      "y": 1740,
+      "text": "Anatomy, motion and the Max-effort moment",
+      "kind": "title1",
+      "maxW": 2800,
+      "page": "shell"
+    },
+    "p1": {
+      "x": 1520,
+      "y": 0,
+      "w": 320,
+      "text": "Paper: every surface is a cut sheet with a hard offset shadow, so depth comes from stacking, not blur. Motion runs on steps() at 8–12 fps like a stop-motion puppet: capsules boil while working, notes drop in, the YOLO and MAX stamps thump down. Sessions are folder tabs over ruled index cards; the selected one is highlighter.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "f1": {
+      "x": 1520,
+      "y": 0,
+      "w": 320,
+      "text": "Futuristic: a HUD console. Bracket corners, 1 px lines, mono microlabels, one cyan accent with amber for YOLO/Max. Motion is linear and mechanical: a scan line sweeps the working capsule, panels unclip, the reply types itself in. Sessions are a mono manifest; busy rows carry a blinking amber segment.",
+      "fill": "teal",
+      "page": "future"
+    },
+    "s1": {
+      "x": 1520,
+      "y": 0,
+      "w": 320,
+      "text": "Professional SaaS: white cards on a cool grey ground, 1 px borders, one indigo accent and Inter throughout. Status is a pill (Running, Done, Needs review), workspaces are collapsible groups with a count, and the composer is a bordered card with a segmented effort control. Motion is quiet: 150–250 ms eases, a progress bar across the working capsule, no bounce.",
+      "fill": "blue",
+      "page": "saas"
+    },
+    "p2": {
+      "x": 1520,
+      "y": 440,
+      "w": 320,
+      "text": "Design system: tokens, type, tilt and shadow scales, motion table, icon set and 26 components with live previews live in the Paper Chat design system → https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh. Its tokens are installed on this canvas (Theme menu).",
+      "fill": "orange",
+      "page": "paper"
+    }
   },
-  "designSystems": []
+  "designSystems": [
+    {
+      "title": "Paper Chat",
+      "namespace": "paper-chat",
+      "artifact": "https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh",
+      "version": "1793353188-d80b",
+      "copiedAt": "2026-10-30T09:40:00Z"
+    }
+  ]
 }

@@ -18,6 +18,25 @@ Live canvas: https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis
 | `Saas.dc.html` | Page "Professional SaaS": the full shell as a conventional B2B product. White cards on a cool grey ground, 1 px borders, one indigo accent, Inter + JetBrains Mono. Rail with labelled icons and a brand tile; sessions panel with search, New button, All/Active segmented control and collapsible workspace groups with counts; status is a pill (Running, Done, Needs review). Chat header with breadcrumb, status pill and branch chip; underline tabs; capsules are bordered cards with a progress bar while working. Composer is a bordered card with a radio-list model menu and a segmented effort control. Motion is 150–250 ms eases, no bounce. |
 | `canvas.json` | Canvas index (pages, frames, order, notes). |
 
+## Paper Chat design system
+
+The Paper variant has its own design system, published as a Design System artifact at
+https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh and mirrored under `design-system/`:
+
+- `tokens.json` — one theme (Paper): 46 colour tokens, four type families (Fraunces, Nunito,
+  Caveat, Courier New) in 22 styles, spacing by pixel value, radii, 15 hard offset shadows, a
+  tilt scale for stickers and stamps, and stroke widths.
+- `README.md` and `motion.md` — the brand book for a consuming agent (principles, voice, colour,
+  type, surfaces, grain, states, iconography) and the full stop-motion table.
+- `components/bundle.css` — every component as `pp-*` classes with `is-*` states, built from the
+  Paper board's own CSS; `components/<Name>/preview.html` + `README.md` for 26 components
+  (Sheet, Grain, Rail, FolderTab, ChatTab, SessionRow, SearchField, Header, Button, SendButton,
+  StampToggle, Sticker, KindDot, Note, Said, Reply, Capsule, Ledger, Todo, Scrap, Composer,
+  ModelTag, Gauge, Popover, MaxStamp, Inline) and the cover.
+- `assets/Icons/` — the 26 single-ink icons (rail, fields, marks) as SVG.
+
+The canvas records it in `designSystems` and carries its tokens at `project/ds/paper-chat/`.
+
 ## Notes
 
 - The canvas has four pages: App shell (the full interface, states and anatomy), Paper,

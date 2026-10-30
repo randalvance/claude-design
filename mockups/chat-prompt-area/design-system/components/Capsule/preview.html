@@ -1,0 +1,26 @@
+<!-- @dsCard group="Conversation" height=470 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Capsule — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);padding:16px;box-sizing:border-box}
+.pv{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.pv-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.pv-l{font-family:var(--font-hand);font-size:15px;color:var(--mute);margin:0}
+
+</style>
+</head>
+<body class="pp-root">
+<div style="display:flex;flex-direction:column;gap:18px;max-width:640px"><section class="pp-deck" aria-label="Agent work"><button class="pp-cap" aria-expanded="false"><span class="pp-tb">13s<span class="pp-ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span></span><span class="pp-cap-t"><strong>Done in 13s</strong><span class="pp-cap-s">2 LLM calls · 1 tool call</span></span><span class="pp-trail" aria-hidden="true"><i class="pp-dot is-think"></i><i class="pp-dot is-read"></i></span><svg class="pp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button></section><section class="pp-deck is-open" aria-label="Agent work"><button class="pp-cap" aria-expanded="true"><span class="pp-tb">31s<span class="pp-ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span></span><span class="pp-cap-t"><strong>Done in 31s</strong><span class="pp-cap-s">4 LLM calls · 4 tool calls</span></span><span class="pp-trail" aria-hidden="true"><i class="pp-dot is-bash"></i><i class="pp-dot is-read"></i><i class="pp-dot is-read"></i><i class="pp-dot is-bash"></i></span><svg class="pp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<div class="pp-body"><div class="pp-body-in"><ol class="pp-steps">
+<li class="pp-step" style="animation-delay:30ms"><span class="pp-k">Bash</span><code>git log -S'plain text' -- src/cards/card-detail.tsx</code><span class="pp-tm">1.1s</span></li>
+<li class="pp-step" style="animation-delay:80ms"><span class="pp-k">Read</span><code>src/ui/markdown-view.tsx</code><span class="pp-tm">0.2s</span></li>
+<li class="pp-step" style="animation-delay:130ms"><span class="pp-k">Bash</span><code>grep -rn "allowRawHtml" src/ | head</code><span class="pp-tm">0.4s</span></li>
+</ol></div></div></section><section class="pp-deck is-live" aria-label="Agent work"><button class="pp-cap" aria-expanded="false"><span class="pp-tb">0:07</span><span class="pp-cap-t"><strong>Working · 0:07</strong><span class="pp-cap-s">2 steps</span></span><span class="pp-trail" aria-hidden="true"><i class="pp-dot is-think"></i><i class="pp-dot is-bash is-run"></i></span><span class="pp-now">running the e2e suite…</span><svg class="pp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button></section><section class="pp-deck" aria-label="Agent work"><button class="pp-cap" aria-expanded="false"><span class="pp-tb">0:04<span class="pp-ok is-stopped" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect></svg></span></span><span class="pp-cap-t"><strong>Stopped at 0:04</strong><span class="pp-cap-s">2 steps · interrupted</span></span><span class="pp-trail" aria-hidden="true"><i class="pp-dot is-think"></i><i class="pp-dot is-err"></i></span><svg class="pp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button></section></div>
+</body>
+</html>

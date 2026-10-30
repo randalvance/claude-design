@@ -1,0 +1,61 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Paper Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);overflow:hidden}
+.cover{position:relative;height:320px;overflow:hidden}
+.art{position:absolute;top:0;left:480px;width:480px;height:320px;overflow:hidden}
+.art svg{display:block;width:480px;height:320px}
+.kraft{fill:var(--kraft)}.kraft2{fill:var(--kraft-2)}.sheet{fill:var(--sheet)}.shadow{fill:var(--shadow)}
+.blue{fill:var(--blue)}.blue2{fill:var(--blue-2)}.red{fill:var(--red)}.red2{fill:var(--red-2)}
+.hl{fill:var(--highlighter);mix-blend-mode:multiply}.tape{fill:var(--tape)}
+.rule{stroke:var(--line);stroke-width:1;stroke-dasharray:3 3;fill:none}
+.sq{rx:var(--radius-3)}.tab{rx:var(--radius-6)}
+.words{position:absolute;left:28px;bottom:28px;max-width:440px}
+.name{margin:0;font-family:var(--font-serif);font-size:104px;line-height:.95;font-weight:600;letter-spacing:-.01em;font-variation-settings:"opsz" 144;color:var(--ink)}
+.tag{margin:8px 0 0 4px;font-size:14px;line-height:20px;color:var(--mute)}
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 320" width="480" height="320">
+<!--
+  blocks      kraft 200×256 slab (the note and folder-tab paper) with its kraft-2 offset block · sheet 232×168 index card with its shadow block · blue 128×72 (the send button) with blue-2 · red 64 disc (the stamp and sticker colour) with red-2 · highlighter 160×22 stroke, skewed, multiplied — about 40% of the box
+  arrangement staggered stack, every sheet tilted 1 to 3 degrees, each with a solid shadow block 3px right and 4px down, like the capsule deck
+  pattern     dashed hairline rules at the 28px pitch across the index card ("every list is an index card with dashed rules") and two tape strips pinning the sheets
+  scales      offsets 3/4px from shadow-sheet, pitch space-28, corners radius-3 on sheets and radius-6 on the kraft tab, the disc radius-round
+-->
+<g transform="rotate(-2 124 160)">
+<rect class="kraft2 tab" x="27" y="36" width="200" height="256" rx="6"/>
+<rect class="kraft tab" x="24" y="32" width="200" height="256" rx="6"/>
+</g>
+<g transform="rotate(1.5 300 200)">
+<rect class="shadow sq" x="187" y="120" width="232" height="168" rx="3"/>
+<rect class="sheet sq" x="184" y="116" width="232" height="168" rx="3"/>
+<path class="rule" d="M200 156H400M200 184H400M200 212H400M200 240H400M200 268H400"/>
+<rect class="hl" x="208" y="196" width="160" height="22" transform="skewX(-6)"/>
+</g>
+<g transform="rotate(3 384 60)">
+<rect class="blue2 sq" x="323" y="28" width="128" height="72" rx="3"/>
+<rect class="blue sq" x="320" y="24" width="128" height="72" rx="3"/>
+</g>
+<circle class="red2" cx="99" cy="68" r="32"/>
+<circle class="red" cx="96" cy="64" r="32"/>
+<rect class="tape" x="62" y="22" width="76" height="20" transform="rotate(-3 100 32)"/>
+<rect class="tape" x="268" y="106" width="62" height="18" transform="rotate(-2 299 115)"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Paper<br>Chat</h1>
+<p class="tag">Cut sheets, hard shadows, stop motion.</p>
+</div>
+</div>
+</body>
+</html>
