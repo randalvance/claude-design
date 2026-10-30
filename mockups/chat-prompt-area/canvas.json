@@ -103,6 +103,26 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Workspaces.dc.html": {
+      "x": 0,
+      "y": 3000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspaces — list page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Workspace.dc.html": {
+      "x": 0,
+      "y": 4000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspace — edit page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -112,6 +132,8 @@
     "Paper.dc.html",
     "Agents.dc.html",
     "Agent.dc.html",
+    "Workspaces.dc.html",
+    "Workspace.dc.html",
     "Future.dc.html",
     "Saas.dc.html"
   ],
@@ -177,6 +199,22 @@
       "y": 2000,
       "w": 320,
       "text": "Agent page: a sticky header holds the taped portrait, the name as an editable serif title, Delete (dashed red) and Save (blue, goes kraft-grey when there is nothing to save). Below, index cards for Description, Personality (trait stickers + text), System prompt (ruled, with a token estimate), Preferred model (radio rows), MCP servers (paper switches) and Skills (checkbox rows). Every change marks the page dirty; Save thumps a green sticker down; Delete asks on a kraft note before tearing the agent up.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p5": {
+      "x": 1520,
+      "y": 3000,
+      "w": 320,
+      "text": "Workspaces list: each workspace is an index card with its colour as a painted spine down the left edge, the name, the linked folders in mono, and one hand-written line (agents · memory facts · Kanban board). Cards with sessions working show a turning amber marker. New session opens a chat with that workspace's folders mounted; search matches names, folders and boards.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p6": {
+      "x": 1520,
+      "y": 4000,
+      "w": 320,
+      "text": "Workspace page: the header carries the colour chip (pick from six swatches), the editable name, Delete and Save. Left column: Linked folders (mono paths with a git marker, unlink ×, Add a folder), Extra context (ruled, token estimate) and Memory (facts learned by sessions here, pin to keep, × to forget, write your own and press Enter). Right column: Kanban board (one board per workspace, radio rows), Agents relevant here (checkbox rows with portraits), Skills and MCP servers (paper switches). Delete explains that folders on disk are never touched.",
       "fill": "orange",
       "page": "paper"
     }
