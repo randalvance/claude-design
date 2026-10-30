@@ -117,9 +117,7 @@ button,input,textarea{font:inherit}
 .mn{font-weight:800;font-size:13.5px;white-space:nowrap}
 .mh{font-family:var(--font-hand);font-size:15px;color:var(--mute);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .macts{margin-left:auto;display:inline-flex;gap:6px;flex:none}
-.mrow:not(.is-on) .macts{opacity:0;transition:opacity .15s steps(2)}
-.mrow:not(.is-on):hover .macts,.mrow:not(.is-on):focus-within .macts{opacity:1}
-.mini{all:unset;cursor:pointer;font-size:11px;font-weight:800;padding:3px 8px;border:1.5px dashed var(--bar);color:var(--mute);border-radius:3px;transition:transform .2s steps(2);white-space:nowrap}
+.mini{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:3px 8px;border:1.5px dashed var(--bar);color:var(--mute);border-radius:3px;transition:transform .2s steps(2);white-space:nowrap}
 .mini:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
 .mini:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .mini.open{border-style:solid;border-color:var(--ink);color:var(--ink);background:var(--sheet);box-shadow:1px 1px 0 var(--shadow)}
@@ -267,7 +265,7 @@ button,input,textarea{font:inherit}
                 <div class="mrow {{b.cls}}">
                   <button class="mhit" onClick="{{b.link}}" aria-pressed="{{b.on}}" aria-label="{{b.aria}}"><span class="kb" aria-hidden="true"><i style="height: 14px"></i><i style="height: 9px"></i><i style="height: 6px"></i></span><span class="mn">{{b.name}}</span><span class="mh">{{b.note}}</span></button>
                   <sc-if value="{{b.on}}" hint-placeholder-val="{{false}}"><span class="macts"><button class="mini open">Open board</button><button class="mini red" onClick="{{unlink}}">Unlink</button></span></sc-if>
-                  <sc-if value="{{b.off}}" hint-placeholder-val="{{true}}"><span class="macts"><button class="mini" onClick="{{b.link}}">Link</button></span></sc-if>
+                  <sc-if value="{{b.off}}" hint-placeholder-val="{{true}}"><span class="macts"><button class="mini" onClick="{{b.link}}"><svg class="pp-ic" style="width: 12px; height: 12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Link</button></span></sc-if>
                 </div>
               </sc-for>
             </div>
