@@ -504,10 +504,10 @@ button{font:inherit}
 
           <sc-if value="{{isIssueCreator}}" hint-placeholder-val="{{true}}">
             <div class="reply-body">
-              <p>I created issue #664: <a href="https://example.com/gic-developer-sandbox/primepaw/issues/664">https://github.com/gic-developer-sandbox/primepaw/issues/664</a></p>
+              <p>I created issue #218: <a href="https://example.com/acme/lighthouse/issues/218">https://example.com/acme/lighthouse/issues/218</a></p>
               <p>I labelled it <code>enhancement</code>. I didn't read the body back or link it to other issues.</p>
-              <p>I found why this happens. In <code>task-detail-view.tsx</code>, local cards already render markdown. Synced cards (GitHub issues and Jira) show their description as plain text. A code comment says that's because tracker text is untrusted. Both sources are markdown, so headings, lists and links show up raw.</p>
-              <p>The plain-text rule is about untrusted HTML, and the app's markdown renderer is already safe against that. It builds a virtual DOM and drops raw HTML, and <code>markdown-preview.tsx</code> warns against adding <code>rehype-raw</code>. So the issue asks to render markdown with the same renderer as the rest of the app, with raw HTML never enabled.</p>
+              <p>I found why this happens. In <code>card-detail.tsx</code>, local cards already render markdown. Synced cards from the tracker show their description as plain text. A code comment says that's because tracker text is untrusted. Both sources are markdown, so headings, lists and links show up raw.</p>
+              <p>The plain-text rule is about untrusted HTML, and the app's markdown renderer is already safe against that. It builds a virtual DOM and drops raw HTML, and <code>markdown-view.tsx</code> warns against turning on <code>allowRawHtml</code>. So the issue asks to render markdown with the same renderer as the rest of the app, with raw HTML never enabled.</p>
               <p>The issue also covers:</p>
               <ul>
                 <li><b>Links:</b> only safe schemes (no <code>javascript:</code> links), opened in a new tab.</li>
@@ -519,8 +519,8 @@ button{font:inherit}
           </sc-if>
           <sc-if value="{{isRum}}" hint-placeholder-val="{{false}}">
             <div class="reply-body">
-              <p>The RUM SDK is now initialised in <code>app/root.tsx</code> behind the <code>DATADOG_RUM_ENABLED</code> flag, with the client token read from the runtime config rather than the bundle. Session replay is off by default.</p>
-              <p>Still running: the e2e suite against staging to confirm no CSP violations from <code>browser-intake-datadoghq.com</code>. I'll open the PR once it's green.</p>
+              <p>The telemetry SDK is now initialised in <code>src/root.tsx</code> behind the <code>TELEMETRY_ENABLED</code> flag, with the client token read from the runtime config rather than the bundle. Session replay is off by default.</p>
+              <p>Still running: the e2e suite against staging to confirm no CSP violations from <code>intake.telemetry.example.com</code>. I'll open the PR once it's green.</p>
             </div>
           </sc-if>
           <sc-if value="{{isGeneric}}" hint-placeholder-val="{{false}}">
@@ -558,15 +558,15 @@ button{font:inherit}
       <sc-if value="{{isGit}}" hint-placeholder-val="{{false}}">
         <div class="wrap">
           <div class="card"><h3>Working tree · {{cur.branch}}</h3>
-            <div class="frow"><span class="chip">M</span><span class="p">app/components/task-detail-view.tsx</span><span class="plus">+38</span><span class="minus">−12</span></div>
-            <div class="frow"><span class="chip">M</span><span class="p">app/components/markdown-preview.tsx</span><span class="plus">+6</span><span class="minus">−1</span></div>
-            <div class="frow"><span class="chip">A</span><span class="p">app/lib/safe-link.ts</span><span class="plus">+41</span><span class="minus">−0</span></div>
-            <div class="frow"><span class="chip">M</span><span class="p">tests/task-detail-view.test.tsx</span><span class="plus">+57</span><span class="minus">−3</span></div>
+            <div class="frow"><span class="chip">M</span><span class="p">src/cards/card-detail.tsx</span><span class="plus">+38</span><span class="minus">−12</span></div>
+            <div class="frow"><span class="chip">M</span><span class="p">src/ui/markdown-view.tsx</span><span class="plus">+6</span><span class="minus">−1</span></div>
+            <div class="frow"><span class="chip">A</span><span class="p">src/lib/safe-link.ts</span><span class="plus">+41</span><span class="minus">−0</span></div>
+            <div class="frow"><span class="chip">M</span><span class="p">tests/card-detail.test.tsx</span><span class="plus">+57</span><span class="minus">−3</span></div>
           </div>
           <div class="card"><h3>Recent commits</h3>
             <div class="frow"><span class="chip" style="font-family: var(--mono)">a91f3c0</span><span class="p" style="font-family: inherit">Render synced card descriptions as markdown</span><span class="chip">2m ago</span></div>
             <div class="frow"><span class="chip" style="font-family: var(--mono)">7d2e8b4</span><span class="p" style="font-family: inherit">Add safe-link helper and tests</span><span class="chip">14m ago</span></div>
-            <div class="frow"><span class="chip" style="font-family: var(--mono)">c46b20f</span><span class="p" style="font-family: inherit">Merge release-primepaw into main</span><span class="chip">6h ago</span></div>
+            <div class="frow"><span class="chip" style="font-family: var(--mono)">c46b20f</span><span class="p" style="font-family: inherit">Merge release-2.4 into main</span><span class="chip">6h ago</span></div>
           </div>
         </div>
       </sc-if>
@@ -575,10 +575,10 @@ button{font:inherit}
       <sc-if value="{{isGithub}}" hint-placeholder-val="{{false}}">
         <div class="wrap">
           <div class="card"><h3>Issues created in this session</h3>
-            <div class="frow"><span class="chip" style="color: var(--ok)">open</span><span class="p" style="font-family: inherit">#664 Render synced task descriptions as markdown</span><span class="chip">enhancement</span></div>
+            <div class="frow"><span class="chip" style="color: var(--ok)">open</span><span class="p" style="font-family: inherit">#218 Render synced card descriptions as markdown</span><span class="chip">enhancement</span></div>
           </div>
           <div class="card"><h3>Pull requests</h3>
-            <div class="frow"><span class="chip" style="color: var(--warn)">draft</span><span class="p" style="font-family: inherit">#5412 feat(primepaw): markdown for synced cards</span><span class="chip">CI running</span></div>
+            <div class="frow"><span class="chip" style="color: var(--warn)">draft</span><span class="p" style="font-family: inherit">#219 feat(cards): markdown for synced cards</span><span class="chip">CI running</span></div>
           </div>
         </div>
       </sc-if>
@@ -619,8 +619,8 @@ button{font:inherit}
       <!-- TERMINAL -->
       <sc-if value="{{isTerm}}" hint-placeholder-val="{{false}}">
         <div class="wrap">
-          <pre class="term" style="margin: 0"><span class="b">$</span> pnpm test -- task-detail-view
-<span class="m">› vitest run tests/task-detail-view.test.tsx</span>
+          <pre class="term" style="margin: 0"><span class="b">$</span> pnpm test -- card-detail
+<span class="m">› vitest run tests/card-detail.test.tsx</span>
  <span class="g">✓</span> renders local card markdown <span class="m">(12 ms)</span>
  <span class="g">✓</span> renders synced card markdown without raw html <span class="m">(9 ms)</span>
  <span class="g">✓</span> blocks javascript: links <span class="m">(3 ms)</span>
@@ -633,7 +633,7 @@ button{font:inherit}
       <!-- LOGS -->
       <sc-if value="{{isLogs}}" hint-placeholder-val="{{false}}">
         <div class="wrap">
-          <pre class="term" style="margin: 0"><span class="m">11:32:04</span> <span class="b">llm</span>   turn 12 · bedrock/claude-sonnet-5-5 · effort high · 4.1k in / 612 out
+          <pre class="term" style="margin: 0"><span class="m">11:32:04</span> <span class="b">llm</span>   turn 12 · sonnet-5.5 · effort high · 4.1k in / 612 out
 <span class="m">11:32:09</span> <span class="b">tool</span>  bash · exit 0 · 1.2s
 <span class="m">11:32:21</span> <span class="b">tool</span>  gh issue create · exit 0 · 3.0s
 <span class="m">11:32:22</span> <span class="g">ok</span>    turn complete · 55s · context 138k/200k</pre>
@@ -649,7 +649,7 @@ button{font:inherit}
     <sc-if value="{{drawerOpen}}" hint-placeholder-val="{{false}}">
       <aside class="drawer" aria-label="Artifacts">
         <div style="display: flex; align-items: center; justify-content: space-between"><h3>Artifacts</h3><button class="ib" onClick="{{toggleDrawer}}" aria-label="Close artifacts"><svg class="ic-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
-        <div class="art"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5"></path></svg><div><div>issue-664-draft.md</div><div class="m">3.2 KB · 11:32</div></div></div>
+        <div class="art"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5"></path></svg><div><div>issue-218-draft.md</div><div class="m">3.2 KB · 11:32</div></div></div>
       </aside>
     </sc-if>
 
@@ -814,7 +814,7 @@ button{font:inherit}
   <!-- ---------- right rail ---------- -->
   <aside class="rside" aria-label="Side panels">
     <button class="vtab {{drawerCls}}" onClick="{{toggleDrawer}}" aria-pressed="{{drawerOpen}}">Artifacts<span class="nb">1</span></button>
-    <button class="vtab">GameRoom</button>
+    <button class="vtab">Notes</button>
   </aside>
 </div>
 </div>
@@ -853,28 +853,28 @@ const NAV = [
 const TABS = ['Chat', 'Git', 'GitHub', 'Todos', 'Tools', 'Subagents', 'Browser', 'Terminal', 'Logs'];
 
 const WS = [
-  { id: 'primepaw', name: 'Primepaw Dev', color: '#4fd1a0', sessions: [
-    { id: 's1', t: 'dark factory: the curator creates the nightly digest', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
-    { id: 's2', t: 'Pull latest main and release-primepaw into feature', st: 'busy', dur: '4m 55s', role: 'Implementer', branch: 'feat/LEIB-281' },
+  { id: 'lighthouse', name: 'Lighthouse Web', color: '#4fd1a0', sessions: [
+    { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
+    { id: 's2', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4m 55s', role: 'Implementer', branch: 'feat/LH-281' },
     { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
-  { id: 'le', name: 'Large Exposure App', color: '#ff7ab8', attn: true, sessions: [
-    { id: 's4', t: 'Sticky Sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-sessions' },
-    { id: 's5', t: 'LEIB-272 - Datadog RUM', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/LEIB-272-datadog-rum' },
-    { id: 's6', t: 'Ticket Creation', st: 'idle', dur: '1m 40s', jira: true, role: 'Implementer', branch: 'main' },
-    { id: 's7', t: 'Generate App Icon', st: 'idle', dur: '2m 50s', role: 'Implementer', branch: 'main' },
-    { id: 's8', t: 'Filter JSON by Date and Correlate with Logs', st: 'idle', dur: '1m 02s', role: 'Implementer', branch: 'main' },
-    { id: 's9', t: 'Migrate RPMDACR EKS cluster to private subnets', st: 'done', dur: '34s', role: 'Orchestrator', branch: 'feat/eks-private' },
-    { id: 's10', t: 'MyAccess Role Filling In', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
-    { id: 's11', t: 'Fill MyAccess Take On Form', st: 'idle', dur: '45m 40s', jira: true, role: 'Implementer', branch: 'main' },
-    { id: 's12', t: 'Cross-instance access security vulnerability', st: 'idle', dur: '46m 18s', role: 'Orchestrator', branch: 'fix/LEIB-266' },
-    { id: 's13', t: 'Find Recent LEIB-Prefixed Pull Requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
-    { id: 's14', t: 'Guardrails Check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
-    { id: 's15', t: 'Stale PR LEIB-205 Still Relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
-    { id: 's16', t: 'BITRA Answers', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
-  { id: 'acr', name: 'RPMD ACR Private Deploy', color: '#f0b64f', sessions: [
-    { id: 's17', t: 'Update Image Hash', st: 'idle', dur: '29m 03s', role: 'Implementer', branch: 'main' },
-    { id: 's18', t: 'Find and move preprod deployed images', st: 'busy', dur: '31m 15s', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
-  { id: 'tf', name: 'RPMD ACR Private TF', color: '#9aa6cc', sessions: [
+  { id: 'orbit', name: 'Orbit Billing', color: '#ff7ab8', attn: true, sessions: [
+    { id: 's4', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
+    { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/ORB-272-telemetry' },
+    { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2m 50s', role: 'Implementer', branch: 'main' },
+    { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1m 02s', role: 'Implementer', branch: 'main' },
+    { id: 's9', t: 'Move worker pool to private subnets', st: 'done', dur: '34s', role: 'Orchestrator', branch: 'feat/private-workers' },
+    { id: 's10', t: 'Fill in access-request roles', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
+    { id: 's11', t: 'Onboarding form autofill', st: 'idle', dur: '45m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's12', t: 'Cross-tenant access audit', st: 'idle', dur: '46m 18s', role: 'Orchestrator', branch: 'fix/ORB-266' },
+    { id: 's13', t: 'Find recent ORB-prefixed pull requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's14', t: 'Guardrails check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's15', t: 'Is stale PR ORB-205 still relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's16', t: 'Support answers draft', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
+  { id: 'fleet', name: 'Fleet Infra Deploy', color: '#f0b64f', sessions: [
+    { id: 's17', t: 'Update image digest', st: 'idle', dur: '29m 03s', role: 'Implementer', branch: 'main' },
+    { id: 's18', t: 'Find and move preprod images', st: 'busy', dur: '31m 15s', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
+  { id: 'tf', name: 'Fleet Infra Terraform', color: '#9aa6cc', sessions: [
     { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12m 08s', role: 'Orchestrator', branch: 'main' } ] }
 ];
 
@@ -884,32 +884,32 @@ const USER = (text) => ({ k: 'user', text });
 
 const THREADS = {
   s3: [
-    USER('Create a GitHub issue for synced task cards showing markdown as plain text. Look at how local cards render first.'),
+    USER('Open an issue for synced cards showing markdown as plain text. Check how local cards render it first.'),
     CAP('c1', '13s', '2 LLM calls · 1 tool call', ['think', 'read'], [
       { k: 'think', label: 'thinking', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
-      { k: 'read', label: 'read', detail: 'app/components/task-detail-view.tsx', time: '0.3s' } ]),
-    SAID('Line 562 renders markdown but line 516 renders plain text, so I\'ll check what separates them.'),
+      { k: 'read', label: 'read', detail: 'src/cards/card-detail.tsx', time: '0.3s' } ]),
+    SAID('Line 212 renders markdown but line 180 renders plain text, so I\'ll check what separates them.'),
     CAP('c2', '31s', '4 LLM calls · 4 tool calls', ['bash', 'read', 'read', 'bash'], [
-      { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- app/components/task-detail-view.tsx", time: '1.1s' },
-      { k: 'read', label: 'read', detail: 'app/components/markdown-preview.tsx', time: '0.2s' },
-      { k: 'read', label: 'read', detail: 'app/lib/sync/github.ts', time: '0.2s' },
-      { k: 'bash', label: 'bash', detail: 'grep -rn "rehype-raw" app/ | head', time: '0.4s' } ]),
-    SAID('Local cards render markdown, but synced cards (GitHub issues, Jira) deliberately show plain text. That is what the ticket needs to change.'),
+      { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- src/cards/card-detail.tsx", time: '1.1s' },
+      { k: 'read', label: 'read', detail: 'src/ui/markdown-view.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'src/sync/tracker.ts', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'grep -rn "allowRawHtml" src/ | head', time: '0.4s' } ]),
+    SAID('Local cards render markdown, but synced cards from the tracker deliberately show plain text. That is what the ticket needs to change.'),
     CAP('c3', '10s', '1 LLM call · 1 tool call · turn 55s', ['ask'], [
-      { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced task descriptions as markdown" --label enhancement', time: '3.0s' } ])
+      { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced card descriptions as markdown" --label enhancement', time: '3.0s' } ])
   ],
   s5: [
-    USER('Enable Datadog RUM in the Large Exposure frontend. Keep the client token out of the bundle and gate it behind a flag.'),
+    USER('Enable browser telemetry in the Orbit checkout. Keep the client token out of the bundle and gate it behind a flag.'),
     CAP('r1', '48s', '5 LLM calls · 6 tool calls', ['read', 'read', 'bash', 'edit', 'edit', 'bash'], [
-      { k: 'read', label: 'read', detail: 'app/root.tsx', time: '0.2s' },
-      { k: 'read', label: 'read', detail: 'app/config/runtime.ts', time: '0.2s' },
-      { k: 'bash', label: 'bash', detail: 'pnpm add @datadog/browser-rum', time: '9.4s' },
-      { k: 'edit', label: 'edit', detail: 'app/root.tsx (+24)', time: '0.3s' },
-      { k: 'edit', label: 'edit', detail: 'app/config/runtime.ts (+6)', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'src/root.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'src/config/runtime.ts', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm add @acme/browser-telemetry', time: '9.4s' },
+      { k: 'edit', label: 'edit', detail: 'src/root.tsx (+24)', time: '0.3s' },
+      { k: 'edit', label: 'edit', detail: 'src/config/runtime.ts (+6)', time: '0.2s' },
       { k: 'bash', label: 'bash', detail: 'pnpm typecheck → 0 errors', time: '21s' } ]),
-    SAID('The SDK is wired behind DATADOG_RUM_ENABLED. Before opening a PR I want the e2e run against staging to confirm the CSP allows the intake host.'),
-    { k: 'cap', id: 'r2', live: true, time: '1h 53m', sub: '3 steps · 1h 53m', dots: ['bash', 'read', 'bash'], now: 'bash · pnpm e2e --env staging --grep rum', steps: [
-      { k: 'bash', label: 'bash', detail: 'pnpm e2e --env staging --grep rum', time: '…' } ] }
+    SAID('The SDK is wired behind TELEMETRY_ENABLED. Before opening a PR I want the e2e run against staging to confirm the CSP allows the intake host.'),
+    { k: 'cap', id: 'r2', live: true, time: '1h 53m', sub: '3 steps · 1h 53m', dots: ['bash', 'read', 'bash'], now: 'bash · pnpm e2e --env staging --grep telemetry', steps: [
+      { k: 'bash', label: 'bash', detail: 'pnpm e2e --env staging --grep telemetry', time: '…' } ] }
   ]
 };
 const GENERIC = [
@@ -920,10 +920,10 @@ const GENERIC = [
     { k: 'bash', label: 'bash', detail: 'git status --short && git log --oneline -3', time: '0.9s' } ])
 ];
 const GENERIC_REPLY = {
-  s1: 'The curator now writes the digest to docs/digest/2026-10-30.md and opens a draft PR each night. Two sources still return 403; I\'m retrying them with the service account.',
-  s2: 'Merged origin/main and release-primepaw into the feature branch. One conflict in package.json resolved in favour of the release pin. Tests are running.',
-  s4: 'Sticky sessions are enabled on the ALB target group with a 12h cookie. Verifying the health check still passes across both AZs.',
-  s9: 'Migration complete. Both node groups moved to private subnets and the NAT gateway route is in place. Nothing else to do here.',
+  s1: 'The curator now writes the digest to docs/changelog/2026-10-30.md and opens a draft PR each night. Two feeds still return 403; I\'m retrying them with the service account.',
+  s2: 'Rebased onto origin/main and release-2.4. One conflict in package.json resolved in favour of the release pin. Tests are running.',
+  s4: 'Sticky checkout sessions are enabled on the load balancer with a 12h cookie. Verifying the health check still passes across both zones.',
+  s9: 'Move complete. Both worker pools are on private subnets and the NAT route is in place. Nothing else to do here.',
   s18: 'Found 14 preprod images tagged with the old registry. Moving them in batches of five so the registry rate limit isn\'t hit.'
 };
 
@@ -948,8 +948,8 @@ function walk(node, f, out) {
 }
 
 class Component extends DCLogic {
-  state = { sid: 's3', tab: 'Chat', openWs: { primepaw: true, le: true, acr: true, tf: false }, openCaps: {}, activeOnly: false, drawer: false,
-    todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the GitHub issue', d: true }, { t: 'Link the issue to LEIB-273', d: false }] },
+  state = { sid: 's3', tab: 'Chat', openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, openCaps: {}, activeOnly: false, drawer: false,
+    todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the GitHub issue', d: true }, { t: 'Link the issue to LH-273', d: false }] },
     model: 'sonnet', effort: 2, auto: true, showThink: false, yolo: true, open: null, used: { ...BASE }, draft: 0, focus: false, sel: null, msgs: {}, maxBurst: false, yoloBurst: false, refill: null, fly: false, tick: 0 };
 
   componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearTimeout(this.t4); clearInterval(this.ticker); }
