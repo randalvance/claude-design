@@ -83,6 +83,16 @@
       "page": "saas",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Agents.dc.html": {
+      "x": 0,
+      "y": 1000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agents — list page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -90,6 +100,7 @@
     "States.dc.html",
     "Anatomy.dc.html",
     "Paper.dc.html",
+    "Agents.dc.html",
     "Future.dc.html",
     "Saas.dc.html"
   ],
@@ -139,6 +150,14 @@
       "y": 440,
       "w": 320,
       "text": "Design system: tokens, type, tilt and shadow scales, motion table, icon set and 26 components with live previews live in the Paper Chat design system → https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh. Its tokens are installed on this canvas (Theme menu).",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p3": {
+      "x": 1520,
+      "y": 1000,
+      "w": 320,
+      "text": "Agents page: each agent is an index card with a taped-on 12×12 pixel portrait, a highlighter name, a hand-written role, the description, and a kraft model tag. Working agents wear a red sticker. Pick a card to lift it and reveal Start / Edit / Duplicate; search and the role filters are live. Built from the Paper Chat tokens and pp-* classes.",
       "fill": "orange",
       "page": "paper"
     }

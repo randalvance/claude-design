@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Agents — paper</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e4dccb;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
+a{color:#3b5b9a}a:hover{color:#2a4070}
+.page{--desk:#e4dccb;--paper:#f8f3e9;--paper-2:#efe7d6;--sheet:#fffdf7;--sheet-warm:#fffaf0;--card:#fffdf8;--rail:#e4d9c1;--line:#d6cab2;--kraft:#e2c48c;--kraft-2:#cfae72;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--tape:#ffec969e;--white:#ffffff;--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;min-height:100vh;box-sizing:border-box;display:flex;justify-content:center}
+.pp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit}
+.pp-ic{width:16px;height:16px;flex:none}
+
+.app{position:relative;width:100%;display:flex;background:var(--paper);min-height:100vh}
+.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
+
+/* rail (Paper Chat: Rail) */
+.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:relative;z-index:1}
+.pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
+.pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.pp-rb svg{width:18px;height:18px}
+.pp-rb:hover{background:var(--sheet-warm);transform:translateY(-1px)}
+.pp-rb.is-on{background:var(--sheet-warm);color:var(--ink);box-shadow:2px 2px 0 var(--shadow);transform:rotate(-2deg)}
+.pp-rb:focus-visible{outline:2px solid var(--blue)}
+.pp-rb .pp-nb{position:absolute;top:0;right:4px;transform:rotate(8deg)}
+.pp-nb{min-width:16px;height:16px;padding:0 4px;border-radius:50%;background:var(--red);color:var(--white);font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);box-sizing:border-box;flex:none}
+.pp-rail .pp-sp{flex:1}
+
+/* list page */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
+.ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ttl h1{margin:0;font-family:var(--font-serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
+.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pp-search{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);color:var(--mute);box-sizing:border-box;width:260px;max-width:100%}
+.pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.pp-search input::placeholder{color:var(--faint);font-family:var(--font-hand);font-size:16px}
+.pp-kbd{font-family:var(--font-mono);font-size:10px;color:var(--mute);border:1px solid var(--line);padding:1px 4px;white-space:nowrap}
+.pp-btn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 2px 0 var(--blue-2);transition:transform .2s steps(2);box-sizing:border-box}
+.pp-btn:hover{transform:translateY(-1px)}
+.pp-btn:focus-visible{outline:2px solid var(--ink)}
+.filters{display:flex;align-items:center;gap:6px;padding:16px 28px 0;flex-wrap:wrap}
+.pp-filt{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);font-size:12.5px;font-weight:700;color:var(--ink);box-sizing:border-box;transition:transform .2s steps(2)}
+.pp-filt:hover{transform:translateY(-1px)}
+.pp-filt:focus-visible{outline:2px solid var(--blue)}
+.pp-filt.is-on{background:var(--highlighter);border-color:var(--highlighter-2)}
+.pp-filt .n{font-family:var(--font-hand);font-size:15px;color:var(--mute);font-weight:500}
+.filters .hint{margin-left:auto;font-family:var(--font-hand);font-size:16px;color:var(--mute)}
+
+.grid{flex:1;padding:22px 28px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;align-content:start}
+.agent{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);display:flex;flex-direction:column;transition:transform .2s steps(2),box-shadow .2s steps(2);animation:drop .35s steps(4) both}
+.agent:hover{transform:translate(-1px,-1px);box-shadow:4px 5px 0 var(--shadow)}
+.agent.on{transform:translate(-2px,-2px);box-shadow:6px 7px 0 var(--shadow);border-color:var(--kraft-2)}
+.hit{all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px 16px 12px;width:100%;box-sizing:border-box;border-radius:3px 3px 0 0}
+.hit:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.photo{position:relative;width:64px;height:64px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg);transition:transform .2s steps(2)}
+.agent.on .photo{transform:rotate(2deg)}
+.photo::before{content:"";position:absolute;left:50%;top:-8px;width:40px;height:14px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08);z-index:2}
+.photo svg{width:48px;height:48px;shape-rendering:crispEdges;display:block}
+.who{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.nm{font-size:15px;font-weight:800;line-height:1.2;position:relative;display:inline-block;align-self:flex-start}
+.nm::before{content:"";position:absolute;inset:0 -6px;background:var(--highlighter);transform:skewX(-6deg) rotate(-.4deg);mix-blend-mode:multiply;opacity:0;transition:opacity .15s steps(2)}
+.agent.on .nm::before{opacity:1}
+.nm span{position:relative}
+.role{font-family:var(--font-hand);font-size:16px;color:var(--mute);line-height:1}
+.desc{margin:6px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.foot{display:flex;align-items:center;gap:10px;padding:8px 16px 12px;border-top:1px dashed var(--line);font-family:var(--font-hand);font-size:15px;color:var(--mute);flex-wrap:wrap}
+.foot .ws{display:inline-flex;align-items:center;gap:6px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sw{width:10px;height:10px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.foot .sep{color:var(--line)}
+.pp-tag{position:relative;display:inline-flex;align-items:center;height:22px;padding:0 8px 0 14px;background:var(--kraft);color:var(--ink);font-family:var(--font-mono);font-size:11px;font-weight:700;clip-path:polygon(0 50%,8px 0,100% 0,100% 100%,8px 100%);white-space:nowrap;margin-left:auto}
+.pp-tag::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;border-radius:50%;background:var(--paper);transform:translateY(-50%)}
+.pp-sticker{position:absolute;top:-10px;right:12px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--green);box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-2deg);white-space:nowrap;z-index:2}
+.pp-sticker.is-busy{background:var(--red);animation:wob .5s steps(2) infinite}
+.pp-sticker i{width:6px;height:6px;border-radius:50%;background:var(--white)}
+.acts{display:flex;gap:8px;padding:0 16px 14px;animation:slide .3s steps(4) both}
+.acts .pp-btn{height:30px}
+.acts .pp-filt{height:30px}
+.pp-dashed{all:unset;cursor:pointer;font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed var(--bar);padding:3px 10px;border-radius:3px}
+.pp-dashed:hover{color:var(--ink);border-color:var(--ink)}
+.pp-dashed:focus-visible{outline:2px solid var(--blue)}
+.newc{all:unset;cursor:pointer;min-height:180px;border:1.5px dashed var(--bar);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mute);font-family:var(--font-hand);font-size:20px;transition:transform .2s steps(2),border-color .2s steps(2),color .2s steps(2);box-sizing:border-box}
+.newc:hover{transform:translateY(-2px);border-color:var(--ink);color:var(--ink)}
+.newc:focus-visible{outline:2px solid var(--blue)}
+.newc .plus{width:44px;height:44px;border-radius:50%;background:var(--kraft);box-shadow:1px 2px 0 var(--kraft-2);display:grid;place-items:center;color:var(--ink);transform:rotate(-7deg)}
+.newc .plus svg{width:20px;height:20px}
+.pp-scrap{grid-column:1/-1;font-family:var(--font-hand);font-size:22px;color:var(--mute);padding:40px 0;text-align:center;transform:rotate(-1deg)}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:16px;color:var(--mute);padding:0 28px 16px;flex-wrap:wrap}
+
+@keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes wob{0%{transform:rotate(-2deg)}100%{transform:rotate(1deg)}}
+@keyframes slide{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+@media (max-width:860px){.app{flex-direction:column}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.top,.filters,.grid,.demo{padding-left:16px;padding-right:16px}.top-r{margin-left:0;width:100%}.pp-search{width:100%}.filters .hint{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page">
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<div class="app">
+
+  <nav class="pp-rail" aria-label="Primary">
+    <div class="pp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="pp-rb {{n.cls}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="pp-nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="pp-sp"></span>
+    <button class="pp-rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <main class="main">
+    <header class="top">
+      <div class="ttl"><h1>Agents</h1><span class="sub">{{sub}}</span></div>
+      <div class="top-r">
+        <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input id="q" type="search" placeholder="Find an agent" aria-label="Find an agent" ref="{{qRef}}" onInput="{{onSearch}}"><span class="pp-kbd">⌘K</span></label>
+        <button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New agent</button>
+      </div>
+    </header>
+
+    <div class="filters" role="group" aria-label="Filter agents">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="5"><button class="pp-filt {{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}} <span class="n">{{f.n}}</span></button></sc-for>
+      <span class="hint" aria-hidden="true">click a card to pick it up</span>
+    </div>
+
+    <section class="grid" aria-label="Agents">
+      <sc-for list="{{agents}}" as="a" hint-placeholder-count="8">
+        <article class="agent {{a.cls}}">
+          <sc-if value="{{a.busy}}" hint-placeholder-val="{{false}}"><span class="pp-sticker is-busy"><i aria-hidden="true"></i>Working</span></sc-if>
+          <button class="hit" onClick="{{a.pick}}" aria-pressed="{{a.on}}">
+            <span class="photo" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{a.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>
+            <span class="who">
+              <span class="nm"><span>{{a.name}}</span></span>
+              <span class="role">{{a.role}}</span>
+              <span class="desc">{{a.desc}}</span>
+            </span>
+          </button>
+          <sc-if value="{{a.on}}" hint-placeholder-val="{{false}}">
+            <div class="acts"><button class="pp-btn">Start a session</button><button class="pp-filt">Edit</button><button class="pp-filt">Duplicate</button></div>
+          </sc-if>
+          <div class="foot">
+            <span class="ws"><i class="sw" style="background: {{a.wsColor}}" aria-hidden="true"></i>{{a.ws}}</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>{{a.sessions}} sessions</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>{{a.last}}</span>
+            <span class="pp-tag">{{a.model}}</span>
+          </div>
+        </article>
+      </sc-for>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">No agent called “{{q}}” here</div></sc-if>
+      <sc-if value="{{showNew}}" hint-placeholder-val="{{true}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new agent</button></sc-if>
+    </section>
+
+    <div class="demo"><span>Search and filters work · pick a card to see its actions</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+  </main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+// Pixel portraits: 12×12, one letter per pixel, '.' is paper. Colours are design-system tokens.
+const PAL = { i: '#2a2219', b: '#3b5b9a', B: '#2a4070', g: '#5b8c5a', r: '#c8553d', R: '#8f3a2a', k: '#e2c48c', K: '#cfae72', a: '#b8792f', w: '#fffdf7', t: '#4a8f99', s: '#8b6bb3', m: '#6f6252', h: '#fff0a0' };
+const SPRITES = {
+  curator: [
+    '..k......k..',
+    '..kk....kk..',
+    '..kkkkkkkk..',
+    '.kkwwkkwwkk.',
+    '.kwiwkkwiwk.',
+    '.kkwwkkwwkk.',
+    '.kkkkaakkkk.',
+    '..kKKKKKKk..',
+    '..kKkKkKKk..',
+    '..kKKKKKKk..',
+    '...kkkkkk...',
+    '...a.aa.a...'
+  ],
+  implementer: [
+    '............',
+    '..gggggggg..',
+    '..gggggggg..',
+    '..giiiiiig..',
+    '..giwiiwig..',
+    '..giiiiiig..',
+    '..gggggggg..',
+    '..ggkkkkgg..',
+    '..gggggggg..',
+    '...g.gg.g...',
+    '..kk.gg.kk..',
+    '..kk....kk..'
+  ],
+  issue: [
+    '...rrrrrr...',
+    '..rrrrrrrr..',
+    '..rRRRRRRr..',
+    '..kkkkkkkk..',
+    '..kwkkkkwk..',
+    '..kikkkkik..',
+    '..kkkkkkkk..',
+    '..kkkiikkk..',
+    '...kkkkkk...',
+    '..wwwwwwww..',
+    '..wiiwwiiw..',
+    '..wwwwwwww..'
+  ],
+  reviewer: [
+    '............',
+    '...iiii.....',
+    '..iwwwwi....',
+    '.iwbbbbwi...',
+    '.iwbhbbwi...',
+    '.iwbbbbwi...',
+    '..iwwwwi....',
+    '...iiiii....',
+    '.......ii...',
+    '........ii..',
+    '.........ii.',
+    '............'
+  ],
+  triage: [
+    '............',
+    '..aaaaaaaa..',
+    '..aaawwaaa..',
+    '..aawwwwaa..',
+    '..aaawwaaa..',
+    '..aaaaaaaa..',
+    '..awwaawwa..',
+    '..aiwaawia..',
+    '..aaaaaaaa..',
+    '..aaawwaaa..',
+    '...aaaaaa...',
+    '............'
+  ],
+  release: [
+    '.....ww.....',
+    '....wrrw....',
+    '....wrrw....',
+    '...wrrrrw...',
+    '...wrbbrw...',
+    '...wrbbrw...',
+    '...wrrrrw...',
+    '..rwrrrrwr..',
+    '..rwwwwwwr..',
+    '..r.aaaa.r..',
+    '....a..a....',
+    '....a..a....'
+  ],
+  support: [
+    '............',
+    '...tttttt...',
+    '..tttttttt..',
+    '.tt.kkkk.tt.',
+    '.t.kkkkkk.t.',
+    '.t.kwkkwk.t.',
+    '.tt.kkkk.tt.',
+    '.tt.kiik.tt.',
+    '..tttkkttt..',
+    '.....kk..t..',
+    '....tttttt..',
+    '............'
+  ],
+  planner: [
+    '............',
+    '..ssssssss..',
+    '..swwssmms..',
+    '..swissmms..',
+    '..ssssssss..',
+    '..skkkkkks..',
+    '..sskkkkss..',
+    '...ssssss...',
+    '..bbbbbbbb..',
+    '..b.b..b.b..',
+    '..bbbbbbbb..',
+    '............'
+  ]
+};
+function px(rows) {
+  const out = [];
+  rows.forEach((row, y) => { Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: PAL[ch] }); }); });
+  return out;
+}
+const WS = { lighthouse: { name: 'Lighthouse Web', color: '#5b8c5a' }, orbit: { name: 'Orbit Billing', color: '#c8553d' }, fleet: { name: 'Fleet Infra', color: '#b8792f' } };
+const AGENTS = [
+  { id: 'curator', name: 'Curator', role: 'Orchestrator', ws: 'lighthouse', sprite: 'curator', model: 'Sonnet 5.5', sessions: 41, last: 'running now', busy: true,
+    desc: 'Drafts the nightly changelog from merged PRs and release notes, then opens a draft PR for someone to read over coffee.' },
+  { id: 'implementer', name: 'Implementer', role: 'Implementer', ws: 'lighthouse', sprite: 'implementer', model: 'Opus 5.5', sessions: 128, last: 'ran 4m ago', busy: false,
+    desc: 'Takes a scoped ticket, writes the change with tests, and leaves a PR with a plain summary of what moved and why.' },
+  { id: 'issue', name: 'Issue Creator', role: 'Orchestrator', ws: 'lighthouse', sprite: 'issue', model: 'Sonnet 5.5', sessions: 33, last: 'ran 6h ago', busy: false,
+    desc: 'Turns a loose description into a well-formed issue: checks the code first, then files it with labels and a repro.' },
+  { id: 'reviewer', name: 'Reviewer', role: 'Reviewer', ws: 'orbit', sprite: 'reviewer', model: 'Fable 5.1', sessions: 76, last: 'ran 1h ago', busy: false,
+    desc: 'Reads a PR the way a careful colleague would: correctness first, then naming, then the nits it keeps to itself.' },
+  { id: 'triage', name: 'Triage', role: 'Implementer', ws: 'orbit', sprite: 'triage', model: 'Haiku 5.5', sessions: 210, last: 'running now', busy: true,
+    desc: 'Sorts incoming tickets by area and urgency, links duplicates, and asks the reporter for whatever is missing.' },
+  { id: 'release', name: 'Release Captain', role: 'Orchestrator', ws: 'fleet', sprite: 'release', model: 'Sonnet 5.5', sessions: 19, last: 'ran 2d ago', busy: false,
+    desc: 'Cuts release branches, rebases open work onto them, and watches the deploy until every health check is green.' },
+  { id: 'support', name: 'Support Writer', role: 'Implementer', ws: 'orbit', sprite: 'support', model: 'Sonnet 5.5', sessions: 54, last: 'ran 45m ago', busy: false,
+    desc: 'Drafts answers to support threads from the docs and recent fixes, and flags anything it is not sure about.' },
+  { id: 'planner', name: 'Infra Planner', role: 'Orchestrator', ws: 'fleet', sprite: 'planner', model: 'Opus 5.5', sessions: 12, last: 'ran 12m ago', busy: false,
+    desc: 'Plans Terraform changes module by module and explains the blast radius before it touches anything.' }
+];
+const FILTERS = [
+  { id: 'all', label: 'All', test: () => true },
+  { id: 'Orchestrator', label: 'Orchestrators', test: (a) => a.role === 'Orchestrator' },
+  { id: 'Implementer', label: 'Implementers', test: (a) => a.role === 'Implementer' },
+  { id: 'Reviewer', label: 'Reviewers', test: (a) => a.role === 'Reviewer' },
+  { id: 'busy', label: 'Working now', test: (a) => a.busy }
+];
+
+class Component extends DCLogic {
+  state = { filter: 'all', q: '', sel: null };
+  renderVals() {
+    const st = this.state;
+    const q = st.q.trim().toLowerCase();
+    const f = FILTERS.find((x) => x.id === st.filter) || FILTERS[0];
+    const list = AGENTS.filter((a) => f.test(a) && (!q || a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q) || a.role.toLowerCase().includes(q)));
+    const busyN = AGENTS.filter((a) => a.busy).length;
+    return {
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'agents' ? 'is-on' : '', cur: n.id === 'agents' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
+      sub: AGENTS.length + ' agents across 3 workspaces · ' + busyN + ' working now',
+      filters: FILTERS.map((x) => ({ label: x.label, n: AGENTS.filter(x.test).length, on: st.filter === x.id, cls: st.filter === x.id ? 'is-on' : '', pick: () => this.setState({ filter: x.id, sel: null }) })),
+      qRef: (el) => { if (el) this.q = el; },
+      onSearch: (e) => this.setState({ q: e.currentTarget.value, sel: null }),
+      q: st.q,
+      agents: list.map((a) => ({
+        name: a.name, role: a.role, desc: a.desc, model: a.model, sessions: a.sessions, last: a.last, busy: a.busy,
+        ws: WS[a.ws].name, wsColor: WS[a.ws].color, px: px(SPRITES[a.sprite]),
+        on: st.sel === a.id, cls: st.sel === a.id ? 'on' : '',
+        pick: () => this.setState({ sel: st.sel === a.id ? null : a.id })
+      })),
+      empty: list.length === 0,
+      showNew: !q && st.filter === 'all',
+      reset: () => { if (this.q) this.q.value = ''; this.setState({ filter: 'all', q: '', sel: null }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
