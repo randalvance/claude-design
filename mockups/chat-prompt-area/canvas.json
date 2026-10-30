@@ -214,7 +214,7 @@
       "x": 1520,
       "y": 4000,
       "w": 320,
-      "text": "Workspace page: the header carries the colour chip (pick from six swatches), the editable name, Delete and Save. Left column: Linked folders (mono paths with a git marker, unlink ×, Add a folder), Extra context (ruled, token estimate) and Memory (facts learned by sessions here, pin to keep, × to forget, write your own and press Enter). Right column: Kanban board (the linked board as a kraft preview with its three columns, Unlink / Change / Open board; unlinked shows Link a board, which opens a picker over the Kanban collection with search and Make a new board), Agents relevant here (checkbox rows with portraits), Skills and MCP servers (paper switches). Delete explains that folders on disk are never touched.",
+      "text": "Workspace page: the header carries the colour chip (pick from six swatches), the editable name, Delete and Save. Left column: Linked folders (mono paths with a git marker, unlink ×, Add a folder), Extra context (ruled, token estimate) and Memory (facts learned by sessions here, pin to keep, × to forget, write your own and press Enter). Right column: Kanban board (one compact row per board in the Kanban collection; the linked row is highlighter with Open board and Unlink, the others show Link on hover), Agents relevant here (checkbox rows with portraits), Skills and MCP servers (paper switches). Delete explains that folders on disk are never touched.",
       "fill": "orange",
       "page": "paper"
     }
