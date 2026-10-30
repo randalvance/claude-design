@@ -52,7 +52,14 @@ button{font:inherit}
 .agent{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);display:flex;flex-direction:column;transition:transform .2s steps(2),box-shadow .2s steps(2);animation:drop .35s steps(4) both}
 .agent:hover{transform:translate(-1px,-1px);box-shadow:4px 5px 0 var(--shadow)}
 .agent.on{transform:translate(-2px,-2px);box-shadow:6px 7px 0 var(--shadow);border-color:var(--kraft-2)}
-.hit{all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;border-radius:3px}
+.hit{all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px 16px 10px;width:100%;box-sizing:border-box;border-radius:3px 3px 0 0}
+.cta{display:flex;justify-content:flex-end;padding:0 16px 14px;margin-top:auto}
+.chat{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;background:var(--sheet-warm);border:1px solid var(--ink);color:var(--ink);font-size:12.5px;font-weight:800;box-shadow:2px 2px 0 var(--shadow);box-sizing:border-box;transition:transform .2s steps(2),box-shadow .2s steps(2),background .2s steps(2)}
+.chat svg{width:15px;height:15px;flex:none}
+.chat:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--shadow)}
+.chat:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow)}
+.chat:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.chat.is-on{background:var(--blue);border-color:var(--blue-2);color:var(--white);box-shadow:2px 2px 0 var(--blue-2)}
 .hit:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
 .photo{position:relative;width:64px;height:64px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg);transition:transform .2s steps(2)}
 .agent.on .photo{transform:rotate(2deg)}
@@ -116,13 +123,14 @@ button{font:inherit}
               <span class="desc">{{a.desc}}</span>
             </span>
           </button>
+          <div class="cta"><button class="chat {{a.chatCls}}" onClick="{{a.chat}}" aria-label="{{a.chatAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg>{{a.chatLabel}}</button></div>
         </article>
       </sc-for>
       <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">No agent called “{{q}}” here</div></sc-if>
       <sc-if value="{{showNew}}" hint-placeholder-val="{{true}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new agent</button></sc-if>
     </section>
 
-    <div class="demo"><span>Search is live · click a card to pick it up</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+    <div class="demo"><span>{{demoText}}</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
   </main>
 </div>
 </div>
@@ -282,12 +290,14 @@ const AGENTS = [
 ];
 
 class Component extends DCLogic {
-  state = { q: '', sel: null };
+  state = { q: '', sel: null, chat: null };
   renderVals() {
     const st = this.state;
     const q = st.q.trim().toLowerCase();
     const list = AGENTS.filter((a) => !q || a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q));
+    const chatting = AGENTS.find((a) => a.id === st.chat);
     return {
+      demoText: chatting ? 'Started a chat with ' + chatting.name + ' · in the app this opens a new session' : 'Search is live · click a card to pick it up · Start a chat opens a session',
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'agents' ? 'is-on' : '', cur: n.id === 'agents' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
       sub: AGENTS.length + ' agents',
       qRef: (el) => { if (el) this.q = el; },
@@ -296,11 +306,15 @@ class Component extends DCLogic {
       agents: list.map((a) => ({
         name: a.name, desc: a.desc, px: px(SPRITES[a.sprite]),
         on: st.sel === a.id, cls: st.sel === a.id ? 'on' : '',
-        pick: () => this.setState({ sel: st.sel === a.id ? null : a.id })
+        pick: () => this.setState({ sel: st.sel === a.id ? null : a.id }),
+        chatCls: st.chat === a.id ? 'is-on' : '',
+        chatLabel: st.chat === a.id ? 'Chat opened' : 'Start a chat',
+        chatAria: 'Start a chat with ' + a.name,
+        chat: () => this.setState({ chat: a.id, sel: a.id })
       })),
       empty: list.length === 0,
       showNew: !q,
-      reset: () => { if (this.q) this.q.value = ''; this.setState({ q: '', sel: null }); }
+      reset: () => { if (this.q) this.q.value = ''; this.setState({ q: '', sel: null, chat: null }); }
     };
   }
 }

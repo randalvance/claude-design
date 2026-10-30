@@ -157,7 +157,7 @@
       "x": 1520,
       "y": 1000,
       "w": 320,
-      "text": "Agents page: each agent is an index card with three things only, a taped-on 12×12 pixel portrait, the name and the description. Click a card to lift it and run a highlighter under the name; search is live. Built from the Paper Chat tokens and pp-* classes.",
+      "text": "Agents page: each agent is an index card with a taped-on 12×12 pixel portrait, the name, the description and one Start a chat button. Click a card to lift it and run a highlighter under the name; Start a chat fills blue and the footer line says which agent was started; search is live. Built from the Paper Chat tokens and pp-* classes.",
       "fill": "orange",
       "page": "paper"
     }
