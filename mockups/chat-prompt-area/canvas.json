@@ -93,6 +93,16 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Agent.dc.html": {
+      "x": 0,
+      "y": 2000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agent — edit page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -101,6 +111,7 @@
     "Anatomy.dc.html",
     "Paper.dc.html",
     "Agents.dc.html",
+    "Agent.dc.html",
     "Future.dc.html",
     "Saas.dc.html"
   ],
@@ -158,6 +169,14 @@
       "y": 1000,
       "w": 320,
       "text": "Agents page: each agent is an index card with a taped-on 12×12 pixel portrait, the name, the description and one Start a chat button. Click a card to lift it and run a highlighter under the name; Start a chat fills blue and the footer line says which agent was started; search is live. Built from the Paper Chat tokens and pp-* classes.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p4": {
+      "x": 1520,
+      "y": 2000,
+      "w": 320,
+      "text": "Agent page: a sticky header holds the taped portrait, the name as an editable serif title, Delete (dashed red) and Save (blue, goes kraft-grey when there is nothing to save). Below, index cards for Description, Personality (trait stickers + text), System prompt (ruled, with a token estimate), Preferred model (radio rows), MCP servers (paper switches) and Skills (checkbox rows). Every change marks the page dirty; Save thumps a green sticker down; Delete asks on a kraft note before tearing the agent up.",
       "fill": "orange",
       "page": "paper"
     }
