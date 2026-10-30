@@ -47,19 +47,12 @@ button{font:inherit}
 .pp-btn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 2px 0 var(--blue-2);transition:transform .2s steps(2);box-sizing:border-box}
 .pp-btn:hover{transform:translateY(-1px)}
 .pp-btn:focus-visible{outline:2px solid var(--ink)}
-.filters{display:flex;align-items:center;gap:6px;padding:16px 28px 0;flex-wrap:wrap}
-.pp-filt{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);font-size:12.5px;font-weight:700;color:var(--ink);box-sizing:border-box;transition:transform .2s steps(2)}
-.pp-filt:hover{transform:translateY(-1px)}
-.pp-filt:focus-visible{outline:2px solid var(--blue)}
-.pp-filt.is-on{background:var(--highlighter);border-color:var(--highlighter-2)}
-.pp-filt .n{font-family:var(--font-hand);font-size:15px;color:var(--mute);font-weight:500}
-.filters .hint{margin-left:auto;font-family:var(--font-hand);font-size:16px;color:var(--mute)}
 
-.grid{flex:1;padding:22px 28px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;align-content:start}
+.grid{flex:1;padding:26px 28px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;align-content:start}
 .agent{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);display:flex;flex-direction:column;transition:transform .2s steps(2),box-shadow .2s steps(2);animation:drop .35s steps(4) both}
 .agent:hover{transform:translate(-1px,-1px);box-shadow:4px 5px 0 var(--shadow)}
 .agent.on{transform:translate(-2px,-2px);box-shadow:6px 7px 0 var(--shadow);border-color:var(--kraft-2)}
-.hit{all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px 16px 12px;width:100%;box-sizing:border-box;border-radius:3px 3px 0 0}
+.hit{all:unset;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;border-radius:3px}
 .hit:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
 .photo{position:relative;width:64px;height:64px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg);transition:transform .2s steps(2)}
 .agent.on .photo{transform:rotate(2deg)}
@@ -70,20 +63,7 @@ button{font:inherit}
 .nm::before{content:"";position:absolute;inset:0 -6px;background:var(--highlighter);transform:skewX(-6deg) rotate(-.4deg);mix-blend-mode:multiply;opacity:0;transition:opacity .15s steps(2)}
 .agent.on .nm::before{opacity:1}
 .nm span{position:relative}
-.role{font-family:var(--font-hand);font-size:16px;color:var(--mute);line-height:1}
-.desc{margin:6px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink)}
-.foot{display:flex;align-items:center;gap:10px;padding:8px 16px 12px;border-top:1px dashed var(--line);font-family:var(--font-hand);font-size:15px;color:var(--mute);flex-wrap:wrap}
-.foot .ws{display:inline-flex;align-items:center;gap:6px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sw{width:10px;height:10px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
-.foot .sep{color:var(--line)}
-.pp-tag{position:relative;display:inline-flex;align-items:center;height:22px;padding:0 8px 0 14px;background:var(--kraft);color:var(--ink);font-family:var(--font-mono);font-size:11px;font-weight:700;clip-path:polygon(0 50%,8px 0,100% 0,100% 100%,8px 100%);white-space:nowrap;margin-left:auto}
-.pp-tag::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;border-radius:50%;background:var(--paper);transform:translateY(-50%)}
-.pp-sticker{position:absolute;top:-10px;right:12px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--green);box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-2deg);white-space:nowrap;z-index:2}
-.pp-sticker.is-busy{background:var(--red);animation:wob .5s steps(2) infinite}
-.pp-sticker i{width:6px;height:6px;border-radius:50%;background:var(--white)}
-.acts{display:flex;gap:8px;padding:0 16px 14px;animation:slide .3s steps(4) both}
-.acts .pp-btn{height:30px}
-.acts .pp-filt{height:30px}
+.desc{margin:4px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink)}
 .pp-dashed{all:unset;cursor:pointer;font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed var(--bar);padding:3px 10px;border-radius:3px}
 .pp-dashed:hover{color:var(--ink);border-color:var(--ink)}
 .pp-dashed:focus-visible{outline:2px solid var(--blue)}
@@ -96,9 +76,7 @@ button{font:inherit}
 .demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:16px;color:var(--mute);padding:0 28px 16px;flex-wrap:wrap}
 
 @keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
-@keyframes wob{0%{transform:rotate(-2deg)}100%{transform:rotate(1deg)}}
-@keyframes slide{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
-@media (max-width:860px){.app{flex-direction:column}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.top,.filters,.grid,.demo{padding-left:16px;padding-right:16px}.top-r{margin-left:0;width:100%}.pp-search{width:100%}.filters .hint{display:none}}
+@media (max-width:860px){.app{flex-direction:column}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.top,.grid,.demo{padding-left:16px;padding-right:16px}.top-r{margin-left:0;width:100%}.pp-search{width:100%}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </helmet>
@@ -128,41 +106,23 @@ button{font:inherit}
       </div>
     </header>
 
-    <div class="filters" role="group" aria-label="Filter agents">
-      <sc-for list="{{filters}}" as="f" hint-placeholder-count="5"><button class="pp-filt {{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}} <span class="n">{{f.n}}</span></button></sc-for>
-      <span class="hint" aria-hidden="true">click a card to pick it up</span>
-    </div>
-
     <section class="grid" aria-label="Agents">
       <sc-for list="{{agents}}" as="a" hint-placeholder-count="8">
         <article class="agent {{a.cls}}">
-          <sc-if value="{{a.busy}}" hint-placeholder-val="{{false}}"><span class="pp-sticker is-busy"><i aria-hidden="true"></i>Working</span></sc-if>
           <button class="hit" onClick="{{a.pick}}" aria-pressed="{{a.on}}">
             <span class="photo" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{a.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>
             <span class="who">
               <span class="nm"><span>{{a.name}}</span></span>
-              <span class="role">{{a.role}}</span>
               <span class="desc">{{a.desc}}</span>
             </span>
           </button>
-          <sc-if value="{{a.on}}" hint-placeholder-val="{{false}}">
-            <div class="acts"><button class="pp-btn">Start a session</button><button class="pp-filt">Edit</button><button class="pp-filt">Duplicate</button></div>
-          </sc-if>
-          <div class="foot">
-            <span class="ws"><i class="sw" style="background: {{a.wsColor}}" aria-hidden="true"></i>{{a.ws}}</span>
-            <span class="sep" aria-hidden="true">·</span>
-            <span>{{a.sessions}} sessions</span>
-            <span class="sep" aria-hidden="true">·</span>
-            <span>{{a.last}}</span>
-            <span class="pp-tag">{{a.model}}</span>
-          </div>
         </article>
       </sc-for>
       <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">No agent called “{{q}}” here</div></sc-if>
       <sc-if value="{{showNew}}" hint-placeholder-val="{{true}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new agent</button></sc-if>
     </section>
 
-    <div class="demo"><span>Search and filters work · pick a card to see its actions</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+    <div class="demo"><span>Search is live · click a card to pick it up</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
   </main>
 </div>
 </div>
@@ -302,57 +262,45 @@ function px(rows) {
   rows.forEach((row, y) => { Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: PAL[ch] }); }); });
   return out;
 }
-const WS = { lighthouse: { name: 'Lighthouse Web', color: '#5b8c5a' }, orbit: { name: 'Orbit Billing', color: '#c8553d' }, fleet: { name: 'Fleet Infra', color: '#b8792f' } };
 const AGENTS = [
-  { id: 'curator', name: 'Curator', role: 'Orchestrator', ws: 'lighthouse', sprite: 'curator', model: 'Sonnet 5.5', sessions: 41, last: 'running now', busy: true,
+  { id: 'curator', name: 'Curator', sprite: 'curator',
     desc: 'Drafts the nightly changelog from merged PRs and release notes, then opens a draft PR for someone to read over coffee.' },
-  { id: 'implementer', name: 'Implementer', role: 'Implementer', ws: 'lighthouse', sprite: 'implementer', model: 'Opus 5.5', sessions: 128, last: 'ran 4m ago', busy: false,
+  { id: 'implementer', name: 'Implementer', sprite: 'implementer',
     desc: 'Takes a scoped ticket, writes the change with tests, and leaves a PR with a plain summary of what moved and why.' },
-  { id: 'issue', name: 'Issue Creator', role: 'Orchestrator', ws: 'lighthouse', sprite: 'issue', model: 'Sonnet 5.5', sessions: 33, last: 'ran 6h ago', busy: false,
+  { id: 'issue', name: 'Issue Creator', sprite: 'issue',
     desc: 'Turns a loose description into a well-formed issue: checks the code first, then files it with labels and a repro.' },
-  { id: 'reviewer', name: 'Reviewer', role: 'Reviewer', ws: 'orbit', sprite: 'reviewer', model: 'Fable 5.1', sessions: 76, last: 'ran 1h ago', busy: false,
+  { id: 'reviewer', name: 'Reviewer', sprite: 'reviewer',
     desc: 'Reads a PR the way a careful colleague would: correctness first, then naming, then the nits it keeps to itself.' },
-  { id: 'triage', name: 'Triage', role: 'Implementer', ws: 'orbit', sprite: 'triage', model: 'Haiku 5.5', sessions: 210, last: 'running now', busy: true,
+  { id: 'triage', name: 'Triage', sprite: 'triage',
     desc: 'Sorts incoming tickets by area and urgency, links duplicates, and asks the reporter for whatever is missing.' },
-  { id: 'release', name: 'Release Captain', role: 'Orchestrator', ws: 'fleet', sprite: 'release', model: 'Sonnet 5.5', sessions: 19, last: 'ran 2d ago', busy: false,
+  { id: 'release', name: 'Release Captain', sprite: 'release',
     desc: 'Cuts release branches, rebases open work onto them, and watches the deploy until every health check is green.' },
-  { id: 'support', name: 'Support Writer', role: 'Implementer', ws: 'orbit', sprite: 'support', model: 'Sonnet 5.5', sessions: 54, last: 'ran 45m ago', busy: false,
+  { id: 'support', name: 'Support Writer', sprite: 'support',
     desc: 'Drafts answers to support threads from the docs and recent fixes, and flags anything it is not sure about.' },
-  { id: 'planner', name: 'Infra Planner', role: 'Orchestrator', ws: 'fleet', sprite: 'planner', model: 'Opus 5.5', sessions: 12, last: 'ran 12m ago', busy: false,
+  { id: 'planner', name: 'Infra Planner', sprite: 'planner',
     desc: 'Plans Terraform changes module by module and explains the blast radius before it touches anything.' }
-];
-const FILTERS = [
-  { id: 'all', label: 'All', test: () => true },
-  { id: 'Orchestrator', label: 'Orchestrators', test: (a) => a.role === 'Orchestrator' },
-  { id: 'Implementer', label: 'Implementers', test: (a) => a.role === 'Implementer' },
-  { id: 'Reviewer', label: 'Reviewers', test: (a) => a.role === 'Reviewer' },
-  { id: 'busy', label: 'Working now', test: (a) => a.busy }
 ];
 
 class Component extends DCLogic {
-  state = { filter: 'all', q: '', sel: null };
+  state = { q: '', sel: null };
   renderVals() {
     const st = this.state;
     const q = st.q.trim().toLowerCase();
-    const f = FILTERS.find((x) => x.id === st.filter) || FILTERS[0];
-    const list = AGENTS.filter((a) => f.test(a) && (!q || a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q) || a.role.toLowerCase().includes(q)));
-    const busyN = AGENTS.filter((a) => a.busy).length;
+    const list = AGENTS.filter((a) => !q || a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q));
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'agents' ? 'is-on' : '', cur: n.id === 'agents' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
-      sub: AGENTS.length + ' agents across 3 workspaces · ' + busyN + ' working now',
-      filters: FILTERS.map((x) => ({ label: x.label, n: AGENTS.filter(x.test).length, on: st.filter === x.id, cls: st.filter === x.id ? 'is-on' : '', pick: () => this.setState({ filter: x.id, sel: null }) })),
+      sub: AGENTS.length + ' agents',
       qRef: (el) => { if (el) this.q = el; },
       onSearch: (e) => this.setState({ q: e.currentTarget.value, sel: null }),
       q: st.q,
       agents: list.map((a) => ({
-        name: a.name, role: a.role, desc: a.desc, model: a.model, sessions: a.sessions, last: a.last, busy: a.busy,
-        ws: WS[a.ws].name, wsColor: WS[a.ws].color, px: px(SPRITES[a.sprite]),
+        name: a.name, desc: a.desc, px: px(SPRITES[a.sprite]),
         on: st.sel === a.id, cls: st.sel === a.id ? 'on' : '',
         pick: () => this.setState({ sel: st.sel === a.id ? null : a.id })
       })),
       empty: list.length === 0,
-      showNew: !q && st.filter === 'all',
-      reset: () => { if (this.q) this.q.value = ''; this.setState({ filter: 'all', q: '', sel: null }); }
+      showNew: !q,
+      reset: () => { if (this.q) this.q.value = ''; this.setState({ q: '', sel: null }); }
     };
   }
 }

@@ -157,7 +157,7 @@
       "x": 1520,
       "y": 1000,
       "w": 320,
-      "text": "Agents page: each agent is an index card with a taped-on 12×12 pixel portrait, a highlighter name, a hand-written role, the description, and a kraft model tag. Working agents wear a red sticker. Pick a card to lift it and reveal Start / Edit / Duplicate; search and the role filters are live. Built from the Paper Chat tokens and pp-* classes.",
+      "text": "Agents page: each agent is an index card with three things only, a taped-on 12×12 pixel portrait, the name and the description. Click a card to lift it and run a highlighter under the name; search is live. Built from the Paper Chat tokens and pp-* classes.",
       "fill": "orange",
       "page": "paper"
     }
