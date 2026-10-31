@@ -163,6 +163,23 @@ button{font:inherit}
 .scrap{font-family:var(--hand);font-size:22px;color:var(--mute);padding:40px 0;text-align:center;transform:rotate(-1deg)}
 
 .foot{padding:6px 28px 18px;position:relative;z-index:4}
+.hello{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 28px 70px;position:relative;z-index:4;border-top:0}
+.hello-in{width:100%;max-width:780px;display:flex;flex-direction:column;gap:16px}
+.hi{margin:0;font-family:var(--hand);font-size:50px;font-weight:600;line-height:1;color:var(--ink);transform:rotate(-1.2deg);transform-origin:left bottom;animation:drop .4s steps(5) both}
+.hi2{margin:-4px 0 6px 2px;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.4;color:var(--mute)}
+.hello .card{animation:drop .45s steps(5) .08s both}
+.hello .ta{min-height:84px}
+.adv{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--hand);font-size:17px;color:var(--mute);padding:4px 6px 0}
+.adv .lbl{color:var(--ink);font-weight:600}
+.adv .sum{flex:1;min-width:0;text-align:right}
+.adv .sum b{font-weight:600;color:var(--ink)}
+.sw{all:unset;cursor:pointer;position:relative;width:36px;height:20px;border:1.5px solid var(--ink);background:#fffdf7;box-sizing:border-box;flex:none;transition:background .2s steps(2)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--ink);transition:transform .2s steps(2),background .2s steps(2)}
+.sw[aria-checked="true"]{background:var(--green)}
+.sw[aria-checked="true"]::after{transform:translateX(17px);background:#fff}
+.sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mbtn .wsd{width:9px;height:9px}
+.orl{font-family:var(--hand);font-size:17px;color:#9a8c74;text-align:center;margin-top:10px}
 .foot-in{max-width:980px;position:relative}
 .scrim{all:unset;position:fixed;inset:0;z-index:10;cursor:default}
 .card{position:relative;background:#fffdf8;border:1px solid var(--line);border-top:3px solid #e8a9a2;border-radius:3px;box-shadow:4px 5px 0 var(--shadow);transition:transform .25s steps(3),box-shadow .25s steps(3)}
@@ -251,7 +268,7 @@ button{font:inherit}
 @keyframes fly{0%{transform:translate(0,0)}40%{transform:translate(14px,-14px);opacity:0}41%{transform:translate(-10px,10px);opacity:0}100%{transform:none;opacity:1}}
 @keyframes flick{0%{transform:scaleY(1)}100%{transform:scaleY(.7)}}
 @media (max-width:1000px){.panel{width:250px}}
-@media (max-width:860px){.app{flex-direction:column}.rail{position:static;height:auto;width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid #d6cab2;padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{width:100%;max-height:40vh;border-right:0;border-bottom:1px solid var(--line)}.note{max-width:92%}.hint{display:none}.top{padding:16px 16px 0}.tabs,.content,.foot{padding-left:16px;padding-right:16px}.pop{width:min(286px,calc(100vw - 40px))}}
+@media (max-width:860px){.app{flex-direction:column}.rail{position:static;height:auto;width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid #d6cab2;padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{width:100%;max-height:40vh;border-right:0;border-bottom:1px solid var(--line)}.note{max-width:92%}.hint{display:none}.top{padding:16px 16px 0}.tabs,.content,.foot,.hello{padding-left:16px;padding-right:16px}.hi{font-size:40px}.pop{width:min(286px,calc(100vw - 40px))}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </helmet>
@@ -261,7 +278,7 @@ button{font:inherit}
 
   <nav class="rail" aria-label="Primary">
     <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
-    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="10">
       <button class="rb {{n.cls}}" onClick="{{n.pick}}" aria-current="{{n.cur}}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
         <span>{{n.label}}</span>
@@ -316,6 +333,90 @@ button{font:inherit}
   </aside>
 
 <div class="sheet">
+  <sc-if value="{{noSession}}" hint-placeholder-val="{{true}}">
+    <section class="hello" aria-label="Start a session">
+      <div class="hello-in">
+        <h1 class="hi">{{greeting}}</h1>
+        <p class="hi2">{{greetSub}}</p>
+        <div class="foot-in" style="max-width: none">
+          <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
+          <div class="card">
+            <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
+            <div class="ed">
+              <label class="sr" for="ta0">Start a session</label>
+              <textarea id="ta0" class="ta" rows="3" placeholder="{{helloPlaceholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea>
+            </div>
+            <div class="bar">
+              <sc-if value="{{adv}}" hint-placeholder-val="{{false}}">
+                <div class="tools">
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Model and effort">
+                  <div class="pop-h"><span>Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleWs}}" aria-expanded="{{wsOpen}}" aria-haspopup="dialog" aria-label="Workspace"><i class="wsd" style="background: {{pickWsColor}}" aria-hidden="true"></i><span>{{pickWsName}}</span></button>
+              <sc-if value="{{wsOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Workspace">
+                  <div class="pop-h"><span>Workspace</span><span class="mode">its folders get mounted</span></div>
+                  <sc-for list="{{wsRows}}" as="w" hint-placeholder-count="4">
+                    <button class="mrow {{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><i class="wsd" style="background: {{w.color}}" aria-hidden="true"></i><span>{{w.name}}</span><span class="mdesc">{{w.n}}</span></button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleRole}}" aria-expanded="{{roleOpen}}" aria-haspopup="dialog" aria-label="Agent"><span>{{pickRole}}</span></button>
+              <sc-if value="{{roleOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Agent">
+                  <div class="pop-h"><span>Agent</span><span class="mode">who runs the session</span></div>
+                  <sc-for list="{{roleRows}}" as="r" hint-placeholder-count="5">
+                    <button class="mrow {{r.cls}}" onClick="{{r.pick}}" aria-pressed="{{r.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{r.name}}</span><span class="mdesc">{{r.desc}}</span></button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </span>
+
+            <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              YOLO
+              <sc-if value="{{yolo}}" hint-placeholder-val="{{true}}"><span class="stamp" aria-hidden="true">YOLO</span></sc-if>
+            </button>
+                </div>
+              </sc-if>
+              <span class="hint" aria-hidden="true">{{helloHint}}</span>
+              <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="Start the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button>
+            </div>
+          </div>
+          <div class="adv">
+            <button class="sw" role="switch" aria-checked="{{adv}}" onClick="{{toggleAdv}}" aria-label="Advanced options"></button><span class="lbl">Advanced options</span>
+            <span class="sum">{{helloSum}}</span>
+          </div>
+          <p class="orl">or pick up a session on the left</p>
+          <div class="demo"><span>type and ↵ to start a session in the chosen workspace · the switch shows model, effort, workspace, agent and YOLO</span><button onClick="{{reset}}">Reset demo</button></div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+  <sc-if value="{{hasSession}}" hint-placeholder-val="{{false}}">
   <header class="top">
     <div class="ttl">
       <h1>{{cur.t}}</h1>
@@ -325,7 +426,7 @@ button{font:inherit}
     <div class="top-r">
       <button class="ib" aria-label="Open in editor"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
       <button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
-      <button class="ib" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+      <button class="ib" onClick="{{closeSession}}" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
     </div>
   </header>
 
@@ -482,9 +583,10 @@ button{font:inherit}
           </button>
         </div>
       </div>
-      <div class="demo"><span>click sessions and tabs · type, ↵ to send, then stop with the red square · each character counts as 25 tokens</span><button onClick="{{reset}}">Reset demo</button></div>
+      <div class="demo"><span>click sessions and tabs · type, ↵ to send, then stop with the red square · each character counts as 25 tokens · × up top leaves the session</span><button onClick="{{reset}}">Reset demo</button></div>
     </div>
   </footer>
+  </sc-if>
 </div>
 </div>
 </div>
@@ -501,9 +603,8 @@ const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
 const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
 const TABS = ['Chat', 'Git', 'Todos', 'Tools', 'Terminal', 'Logs'];
 const NAV = [
-  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
-  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
   { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
   { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
   { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
@@ -513,6 +614,7 @@ const NAV = [
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
+const ROLES = [['Orchestrator', 'plans, delegates, reports back'], ['Implementer', 'writes the code itself'], ['Curator', 'reads, summarises, drafts'], ['Reviewer', 'reads diffs, leaves comments'], ['Triage', 'sorts and labels']];
 const WS = [
   { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', sessions: [
     { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
@@ -592,11 +694,13 @@ function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
 function findSession(id) { for (const w of WS) { const s = w.sessions.find((x) => x.id === id); if (s) return { ...s, ws: w.name }; } return null; }
 
 class Component extends DCLogic {
-  state = { sid: 's3', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: BASE, tick: 0,
+  state = { sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
   componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
   curMsgs() { return this.state.msgs[this.state.sid] || []; }
+  sess(id) { const n = this.state.newSessions.find((x) => x.id === id); if (n) { const m = (this.state.msgs[id] || [])[0]; const live = !!m && !m.done; return { ...n, ws: WS.find((w) => w.id === n.wsId).name, st: live ? 'busy' : 'idle', dur: m ? (live ? fmtSec(Date.now() - m.start) : m.elapsed) : '—' }; } return findSession(id); }
+  usedOf(sid) { if (sid in this.state.used) return this.state.used[sid]; return typeof sid === 'string' && sid[0] === 'n' ? 1800 : BASE; }
   busy() { return this.curMsgs().some((m) => !m.done); }
   stop() {
     clearInterval(this.ticker); clearTimeout(this.t3);
@@ -606,15 +710,20 @@ class Component extends DCLogic {
   send() {
     const el = this.ta;
     if (this.busy() || !el || !el.value.trim()) return;
-    const text = el.value.trim(); const id = Date.now(); const sid = this.state.sid;
+    const text = el.value.trim(); const id = Date.now(); let sid = this.state.sid; const patch = {};
+    if (!sid) {
+      sid = 'n' + this.state.nextId;
+      const t = text.length > 56 ? text.slice(0, 56).replace(/\s+\S*$/, '') + '…' : text;
+      Object.assign(patch, { sid, tab: 'Chat', nextId: this.state.nextId + 1, newSessions: [{ id: sid, wsId: this.state.newWs, t, role: this.state.newRole, branch: 'main', isNew: true }].concat(this.state.newSessions), openWs: { ...this.state.openWs, [this.state.newWs]: true } });
+    }
     el.value = ''; el.style.height = '';
-    this.setState({ msgs: { ...this.state.msgs, [sid]: [...this.curMsgs(), { id, text, start: id, done: false }] }, draft: 0, used: this.state.used + Math.max(40, text.length * TPC), fly: true, open: null });
+    this.setState({ ...patch, msgs: { ...this.state.msgs, [sid]: [...(this.state.msgs[sid] || []), { id, text, start: id, done: false }] }, draft: 0, used: { ...this.state.used, [sid]: this.usedOf(sid) + Math.max(40, text.length * TPC) }, fly: true, open: null });
     clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ fly: false }), 500);
     clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400);
     clearTimeout(this.t3);
     this.t3 = setTimeout(() => {
       clearInterval(this.ticker);
-      this.setState({ used: this.state.used + 1500, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } });
+      this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } });
     }, 2600);
   }
   capView(c, sid) {
@@ -625,14 +734,17 @@ class Component extends DCLogic {
   }
   renderVals() {
     const st = this.state; const total = this.total();
-    const used = Math.min(total - 1000, st.used);
+    const used = Math.min(total - 1000, this.usedOf(st.sid));
     const remaining = (total - used) / total;
     const draftTok = Math.min(remaining * total, st.draft * TPC); const draftFrac = draftTok / total;
     const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
     const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
     const busy = this.busy();
-    const cur = findSession(st.sid) || findSession('s3');
-    const sessionBusy = busy || cur.st === 'busy';
+    const cur = st.sid ? this.sess(st.sid) : null;
+    const c = cur || { t: '', role: '', ws: '', branch: '', st: 'idle', attn: 0, isNew: false };
+    const sessionBusy = busy || c.st === 'busy';
+    const h = new Date().getHours(); const greeting = h < 5 ? 'Still up?' : h < 12 ? 'Good morning.' : h < 18 ? 'Good afternoon.' : 'Good evening.';
+    const pickWs = WS.find((w) => w.id === st.newWs) || WS[0];
     const msgs = this.curMsgs().map((m) => {
       const live = !m.done; const stopped = !!m.stopped;
       const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.n || 1) : 3);
@@ -655,19 +767,29 @@ class Component extends DCLogic {
       toggleActive: () => this.setState({ activeOnly: !st.activeOnly }),
       workspaces: WS.map((w) => {
         const open = !!st.openWs[w.id];
-        const sessions = w.sessions.filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
+        const sessions = st.newSessions.filter((n) => n.wsId === w.id).map((n) => this.sess(n.id)).concat(w.sessions).filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
         return { name: w.name, color: w.color, attn: !!w.attn, count: sessions.length, open, cls: open ? '' : 'closed',
           toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
           sessions: sessions.map((s) => ({ t: s.t, dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
             pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
       }),
-      cur: { t: cur.t, role: cur.role, ws: cur.ws, branch: cur.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
-      stCls: sessionBusy ? 'busy' : cur.attn ? 'attn' : '', stLabel: sessionBusy ? 'Busy' : cur.attn ? 'Needs attention' : 'Idle',
+      hasSession: !!cur, noSession: !cur, closeSession: () => this.setState({ sid: null, open: null, draft: 0 }),
+      greeting, greetSub: 'What are we working on? One line is enough; the agent asks when it needs more.',
+      helloPlaceholder: isMax ? 'Max effort. Give it the hard one…' : 'Describe the job, or paste a ticket…',
+      helloHint: '↵ start · ⇧↵ newline',
+      adv: st.adv, toggleAdv: () => this.setState({ adv: !st.adv, open: null }),
+      helloSum: st.adv ? '' : model.name + ' · ' + EFFORT_FULL[st.effort].toLowerCase() + ' effort · ' + pickWs.name + ' · ' + st.newRole + ' · YOLO ' + (st.yolo ? 'on' : 'off'),
+      wsOpen: st.open === 'ws', toggleWs: () => this.setState({ open: st.open === 'ws' ? null : 'ws' }), pickWsName: pickWs.name, pickWsColor: pickWs.color,
+      wsRows: WS.map((w) => ({ name: w.name, color: w.color, n: w.sessions.length + ' sessions', sel: w.id === st.newWs, cls: w.id === st.newWs ? 'sel' : '', pick: () => this.setState({ newWs: w.id, open: null }) })),
+      roleOpen: st.open === 'role', toggleRole: () => this.setState({ open: st.open === 'role' ? null : 'role' }), pickRole: st.newRole,
+      roleRows: ROLES.map((r) => ({ name: r[0], desc: r[1], sel: r[0] === st.newRole, cls: r[0] === st.newRole ? 'sel' : '', pick: () => this.setState({ newRole: r[0], open: null }) })),
+      cur: { t: c.t, role: c.role, ws: c.ws, branch: c.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
+      stCls: sessionBusy ? 'busy' : c.attn ? 'attn' : '', stLabel: sessionBusy ? 'Busy' : c.attn ? 'Needs attention' : 'Idle',
       tabs: TABS.map((t) => ({ label: t, cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
       isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab,
-      thread: (THREADS[st.sid] || GENERIC).map((it) => it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text }),
-      isIssue: st.sid === 's3', isGeneric: !THREADS[st.sid],
+      thread: (c.isNew ? [] : (THREADS[st.sid] || GENERIC)).map((it) => it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text }),
+      isIssue: st.sid === 's3', isGeneric: !c.isNew && !THREADS[st.sid],
       msgs, todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
       placeholder: isMax ? 'Max effort. Give it the hard one…' : st.yolo ? 'Write to the agent · no permission prompts' : 'Write to the agent…',
       hint: busy ? '⎋ stop · agent is working' : '↵ send · ⇧↵ newline',
@@ -691,7 +813,7 @@ class Component extends DCLogic {
       yolo: st.yolo, toggleYolo: () => this.setState({ yolo: !st.yolo }),
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
-      reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: 's3', tab: 'Chat', open: null, caps: {}, msgs: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: BASE, activeOnly: false, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
+      reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: {}, activeOnly: false, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
     };
   }
 }
