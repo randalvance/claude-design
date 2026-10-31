@@ -95,6 +95,16 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Background.dc.html": {
+      "x": 0,
+      "y": 8000,
+      "w": 1440,
+      "h": 900,
+      "title": "Background — jobs and workflows with triggers and run history, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -105,7 +115,8 @@
     "Workspace.dc.html",
     "Kanban.dc.html",
     "Board.dc.html",
-    "Memory.dc.html"
+    "Memory.dc.html",
+    "Background.dc.html"
   ],
   "notes": {
     "p1": {
@@ -177,6 +188,14 @@
       "y": 7000,
       "w": 320,
       "text": "Memory page: three folder tabs for the levels (Global, Workspaces, Agents). Workspace and agent levels add a strip of chips, each with its colour or portrait and a tiny meter of its 4 KB. Facts sit under kraft section labels with a red tack; each row has a push-pin (red = pinned, rides in every session; grey = answers search_memory only), the text, where it came from and when, its size in bytes, edit and forget. The Budget sheet is a paper ruler: solid fill is pinned, hatched is searchable, a post marks 4 KB. Global is nearly full (amber sticker); Orbit Billing is over, so the fill turns red, spills past the post, an Over-by sticker thumps down and a kraft note says what happens. New fact opens a kraft note: level, which workspace or agent, section chips or a new section, the fact, a pin switch, and a hand-written line saying what it adds and whether that goes over.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p10": {
+      "x": 1520,
+      "y": 8000,
+      "w": 320,
+      "text": "Background page: a timetable sheet of every job. Each row has a rubber-stamped kind (JOB in ink, WORKFLOW in blue), the name with the agent it runs as and a description, the trigger (a clock with the cron expression in mono and a hand-written reading, or an amber bolt with the event name, like cloud.file.created when a file lands in Drive › inbox), the last run as a sticker (Done, Failed, Running with a stepped pinwheel, Skipped) with when and how long, the next run (or \"waits for the next file\" for events, struck-through \"paused\" when paused), Run now and Pause/Resume. Paused rows fade under a red PAUSED stamp. A kraft Up next note lists the next three scheduled runs. Click a job for the drawer: trigger, runs-as portrait, workspace, last and next run, an enabled switch, the steps of a workflow, and the run history as a ledger with status, time, cause (on schedule, by hand, or the event with its file or deploy), a note and the duration; failed runs get Run again. Run now turns the sticker amber for a couple of seconds, then Done, and writes a new line in the ledger.",
       "fill": "orange",
       "page": "paper"
     }

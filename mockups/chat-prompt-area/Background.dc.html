@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Background — paper</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e4dccb;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
+a{color:#3b5b9a}a:hover{color:#2a4070}
+.page{--desk:#e4dccb;--paper:#f8f3e9;--paper-2:#efe7d6;--sheet:#fffdf7;--sheet-warm:#fffaf0;--card:#fffdf8;--rail:#e4d9c1;--line:#d6cab2;--kraft:#e2c48c;--kraft-2:#cfae72;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--tape:#ffec969e;--white:#ffffff;--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;min-height:100vh;box-sizing:border-box;display:flex;justify-content:center}
+.pp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit}
+.pp-ic{width:16px;height:16px;flex:none}
+
+.app{position:relative;width:100%;display:flex;background:var(--paper);min-height:100vh}
+.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
+
+/* rail (Paper Chat: Rail) */
+.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:relative;z-index:1}
+.pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
+.pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.pp-rb svg{width:18px;height:18px}
+.pp-rb:hover{background:var(--sheet-warm);transform:translateY(-1px)}
+.pp-rb.is-on{background:var(--sheet-warm);color:var(--ink);box-shadow:2px 2px 0 var(--shadow);transform:rotate(-2deg)}
+.pp-rb:focus-visible{outline:2px solid var(--blue)}
+.pp-rb .pp-nb{position:absolute;top:0;right:4px;transform:rotate(8deg)}
+.pp-nb{min-width:16px;height:16px;padding:0 4px;border-radius:50%;background:var(--red);color:var(--white);font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);box-sizing:border-box;flex:none}
+.pp-rail .pp-sp{flex:1}
+
+/* header */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
+.ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ttl h1{margin:0;font-family:var(--font-serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
+.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pp-search{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);color:var(--mute);box-sizing:border-box;width:250px;max-width:100%}
+.pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.pp-search input::placeholder{color:var(--faint);font-family:var(--font-hand);font-size:16px}
+.pp-kbd{font-family:var(--font-mono);font-size:10px;color:var(--mute);border:1px solid var(--line);padding:1px 4px;white-space:nowrap}
+.pp-btn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 2px 0 var(--blue-2);transition:transform .2s steps(2),background .2s steps(2),box-shadow .2s steps(2);box-sizing:border-box;white-space:nowrap}
+.pp-btn:hover{transform:translateY(-1px)}
+.pp-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--blue-2)}
+.pp-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pp-dashed{all:unset;cursor:pointer;font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed var(--bar);padding:3px 10px;border-radius:3px;white-space:nowrap;transition:transform .2s steps(2),color .2s steps(2),border-color .2s steps(2)}
+.pp-dashed:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
+.pp-dashed:focus-visible{outline:2px solid var(--blue)}
+.pp-dashed.is-on{border-style:solid;border-color:var(--ink);color:var(--ink);background:var(--sheet);box-shadow:1px 1px 0 var(--shadow);transform:rotate(-1.5deg)}
+.pp-dashed.red{color:var(--red);border-color:var(--red)}
+.pp-dashed.red:hover{background:#c8553d1a;color:var(--red-2);border-color:var(--red-2)}
+.pp-dashed.green{color:var(--green);border-color:var(--green)}
+.pp-dashed.green:hover{background:#5b8c5a1a}
+
+/* filters + up next */
+.bar2{display:flex;align-items:center;gap:8px;padding:16px 28px 0;flex-wrap:wrap}
+.bar2 .fl{font-family:var(--font-hand);font-size:15px;color:var(--mute);margin-right:2px}
+.upnext{margin-left:auto;display:inline-flex;align-items:center;gap:10px;background:var(--kraft);box-shadow:2px 3px 0 var(--kraft-2);padding:5px 12px 5px 10px;font-family:var(--font-hand);font-size:15.5px;color:var(--ink);transform:rotate(-.6deg);position:relative;max-width:100%;box-sizing:border-box}
+.upnext::before{content:"";position:absolute;left:-7px;top:50%;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9b85,var(--red) 55%,var(--red-2));box-shadow:1px 1px 1px rgba(0,0,0,.3);transform:translateY(-50%)}
+.upnext b{font-weight:600;color:var(--red-2)}
+.upnext .sep{color:var(--kraft-2)}
+
+/* body: table + drawer */
+.body{flex:1;display:flex;min-height:0;align-items:stretch}
+.list{flex:1;min-width:0;padding:18px 28px 14px;display:flex;flex-direction:column}
+.sheet{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);padding:6px 16px 10px;animation:drop .35s steps(4) both}
+.heads{display:grid;grid-template-columns:84px minmax(0,1.6fr) minmax(0,1.15fr) minmax(0,1.05fr) minmax(0,.8fr) auto;gap:14px;padding:8px 6px 6px;font-family:var(--font-hand);font-size:15px;color:var(--mute);border-bottom:1px solid var(--line)}
+.heads .r{text-align:right}
+.job{position:relative;display:grid;grid-template-columns:84px minmax(0,1.6fr) minmax(0,1.15fr) minmax(0,1.05fr) minmax(0,.8fr) auto;gap:14px;align-items:center;padding:11px 6px;border-bottom:1px dashed var(--line);transition:background .2s steps(2);animation:drop .3s steps(4) both}
+.job:last-of-type{border-bottom:0}
+.job:hover{background:var(--paper-2)}
+.job.is-sel{background:var(--highlighter);box-shadow:inset 3px 0 0 var(--highlighter-2)}
+.job.is-paused .who,.job.is-paused .trig,.job.is-paused .last{opacity:.55}
+.stamp{justify-self:start;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 6px;border:2px solid currentColor;border-radius:3px;transform:rotate(-5deg);opacity:.85;mix-blend-mode:multiply;background:#fffdf8cc;white-space:nowrap}
+.stamp.job{color:var(--mute)}
+.stamp.workflow{color:var(--blue)}
+.stamp.big{font-size:11px;padding:4px 8px}
+.pstamp{position:absolute;left:4px;top:50%;transform:translateY(-50%) rotate(-14deg);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--red);border:2.5px solid var(--red);padding:3px 8px;border-radius:3px;background:#fffdf8aa;mix-blend-mode:multiply;z-index:2;animation:thump .3s steps(3) both;pointer-events:none}
+.who{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left;padding:2px 0}
+.who:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.who .nm{font-size:14px;font-weight:800;line-height:1.2;display:flex;align-items:center;gap:8px}
+.who .nm .ap{width:22px;height:22px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:1px 1px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg)}
+.who .nm .ap svg{width:18px;height:18px;shape-rendering:crispEdges;display:block}
+.who .ds{font-size:12.5px;line-height:1.4;color:var(--mute);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.trig{display:flex;gap:8px;align-items:flex-start;min-width:0}
+.trig .ti{width:18px;height:18px;flex:none;color:var(--mute);margin-top:1px}
+.trig .ti.ev{color:var(--amber)}
+.trig .tt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.trig .ts{font-family:var(--font-hand);font-size:15.5px;line-height:1.15;color:var(--ink)}
+.trig .tm{font-family:var(--font-mono);font-size:10.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.last{display:flex;flex-direction:column;gap:4px;min-width:0;align-items:flex-start}
+.last .lw{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1.15}
+.last .lw.err{color:var(--red-2)}
+.stk{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--white);box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-3deg);flex:none;white-space:nowrap;animation:thump .3s steps(3) both}
+.stk.done{background:var(--green)}
+.stk.failed{background:var(--red)}
+.stk.running{background:var(--amber)}
+.stk.skipped{background:var(--bar);color:var(--ink)}
+.stk.paused{background:var(--sheet);color:var(--red);border:1.5px solid var(--red);box-shadow:none}
+.pw{width:11px;height:11px;flex:none;animation:turn .8s steps(4) infinite}
+.next{font-family:var(--font-hand);font-size:15.5px;line-height:1.15;color:var(--ink);min-width:0}
+.next.wait{color:var(--mute)}
+.next.off{color:var(--red);text-decoration:line-through;text-decoration-thickness:1.5px}
+.acts{display:flex;align-items:center;gap:6px;justify-self:end}
+.runb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;background:var(--sheet-warm);border:1px solid var(--ink);color:var(--ink);font-size:11.5px;font-weight:800;box-shadow:2px 2px 0 var(--shadow);box-sizing:border-box;transition:transform .2s steps(2),box-shadow .2s steps(2),background .2s steps(2);white-space:nowrap}
+.runb svg{width:12px;height:12px;flex:none}
+.runb:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--shadow)}
+.runb:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow)}
+.runb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.runb.is-busy{border-color:var(--bar);color:var(--faint);box-shadow:none;cursor:default;background:var(--paper-2)}
+.runb.is-busy:hover{transform:none}
+.pp-scrap{font-family:var(--font-hand);font-size:21px;color:var(--mute);padding:34px 0;text-align:center;transform:rotate(-1deg)}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:16px;color:var(--mute);padding:10px 28px 16px;flex-wrap:wrap;text-align:center}
+
+/* drawer */
+.drawer{width:420px;flex:none;background:var(--sheet);border-left:1px solid var(--line);box-shadow:-4px 0 0 var(--shadow);overflow:auto;position:relative;z-index:2;animation:slide .25s steps(4) both;display:flex;flex-direction:column}
+.dh{position:sticky;top:0;z-index:2;background:var(--sheet);padding:14px 18px 10px;border-bottom:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
+.dh .row1{display:flex;align-items:center;gap:10px}
+.dh h2{margin:0;font-family:var(--font-serif);font-size:19px;font-weight:600;line-height:1.2;flex:1;min-width:0}
+.dx{all:unset;cursor:pointer;width:26px;height:26px;display:grid;place-items:center;color:var(--mute);border-radius:50%;transition:transform .2s steps(2),color .2s steps(2)}
+.dx:hover{color:var(--ink);background:var(--paper-2);transform:rotate(90deg)}
+.dx:focus-visible{outline:2px solid var(--blue)}
+.dx svg{width:14px;height:14px}
+.dh .ds{font-size:13px;line-height:1.5;color:var(--ink)}
+.dh .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.db{padding:14px 18px 18px;display:flex;flex-direction:column;gap:16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.fact{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fact.wide{grid-column:1/-1}
+.fk{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1}
+.fv{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;min-width:0;flex-wrap:wrap}
+.fv .sub{font-family:var(--font-hand);font-size:14px;color:var(--mute);font-weight:500}
+.fv .ws{width:10px;height:10px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.fv .ap{width:26px;height:26px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:1px 1px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg)}
+.fv .ap svg{width:20px;height:20px;shape-rendering:crispEdges;display:block}
+.fv .tm{font-family:var(--font-mono);font-size:11px;font-weight:700;background:var(--paper-2);padding:1px 6px}
+.fv .ti{width:16px;height:16px;flex:none;color:var(--mute)}
+.fv .ti.ev{color:var(--amber)}
+.sw{all:unset;cursor:pointer;position:relative;width:36px;height:20px;border:1.5px solid var(--ink);background:var(--sheet);box-sizing:border-box;flex:none;transition:background .2s steps(2)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--ink);transition:transform .2s steps(2),background .2s steps(2)}
+.sw[aria-checked="true"]{background:var(--green)}
+.sw[aria-checked="true"]::after{transform:translateX(17px);background:var(--white)}
+.sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sec h3{margin:0 0 6px;font-family:var(--font-serif);font-size:15px;font-weight:600;display:flex;align-items:baseline;gap:10px}
+.sec h3 .hh{margin-left:auto;font-family:var(--font-hand);font-size:14px;color:var(--mute);font-weight:500;text-align:right}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;align-items:center;gap:10px;padding:5px 2px;border-bottom:1px dashed var(--line);font-size:13px}
+.step:last-of-type{border-bottom:0}
+.step .no{width:20px;height:20px;border-radius:50%;background:var(--kraft);box-shadow:1px 1px 0 var(--kraft-2);display:grid;place-items:center;font-family:var(--font-hand);font-size:14px;font-weight:600;flex:none;transform:rotate(-6deg)}
+.step .sa{margin-left:auto;font-family:var(--font-hand);font-size:14px;color:var(--mute);white-space:nowrap}
+.run{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:start;padding:8px 2px;border-bottom:1px dashed var(--line);animation:drop .25s steps(3) both}
+.run:last-of-type{border-bottom:0}
+.run .stk{margin-top:1px;font-size:9px;padding:1px 7px}
+.run .rt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.run .rw{font-size:13px;font-weight:700}
+.run .rw .cause{font-weight:600;color:var(--mute)}
+.run .rw .cause code{font-family:var(--font-mono);font-size:11px;background:var(--paper-2);padding:0 4px}
+.run .rn{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1.2}
+.run .rn.err{color:var(--red-2)}
+.run .rd{font-family:var(--font-mono);font-size:11px;color:var(--mute);white-space:nowrap;margin-top:3px}
+.run .retry{grid-column:2/-1;justify-self:start}
+.ledger{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);margin-top:6px}
+
+@keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes thump{from{transform:rotate(-3deg) scale(1.6);opacity:0}to{transform:rotate(-3deg) scale(1);opacity:1}}
+@keyframes slide{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes turn{to{transform:rotate(360deg)}}
+@media (max-width:1100px){.heads{display:none}.job{grid-template-columns:84px minmax(0,1fr);row-gap:8px}.job .acts{justify-self:start;grid-column:2}.drawer{width:360px}}
+@media (max-width:860px){.app{flex-direction:column}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.top,.bar2,.list,.demo{padding-left:16px;padding-right:16px}.top-r{margin-left:0;width:100%}.pp-search{width:100%}.body{flex-direction:column}.drawer{width:100%;border-left:0;border-top:1px solid var(--line);box-shadow:0 -4px 0 var(--shadow)}.upnext{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page">
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<div class="app">
+
+  <nav class="pp-rail" aria-label="Primary">
+    <div class="pp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="pp-rb {{n.cls}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="pp-nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="pp-sp"></span>
+    <button class="pp-rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <main class="main">
+    <header class="top">
+      <div class="ttl"><h1>Background</h1><span class="sub">{{sub}}</span></div>
+      <div class="top-r">
+        <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a job…" aria-label="Find a job" ref="{{qRef}}" onInput="{{onSearch}}"><span class="pp-kbd">⌘K</span></label>
+        <button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New job</button>
+      </div>
+    </header>
+
+    <div class="bar2">
+      <span class="fl">Show</span>
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="6"><button class="pp-dashed {{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}}</button></sc-for>
+      <div class="upnext" aria-label="Up next"><b>Up next</b><span>{{upNext}}</span></div>
+    </div>
+
+    <div class="body">
+      <div class="list">
+        <div class="sheet">
+          <div class="heads" aria-hidden="true"><span>Kind</span><span>Job</span><span>Trigger</span><span>Last run</span><span>Next run</span><span class="r"></span></div>
+          <sc-for list="{{jobs}}" as="j" hint-placeholder-count="9">
+            <div class="job {{j.cls}}">
+              <sc-if value="{{j.paused}}" hint-placeholder-val="{{false}}"><span class="pstamp">Paused</span></sc-if>
+              <span class="stamp {{j.kind}}">{{j.kindLabel}}</span>
+              <button class="who" onClick="{{j.open}}" aria-expanded="{{j.sel}}">
+                <span class="nm"><sc-if value="{{j.hasAgent}}" hint-placeholder-val="{{true}}"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{j.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span></sc-if>{{j.name}}</span>
+                <span class="ds">{{j.desc}}</span>
+              </button>
+              <span class="trig">
+                <sc-if value="{{j.isCron}}" hint-placeholder-val="{{true}}"><svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></sc-if>
+                <sc-if value="{{j.isEvent}}" hint-placeholder-val="{{false}}"><svg class="ti ev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></sc-if>
+                <span class="tt"><span class="ts">{{j.trigSay}}</span><span class="tm">{{j.trigMono}}</span></span>
+              </span>
+              <span class="last">
+                <span class="stk {{j.status}}"><sc-if value="{{j.running}}" hint-placeholder-val="{{false}}"><svg class="pw" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 6V0l3 3zM6 6h6L9 9zM6 6v6L3 9zM6 6H0l3-3z"></path></svg></sc-if>{{j.statusLabel}}</span>
+                <span class="lw {{j.lwCls}}">{{j.lastWhen}}</span>
+              </span>
+              <span class="next {{j.nextCls}}">{{j.next}}</span>
+              <span class="acts">
+                <button class="runb {{j.runCls}}" onClick="{{j.run}}" aria-label="{{j.runAria}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"></path></svg>{{j.runLabel}}</button>
+                <button class="pp-dashed {{j.pauseCls}}" onClick="{{j.togglePause}}">{{j.pauseLabel}}</button>
+              </span>
+            </div>
+          </sc-for>
+          <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">No job matches that</div></sc-if>
+        </div>
+        <div class="demo"><span>{{demoText}}</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+      </div>
+
+      <sc-if value="{{hasSel}}" hint-placeholder-val="{{true}}">
+        <aside class="drawer" aria-label="Job details">
+          <div class="dh">
+            <div class="row1"><span class="stamp big {{dKind}}">{{dKindLabel}}</span><h2>{{dName}}</h2><button class="dx" onClick="{{close}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+            <p class="ds" style="margin:0">{{dDesc}}</p>
+            <div class="btns">
+              <button class="runb {{dRunCls}}" onClick="{{dRun}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"></path></svg>{{dRunLabel}}</button>
+              <button class="pp-dashed {{dPauseCls}}" onClick="{{dTogglePause}}">{{dPauseLabel}}</button>
+              <span class="fv" style="margin-left:auto;gap:8px"><button class="sw" role="switch" aria-checked="{{dEnabled}}" onClick="{{dTogglePause}}" aria-label="Enabled"></button><span class="sub">{{dEnabledSay}}</span></span>
+            </div>
+          </div>
+          <div class="db">
+            <div class="facts">
+              <div class="fact wide"><span class="fk">Trigger</span><span class="fv">
+                <sc-if value="{{dIsCron}}" hint-placeholder-val="{{true}}"><svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></sc-if>
+                <sc-if value="{{dIsEvent}}" hint-placeholder-val="{{false}}"><svg class="ti ev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></sc-if>
+                <span>{{dTrigSay}}</span><span class="tm">{{dTrigMono}}</span><span class="sub">{{dTrigNote}}</span></span></div>
+              <div class="fact"><span class="fk">Runs as</span><span class="fv"><sc-if value="{{dHasAgent}}" hint-placeholder-val="{{true}}"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{dPx}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span></sc-if>{{dAgent}}</span></div>
+              <div class="fact"><span class="fk">Workspace</span><span class="fv"><sc-if value="{{dHasWs}}" hint-placeholder-val="{{true}}"><span class="ws" style="background:{{dWsColor}}" aria-hidden="true"></span></sc-if>{{dWs}}</span></div>
+              <div class="fact"><span class="fk">Last run</span><span class="fv"><span class="stk {{dStatus}}">{{dStatusLabel}}</span><span class="sub">{{dLastWhen}}</span></span></div>
+              <div class="fact"><span class="fk">Next run</span><span class="fv"><span class="next {{dNextCls}}">{{dNext}}</span></span></div>
+            </div>
+
+            <sc-if value="{{dIsWorkflow}}" hint-placeholder-val="{{true}}">
+              <div class="sec"><h3>Steps<span class="hh">{{dStepsHint}}</span></h3>
+                <div class="steps"><sc-for list="{{dSteps}}" as="s" hint-placeholder-count="4"><div class="step"><span class="no">{{s.n}}</span><span>{{s.name}}</span><span class="sa">{{s.agent}}</span></div></sc-for></div>
+              </div>
+            </sc-if>
+
+            <div class="sec"><h3>Run history<span class="hh">{{dRunsHint}}</span></h3>
+              <sc-for list="{{dRuns}}" as="r" hint-placeholder-count="6">
+                <div class="run">
+                  <span class="stk {{r.status}}"><sc-if value="{{r.running}}" hint-placeholder-val="{{false}}"><svg class="pw" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 6V0l3 3zM6 6h6L9 9zM6 6v6L3 9zM6 6H0l3-3z"></path></svg></sc-if>{{r.label}}</span>
+                  <span class="rt"><span class="rw">{{r.at}} <span class="cause">· {{r.causeSay}} <sc-if value="{{r.hasRef}}" hint-placeholder-val="{{false}}"><code>{{r.ref}}</code></sc-if></span></span><span class="rn {{r.noteCls}}">{{r.note}}</span></span>
+                  <span class="rd">{{r.dur}}</span>
+                  <sc-if value="{{r.failed}}" hint-placeholder-val="{{false}}"><button class="pp-dashed retry" onClick="{{r.retry}}">Run again</button></sc-if>
+                </div>
+              </sc-for>
+              <div class="ledger">{{dLedger}}</div>
+            </div>
+          </div>
+        </aside>
+      </sc-if>
+    </div>
+  </main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+const PAL = { i: '#2a2219', b: '#3b5b9a', B: '#2a4070', g: '#5b8c5a', r: '#c8553d', R: '#8f3a2a', k: '#e2c48c', K: '#cfae72', a: '#b8792f', w: '#fffdf7', t: '#4a8f99', s: '#8b6bb3', m: '#6f6252', h: '#fff0a0' };
+const SPRITES = {
+  curator: ['..k......k..','..kk....kk..','..kkkkkkkk..','.kkwwkkwwkk.','.kwiwkkwiwk.','.kkwwkkwwkk.','.kkkkaakkkk.','..kKKKKKKk..','..kKkKkKKk..','..kKKKKKKk..','...kkkkkk...','...a.aa.a...'],
+  implementer: ['............','..gggggggg..','..gggggggg..','..giiiiiig..','..giwiiwig..','..giiiiiig..','..gggggggg..','..ggkkkkgg..','..gggggggg..','...g.gg.g...','..kk.gg.kk..','..kk....kk..'],
+  issue: ['...rrrrrr...','..rrrrrrrr..','..rRRRRRRr..','..kkkkkkkk..','..kwkkkkwk..','..kikkkkik..','..kkkkkkkk..','..kkkiikkk..','...kkkkkk...','..wwwwwwww..','..wiiwwiiw..','..wwwwwwww..'],
+  reviewer: ['............','...iiii.....','..iwwwwi....','.iwbbbbwi...','.iwbhbbwi...','.iwbbbbwi...','..iwwwwi....','...iiiii....','.......ii...','........ii..','.........ii.','............'],
+  triage: ['............','..aaaaaaaa..','..aaawwaaa..','..aawwwwaa..','..aaawwaaa..','..aaaaaaaa..','..awwaawwa..','..aiwaawia..','..aaaaaaaa..','..aaawwaaa..','...aaaaaa...','............'],
+  release: ['.....ww.....','....wrrw....','....wrrw....','...wrrrrw...','...wrbbrw...','...wrbbrw...','...wrrrrw...','..rwrrrrwr..','..rwwwwwwr..','..r.aaaa.r..','....a..a....','....a..a....'],
+  support: ['............','...tttttt...','..tttttttt..','.tt.kkkk.tt.','.t.kkkkkk.t.','.t.kwkkwk.t.','.tt.kkkk.tt.','.tt.kiik.tt.','..tttkkttt..','.....kk..t..','....tttttt..','............'],
+  planner: ['............','..ssssssss..','..swwssmms..','..swissmms..','..ssssssss..','..skkkkkks..','..sskkkkss..','...ssssss...','..bbbbbbbb..','..b.b..b.b..','..bbbbbbbb..','............']
+};
+function px(rows) { const out = []; rows.forEach((row, y) => { Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: PAL[ch] }); }); }); return out; }
+const AGENTS = { curator: 'Curator', implementer: 'Implementer', issue: 'Issue Creator', reviewer: 'Reviewer', triage: 'Triage', release: 'Release Captain', support: 'Support Writer', planner: 'Infra Planner' };
+const WS = { lighthouse: { name: 'Lighthouse Web', color: '#5b8c5a' }, orbit: { name: 'Orbit Billing', color: '#c8553d' }, fleet: { name: 'Fleet Infra', color: '#b8792f' }, atlas: { name: 'Atlas Docs', color: '#3b5b9a' }, harbor: { name: 'Harbor Mobile', color: '#8b6bb3' }, kiln: { name: 'Kiln Data', color: '#4a8f99' } };
+const STATUS = { done: 'Done', failed: 'Failed', running: 'Running', skipped: 'Skipped' };
+const CAUSE = { cron: 'on schedule', manual: 'run by hand', event: 'event' };
+const R = (status, at, dur, cause, note, ref) => ({ status, at, dur, cause, note, ref: ref || '' });
+
+// It is Fri 31 Oct, 10:42. nextIn is minutes until the next scheduled run, for the Up next note.
+const JOBS = [
+  { id: 'changelog', name: 'Nightly changelog', kind: 'workflow', agent: 'curator', ws: 'lighthouse',
+    desc: 'Reads yesterday\'s merged PRs and release notes, drafts the changelog and opens a draft PR for someone to read over coffee.',
+    trigger: { type: 'cron', expr: '0 6 * * 1-5', say: 'weekdays at 06:00', note: 'Europe/Lisbon' },
+    last: { status: 'done', when: 'today 06:00 · 2 m 14 s' }, next: 'tomorrow 06:00', nextIn: 1158, manualDur: '2 m 02 s', manualNote: '38 PRs, 1 draft PR opened',
+    steps: [['Collect merged PRs', 'Curator'], ['Draft the notes', 'Curator'], ['Open a draft PR', 'Curator'], ['Ping the channel', 'no agent']],
+    runs: [R('done', 'today 06:00', '2 m 14 s', 'cron', '41 PRs · draft PR #1032 opened'), R('done', 'Thu 30 Oct 06:00', '1 m 58 s', 'cron', '27 PRs · draft PR #1027 opened'), R('done', 'Wed 29 Oct 06:00', '2 m 31 s', 'cron', '44 PRs · draft PR #1019 opened'), R('done', 'Tue 28 Oct 06:15', '2 m 05 s', 'manual', 'retried after the rate limit · PR #1011'), R('failed', 'Tue 28 Oct 06:00', '0 m 44 s', 'cron', 'GitHub rate limit on the PR search · nothing opened'), R('done', 'Mon 27 Oct 06:00', '2 m 20 s', 'cron', '52 PRs · draft PR #1004 opened')] },
+  { id: 'jira', name: 'Sync Jira boards', kind: 'job', agent: null, ws: null,
+    desc: 'Pulls every Jira-backed Kanban board and pushes local cards up. Quiet unless something changed.',
+    trigger: { type: 'cron', expr: '*/15 * * * *', say: 'every 15 minutes', note: 'skips if a sync is still running' },
+    last: { status: 'done', when: '4 min ago · 18 s' }, next: 'in 11 min', nextIn: 11, manualDur: '17 s', manualNote: '2 boards · nothing new',
+    runs: [R('done', 'today 10:30', '18 s', 'cron', '2 boards · 3 cards updated · ORB-150 pulled in'), R('done', 'today 10:15', '16 s', 'cron', 'nothing new'), R('done', 'today 10:00', '21 s', 'cron', '1 card pushed · ORB-151'), R('done', 'today 09:45', '17 s', 'cron', 'nothing new'), R('skipped', 'today 09:30', '—', 'cron', 'previous sync still running'), R('done', 'today 09:15', '48 s', 'cron', 'Harbor 1.0 synced for the first time today · 12 cards')] },
+  { id: 'inbox', name: 'Inbox PDF to tickets', kind: 'job', agent: 'issue', ws: 'orbit',
+    desc: 'When a PDF lands in the shared inbox folder, reads it and files a Jira ticket on the Billing migration board with the gist.',
+    trigger: { type: 'event', expr: 'cloud.file.created', say: 'when a file lands in Drive › inbox/', note: 'PDFs only' },
+    last: { status: 'failed', when: '32 min ago · 41 s', err: 'Jira answered 502 creating ORB-153' }, next: 'waits for the next file', nextIn: null, manualDur: '36 s', manualNote: 'ORB-153 created on the retry',
+    runs: [R('failed', 'today 10:10', '41 s', 'event', 'Jira answered 502 creating ORB-153 · the PDF is still in inbox/', 'inbox/invoice-oct.pdf'), R('done', 'Thu 30 Oct 16:02', '38 s', 'event', 'ORB-151 created · 1 page', 'inbox/receipt-0431.pdf'), R('done', 'Wed 29 Oct 11:40', '52 s', 'event', 'ORB-148 created · 3 pages', 'inbox/statement-q3.pdf'), R('skipped', 'Wed 29 Oct 11:38', '—', 'event', 'not a PDF', 'inbox/notes.txt'), R('done', 'Mon 27 Oct 09:05', '35 s', 'event', 'ORB-146 created', 'inbox/invoice-sep.pdf')] },
+  { id: 'deps', name: 'Weekly dependency bumps', kind: 'workflow', agent: 'implementer', ws: 'lighthouse',
+    desc: 'Checks for updates, bumps them one package at a time with the tests, and opens one PR per package.',
+    trigger: { type: 'cron', expr: '0 9 * * 1', say: 'Mondays at 09:00', note: '' },
+    last: { status: 'done', when: 'Mon 27 Oct · 6 m 40 s' }, next: 'Mon 3 Nov 09:00', nextIn: 4218, manualDur: '5 m 12 s', manualNote: '1 PR opened · nothing else to bump',
+    steps: [['Check for updates', 'no agent'], ['Bump and run the tests', 'Implementer'], ['Open one PR per package', 'Implementer'], ['Ask for a review pass', 'Reviewer']],
+    runs: [R('done', 'Mon 27 Oct 09:00', '6 m 40 s', 'cron', '3 PRs opened · 1 held back: breaking change in date-fns'), R('done', 'Mon 20 Oct 09:00', '5 m 02 s', 'cron', '2 PRs opened'), R('done', 'Mon 13 Oct 09:00', '7 m 15 s', 'cron', '4 PRs opened'), R('failed', 'Mon 6 Oct 09:00', '2 m 10 s', 'cron', 'tests failed on packages/ui · no PR opened'), R('done', 'Mon 29 Sep 09:00', '4 m 48 s', 'cron', '1 PR opened')] },
+  { id: 'stale', name: 'Stale PR nudge', kind: 'job', agent: 'reviewer', ws: null,
+    desc: 'Finds pull requests with no activity for three days and leaves a short, polite comment asking what they need.',
+    trigger: { type: 'cron', expr: '0 10 * * 1-5', say: 'weekdays at 10:00', note: '' },
+    last: { status: 'skipped', when: 'today 10:00 · nothing older than 3 days' }, next: 'tomorrow 10:00', nextIn: 1398, manualDur: '9 s', manualNote: 'nothing stale',
+    runs: [R('skipped', 'today 10:00', '—', 'cron', 'nothing older than 3 days'), R('done', 'Thu 30 Oct 10:00', '12 s', 'cron', 'nudged 2 PRs · #1012, #998'), R('skipped', 'Wed 29 Oct 10:00', '—', 'cron', 'nothing older than 3 days'), R('done', 'Tue 28 Oct 10:00', '9 s', 'cron', 'nudged 1 PR · #987'), R('done', 'Mon 27 Oct 10:00', '14 s', 'cron', 'nudged 1 PR · #981')] },
+  { id: 'health', name: 'Release health watch', kind: 'job', agent: 'release', ws: 'fleet',
+    desc: 'After each production deploy, watches error rates and latency for ten minutes and rolls back if a budget is blown.',
+    trigger: { type: 'event', expr: 'deploy.finished', say: 'after each deploy to prod', note: 'watches for 10 min' },
+    last: { status: 'running', when: 'started 2 min ago' }, next: 'waits for the next deploy', nextIn: null, manualDur: '10 m 00 s', manualNote: 'all checks green',
+    runs: [R('running', 'today 10:40', '…', 'event', 'watching · p95 212 ms · errors 0.02%', 'deploy 2026.10.31-3'), R('done', 'Thu 30 Oct 17:12', '10 m 00 s', 'event', 'all checks green', 'deploy 2026.10.30-2'), R('done', 'Thu 30 Oct 11:05', '10 m 00 s', 'event', 'all checks green', 'deploy 2026.10.30-1'), R('failed', 'Wed 29 Oct 15:40', '4 m 12 s', 'event', 'p95 latency over budget · rolled back to 2026.10.29-1', 'deploy 2026.10.29-2'), R('done', 'Tue 28 Oct 16:20', '10 m 00 s', 'event', 'all checks green', 'deploy 2026.10.28-1')] },
+  { id: 'triage', name: 'Triage new issues', kind: 'workflow', agent: 'triage', ws: 'lighthouse',
+    desc: 'Reads a new GitHub issue, looks for duplicates, labels it by area and urgency, and replies to the reporter if something is missing.',
+    trigger: { type: 'event', expr: 'github.issue.opened', say: 'when an issue opens on lighthouse/web', note: '' },
+    last: { status: 'done', when: '1 h ago · 52 s' }, next: 'waits for the next issue', nextIn: null, manualDur: '44 s', manualNote: 're-triaged the latest issue · no change',
+    steps: [['Read the issue', 'Triage'], ['Find duplicates', 'Triage'], ['Label and assign', 'Triage'], ['Reply to the reporter', 'Support Writer']],
+    runs: [R('done', 'today 09:38', '52 s', 'event', 'labelled bug · area:checkout · asked for a repro', 'issue #418'), R('done', 'today 08:55', '47 s', 'event', 'duplicate of #402 · closed with a link', 'issue #417'), R('done', 'Thu 30 Oct 19:12', '58 s', 'event', 'labelled enhancement · area:sessions', 'issue #416'), R('done', 'Thu 30 Oct 14:03', '49 s', 'event', 'labelled bug · P1 · pinged the channel', 'issue #415'), R('done', 'Wed 29 Oct 10:21', '51 s', 'event', 'labelled question · answered from the docs', 'issue #414')] },
+  { id: 'memory', name: 'Memory tidy-up', kind: 'job', agent: null, ws: null, paused: true, pausedSince: 'Sun 19 Oct',
+    desc: 'Merges duplicate memory facts, flags ones nobody has used in sixty days, and reports what it would forget.',
+    trigger: { type: 'cron', expr: '0 2 * * 0', say: 'Sundays at 02:00', note: '' },
+    last: { status: 'done', when: 'Sun 19 Oct · 1 m 20 s' }, next: 'Sun 2 Nov 02:00', nextIn: 2238, manualDur: '1 m 08 s', manualNote: 'merged 2 duplicate facts · 1 stale one flagged',
+    runs: [R('done', 'Sun 19 Oct 02:00', '1 m 20 s', 'cron', 'merged 4 duplicate facts · 2 stale ones flagged'), R('done', 'Sun 12 Oct 02:00', '1 m 12 s', 'cron', 'merged 1 duplicate fact'), R('done', 'Sun 5 Oct 02:00', '1 m 31 s', 'cron', 'nothing to merge · 3 stale ones flagged'), R('done', 'Sun 28 Sep 02:00', '1 m 05 s', 'cron', 'merged 2 duplicate facts')] },
+  { id: 'digest', name: 'Support digest', kind: 'workflow', agent: 'support', ws: 'atlas',
+    desc: 'Collects overnight support threads, drafts replies from the docs and recent fixes, and posts a digest with the ones it is unsure about.',
+    trigger: { type: 'cron', expr: '30 8 * * 1-5', say: 'weekdays at 08:30', note: '' },
+    last: { status: 'done', when: 'today 08:30 · 1 m 05 s' }, next: 'tomorrow 08:30', nextIn: 1308, manualDur: '58 s', manualNote: '2 new threads · 0 flagged',
+    steps: [['Pull new threads', 'no agent'], ['Draft replies', 'Support Writer'], ['Post the digest', 'Support Writer']],
+    runs: [R('done', 'today 08:30', '1 m 05 s', 'cron', '6 threads · 2 flagged as unsure'), R('done', 'Thu 30 Oct 08:30', '1 m 12 s', 'cron', '9 threads · 1 flagged'), R('done', 'Wed 29 Oct 08:30', '0 m 58 s', 'cron', '4 threads · 0 flagged'), R('done', 'Tue 28 Oct 08:45', '1 m 03 s', 'manual', 'run again after the token was renewed · 7 threads'), R('failed', 'Tue 28 Oct 08:30', '0 m 06 s', 'cron', 'Intercom token expired · nothing posted')] }
+];
+const FILTERS = [{ id: 'all', label: 'All' }, { id: 'job', label: 'Jobs' }, { id: 'workflow', label: 'Workflows' }, { id: 'cron', label: 'On a schedule' }, { id: 'event', label: 'On an event' }, { id: 'paused', label: 'Paused' }];
+const clone = (jobs) => jobs.map((j) => ({ ...j, last: { ...j.last }, runs: j.runs.map((r) => ({ ...r })) }));
+const INIT = { q: '', filter: 'all', sel: 'inbox', msg: '' };
+
+class Component extends DCLogic {
+  state = { ...INIT, jobs: clone(JOBS) };
+  timers = [];
+  patchJob(id, fn) { this.setState({ jobs: this.state.jobs.map((j) => j.id === id ? fn(j) : j) }); }
+  startRun(id) {
+    const job = this.state.jobs.find((j) => j.id === id);
+    if (!job || job.last.status === 'running') return;
+    const run = R('running', 'today 10:42', '…', 'manual', 'running now');
+    this.patchJob(id, (j) => ({ ...j, last: { status: 'running', when: 'started just now' }, runs: [run].concat(j.runs) }));
+    this.setState({ msg: 'Running ' + job.name + ' now · it keeps its place in the schedule' });
+    const t = setTimeout(() => {
+      this.patchJob(id, (j) => ({ ...j, last: { status: 'done', when: 'just now · ' + j.manualDur }, runs: j.runs.map((r, i) => i === 0 && r.status === 'running' ? { ...r, status: 'done', dur: j.manualDur, note: j.manualNote } : r) }));
+      this.setState({ msg: job.name + ' finished · ' + job.manualNote });
+    }, 1800 + Math.random() * 1200);
+    this.timers.push(t);
+  }
+  renderVals() {
+    const st = this.state;
+    const q = st.q.trim().toLowerCase();
+    const match = (j) => !q || j.name.toLowerCase().includes(q) || j.desc.toLowerCase().includes(q) || j.trigger.say.toLowerCase().includes(q) || j.trigger.expr.toLowerCase().includes(q);
+    const passes = (j) => st.filter === 'all' || (st.filter === 'paused' ? !!j.paused : st.filter === 'cron' || st.filter === 'event' ? j.trigger.type === st.filter : j.kind === st.filter);
+    const list = st.jobs.filter((j) => match(j) && passes(j));
+    const running = st.jobs.filter((j) => j.last.status === 'running').length;
+    const failed = st.jobs.filter((j) => j.last.status === 'failed').length;
+    const paused = st.jobs.filter((j) => j.paused).length;
+    const upcoming = st.jobs.filter((j) => !j.paused && j.nextIn != null).sort((a, b) => a.nextIn - b.nextIn).slice(0, 3);
+    const nextOf = (j) => j.paused ? 'paused' : j.next;
+    const nextCls = (j) => j.paused ? 'off' : j.trigger.type === 'event' ? 'wait' : '';
+    const pauseLabel = (j) => j.paused ? 'Resume' : 'Pause';
+    const pauseCls = (j) => j.paused ? 'green' : '';
+    const togglePause = (j) => () => { this.patchJob(j.id, (x) => ({ ...x, paused: !x.paused, pausedSince: x.paused ? '' : 'today' })); this.setState({ msg: j.paused ? j.name + ' resumed · next run ' + j.next : j.name + ' paused · it keeps its history and can still be run by hand' }); };
+    const sel = st.jobs.find((j) => j.id === st.sel) || null;
+    const dv = {};
+    if (sel) {
+      const doneRuns = sel.runs.filter((r) => r.status === 'done').length, failedRuns = sel.runs.filter((r) => r.status === 'failed').length, skippedRuns = sel.runs.filter((r) => r.status === 'skipped').length;
+      Object.assign(dv, {
+        dKind: sel.kind, dKindLabel: sel.kind, dName: sel.name, dDesc: sel.desc,
+        dRunCls: sel.last.status === 'running' ? 'is-busy' : '', dRunLabel: sel.last.status === 'running' ? 'Running…' : 'Run now', dRun: () => this.startRun(sel.id),
+        dPauseCls: pauseCls(sel), dPauseLabel: pauseLabel(sel), dTogglePause: togglePause(sel),
+        dEnabled: !sel.paused, dEnabledSay: sel.paused ? 'paused since ' + sel.pausedSince : 'enabled',
+        dIsCron: sel.trigger.type === 'cron', dIsEvent: sel.trigger.type === 'event', dTrigSay: sel.trigger.say, dTrigMono: sel.trigger.expr, dTrigNote: sel.trigger.note,
+        dHasAgent: !!sel.agent, dPx: sel.agent ? px(SPRITES[sel.agent]) : [], dAgent: sel.agent ? AGENTS[sel.agent] : 'no agent · a plain script',
+        dHasWs: !!sel.ws, dWsColor: sel.ws ? WS[sel.ws].color : '', dWs: sel.ws ? WS[sel.ws].name : 'every workspace',
+        dStatus: sel.last.status, dStatusLabel: STATUS[sel.last.status], dLastWhen: sel.last.when,
+        dNext: nextOf(sel), dNextCls: nextCls(sel),
+        dIsWorkflow: sel.kind === 'workflow', dSteps: (sel.steps || []).map((s, i) => ({ n: i + 1, name: s[0], agent: s[1] })), dStepsHint: (sel.steps || []).length + ' steps, in order',
+        dRuns: sel.runs.map((r) => ({ status: r.status, label: STATUS[r.status], running: r.status === 'running', at: r.at, dur: r.dur, causeSay: CAUSE[r.cause], hasRef: !!r.ref, ref: r.ref, note: r.note, noteCls: r.status === 'failed' ? 'err' : '', failed: r.status === 'failed', retry: () => this.startRun(sel.id) })),
+        dRunsHint: sel.runs.length + ' most recent',
+        dLedger: doneRuns + ' done · ' + failedRuns + ' failed · ' + skippedRuns + ' skipped · the full ledger keeps 90 days'
+      });
+    }
+    return {
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'bg' ? 'is-on' : '', cur: n.id === 'bg' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
+      sub: st.jobs.length + ' jobs · ' + st.jobs.filter((j) => j.kind === 'workflow').length + ' of them workflows · ' + running + ' running · ' + failed + ' failed · ' + paused + ' paused',
+      qRef: (el) => { if (el) this.q = el; },
+      onSearch: (e) => this.setState({ q: e.currentTarget.value }),
+      filters: FILTERS.map((f) => ({ label: f.label, on: st.filter === f.id, cls: st.filter === f.id ? 'is-on' : '', pick: () => this.setState({ filter: f.id }) })),
+      upNext: upcoming.map((j) => j.name + ' ' + j.next).join(' · '),
+      jobs: list.map((j) => ({
+        name: j.name, desc: j.desc, kind: j.kind, kindLabel: j.kind,
+        cls: (st.sel === j.id ? 'is-sel ' : '') + (j.paused ? 'is-paused' : ''), sel: st.sel === j.id, paused: !!j.paused,
+        hasAgent: !!j.agent, px: j.agent ? px(SPRITES[j.agent]) : [],
+        open: () => this.setState({ sel: st.sel === j.id ? null : j.id }),
+        isCron: j.trigger.type === 'cron', isEvent: j.trigger.type === 'event', trigSay: j.trigger.say, trigMono: j.trigger.expr,
+        status: j.last.status, statusLabel: STATUS[j.last.status], running: j.last.status === 'running',
+        lastWhen: j.last.status === 'failed' && j.last.err ? j.last.when + ' · ' + j.last.err : j.last.when, lwCls: j.last.status === 'failed' ? 'err' : '',
+        next: nextOf(j), nextCls: nextCls(j),
+        runCls: j.last.status === 'running' ? 'is-busy' : '', runLabel: j.last.status === 'running' ? 'Running…' : 'Run now', runAria: 'Run ' + j.name + ' now', run: () => this.startRun(j.id),
+        pauseLabel: pauseLabel(j), pauseCls: pauseCls(j), togglePause: togglePause(j)
+      })),
+      empty: list.length === 0,
+      hasSel: !!sel, close: () => this.setState({ sel: null }),
+      ...dv,
+      demoText: st.msg || 'Click a job for its run history · Run now starts it (watch the sticker) · Pause keeps it from its next run · Release health watch is mid-run',
+      reset: () => { this.timers.forEach(clearTimeout); this.timers = []; if (this.q) this.q.value = ''; this.setState({ ...INIT, jobs: clone(JOBS) }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
