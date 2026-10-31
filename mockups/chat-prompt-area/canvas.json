@@ -125,6 +125,16 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "MCPs.dc.html": {
+      "x": 0,
+      "y": 11000,
+      "w": 1440,
+      "h": 900,
+      "title": "MCPs — servers with connection, tools and calls, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -138,7 +148,8 @@
     "Memory.dc.html",
     "Background.dc.html",
     "Skills.dc.html",
-    "Skill.dc.html"
+    "Skill.dc.html",
+    "MCPs.dc.html"
   ],
   "notes": {
     "p1": {
@@ -234,6 +245,14 @@
       "y": 10000,
       "w": 320,
       "text": "Skill page: sticky header with a crumb back to Skills, the editable serif name with its live slash command, the Yours stamp, version · edited · files · size, the save state, an enabled switch, Try it in a chat, Delete skill and Save skill (kraft-grey until something changes; saving bumps the version and thumps a Saved sticker). Left: Description (what agents read), When to use it (highlighter phrase chips, × to remove, Enter to add), Instructions (the SKILL.md body on a ruled mono sheet with character and token counts), Files in this skill (mono paths with a note each, Open, Add a file). Right: On for (checkbox rows of agents with portraits and workspaces with colour squares), Usage (a paper bar chart of runs per day for two weeks, then recent runs with agent, workspace and what came out), About (source, version, folder path, created, Export as a plugin). Delete asks on a kraft note, then shows a torn scrap with Undo.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p13": {
+      "x": 1520,
+      "y": 11000,
+      "w": 320,
+      "text": "MCP servers: a timetable sheet of every server. Each row has a rubber-stamped transport (STDIO in ink, HTTP in blue), the name with where it came from in hand-writing, what it is for and the command or URL in mono, the connection as a sticker (Connected, Connecting with a stepped pinwheel, Needs sign-in as a red outline, Error, Off) with a hand-written line saying since when or what went wrong, how many tools it gives plus resources and prompts, who has it on (agent portraits and workspace colour squares), then a contextual button (Restart, Reconnect, Sign in, Turn on) and a paper switch that turns the server off everywhere; off rows fade under a red OFF stamp. A kraft Heads up note names the servers that need a sign-in or can't connect. Filters: All, Connected, Needs attention, Off, stdio, HTTP; search also matches tool names. Click a server for the drawer: command or URL, connection, where from and scope, how it signs in, version, today's calls, the tool list with how often each was used, environment keys (values stay in the Keychain), On for as toggling chips of agents and workspaces, recent calls as a ledger, and Remove server behind a kraft confirmation. Add a server opens a kraft note: name, stdio or HTTP, command or URL, just you or this project; the new row connects in front of you.",
       "fill": "orange",
       "page": "paper"
     }

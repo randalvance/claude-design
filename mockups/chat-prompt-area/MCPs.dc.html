@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MCPs — paper</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e4dccb;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
+a{color:#3b5b9a}a:hover{color:#2a4070}
+.page{--desk:#e4dccb;--paper:#f8f3e9;--paper-2:#efe7d6;--sheet:#fffdf7;--sheet-warm:#fffaf0;--card:#fffdf8;--rail:#e4d9c1;--line:#d6cab2;--kraft:#e2c48c;--kraft-2:#cfae72;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--tape:#ffec969e;--white:#ffffff;--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;min-height:100vh;box-sizing:border-box;display:flex;justify-content:center}
+.pp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit}
+.pp-ic{width:16px;height:16px;flex:none}
+
+.app{position:relative;width:100%;height:100vh;display:flex;background:var(--paper);overflow:hidden}
+.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
+
+/* rail (Paper Chat: Rail) */
+.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:relative;z-index:1}
+.pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
+.pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.pp-rb svg{width:18px;height:18px}
+.pp-rb:hover{background:var(--sheet-warm);transform:translateY(-1px)}
+.pp-rb.is-on{background:var(--sheet-warm);color:var(--ink);box-shadow:2px 2px 0 var(--shadow);transform:rotate(-2deg)}
+.pp-rb:focus-visible{outline:2px solid var(--blue)}
+.pp-rb .pp-nb{position:absolute;top:0;right:4px;transform:rotate(8deg)}
+.pp-nb{min-width:16px;height:16px;padding:0 4px;border-radius:50%;background:var(--red);color:var(--white);font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);box-sizing:border-box;flex:none}
+.pp-rail .pp-sp{flex:1}
+
+/* header */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
+.ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ttl h1{margin:0;font-family:var(--font-serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
+.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pp-search{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);color:var(--mute);box-sizing:border-box;width:250px;max-width:100%}
+.pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.pp-search input::placeholder{color:var(--faint);font-family:var(--font-hand);font-size:16px}
+.pp-kbd{font-family:var(--font-mono);font-size:10px;color:var(--mute);border:1px solid var(--line);padding:1px 4px;white-space:nowrap}
+.pp-btn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 2px 0 var(--blue-2);transition:transform .2s steps(2),background .2s steps(2),box-shadow .2s steps(2);box-sizing:border-box;white-space:nowrap}
+.pp-btn:hover{transform:translateY(-1px)}
+.pp-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--blue-2)}
+.pp-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pp-btn.is-clean{background:var(--bar);box-shadow:2px 2px 0 var(--shadow);color:var(--sheet);cursor:default}
+.pp-btn.is-clean:hover{transform:none}
+.pp-btn.red{background:var(--red);box-shadow:2px 2px 0 var(--red-2)}
+.pp-dashed{all:unset;cursor:pointer;font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed var(--bar);padding:3px 10px;border-radius:3px;white-space:nowrap;transition:transform .2s steps(2),color .2s steps(2),border-color .2s steps(2)}
+.pp-dashed:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
+.pp-dashed:focus-visible{outline:2px solid var(--blue)}
+.pp-dashed.is-on{border-style:solid;border-color:var(--ink);color:var(--ink);background:var(--sheet);box-shadow:1px 1px 0 var(--shadow);transform:rotate(-1.5deg)}
+.pp-dashed.red{color:var(--red);border-color:var(--red)}
+.pp-dashed.red:hover{background:#c8553d1a;color:var(--red-2);border-color:var(--red-2)}
+.pp-dashed.green{color:var(--green);border-color:var(--green)}
+.pp-dashed.green:hover{background:#5b8c5a1a}
+
+/* filters + heads-up note */
+.bar2{display:flex;align-items:center;gap:8px;padding:16px 28px 0;flex-wrap:wrap}
+.bar2 .fl{font-family:var(--font-hand);font-size:15px;color:var(--mute);margin-right:2px}
+.headsup{margin-left:auto;display:inline-flex;align-items:baseline;gap:10px;min-width:0;flex:0 1 auto;line-height:1.2;background:var(--kraft);box-shadow:2px 3px 0 var(--kraft-2);padding:5px 12px 5px 10px;font-family:var(--font-hand);font-size:15.5px;color:var(--ink);transform:rotate(-.6deg);position:relative;max-width:100%;box-sizing:border-box}
+.headsup::before{content:"";position:absolute;left:-7px;top:50%;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9b85,var(--red) 55%,var(--red-2));box-shadow:1px 1px 1px rgba(0,0,0,.3);transform:translateY(-50%)}
+.headsup b{font-weight:600;color:var(--red-2);white-space:nowrap}
+.headsup.calm b{color:var(--green)}
+.headsup span{min-width:0}
+
+/* body: table + drawer */
+.body{flex:1;display:flex;min-height:0;align-items:stretch}
+.list{overflow:auto;container-type:inline-size}
+.list{flex:1;min-width:0;padding:18px 28px 14px;display:flex;flex-direction:column}
+.sheet{flex:none}
+.sheet{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);padding:6px 16px 10px;animation:drop .35s steps(4) both}
+.heads{display:grid;grid-template-columns:84px minmax(0,1.6fr) minmax(0,1.05fr) minmax(0,.8fr) minmax(0,1fr) auto;gap:14px;padding:8px 6px 6px;font-family:var(--font-hand);font-size:15px;color:var(--mute);border-bottom:1px solid var(--line)}
+.srow{position:relative;display:grid;grid-template-columns:84px minmax(0,1.6fr) minmax(0,1.05fr) minmax(0,.8fr) minmax(0,1fr) auto;gap:14px;align-items:center;padding:11px 6px;border-bottom:1px dashed var(--line);transition:background .2s steps(2);animation:drop .3s steps(4) both}
+.srow:last-of-type{border-bottom:0}
+.srow:hover{background:var(--paper-2)}
+.srow.is-sel{background:var(--highlighter);box-shadow:inset 3px 0 0 var(--highlighter-2)}
+.srow.is-off .who,.srow.is-off .tools,.srow.is-off .onfor{opacity:.5}
+.srow.is-off .who .nm{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:var(--red)}
+.stamp{justify-self:start;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 6px;border:2px solid currentColor;border-radius:3px;transform:rotate(-5deg);opacity:.85;mix-blend-mode:multiply;background:#fffdf8cc;white-space:nowrap}
+.stamp.stdio{color:var(--mute)}
+.stamp.http{color:var(--blue)}
+.stamp.big{font-size:11px;padding:4px 8px}
+.ostamp{position:absolute;left:22px;top:50%;transform:translateY(4px) rotate(-14deg);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--red);border:2.5px solid var(--red);padding:3px 8px;border-radius:3px;background:#fffdf8aa;mix-blend-mode:multiply;z-index:2;animation:thump .3s steps(3) both;pointer-events:none}
+.who{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;text-align:left;padding:2px 0}
+.who:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.who .nm{font-size:14px;font-weight:800;line-height:1.2;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.who .nm .src{font-family:var(--font-hand);font-size:14px;font-weight:500;color:var(--mute)}
+.who .ds{font-size:12.5px;line-height:1.4;color:var(--mute);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.who .cm{font-family:var(--font-mono);font-size:10.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.conn{display:flex;flex-direction:column;gap:4px;min-width:0;align-items:flex-start}
+.conn .lw{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1.15}
+.conn .lw.err{color:var(--red-2)}
+.stk{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--white);box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-3deg);flex:none;white-space:nowrap;animation:thump .3s steps(3) both}
+.stk.ok{background:var(--green)}
+.stk.error{background:var(--red)}
+.stk.connecting{background:var(--amber)}
+.stk.off{background:var(--bar);color:var(--ink)}
+.stk.auth{background:var(--sheet);color:var(--red);border:1.5px solid var(--red);box-shadow:none}
+.pw{width:11px;height:11px;flex:none;animation:turn .8s steps(4) infinite}
+.tools{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tools .tn{font-size:14px;font-weight:800;line-height:1.2}
+.tools .tn.faint{color:var(--faint);font-weight:700}
+.tools .tx{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1.15}
+.onfor{display:flex;align-items:center;gap:4px;min-width:0;flex-wrap:wrap}
+.onfor .ap{width:22px;height:22px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:1px 1px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg)}
+.onfor .ap svg{width:18px;height:18px;shape-rendering:crispEdges;display:block}
+.onfor .sqs{display:flex;gap:4px;margin-left:6px;align-items:center}
+.onfor .sq{width:11px;height:11px;flex:none;background:var(--c);box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(-6deg)}
+.onfor .none{font-family:var(--font-hand);font-size:14.5px;color:var(--faint)}
+.acts{display:flex;align-items:center;gap:8px;justify-self:end}
+.runb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;background:var(--sheet-warm);border:1px solid var(--ink);color:var(--ink);font-size:11.5px;font-weight:800;box-shadow:2px 2px 0 var(--shadow);box-sizing:border-box;transition:transform .2s steps(2),box-shadow .2s steps(2),background .2s steps(2);white-space:nowrap}
+.runb svg{width:12px;height:12px;flex:none}
+.runb:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--shadow)}
+.runb:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow)}
+.runb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.runb.is-busy{border-color:var(--bar);color:var(--faint);box-shadow:none;cursor:default;background:var(--paper-2)}
+.runb.is-busy:hover{transform:none}
+.runb.red{border-color:var(--red);color:var(--red-2)}
+.runb.red:hover{background:#c8553d14}
+.sw{all:unset;cursor:pointer;position:relative;width:36px;height:20px;border:1.5px solid var(--ink);background:var(--sheet);box-sizing:border-box;flex:none;transition:background .2s steps(2)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--ink);transition:transform .2s steps(2),background .2s steps(2)}
+.sw[aria-checked="true"]{background:var(--green)}
+.sw[aria-checked="true"]::after{transform:translateX(17px);background:var(--white)}
+.sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pp-scrap{font-family:var(--font-hand);font-size:21px;color:var(--mute);padding:34px 0;text-align:center;transform:rotate(-1deg)}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:16px;color:var(--mute);padding:10px 28px 16px;flex-wrap:wrap;text-align:center}
+
+/* drawer */
+.drawer{width:430px;flex:none;background:var(--sheet);border-left:1px solid var(--line);box-shadow:-4px 0 0 var(--shadow);overflow:auto;position:relative;z-index:2;animation:slide .25s steps(4) both;display:flex;flex-direction:column}
+.dh{position:sticky;top:0;z-index:2;background:var(--sheet);padding:14px 18px 10px;border-bottom:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
+.dh .row1{display:flex;align-items:center;gap:10px}
+.dh h2{margin:0;font-family:var(--font-serif);font-size:19px;font-weight:600;line-height:1.2;flex:1;min-width:0}
+.dx{all:unset;cursor:pointer;width:26px;height:26px;display:grid;place-items:center;color:var(--mute);border-radius:50%;transition:transform .2s steps(2),color .2s steps(2)}
+.dx:hover{color:var(--ink);background:var(--paper-2);transform:rotate(90deg)}
+.dx:focus-visible{outline:2px solid var(--blue)}
+.dx svg{width:14px;height:14px}
+.dh .ds{font-size:13px;line-height:1.5;color:var(--ink)}
+.dh .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.db{padding:14px 18px 18px;display:flex;flex-direction:column;gap:16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.fact{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fact.wide{grid-column:1/-1}
+.fk{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1}
+.fv{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;min-width:0;flex-wrap:wrap}
+.fv .sub{font-family:var(--font-hand);font-size:14px;color:var(--mute);font-weight:500}
+.fv .sub.err{color:var(--red-2)}
+.fv .tm{font-family:var(--font-mono);font-size:11px;font-weight:700;background:var(--paper-2);padding:1px 6px;overflow-wrap:anywhere}
+.sec h3{margin:0 0 6px;font-family:var(--font-serif);font-size:15px;font-weight:600;display:flex;align-items:baseline;gap:10px}
+.sec h3 .hh{margin-left:auto;font-family:var(--font-hand);font-size:14px;color:var(--mute);font-weight:500;text-align:right}
+.tl{display:flex;flex-direction:column}
+.tool{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:6px 2px;border-bottom:1px dashed var(--line);align-items:baseline}
+.tool:last-of-type{border-bottom:0}
+.tool .tnm{font-family:var(--font-mono);font-size:11.5px;font-weight:700}
+.tool .tds{grid-column:1/-1;font-size:12.5px;line-height:1.4;color:var(--mute)}
+.tool .tus{font-family:var(--font-hand);font-size:14px;color:var(--mute);white-space:nowrap}
+.tool .tus.hot{color:var(--amber)}
+.tool .tus.never{color:var(--faint)}
+.env{display:flex;flex-direction:column}
+.ev{display:flex;align-items:center;gap:10px;padding:5px 2px;border-bottom:1px dashed var(--line);font-size:12.5px}
+.ev:last-of-type{border-bottom:0}
+.ev .ek{font-family:var(--font-mono);font-size:11.5px;font-weight:700}
+.ev .evv{font-family:var(--font-mono);font-size:11.5px;color:var(--mute);letter-spacing:.1em}
+.ev .ew{margin-left:auto;font-family:var(--font-hand);font-size:14px;color:var(--mute);white-space:nowrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;padding:4px 10px 4px 6px;border:1px solid var(--line);background:var(--sheet-warm);box-shadow:1px 1px 0 var(--shadow);transition:transform .2s steps(2),opacity .2s steps(2),background .2s steps(2)}
+.chip:hover{transform:translate(-1px,-1px)}
+.chip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.chip.is-off{opacity:.45;background:var(--paper-2);box-shadow:none;border-style:dashed}
+.chip .ap{width:20px;height:20px;flex:none;background:var(--paper-2);border:1px solid var(--line);display:grid;place-items:center}
+.chip .ap svg{width:16px;height:16px;shape-rendering:crispEdges;display:block}
+.chip .sq{width:12px;height:12px;flex:none;background:var(--c);box-shadow:1px 1px 0 rgba(0,0,0,.18);margin:0 3px}
+.run{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:start;padding:8px 2px;border-bottom:1px dashed var(--line);animation:drop .25s steps(3) both}
+.run:last-of-type{border-bottom:0}
+.run .stk{margin-top:1px;font-size:9px;padding:1px 7px}
+.run .rt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.run .rw{font-size:13px;font-weight:700;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.run .rw code{font-family:var(--font-mono);font-size:11px;background:var(--paper-2);padding:0 4px}
+.run .rw .cause{font-weight:600;color:var(--mute)}
+.run .rn{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);line-height:1.2}
+.run .rn.err{color:var(--red-2)}
+.run .rd{font-family:var(--font-mono);font-size:11px;color:var(--mute);white-space:nowrap;margin-top:3px}
+.ledger{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);margin-top:6px}
+.danger{display:flex;align-items:center;gap:12px;padding-top:4px;border-top:1px dashed var(--line);margin-top:4px}
+.danger .dsay{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);flex:1;min-width:0}
+
+/* kraft notes: confirm + new server */
+.veil{position:fixed;inset:0;z-index:5;background:#2a221959;display:grid;place-items:center;animation:fade .2s steps(2) both;padding:20px;box-sizing:border-box}
+.cnote{position:relative;background:var(--kraft);box-shadow:4px 5px 0 var(--kraft-2);padding:24px 26px 22px;max-width:420px;width:100%;transform:rotate(-1deg);animation:drop .3s steps(4) both;box-sizing:border-box}
+.cnote::before{content:"";position:absolute;left:50%;top:-10px;width:70px;height:18px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.cnote h3{margin:0 0 6px;font-family:var(--font-hand);font-size:28px;font-weight:600;line-height:1.1;display:flex;align-items:baseline;gap:10px}
+.cnote h3 .hh{margin-left:auto;font-size:15px;font-weight:500;color:var(--red-2)}
+.cnote p{margin:0 0 16px;font-size:13.5px;line-height:1.5}
+.cnote .btns{display:flex;gap:10px;justify-content:flex-end;align-items:center}
+.cnote .lab{font-family:var(--font-hand);font-size:16px;color:var(--red-2);margin:12px 0 5px}
+.cnote .rowc{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.lvl{all:unset;cursor:pointer;font-size:12px;font-weight:800;padding:5px 12px;border:1.5px dashed var(--red-2);color:var(--red-2);border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.lvl:hover{transform:translateY(-1px)}
+.lvl.is-on{background:var(--sheet);border-style:solid;border-color:var(--ink);color:var(--ink);box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(-1.5deg)}
+.lvl:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.nf{all:unset;display:block;width:100%;box-sizing:border-box;border-bottom:1.5px dashed var(--red-2);padding:4px 2px;font-size:13.5px;color:var(--ink);background:rgba(255,253,247,.35)}
+.nf.mono{font-family:var(--font-mono);font-size:12.5px}
+.nf::placeholder{font-family:var(--font-hand);font-size:16px;color:var(--red-2);opacity:.8}
+.nf:focus{border-color:var(--ink)}
+.est{margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.est .et{font-family:var(--font-hand);font-size:16px;color:var(--ink);flex:1;min-width:180px}
+.est .btns{margin-left:auto}
+
+@keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes thump{from{transform:rotate(-3deg) scale(1.6);opacity:0}to{transform:rotate(-3deg) scale(1);opacity:1}}
+@keyframes slide{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@container (max-width:900px){.heads{display:none}.srow{grid-template-columns:84px minmax(0,1.1fr) minmax(0,.8fr) minmax(0,1fr) auto;grid-template-areas:"k who who who acts" "k conn tools onfor acts";row-gap:8px;align-items:start}.srow .stamp{grid-area:k;align-self:center}.srow .who{grid-area:who}.srow .conn{grid-area:conn}.srow .tools{grid-area:tools}.srow .onfor{grid-area:onfor}.srow .acts{grid-area:acts;align-self:center}}
+@media (max-width:1100px){.drawer{width:360px}}
+@media (max-width:860px){.app{flex-direction:column}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.top,.bar2,.list,.demo{padding-left:16px;padding-right:16px}.top-r{margin-left:0;width:100%}.pp-search{width:100%}.body{flex-direction:column}.drawer{width:100%;border-left:0;border-top:1px solid var(--line);box-shadow:0 -4px 0 var(--shadow)}.headsup{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page">
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<div class="app">
+
+  <nav class="pp-rail" aria-label="Primary">
+    <div class="pp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="pp-rb {{n.cls}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="pp-nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="pp-sp"></span>
+    <button class="pp-rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <main class="main">
+    <header class="top">
+      <div class="ttl"><h1>MCP servers</h1><span class="sub">{{sub}}</span></div>
+      <div class="top-r">
+        <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a server or a tool…" aria-label="Find a server or a tool" ref="{{qRef}}" onInput="{{onSearch}}"><span class="pp-kbd">⌘K</span></label>
+        <button class="pp-btn" onClick="{{openAdd}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add a server</button>
+      </div>
+    </header>
+
+    <div class="bar2">
+      <span class="fl">Show</span>
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="6"><button class="pp-dashed {{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}}</button></sc-for>
+      <div class="headsup {{huCls}}" aria-label="Heads up"><b>{{huLabel}}</b><span>{{huText}}</span></div>
+    </div>
+
+    <div class="body">
+      <div class="list">
+        <div class="sheet">
+          <div class="heads" aria-hidden="true"><span>Over</span><span>Server</span><span>Connection</span><span>Gives</span><span>On for</span><span></span></div>
+          <sc-for list="{{servers}}" as="s" hint-placeholder-count="10">
+            <div class="srow {{s.cls}}">
+              <sc-if value="{{s.isOff}}" hint-placeholder-val="{{false}}"><span class="ostamp">Off</span></sc-if>
+              <span class="stamp {{s.transport}}">{{s.transport}}</span>
+              <button class="who" onClick="{{s.open}}" aria-expanded="{{s.sel}}">
+                <span class="nm">{{s.name}}<span class="src">{{s.srcSay}}</span></span>
+                <span class="ds">{{s.note}}</span>
+                <span class="cm">{{s.cmd}}</span>
+              </button>
+              <span class="conn">
+                <span class="stk {{s.status}}"><sc-if value="{{s.busy}}" hint-placeholder-val="{{false}}"><svg class="pw" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 6V0l3 3zM6 6h6L9 9zM6 6v6L3 9zM6 6H0l3-3z"></path></svg></sc-if>{{s.statusLabel}}</span>
+                <span class="lw {{s.sayCls}}">{{s.say}}</span>
+              </span>
+              <span class="tools">
+                <span class="tn {{s.tnCls}}">{{s.toolCount}}</span>
+                <span class="tx">{{s.toolExtra}}</span>
+              </span>
+              <span class="onfor">
+                <sc-for list="{{s.agents}}" as="a" hint-placeholder-count="4"><span class="ap" title="{{a.name}}" aria-label="{{a.name}}"><svg viewBox="0 0 12 12"><sc-for list="{{a.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span></sc-for>
+                <span class="sqs"><sc-for list="{{s.wss}}" as="w" hint-placeholder-count="6"><span class="sq" style="--c:{{w.color}}" title="{{w.name}}" aria-label="{{w.name}}"></span></sc-for></span>
+                <sc-if value="{{s.onNone}}" hint-placeholder-val="{{false}}"><span class="none">nobody yet</span></sc-if>
+              </span>
+              <span class="acts">
+                <button class="runb {{s.actCls}}" onClick="{{s.act}}" aria-label="{{s.actAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.actIcon}}"></path></svg>{{s.actLabel}}</button>
+                <button class="sw" role="switch" aria-checked="{{s.on}}" onClick="{{s.toggle}}" aria-label="{{s.swAria}}"></button>
+              </span>
+            </div>
+          </sc-for>
+          <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">{{emptyText}}</div></sc-if>
+        </div>
+        <div class="demo"><span>{{demoText}}</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+      </div>
+
+      <sc-if value="{{hasSel}}" hint-placeholder-val="{{true}}">
+        <aside class="drawer" aria-label="Server details">
+          <div class="dh">
+            <div class="row1"><span class="stamp big {{dTransport}}">{{dTransport}}</span><h2>{{dName}}</h2><button class="dx" onClick="{{close}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+            <p class="ds" style="margin:0">{{dNote}}</p>
+            <div class="btns">
+              <button class="runb {{dActCls}}" onClick="{{dAct}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{dActIcon}}"></path></svg>{{dActLabel}}</button>
+              <span class="fv" style="margin-left:auto;gap:8px"><button class="sw" role="switch" aria-checked="{{dOn}}" onClick="{{dToggle}}" aria-label="Enabled"></button><span class="sub">{{dOnSay}}</span></span>
+            </div>
+          </div>
+          <div class="db">
+            <div class="facts">
+              <div class="fact wide"><span class="fk">{{dCmdLabel}}</span><span class="fv"><span class="tm">{{dCmd}}</span></span></div>
+              <div class="fact"><span class="fk">Connection</span><span class="fv"><span class="stk {{dStatus}}">{{dStatusLabel}}</span><span class="sub {{dSayCls}}">{{dSay}}</span></span></div>
+              <div class="fact"><span class="fk">Where from</span><span class="fv">{{dSrc}}<span class="sub">{{dScope}}</span></span></div>
+              <div class="fact"><span class="fk">Signs in with</span><span class="fv">{{dAuth}}<span class="sub {{dAuthCls}}">{{dAuthSay}}</span></span></div>
+              <div class="fact"><span class="fk">Version</span><span class="fv">{{dVer}}<span class="sub">{{dProto}}</span></span></div>
+              <div class="fact wide"><span class="fk">Today</span><span class="fv">{{dCalls}}<span class="sub">{{dCallsSay}}</span></span></div>
+            </div>
+
+            <div class="sec"><h3>Tools<span class="hh">{{dToolsHint}}</span></h3>
+              <div class="tl"><sc-for list="{{dTools}}" as="t" hint-placeholder-count="6"><div class="tool"><span class="tnm">{{t.n}}</span><span class="tus {{t.usCls}}">{{t.used}}</span><span class="tds">{{t.d}}</span></div></sc-for></div>
+              <sc-if value="{{dNoTools}}" hint-placeholder-val="{{false}}"><div class="ledger">{{dNoToolsSay}}</div></sc-if>
+            </div>
+
+            <sc-if value="{{dHasEnv}}" hint-placeholder-val="{{true}}">
+              <div class="sec"><h3>Environment<span class="hh">values stay in the Keychain</span></h3>
+                <div class="env"><sc-for list="{{dEnv}}" as="e" hint-placeholder-count="3"><div class="ev"><span class="ek">{{e.k}}</span><span class="evv">••••••••</span><span class="ew">{{e.w}}</span></div></sc-for></div>
+              </div>
+            </sc-if>
+
+            <div class="sec"><h3>On for<span class="hh">{{dOnForHint}}</span></h3>
+              <div class="chips"><sc-for list="{{dAgents}}" as="a" hint-placeholder-count="8"><button class="chip {{a.cls}}" onClick="{{a.toggle}}" aria-pressed="{{a.on}}"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{a.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>{{a.name}}</button></sc-for></div>
+              <div class="chips" style="margin-top:8px"><sc-for list="{{dWss}}" as="w" hint-placeholder-count="6"><button class="chip {{w.cls}}" style="--c:{{w.color}}" onClick="{{w.toggle}}" aria-pressed="{{w.on}}"><span class="sq" aria-hidden="true"></span>{{w.name}}</button></sc-for></div>
+            </div>
+
+            <div class="sec"><h3>Recent calls<span class="hh">{{dLogHint}}</span></h3>
+              <sc-for list="{{dLog}}" as="r" hint-placeholder-count="6">
+                <div class="run">
+                  <span class="stk {{r.status}}">{{r.label}}</span>
+                  <span class="rt"><span class="rw"><code>{{r.tool}}</code><span class="cause">{{r.at}} · {{r.agent}}</span></span><span class="rn {{r.noteCls}}">{{r.note}}</span></span>
+                  <span class="rd">{{r.dur}}</span>
+                </div>
+              </sc-for>
+              <sc-if value="{{dNoLog}}" hint-placeholder-val="{{false}}"><div class="ledger">{{dNoLogSay}}</div></sc-if>
+            </div>
+
+            <div class="danger"><span class="dsay">{{dRemoveSay}}</span><button class="pp-dashed red" onClick="{{askRemove}}">Remove server</button></div>
+          </div>
+        </aside>
+      </sc-if>
+    </div>
+  </main>
+
+  <sc-if value="{{confirming}}" hint-placeholder-val="{{false}}">
+    <div class="veil" onClick="{{cancelRemove}}">
+      <div class="cnote" role="dialog" aria-label="Remove this server?" onClick="{{stop}}">
+        <h3>Remove {{dName}}?</h3>
+        <p>{{removeText}}</p>
+        <div class="btns"><button class="pp-dashed" onClick="{{cancelRemove}}">Keep it</button><button class="pp-btn red" onClick="{{doRemove}}">Remove it</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{adding}}" hint-placeholder-val="{{false}}">
+    <div class="veil" onClick="{{cancelAdd}}">
+      <div class="cnote" role="dialog" aria-label="Add a server" onClick="{{stop}}">
+        <h3>Add a server<span class="hh">{{aWhere}}</span></h3>
+        <div class="lab">Call it</div>
+        <input class="nf" type="text" placeholder="a name agents will see…" aria-label="Server name" ref="{{aNameRef}}" onInput="{{aNameInput}}">
+        <div class="lab">Talks over</div>
+        <div class="rowc" role="radiogroup" aria-label="Transport">
+          <sc-for list="{{aTransports}}" as="t" hint-placeholder-count="2"><button class="lvl {{t.cls}}" role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for>
+          <span class="fl" style="font-family:var(--font-hand);font-size:15px;color:var(--red-2)">{{aTransportSay}}</span>
+        </div>
+        <div class="lab">{{aCmdLabel}}</div>
+        <input class="nf mono" type="text" placeholder="{{aCmdPlaceholder}}" aria-label="{{aCmdLabel}}" ref="{{aCmdRef}}" onInput="{{aCmdInput}}">
+        <div class="lab">Who gets it</div>
+        <div class="rowc" role="radiogroup" aria-label="Scope">
+          <sc-for list="{{aScopes}}" as="s" hint-placeholder-count="2"><button class="lvl {{s.cls}}" role="radio" aria-checked="{{s.on}}" onClick="{{s.pick}}">{{s.label}}</button></sc-for>
+        </div>
+        <div class="est"><span class="et">{{aEst}}</span><span class="btns"><button class="pp-dashed" onClick="{{cancelAdd}}">Cancel</button><button class="pp-btn {{aAddCls}}" onClick="{{doAdd}}">Add and connect</button></span></div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+const PAL = { i: '#2a2219', b: '#3b5b9a', B: '#2a4070', g: '#5b8c5a', r: '#c8553d', R: '#8f3a2a', k: '#e2c48c', K: '#cfae72', a: '#b8792f', w: '#fffdf7', t: '#4a8f99', s: '#8b6bb3', m: '#6f6252', h: '#fff0a0' };
+const SPRITES = {
+  curator: ['..k......k..','..kk....kk..','..kkkkkkkk..','.kkwwkkwwkk.','.kwiwkkwiwk.','.kkwwkkwwkk.','.kkkkaakkkk.','..kKKKKKKk..','..kKkKkKKk..','..kKKKKKKk..','...kkkkkk...','...a.aa.a...'],
+  implementer: ['............','..gggggggg..','..gggggggg..','..giiiiiig..','..giwiiwig..','..giiiiiig..','..gggggggg..','..ggkkkkgg..','..gggggggg..','...g.gg.g...','..kk.gg.kk..','..kk....kk..'],
+  issue: ['...rrrrrr...','..rrrrrrrr..','..rRRRRRRr..','..kkkkkkkk..','..kwkkkkwk..','..kikkkkik..','..kkkkkkkk..','..kkkiikkk..','...kkkkkk...','..wwwwwwww..','..wiiwwiiw..','..wwwwwwww..'],
+  reviewer: ['............','...iiii.....','..iwwwwi....','.iwbbbbwi...','.iwbhbbwi...','.iwbbbbwi...','..iwwwwi....','...iiiii....','.......ii...','........ii..','.........ii.','............'],
+  triage: ['............','..aaaaaaaa..','..aaawwaaa..','..aawwwwaa..','..aaawwaaa..','..aaaaaaaa..','..awwaawwa..','..aiwaawia..','..aaaaaaaa..','..aaawwaaa..','...aaaaaa...','............'],
+  release: ['.....ww.....','....wrrw....','....wrrw....','...wrrrrw...','...wrbbrw...','...wrbbrw...','...wrrrrw...','..rwrrrrwr..','..rwwwwwwr..','..r.aaaa.r..','....a..a....','....a..a....'],
+  support: ['............','...tttttt...','..tttttttt..','.tt.kkkk.tt.','.t.kkkkkk.t.','.t.kwkkwk.t.','.tt.kkkk.tt.','.tt.kiik.tt.','..tttkkttt..','.....kk..t..','....tttttt..','............'],
+  planner: ['............','..ssssssss..','..swwssmms..','..swissmms..','..ssssssss..','..skkkkkks..','..sskkkkss..','...ssssss...','..bbbbbbbb..','..b.b..b.b..','..bbbbbbbb..','............']
+};
+function px(rows) { const out = []; rows.forEach((row, y) => { Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: PAL[ch] }); }); }); return out; }
+const AGENTS = { curator: 'Curator', implementer: 'Implementer', issue: 'Issue Creator', reviewer: 'Reviewer', triage: 'Triage', release: 'Release Captain', support: 'Support Writer', planner: 'Infra Planner' };
+const WS = { lighthouse: { name: 'Lighthouse Web', color: '#5b8c5a' }, orbit: { name: 'Orbit Billing', color: '#c8553d' }, fleet: { name: 'Fleet Infra', color: '#b8792f' }, atlas: { name: 'Atlas Docs', color: '#3b5b9a' }, harbor: { name: 'Harbor Mobile', color: '#8b6bb3' }, kiln: { name: 'Kiln Data', color: '#4a8f99' } };
+const STATUS = { ok: 'Connected', connecting: 'Connecting', auth: 'Needs sign-in', error: 'Error', off: 'Off' };
+const ICON = { restart: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6', key: 'M15 7a4 4 0 1 1-4 4l-7 7v3h3l1-1v-2h2v-2h2l1-1a4 4 0 0 1 2-8z', power: 'M12 3v9M18.4 6.6a9 9 0 1 1-12.8 0' };
+const T = (n, d, used) => ({ n, d, used });
+const C = (status, at, tool, agent, note, dur) => ({ status, at, tool, agent, note, dur });
+const ALL_WS = Object.keys(WS);
+
+// It is Fri 31 Oct, 10:42. Each server: how it talks, where it came from, how it signs in, what it gives, who has it on, and the recent calls.
+const SERVERS = [
+  { id: 'github', name: 'GitHub', transport: 'stdio', cmd: 'npx -y @modelcontextprotocol/server-github', src: 'from the GitHub plugin', scope: 'just you', auth: 'Personal token', authSay: 'GITHUB_TOKEN · read and write on both orgs', ver: '0.9.4',
+    note: 'Pull requests, issues, checks and code search on the lighthouse and orbit orgs.',
+    status: 'ok', say: 'since 08:12 · 212 calls today', calls: 212, errs: 1,
+    tools: [T('list_pull_requests', 'Open pull requests on a repo with their review and check state.', '41× today'), T('get_pull_request', 'One pull request with its diff, comments and checks.', '38× today'), T('create_pull_request', 'Opens a pull request from a branch, draft or ready.', '6× today'), T('list_issues', 'Issues on a repo, filtered by label, state or assignee.', '29× today'), T('create_issue', 'Files an issue with labels and an assignee.', '3× today'), T('add_comment', 'Comments on a pull request or an issue.', '52× today'), T('search_code', 'Searches code across the org.', '31× today'), T('get_file', 'Reads a file at a ref.', '12× today')],
+    moreTools: 6, resources: 0, prompts: 0,
+    agents: ['implementer', 'curator', 'reviewer', 'release'], wss: ALL_WS,
+    env: [['GITHUB_TOKEN', 'Keychain · renewed Sep']],
+    log: [C('ok', '10:41', 'get_pull_request', 'Reviewer', '#1032 · 3 files · checks green', '0.4 s'), C('ok', '10:40', 'add_comment', 'Reviewer', 'left 2 comments on #1032', '0.6 s'), C('ok', '10:31', 'search_code', 'Implementer', '"retryWithBackoff" · 4 hits', '1.1 s'), C('ok', '10:12', 'list_issues', 'Triage', 'lighthouse/web · 3 new since 09:00', '0.5 s'), C('error', '09:58', 'create_pull_request', 'Curator', '422 · branch already has a PR (#1031)', '0.7 s'), C('ok', '09:40', 'create_pull_request', 'Curator', 'draft PR #1031 opened', '0.9 s')] },
+  { id: 'fs', name: 'Filesystem', transport: 'stdio', cmd: 'mcp-server-filesystem ~/dev', src: 'built in', scope: 'just you', auth: 'Nothing', authSay: 'stays inside the linked folders', ver: '1.2.0',
+    note: 'Reads and writes inside the linked folders of the current workspace and nowhere else.',
+    status: 'ok', say: 'since 08:12 · 1,480 calls today', calls: 1480, errs: 0,
+    tools: [T('read_file', 'Reads a file as text.', '812× today'), T('write_file', 'Writes a file, making folders on the way.', '144× today'), T('list_directory', 'Lists a folder.', '301× today'), T('search_files', 'Finds files by glob.', '190× today'), T('move_file', 'Moves or renames a file.', '9× today'), T('get_file_info', 'Size, dates and mode.', '24× today')],
+    moreTools: 0, resources: 2, prompts: 0,
+    agents: ['implementer', 'curator', 'reviewer', 'release', 'planner', 'issue', 'triage', 'support'], wss: ALL_WS,
+    env: [],
+    log: [C('ok', '10:42', 'read_file', 'Implementer', 'src/billing/retry.ts', '0.0 s'), C('ok', '10:42', 'write_file', 'Implementer', 'src/billing/retry.ts · 2.1 KB', '0.0 s'), C('ok', '10:41', 'search_files', 'Reviewer', '**/*.test.ts · 61 files', '0.1 s'), C('ok', '10:39', 'list_directory', 'Curator', 'docs/changelog/', '0.0 s')] },
+  { id: 'pg', name: 'Postgres (staging)', transport: 'stdio', cmd: 'mcp-server-postgres $PG_URL', src: 'from the Databases plugin', scope: 'this project · Orbit Billing', auth: 'Connection string', authSay: 'PG_URL · read-only role', ver: '0.6.1',
+    note: 'Read-only queries against the staging billing database. Schema is sent along as a resource.',
+    status: 'ok', say: 'since 08:14 · 37 calls today', calls: 37, errs: 2,
+    tools: [T('query', 'Runs a read-only SQL statement, 500 rows at most.', '31× today'), T('describe_table', 'Columns, types and indexes of a table.', '4× today'), T('list_tables', 'Tables in the public schema.', '2× today'), T('explain', 'EXPLAIN ANALYZE for a statement.', 'never')],
+    moreTools: 0, resources: 1, prompts: 0,
+    agents: ['implementer', 'planner'], wss: ['orbit', 'kiln'],
+    env: [['PG_URL', 'Keychain · staging only']],
+    log: [C('ok', '10:35', 'query', 'Implementer', 'select … from invoices where retry_count > 3 · 14 rows', '0.3 s'), C('error', '10:34', 'query', 'Implementer', 'permission denied for table audit_log', '0.1 s'), C('ok', '10:20', 'describe_table', 'Implementer', 'invoices · 18 columns', '0.1 s'), C('ok', '09:05', 'query', 'Infra Planner', 'select count(*) … · 1 row', '0.2 s')] },
+  { id: 'browser', name: 'Browser', transport: 'stdio', cmd: 'mcp-server-browser --headless', src: 'built in', scope: 'just you', auth: 'Nothing', authSay: 'its own profile, signed out', ver: '2.0.3',
+    note: 'Opens pages, reads them as text and takes screenshots in a headless profile of its own.',
+    status: 'connecting', say: 'restarting after a crash · 3rd try', calls: 58, errs: 4,
+    tools: [T('navigate', 'Opens a URL in the tab.', '22× today'), T('read_page', 'The page as an accessibility tree.', '17× today'), T('get_page_text', 'The visible text.', '9× today'), T('screenshot', 'A PNG of the viewport.', '6× today'), T('click', 'Clicks an element by ref.', '3× today'), T('type', 'Types into the focused field.', '1× today')],
+    moreTools: 3, resources: 0, prompts: 0,
+    agents: ['implementer', 'reviewer', 'support'], wss: ['lighthouse', 'atlas', 'harbor'],
+    env: [],
+    log: [C('error', '10:39', 'screenshot', 'Reviewer', 'the server exited while rendering · restarting', '12.0 s'), C('ok', '10:31', 'read_page', 'Support Writer', 'docs.lighthouse.example/sessions · 4 KB', '1.4 s'), C('ok', '10:30', 'navigate', 'Support Writer', 'docs.lighthouse.example/sessions', '0.9 s'), C('ok', '09:50', 'screenshot', 'Reviewer', 'preview #1032 · 1440×900', '2.2 s')] },
+  { id: 'slack', name: 'Slack', transport: 'http', cmd: 'https://mcp.slack.example/v1', src: 'from the Slack plugin', scope: 'just you', auth: 'OAuth', authSay: 'signed in as you · releases and support channels', ver: 'remote',
+    note: 'Posts to the releases and support channels and reads threads it was pointed at.',
+    status: 'ok', say: 'since 08:12 · 9 calls today', calls: 9, errs: 0,
+    tools: [T('post_message', 'Posts to a channel the token can see.', '4× today'), T('read_thread', 'A thread with its replies.', '5× today'), T('list_channels', 'Channels the token can see.', 'never'), T('add_reaction', 'Reacts to a message.', 'never'), T('search_messages', 'Searches messages.', 'never')],
+    moreTools: 0, resources: 0, prompts: 1,
+    agents: ['release', 'support', 'curator'], wss: ['lighthouse', 'fleet', 'atlas'],
+    env: [],
+    log: [C('ok', '08:31', 'post_message', 'Support Writer', '#support · digest with 2 flagged threads', '0.5 s'), C('ok', '08:30', 'read_thread', 'Support Writer', '#support · 6 threads read', '0.8 s'), C('ok', '06:02', 'post_message', 'Curator', '#releases · nightly changelog draft', '0.4 s')] },
+  { id: 'sentry', name: 'Sentry', transport: 'http', cmd: 'https://mcp.sentry.example/sse', src: 'from the Sentry plugin', scope: 'this project · Fleet Infra', auth: 'OAuth', authSay: 'token expired Thu 30 Oct 23:10', ver: 'remote',
+    note: 'Issues, traces and release health for the fleet projects.',
+    status: 'auth', say: 'token expired last night · sign in to reconnect', calls: 0, errs: 0,
+    tools: [T('list_issues', 'Unresolved issues on a project, newest first.', 'Thu 30 Oct'), T('get_issue', 'One issue with its events and tags.', 'Thu 30 Oct'), T('get_trace', 'A trace with its spans.', 'Wed 29 Oct')],
+    moreTools: 0, resources: 0, prompts: 0,
+    agents: ['release', 'planner'], wss: ['fleet', 'orbit'],
+    env: [],
+    log: [C('error', '09:41', 'list_issues', 'Release Captain', '401 · token expired · nothing read', '0.3 s'), C('ok', 'Thu 17:14', 'list_issues', 'Release Captain', 'fleet-api · 2 new since the deploy', '0.9 s'), C('ok', 'Thu 17:14', 'get_issue', 'Release Captain', 'FLEET-API-4K2 · 14 events', '0.7 s')] },
+  { id: 'jira', name: 'Jira', transport: 'http', cmd: 'https://mcp.atlassian.example/mcp', src: 'from the Jira plugin', scope: 'this project · Orbit Billing', auth: 'OAuth', authSay: 'signed in as you · orbit site', ver: 'remote',
+    note: 'Tickets on the Billing migration board. The Kanban page syncs through this server too.',
+    status: 'error', say: 'handshake failed · 502 from the server · retrying in 40 s', calls: 12, errs: 5,
+    tools: [T('get_issue', 'A ticket with its fields and comments.', '7× today'), T('create_issue', 'Files a ticket on a board.', '1× today'), T('transition_issue', 'Moves a ticket to another column.', '2× today'), T('search_issues', 'JQL search.', '2× today'), T('add_comment', 'Comments on a ticket.', 'never')],
+    moreTools: 0, resources: 0, prompts: 0,
+    agents: ['issue', 'triage', 'implementer'], wss: ['orbit', 'harbor'],
+    env: [],
+    log: [C('error', '10:30', 'search_issues', 'sync', '502 Bad Gateway · board sync skipped', '8.0 s'), C('error', '10:15', 'search_issues', 'sync', '502 Bad Gateway · board sync skipped', '8.0 s'), C('error', '10:10', 'create_issue', 'Issue Creator', '502 creating ORB-153 · the PDF is still in inbox/', '41.0 s'), C('ok', '10:00', 'transition_issue', 'Implementer', 'ORB-151 → Review', '0.6 s'), C('ok', '09:45', 'get_issue', 'Triage', 'ORB-150 · 4 comments', '0.5 s')] },
+  { id: 'drive', name: 'Drive', transport: 'http', cmd: 'https://mcp.drive.example/mcp', src: 'from the Office plugin', scope: 'just you', auth: 'OAuth', authSay: 'signed in as you · inbox folder only', ver: 'remote',
+    note: 'The shared inbox folder: lists new files and reads PDFs for the ticket job.',
+    status: 'off', say: 'turned off Sun 19 Oct · the inbox job reads files another way now', calls: 0, errs: 0, offSince: 'Sun 19 Oct',
+    tools: [T('list_files', 'Files in a folder, newest first.', 'Sat 18 Oct'), T('read_file', 'A file as text, PDFs included.', 'Sat 18 Oct'), T('search', 'Full-text search.', 'never'), T('watch_folder', 'Fires cloud.file.created for a folder.', 'Sat 18 Oct')],
+    moreTools: 3, resources: 0, prompts: 0,
+    agents: ['issue'], wss: ['orbit'],
+    env: [],
+    log: [C('ok', 'Sat 18 Oct', 'read_file', 'Issue Creator', 'inbox/invoice-sep.pdf · 2 pages', '1.8 s'), C('ok', 'Sat 18 Oct', 'list_files', 'Issue Creator', 'inbox/ · 1 new', '0.4 s')] },
+  { id: 'calendar', name: 'Calendar', transport: 'stdio', cmd: 'mcp-server-calendar --account work', src: 'from the Office plugin', scope: 'just you', auth: 'OAuth', authSay: 'signed in as you · read-only', ver: '0.3.2',
+    note: 'Reads the work calendar so agents know when a release window is open.',
+    status: 'ok', say: 'since 08:12 · 3 calls today', calls: 3, errs: 0,
+    tools: [T('list_events', 'Events in a range.', '3× today'), T('find_free_slot', 'The next free slot of a given length.', 'never'), T('get_event', 'One event with attendees.', 'never')],
+    moreTools: 0, resources: 0, prompts: 1,
+    agents: ['release'], wss: ['fleet'],
+    env: [],
+    log: [C('ok', '10:40', 'list_events', 'Release Captain', 'today · release window 14:00–16:00', '0.3 s'), C('ok', '08:31', 'list_events', 'Release Captain', 'today · 4 events', '0.3 s')] },
+  { id: 'oracle', name: 'Ticket oracle', transport: 'stdio', cmd: 'node tools/mcp/oracle.js', src: 'this project · Orbit Billing', scope: 'this project · Orbit Billing', auth: 'Nothing', authSay: 'local script, no network', ver: 'local',
+    note: 'A small script of yours: answers which migration step a ticket belongs to, from the plan in docs/.',
+    status: 'ok', say: 'since 08:14 · 5 calls today', calls: 5, errs: 0,
+    tools: [T('which_step', 'The migration step a ticket key belongs to.', '5× today'), T('steps', 'All steps with their tickets.', 'never')],
+    moreTools: 0, resources: 1, prompts: 0,
+    agents: ['triage', 'issue'], wss: ['orbit'],
+    env: [],
+    log: [C('ok', '10:12', 'which_step', 'Triage', 'ORB-150 → step 3, dunning', '0.0 s'), C('ok', '09:45', 'which_step', 'Triage', 'ORB-149 → step 2, invoices', '0.0 s')] }
+];
+const FILTERS = [{ id: 'all', label: 'All' }, { id: 'ok', label: 'Connected' }, { id: 'attn', label: 'Needs attention' }, { id: 'off', label: 'Off' }, { id: 'stdio', label: 'stdio' }, { id: 'http', label: 'HTTP' }];
+const NEW_TOOLS = [T('list_items', 'Lists what the server knows about.', 'never'), T('get_item', 'Reads one item by id.', 'never'), T('search', 'Free-text search.', 'never')];
+const clone = (list) => list.map((s) => ({ ...s, tools: s.tools.map((t) => ({ ...t })), agents: s.agents.slice(), wss: s.wss.slice(), log: s.log.map((r) => ({ ...r })) }));
+const DRAFT = { name: '', transport: 'stdio', cmd: '', scope: 'you' };
+const INIT = { q: '', filter: 'all', sel: 'jira', msg: '', confirming: false, adding: false, draft: DRAFT, nextId: 1 };
+
+class Component extends DCLogic {
+  state = { ...INIT, servers: clone(SERVERS) };
+  timers = [];
+  els = {};
+  patch(id, fn) { this.setState({ servers: this.state.servers.map((s) => s.id === id ? fn(s) : s) }); }
+  later(fn, ms) { const t = setTimeout(fn, ms); this.timers.push(t); }
+  connect(id, how) {
+    const s = this.state.servers.find((x) => x.id === id);
+    if (!s || s.status === 'connecting') return;
+    const say = how === 'auth' ? 'waiting for the browser sign-in…' : how === 'on' ? 'starting…' : 'restarting…';
+    this.patch(id, (x) => ({ ...x, status: 'connecting', say }));
+    this.setState({ msg: how === 'auth' ? 'Signing in to ' + s.name + ' in your browser' : (how === 'on' ? 'Turning ' + s.name + ' on' : 'Restarting ' + s.name) });
+    this.later(() => {
+      const n = this.state.servers.find((x) => x.id === id); if (!n || n.status !== 'connecting') return;
+      const tools = n.tools.length + n.moreTools;
+      const doneSay = how === 'auth' ? 'signed in just now · token good for 30 days' : 'since just now · ' + tools + ' tools listed';
+      this.patch(id, (x) => ({ ...x, status: 'ok', say: doneSay, authSay: how === 'auth' ? 'signed in as you · renewed just now' : x.authSay, log: [C('ok', '10:42', 'initialize', 'app', how === 'auth' ? 'signed in · ' + tools + ' tools listed' : 'handshake ok · ' + tools + ' tools listed', '0.6 s')].concat(x.log) }));
+      this.setState({ msg: n.name + ' is connected · ' + tools + ' tools back on the table' });
+    }, 1600 + Math.random() * 1200);
+  }
+  toggle(id) {
+    const s = this.state.servers.find((x) => x.id === id); if (!s) return;
+    if (s.status === 'off') { this.connect(id, 'on'); return; }
+    this.patch(id, (x) => ({ ...x, status: 'off', say: 'turned off just now · its tools leave every agent', offSince: 'today' }));
+    this.setState({ msg: s.name + ' turned off · agents stop seeing its tools on their next turn' });
+  }
+  renderVals() {
+    const st = this.state;
+    const q = st.q.trim().toLowerCase();
+    const match = (s) => !q || s.name.toLowerCase().includes(q) || s.note.toLowerCase().includes(q) || s.cmd.toLowerCase().includes(q) || s.src.toLowerCase().includes(q) || s.tools.some((t) => t.n.includes(q));
+    const passes = (s) => st.filter === 'all' || (st.filter === 'attn' ? (s.status === 'auth' || s.status === 'error') : st.filter === 'stdio' || st.filter === 'http' ? s.transport === st.filter : s.status === st.filter);
+    const list = st.servers.filter((s) => match(s) && passes(s));
+    const okN = st.servers.filter((s) => s.status === 'ok').length;
+    const attn = st.servers.filter((s) => s.status === 'auth' || s.status === 'error');
+    const offN = st.servers.filter((s) => s.status === 'off').length;
+    const toolsN = st.servers.filter((s) => s.status === 'ok').reduce((n, s) => n + s.tools.length + s.moreTools, 0);
+    const act = (s) => {
+      if (s.status === 'connecting') return { cls: 'is-busy', label: 'Connecting…', icon: ICON.restart, aria: 'Connecting ' + s.name, fn: () => {} };
+      if (s.status === 'auth') return { cls: 'red', label: 'Sign in', icon: ICON.key, aria: 'Sign in to ' + s.name, fn: () => this.connect(s.id, 'auth') };
+      if (s.status === 'off') return { cls: '', label: 'Turn on', icon: ICON.power, aria: 'Turn ' + s.name + ' on', fn: () => this.toggle(s.id) };
+      if (s.status === 'error') return { cls: 'red', label: 'Reconnect', icon: ICON.restart, aria: 'Reconnect ' + s.name, fn: () => this.connect(s.id, 'restart') };
+      return { cls: '', label: 'Restart', icon: ICON.restart, aria: 'Restart ' + s.name, fn: () => this.connect(s.id, 'restart') };
+    };
+    const sayCls = (s) => s.status === 'error' || s.status === 'auth' ? 'err' : '';
+    const toolCount = (s) => (s.tools.length + s.moreTools) + ' tools';
+    const toolExtra = (s) => { const parts = []; if (s.resources) parts.push(s.resources + (s.resources === 1 ? ' resource' : ' resources')); if (s.prompts) parts.push(s.prompts + (s.prompts === 1 ? ' prompt' : ' prompts')); if (!parts.length) parts.push('tools only'); return parts.join(' · '); };
+    const sel = st.servers.find((s) => s.id === st.sel) || null;
+    const dv = {};
+    if (sel) {
+      const a = act(sel);
+      const errsToday = sel.log.filter((r) => r.status === 'error' && !/Oct|Thu|Wed|Sat/.test(r.at)).length;
+      Object.assign(dv, {
+        dTransport: sel.transport, dName: sel.name, dNote: sel.note,
+        dActCls: a.cls, dActLabel: a.label, dActIcon: a.icon, dAct: a.fn,
+        dOn: sel.status !== 'off', dToggle: () => this.toggle(sel.id), dOnSay: sel.status === 'off' ? 'off since ' + (sel.offSince || 'today') : 'enabled',
+        dCmdLabel: sel.transport === 'http' ? 'Talks to' : 'Runs', dCmd: sel.cmd,
+        dStatus: sel.status, dStatusLabel: STATUS[sel.status], dSay: sel.say, dSayCls: sayCls(sel),
+        dSrc: sel.src, dScope: '· ' + sel.scope,
+        dAuth: sel.auth, dAuthSay: sel.authSay, dAuthCls: sel.status === 'auth' ? 'err' : '',
+        dVer: sel.ver, dProto: '· protocol 2025-06',
+        dCalls: sel.calls + ' calls', dCallsSay: errsToday ? '· ' + errsToday + ' failed · the rest under a second' : sel.calls ? '· none failed' : '· nothing yet today',
+        dTools: sel.tools.map((t) => ({ n: t.n, d: t.d, used: t.used === 'never' ? 'never used' : 'used ' + t.used, usCls: t.used === 'never' ? 'never' : /today/.test(t.used) && parseInt(t.used, 10) >= 30 ? 'hot' : '' })),
+        dToolsHint: sel.moreTools ? sel.tools.length + ' shown of ' + (sel.tools.length + sel.moreTools) + ' · ' + toolExtra(sel) : (sel.tools.length + sel.moreTools) + ' · ' + toolExtra(sel),
+        dNoTools: sel.tools.length === 0, dNoToolsSay: 'Nothing listed yet · tools appear once the handshake is through',
+        dHasEnv: sel.env.length > 0, dEnv: sel.env.map((e) => ({ k: e[0], w: e[1] })),
+        dOnForHint: sel.agents.length + ' agents · ' + sel.wss.length + ' workspaces',
+        dAgents: Object.keys(AGENTS).map((id) => { const on = sel.agents.includes(id); return { name: AGENTS[id], px: px(SPRITES[id]), on, cls: on ? '' : 'is-off', toggle: () => { this.patch(sel.id, (x) => ({ ...x, agents: on ? x.agents.filter((i) => i !== id) : x.agents.concat([id]) })); this.setState({ msg: AGENTS[id] + (on ? ' loses ' : ' gets ') + sel.name + ' on its next turn' }); } }; }),
+        dWss: ALL_WS.map((id) => { const on = sel.wss.includes(id); return { name: WS[id].name, color: WS[id].color, on, cls: on ? '' : 'is-off', toggle: () => { this.patch(sel.id, (x) => ({ ...x, wss: on ? x.wss.filter((i) => i !== id) : x.wss.concat([id]) })); this.setState({ msg: sel.name + (on ? ' is off for ' : ' is on for ') + WS[id].name }); } }; }),
+        dLog: sel.log.map((r) => ({ status: r.status, label: r.status === 'ok' ? 'ok' : 'failed', tool: r.tool, at: r.at, agent: r.agent, note: r.note, noteCls: r.status === 'error' ? 'err' : '', dur: r.dur })),
+        dLogHint: sel.log.length + ' most recent', dNoLog: sel.log.length === 0, dNoLogSay: 'No calls yet',
+        dRemoveSay: 'Its tools leave ' + sel.agents.length + ' agents · nothing on the other end is touched',
+        removeText: 'The ' + sel.name + ' tools disappear from ' + sel.agents.length + ' agents and ' + sel.wss.length + ' workspaces on their next turn. Nothing on the other end is touched, and the config line stays in the trash for 30 days.'
+      });
+    }
+    const d = st.draft;
+    const canAdd = d.name.trim().length > 0 && d.cmd.trim().length > 0;
+    const bind = (key) => (el) => { if (!el) return; this.els[key] = el; if (document.activeElement !== el && el.value !== st.draft[key]) el.value = st.draft[key]; };
+    return {
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'mcps' ? 'is-on' : '', cur: n.id === 'mcps' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
+      sub: st.servers.length + ' servers · ' + okN + ' connected · ' + attn.length + ' need attention · ' + offN + ' off · ' + toolsN + ' tools on the table',
+      qRef: (el) => { if (el) this.q = el; },
+      onSearch: (e) => this.setState({ q: e.currentTarget.value }),
+      filters: FILTERS.map((f) => ({ label: f.label, on: st.filter === f.id, cls: st.filter === f.id ? 'is-on' : '', pick: () => this.setState({ filter: f.id }) })),
+      huCls: attn.length ? '' : 'calm', huLabel: attn.length ? 'Heads up' : 'All good',
+      huText: attn.length ? attn.map((s) => s.name + (s.status === 'auth' ? ' needs a sign-in' : ' can\'t connect')).join(' · ') : 'every server that is on is connected',
+      servers: list.map((s) => { const a = act(s); return {
+        name: s.name, note: s.note, cmd: s.cmd, transport: s.transport, srcSay: s.src,
+        cls: (st.sel === s.id ? 'is-sel ' : '') + (s.status === 'off' ? 'is-off' : ''), sel: st.sel === s.id, isOff: s.status === 'off',
+        open: () => this.setState({ sel: st.sel === s.id ? null : s.id }),
+        status: s.status, statusLabel: STATUS[s.status], busy: s.status === 'connecting', say: s.say, sayCls: sayCls(s),
+        toolCount: toolCount(s), toolExtra: toolExtra(s), tnCls: s.status === 'ok' || s.status === 'connecting' ? '' : 'faint',
+        agents: s.agents.slice(0, 4).map((id) => ({ name: AGENTS[id], px: px(SPRITES[id]) })), wss: s.wss.map((id) => ({ name: WS[id].name, color: WS[id].color })), onNone: s.agents.length === 0 && s.wss.length === 0,
+        actCls: a.cls, actLabel: a.label, actIcon: a.icon, actAria: a.aria, act: a.fn,
+        on: s.status !== 'off', toggle: () => this.toggle(s.id), swAria: (s.status === 'off' ? 'Turn on ' : 'Turn off ') + s.name
+      }; }),
+      empty: list.length === 0,
+      emptyText: (st.filter === 'all' ? 'No server' : st.filter === 'attn' ? 'No server needing attention' : st.filter === 'stdio' || st.filter === 'http' ? 'No ' + FILTERS.find((f) => f.id === st.filter).label + ' server' : 'No ' + FILTERS.find((f) => f.id === st.filter).label.toLowerCase() + ' server') + (q ? ' matches “' + st.q.trim() + '”' : ' here'),
+      hasSel: !!sel, close: () => this.setState({ sel: null }),
+      ...dv,
+      confirming: st.confirming, stop: (e) => e.stopPropagation(),
+      askRemove: () => this.setState({ confirming: true }), cancelRemove: () => this.setState({ confirming: false }),
+      doRemove: () => { if (!sel) return; this.setState({ servers: st.servers.filter((s) => s.id !== sel.id), sel: null, confirming: false, msg: sel.name + ' removed · its config line is in the trash for 30 days · Reset demo brings it back' }); },
+      adding: st.adding,
+      openAdd: () => this.setState({ adding: true, draft: { ...DRAFT } }), cancelAdd: () => this.setState({ adding: false }),
+      aWhere: d.scope === 'you' ? 'goes in ~/.claude/mcp.json' : 'goes in .claude/mcp.json of Orbit Billing',
+      aNameRef: bind('name'), aNameInput: (e) => this.setState({ draft: { ...st.draft, name: e.currentTarget.value } }),
+      aTransports: [{ id: 'stdio', label: 'stdio' }, { id: 'http', label: 'HTTP' }].map((t) => ({ label: t.label, on: d.transport === t.id, cls: d.transport === t.id ? 'is-on' : '', pick: () => this.setState({ draft: { ...st.draft, transport: t.id } }) })),
+      aTransportSay: d.transport === 'stdio' ? 'a command this machine runs' : 'a server somewhere else',
+      aCmdLabel: d.transport === 'stdio' ? 'Command' : 'URL', aCmdPlaceholder: d.transport === 'stdio' ? 'npx -y some-mcp-server …' : 'https://…/mcp',
+      aCmdRef: bind('cmd'), aCmdInput: (e) => this.setState({ draft: { ...st.draft, cmd: e.currentTarget.value } }),
+      aScopes: [{ id: 'you', label: 'Just you' }, { id: 'project', label: 'This project' }].map((s) => ({ label: s.label, on: d.scope === s.id, cls: d.scope === s.id ? 'is-on' : '', pick: () => this.setState({ draft: { ...st.draft, scope: s.id } }) })),
+      aEst: canAdd ? 'Connects right away · tools show up once the handshake is through' : !d.name.trim() ? 'Needs a name' : (d.transport === 'stdio' ? 'Needs a command' : 'Needs a URL'),
+      aAddCls: canAdd ? '' : 'is-clean',
+      doAdd: () => {
+        if (!canAdd) return;
+        const id = 'new' + st.nextId;
+        const s = { id, name: d.name.trim(), transport: d.transport, cmd: d.cmd.trim(), src: 'you added it just now', scope: d.scope === 'you' ? 'just you' : 'this project · Orbit Billing', auth: d.transport === 'http' ? 'OAuth' : 'Nothing', authSay: d.transport === 'http' ? 'asks on first connect' : 'nothing yet', ver: d.transport === 'http' ? 'remote' : 'local',
+          note: 'Added by hand. Its description arrives with the handshake.', status: 'connecting', say: 'starting…', calls: 0, errs: 0, tools: NEW_TOOLS.map((t) => ({ ...t })), moreTools: 0, resources: 0, prompts: 0, agents: [], wss: d.scope === 'you' ? [] : ['orbit'], env: [], log: [] };
+        this.setState({ servers: [s].concat(st.servers), adding: false, sel: id, nextId: st.nextId + 1, msg: s.name + ' added · connecting' });
+        this.later(() => { this.patch(id, (x) => ({ ...x, status: 'ok', say: 'since just now · 3 tools listed', log: [C('ok', '10:42', 'initialize', 'app', 'handshake ok · 3 tools listed', '0.6 s')] })); this.setState({ msg: s.name + ' is connected · turn it on for an agent in the drawer' }); }, 1800);
+      },
+      demoText: st.msg || 'Click a server for its tools and calls · Jira can\'t connect and Sentry needs a sign-in · Browser is restarting · the switch turns a server off everywhere',
+      reset: () => { this.timers.forEach(clearTimeout); this.timers = []; if (this.q) this.q.value = ''; this.setState({ ...INIT, draft: { ...DRAFT }, servers: clone(SERVERS) }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
