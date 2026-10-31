@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Team board</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/agent-teams-ds/tokens.css">
+<link rel="stylesheet" href="ds/agent-teams-ds/components/bundle.css">
+<script src="ds/agent-teams-ds/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1221}
+a{color:#9db4ff}a:hover{color:#c3d1ff}
+.col{flex:1 1 230px;min-width:230px;max-width:300px;display:flex;flex-direction:column;gap:10px;min-height:0}
+.colh{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 10px;border-radius:8px}
+.colh b{font-size:13px;font-weight:600;letter-spacing:-.01em}
+.colh .n{font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#8d96b5;background:#1b2340;padding:4px 7px;border-radius:999px;font-variant-numeric:tabular-nums}
+.colh .n.over{color:#f0b64f;background:#f0b64f24}
+.colh .k{width:8px;height:8px;border-radius:50%;background:var(--k)}
+.lane{display:flex;flex-direction:column;gap:8px;padding:8px;border-radius:12px;background:rgba(21,27,47,.55);border:1px solid #1b2340;min-height:420px;flex:1}
+.lane.target{border-color:#7c9cff;box-shadow:inset 0 0 0 1px rgba(124,156,255,.35),0 0 18px rgba(124,156,255,.2)}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:12px;background:#151b2f;border:1px solid #252d48;transition:border-color .2s,box-shadow .25s,opacity .2s,transform .2s;text-align:left}
+.card:hover{border-color:#36406a;transform:translateY(-1px)}
+.card:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.card.on{border-color:#3a4677;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.card.live{border-color:#7c9cff73;box-shadow:0 0 0 1px rgba(124,156,255,.55),0 0 18px rgba(124,156,255,.35)}
+.card.blocked{border-color:#f0b64f;background:color-mix(in srgb,#f0b64f24,#151b2f);animation:at-attn 2.4s ease-in-out infinite}
+.card.failed{border-color:#ff7083;box-shadow:0 0 0 1px rgba(255,112,131,.6),0 0 18px rgba(255,112,131,.4)}
+.card.done{opacity:.75}
+.card.dim{opacity:.28;filter:saturate(.4)}
+.card .id{font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#5b6484}
+.card h3{margin:0;font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.35;color:#e7eaf4}
+.card .foot{display:flex;align-items:center;gap:6px;min-width:0}
+.card .sp{flex:1}
+.card .live-line{position:relative;height:2px;border-radius:2px;background:#7c9cff2e;overflow:hidden;margin-top:2px}
+.card .live-line::after{content:"";position:absolute;top:0;bottom:0;width:35%;border-radius:2px;background:linear-gradient(90deg,transparent,#c3d1ff,transparent);animation:at-slide 1.6s cubic-bezier(.6,0,.4,1) infinite}
+.card .sub{display:flex;flex-direction:column;gap:4px;padding-top:6px;border-top:1px dashed #252d48}
+.card .sub span{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#8d96b5}
+.card .sub i{width:12px;height:12px;border-radius:3px;border:1.5px solid #5b6484;flex:none;display:grid;place-items:center}
+.card .sub i.d{background:#4fd1a0;border-color:#4fd1a0;color:#0d1221}
+.who{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 4px;border-radius:999px;background:#151b2f;border:1px solid #252d48;font:500 12px/1 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5;transition:border-color .15s,color .15s,background .2s}
+.who:hover{border-color:#36406a;color:#e7eaf4}
+.who:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.who.on{color:#e7eaf4;background:#7c9cff2e;border-color:#3a4677}
+.who .c{font:400 11px/1 "JetBrains Mono",ui-monospace,monospace;color:#5b6484}
+.ico{all:unset;box-sizing:border-box;cursor:pointer;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;color:#8d96b5;border:1px solid #252d48;background:#151b2f}
+.ico:hover{border-color:#36406a;color:#e7eaf4}
+.ico:focus-visible{box-shadow:0 0 0 2px #0d1221,0 0 0 4px #7c9cff}
+.seg{display:inline-flex;padding:2px;border-radius:8px;background:#0f1527;border:1px solid #252d48}
+.seg button{all:unset;cursor:pointer;height:26px;padding:0 10px;border-radius:6px;font:500 12.5px/1 "IBM Plex Sans",system-ui,sans-serif;color:#8d96b5}
+.seg button.on{background:#1b2340;color:#e7eaf4}
+.act{display:flex;gap:8px;padding:8px 10px;border-radius:8px;font-size:12.5px;line-height:1.45}
+.act time{font:400 11px/1.5 "JetBrains Mono",ui-monospace,monospace;color:#5b6484;flex:none;width:40px}
+@media (max-width:980px){.hide-sm{display:none}}
+</style>
+</helmet>
+<div class="at-root" style="min-height: 100vh; display: flex; flex-direction: column; background: #0d1221; color: #e7eaf4; font-family: 'IBM Plex Sans', system-ui, sans-serif; box-sizing: border-box">
+
+  <header style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; border-bottom: 1px solid #252d48; background: #0f1527; position: sticky; top: 0; z-index: 3">
+    <a href="Space.dc.html" aria-label="Back to team space" style="display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #8d96b5; border: 1px solid #252d48; background: #151b2f">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    </a>
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+      <span style="font-size: 11.5px; color: #8d96b5">Teams / Release crew</span>
+      <strong style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2">Board · LEIB-117</strong>
+    </div>
+    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #9db4ff">
+      <x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="bash" running="{{yes}}" pop="{{no}}"></x-import>
+      2 cards in progress · 1 blocked on you
+    </span>
+    <div style="margin-left: auto; display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+      <div class="seg hide-sm" role="group" aria-label="Group by"><button type="button" class="on">By stage</button><button type="button">By agent</button></div>
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" icon="zap">Let Orchestrator re-plan</x-import>
+      <x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" icon="plus">Add card</x-import>
+    </div>
+  </header>
+
+  <!-- agent filter + hint -->
+  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 14px 24px 0">
+    <span style="font-size: 11.5px; color: #8d96b5; margin-right: 4px">Show</span>
+    <sc-for list="{{whos}}" as="w" hint-placeholder-count="6">
+      <button type="button" class="who {{w.cls}}" aria-pressed="{{w.on}}" onClick="{{w.pick}}">
+        <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{w.name}}" id="{{w.name}}" glyph="{{w.glyph}}" size="{{twentyTwo}}" status="{{w.status}}"></x-import>
+        {{w.name}}<span class="c">{{w.count}}</span>
+      </button>
+    </sc-for>
+    <span class="hide-sm" style="margin-left: auto; font-size: 11.5px; color: #5b6484">Agents move their own cards. Click a card, then “Move →” to override.</span>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: stretch; gap: 0">
+
+    <!-- ===== Columns ===== -->
+    <main style="flex: 999 1 720px; min-width: 0; overflow-x: auto; padding: 14px 24px 28px; box-sizing: border-box">
+      <div style="display: flex; gap: 12px; align-items: stretch; min-width: 0">
+        <sc-for list="{{cols}}" as="c" hint-placeholder-count="5">
+          <section class="col" aria-label="{{c.name}}">
+            <div class="colh" style="--k: {{c.color}}">
+              <i class="k" aria-hidden="true"></i><b>{{c.name}}</b>
+              <span class="n {{c.nCls}}">{{c.countLabel}}</span>
+              <span style="margin-left: auto; font-size: 11px; color: #5b6484">{{c.hint}}</span>
+            </div>
+            <div class="lane {{c.laneCls}}">
+              <sc-for list="{{c.cards}}" as="k" hint-placeholder-count="3">
+                <button type="button" class="card {{k.cls}}" aria-pressed="{{k.on}}" onClick="{{k.pick}}">
+                  <span style="display: flex; align-items: center; gap: 8px">
+                    <span class="id">{{k.id}}</span>
+                    <sc-if value="{{k.hasFlag}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{k.flagTone}}">{{k.flag}}</x-import></sc-if>
+                    <span class="sp"></span>
+                    <sc-for list="{{k.kinds}}" as="d" hint-placeholder-count="2"><x-import component-from-global-scope="AgentTeamsDS.StatusDot" kind="{{d}}" pop="{{no}}"></x-import></sc-for>
+                  </span>
+                  <h3>{{k.title}}</h3>
+                  <sc-if value="{{k.hasSub}}" hint-placeholder-val="{{false}}">
+                    <span class="sub">
+                      <sc-for list="{{k.sub}}" as="t" hint-placeholder-count="2"><span><i class="{{t.cls}}"><sc-if value="{{t.done}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="check" size="{{nine}}" stroke-width="{{four}}"></x-import></sc-if></i>{{t.text}}</span></sc-for>
+                    </span>
+                  </sc-if>
+                  <sc-if value="{{k.isLive}}" hint-placeholder-val="{{false}}"><span class="live-line" aria-hidden="true"></span></sc-if>
+                  <span class="foot">
+                    <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{k.who}}" id="{{k.who}}" glyph="{{k.whoGlyph}}" size="{{twenty}}" status="{{k.whoStatus}}"></x-import>
+                    <span style="font-size: 11.5px; color: #8d96b5">{{k.who}}</span>
+                    <span class="sp"></span>
+                    <span style="font: 400 11px/1 'JetBrains Mono', monospace; color: #5b6484; font-variant-numeric: tabular-nums">{{k.meta}}</span>
+                  </span>
+                </button>
+              </sc-for>
+              <sc-if value="{{c.empty}}" hint-placeholder-val="{{false}}">
+                <span style="font-size: 12px; color: #5b6484; text-align: center; padding: 20px 8px">Nothing here{{c.emptyNote}}</span>
+              </sc-if>
+            </div>
+          </section>
+        </sc-for>
+      </div>
+    </main>
+
+    <!-- ===== Card detail ===== -->
+    <aside aria-label="Card" style="flex: 1 1 320px; max-width: 360px; min-width: 0; border-left: 1px solid #252d48; background: #0f1527; display: flex; flex-direction: column; gap: 16px; padding: 18px 16px 24px; box-sizing: border-box">
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+        <span style="font: 400 11.5px/1 'JetBrains Mono', monospace; color: #8d96b5">{{sel.id}}</span>
+        <x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{sel.stageTone}}">{{sel.stage}}</x-import>
+        <sc-if value="{{sel.hasFlag}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Chip" tone="{{sel.flagTone}}">{{sel.flag}}</x-import></sc-if>
+        <span style="margin-left: auto; display: inline-flex; gap: 6px">
+          <button class="ico" type="button" aria-label="Open session"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="message" size="{{fourteen}}"></x-import></button>
+          <button class="ico" type="button" aria-label="Edit card"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="pencil" size="{{fourteen}}"></x-import></button>
+        </span>
+      </div>
+      <strong style="font-size: 16px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3">{{sel.title}}</strong>
+      <p style="margin: 0; font-size: 13px; line-height: 1.55; color: #c9cfe8">{{sel.desc}}</p>
+
+      <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; background: #151b2f; border: 1px solid #252d48">
+        <x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{sel.who}}" id="{{sel.who}}" glyph="{{sel.whoGlyph}}" size="{{thirtyTwo}}" status="{{sel.whoStatus}}"></x-import>
+        <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1">
+          <span style="font-size: 13px; font-weight: 500">{{sel.who}}</span>
+          <span style="font-size: 11.5px; color: #8d96b5">{{sel.whoNote}}</span>
+        </span>
+        <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm">Reassign</x-import>
+      </div>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <x-import component-from-global-scope="AgentTeamsDS.Button" variant="primary" size="sm" icon="send" disabled="{{sel.atEnd}}" on-click="{{moveNext}}">Move → {{sel.next}}</x-import>
+        <x-import component-from-global-scope="AgentTeamsDS.Button" variant="ghost" size="sm" disabled="{{sel.atStart}}" on-click="{{movePrev}}">← {{sel.prev}}</x-import>
+        <sc-if value="{{sel.blocked}}" hint-placeholder-val="{{false}}"><x-import component-from-global-scope="AgentTeamsDS.Button" variant="danger" size="sm">Answer in session</x-import></sc-if>
+      </div>
+
+      <section style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484">Linked</span>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <a href="Space.dc.html" style="display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 8px; border-radius: 8px; font-size: 12.5px; text-decoration: none; color: #e7eaf4"><span style="color: #5fd4e8"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="compass" size="{{fourteen}}"></x-import></span>plans/leib-117.md <span style="margin-left: auto; font: 400 11px/1 'JetBrains Mono', monospace; color: #5b6484">plan</span></a>
+          <a href="Chat.dc.html" style="display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 8px; border-radius: 8px; font-size: 12.5px; text-decoration: none; color: #e7eaf4"><span style="color: #7c9cff"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="message" size="{{fourteen}}"></x-import></span>Session · Static HTML file export <span style="margin-left: auto; font: 400 11px/1 'JetBrains Mono', monospace; color: #5b6484">live</span></a>
+          <a href="Swimlanes.dc.html" style="display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 8px; border-radius: 8px; font-size: 12.5px; text-decoration: none; color: #e7eaf4"><span style="color: #c58cff"><x-import component-from-global-scope="AgentTeamsDS.Icon" name="users" size="{{fourteen}}"></x-import></span>Timeline for this card <span style="margin-left: auto; font: 400 11px/1 'JetBrains Mono', monospace; color: #5b6484">{{sel.meta}}</span></a>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 2px; margin-top: auto">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5b6484; margin-bottom: 6px">Activity</span>
+        <sc-for list="{{sel.log}}" as="l" hint-placeholder-count="4">
+          <div class="act"><time>{{l.t}}</time><x-import component-from-global-scope="AgentTeamsDS.AgentAvatar" name="{{l.by}}" id="{{l.by}}" glyph="{{l.glyph}}" size="{{eighteen}}"></x-import><span style="color: #c9cfe8">{{l.text}}</span></div>
+        </sc-for>
+      </section>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":940}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.stages = ['Backlog', 'Ready', 'In progress', 'Review', 'Done'];
+    this.state = {
+      sel: 'L-117-4', who: 'all',
+      stage: { 'L-117-1': 4, 'L-117-2': 4, 'L-117-3': 4, 'L-117-4': 2, 'L-117-5': 3, 'L-117-6': 1, 'L-117-7': 0, 'L-117-8': 0, 'L-117-9': 1, 'L-118-1': 0 }
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const A = { Orchestrator: 'bot', Planner: 'compass', Builder: 'wrench', Scout: 'search', Reviewer: 'shield', You: 'message', Unassigned: 'plus' };
+    const STATUS = { Builder: 'live', Reviewer: 'live', Orchestrator: 'live', Planner: 'ask', Scout: 'done' };
+    const cards = [
+      { id: 'L-117-1', title: 'Map owning files and tests for the exporter', who: 'Scout', kinds: ['read'], meta: '5m', desc: 'Find who owns apps/export and which tests cover it before anyone edits.', log: [{ t: '14:06', by: 'Scout', text: 'Moved to Done · map written to the space' }, { t: '14:01', by: 'Orchestrator', text: 'Assigned to Scout' }] },
+      { id: 'L-117-2', title: 'Add render_static() entry point', who: 'Builder', kinds: ['edit', 'bash'], meta: '7m', sub: [{ text: 'tests green', done: true }, { text: 'under 10 KB JS', done: true }], desc: 'New exporter writing dist/board.html with inlined SVG charts.', log: [{ t: '14:17', by: 'Builder', text: 'Moved to Done · 6 tests pass' }, { t: '14:13', by: 'Builder', text: 'pytest failed — fixture path; fixing' }] },
+      { id: 'L-117-3', title: 'Fix moved fixture import in conftest', who: 'Builder', kinds: ['edit'], meta: '2m', desc: 'Unplanned: surfaced by the failed run.', flag: 'unplanned', flagTone: 'neutral', log: [{ t: '14:15', by: 'Builder', text: 'Moved to Done' }, { t: '14:13', by: 'Builder', text: 'Created card from a failed step' }] },
+      { id: 'L-117-4', title: 'Remove export_legacy() and its fixture', who: 'Builder', kinds: ['edit', 'bash'], meta: '0:38', live: true, sub: [{ text: 'delete legacy.py path', done: true }, { text: 'pytest -q', done: false }], desc: 'You decided at 14:24: remove, don’t flag. Builder is deleting the path and re-running the suite.', whoNote: 'running pytest · 0:38', log: [{ t: '14:26', by: 'Builder', text: 'Spawned Reviewer for dist/board.js' }, { t: '14:24', by: 'Orchestrator', text: 'Moved to In progress after your answer' }, { t: '14:19', by: 'Planner', text: 'Blocked: keep or remove? Asked you' }, { t: '14:09', by: 'Orchestrator', text: 'Created from the plan' }] },
+      { id: 'L-117-5', title: 'Review dist/board.js for legend regressions', who: 'Reviewer', kinds: ['read', 'think'], meta: '13m', live: true, desc: 'Scope is the chart script only; styles are out.', whoNote: 'reviewing · 2 nits so far', log: [{ t: '14:35', by: 'Reviewer', text: 'Approved with 2 nits; re-checking after fix' }, { t: '14:26', by: 'Builder', text: 'Handed off' }] },
+      { id: 'L-117-6', title: 'Open PR and link the plan', who: 'Builder', kinds: ['bash'], meta: 'next', desc: 'Blocked until L-117-4 and L-117-5 land.', log: [{ t: '14:09', by: 'Orchestrator', text: 'Created from the plan' }] },
+      { id: 'L-117-7', title: 'Write the board-pack embed snippet', who: 'Unassigned', kinds: ['edit'], meta: '—', desc: 'Short HTML snippet for the board pack authors.', log: [{ t: '14:02', by: 'You', text: 'Added to backlog' }] },
+      { id: 'L-117-8', title: 'Decide: keep a legacy flag for one release?', who: 'You', kinds: ['ask'], meta: '6m', blocked: true, flag: 'needs you', flagTone: 'warn', desc: 'Planner wants a product call: ship a feature flag for one release, or remove outright (already done on L-117-4).', whoNote: 'waiting on you since 14:19', log: [{ t: '14:19', by: 'Planner', text: 'Asked you; moved card to Backlog for a decision' }] },
+      { id: 'L-117-9', title: 'Plan billing-table migration', who: 'Planner', kinds: ['think'], meta: '15m', desc: 'Draft plan written to the space; unblocked now the exporter decision landed.', log: [{ t: '14:24', by: 'Planner', text: 'Unblocked; moved to Ready' }, { t: '14:17', by: 'Planner', text: 'Draft plan in plans/billing-migration.md' }] },
+      { id: 'L-118-1', title: 'Deploy canary for the exporter', who: 'Builder', kinds: ['bash'], meta: 'failed 1d', failed: true, flag: 'failed last run', flagTone: 'err', desc: 'Previous attempt failed on pytest; retry after L-117 ships.', log: [{ t: '1d', by: 'Builder', text: 'Run failed · pytest' }] }
+    ];
+    const byId = {}; cards.forEach((c) => { byId[c.id] = c; });
+    const sel = byId[s.sel];
+    const selStage = s.stage[sel.id];
+    const colDefs = [
+      { name: 'Backlog', color: 'var(--ink-400)', hint: '' },
+      { name: 'Ready', color: 'var(--kind-read)', hint: 'agents pull from here' },
+      { name: 'In progress', color: 'var(--accent)', hint: 'WIP 3', wip: 3 },
+      { name: 'Review', color: 'var(--kind-subagent)', hint: '' },
+      { name: 'Done', color: 'var(--ok)', hint: 'today' }
+    ];
+    const whoCounts = { all: cards.length }; cards.forEach((c) => { whoCounts[c.who] = (whoCounts[c.who] || 0) + 1; });
+    const whos = [{ name: 'Everyone', key: 'all', glyph: 'users' }].concat(['Orchestrator', 'Planner', 'Builder', 'Scout', 'Reviewer', 'You'].map((n) => ({ name: n, key: n, glyph: A[n] }))).map((w) => ({
+      ...w, status: STATUS[w.key] || '', count: whoCounts[w.key] || 0, on: s.who === w.key, cls: s.who === w.key ? 'on' : '', pick: () => this.setState({ who: s.who === w.key ? 'all' : w.key })
+    }));
+    const cols = colDefs.map((c, ci) => {
+      const inCol = cards.filter((k) => s.stage[k.id] === ci);
+      return {
+        ...c, countLabel: c.wip ? inCol.length + ' / ' + c.wip : String(inCol.length), nCls: c.wip && inCol.length >= c.wip ? 'over' : '',
+        laneCls: sel && selStage === ci - 1 ? '' : '', empty: inCol.length === 0, emptyNote: ci === 3 ? ' — Reviewer pulls automatically' : '',
+        cards: inCol.map((k) => {
+          const on = k.id === s.sel, dim = s.who !== 'all' && k.who !== s.who;
+          return {
+            ...k, on, whoGlyph: A[k.who], whoStatus: k.live ? 'live' : (k.failed ? 'error' : (k.blocked ? 'ask' : '')), isLive: !!k.live,
+            hasFlag: !!k.flag, flag: k.flag || '', flagTone: k.flagTone || 'neutral', hasSub: !!k.sub,
+            sub: (k.sub || []).map((t) => ({ ...t, cls: t.done ? 'd' : '' })),
+            cls: [on && 'on', k.live && 'live', k.blocked && 'blocked', k.failed && 'failed', ci === 4 && 'done', dim && 'dim'].filter(Boolean).join(' '),
+            pick: () => this.setState({ sel: k.id })
+          };
+        })
+      };
+    });
+    const move = (d) => () => { const n = Math.max(0, Math.min(4, s.stage[sel.id] + d)); this.setState({ stage: { ...s.stage, [sel.id]: n } }); };
+    return {
+      yes: true, no: false, four: 4, nine: 9, fourteen: 14, eighteen: 18, twenty: 20, twentyTwo: 22, thirtyTwo: 32,
+      whos, cols,
+      moveNext: move(1), movePrev: move(-1),
+      sel: {
+        ...sel, stage: this.stages[selStage], stageTone: selStage === 4 ? 'ok' : selStage === 2 ? 'accent' : 'neutral',
+        hasFlag: !!sel.flag, flag: sel.flag || '', flagTone: sel.flagTone || 'neutral', blocked: !!sel.blocked,
+        whoGlyph: A[sel.who], whoStatus: sel.live ? 'live' : (sel.failed ? 'error' : (sel.blocked ? 'ask' : '')), whoNote: sel.whoNote || (selStage === 4 ? 'finished' : 'not started'),
+        next: this.stages[Math.min(4, selStage + 1)], prev: this.stages[Math.max(0, selStage - 1)], atEnd: selStage === 4, atStart: selStage === 0,
+        log: sel.log.map((l) => ({ ...l, glyph: A[l.by] }))
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
