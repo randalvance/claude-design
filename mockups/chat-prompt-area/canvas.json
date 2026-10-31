@@ -85,6 +85,16 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Memory.dc.html": {
+      "x": 0,
+      "y": 7000,
+      "w": 1440,
+      "h": 900,
+      "title": "Memory — global, workspace and agent facts, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -94,7 +104,8 @@
     "Workspaces.dc.html",
     "Workspace.dc.html",
     "Kanban.dc.html",
-    "Board.dc.html"
+    "Board.dc.html",
+    "Memory.dc.html"
   ],
   "notes": {
     "p1": {
@@ -158,6 +169,14 @@
       "y": 4000,
       "w": 320,
       "text": "Workspace page: the header carries the colour chip (pick from six swatches), the editable name, Delete and Save. Left column: Linked folders (mono paths with a git marker, unlink ×, Add a folder), Extra context (ruled, token estimate) and Memory (facts learned by sessions here, pin to keep, × to forget, write your own and press Enter). Right column: Kanban board (a single highlighter row for the linked board with Open board and Unlink; when nothing is linked the row says so and Link a board opens a small floating list of the boards in Kanban), Agents relevant here (checkbox rows with portraits), Skills and MCP servers (paper switches). Delete explains that folders on disk are never touched.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p9": {
+      "x": 1520,
+      "y": 7000,
+      "w": 320,
+      "text": "Memory page: three folder tabs for the levels (Global, Workspaces, Agents). Workspace and agent levels add a strip of chips, each with its colour or portrait and a tiny meter of its 4 KB. Facts sit under kraft section labels with a red tack; each row has a push-pin (red = pinned, rides in every session; grey = answers search_memory only), the text, where it came from and when, its size in bytes, edit and forget. The Budget sheet is a paper ruler: solid fill is pinned, hatched is searchable, a post marks 4 KB. Global is nearly full (amber sticker); Orbit Billing is over, so the fill turns red, spills past the post, an Over-by sticker thumps down and a kraft note says what happens. New fact opens a kraft note: level, which workspace or agent, section chips or a new section, the fact, a pin switch, and a hand-written line saying what it adds and whether that goes over.",
       "fill": "orange",
       "page": "paper"
     }
