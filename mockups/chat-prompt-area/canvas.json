@@ -123,6 +123,26 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Kanban.dc.html": {
+      "x": 0,
+      "y": 5000,
+      "w": 1440,
+      "h": 900,
+      "title": "Kanban — boards list, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Board.dc.html": {
+      "x": 0,
+      "y": 6000,
+      "w": 1440,
+      "h": 900,
+      "title": "Board — cork board with ticket drawer, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -134,6 +154,8 @@
     "Agent.dc.html",
     "Workspaces.dc.html",
     "Workspace.dc.html",
+    "Kanban.dc.html",
+    "Board.dc.html",
     "Future.dc.html",
     "Saas.dc.html"
   ],
@@ -207,6 +229,22 @@
       "y": 3000,
       "w": 320,
       "text": "Workspaces list: each workspace is an index card with its colour as a painted spine down the left edge, the name, the linked folders in mono, and one hand-written line (agents · memory facts · Kanban board). Cards with sessions working show a turning amber marker. New session opens a chat with that workspace's folders mounted; search matches names, folders and boards.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p7": {
+      "x": 1520,
+      "y": 5000,
+      "w": 320,
+      "text": "Kanban list: one index card per board with a rubber-stamped type in the corner (Local, Jira, GitHub), the source in mono, To do / Doing / Done counts as tags, and the workspaces it is tied to as colour chips. Jira and GitHub cards carry a Sync button and a hand-written sync state; local ones say there is nothing to sync. Sync all in the header runs every synced board with a turning arrow. Click a card to open the cork board.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p8": {
+      "x": 1520,
+      "y": 6000,
+      "w": 320,
+      "text": "Board: a framed cork board. Columns are kraft labels pinned with a red tack; cards are sticky notes in five pastel colours, each a little crooked, with the ticket key, a hand-written title, the workspace swatch, the agent's portrait and when it last moved. Drag a note onto another column to move it (the column lights up); click one to open the ticket drawer on the right: column chips, workspace, agent (change cycles), created, updated, links, description, notes to the agent, history and sessions with a Start a session button. Sync pulls a new note in from Jira; Add card pins a local one that goes to Jira on the next sync.",
       "fill": "orange",
       "page": "paper"
     },
