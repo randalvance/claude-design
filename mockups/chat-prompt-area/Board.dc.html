@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Board — paper</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e4dccb;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
+.page{--desk:#e4dccb;--paper:#f8f3e9;--paper-2:#efe7d6;--sheet:#fffdf7;--sheet-warm:#fffaf0;--card:#fffdf8;--rail:#e4d9c1;--line:#d6cab2;--kraft:#e2c48c;--kraft-2:#cfae72;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--tape:#ffec969e;--white:#ffffff;--cork:#b98c5e;--cork-2:#7a5634;--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;min-height:100vh;box-sizing:border-box;display:flex;justify-content:center}
+button,input,textarea{font:inherit}
+.pp-ic{width:16px;height:16px;flex:none}
+
+.app{position:relative;width:100%;height:100vh;display:flex;background:var(--paper);overflow:hidden}
+.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
+
+/* rail (Paper Chat: Rail) */
+.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:relative;z-index:1}
+.pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
+.pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.pp-rb svg{width:18px;height:18px}
+.pp-rb:hover{background:var(--sheet-warm);transform:translateY(-1px)}
+.pp-rb.is-on{background:var(--sheet-warm);color:var(--ink);box-shadow:2px 2px 0 var(--shadow);transform:rotate(-2deg)}
+.pp-rb:focus-visible{outline:2px solid var(--blue)}
+.pp-rb .pp-nb{position:absolute;top:0;right:4px;transform:rotate(8deg)}
+.pp-nb{min-width:16px;height:16px;padding:0 4px;border-radius:50%;background:var(--red);color:var(--white);font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);box-sizing:border-box;flex:none}
+.pp-rail .pp-sp{flex:1}
+
+/* board header */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.top{position:relative;z-index:2;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 22px 12px;display:flex;flex-direction:column;gap:6px}
+.crumb{all:unset;cursor:pointer;font-family:var(--font-hand);font-size:17px;color:var(--blue);display:inline-flex;align-items:center;gap:4px;align-self:flex-start}
+.crumb:hover{color:var(--blue-2);text-decoration:underline}
+.crumb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bname{font-family:var(--font-serif);font-size:22px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:12px}
+.stamp{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border:2px solid currentColor;border-radius:3px;transform:rotate(-4deg);opacity:.85;mix-blend-mode:multiply;background:#fffdf8cc;white-space:nowrap;color:var(--blue)}
+.meta{font-family:var(--font-hand);font-size:16px;color:var(--mute)}
+.meta.is-busy{color:var(--amber)}
+.meta.is-new{color:var(--green)}
+.wss{display:flex;gap:6px;flex-wrap:wrap}
+.wsc{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px 0 6px;background:var(--sheet-warm);border:1px solid var(--line);font-size:12px;font-weight:700;transform:rotate(-1deg)}
+.wsc:nth-child(even){transform:rotate(1deg)}
+.wsc i{width:9px;height:9px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pp-btn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 2px 0 var(--blue-2);transition:transform .2s steps(2),background .2s steps(2);box-sizing:border-box;white-space:nowrap}
+.pp-btn:hover{transform:translateY(-1px)}
+.pp-btn:focus-visible{outline:2px solid var(--ink)}
+.pp-btn.ghost{background:var(--sheet);color:var(--ink);box-shadow:2px 2px 0 var(--shadow);border:1px solid var(--ink)}
+.pp-btn.ghost.is-busy{background:var(--highlighter)}
+.pp-btn.sm{height:30px}
+.spin{animation:turn .8s steps(4) infinite}
+.pp-dashed{all:unset;cursor:pointer;font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed var(--bar);padding:3px 10px;border-radius:3px;transition:transform .2s steps(2);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.pp-dashed:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
+.pp-dashed:focus-visible{outline:2px solid var(--blue)}
+
+/* cork */
+.body{flex:1;min-height:0;display:flex}
+.cork{flex:1;min-width:0;overflow:auto;position:relative;background-color:var(--cork);background-image:radial-gradient(rgba(0,0,0,.16) 1px,transparent 1.6px),radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.6px),radial-gradient(rgba(0,0,0,.09) 2px,transparent 2.8px);background-size:7px 7px,11px 11px,23px 23px;background-position:0 0,3px 5px,9px 2px;box-shadow:inset 0 0 0 10px var(--cork-2),inset 0 0 0 12px #c9a06c,inset 0 0 40px rgba(0,0,0,.25);display:block;padding:28px 24px 28px;box-sizing:border-box}
+.colsview{display:flex;gap:16px;align-items:flex-start}
+.views{display:inline-flex;border:1px solid var(--line);background:var(--sheet);box-shadow:2px 2px 0 var(--shadow)}
+.vt{all:unset;cursor:pointer;height:30px;padding:0 12px;font-size:12px;font-weight:800;color:var(--mute);display:inline-flex;align-items:center;gap:6px;transition:background .15s steps(2)}
+.vt:hover{color:var(--ink)}
+.vt:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.vt.is-on{background:var(--highlighter);color:var(--ink)}
+.vt svg{width:14px;height:14px}
+.gchip{all:unset;cursor:pointer;height:28px;padding:0 10px;font-size:11.5px;font-weight:800;border:1.5px dashed var(--bar);color:var(--mute);border-radius:3px;display:inline-flex;align-items:center;gap:6px;box-sizing:border-box;transition:transform .2s steps(2)}
+.gchip:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
+.gchip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.gchip.is-on{border-style:solid;border-color:var(--highlighter-2);background:var(--highlighter);color:var(--ink)}
+.eh{display:flex;align-items:center;gap:6px;margin:4px 4px -4px;font-family:var(--font-hand);font-size:15px;font-weight:600;color:rgba(255,253,247,.92);text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.eh .ek{font-family:var(--font-mono);font-size:9.5px;font-weight:700;background:var(--kraft);color:var(--ink);padding:1px 5px;text-shadow:none;transform:rotate(-2deg)}
+.depwrap{position:relative;display:flex;flex-wrap:wrap;gap:38px 28px;padding:14px 4px 28px;align-items:flex-start;box-sizing:border-box}
+.strings{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2}
+.strings .sh{fill:none;stroke:rgba(0,0,0,.32);stroke-width:3;transform:translate(1.5px,2.5px)}
+.strings .str{fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round;opacity:.92;transition:opacity .15s steps(2)}
+.strings .str.rel{stroke:#dcc08f;stroke-width:2}
+.strings .str.is-hot{stroke-width:3.2;opacity:1}
+.strings.has-sel .str:not(.is-hot){opacity:.4}
+.epic{position:relative;border:2px dashed rgba(255,253,247,.5);border-radius:6px;padding:28px 14px 16px;display:grid;grid-template-columns:repeat(2,176px);gap:22px 14px;align-content:start;min-height:120px}
+.epic.loose{border-style:dotted;grid-template-columns:repeat(1,176px)}
+.el{position:absolute;top:-13px;left:14px;background:var(--kraft);padding:4px 10px;font-weight:800;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);box-shadow:2px 2px 0 rgba(0,0,0,.28);transform:rotate(-1.5deg);display:flex;gap:8px;align-items:center;white-space:nowrap;z-index:1}
+.el .ek{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0;background:var(--sheet);padding:1px 5px}
+.el .n{font-family:var(--font-hand);font-size:15px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--mute)}
+.depwrap .note{width:176px;cursor:pointer;padding-top:14px}
+.depwrap .note .tack{top:-6px;z-index:3}
+.depwrap .note:hover{transform:rotate(var(--r)) translateY(-1px)}
+.depwrap .note .new{color:var(--mute);transform:none;font-size:13px}
+.legend{width:100%;font-family:var(--font-hand);font-size:15px;color:rgba(255,253,247,.88);text-shadow:0 1px 0 rgba(0,0,0,.35);display:flex;gap:18px;align-items:center;padding:0 6px;flex-wrap:wrap}
+.legend i{display:inline-block;width:26px;height:0;border-top:2.5px solid var(--red);vertical-align:middle;margin-right:6px;border-radius:2px}
+.legend i.rel{border-color:#dcc08f}
+.col{width:226px;flex:none;display:flex;flex-direction:column;gap:14px;padding:6px 6px 34px;min-height:440px;border-radius:4px;transition:background .15s steps(2)}
+.col.is-over{background:rgba(255,253,247,.14);outline:2px dashed rgba(255,253,247,.75);outline-offset:-4px}
+.colh{position:relative;background:var(--kraft);padding:7px 10px 6px 12px;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);box-shadow:2px 3px 0 rgba(0,0,0,.28);transform:rotate(-1.2deg);display:flex;align-items:center;gap:8px;margin:0 4px}
+.col:nth-child(even) .colh{transform:rotate(.8deg)}
+.colh .n{margin-left:auto;font-family:var(--font-hand);font-size:16px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--mute)}
+.tack{position:absolute;top:-7px;left:50%;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9b85,var(--red) 55%,var(--red-2));box-shadow:1px 2px 1px rgba(0,0,0,.35);transform:translateX(-50%)}
+.note{position:relative;background:var(--nc);padding:12px 12px 9px;box-shadow:2px 3px 0 rgba(0,0,0,.2),0 10px 12px -9px rgba(0,0,0,.45);transform:rotate(var(--r));cursor:grab;transition:transform .15s steps(2),box-shadow .15s steps(2);animation:drop .3s steps(4) both;text-align:left;box-sizing:border-box;display:flex;flex-direction:column;gap:5px;user-select:none}
+.note::before{content:"";position:absolute;left:0;right:0;top:0;height:16px;background:rgba(0,0,0,.06)}
+.note::after{content:"";position:absolute;right:0;bottom:0;width:0;height:0;border-style:solid;border-width:0 0 16px 16px;border-color:transparent transparent rgba(0,0,0,.14) transparent}
+.note:hover{transform:rotate(0) translateY(-2px);box-shadow:3px 4px 0 rgba(0,0,0,.2),0 14px 14px -9px rgba(0,0,0,.45);z-index:1}
+.note.is-sel{outline:2px dashed var(--ink);outline-offset:3px;transform:rotate(0) scale(1.02)}
+.note.is-drag{opacity:.45;cursor:grabbing}
+.note:active{cursor:grabbing}
+.note:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.nk{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;font-weight:700;color:rgba(42,34,25,.72);position:relative}
+.pri{width:8px;height:8px;border-radius:50%;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.pri.high{background:var(--red)}
+.pri.normal{background:var(--amber)}
+.pri.low{background:var(--green)}
+.nk .new{margin-left:auto;font-family:var(--font-hand);font-size:13.5px;color:var(--red-2);font-weight:600;transform:rotate(-3deg)}
+.nt{font-family:var(--font-hand);font-size:19px;line-height:1.05;font-weight:600;color:var(--ink);position:relative}
+.nf{display:flex;align-items:center;gap:7px;margin-top:2px;position:relative}
+.nf .ws{width:10px;height:10px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.ap{width:22px;height:22px;flex:none;background:rgba(255,253,247,.65);border:1px solid rgba(42,34,25,.22);display:grid;place-items:center;transform:rotate(-4deg)}
+.ap svg{width:16px;height:16px;shape-rendering:crispEdges;display:block}
+.nf .who{font-size:11px;font-weight:800;color:rgba(42,34,25,.75)}
+.nf .when{margin-left:auto;font-family:var(--font-hand);font-size:14px;color:var(--mute)}
+.col .hint{font-family:var(--font-hand);font-size:15px;color:rgba(255,253,247,.75);text-align:center;padding:6px;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+
+/* ticket drawer */
+.drawer{width:470px;flex:none;background:var(--sheet);border-left:1px solid var(--line);box-shadow:-4px 0 0 var(--shadow);overflow:auto;position:relative;z-index:2;animation:slide .25s steps(4) both;display:flex;flex-direction:column}
+.dh{position:sticky;top:0;z-index:2;background:var(--sheet);padding:14px 18px 10px;border-bottom:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
+.row1{display:flex;align-items:center;gap:8px}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px 0 14px;background:var(--kraft);font-family:var(--font-mono);font-size:11px;font-weight:700;clip-path:polygon(0 50%,8px 0,100% 0,100% 100%,8px 100%);position:relative;white-space:nowrap}
+.tag::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;border-radius:50%;background:var(--sheet);transform:translateY(-50%)}
+.ext{font-family:var(--font-hand);font-size:15px;color:var(--blue);text-decoration:none;margin-left:auto;display:inline-flex;align-items:center;gap:3px}
+.ext:hover{text-decoration:underline;color:var(--blue-2)}
+.x{all:unset;cursor:pointer;width:26px;height:26px;flex:none;display:grid;place-items:center;color:var(--mute);border-radius:50%;transition:transform .2s steps(2),color .2s steps(2)}
+.x:hover{color:var(--ink);background:var(--paper-2);transform:rotate(90deg)}
+.x:focus-visible{outline:2px solid var(--blue)}
+.x svg{width:14px;height:14px}
+.dt{margin:0;font-family:var(--font-serif);font-size:20px;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.cchips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.cchips .lb{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-right:2px}
+.cchip{all:unset;cursor:pointer;height:22px;padding:0 8px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--sheet-warm);color:var(--mute);display:inline-flex;align-items:center;transition:transform .15s steps(2),background .15s steps(2)}
+.cchip:hover{transform:translateY(-1px);color:var(--ink)}
+.cchip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.cchip.is-on{background:var(--highlighter);border-color:var(--highlighter-2);color:var(--ink);transform:rotate(-2deg)}
+.db{padding:4px 18px 18px;display:flex;flex-direction:column}
+.sec{padding:14px 0;border-bottom:1px dashed var(--line)}
+.sec:last-child{border-bottom:0}
+.sec h3{margin:0 0 8px;font-family:var(--font-serif);font-size:15px;font-weight:600;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec h3 .hh{margin-left:auto;font-family:var(--font-hand);font-size:14px;color:var(--mute);font-weight:500}
+.sec h3 .hh.is-new{color:var(--green)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.fact{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fl{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.fv{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;min-width:0;flex-wrap:wrap}
+.fv .sub{font-family:var(--font-hand);font-size:14px;color:var(--mute);font-weight:500}
+.fv .ws{width:10px;height:10px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.fv .ap{width:26px;height:26px;background:var(--paper-2);border:1px solid var(--line)}
+.fv .ap svg{width:20px;height:20px}
+.fv .pp-dashed{padding:1px 7px;font-size:10.5px}
+.lrow{display:flex;align-items:center;gap:8px;padding:5px 0}
+.lrow .rel{font-family:var(--font-hand);font-size:15px;color:var(--mute);width:80px;flex:none}
+.lrow .lt{font-size:13px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .lc{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);flex:none}
+.desc{font-size:13.5px;line-height:1.55;white-space:pre-wrap;margin:0}
+.desc.empty{font-family:var(--font-hand);font-size:16px;color:var(--faint)}
+.fld{all:unset;display:block;width:100%;box-sizing:border-box;font-family:var(--font-sans);font-size:13.5px;line-height:24px;color:var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--line) 23px 24px);background-attachment:local;padding:0 2px;white-space:pre-wrap;overflow-wrap:anywhere;resize:vertical;min-height:72px}
+.fld::placeholder{font-family:var(--font-hand);font-size:17px;color:var(--faint)}
+.fld:focus{background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--bar) 23px 24px)}
+.frow{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:8px}
+.frow .hint{font-family:var(--font-hand);font-size:14px;color:var(--mute);margin-right:auto}
+.hrow{display:flex;gap:10px;align-items:flex-start;padding:5px 0;animation:drop .25s steps(3) both}
+.hrow .dot{width:8px;height:8px;border-radius:50%;background:var(--bar);margin-top:6px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.15)}
+.hrow .dot.now{background:var(--green)}
+.hrow .ht{display:flex;flex-direction:column;gap:1px;min-width:0}
+.hrow .hw{font-size:13px;font-weight:700}
+.hrow .hm{font-family:var(--font-hand);font-size:14px;color:var(--mute)}
+.srow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line);animation:drop .25s steps(3) both}
+.srow:last-of-type{border-bottom:0}
+.stk{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--white);box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-3deg);flex:none;white-space:nowrap}
+.stk.done{background:var(--green)}
+.stk.working{background:var(--red);animation:wob .5s steps(2) infinite}
+.stk.attn{background:var(--amber)}
+.srow .st{font-size:13px;font-weight:700;min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srow .sm{font-family:var(--font-hand);font-size:14px;color:var(--mute);white-space:nowrap}
+.mini{all:unset;cursor:pointer;font-size:11px;font-weight:800;padding:3px 8px;border:1px solid var(--ink);color:var(--ink);background:var(--sheet-warm);box-shadow:1px 1px 0 var(--shadow);border-radius:3px;white-space:nowrap;transition:transform .2s steps(2)}
+.mini:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--shadow)}
+.mini:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.empty{font-family:var(--font-hand);font-size:16px;color:var(--faint);padding:4px 0}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:15px;color:var(--mute);padding:6px 22px;border-top:1px solid var(--line);background:var(--paper);flex-wrap:wrap;position:relative;z-index:2}
+
+@keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{opacity:1}}
+@keyframes slide{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes wob{0%{transform:rotate(-3deg)}100%{transform:rotate(1deg)}}
+@media (max-width:1000px){.drawer{width:380px}.col{width:200px}}
+@media (max-width:860px){.app{flex-direction:column;height:auto;min-height:100vh;overflow:visible}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.body{flex-direction:column}.drawer{width:100%;border-left:0;border-top:1px solid var(--line);box-shadow:0 -4px 0 var(--shadow)}.top-r{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page">
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<div class="app">
+
+  <nav class="pp-rail" aria-label="Primary">
+    <div class="pp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="pp-rb {{n.cls}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="pp-nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="pp-sp"></span>
+    <button class="pp-rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <main class="main">
+    <header class="top">
+      <button class="crumb"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Kanban</button>
+      <div class="hrow">
+        <h1 class="bname">Billing migration <span class="stamp">Jira · ORB</span></h1>
+        <span class="meta {{metaCls}}">{{meta}}</span>
+        <span class="wss"><span class="wsc"><i style="background: #c8553d" aria-hidden="true"></i>Orbit Billing</span><span class="wsc"><i style="background: #b8792f" aria-hidden="true"></i>Fleet Infra</span></span>
+        <div class="views" role="tablist" aria-label="View">
+          <button class="vt {{colsCls}}" role="tab" aria-selected="{{isCols}}" onClick="{{viewCols}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>Columns</button>
+          <button class="vt {{depsCls}}" role="tab" aria-selected="{{isDeps}}" onClick="{{viewDeps}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><circle cx="10" cy="18" r="2.5"></circle><path d="M8.4 6.6l7.2.8M7 8.3l2.3 7.3M16.5 10.2l-5 5.8"></path></svg>Dependencies</button>
+        </div>
+        <sc-if value="{{isCols}}" hint-placeholder-val="{{true}}"><button class="gchip {{groupCls}}" aria-pressed="{{groupBy}}" onClick="{{toggleGroup}}">Group by epic</button></sc-if>
+        <div class="top-r">
+          <button class="pp-btn ghost {{syncCls}}" onClick="{{sync}}" aria-busy="{{syncing}}"><svg class="pp-ic {{syncSpin}}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"></path></svg>{{syncLabel}}</button>
+          <button class="pp-btn" onClick="{{addCard}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add card</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="body">
+      <section class="cork" aria-label="Board">
+        <sc-if value="{{isCols}}" hint-placeholder-val="{{true}}">
+          <div class="colsview">
+            <sc-for list="{{cols}}" as="c" hint-placeholder-count="5">
+              <div class="col {{c.cls}}" onDragOver="{{c.over}}" onDragEnter="{{c.enter}}" onDragLeave="{{c.leave}}" onDrop="{{c.drop}}" aria-label="{{c.name}}">
+                <div class="colh"><span class="tack" aria-hidden="true"></span>{{c.name}}<span class="n">{{c.n}}</span></div>
+                <sc-for list="{{c.groups}}" as="g" hint-placeholder-count="1">
+                  <sc-if value="{{g.labelled}}" hint-placeholder-val="{{false}}"><div class="eh"><span class="ek">{{g.key}}</span>{{g.name}}</div></sc-if>
+                  <sc-for list="{{g.notes}}" as="t" hint-placeholder-count="3">
+                    <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" role="button" tabindex="0" draggable="true" onClick="{{t.open}}" onKeyDown="{{t.key}}" onDragStart="{{t.dragstart}}" onDragEnd="{{t.dragend}}" aria-label="{{t.aria}}">
+                      <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span class="new">{{t.newText}}</span></sc-if></span>
+                      <span class="nt">{{t.title}}</span>
+                      <span class="nf"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><span class="who">{{t.agentName}}</span><span class="when">{{t.updated}}</span></span>
+                    </div>
+                  </sc-for>
+                </sc-for>
+                <sc-if value="{{c.empty}}" hint-placeholder-val="{{false}}"><div class="hint">drop a note here</div></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{isDeps}}" hint-placeholder-val="{{false}}">
+          <div class="depwrap" ref="{{depRef}}">
+            <svg class="strings {{stringsCls}}" aria-hidden="true"><sc-for list="{{strings}}" as="e" hint-placeholder-count="7"><path class="sh" d="{{e.d}}"></path><path class="str {{e.cls}}" d="{{e.d}}"></path></sc-for></svg>
+            <sc-for list="{{epics}}" as="g" hint-placeholder-count="5">
+              <div class="epic {{g.cls}}">
+                <div class="el"><span class="ek">{{g.key}}</span>{{g.name}}<span class="n">{{g.n}}</span></div>
+                <sc-for list="{{g.notes}}" as="t" hint-placeholder-count="3">
+                  <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" data-id="{{t.id}}" role="button" tabindex="0" onClick="{{t.open}}" onKeyDown="{{t.key}}" aria-label="{{t.aria}}">
+                    <span class="tack" aria-hidden="true"></span>
+                    <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<span class="new">{{t.colName}}</span></span>
+                    <span class="nt">{{t.title}}</span>
+                    <span class="nf"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><span class="who">{{t.agentName}}</span><span class="when">{{t.updated}}</span></span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+            <div class="legend"><span><i aria-hidden="true"></i>red string: blocks</span><span><i class="rel" aria-hidden="true"></i>twine: relates to</span><span>{{stringN}} strings · click a note to light up its own</span></div>
+          </div>
+        </sc-if>
+      </section>
+
+      <sc-if value="{{open}}" hint-placeholder-val="{{true}}">
+        <aside class="drawer" aria-label="Ticket">
+          <div class="dh">
+            <div class="row1"><span class="tag">{{t.id}}</span><span class="stamp">{{t.origin}}</span><a class="ext" href="#" onClick="{{noop}}">{{t.extLabel}}<svg class="pp-ic" style="width: 12px; height: 12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a><button class="x" onClick="{{close}}" aria-label="Close ticket"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+            <h2 class="dt">{{t.title}}</h2>
+            <div class="cchips" role="radiogroup" aria-label="Column"><span class="lb">Column</span><sc-for list="{{t.colChips}}" as="c" hint-placeholder-count="5"><button class="cchip {{c.cls}}" role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}">{{c.name}}</button></sc-for></div>
+          </div>
+          <div class="db">
+            <section class="sec">
+              <div class="facts">
+                <div class="fact"><span class="fl">Workspace</span><span class="fv"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i>{{t.wsName}}</span></div>
+                <div class="fact"><span class="fl">Agent</span><span class="fv"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>{{t.agentName}}<button class="pp-dashed" onClick="{{t.nextAgent}}">change</button></span></div>
+                <div class="fact"><span class="fl">Epic</span><span class="fv"><sc-if value="{{t.hasEpic}}" hint-placeholder-val="{{true}}"><span class="tag">{{t.epicKey}}</span>{{t.epicName}}</sc-if><sc-if value="{{t.noEpic}}" hint-placeholder-val="{{false}}"><span class="sub">none · loose on the board</span></sc-if></span></div>
+                <div class="fact"><span class="fl">Created</span><span class="fv">{{t.created}}<span class="sub">by {{t.createdBy}}</span></span></div>
+                <div class="fact"><span class="fl">Updated</span><span class="fv">{{t.updated}}<span class="sub">by {{t.updatedBy}}</span></span></div>
+              </div>
+            </section>
+
+            <section class="sec">
+              <h3>Links<span class="hh">{{t.linkHint}}</span></h3>
+              <sc-for list="{{t.links}}" as="l" hint-placeholder-count="3"><div class="lrow"><span class="rel">{{l.rel}}</span><span class="tag">{{l.id}}</span><span class="lt">{{l.title}}</span><span class="lc">{{l.col}}</span></div></sc-for>
+              <sc-if value="{{t.noLinks}}" hint-placeholder-val="{{false}}"><div class="empty">Stands on its own. Link a parent or a related ticket from Jira.</div></sc-if>
+            </section>
+
+            <section class="sec">
+              <h3>Description<span class="hh">{{t.descHint}}</span></h3>
+              <sc-if value="{{t.hasDesc}}" hint-placeholder-val="{{true}}"><p class="desc">{{t.desc}}</p></sc-if>
+              <sc-if value="{{t.noDesc}}" hint-placeholder-val="{{false}}"><p class="desc empty">No description yet beyond the title.</p></sc-if>
+            </section>
+
+            <section class="sec">
+              <h3>Notes to the agent<span class="hh">read before it starts · never synced out</span></h3>
+              <textarea class="fld" rows="3" placeholder="Anything the agent should know before it starts…" aria-label="Notes to the agent" ref="{{t.notesRef}}" onInput="{{t.onNotes}}"></textarea>
+              <div class="frow"><span class="hint">{{t.noteHint}}</span><button class="pp-dashed" onClick="{{t.saveNote}}">Save note</button></div>
+            </section>
+
+            <section class="sec">
+              <h3>History<span class="hh">{{t.histN}} changes</span></h3>
+              <sc-for list="{{t.history}}" as="h" hint-placeholder-count="4"><div class="hrow"><i class="dot {{h.cls}}" aria-hidden="true"></i><span class="ht"><span class="hw">{{h.what}}</span><span class="hm">{{h.when}} · by {{h.who}}</span></span></div></sc-for>
+            </section>
+
+            <section class="sec">
+              <h3>Sessions<span class="hh">{{t.sessHint}}</span></h3>
+              <sc-for list="{{t.sessions}}" as="s" hint-placeholder-count="2"><div class="srow"><span class="stk {{s.status}}">{{s.label}}</span><span class="st">{{s.title}}</span><span class="sm">{{s.meta}}</span><button class="mini">Open</button></div></sc-for>
+              <sc-if value="{{t.noSess}}" hint-placeholder-val="{{false}}"><div class="empty">No session has worked on this yet.</div></sc-if>
+              <div class="frow"><button class="pp-btn sm" onClick="{{t.startSession}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg>Start a session on this ticket</button></div>
+            </section>
+          </div>
+        </aside>
+      </sc-if>
+    </div>
+
+    <div class="demo"><span>{{demoText}}</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+  </main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+const PAL = { i: '#2a2219', b: '#3b5b9a', B: '#2a4070', g: '#5b8c5a', r: '#c8553d', R: '#8f3a2a', k: '#e2c48c', K: '#cfae72', a: '#b8792f', w: '#fffdf7', t: '#4a8f99', s: '#8b6bb3', m: '#6f6252', h: '#fff0a0' };
+const SPRITES = {
+  curator: ['..k......k..','..kk....kk..','..kkkkkkkk..','.kkwwkkwwkk.','.kwiwkkwiwk.','.kkwwkkwwkk.','.kkkkaakkkk.','..kKKKKKKk..','..kKkKkKKk..','..kKKKKKKk..','...kkkkkk...','...a.aa.a...'],
+  implementer: ['............','..gggggggg..','..gggggggg..','..giiiiiig..','..giwiiwig..','..giiiiiig..','..gggggggg..','..ggkkkkgg..','..gggggggg..','...g.gg.g...','..kk.gg.kk..','..kk....kk..'],
+  issue: ['...rrrrrr...','..rrrrrrrr..','..rRRRRRRr..','..kkkkkkkk..','..kwkkkkwk..','..kikkkkik..','..kkkkkkkk..','..kkkiikkk..','...kkkkkk...','..wwwwwwww..','..wiiwwiiw..','..wwwwwwww..'],
+  reviewer: ['............','...iiii.....','..iwwwwi....','.iwbbbbwi...','.iwbhbbwi...','.iwbbbbwi...','..iwwwwi....','...iiiii....','.......ii...','........ii..','.........ii.','............'],
+  triage: ['............','..aaaaaaaa..','..aaawwaaa..','..aawwwwaa..','..aaawwaaa..','..aaaaaaaa..','..awwaawwa..','..aiwaawia..','..aaaaaaaa..','..aaawwaaa..','...aaaaaa...','............'],
+  release: ['.....ww.....','....wrrw....','....wrrw....','...wrrrrw...','...wrbbrw...','...wrbbrw...','...wrrrrw...','..rwrrrrwr..','..rwwwwwwr..','..r.aaaa.r..','....a..a....','....a..a....'],
+  support: ['............','...tttttt...','..tttttttt..','.tt.kkkk.tt.','.t.kkkkkk.t.','.t.kwkkwk.t.','.tt.kkkk.tt.','.tt.kiik.tt.','..tttkkttt..','.....kk..t..','....tttttt..','............'],
+  planner: ['............','..ssssssss..','..swwssmms..','..swissmms..','..ssssssss..','..skkkkkks..','..sskkkkss..','...ssssss...','..bbbbbbbb..','..b.b..b.b..','..bbbbbbbb..','............']
+};
+const PX = {};
+Object.keys(SPRITES).forEach((k) => { const out = []; SPRITES[k].forEach((row, y) => { Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: PAL[ch] }); }); }); PX[k] = out; });
+const AGENTS = { implementer: 'Implementer', reviewer: 'Reviewer', triage: 'Triage', planner: 'Infra Planner', release: 'Release Captain', issue: 'Issue Creator', curator: 'Curator', support: 'Support Writer' };
+const AGENT_ORDER = Object.keys(AGENTS);
+const WS = { orbit: { name: 'Orbit Billing', color: '#c8553d' }, fleet: { name: 'Fleet Infra', color: '#b8792f' } };
+const COLS = [['backlog', 'Backlog'], ['todo', 'To do'], ['doing', 'Doing'], ['review', 'Review'], ['done', 'Done']];
+const COLNAME = Object.fromEntries(COLS);
+const COLORS = ['#fff39b', '#ffc9d2', '#c4e4ff', '#cdf0b9', '#ffd9a1'];
+const ROTS = ['-1.5deg', '1deg', '-.6deg', '1.6deg', '-1deg', '.4deg', '-1.2deg'];
+const SESS_LABEL = { working: 'Working', done: 'Done', attn: 'Needs you' };
+const T = (id, title, col, ws, agent, pri, created, createdBy, updated, updatedBy, extra) => Object.assign({ id, title, col, ws, agent, pri, created, createdBy, updated, updatedBy, links: [], desc: '', notes: '', history: [{ what: 'synced from Jira', when: '4 min ago', who: 'sync' }, { what: 'created', when: created, who: createdBy + ' (Jira)' }], sessions: [], isNew: false }, extra || {});
+const EPICS = { 'ORB-120': 'Invoice PDF overhaul', 'ORB-100': 'Ledger v2', 'ORB-110': 'Payments hardening', 'ORB-115': 'Plans & coupons' };
+const EPIC_IDS = Object.keys(EPICS);
+const TICKETS = [
+  T('ORB-151', 'Dunning emails: retry schedule config', 'backlog', 'orbit', 'triage', 'low', '28 Oct', 'Mara', '2 d ago', 'sync', { epic: 'ORB-110' }),
+  T('ORB-149', 'Export ledger as CSV', 'backlog', 'orbit', 'implementer', 'normal', '27 Oct', 'Jonas', '2 d ago', 'sync', { epic: 'ORB-100', links: [{ rel: 'relates to', id: 'ORB-131', title: 'Backfill 2024 invoices', col: 'Done' }] }),
+  T('ORB-147', 'Rate-limit the invoice PDF endpoint', 'backlog', 'fleet', 'planner', 'normal', '26 Oct', 'Mara', '3 d ago', 'sync', { epic: 'ORB-120', links: [{ rel: 'blocked by', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }] }),
+  T('ORB-146', 'Tax rounding differs from Jira totals', 'todo', 'orbit', 'implementer', 'high', '25 Oct', 'Priya', 'yesterday', 'Triage', { epic: 'ORB-100', links: [{ rel: 'relates to', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }], desc: 'Totals on the invoice list differ from the Jira finance export by a cent on some multi-line invoices. Rounding happens per line in one place and per invoice in the other.' }),
+  T('ORB-145', 'Migrate coupons table', 'todo', 'orbit', 'implementer', 'normal', '24 Oct', 'Jonas', 'yesterday', 'sync', { epic: 'ORB-115', links: [{ rel: 'blocks', id: 'ORB-138', title: 'Proration on plan downgrade', col: 'Doing' }] }),
+  T('ORB-144', 'Nightly reconciliation job', 'todo', 'fleet', 'planner', 'normal', '22 Oct', 'Mara', '3 d ago', 'sync', { epic: 'ORB-100', links: [{ rel: 'blocked by', id: 'ORB-131', title: 'Backfill 2024 invoices', col: 'Done' }] }),
+  T('ORB-142', 'Invoice PDF renders wrong currency symbol', 'doing', 'orbit', 'implementer', 'high', '12 Oct', 'Mara', '2 h ago', 'Implementer', {
+    epic: 'ORB-120',
+    links: [{ rel: 'parent', id: 'ORB-120', title: 'Invoice PDF overhaul', col: 'Epic' }, { rel: 'relates to', id: 'ORB-146', title: 'Tax rounding differs from Jira totals', col: 'To do' }, { rel: 'blocks', id: 'ORB-137', title: 'Ledger double-entry audit', col: 'Review' }, { rel: 'blocks', id: 'ORB-147', title: 'Rate-limit the invoice PDF endpoint', col: 'Backlog' }],
+    desc: 'Invoices for customers billed in EUR render the € as a box in the PDF. The PDF service uses the Lato subset without the currency glyphs.\n\nExpected: € and £ render. Actual: ☐.\n\nRepro: open any EUR invoice from the portal, Download PDF. Started after the font subsetting change in ORB-118.',
+    notes: 'Use the full Lato font, not the subset; the size budget was lifted in the ORB-118 follow-up. Check £ and ¥ too while you are there.',
+    history: [{ what: 'moved to Doing', when: '2 h ago', who: 'Implementer' }, { what: 'assigned to Implementer', when: 'yesterday', who: 'you' }, { what: 'note to the agent added', when: 'yesterday', who: 'you' }, { what: 'synced from Jira', when: '3 d ago', who: 'sync' }, { what: 'created', when: '12 Oct', who: 'Mara (Jira)' }],
+    sessions: [{ title: 'Fix currency glyphs in invoice PDF', status: 'working', meta: '41 min · 12k tokens' }, { title: 'Reproduce the EUR invoice bug', status: 'done', meta: '9 min · 3k tokens' }]
+  }),
+  T('ORB-140', 'Webhook signature v2', 'doing', 'orbit', 'implementer', 'normal', '18 Oct', 'Priya', '5 h ago', 'Implementer', { epic: 'ORB-110', links: [{ rel: 'blocked by', id: 'ORB-135', title: 'Move Stripe keys to vault', col: 'Review' }], sessions: [{ title: 'Implement v2 signatures', status: 'attn', meta: '1 h 12 min · 28k tokens' }], history: [{ what: 'session needs you', when: '5 h ago', who: 'Implementer' }, { what: 'moved to Doing', when: 'yesterday', who: 'you' }, { what: 'created', when: '18 Oct', who: 'Priya (Jira)' }] }),
+  T('ORB-138', 'Proration on plan downgrade', 'doing', 'orbit', 'reviewer', 'normal', '16 Oct', 'Mara', 'yesterday', 'Reviewer', { epic: 'ORB-115', links: [{ rel: 'blocked by', id: 'ORB-145', title: 'Migrate coupons table', col: 'To do' }] }),
+  T('ORB-137', 'Ledger double-entry audit', 'review', 'orbit', 'reviewer', 'high', '15 Oct', 'Jonas', '3 h ago', 'Reviewer', { epic: 'ORB-100', links: [{ rel: 'blocked by', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }], sessions: [{ title: 'Audit ledger entries', status: 'done', meta: '2 h 4 min · 61k tokens' }] }),
+  T('ORB-135', 'Move Stripe keys to vault', 'review', 'fleet', 'planner', 'high', '14 Oct', 'Mara', '6 h ago', 'Infra Planner', { epic: 'ORB-110', links: [{ rel: 'blocks', id: 'ORB-140', title: 'Webhook signature v2', col: 'Doing' }], sessions: [{ title: 'Vault migration plan', status: 'done', meta: '38 min · 9k tokens' }] }),
+  T('ORB-131', 'Backfill 2024 invoices', 'done', 'orbit', 'implementer', 'normal', '9 Oct', 'Jonas', '4 d ago', 'Release Captain', { epic: 'ORB-100', links: [{ rel: 'blocks', id: 'ORB-144', title: 'Nightly reconciliation job', col: 'To do' }, { rel: 'relates to', id: 'ORB-149', title: 'Export ledger as CSV', col: 'Backlog' }] }),
+  T('ORB-129', 'Remove legacy billing cron', 'done', 'fleet', 'release', 'low', '8 Oct', 'Mara', '5 d ago', 'Release Captain', { epic: 'ORB-110' }),
+  T('ORB-126', 'Customer portal: receipts tab', 'done', 'orbit', 'implementer', 'normal', '3 Oct', 'Priya', '1 w ago', 'Reviewer', { epic: 'ORB-115' })
+];
+const clone = (o) => JSON.parse(JSON.stringify(o));
+const INIT = { tickets: TICKETS, sel: 'ORB-142', drag: null, over: null, syncing: false, synced: '4 min ago', justSynced: false, nextId: 152, noteSaved: {}, view: 'cols', groupBy: false, coords: {} };
+const STRING_RELS = ['blocks', 'blocked by', 'relates to'];
+function edgesOf(tickets) {
+  const edges = []; const seen = new Set();
+  tickets.forEach((t) => (t.links || []).forEach((l) => {
+    if (!STRING_RELS.includes(l.rel) || !tickets.some((x) => x.id === l.id)) return;
+    const rel = l.rel === 'relates to';
+    const a = l.rel === 'blocked by' ? l.id : t.id, b = l.rel === 'blocked by' ? t.id : l.id;
+    const key = rel ? 'rel:' + [a, b].sort().join('~') : 'blk:' + a + '>' + b;
+    if (seen.has(key)) return; seen.add(key); edges.push({ key, a, b, rel });
+  }));
+  return edges;
+}
+
+class Component extends DCLogic {
+  state = clone(INIT);
+  els = {};
+  timers = [];
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+  patchTicket(id, fn) {
+    const tickets = this.state.tickets.map((t) => (t.id === id ? fn(clone(t)) : t));
+    this.setState({ tickets });
+  }
+  touch(t, what, who) { t.history = [{ what, when: 'just now', who, now: true }, ...t.history]; t.updated = 'just now'; t.updatedBy = who; return t; }
+  moveTo(id, col) {
+    const t = this.state.tickets.find((x) => x.id === id);
+    if (!t || t.col === col) return;
+    this.patchTicket(id, (x) => { x.col = col; return this.touch(x, 'moved to ' + COLNAME[col], 'you'); });
+  }
+  // Dependencies view: measure where each note's tack sits and keep the strings pinned to them.
+  measure() {
+    const el = this.depEl;
+    if (!el || !el.isConnected) return;
+    const wr = el.getBoundingClientRect();
+    const pos = {};
+    el.querySelectorAll('.note[data-id]').forEach((n) => { const r = n.getBoundingClientRect(); pos[n.dataset.id] = { x: Math.round(r.left - wr.left + r.width / 2), y: Math.round(r.top - wr.top + 1) }; });
+    const next = JSON.stringify(pos);
+    if (next !== this.lastPos) { this.lastPos = next; this.setState({ coords: pos }); }
+  }
+  scheduleMeasure() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = requestAnimationFrame(() => { this.raf = null; this.measure(); });
+  }
+  renderVals() {
+    const st = this.state;
+    const sel = st.tickets.find((t) => t.id === st.sel) || null;
+    const byCol = (c) => st.tickets.filter((t) => t.col === c);
+    const isDeps = st.view === 'deps';
+    if (!this.listening) { this.listening = true; window.addEventListener('resize', () => this.scheduleMeasure()); }
+    if (isDeps) { this.scheduleMeasure(); if (!this.settle) { this.settle = true; [500, 1200, 2500].forEach((ms) => this.later(() => this.scheduleMeasure(), ms)); } }
+    const view = (t, i) => ({
+      id: t.id, title: t.title, pri: t.pri, isNew: !!t.isNew, newText: t.newText || '', colName: COLNAME[t.col],
+      color: t.color || COLORS[(t.id.charCodeAt(t.id.length - 1) + i) % COLORS.length], rot: ROTS[(i + t.id.length) % ROTS.length],
+      wsColor: WS[t.ws].color, px: PX[t.agent], agentName: AGENTS[t.agent], updated: t.updated,
+      cls: (st.sel === t.id ? 'is-sel ' : '') + (st.drag === t.id ? 'is-drag' : ''),
+      aria: t.id + ' · ' + t.title + ' · ' + COLNAME[t.col],
+      open: () => this.setState({ sel: t.id }),
+      key: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.setState({ sel: t.id }); } },
+      dragstart: (e) => { try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', t.id); } catch (_) {} this.setState({ drag: t.id }); },
+      dragend: () => this.setState({ drag: null, over: null })
+    });
+    const edges = edgesOf(st.tickets);
+    const groupsOf = (list) => {
+      if (!st.groupBy) return [{ labelled: false, key: '', name: '', notes: list.map(view) }];
+      return [...EPIC_IDS.map((k) => ({ labelled: true, key: k, name: EPICS[k], notes: list.filter((t) => t.epic === k).map(view) })), { labelled: true, key: '—', name: 'loose', notes: list.filter((t) => !t.epic).map(view) }].filter((g) => g.notes.length);
+    };
+    return {
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'kanban' ? 'is-on' : '', cur: n.id === 'kanban' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
+      isCols: !isDeps, isDeps, colsCls: !isDeps ? 'is-on' : '', depsCls: isDeps ? 'is-on' : '',
+      viewCols: () => this.setState({ view: 'cols', drag: null, over: null }),
+      viewDeps: () => { this.lastPos = null; this.settle = false; this.setState({ view: 'deps', drag: null, over: null }); },
+      groupBy: st.groupBy, groupCls: st.groupBy ? 'is-on' : '', toggleGroup: () => this.setState({ groupBy: !st.groupBy }),
+      depRef: (el) => { this.depEl = el; if (el) this.scheduleMeasure(); },
+      strings: edges.map((e) => {
+        const p = st.coords[e.a], q = st.coords[e.b];
+        if (!p || !q) return null;
+        const dist = Math.hypot(q.x - p.x, q.y - p.y);
+        const cx = (p.x + q.x) / 2, cy = Math.max(p.y, q.y) + 16 + dist * 0.12;
+        return { d: 'M' + p.x + ' ' + p.y + ' Q' + cx + ' ' + cy + ' ' + q.x + ' ' + q.y, cls: (e.rel ? 'rel ' : '') + ((st.sel === e.a || st.sel === e.b) ? 'is-hot' : '') };
+      }).filter(Boolean),
+      stringN: edges.length,
+      stringsCls: sel && edges.some((e) => e.a === sel.id || e.b === sel.id) ? 'has-sel' : '',
+      epics: [...EPIC_IDS.map((k) => ({ key: k, name: EPICS[k], loose: false, notes: st.tickets.filter((t) => t.epic === k) })), { key: '—', name: 'Loose · no epic', loose: true, notes: st.tickets.filter((t) => !t.epic) }].filter((g) => g.notes.length).map((g) => ({ key: g.key, name: g.name, n: g.notes.length, cls: g.loose ? 'loose' : '', notes: g.notes.map(view) })),
+      meta: st.syncing ? 'pulling tickets from Jira…' : isDeps ? st.tickets.length + ' cards · ' + edges.length + ' strings · ' + EPIC_IDS.length + ' epics' : (st.justSynced ? st.tickets.length + ' cards · synced just now · 1 new' : st.tickets.length + ' cards · synced ' + st.synced),
+      metaCls: st.syncing ? 'is-busy' : (st.justSynced ? 'is-new' : ''),
+      syncing: st.syncing, syncCls: st.syncing ? 'is-busy' : '', syncSpin: st.syncing ? 'spin' : '', syncLabel: st.syncing ? 'Syncing…' : 'Sync with Jira',
+      sync: () => {
+        if (st.syncing) return;
+        this.setState({ syncing: true });
+        this.later(() => {
+          const s = this.state;
+          const has = s.tickets.some((t) => t.id === 'ORB-150');
+          const fresh = has ? [] : [T('ORB-150', 'Refund flow: partial refunds', 'backlog', 'orbit', 'triage', 'normal', 'today', 'Priya', 'just now', 'sync', { isNew: true, newText: 'new from Jira', color: '#ffc9d2' })];
+          this.setState({ syncing: false, justSynced: true, synced: 'just now', tickets: [...fresh, ...s.tickets] });
+        }, 1600);
+      },
+      addCard: () => {
+        const id = 'ORB-' + st.nextId;
+        const t = T(id, 'New card', 'backlog', 'orbit', 'triage', 'normal', 'just now', 'you', 'just now', 'you', { isNew: true, newText: 'not in Jira yet', color: '#c4e4ff', history: [{ what: 'created here · goes to Jira on next sync', when: 'just now', who: 'you', now: true }] });
+        this.setState({ tickets: [t, ...st.tickets], sel: id, nextId: st.nextId + 1 });
+      },
+      cols: COLS.map(([c, name]) => {
+        const list = byCol(c);
+        return {
+          name, n: list.length, cls: st.over === c ? 'is-over' : '', empty: list.length === 0,
+          groups: groupsOf(list),
+          enter: (e) => { e.preventDefault(); },
+          over: (e) => { e.preventDefault(); try { e.dataTransfer.dropEffect = 'move'; } catch (_) {} if (this.state.over !== c) this.setState({ over: c }); },
+          leave: (e) => { if (!e.currentTarget.contains(e.relatedTarget)) this.setState({ over: null }); },
+          drop: (e) => { e.preventDefault(); let id = this.state.drag; if (!id) { try { id = e.dataTransfer.getData('text/plain'); } catch (_) {} } if (id) this.moveTo(id, c); this.setState({ drag: null, over: null }); }
+        };
+      }),
+      open: !!sel,
+      close: () => this.setState({ sel: null }),
+      noop: (e) => e.preventDefault(),
+      t: sel ? {
+        id: sel.id, title: sel.title, origin: sel.isNew && sel.newText === 'not in Jira yet' ? 'Local · pending' : 'Jira', extLabel: sel.isNew && sel.newText === 'not in Jira yet' ? 'will be created in Jira' : 'open in Jira',
+        colChips: COLS.map(([c, name]) => ({ name, on: sel.col === c, cls: sel.col === c ? 'is-on' : '', pick: () => this.moveTo(sel.id, c) })),
+        wsName: WS[sel.ws].name, wsColor: WS[sel.ws].color, px: PX[sel.agent], agentName: AGENTS[sel.agent],
+        hasEpic: !!sel.epic, noEpic: !sel.epic, epicKey: sel.epic || '', epicName: sel.epic ? EPICS[sel.epic] : '',
+        nextAgent: () => { const next = AGENT_ORDER[(AGENT_ORDER.indexOf(sel.agent) + 1) % AGENT_ORDER.length]; this.patchTicket(sel.id, (x) => { x.agent = next; return this.touch(x, 'assigned to ' + AGENTS[next], 'you'); }); },
+        created: sel.created, createdBy: sel.createdBy, updated: sel.updated, updatedBy: sel.updatedBy,
+        links: sel.links, noLinks: sel.links.length === 0, linkHint: sel.links.length ? sel.links.length + ' linked' : 'none',
+        desc: sel.desc, hasDesc: !!sel.desc, noDesc: !sel.desc, descHint: sel.desc ? 'from Jira' : '',
+        notesRef: (el) => { if (!el) return; this.els.notes = el; if (document.activeElement !== el && el.value !== sel.notes) el.value = sel.notes; },
+        onNotes: (e) => { const v = e.currentTarget.value; this.setState({ tickets: this.state.tickets.map((x) => (x.id === sel.id ? { ...x, notes: v } : x)), noteSaved: { ...this.state.noteSaved, [sel.id]: false } }); },
+        noteHint: st.noteSaved[sel.id] ? 'saved just now' : (sel.notes ? 'the agent reads this at the start of every session' : ''),
+        saveNote: () => { this.patchTicket(sel.id, (x) => this.touch(x, 'note to the agent ' + (x.history.some((h) => h.what.startsWith('note')) ? 'updated' : 'added'), 'you')); this.setState({ noteSaved: { ...this.state.noteSaved, [sel.id]: true } }); },
+        history: sel.history.map((h) => ({ ...h, cls: h.now ? 'now' : '' })), histN: sel.history.length,
+        sessions: sel.sessions.map((s) => ({ ...s, label: SESS_LABEL[s.status] })), noSess: sel.sessions.length === 0,
+        sessHint: sel.sessions.length ? sel.sessions.filter((s) => s.status === 'working').length + ' working · ' + sel.sessions.length + ' total' : 'none yet',
+        startSession: () => this.patchTicket(sel.id, (x) => { x.sessions = [{ title: 'Work on ' + x.id + ': ' + x.title, status: 'working', meta: 'just started' }, ...x.sessions]; if (x.col === 'backlog' || x.col === 'todo') x.col = 'doing'; return this.touch(x, 'session started' + (x.col === 'doing' ? ' · moved to Doing' : ''), 'you'); })
+      } : {},
+      demoText: st.drag ? 'drop it on a column' : isDeps ? 'Notes sit in their epic · strings run tack to tack between dependent notes · click one to light up its strings' : (sel ? 'Drag notes between columns, or pick a column in the drawer · ' + sel.id + ' is open' : 'Drag notes between columns · click one to open it'),
+      reset: () => { this.timers.forEach(clearTimeout); this.timers = []; this.lastPos = null; this.settle = false; if (this.els.notes) this.els.notes.value = TICKETS.find((t) => t.id === 'ORB-142').notes; this.setState(clone(INIT)); }
+    };
+  }
+}
+</script>
+</body>
+</html>

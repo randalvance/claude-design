@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Paper chat app</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e4dccb;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
+a{color:#3b5b9a}a:hover{color:#2a4070}
+.page{--ink:#2a2219;--mute:#6f6252;--line:#d6cab2;--paper:#f8f3e9;--paper2:#efe7d6;--kraft:#e2c48c;--kraft2:#cfae72;--red:#c8553d;--blue:#3b5b9a;--green:#5b8c5a;--amber:#b8792f;--shadow:#cdbf9f;--mono:"Courier New",Courier,ui-monospace,monospace;--hand:"Caveat",cursive;--serif:"Fraunces",Georgia,serif;min-height:100vh;box-sizing:border-box;padding:0;display:flex;justify-content:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit}
+.ic{width:16px;height:16px;flex:none}
+
+.app{position:relative;width:100%;display:flex;background:var(--paper);min-height:100vh}
+.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;border-radius:inherit;z-index:3}
+
+/* ---------- rail ---------- */
+.rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:#e4d9c1;border-right:1px solid #d6cab2;box-sizing:border-box;overflow:auto;position:sticky;top:0;height:100vh;align-self:flex-start;z-index:1}
+.logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
+.rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.rb svg{width:18px;height:18px}
+.rb:hover{background:#fffaf0;transform:translateY(-1px)}
+.rb.on{background:#fffaf0;color:var(--ink);box-shadow:2px 2px 0 var(--shadow);transform:rotate(-2deg)}
+.rb:focus-visible{outline:2px solid var(--blue)}
+.rb .nb{position:absolute;top:0;right:4px;min-width:16px;height:16px;padding:0 4px;border-radius:50%;background:var(--red);color:#fff;font-size:10px;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);box-sizing:border-box;transform:rotate(8deg)}
+.rail .sp{flex:1}
+
+/* ---------- sessions panel ---------- */
+.panel{width:300px;flex:none;display:flex;flex-direction:column;background:#f3ecdd;border-right:1px solid var(--line);box-sizing:border-box;min-height:0;position:relative;z-index:1}
+.ptop{padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.srch{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background:#fffdf7;border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);flex:1;min-width:0;color:var(--mute);box-sizing:border-box}
+.srch input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.srch input::placeholder{color:#9a8c74;font-family:var(--hand);font-size:16px}
+.kbd{font-family:var(--mono);font-size:10px;color:var(--mute);border:1px solid var(--line);padding:1px 4px;white-space:nowrap}
+.pbtn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;box-shadow:2px 2px 0 #2a4070;transition:transform .2s steps(2)}
+.pbtn:hover{transform:translateY(-1px)}
+.pbtn:focus-visible{outline:2px solid var(--ink)}
+.filt{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:#fffdf7;border:1px solid var(--line);font-size:12.5px;font-weight:700;color:var(--ink);min-width:0;box-sizing:border-box;transition:transform .2s steps(2)}
+.filt:hover{transform:translateY(-1px)}
+.filt:focus-visible{outline:2px solid var(--blue)}
+.filt.on{background:#fff0a0;border-color:#d9b84a}
+.list{flex:1;overflow:auto;padding:12px 10px 14px;display:flex;flex-direction:column;gap:12px;min-height:0}
+.ws{position:relative}
+.wsh{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:6px 10px;background:var(--kraft);border-radius:6px 6px 0 0;font-size:12.5px;font-weight:800;color:var(--ink);transition:transform .2s steps(2)}
+.wsh:hover{transform:translateY(-1px)}
+.wsh:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.wsh .chev{width:14px;height:14px;color:var(--mute);transition:transform .25s steps(3)}
+.ws.closed .wsh .chev{transform:rotate(-90deg)}
+.ws.closed .wsh{border-radius:6px;box-shadow:2px 2px 0 var(--kraft2)}
+.wsd{width:10px;height:10px;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.18)}
+.wsh .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wsh .cnt{font-family:var(--hand);font-size:16px;color:var(--mute)}
+.attn{width:16px;height:16px;border-radius:50%;background:#f0c24a;color:var(--ink);font-size:10px;font-weight:900;display:grid;place-items:center;flex:none;box-shadow:1px 1px 0 rgba(0,0,0,.2)}
+.wsb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s steps(5)}
+.ws.closed .wsb{grid-template-rows:0fr}
+.wsi{min-height:0;overflow:hidden}
+.rows{display:flex;flex-direction:column;background:#fffdf7;border:1px solid var(--line);box-shadow:2px 3px 0 var(--shadow);padding:3px 0}
+.row{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:6px 10px 6px 12px;font-size:12.5px;color:var(--ink);border-top:1px dashed var(--line);transition:background .15s steps(2)}
+.row:first-child{border-top:0}
+.row:hover{background:var(--paper2)}
+.row:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.row.on::before{content:"";position:absolute;left:6px;right:6px;top:4px;bottom:4px;background:#fff0a0;transform:skewX(-6deg) rotate(-.4deg);mix-blend-mode:multiply}
+.row>*{position:relative}
+.row .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .dur{font-family:var(--hand);font-size:15px;color:var(--mute);white-space:nowrap}
+.row.busy .dur{color:var(--amber)}
+.row .nb{flex:none;transform:rotate(-8deg);width:16px;height:16px;border-radius:50%;background:var(--red);color:#fff;font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2)}
+.pin{width:12px;height:12px;color:var(--amber);animation:spin8 1.2s steps(8) infinite;flex:none}
+.donechip{font-family:var(--hand);font-size:14px;font-weight:600;color:#fff;background:var(--green);padding:0 7px;border-radius:999px;transform:rotate(-4deg);flex:none;line-height:16px}
+.subn{font-family:var(--hand);font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:0 5px;line-height:14px;flex:none}
+.src{display:flex;gap:3px;color:#9a8c74;flex:none}
+.src svg{width:12px;height:12px}
+
+/* ---------- chat sheet ---------- */
+.sheet{position:relative;flex:1;min-width:0;display:flex;flex-direction:column}
+.top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
+.ttl{display:flex;align-items:center;gap:12px;min-width:0}
+.ttl h1{margin:0;font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+.tagb{position:relative;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px 0 16px;background:var(--kraft);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:700;clip-path:polygon(0 50%,9px 0,100% 0,100% 100%,9px 100%);white-space:nowrap}
+.tagb::before{content:"";position:absolute;left:6px;top:50%;width:5px;height:5px;border-radius:50%;background:var(--paper);transform:translateY(-50%)}
+.tagw{filter:drop-shadow(2px 2px 0 var(--kraft2))}
+.meta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mute);padding-bottom:4px;flex-wrap:wrap}
+.sticker{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--green);box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-2deg);white-space:nowrap}
+.sticker.busy{background:var(--red);animation:wob .5s steps(2) infinite}
+.sticker.attn{background:var(--amber)}
+.sticker i{width:6px;height:6px;border-radius:50%;background:#fff}
+.top-r{margin-left:auto;display:flex;gap:4px;padding-bottom:2px}
+.ib{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--mute);transition:transform .2s steps(2),background .2s steps(2)}
+.ib:hover{background:var(--paper2);color:var(--ink);transform:translateY(-1px)}
+.ib:focus-visible{outline:2px solid var(--blue)}
+
+.tabs{display:flex;gap:6px;padding:0 28px;margin-top:16px;align-items:flex-end;overflow-x:auto}
+.tab{all:unset;cursor:pointer;padding:8px 14px 9px;background:var(--paper2);color:var(--mute);font-weight:700;font-size:13px;border:1px solid var(--line);border-bottom:0;border-radius:7px 7px 0 0;transform:translateY(2px);box-shadow:2px 0 0 var(--shadow);transition:transform .2s steps(2),background .2s steps(2);white-space:nowrap}
+.tab:hover{transform:translateY(-2px)}
+.tab.on{background:#fffaf0;color:var(--ink);transform:translateY(1px);border-top:3px solid var(--red);padding-top:6px}
+.tab:focus-visible{outline:2px solid var(--blue)}
+.content{flex:1;border-top:1px solid var(--line);background:#fffaf0;padding:26px 28px 14px;display:flex;flex-direction:column;gap:18px;position:relative;z-index:1}
+
+.note{align-self:flex-end;max-width:70%;position:relative;filter:drop-shadow(3px 4px 0 var(--shadow));animation:drop .4s steps(5) both}
+.note-in{background:var(--kraft);color:var(--ink);padding:16px 18px 13px;font-size:14.5px;line-height:1.5;clip-path:polygon(0 4%,5% 0,32% 2%,58% 0,82% 2%,100% 1%,99% 38%,100% 68%,98% 100%,62% 98%,30% 100%,3% 97%,0 60%);white-space:pre-wrap;word-break:break-word}
+.tape{position:absolute;left:50%;top:-9px;width:76px;height:20px;background:rgba(255,236,150,.62);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08);z-index:2}
+.said{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--ink);max-width:720px;padding-left:4px}
+.reply{font-size:15px;line-height:1.6;max-width:760px}
+.reply p{margin:0 0 10px}
+.reply ul{margin:4px 0 0;padding-left:22px}
+.reply li{margin:4px 0}
+.reply code,.steps code{font-family:var(--mono);font-size:13px;background:var(--paper2);padding:1px 6px;border-radius:2px}
+.reply a{text-decoration:underline;text-decoration-style:wavy;text-decoration-thickness:1px;text-underline-offset:3px}
+
+.deck{position:relative;margin:4px 0;max-width:760px}
+.deck::before,.deck::after{content:"";position:absolute;inset:0 0 auto 0;height:100%;max-height:64px;background:#f1eadb;border:1px solid var(--line);border-radius:3px;z-index:0}
+.deck::before{transform:rotate(-1.3deg) translate(-3px,3px)}
+.deck::after{transform:rotate(.9deg) translate(4px,2px);background:#ebe3d1}
+.cap{all:unset;position:relative;z-index:1;cursor:pointer;display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;padding:9px 14px;min-height:62px;background:#fffdf7;border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);color:var(--ink);transition:transform .2s steps(2),box-shadow .2s steps(2)}
+.cap:hover{transform:translate(-1px,-1px);box-shadow:4px 5px 0 var(--shadow)}
+.cap:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.open .cap{box-shadow:none;border-bottom:1px dashed var(--line);border-radius:3px 3px 0 0}
+.live .cap{animation:boil .6s steps(3) infinite}
+.tb{position:relative;width:44px;height:44px;border-radius:50%;background:var(--kraft);box-shadow:1px 2px 0 var(--kraft2);display:grid;place-items:center;font-family:var(--hand);font-size:17px;font-weight:600;transform:rotate(-7deg);flex:none}
+.live .tb{animation:tbwob .6s steps(3) infinite}
+.tb .ok{position:absolute;right:-6px;top:-5px;width:17px;height:17px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);animation:stamp .3s steps(3) both}
+.tb .ok svg{width:9px;height:9px}
+.tb .ok.stopped{background:var(--red)}
+.cap-t{display:flex;flex-direction:column;min-width:0;gap:1px}
+.cap-t strong{font-size:14px;font-weight:800;line-height:1.2}
+.cap-s{font-size:12px;color:var(--mute)}
+.trail{display:flex;gap:5px;align-items:center;padding:0 6px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--mute);box-shadow:1px 1px 0 rgba(0,0,0,.18);display:inline-block;animation:popd .3s steps(3) both}
+.dot.bash{background:var(--blue)}.dot.think{background:#4a8f99}.dot.edit{background:var(--green)}.dot.read{background:#9a8c74}.dot.say{background:var(--ink);border-radius:2px}.dot.ask{background:var(--amber)}.dot.sub{background:#8b6bb3}.dot.err{background:var(--red)}
+.dot.run{animation:popd .3s steps(3) both,hop .5s steps(2) .3s infinite}
+.now{margin-left:auto;font-family:var(--hand);font-size:17px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.cap .chev{width:16px;height:16px;flex:none;margin-left:auto;color:var(--mute);transition:transform .3s steps(3)}
+.now+.chev{margin-left:0}
+.open .cap .chev{transform:rotate(180deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s steps(6);position:relative;z-index:1}
+.open .body{grid-template-rows:1fr}
+.body-in{min-height:0;overflow:hidden}
+.steps{list-style:none;margin:0;padding:8px 12px 12px 70px;background:#fffdf7;border:1px solid var(--line);border-top:0;border-radius:0 0 3px 3px;box-shadow:3px 4px 0 var(--shadow);display:flex;flex-direction:column;gap:2px}
+.step{display:flex;gap:10px;align-items:center;padding:6px 8px;font-size:13px;opacity:0}
+.open .step{animation:slide .3s steps(4) both}
+.step .k{font-weight:800;min-width:60px}
+.step code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.step .tm{font-family:var(--hand);font-size:15px;color:var(--mute)}
+
+.ledger{max-width:760px;background:#fffdf7;border:1px solid var(--line);box-shadow:3px 4px 0 var(--shadow);padding:6px 16px}
+.ledger h3{margin:8px 0 6px;font-family:var(--hand);font-weight:600;font-size:20px;color:var(--mute)}
+.lrow{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px dashed var(--line);font-size:13.5px}
+.lrow code{font-family:var(--mono);font-size:13px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plus{color:var(--green);font-weight:800}.minus{color:var(--red);font-weight:800}
+.todo{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:9px 0;border-top:1px dashed var(--line);font-size:14.5px}
+.todo:focus-visible{outline:2px solid var(--blue)}
+.box{width:18px;height:18px;border:2px solid var(--ink);border-radius:2px;display:grid;place-items:center;flex:none;background:#fff}
+.box svg{width:18px;height:18px;overflow:visible;opacity:0}
+.todo.done .box svg{opacity:1;animation:stamp .25s steps(3) both}
+.todo.done span{color:var(--mute);text-decoration:line-through}
+.scrap{font-family:var(--hand);font-size:22px;color:var(--mute);padding:40px 0;text-align:center;transform:rotate(-1deg)}
+
+.foot{padding:6px 28px 18px;position:relative;z-index:4}
+.foot-in{max-width:980px;position:relative}
+.scrim{all:unset;position:fixed;inset:0;z-index:10;cursor:default}
+.card{position:relative;background:#fffdf8;border:1px solid var(--line);border-top:3px solid #e8a9a2;border-radius:3px;box-shadow:4px 5px 0 var(--shadow);transition:transform .25s steps(3),box-shadow .25s steps(3)}
+.focus .card{transform:translate(-2px,-2px);box-shadow:6px 7px 0 var(--shadow)}
+.max .card{border-color:#c7935a;box-shadow:4px 5px 0 #d9b48a,0 0 0 2px rgba(200,85,61,.12)}
+.maxstamp{position:absolute;right:16px;top:-12px;padding:3px 9px;border:2px solid var(--red);border-radius:3px;color:var(--red);font-weight:800;font-size:11px;letter-spacing:.14em;background:rgba(255,253,248,.8);transform:rotate(6deg);mix-blend-mode:multiply;animation:stamp .3s steps(3) both;z-index:5}
+.ed{background-image:repeating-linear-gradient(transparent 0 27px,#dfe5ee 27px 28px);background-position:0 12px;padding:12px 18px 0}
+.ta{display:block;width:100%;box-sizing:border-box;min-height:56px;max-height:196px;resize:none;border:0;background:transparent;font:inherit;font-size:15px;line-height:28px;color:var(--ink);outline:none;padding:0;overflow:auto}
+.ta::placeholder{color:#9a8c74;font-family:var(--hand);font-size:19px}
+.max .ta::placeholder{color:var(--red)}
+.bar{display:flex;align-items:center;gap:10px;padding:10px 12px 12px 14px;flex-wrap:wrap}
+.tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tool{position:relative;display:inline-flex}
+.mbtn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px 0 18px;background:var(--kraft);color:var(--ink);font-size:12.5px;font-weight:800;clip-path:polygon(0 50%,9px 0,100% 0,100% 100%,9px 100%);position:relative;transition:transform .2s steps(2)}
+.mbtn::before{content:"";position:absolute;left:7px;top:50%;width:5px;height:5px;border-radius:50%;background:var(--paper);transform:translateY(-50%)}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn:focus-visible{outline:2px solid var(--blue)}
+.ebars{display:flex;align-items:flex-end;gap:2px;height:12px}
+.ebars i{width:3px;background:#b9a98a;transform-origin:bottom}
+.ebars i.on{background:var(--ink)}
+.max .ebars i.on{background:var(--red);animation:flick .5s steps(2) infinite}
+.gauge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--mute)}
+.g{width:26px;height:26px}
+.g-track{fill:none;stroke:var(--line);stroke-width:4;stroke-dasharray:65.97 87.96;stroke-linecap:butt}
+.g-fill{fill:none;stroke-width:4;stroke-linecap:butt;transition:stroke-dasharray .6s steps(8)}
+.g-fill.ok{stroke:var(--blue)}.g-fill.mid{stroke:var(--amber)}.g-fill.low{stroke:var(--red)}
+.g-draft{fill:none;stroke:var(--ink);opacity:.35;stroke-width:4;transition:stroke-dasharray .25s steps(3),stroke-dashoffset .25s steps(3)}
+.needle{stroke:var(--ink);stroke-width:2;stroke-linecap:round;transform-origin:20px 20px;transition:transform .6s steps(8)}
+.hub{fill:var(--ink)}
+.g text{font-family:var(--hand);font-size:9px;fill:var(--mute)}
+.stampbtn{all:unset;cursor:pointer;position:relative;padding:4px 10px;border:1.5px dashed #b9a98a;border-radius:3px;font-weight:800;font-size:11.5px;letter-spacing:.1em;color:var(--mute);min-width:40px;text-align:center;transition:transform .2s steps(2)}
+.stampbtn:hover{transform:translateY(-1px)}
+.stampbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.stampbtn[aria-checked="true"]{border-color:transparent;color:transparent}
+.stamp{position:absolute;inset:-5px -8px;border:2.5px solid var(--red);border-radius:4px;color:var(--red);font-weight:900;font-size:13px;letter-spacing:.12em;display:grid;place-items:center;transform:rotate(-8deg);mix-blend-mode:multiply;animation:stamp .3s steps(3) both;background:rgba(255,253,248,.55)}
+.dirtag{display:inline-flex;align-items:center;gap:6px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.hint{margin-left:auto;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.send{all:unset;position:relative;cursor:pointer;width:40px;height:40px;border-radius:50%;background:var(--paper2);color:#9a8c74;display:grid;place-items:center;box-shadow:2px 3px 0 var(--shadow);transition:transform .2s steps(2),background .2s steps(2),color .2s steps(2);flex:none}
+.send svg{width:18px;height:18px}
+.send.ready{background:var(--blue);color:#fff;box-shadow:2px 3px 0 #2a4070}
+.max .send.ready{background:var(--red);box-shadow:2px 3px 0 #8f3a2a}
+.send.ready:hover{transform:rotate(-14deg) translate(-1px,-1px)}
+.send:active{transform:scale(.92)}
+.send.fly svg{animation:fly .45s steps(5) both}
+.send.stop{border-radius:4px;background:var(--red);color:#fff;box-shadow:2px 3px 0 #8f3a2a;transform:rotate(-4deg)}
+.send.stop svg{width:16px;height:16px;animation:stamp .3s steps(3) both}
+.send:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pop{position:absolute;left:0;bottom:calc(100% + 14px);width:286px;background:#fffdf8;border:1px solid var(--line);box-shadow:4px 5px 0 var(--shadow);padding:12px 12px 10px;z-index:20;transform-origin:bottom left;animation:popIn .3s steps(4) both;box-sizing:border-box}
+.pop::before{content:"";position:absolute;left:36px;top:-9px;width:62px;height:18px;background:rgba(255,236,150,.62);transform:rotate(-2deg)}
+.pop-h{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--hand);font-size:19px;font-weight:600;color:var(--mute);margin:0 2px 6px}
+.pop-h .val{font-family:"Nunito";font-size:12px;font-weight:800;color:var(--ink)}
+.pop-h .mode{font-family:var(--hand);font-size:15px;font-weight:500;color:var(--mute)}
+.mrow{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;padding:7px 8px;font-size:13.5px;font-weight:700;transition:background .15s steps(2)}
+.mrow:hover{background:var(--paper2)}
+.mrow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.mrow .mdesc{margin-left:auto;font-weight:400;font-size:12px;color:var(--mute)}
+.mrow .box{width:16px;height:16px}
+.mrow .box svg{opacity:0}
+.mrow.sel .box svg{opacity:1;animation:stamp .25s steps(3) both}
+.efs{display:flex;gap:6px;margin:4px 2px 0}
+.ef{all:unset;cursor:pointer;position:relative;flex:1;height:30px;border:2px solid var(--ink);border-radius:2px;display:grid;place-items:center;font-size:10.5px;font-weight:800;letter-spacing:.04em;background:#fff;transition:transform .15s steps(2)}
+.ef:hover{transform:translateY(-1px)}
+.ef:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ef.on{background:var(--ink);color:#fff}
+.ef.def::after{content:"";position:absolute;left:50%;bottom:-8px;width:4px;height:4px;border-radius:50%;background:var(--mute);transform:translateX(-50%)}
+.ef.maxon{background:var(--red);border-color:var(--red)}
+.adapt{display:flex;gap:8px;align-items:flex-start;margin:14px 2px 0;font-size:12px;line-height:1.45;color:var(--mute)}
+.lnk{all:unset;cursor:pointer;font-family:var(--hand);font-size:16px;color:var(--blue);white-space:nowrap}
+.lnk:hover{text-decoration:underline}
+.lnk:focus-visible{outline:2px solid var(--blue)}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--hand);font-size:16px;color:var(--mute);margin-top:12px;flex-wrap:wrap}
+.demo button{all:unset;cursor:pointer;font-family:"Nunito";font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed #b9a98a;padding:3px 10px;border-radius:3px}
+.demo button:hover{color:var(--ink);border-color:var(--ink)}
+.demo button:focus-visible{outline:2px solid var(--blue)}
+
+@keyframes boil{0%{transform:rotate(-.5deg) translate(0,0)}33%{transform:rotate(.4deg) translate(.5px,-.5px)}66%{transform:rotate(-.2deg) translate(-.5px,.5px)}100%{transform:rotate(.5deg)}}
+@keyframes tbwob{0%{transform:rotate(-9deg)}50%{transform:rotate(-4deg)}100%{transform:rotate(-7deg)}}
+@keyframes wob{0%{transform:rotate(-2deg)}100%{transform:rotate(1deg)}}
+@keyframes spin8{to{transform:rotate(360deg)}}
+@keyframes drop{from{transform:translateY(-16px) rotate(-3deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes popd{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes hop{0%{transform:translateY(0)}100%{transform:translateY(-3px)}}
+@keyframes slide{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+@keyframes stamp{0%{transform:rotate(-14deg) scale(1.9);opacity:0}100%{transform:rotate(-8deg) scale(1);opacity:1}}
+@keyframes popIn{from{opacity:0;transform:rotate(-3deg) scale(.9)}to{opacity:1;transform:rotate(-1deg) scale(1)}}
+@keyframes fly{0%{transform:translate(0,0)}40%{transform:translate(14px,-14px);opacity:0}41%{transform:translate(-10px,10px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes flick{0%{transform:scaleY(1)}100%{transform:scaleY(.7)}}
+@media (max-width:1000px){.panel{width:250px}}
+@media (max-width:860px){.app{flex-direction:column}.rail{position:static;height:auto;width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid #d6cab2;padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{width:100%;max-height:40vh;border-right:0;border-bottom:1px solid var(--line)}.note{max-width:92%}.hint{display:none}.top{padding:16px 16px 0}.tabs,.content,.foot{padding-left:16px;padding-right:16px}.pop{width:min(286px,calc(100vw - 40px))}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page {{cls}}">
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<div class="app">
+
+  <nav class="rail" aria-label="Primary">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="rb {{n.cls}}" onClick="{{n.pick}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="sp"></span>
+    <button class="rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <aside class="panel" aria-label="Sessions">
+    <div class="ptop">
+      <div style="display: flex; gap: 8px">
+        <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search sessions…" aria-label="Search sessions"><span class="kbd">Ctrl K</span></label>
+        <button class="pbtn">Select</button>
+      </div>
+      <div style="display: flex; gap: 8px">
+        <button class="filt" style="flex: 1" aria-haspopup="listbox"><span style="flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">All workspaces</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+        <button class="filt {{activeCls}}" onClick="{{toggleActive}}" aria-pressed="{{activeOnly}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>Active</button>
+      </div>
+    </div>
+    <div class="list">
+      <sc-for list="{{workspaces}}" as="w" hint-placeholder-count="4">
+        <section class="ws {{w.cls}}">
+          <button class="wsh" onClick="{{w.toggle}}" aria-expanded="{{w.open}}">
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            <i class="wsd" style="background: {{w.color}}" aria-hidden="true"></i>
+            <span class="nm">{{w.name}}</span>
+            <sc-if value="{{w.attn}}" hint-placeholder-val="{{false}}"><span class="attn" aria-label="Needs attention">!</span></sc-if>
+            <span class="cnt">{{w.count}}</span>
+          </button>
+          <div class="wsb"><div class="wsi">
+            <div class="rows">
+              <sc-for list="{{w.sessions}}" as="s" hint-placeholder-count="3">
+                <button class="row {{s.cls}}" onClick="{{s.pick}}" aria-current="{{s.cur}}">
+                  <sc-if value="{{s.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{s.attn}}</span></sc-if>
+                  <span class="src" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg>
+                  </span>
+                  <sc-if value="{{s.isDone}}" hint-placeholder-val="{{false}}"><span class="donechip">Done</span></sc-if>
+                  <span class="t">{{s.t}}</span>
+                  <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}"><span class="subn" title="Subagents">{{s.sub}}</span></sc-if>
+                  <sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12L4 4h8zM12 12l8-8v8zM12 12l8 8h-8zM12 12l-8 8v-8z"></path></svg></sc-if>
+                  <span class="dur">{{s.dur}}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div></div>
+        </section>
+      </sc-for>
+    </div>
+  </aside>
+
+<div class="sheet">
+  <header class="top">
+    <div class="ttl">
+      <h1>{{cur.t}}</h1>
+      <span class="tagw"><span class="tagb">{{cur.branch}}</span></span>
+    </div>
+    <div class="meta"><span>{{cur.role}} · {{cur.ws}}</span><span class="sticker {{stCls}}"><i aria-hidden="true"></i>{{stLabel}}</span></div>
+    <div class="top-r">
+      <button class="ib" aria-label="Open in editor"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
+      <button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
+      <button class="ib" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Session views">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab {{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}">{{t.label}}</button></sc-for>
+  </nav>
+
+  <div class="content">
+    <sc-if value="{{isChat}}" hint-placeholder-val="{{true}}">
+      <sc-for list="{{thread}}" as="it" hint-placeholder-count="6">
+        <sc-if value="{{it.isUser}}" hint-placeholder-val="{{false}}"><div class="note"><span class="tape" aria-hidden="true"></span><div class="note-in">{{it.text}}</div></div></sc-if>
+        <sc-if value="{{it.isSaid}}" hint-placeholder-val="{{false}}"><p class="said">{{it.text}}</p></sc-if>
+        <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
+          <section class="deck {{it.cls}}" aria-label="Agent work">
+            <button class="cap" onClick="{{it.toggle}}" aria-expanded="{{it.open}}">
+              <span class="tb">{{it.time}}
+                <sc-if value="{{it.ok}}" hint-placeholder-val="{{true}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+              </span>
+              <span class="cap-t"><strong>{{it.title}}</strong><span class="cap-s">{{it.sub}}</span></span>
+              <span class="trail" aria-hidden="true"><sc-for list="{{it.dots}}" as="d" hint-placeholder-count="3"><i class="dot {{d.cls}}"></i></sc-for></span>
+              <sc-if value="{{it.live}}" hint-placeholder-val="{{false}}"><span class="now">{{it.now}}</span></sc-if>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <div class="body"><div class="body-in">
+              <ol class="steps">
+                <sc-for list="{{it.steps}}" as="s" hint-placeholder-count="2">
+                  <li class="step" style="animation-delay: {{s.delay}}"><i class="dot {{s.k}}" aria-hidden="true" style="animation: none"></i><span class="k">{{s.label}}</span><code>{{s.detail}}</code><span class="tm">{{s.time}}</span></li>
+                </sc-for>
+              </ol>
+            </div></div>
+          </section>
+        </sc-if>
+      </sc-for>
+
+      <sc-if value="{{isIssue}}" hint-placeholder-val="{{true}}">
+        <div class="reply">
+          <p>I created issue #218: <a href="https://example.com/acme/lighthouse/issues/218">example.com/acme/lighthouse/issues/218</a> and labelled it <code>enhancement</code>.</p>
+          <p>In <code>card-detail.tsx</code>, local cards already render markdown. Synced cards from the tracker show their description as plain text because tracker text is untrusted. The app's markdown view already drops raw HTML, so the issue asks to render synced descriptions with the same view, with <code>allowRawHtml</code> never enabled.</p>
+          <ul>
+            <li><b>Links:</b> safe schemes only, opened in a new tab.</li>
+            <li><b>Images:</b> never load automatically, since a remote image would make the browser fetch from a third-party host as soon as the card opens.</li>
+            <li><b>Task lists:</b> render read-only.</li>
+          </ul>
+        </div>
+      </sc-if>
+      <sc-if value="{{isGeneric}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{cur.reply}}</p></div></sc-if>
+
+      <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
+        <div class="note"><span class="tape" aria-hidden="true"></span><div class="note-in">{{m.text}}</div></div>
+        <section class="deck {{m.cls}}" aria-label="Agent work for this turn">
+          <button class="cap" onClick="{{m.toggle}}" aria-expanded="{{m.open}}">
+            <span class="tb">{{m.time}}
+              <sc-if value="{{m.ok}}" hint-placeholder-val="{{false}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if>
+              <sc-if value="{{m.stopped}}" hint-placeholder-val="{{false}}"><span class="ok stopped"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="1"></rect></svg></span></sc-if>
+            </span>
+            <span class="cap-t"><strong>{{m.title}}</strong><span class="cap-s">{{m.sub}}</span></span>
+            <span class="trail" aria-hidden="true"><sc-for list="{{m.dots}}" as="d" hint-placeholder-count="2"><i class="dot {{d.cls}}"></i></sc-for></span>
+            <sc-if value="{{m.live}}" hint-placeholder-val="{{false}}"><span class="now">{{m.now}}</span></sc-if>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <div class="body"><div class="body-in">
+            <ol class="steps">
+              <sc-for list="{{m.steps}}" as="s" hint-placeholder-count="2">
+                <li class="step" style="animation-delay: {{s.delay}}"><i class="dot {{s.k}}" aria-hidden="true" style="animation: none"></i><span class="k">{{s.label}}</span><code>{{s.detail}}</code><span class="tm">{{s.time}}</span></li>
+              </sc-for>
+            </ol>
+          </div></div>
+        </section>
+        <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{m.reply}}</p></div></sc-if>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{isGit}}" hint-placeholder-val="{{false}}">
+      <div class="ledger">
+        <h3>Working tree · {{cur.branch}}</h3>
+        <div class="lrow"><span class="dot edit" style="animation: none" aria-hidden="true"></span><code>src/cards/card-detail.tsx</code><span class="plus">+38</span><span class="minus">−12</span></div>
+        <div class="lrow"><span class="dot edit" style="animation: none" aria-hidden="true"></span><code>src/ui/markdown-view.tsx</code><span class="plus">+6</span><span class="minus">−1</span></div>
+        <div class="lrow"><span class="dot bash" style="animation: none" aria-hidden="true"></span><code>src/lib/safe-link.ts</code><span class="plus">+41</span><span class="minus">−0</span></div>
+        <div class="lrow"><span class="dot edit" style="animation: none" aria-hidden="true"></span><code>tests/card-detail.test.tsx</code><span class="plus">+57</span><span class="minus">−3</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isTodos}}" hint-placeholder-val="{{false}}">
+      <div class="ledger">
+        <h3>Todos · {{todoDone}} of {{todoTotal}}</h3>
+        <sc-for list="{{todos}}" as="td" hint-placeholder-count="4">
+          <button class="todo {{td.cls}}" onClick="{{td.toggle}}" aria-pressed="{{td.done}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{td.t}}</span></button>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isOther}}" hint-placeholder-val="{{false}}">
+      <p class="scrap">Nothing pinned under {{tabName}} yet.</p>
+    </sc-if>
+  </div>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
+      <div class="card">
+        <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
+        <div class="ed">
+          <label class="sr" for="ta">Message the agent</label>
+          <textarea id="ta" class="ta" rows="2" placeholder="{{placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea>
+        </div>
+        <div class="bar">
+          <div class="tools">
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Model and effort">
+                  <div class="pop-h"><span>Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="gauge" role="img" aria-label="{{ctxAria}}">
+              <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
+                <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                <text x="6" y="36">E</text><text x="29" y="36">F</text>
+                <line class="needle" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line>
+                <circle class="hub" cx="20" cy="20" r="2.2"></circle>
+              </svg>
+              <span>{{pct}}%</span>
+            </span>
+
+            <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              YOLO
+              <sc-if value="{{yolo}}" hint-placeholder-val="{{true}}"><span class="stamp" aria-hidden="true">YOLO</span></sc-if>
+            </button>
+
+            <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{cur.ws}}</span>
+          </div>
+          <span class="hint" aria-hidden="true">{{hint}}</span>
+          <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
+            <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1"></rect></svg></sc-if>
+            <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></sc-if>
+          </button>
+        </div>
+      </div>
+      <div class="demo"><span>click sessions and tabs · type, ↵ to send, then stop with the red square · each character counts as 25 tokens</span><button onClick="{{reset}}">Reset demo</button></div>
+    </div>
+  </footer>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"contextWindow":{"editor":"enum","default":"200k","options":["200k","1M"]},"$preview":{"width":1440,"height":900}}'>
+const MODELS = [
+  { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', def: 2 },
+  { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', def: 1 },
+  { id: 'sonnet', name: 'Sonnet 5.5', desc: 'Fast and capable', def: 2 },
+  { id: 'haiku', name: 'Haiku 5.5', desc: 'Instant', def: 1 }
+];
+const EFFORT = ['Low', 'Med', 'High', 'X-high', 'Max'];
+const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
+const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
+const TABS = ['Chat', 'Git', 'Todos', 'Tools', 'Terminal', 'Logs'];
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+const WS = [
+  { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', sessions: [
+    { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
+    { id: 's2', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4m 55s', role: 'Implementer', branch: 'feat/LH-281' },
+    { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
+  { id: 'orbit', name: 'Orbit Billing', color: '#d06a8c', attn: true, sessions: [
+    { id: 's4', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
+    { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/ORB-272-telemetry' },
+    { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2m 50s', role: 'Implementer', branch: 'main' },
+    { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1m 02s', role: 'Implementer', branch: 'main' },
+    { id: 's9', t: 'Move worker pool to private subnets', st: 'done', dur: '34s', role: 'Orchestrator', branch: 'feat/private-workers' },
+    { id: 's10', t: 'Fill in access-request roles', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
+    { id: 's11', t: 'Onboarding form autofill', st: 'idle', dur: '45m 40s', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's12', t: 'Cross-tenant access audit', st: 'idle', dur: '46m 18s', role: 'Orchestrator', branch: 'fix/ORB-266' },
+    { id: 's13', t: 'Find recent ORB-prefixed pull requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's14', t: 'Guardrails check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's15', t: 'Is stale PR ORB-205 still relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's16', t: 'Support answers draft', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
+  { id: 'fleet', name: 'Fleet Infra Deploy', color: '#c8884a', sessions: [
+    { id: 's17', t: 'Update image digest', st: 'idle', dur: '29m 03s', role: 'Implementer', branch: 'main' },
+    { id: 's18', t: 'Find and move preprod images', st: 'busy', dur: '31m 15s', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
+  { id: 'tf', name: 'Fleet Infra Terraform', color: '#9a8c74', sessions: [
+    { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12m 08s', role: 'Orchestrator', branch: 'main' } ] }
+];
+const THREADS = {
+  s3: [
+    { k: 'user', text: 'Open an issue for synced cards showing markdown as plain text. Check how local cards render it first.' },
+    { k: 'cap', id: 'c1', time: '13s', sub: '2 LLM calls · 1 tool call', dots: ['think', 'read'], steps: [
+      { k: 'think', label: 'thinking', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
+      { k: 'read', label: 'read', detail: 'src/cards/card-detail.tsx', time: '0.3s' } ] },
+    { k: 'said', text: 'Line 212 renders markdown but line 180 renders plain text, so I\'ll check what separates them.' },
+    { k: 'cap', id: 'c2', time: '31s', sub: '4 LLM calls · 4 tool calls', dots: ['bash', 'read', 'read', 'bash'], steps: [
+      { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- src/cards/card-detail.tsx", time: '1.1s' },
+      { k: 'read', label: 'read', detail: 'src/ui/markdown-view.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'src/sync/tracker.ts', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'grep -rn "allowRawHtml" src/ | head', time: '0.4s' } ] },
+    { k: 'said', text: 'Local cards render markdown, but synced cards from the tracker deliberately show plain text. That is what the ticket needs to change.' },
+    { k: 'cap', id: 'c3', time: '10s', sub: '1 LLM call · 1 tool call · turn 55s', dots: ['ask'], steps: [
+      { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced card descriptions as markdown" --label enhancement', time: '3.0s' } ] }
+  ],
+  s5: [
+    { k: 'user', text: 'Enable browser telemetry in the Orbit checkout. Keep the client token out of the bundle and gate it behind a flag.' },
+    { k: 'cap', id: 'r1', time: '48s', sub: '5 LLM calls · 6 tool calls', dots: ['read', 'read', 'bash', 'edit', 'edit', 'bash'], steps: [
+      { k: 'read', label: 'read', detail: 'src/root.tsx', time: '0.2s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm add @acme/browser-telemetry', time: '9.4s' },
+      { k: 'edit', label: 'edit', detail: 'src/root.tsx (+24)', time: '0.3s' },
+      { k: 'bash', label: 'bash', detail: 'pnpm typecheck → 0 errors', time: '21s' } ] },
+    { k: 'said', text: 'The SDK is wired behind TELEMETRY_ENABLED. Before opening a PR I want the e2e run against staging to confirm the CSP allows the intake host.' },
+    { k: 'cap', id: 'r2', live: true, time: '1h 53m', sub: '3 steps · 1h 53m', dots: ['bash', 'read', 'bash'], now: 'running the e2e suite…', steps: [
+      { k: 'bash', label: 'bash', detail: 'pnpm e2e --env staging --grep telemetry', time: '…' } ] }
+  ]
+};
+const GENERIC = [
+  { k: 'user', text: 'Pick this up from where the last session left off and summarise the state.' },
+  { k: 'cap', id: 'g1', time: '21s', sub: '3 LLM calls · 2 tool calls', dots: ['think', 'read', 'bash'], steps: [
+    { k: 'think', label: 'thinking', detail: 'Read the last reply and the working tree first', time: '6s' },
+    { k: 'read', label: 'read', detail: 'last reply · 1.4k tokens', time: '0.2s' },
+    { k: 'bash', label: 'bash', detail: 'git status --short && git log --oneline -3', time: '0.9s' } ] }
+];
+const GENERIC_REPLY = {
+  s1: 'The curator now writes the digest to docs/changelog/2026-10-30.md and opens a draft PR each night. Two feeds still return 403; I\'m retrying them with the service account.',
+  s2: 'Rebased onto origin/main and release-2.4. One conflict in package.json resolved in favour of the release pin. Tests are running.',
+  s4: 'Sticky checkout sessions are enabled on the load balancer with a 12h cookie. Verifying the health check still passes across both zones.',
+  s9: 'Move complete. Both worker pools are on private subnets and the NAT route is in place. Nothing else to do here.',
+  s18: 'Found 14 preprod images tagged with the old registry. Moving them in batches of five so the registry rate limit isn\'t hit.'
+};
+const LIVE_STEPS = [
+  { k: 'think', label: 'thinking', detail: 'adaptive · reading your note', time: '2s' },
+  { k: 'read', label: 'read', detail: 'last reply', time: '0.2s' },
+  { k: 'bash', label: 'bash', detail: 'git status --short', time: '0.4s' }
+];
+const NOW = ['thinking…', 'reading the last reply…', 'running git status…'];
+const DEFAULT_TODOS = [{ t: 'Summarise the current state', d: true }, { t: 'Confirm next step with the user', d: false }];
+function fmtSec(ms) { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
+function findSession(id) { for (const w of WS) { const s = w.sessions.find((x) => x.id === id); if (s) return { ...s, ws: w.name }; } return null; }
+
+class Component extends DCLogic {
+  state = { sid: 's3', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: BASE, tick: 0,
+    todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
+  total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
+  curMsgs() { return this.state.msgs[this.state.sid] || []; }
+  busy() { return this.curMsgs().some((m) => !m.done); }
+  stop() {
+    clearInterval(this.ticker); clearTimeout(this.t3);
+    const sid = this.state.sid;
+    this.setState({ msgs: { ...this.state.msgs, [sid]: this.curMsgs().map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), n: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) } });
+  }
+  send() {
+    const el = this.ta;
+    if (this.busy() || !el || !el.value.trim()) return;
+    const text = el.value.trim(); const id = Date.now(); const sid = this.state.sid;
+    el.value = ''; el.style.height = '';
+    this.setState({ msgs: { ...this.state.msgs, [sid]: [...this.curMsgs(), { id, text, start: id, done: false }] }, draft: 0, used: this.state.used + Math.max(40, text.length * TPC), fly: true, open: null });
+    clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ fly: false }), 500);
+    clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400);
+    clearTimeout(this.t3);
+    this.t3 = setTimeout(() => {
+      clearInterval(this.ticker);
+      this.setState({ used: this.state.used + 1500, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } });
+    }, 2600);
+  }
+  capView(c, sid) {
+    const key = sid + c.id; const open = !!this.state.caps[key]; const live = !!c.live;
+    return { isCap: true, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''), ok: !live, live, time: c.time, title: live ? 'Working' : 'Done', sub: c.sub, now: c.now || '',
+      dots: c.dots.map((k, i) => ({ cls: k + (live && i === c.dots.length - 1 ? ' run' : '') })), steps: c.steps.map((s, i) => ({ ...s, delay: (40 + i * 70) + 'ms' })),
+      toggle: () => this.setState({ caps: { ...this.state.caps, [key]: !open } }) };
+  }
+  renderVals() {
+    const st = this.state; const total = this.total();
+    const used = Math.min(total - 1000, st.used);
+    const remaining = (total - used) / total;
+    const draftTok = Math.min(remaining * total, st.draft * TPC); const draftFrac = draftTok / total;
+    const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
+    const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
+    const busy = this.busy();
+    const cur = findSession(st.sid) || findSession('s3');
+    const sessionBusy = busy || cur.st === 'busy';
+    const msgs = this.curMsgs().map((m) => {
+      const live = !m.done; const stopped = !!m.stopped;
+      const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.n || 1) : 3);
+      const open = !!st.caps[m.id];
+      return { text: m.text, done: !live, live, ok: !live && !stopped, stopped, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''),
+        time: live ? fmtSec(Date.now() - m.start) : (m.elapsed || '0:03'), title: live ? 'Working' : stopped ? 'Stopped' : 'Done',
+        sub: live ? n + (n === 1 ? ' step' : ' steps') : stopped ? n + ' steps · interrupted' : '3 LLM calls · 3 tool calls',
+        now: live ? NOW[n - 1] : '',
+        dots: LIVE_STEPS.slice(0, n).map((s, i) => ({ cls: s.k + (live && i === n - 1 ? ' run' : '') + (stopped && i === n - 1 ? ' err' : '') })),
+        steps: LIVE_STEPS.slice(0, n).map((s, i) => ({ ...s, delay: (40 + i * 70) + 'ms' })),
+        reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. YOLO skipped two permission prompts along the way.' : 'Done. One permission prompt is waiting for you above.',
+        toggle: () => this.setState({ caps: { ...st.caps, [m.id]: !open } }) };
+    });
+    const todoList = st.todos[st.sid] || DEFAULT_TODOS;
+    const todos = todoList.map((t, i) => ({ t: t.t, done: t.d, cls: t.d ? 'done' : '', toggle: () => this.setState({ todos: { ...st.todos, [st.sid]: todoList.map((x, j) => j === i ? { ...x, d: !x.d } : x) } }) }));
+    return {
+      cls: [st.focus ? 'focus' : '', isMax ? 'max' : '', st.yolo ? 'yolo' : ''].join(' '),
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'sessions' ? 'on' : '', cur: n.id === 'sessions' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
+      activeOnly: st.activeOnly, activeCls: st.activeOnly ? 'on' : '',
+      toggleActive: () => this.setState({ activeOnly: !st.activeOnly }),
+      workspaces: WS.map((w) => {
+        const open = !!st.openWs[w.id];
+        const sessions = w.sessions.filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
+        return { name: w.name, color: w.color, attn: !!w.attn, count: sessions.length, open, cls: open ? '' : 'closed',
+          toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
+          sessions: sessions.map((s) => ({ t: s.t, dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+            cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
+            pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
+      }),
+      cur: { t: cur.t, role: cur.role, ws: cur.ws, branch: cur.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
+      stCls: sessionBusy ? 'busy' : cur.attn ? 'attn' : '', stLabel: sessionBusy ? 'Busy' : cur.attn ? 'Needs attention' : 'Idle',
+      tabs: TABS.map((t) => ({ label: t, cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
+      isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab,
+      thread: (THREADS[st.sid] || GENERIC).map((it) => it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text }),
+      isIssue: st.sid === 's3', isGeneric: !THREADS[st.sid],
+      msgs, todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
+      placeholder: isMax ? 'Max effort. Give it the hard one…' : st.yolo ? 'Write to the agent · no permission prompts' : 'Write to the agent…',
+      hint: busy ? '⎋ stop · agent is working' : '↵ send · ⇧↵ newline',
+      taRef: (el) => { if (el) this.ta = el; },
+      onInput: (e) => { const el = e.currentTarget; this.ta = el; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); },
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (st.open) this.setState({ open: null }); else if (busy) this.stop(); } },
+      onFocus: () => this.setState({ focus: true }),
+      onBlur: () => { clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ focus: false }), 120); },
+      modelOpen: st.open === 'model', anyOpen: !!st.open,
+      toggleModel: () => this.setState({ open: st.open === 'model' ? null : 'model' }),
+      closeAll: () => this.setState({ open: null }),
+      modelName: model.name,
+      models: MODELS.map((m) => ({ ...m, defLabel: EFFORT_FULL[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
+      ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
+      efforts: EFFORT.map((t, i) => ({ t, on: i === st.effort, cls: (i === st.effort ? 'on ' : '') + (i === model.def ? 'def ' : '') + (i === 4 && st.effort === 4 ? 'maxon' : ''), pick: () => this.setState({ effort: i, auto: false }) })),
+      effortLabel: EFFORT_FULL[st.effort], effortMode: st.auto ? 'model default' : 'custom', custom: !st.auto, isMax,
+      resetEffort: () => this.setState({ effort: model.def, auto: true }),
+      gaugeCls, pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
+      arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC, draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC, draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
+      ctxAria: 'Context window: ' + Math.round(remaining * 100) + ' percent left, ' + kfmt(total - used) + ' of ' + kfmt(total) + ' tokens',
+      yolo: st.yolo, toggleYolo: () => this.setState({ yolo: !st.yolo }),
+      busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
+      sendOrStop: () => busy ? this.stop() : this.send(),
+      reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: 's3', tab: 'Chat', open: null, caps: {}, msgs: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: BASE, activeOnly: false, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

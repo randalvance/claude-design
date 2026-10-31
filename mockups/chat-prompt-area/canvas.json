@@ -1,0 +1,269 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-13T15:10:00Z"
+  },
+  "title": "Chat Prompt Area",
+  "launch": {
+    "view": "focused",
+    "file": "Paper.dc.html"
+  },
+  "pages": [
+    {
+      "id": "paper",
+      "name": "Paper"
+    }
+  ],
+  "boards": {
+    "Paper.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "App shell — paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Agents.dc.html": {
+      "x": 0,
+      "y": 1000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agents — list page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Agent.dc.html": {
+      "x": 0,
+      "y": 2000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agent — edit page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Workspaces.dc.html": {
+      "x": 0,
+      "y": 3000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspaces — list page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Workspace.dc.html": {
+      "x": 0,
+      "y": 4000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspace — edit page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Kanban.dc.html": {
+      "x": 0,
+      "y": 5000,
+      "w": 1440,
+      "h": 900,
+      "title": "Kanban — boards list, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Board.dc.html": {
+      "x": 0,
+      "y": 6000,
+      "w": 1440,
+      "h": 900,
+      "title": "Board — cork board with ticket drawer, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Memory.dc.html": {
+      "x": 0,
+      "y": 7000,
+      "w": 1440,
+      "h": 900,
+      "title": "Memory — global, workspace and agent facts, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Background.dc.html": {
+      "x": 0,
+      "y": 8000,
+      "w": 1440,
+      "h": 900,
+      "title": "Background — jobs and workflows with triggers and run history, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Skills.dc.html": {
+      "x": 0,
+      "y": 9000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skills — list page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Skill.dc.html": {
+      "x": 0,
+      "y": 10000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skill — detail and edit page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "MCPs.dc.html": {
+      "x": 0,
+      "y": 11000,
+      "w": 1440,
+      "h": 900,
+      "title": "MCPs — servers with connection, tools and calls, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Paper.dc.html",
+    "Agents.dc.html",
+    "Agent.dc.html",
+    "Workspaces.dc.html",
+    "Workspace.dc.html",
+    "Kanban.dc.html",
+    "Board.dc.html",
+    "Memory.dc.html",
+    "Background.dc.html",
+    "Skills.dc.html",
+    "Skill.dc.html",
+    "MCPs.dc.html"
+  ],
+  "notes": {
+    "p1": {
+      "x": 1520,
+      "y": 0,
+      "w": 320,
+      "text": "Paper: every surface is a cut sheet with a hard offset shadow, so depth comes from stacking, not blur. Motion runs on steps() at 8–12 fps like a stop-motion puppet: capsules boil while working, notes drop in, the YOLO and MAX stamps thump down. Sessions are folder tabs over ruled index cards; the selected one is highlighter.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p2": {
+      "x": 1520,
+      "y": 440,
+      "w": 320,
+      "text": "Design system: tokens, type, tilt and shadow scales, motion table, icon set and 26 components with live previews live in the Paper Chat design system → https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh. Its tokens are installed on this canvas (Theme menu).",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p3": {
+      "x": 1520,
+      "y": 1000,
+      "w": 320,
+      "text": "Agents page: each agent is an index card with a taped-on 12×12 pixel portrait, the name, the description and one Start a chat button. Click a card to lift it and run a highlighter under the name; Start a chat fills blue and the footer line says which agent was started; search is live. Built from the Paper Chat tokens and pp-* classes.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p4": {
+      "x": 1520,
+      "y": 2000,
+      "w": 320,
+      "text": "Agent page: a sticky header holds the taped portrait, the name as an editable serif title, Delete (dashed red) and Save (blue, goes kraft-grey when there is nothing to save). Below, index cards for Description, Personality (trait stickers + text), System prompt (ruled, with a token estimate), Preferred model (radio rows), MCP servers (paper switches) and Skills (checkbox rows). Every change marks the page dirty; Save thumps a green sticker down; Delete asks on a kraft note before tearing the agent up.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p5": {
+      "x": 1520,
+      "y": 3000,
+      "w": 320,
+      "text": "Workspaces list: each workspace is an index card with its colour as a painted spine down the left edge, the name, the linked folders in mono, and one hand-written line (agents · memory facts · Kanban board). Cards with sessions working show a turning amber marker. New session opens a chat with that workspace's folders mounted; search matches names, folders and boards.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p7": {
+      "x": 1520,
+      "y": 5000,
+      "w": 320,
+      "text": "Kanban list: one index card per board with a rubber-stamped type in the corner (Local, Jira, GitHub), the source in mono, To do / Doing / Done counts as tags, and the workspaces it is tied to as colour chips. Jira and GitHub cards carry a Sync button and a hand-written sync state; local ones say there is nothing to sync. Sync all in the header runs every synced board with a turning arrow. Click a card to open the cork board.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p8": {
+      "x": 1520,
+      "y": 6000,
+      "w": 320,
+      "text": "Board: a framed cork board. Columns are kraft labels pinned with a red tack; cards are sticky notes in five pastel colours, each a little crooked, with the ticket key, a hand-written title, the workspace swatch, the agent's portrait and when it last moved. Drag a note onto another column to move it (the column lights up); click one to open the ticket drawer on the right: column chips, workspace, agent (change cycles), epic, created, updated, links, description, notes to the agent, history and sessions with a Start a session button. Sync pulls a new note in from Jira; Add card pins a local one that goes to Jira on the next sync. Views: Columns (with Group by epic, which puts hand-written epic labels inside each column) and Dependencies, where notes cluster inside dashed epic regions with kraft labels, each note gets its own tack, and red string sags tack to tack between blocking notes, twine between related ones. Click a note to light up its strings.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p6": {
+      "x": 1520,
+      "y": 4000,
+      "w": 320,
+      "text": "Workspace page: the header carries the colour chip (pick from six swatches), the editable name, Delete and Save. Left column: Linked folders (mono paths with a git marker, unlink ×, Add a folder), Extra context (ruled, token estimate) and Memory (facts learned by sessions here, pin to keep, × to forget, write your own and press Enter). Right column: Kanban board (a single highlighter row for the linked board with Open board and Unlink; when nothing is linked the row says so and Link a board opens a small floating list of the boards in Kanban), Agents relevant here (checkbox rows with portraits), Skills and MCP servers (paper switches). Delete explains that folders on disk are never touched.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p9": {
+      "x": 1520,
+      "y": 7000,
+      "w": 320,
+      "text": "Memory page: three folder tabs for the levels (Global, Workspaces, Agents). Workspace and agent levels add a strip of chips, each with its colour or portrait and a tiny meter of its 4 KB. Facts sit under kraft section labels with a red tack; each row has a push-pin (red = pinned, rides in every session; grey = answers search_memory only), the text, where it came from and when, its size in bytes, edit and forget. The Budget sheet is a paper ruler: solid fill is pinned, hatched is searchable, a post marks 4 KB. Global is nearly full (amber sticker); Orbit Billing is over, so the fill turns red, spills past the post, an Over-by sticker thumps down and a kraft note says what happens. New fact opens a kraft note: level, which workspace or agent, section chips or a new section, the fact, a pin switch, and a hand-written line saying what it adds and whether that goes over.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p10": {
+      "x": 1520,
+      "y": 8000,
+      "w": 320,
+      "text": "Background page: a timetable sheet of every job. Each row has a rubber-stamped kind (JOB in ink, WORKFLOW in blue), the name with the agent it runs as and a description, the trigger (a clock with the cron expression in mono and a hand-written reading, or an amber bolt with the event name, like cloud.file.created when a file lands in Drive › inbox), the last run as a sticker (Done, Failed, Running with a stepped pinwheel, Skipped) with when and how long, the next run (or \"waits for the next file\" for events, struck-through \"paused\" when paused), Run now and Pause/Resume. Paused rows fade under a red PAUSED stamp. A kraft Up next note lists the next three scheduled runs. Click a job for the drawer: trigger, runs-as portrait, workspace, last and next run, an enabled switch, the steps of a workflow, and the run history as a ledger with status, time, cause (on schedule, by hand, or the event with its file or deploy), a note and the duration; failed runs get Run again. Run now turns the sticker amber for a couple of seconds, then Done, and writes a new line in the ledger.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p11": {
+      "x": 1520,
+      "y": 9000,
+      "w": 320,
+      "text": "Skills list: one index card per skill with a rubber-stamped source (Built-in in ink, Plugin in blue with the plugin name, Project in green with the workspace, Yours in red), the version in hand-writing and a paper switch that turns the skill off everywhere. The card body is the name with its slash command in mono, the description agents read, and what the folder holds (scripts, references). The footer shows which agents have it as portraits and which workspaces as colour squares, and when it was last used. Off cards go grey. Filters: All, On, Off, Built-in, From plugins, From a project, Yours; search is live. Click a card to open the skill.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p12": {
+      "x": 1520,
+      "y": 10000,
+      "w": 320,
+      "text": "Skill page: sticky header with a crumb back to Skills, the editable serif name with its live slash command, the Yours stamp, version · edited · files · size, the save state, an enabled switch, Try it in a chat, Delete skill and Save skill (kraft-grey until something changes; saving bumps the version and thumps a Saved sticker). Left: Description (what agents read), When to use it (highlighter phrase chips, × to remove, Enter to add), Instructions (the SKILL.md body on a ruled mono sheet with character and token counts), Files in this skill (mono paths with a note each, Open, Add a file). Right: On for (checkbox rows of agents with portraits and workspaces with colour squares), Usage (a paper bar chart of runs per day for two weeks, then recent runs with agent, workspace and what came out), About (source, version, folder path, created, Export as a plugin). Delete asks on a kraft note, then shows a torn scrap with Undo.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p13": {
+      "x": 1520,
+      "y": 11000,
+      "w": 320,
+      "text": "MCP servers: a timetable sheet of every server. Each row has a rubber-stamped transport (STDIO in ink, HTTP in blue), the name with where it came from in hand-writing, what it is for and the command or URL in mono, the connection as a sticker (Connected, Connecting with a stepped pinwheel, Needs sign-in as a red outline, Error, Off) with a hand-written line saying since when or what went wrong, how many tools it gives plus resources and prompts, who has it on (agent portraits and workspace colour squares), then a contextual button (Restart, Reconnect, Sign in, Turn on) and a paper switch that turns the server off everywhere; off rows fade under a red OFF stamp. A kraft Heads up note names the servers that need a sign-in or can't connect. Filters: All, Connected, Needs attention, Off, stdio, HTTP; search also matches tool names. Click a server for the drawer: command or URL, connection, where from and scope, how it signs in, version, today's calls, the tool list with how often each was used, environment keys (values stay in the Keychain), On for as toggling chips of agents and workspaces, recent calls as a ledger, and Remove server behind a kraft confirmation. Add a server opens a kraft note: name, stdio or HTTP, command or URL, just you or this project; the new row connects in front of you.",
+      "fill": "orange",
+      "page": "paper"
+    }
+  },
+  "designSystems": [
+    {
+      "title": "Paper Chat",
+      "namespace": "paper-chat",
+      "artifact": "https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh",
+      "version": "1793353188-d80b",
+      "copiedAt": "2026-10-30T09:40:00Z"
+    }
+  ]
+}

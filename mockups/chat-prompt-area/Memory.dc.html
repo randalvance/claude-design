@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Memory — paper</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e4dccb;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
+a{color:#3b5b9a}a:hover{color:#2a4070}
+.page{--desk:#e4dccb;--paper:#f8f3e9;--paper-2:#efe7d6;--sheet:#fffdf7;--sheet-warm:#fffaf0;--card:#fffdf8;--rail:#e4d9c1;--line:#d6cab2;--kraft:#e2c48c;--kraft-2:#cfae72;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--tape:#ffec969e;--white:#ffffff;--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;min-height:100vh;box-sizing:border-box;display:flex;justify-content:center}
+.pp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit}
+.pp-ic{width:16px;height:16px;flex:none}
+
+.app{position:relative;width:100%;display:flex;background:var(--paper);min-height:100vh}
+.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
+
+/* rail (Paper Chat: Rail) */
+.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:sticky;top:0;height:100vh;align-self:flex-start;z-index:1}
+.pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
+.pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.pp-rb svg{width:18px;height:18px}
+.pp-rb:hover{background:var(--sheet-warm);transform:translateY(-1px)}
+.pp-rb.is-on{background:var(--sheet-warm);color:var(--ink);box-shadow:2px 2px 0 var(--shadow);transform:rotate(-2deg)}
+.pp-rb:focus-visible{outline:2px solid var(--blue)}
+.pp-rb .pp-nb{position:absolute;top:0;right:4px;transform:rotate(8deg)}
+.pp-nb{min-width:16px;height:16px;padding:0 4px;border-radius:50%;background:var(--red);color:var(--white);font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:1px 1px 0 rgba(0,0,0,.2);box-sizing:border-box;flex:none}
+.pp-rail .pp-sp{flex:1}
+
+/* header */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
+.ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ttl h1{margin:0;font-family:var(--font-serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
+.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pp-search{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background:var(--sheet);border:1px solid var(--line);box-shadow:2px 2px 0 var(--shadow);color:var(--mute);box-sizing:border-box;width:300px;max-width:100%}
+.pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.pp-search input::placeholder{color:var(--faint);font-family:var(--font-hand);font-size:16px}
+.pp-kbd{font-family:var(--font-mono);font-size:10px;color:var(--mute);border:1px solid var(--line);padding:1px 4px;white-space:nowrap}
+.pp-btn{all:unset;cursor:pointer;height:32px;padding:0 12px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 2px 0 var(--blue-2);transition:transform .2s steps(2),background .2s steps(2),box-shadow .2s steps(2);box-sizing:border-box;white-space:nowrap}
+.pp-btn:hover{transform:translateY(-1px)}
+.pp-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--blue-2)}
+.pp-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pp-btn.is-clean{background:var(--bar);box-shadow:2px 2px 0 var(--shadow);color:var(--sheet);cursor:default}
+.pp-dashed{all:unset;cursor:pointer;font-size:11.5px;font-weight:800;color:var(--mute);border:1.5px dashed var(--bar);padding:3px 10px;border-radius:3px;white-space:nowrap}
+.pp-dashed:hover{color:var(--ink);border-color:var(--ink)}
+.pp-dashed:focus-visible{outline:2px solid var(--blue)}
+
+/* level tabs (folder tabs) */
+.tabs{display:flex;align-items:flex-end;gap:8px;padding:20px 28px 0;position:relative;z-index:2}
+.ftab{all:unset;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:1px;padding:8px 18px 9px 16px;background:var(--paper-2);border:1px solid var(--line);border-bottom:0;color:var(--mute);min-width:150px;box-sizing:border-box;transition:transform .2s steps(2),background .2s steps(2);top:1px}
+.ftab:hover{transform:translateY(-2px)}
+.ftab:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+.ftab .fl{font-size:13.5px;font-weight:800}
+.ftab .fd{font-family:var(--font-hand);font-size:15px;line-height:1.1}
+.ftab.is-on{background:var(--sheet);color:var(--ink);box-shadow:3px -1px 0 var(--shadow);transform:translateY(-1px) rotate(-.6deg);z-index:2}
+.ftab.is-on:hover{transform:translateY(-2px) rotate(-.6deg)}
+.ftab .pp-nb{position:absolute;top:-7px;right:-6px;transform:rotate(8deg)}
+.ftab.is-over .fd{color:var(--red)}
+.ftab.is-near .fd{color:var(--amber)}
+.tabs .th{margin-left:auto;font-family:var(--font-hand);font-size:15px;color:var(--mute);padding-bottom:8px;text-align:right}
+
+/* deck: owner strip */
+.deck{margin:0 28px;background:var(--sheet);border:1px solid var(--line);box-shadow:3px 4px 0 var(--shadow);padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+.deck .dh{font-family:var(--font-hand);font-size:16px;color:var(--mute);line-height:1.25}
+.deck .dh b{color:var(--ink);font-weight:600}
+.oc{all:unset;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:5px;padding:7px 10px 7px 8px;border:1px solid var(--line);background:var(--sheet-warm);box-shadow:2px 2px 0 var(--shadow);min-width:138px;box-sizing:border-box;transition:transform .2s steps(2),background .2s steps(2)}
+.oc:hover{transform:translate(-1px,-1px)}
+.oc:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.oc.is-on{background:var(--highlighter);border-color:var(--highlighter-2);transform:rotate(-1deg)}
+.oc.is-on:hover{transform:rotate(-1deg) translate(-1px,-1px)}
+.oc .oh{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;white-space:nowrap}
+.oc .sq{width:14px;height:14px;background:var(--c);box-shadow:1px 1px 0 rgba(0,0,0,.18);flex:none;transform:rotate(-6deg)}
+.oc .ap{width:22px;height:22px;flex:none;background:var(--paper-2);border:1px solid var(--line);box-shadow:1px 1px 0 var(--shadow);display:grid;place-items:center;transform:rotate(-3deg)}
+.oc .ap svg{width:18px;height:18px;shape-rendering:crispEdges;display:block}
+.oc .om{display:flex;align-items:center;gap:7px}
+.oc .mb{flex:1;height:5px;border:1px solid var(--bar);background:var(--sheet);position:relative;overflow:visible}
+.oc .mb i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);transition:width .4s steps(6)}
+.oc.is-near .mb i{background:var(--amber)}
+.oc.is-over .mb{border-color:var(--red)}
+.oc.is-over .mb i{background:var(--red)}
+.oc .mt{font-family:var(--font-mono);font-size:10px;color:var(--mute);white-space:nowrap}
+.oc.is-over .mt{color:var(--red);font-weight:700}
+.oc .pp-nb{position:absolute;top:-6px;right:-6px;transform:rotate(8deg)}
+
+/* columns */
+.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px;padding:22px 28px 10px;align-items:start}
+.sheet{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:3px;box-shadow:3px 4px 0 var(--shadow);padding:16px 18px 18px;animation:drop .35s steps(4) both}
+.cols>.sheet:nth-child(2){animation-delay:.08s}
+.sheet h2{margin:0;font-family:var(--font-serif);font-size:17px;font-weight:600;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sheet h2 .hh{margin-left:auto;font-family:var(--font-hand);font-size:15px;color:var(--mute);font-weight:500;text-align:right}
+.sheet .bd{margin-top:8px}
+
+/* facts by section */
+.klabel{display:inline-flex;align-items:center;gap:9px;background:var(--kraft);box-shadow:1px 2px 0 var(--kraft-2);padding:3px 11px 3px 12px;font-family:var(--font-hand);font-size:18px;font-weight:600;line-height:1.1;transform:rotate(-1.1deg);margin:14px 0 2px;position:relative}
+.sec:nth-child(even) .klabel{transform:rotate(.8deg)}
+.klabel::before{content:"";position:absolute;left:-5px;top:50%;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9b85,var(--red) 55%,var(--red-2));box-shadow:1px 1px 1px rgba(0,0,0,.3);transform:translateY(-50%)}
+.klabel .n{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--red-2);background:rgba(255,253,247,.55);padding:0 5px;border-radius:2px}
+.frow{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:start;padding:9px 4px;border-bottom:1px dashed var(--line);animation:drop .3s steps(4) both;position:relative}
+.sec .frow:last-of-type{border-bottom:0}
+.frow.is-new{animation:flash 1.2s steps(6) both}
+.frow .ft{display:flex;flex-direction:column;gap:3px;min-width:0}
+.frow .fx{font-size:13.5px;line-height:1.45}
+.frow .fm{font-family:var(--font-hand);font-size:14.5px;color:var(--mute);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.frow.is-pin .fm .rides{color:var(--red)}
+.frow .acts{display:flex;align-items:center;gap:4px;margin-top:-2px}
+.frow .by{font-family:var(--font-mono);font-size:10.5px;color:var(--faint);margin-right:4px;white-space:nowrap}
+.pin{all:unset;cursor:pointer;width:22px;height:22px;flex:none;display:grid;place-items:center;color:var(--faint);transform:rotate(25deg);transition:transform .2s steps(2),color .2s steps(2);margin-top:1px}
+.pin:hover{color:var(--ink);transform:rotate(10deg)}
+.pin.is-on{color:var(--red);transform:rotate(-15deg)}
+.pin.is-on:hover{transform:rotate(-25deg)}
+.pin:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pin svg{width:16px;height:16px}
+.x{all:unset;cursor:pointer;width:22px;height:22px;flex:none;display:grid;place-items:center;color:var(--faint);border-radius:50%;transition:transform .2s steps(2),color .2s steps(2)}
+.x:hover{color:var(--red);background:#c8553d1a;transform:rotate(90deg)}
+.x.ed:hover{color:var(--blue);background:#3b5b9a1a;transform:rotate(-12deg)}
+.x:focus-visible{outline:2px solid var(--red)}
+.x svg{width:13px;height:13px}
+.fld{all:unset;display:block;width:100%;box-sizing:border-box;font-family:var(--font-sans);font-size:13.5px;line-height:24px;color:var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--line) 23px 24px);background-attachment:local;padding:0 2px;white-space:pre-wrap;overflow-wrap:anywhere;resize:vertical;min-height:72px}
+.fld::placeholder{font-family:var(--font-hand);font-size:17px;color:var(--faint)}
+.fld:focus{background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--bar) 23px 24px)}
+.edb{display:flex;gap:8px;margin-top:6px}
+.stk{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--green);color:var(--white);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;box-shadow:1px 2px 0 rgba(0,0,0,.18);transform:rotate(-4deg);animation:thump .3s steps(3) both;white-space:nowrap}
+.stk.red{background:var(--red)}
+.stk.amber{background:var(--amber)}
+.stk.sm{font-size:9.5px;padding:1px 7px}
+.pp-scrap{font-family:var(--font-hand);font-size:21px;color:var(--mute);padding:34px 0;text-align:center;transform:rotate(-1deg)}
+.also{font-family:var(--font-hand);font-size:15px;color:var(--mute);margin-top:10px;text-align:right}
+
+/* budget sheet */
+.bigrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:6px}
+.big{font-family:var(--font-serif);font-size:36px;font-weight:600;letter-spacing:-.02em;line-height:1;font-variation-settings:"opsz" 72}
+.big.is-near{color:var(--amber)}
+.big.is-over{color:var(--red)}
+.ofl{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.rwrap{position:relative;margin:16px 60px 0 0}
+.ruler{position:relative;height:24px;border:1.5px solid var(--ink);background:var(--sheet);box-sizing:border-box;color:var(--ink)}
+.ruler.is-near{color:var(--amber);border-color:var(--amber)}
+.ruler.is-over{color:var(--red);border-color:var(--red)}
+.ruler .all{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(135deg,currentColor 0 3px,transparent 3px 7px);transition:width .5s steps(8)}
+.ruler .pinned{position:absolute;left:0;top:0;bottom:0;background:currentColor;transition:width .5s steps(8)}
+.ruler .post{position:absolute;right:-2px;top:-7px;bottom:-7px;width:2px;background:currentColor}
+.ruler .spill{position:absolute;left:100%;top:-1.5px;bottom:-1.5px;background:repeating-linear-gradient(135deg,var(--red) 0 3px,#c8553d33 3px 7px);border:1.5px dashed var(--red);border-left:0;box-sizing:border-box;animation:grow .5s steps(8) both}
+.ruler .flag{position:absolute;left:100%;bottom:100%;margin:0 0 9px 4px;font-family:var(--font-hand);font-size:14px;color:var(--red);white-space:nowrap;transform:rotate(-6deg)}
+.ticks{position:relative;height:16px;margin-top:4px;font-family:var(--font-mono);font-size:10px;color:var(--mute)}
+.ticks span{position:absolute;top:0;transform:translateX(-50%)}
+.ticks span:first-child{transform:none}
+.ticks span::before{content:"";position:absolute;left:50%;top:-6px;height:4px;border-left:1px solid var(--bar)}
+.ticks span:first-child::before{left:0}
+.ticks span.lim{font-weight:700;color:var(--ink)}
+.ruler.is-over~.ticks span.lim{color:var(--red)}
+.keys{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-family:var(--font-hand);font-size:15px;color:var(--mute)}
+.keys i{display:inline-block;width:18px;height:10px;vertical-align:-1px;margin-right:6px;border:1px solid var(--ink);box-sizing:border-box}
+.keys i.solid{background:var(--ink)}
+.keys i.hatch{background:repeating-linear-gradient(135deg,var(--ink) 0 2px,transparent 2px 5px)}
+.keys i.free{background:var(--sheet)}
+.bline{font-family:var(--font-hand);font-size:16px;color:var(--mute);margin-top:12px;line-height:1.3}
+.warn{position:relative;background:var(--kraft);box-shadow:2px 3px 0 var(--kraft-2);padding:12px 14px;font-size:13px;line-height:1.5;transform:rotate(-.7deg);margin-top:14px;animation:drop .3s steps(4) both}
+.warn b{font-family:var(--font-hand);font-size:18px;font-weight:600;color:var(--red-2);display:block;margin-bottom:2px}
+.warn::before{content:"";position:absolute;left:50%;top:-8px;width:52px;height:14px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.how{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px}
+.how h3{margin:0 0 6px;font-family:var(--font-hand);font-size:19px;font-weight:600}
+.how p{margin:0 0 6px;font-size:12.5px;line-height:1.5;color:var(--ink)}
+.how code{font-family:var(--font-mono);font-size:11.5px;background:var(--paper-2);padding:0 4px}
+.how .tk{display:inline-grid;place-items:center;width:14px;height:14px;color:var(--red);vertical-align:-2px;transform:rotate(-15deg)}
+.how .tk svg{width:13px;height:13px}
+.how .tk.off{color:var(--faint);transform:rotate(25deg)}
+.demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:16px;color:var(--mute);padding:8px 28px 16px;flex-wrap:wrap;margin-top:auto;text-align:center}
+
+/* new fact note */
+.veil{position:fixed;inset:0;z-index:5;background:#2a221959;display:grid;place-items:center;animation:fade .2s steps(2) both;padding:20px;box-sizing:border-box}
+.cnote{position:relative;background:var(--kraft);box-shadow:4px 5px 0 var(--kraft-2);padding:22px 26px 20px;width:560px;max-width:100%;box-sizing:border-box;transform:rotate(-.8deg);animation:drop .3s steps(4) both}
+.cnote::before{content:"";position:absolute;left:50%;top:-10px;width:70px;height:18px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.cnote h3{margin:0 0 4px;font-family:var(--font-hand);font-size:28px;font-weight:600;line-height:1.1;display:flex;align-items:baseline;gap:10px}
+.cnote h3 .hh{margin-left:auto;font-size:15px;font-weight:500;color:var(--red-2)}
+.cnote .lab{font-family:var(--font-hand);font-size:16px;color:var(--red-2);margin:12px 0 5px}
+.cnote .rowc{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.lvl{all:unset;cursor:pointer;font-size:12px;font-weight:800;padding:5px 12px;border:1.5px dashed var(--red-2);color:var(--red-2);border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
+.lvl:hover{transform:translateY(-1px)}
+.lvl.is-on{background:var(--sheet);border-style:solid;border-color:var(--ink);color:var(--ink);box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(-1.5deg)}
+.lvl:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ocs{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;padding:4px 10px 4px 7px;border:1px solid transparent;background:rgba(255,253,247,.5);transition:transform .2s steps(2),background .2s steps(2)}
+.ocs:hover{transform:translateY(-1px)}
+.ocs.is-on{background:var(--sheet);border-color:var(--ink);box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(-1deg)}
+.ocs:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ocs .sq{width:12px;height:12px;background:var(--c);box-shadow:1px 1px 0 rgba(0,0,0,.18);flex:none}
+.ocs .ap{width:20px;height:20px;flex:none;background:var(--paper-2);border:1px solid var(--line);display:grid;place-items:center}
+.ocs .ap svg{width:16px;height:16px;shape-rendering:crispEdges;display:block}
+.secc{all:unset;cursor:pointer;font-family:var(--font-hand);font-size:16px;font-weight:600;padding:2px 10px;background:rgba(255,253,247,.5);border:1px solid transparent;transition:transform .2s steps(2)}
+.secc:hover{transform:translateY(-1px)}
+.secc.is-on{background:var(--sheet);border-color:var(--ink);box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(-1.5deg)}
+.secc:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.secf{all:unset;min-width:150px;flex:1;border-bottom:1.5px dashed var(--red-2);padding:3px 2px;font-size:13px;color:var(--ink)}
+.secf::placeholder{font-family:var(--font-hand);font-size:16px;color:var(--red-2);opacity:.8}
+.secf:focus{border-color:var(--ink)}
+.cnote .fld{background-color:var(--sheet);background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--line) 23px 24px);padding:0 10px;box-shadow:2px 2px 0 var(--kraft-2);min-height:96px}
+.pinrow{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:13px}
+.pinrow .ph{font-family:var(--font-hand);font-size:15px;color:var(--red-2)}
+.sw{all:unset;cursor:pointer;position:relative;width:36px;height:20px;border:1.5px solid var(--ink);background:var(--sheet);box-sizing:border-box;flex:none;transition:background .2s steps(2)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--ink);transition:transform .2s steps(2),background .2s steps(2)}
+.sw[aria-checked="true"]{background:var(--red)}
+.sw[aria-checked="true"]::after{transform:translateX(17px);background:var(--white)}
+.sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.est{margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.est .et{font-family:var(--font-hand);font-size:16px;color:var(--ink);flex:1;min-width:200px}
+.est .et.is-over{color:var(--red-2)}
+.est .btns{display:flex;gap:10px;align-items:center;margin-left:auto}
+
+@keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes thump{from{transform:rotate(-4deg) scale(1.7);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes grow{from{width:0}}
+@keyframes flash{0%{background:var(--highlighter)}70%{background:var(--highlighter)}100%{background:transparent}}
+@media (max-width:1000px){.cols{grid-template-columns:1fr}}
+@media (max-width:860px){.app{flex-direction:column}.pp-rail{position:static;height:auto;width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.top,.cols,.demo,.tabs{padding-left:16px;padding-right:16px}.deck{margin:0 16px}.top-r{margin-left:0;width:100%}.pp-search{width:100%}.ftab{min-width:0;flex:1}.tabs .th{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div class="page">
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<div class="app">
+
+  <nav class="pp-rail" aria-label="Primary">
+    <div class="pp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="11">
+      <button class="pp-rb {{n.cls}}" aria-current="{{n.cur}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span>{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="pp-nb">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+    <span class="pp-sp"></span>
+    <button class="pp-rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
+  </nav>
+
+  <main class="main">
+    <header class="top">
+      <div class="ttl"><h1>Memory</h1><span class="sub">{{sub}}</span></div>
+      <div class="top-r">
+        <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search every fact…" aria-label="Search memory" ref="{{qRef}}" onInput="{{onSearch}}"><span class="pp-kbd">⌘K</span></label>
+        <button class="pp-btn" onClick="{{openNew}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New fact</button>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Memory level">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button class="ftab {{t.cls}}" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}"><span class="fl">{{t.label}}</span><span class="fd">{{t.detail}}</span><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="pp-nb">{{t.badge}}</span></sc-if></button>
+      </sc-for>
+      <span class="th">{{tabHint}}</span>
+    </div>
+
+    <div class="deck">
+      <sc-if value="{{isGlobal}}" hint-placeholder-val="{{true}}"><span class="dh"><b>Global</b> rides along in every session, whatever the workspace or agent. Keep it to the rules that are true everywhere.</span></sc-if>
+      <sc-if value="{{isWs}}" hint-placeholder-val="{{false}}">
+        <span class="dh"><b>Workspace</b> memory joins a session that runs there.</span>
+        <sc-for list="{{wsChips}}" as="w" hint-placeholder-count="6">
+          <button class="oc {{w.cls}}" style="--c:{{w.color}}" onClick="{{w.pick}}" aria-pressed="{{w.on}}"><span class="oh"><span class="sq" aria-hidden="true"></span>{{w.name}}</span><span class="om"><span class="mb"><i style="width:{{w.pct}}%"></i></span><span class="mt">{{w.kb}}</span></span><sc-if value="{{w.over}}" hint-placeholder-val="{{false}}"><span class="pp-nb">!</span></sc-if></button>
+        </sc-for>
+      </sc-if>
+      <sc-if value="{{isAgent}}" hint-placeholder-val="{{false}}">
+        <span class="dh"><b>Agent</b> memory joins a session that agent is on.</span>
+        <sc-for list="{{agentChips}}" as="a" hint-placeholder-count="8">
+          <button class="oc {{a.cls}}" onClick="{{a.pick}}" aria-pressed="{{a.on}}"><span class="oh"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{a.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>{{a.name}}</span><span class="om"><span class="mb"><i style="width:{{a.pct}}%"></i></span><span class="mt">{{a.kb}}</span></span><sc-if value="{{a.over}}" hint-placeholder-val="{{false}}"><span class="pp-nb">!</span></sc-if></button>
+        </sc-for>
+      </sc-if>
+    </div>
+
+    <div class="cols">
+      <section class="sheet" aria-label="Facts">
+        <h2>{{sheetTitle}}<span class="hh">{{sheetHint}}</span></h2>
+        <div class="bd">
+          <sc-for list="{{sections}}" as="s" hint-placeholder-count="4">
+            <div class="sec">
+              <div class="klabel">{{s.name}}<span class="n">{{s.n}}</span></div>
+              <sc-for list="{{s.facts}}" as="f" hint-placeholder-count="4">
+                <div class="frow {{f.cls}}">
+                  <button class="pin {{f.pinCls}}" onClick="{{f.togglePin}}" aria-pressed="{{f.pinned}}" aria-label="{{f.pinAria}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2l8 8-3 1-4 4 1 6-4-4-6 6-1-1 6-6-4-4 6 1 4-4z"></path></svg></button>
+                  <span class="ft">
+                    <sc-if value="{{f.viewing}}" hint-placeholder-val="{{true}}"><span class="fx">{{f.text}}</span></sc-if>
+                    <sc-if value="{{f.editing}}" hint-placeholder-val="{{false}}"><textarea class="fld" aria-label="Edit fact" ref="{{f.editRef}}" onInput="{{f.editInput}}"></textarea><span class="edb"><button class="pp-dashed" onClick="{{f.saveEdit}}">Save</button><button class="pp-dashed" onClick="{{f.cancelEdit}}">Cancel</button></span></sc-if>
+                    <span class="fm"><span>{{f.meta}}</span><span class="rides">{{f.rides}}</span><sc-if value="{{f.isNew}}" hint-placeholder-val="{{false}}"><span class="stk sm">new</span></sc-if></span>
+                  </span>
+                  <span class="acts"><span class="by">{{f.bytes}}</span><button class="x ed" onClick="{{f.edit}}" aria-label="Edit this fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4"></path></svg></button><button class="x" onClick="{{f.forget}}" aria-label="{{f.forgetAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+          <sc-if value="{{noneHere}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">{{emptyText}}</div></sc-if>
+          <sc-if value="{{hasAlso}}" hint-placeholder-val="{{false}}"><div class="also">{{alsoText}}</div></sc-if>
+        </div>
+      </section>
+
+      <section class="sheet" aria-label="Memory budget">
+        <h2>Budget<span class="hh">4 KB recommended at each level</span></h2>
+        <div class="bigrow"><span class="big {{bCls}}">{{bBig}}</span><span class="ofl">{{bOf}}</span><sc-if value="{{bOver}}" hint-placeholder-val="{{false}}"><span class="stk red">Over by {{bOverBy}}</span></sc-if><sc-if value="{{bNear}}" hint-placeholder-val="{{false}}"><span class="stk amber">Nearly full</span></sc-if></div>
+        <div class="rwrap">
+          <div class="ruler {{bCls}}" role="meter" aria-valuemin="0" aria-valuemax="4096" aria-valuenow="{{bBytes}}" aria-label="Memory used at this level">
+            <div class="all" style="width:{{bAllPct}}%"></div>
+            <div class="pinned" style="width:{{bPinPct}}%"></div>
+            <div class="post"></div>
+            <sc-if value="{{bOver}}" hint-placeholder-val="{{false}}"><div class="spill" style="width:{{bSpillPct}}%"></div><span class="flag">past the limit</span></sc-if>
+          </div>
+          <div class="ticks"><span style="left:0">0</span><span style="left:25%">1</span><span style="left:50%">2</span><span style="left:75%">3</span><span class="lim" style="left:100%">4 KB</span></div>
+        </div>
+        <div class="keys"><span><i class="solid"></i>pinned {{bPinKb}}</span><span><i class="hatch"></i>searchable {{bSearchKb}}</span><span><i class="free"></i>{{bFreeLabel}}</span></div>
+        <div class="bline">{{bLine}}</div>
+        <sc-if value="{{bOver}}" hint-placeholder-val="{{false}}"><div class="warn"><b>Over the limit</b>Sessions here still start, with a warning. Only the pinned facts that fit under 4 KB ride along; the rest wait for search. Unpin or forget a few facts to get back under.</div></sc-if>
+        <div class="how">
+          <h3>How facts are used</h3>
+          <p><span class="tk"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2l8 8-3 1-4 4 1 6-4-4-6 6-1-1 6-6-4-4 6 1 4-4z"></path></svg></span> <b>Pinned</b> facts are pasted into every session at this level, so they cost context every time.</p>
+          <p><span class="tk off"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2l8 8-3 1-4 4 1 6-4-4-6 6-1-1 6-6-4-4 6 1 4-4z"></path></svg></span> <b>Unpinned</b> facts wait for the agent's <code>search_memory</code> tool, which looks across global, the workspace and the agent.</p>
+          <p>Size is counted as it reaches a session: the section heading, the fact, and where it came from.</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="demo"><span>{{demoText}}</span><button class="pp-dashed" onClick="{{reset}}">Reset demo</button></div>
+
+    <sc-if value="{{hasDraft}}" hint-placeholder-val="{{false}}">
+      <div class="veil" onClick="{{veilClick}}">
+        <div class="cnote" role="dialog" aria-label="New fact" onClick="{{stop}}" onKeyDown="{{dKey}}">
+          <h3>New fact<span class="hh">{{dWhere}}</span></h3>
+          <div class="lab">Level</div>
+          <div class="rowc" role="radiogroup" aria-label="Level">
+            <sc-for list="{{dLevels}}" as="l" hint-placeholder-count="3"><button class="lvl {{l.cls}}" role="radio" aria-checked="{{l.on}}" onClick="{{l.pick}}">{{l.label}}</button></sc-for>
+          </div>
+          <sc-if value="{{dIsWs}}" hint-placeholder-val="{{false}}">
+            <div class="lab">Which workspace</div>
+            <div class="rowc"><sc-for list="{{dWs}}" as="w" hint-placeholder-count="6"><button class="ocs {{w.cls}}" style="--c:{{w.color}}" onClick="{{w.pick}}" aria-pressed="{{w.on}}"><span class="sq" aria-hidden="true"></span>{{w.name}}</button></sc-for></div>
+          </sc-if>
+          <sc-if value="{{dIsAgent}}" hint-placeholder-val="{{false}}">
+            <div class="lab">Which agent</div>
+            <div class="rowc"><sc-for list="{{dAgents}}" as="a" hint-placeholder-count="8"><button class="ocs {{a.cls}}" onClick="{{a.pick}}" aria-pressed="{{a.on}}"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{a.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>{{a.name}}</button></sc-for></div>
+          </sc-if>
+          <div class="lab">Section</div>
+          <div class="rowc"><sc-for list="{{dSections}}" as="s" hint-placeholder-count="4"><button class="secc {{s.cls}}" onClick="{{s.pick}}" aria-pressed="{{s.on}}">{{s.name}}</button></sc-for><input class="secf" type="text" placeholder="or a new section…" aria-label="New section name" ref="{{dSecRef}}" onInput="{{dSecInput}}"></div>
+          <div class="lab">The fact</div>
+          <textarea class="fld" placeholder="Something every session here should know…" aria-label="Fact" ref="{{dTextRef}}" onInput="{{dTextInput}}"></textarea>
+          <div class="pinrow"><button class="sw" role="switch" aria-checked="{{dPin}}" onClick="{{dTogglePin}}" aria-label="Pin this fact"></button><span>Pin it</span><span class="ph">{{dPinHint}}</span></div>
+          <div class="est"><span class="et {{dEstCls}}">{{dEst}}</span><span class="btns"><button class="pp-dashed" onClick="{{dCancel}}">Cancel</button><button class="pp-btn {{dAddCls}}" onClick="{{dAdd}}">Add fact</button></span></div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const NAV = [
+  { id: 'home', label: 'Home', icon: 'M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z' },
+  { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
+  { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
+  { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
+  { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
+  { id: 'memory', label: 'Memory', icon: 'M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 3.9 4 4 0 0 0 1 2.6V17a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2.5a4 4 0 0 0 1-2.6A4 4 0 0 0 16 8V7a4 4 0 0 0-4-4z' },
+  { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
+  { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
+  { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
+  { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
+];
+const PAL = { i: '#2a2219', b: '#3b5b9a', B: '#2a4070', g: '#5b8c5a', r: '#c8553d', R: '#8f3a2a', k: '#e2c48c', K: '#cfae72', a: '#b8792f', w: '#fffdf7', t: '#4a8f99', s: '#8b6bb3', m: '#6f6252', h: '#fff0a0' };
+const SPRITES = {
+  curator: ['..k......k..','..kk....kk..','..kkkkkkkk..','.kkwwkkwwkk.','.kwiwkkwiwk.','.kkwwkkwwkk.','.kkkkaakkkk.','..kKKKKKKk..','..kKkKkKKk..','..kKKKKKKk..','...kkkkkk...','...a.aa.a...'],
+  implementer: ['............','..gggggggg..','..gggggggg..','..giiiiiig..','..giwiiwig..','..giiiiiig..','..gggggggg..','..ggkkkkgg..','..gggggggg..','...g.gg.g...','..kk.gg.kk..','..kk....kk..'],
+  issue: ['...rrrrrr...','..rrrrrrrr..','..rRRRRRRr..','..kkkkkkkk..','..kwkkkkwk..','..kikkkkik..','..kkkkkkkk..','..kkkiikkk..','...kkkkkk...','..wwwwwwww..','..wiiwwiiw..','..wwwwwwww..'],
+  reviewer: ['............','...iiii.....','..iwwwwi....','.iwbbbbwi...','.iwbhbbwi...','.iwbbbbwi...','..iwwwwi....','...iiiii....','.......ii...','........ii..','.........ii.','............'],
+  triage: ['............','..aaaaaaaa..','..aaawwaaa..','..aawwwwaa..','..aaawwaaa..','..aaaaaaaa..','..awwaawwa..','..aiwaawia..','..aaaaaaaa..','..aaawwaaa..','...aaaaaa...','............'],
+  release: ['.....ww.....','....wrrw....','....wrrw....','...wrrrrw...','...wrbbrw...','...wrbbrw...','...wrrrrw...','..rwrrrrwr..','..rwwwwwwr..','..r.aaaa.r..','....a..a....','....a..a....'],
+  support: ['............','...tttttt...','..tttttttt..','.tt.kkkk.tt.','.t.kkkkkk.t.','.t.kwkkwk.t.','.tt.kkkk.tt.','.tt.kiik.tt.','..tttkkttt..','.....kk..t..','....tttttt..','............'],
+  planner: ['............','..ssssssss..','..swwssmms..','..swissmms..','..ssssssss..','..skkkkkks..','..sskkkkss..','...ssssss...','..bbbbbbbb..','..b.b..b.b..','..bbbbbbbb..','............']
+};
+function px(rows) { const out = []; rows.forEach((row, y) => { Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: PAL[ch] }); }); }); return out; }
+
+const WS = [
+  { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a' },
+  { id: 'orbit', name: 'Orbit Billing', color: '#c8553d' },
+  { id: 'fleet', name: 'Fleet Infra', color: '#b8792f' },
+  { id: 'atlas', name: 'Atlas Docs', color: '#3b5b9a' },
+  { id: 'harbor', name: 'Harbor Mobile', color: '#8b6bb3' },
+  { id: 'kiln', name: 'Kiln Data', color: '#4a8f99' }
+];
+const AGENTS = [
+  { id: 'curator', name: 'Curator' }, { id: 'implementer', name: 'Implementer' }, { id: 'issue', name: 'Issue Creator' }, { id: 'reviewer', name: 'Reviewer' },
+  { id: 'triage', name: 'Triage' }, { id: 'release', name: 'Release Captain' }, { id: 'support', name: 'Support Writer' }, { id: 'planner', name: 'Infra Planner' }
+];
+const LEVELS = [{ id: 'global', label: 'Global' }, { id: 'ws', label: 'Workspace' }, { id: 'agent', label: 'Agent' }];
+const SECTIONS = { global: ['Conventions', 'Tools & commands', 'Preferences', 'People'], ws: ['Codebase', 'Decisions', 'Gotchas', 'Working style'], agent: ['Role', 'Style', 'Lessons'] };
+const LIMIT = 4096;
+const TODAY = '31 Oct';
+
+// A fact: level, owner (workspace or agent id), section, pinned, text, where it came from ('you' or the workspace a session learned it on), and when.
+const F = (level, owner, section, pinned, text, src, at) => ({ level, owner, section, pinned, text, src, at });
+const FACTS = [
+  // Global
+  F('global', null, 'Conventions', true, 'Commit messages are imperative and under 72 characters. Add a body only when the why is not obvious from the diff, and never paste the ticket description into it.', 'you', '2 Sep'),
+  F('global', null, 'Conventions', true, 'Never force-push a shared branch. Anything that touches main goes through a pull request with one approving review, even a one-line fix.', 'you', '2 Sep'),
+  F('global', null, 'Conventions', false, 'Unit tests sit next to the code as *.test.ts. Anything that needs a database, a browser or the network lives under tests/ and runs in the slow CI lane.', 'Lighthouse Web', '14 Sep'),
+  F('global', null, 'Conventions', false, 'Feature flags are kebab-case and listed in flags.md with an owner and a removal date. A flag at 100% for a month is a bug; delete it.', 'Orbit Billing', '3 Oct'),
+  F('global', null, 'Conventions', false, 'Branch names are <area>/<ticket>-<slug>, lower case. The ticket key is what links the PR to the board, so get it right. Hyphens, never underscores.', 'you', '6 Sep'),
+  F('global', null, 'Tools & commands', true, 'pnpm is the package manager everywhere. A stray package-lock.json or yarn.lock is a mistake to delete, not a hint to honour.', 'you', '2 Sep'),
+  F('global', null, 'Tools & commands', false, '`just check` runs lint, typecheck and the unit tests in one go. CI runs the same recipe, so a green `just check` means a green PR.', 'Fleet Infra', '20 Sep'),
+  F('global', null, 'Tools & commands', false, 'Deploys go through `fleet ship <env>` and nothing else. Nobody runs terraform apply by hand, including on staging, including at 2 am.', 'Fleet Infra', '20 Sep'),
+  F('global', null, 'Tools & commands', false, 'The staging databases reset nightly at 03:00 UTC from seeds/staging. Anything you leave there is gone in the morning.', 'Orbit Billing', '9 Oct'),
+  F('global', null, 'Tools & commands', false, '`pnpm why <pkg>` before adding a dependency that may already be there under another name; the lockfile has three date libraries as it is.', 'Lighthouse Web', '30 Sep'),
+  F('global', null, 'Preferences', true, 'You prefer short replies that lead with the outcome. Code goes in fenced blocks, never inline in a sentence, and commands get their own block.', 'you', '2 Sep'),
+  F('global', null, 'Preferences', true, 'Ask before deleting anything on disk, even inside a scratch folder, and never run a destructive git command without being told to.', 'you', '5 Sep'),
+  F('global', null, 'Preferences', false, 'TypeScript strict mode is the default in every package. An `any` needs a comment on the same line saying why it is there.', 'you', '11 Sep'),
+  F('global', null, 'Preferences', false, 'Prefer editing an existing file over adding a new one. A new module needs one line in its package README saying what it is for.', 'Harbor Mobile', '17 Oct'),
+  F('global', null, 'Preferences', false, 'When a change touches more than one package, open one PR per package unless they cannot build apart.', 'you', '12 Sep'),
+  F('global', null, 'People', false, 'Mira owns billing and reviews every migration there. Loop her in early on schema changes rather than at review time.', 'you', '9 Sep'),
+  F('global', null, 'People', false, 'The platform team meets on Tuesdays. Infra questions wait for them unless something is actually down right now.', 'Fleet Infra', '24 Sep'),
+  F('global', null, 'People', false, 'Teo keeps the design tokens. Colour or type changes in packages/ui go past him before they merge, no matter how small.', 'Lighthouse Web', '28 Oct'),
+  F('global', null, 'People', false, 'Support escalations land with Priya first; she decides whether an issue is a bug or a how-to before anyone writes code.', 'Atlas Docs', '30 Oct'),
+  F('global', null, 'People', false, 'Jonah runs the mobile releases from Harbor Mobile. App store timing questions go to him, not to Release Captain.', 'Harbor Mobile', '19 Oct'),
+  // Lighthouse Web
+  F('ws', 'lighthouse', 'Codebase', true, 'Next.js 15 app router. Pages live under app/, shared UI in packages/ui, and nothing in app/ imports from another route\'s folder.', 'Lighthouse Web', '12 Sep'),
+  F('ws', 'lighthouse', 'Codebase', false, 'Auth is handled once by src/middleware.ts. Do not add per-page checks; a page that renders is a page the user may see.', 'Lighthouse Web', '15 Sep'),
+  F('ws', 'lighthouse', 'Decisions', true, 'Forms use server actions, not API routes (ADR 7). The API routes that remain are for the mobile app and are frozen.', 'you', '18 Sep'),
+  F('ws', 'lighthouse', 'Gotchas', false, 'The e2e suite needs the mock payments server up: run `pnpm mock:pay` first or every checkout test fails the same way.', 'Lighthouse Web', '2 Oct'),
+  F('ws', 'lighthouse', 'Working style', false, 'Design review happens in the linked Figma file before any UI pull request. Teo signs off on tokens; the rest is yours.', 'you', '21 Oct'),
+  // Orbit Billing (over its budget)
+  F('ws', 'orbit', 'Codebase', true, 'Ledger entries are append-only. A correction is a new entry that references the one it reverses; rows are never updated in place, not even by a migration.', 'Orbit Billing', '6 Oct'),
+  F('ws', 'orbit', 'Codebase', true, 'Money is an integer in minor units plus an ISO currency code, everywhere. Never floats, never decimal strings in JSON payloads, never `number` in the database.', 'you', '6 Oct'),
+  F('ws', 'orbit', 'Codebase', false, 'Invoices render through services/invoice-pdf. The template is templates/invoice.hbs and is versioned by its content hash, so a reissued invoice renders exactly as it did.', 'Orbit Billing', '8 Oct'),
+  F('ws', 'orbit', 'Codebase', false, 'Webhooks are verified once in the middleware. Handlers assume the signature was already checked and must not re-verify, or the replay guard double-counts.', 'Orbit Billing', '12 Oct'),
+  F('ws', 'orbit', 'Codebase', false, 'Currency conversion happens once, at ledger write time, using the rate stored on the entry. Reports never convert again, so totals stay reproducible.', 'Orbit Billing', '14 Oct'),
+  F('ws', 'orbit', 'Codebase', false, 'Invoice numbers come from a Postgres sequence per legal entity. Never mock the sequence in tests; create a throwaway entity and let it allocate.', 'Orbit Billing', '15 Oct'),
+  F('ws', 'orbit', 'Codebase', false, 'The ledger API is versioned by header, not by path. v1 is frozen; every new field goes behind `X-Ledger-Version: 2` and a flag.', 'Orbit Billing', '17 Oct'),
+  F('ws', 'orbit', 'Codebase', false, 'Customer-facing amounts are formatted by formatMoney in packages/money and nowhere else. No toFixed anywhere in the dashboard.', 'Orbit Billing', '30 Oct'),
+  F('ws', 'orbit', 'Decisions', true, 'Jira project ORB is the source of truth for scope. Local cards on the Billing migration board sync up on the next Sync, never the other way round.', 'you', '7 Oct'),
+  F('ws', 'orbit', 'Decisions', false, 'Plans and coupons moved to their own tables in ORB-115. The old plan_json column stays read-only until it is dropped in Q1; new code must not read it.', 'Orbit Billing', '18 Oct'),
+  F('ws', 'orbit', 'Decisions', false, 'Payment webhook retries use exponential backoff capped at six attempts, then land in the dead-letter queue with the raw payload (ORB-110).', 'Orbit Billing', '20 Oct'),
+  F('ws', 'orbit', 'Decisions', false, 'Coupons stack only when both are marked stackable. The rule lives in the domain layer in services/pricing, not in the checkout UI.', 'Orbit Billing', '22 Oct'),
+  F('ws', 'orbit', 'Decisions', false, 'Refunds go back to the original payment method only. Store credit is a separate product decision, not a fallback when the refund fails.', 'Orbit Billing', '23 Oct'),
+  F('ws', 'orbit', 'Decisions', false, 'Invoice PDFs are rendered once and stored. Regenerating one needs a reason in the audit log, and the old file is kept (ORB-120).', 'Orbit Billing', '25 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, 'The Stripe test clock advances inside the fixtures. If a test is flaky, check that the clock is reset in beforeEach before suspecting anything else.', 'Orbit Billing', '10 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, '`pnpm db:migrate` here needs DATABASE_URL pointing at the billing database, not the app one, or it migrates the wrong schema without complaining.', 'Orbit Billing', '13 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, 'Tax rates are cached for an hour. After editing them locally, restart the worker or you will chase a ghost until the cache expires.', 'Orbit Billing', '16 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, 'The nightly reconciliation job holds a lock on ledger_entries for a few seconds at 02:10 UTC. Do not schedule anything else in that window.', 'Orbit Billing', '21 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, 'The dashboard dev server proxies /api to port 4100. When the API is down you get a blank page, not an error, so check the API first.', 'Orbit Billing', '24 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, 'Fixtures under tests/fixtures/invoices are real anonymised invoices. Regenerate them with `pnpm fixtures:refresh`, never by hand.', 'Orbit Billing', '26 Oct'),
+  F('ws', 'orbit', 'Gotchas', false, '`pnpm dev` here starts the API and the worker together. If the worker port is taken the API still comes up and webhooks queue silently.', 'Orbit Billing', '28 Oct'),
+  F('ws', 'orbit', 'Working style', true, 'Every migration PR gets a rollback section in its description and a reviewer from the platform team, in addition to the billing reviewer.', 'you', '7 Oct'),
+  F('ws', 'orbit', 'Working style', false, 'Mira reviews ledger changes. Tag her on anything under services/ledger before asking anyone else, and expect questions about reversals.', 'you', '9 Oct'),
+  F('ws', 'orbit', 'Working style', false, 'Write the Jira comment before the PR description. The ticket is what the billing team reads; GitHub is for the reviewer.', 'you', '11 Oct'),
+  F('ws', 'orbit', 'Working style', false, 'Keep PRs under 400 lines here. Split the migration from the code that uses it, and land the migration first.', 'Orbit Billing', '27 Oct'),
+  F('ws', 'orbit', 'Working style', false, 'Sessions here should run `pnpm test:billing` rather than the full suite; the full suite needs the mock bank and takes twenty minutes.', 'Orbit Billing', '29 Oct'),
+  // Fleet Infra
+  F('ws', 'fleet', 'Codebase', true, 'Terraform modules live under modules/ and are versioned by git tag. Environments under envs/ only pin module versions and set variables.', 'Fleet Infra', '19 Sep'),
+  F('ws', 'fleet', 'Decisions', false, 'Blue/green for everything behind a load balancer; rolling for the batch workers (ADR 12).', 'you', '26 Sep'),
+  F('ws', 'fleet', 'Gotchas', false, '`fleet ship staging` needs an AWS session from `fleet login` within the last hour. An expired one fails late, after the plan.', 'Fleet Infra', '4 Oct'),
+  // Atlas Docs
+  F('ws', 'atlas', 'Codebase', false, 'Docs are MDX under content/, built by Astro. Each page needs a frontmatter owner and a last-reviewed date or the build warns.', 'Atlas Docs', '1 Oct'),
+  F('ws', 'atlas', 'Working style', true, 'Write for someone on their first day. Short sentences, one idea each, and a runnable example before any explanation.', 'you', '1 Oct'),
+  // Harbor Mobile
+  F('ws', 'harbor', 'Codebase', true, 'One Kotlin Multiplatform core under shared/; the iOS and Android folders are thin shells and should stay that way.', 'Harbor Mobile', '8 Oct'),
+  F('ws', 'harbor', 'Decisions', false, 'Offline-first: every screen renders from the local store and syncs in the background (ADR 3). No spinners on first paint.', 'you', '8 Oct'),
+  F('ws', 'harbor', 'Gotchas', false, 'Xcode previews break when the shared framework is stale: run `./gradlew :shared:assembleXCFramework` after touching shared/.', 'Harbor Mobile', '11 Oct'),
+  F('ws', 'harbor', 'Gotchas', false, 'The Android emulator reaches the API on 10.0.2.2, not localhost. The env file in android/ already does this; do not change it.', 'Harbor Mobile', '17 Oct'),
+  // Agents
+  F('agent', 'curator', 'Role', true, 'Write the changelog for readers who did not follow the PRs. Group by what changed for users, not by repository.', 'you', '10 Sep'),
+  F('agent', 'curator', 'Style', false, 'Lead each entry with the verb. No ticket numbers in the headline; put them in parentheses at the end.', 'you', '10 Sep'),
+  F('agent', 'curator', 'Lessons', false, 'Dependency bumps go in one line at the bottom unless they change behaviour.', 'Lighthouse Web', '25 Sep'),
+  F('agent', 'implementer', 'Role', true, 'Take a scoped ticket, make the change with tests, and leave a PR with a plain summary of what moved and why.', 'you', '10 Sep'),
+  F('agent', 'implementer', 'Style', false, 'Match the file\'s existing style over any global preference. Do not reformat lines you did not change.', 'you', '12 Sep'),
+  F('agent', 'implementer', 'Lessons', false, 'On Orbit Billing, run `pnpm test:billing` instead of the full suite; it covers what the reviewer checks.', 'Orbit Billing', '19 Oct'),
+  F('agent', 'implementer', 'Lessons', false, 'When a ticket says "small", read the linked tickets before estimating. ORB-142 was not small.', 'Orbit Billing', '28 Oct'),
+  F('agent', 'reviewer', 'Role', true, 'Correctness first, then naming, then the nits you keep to yourself. One review comment per real problem.', 'you', '10 Sep'),
+  F('agent', 'reviewer', 'Style', false, 'Quote the line, say what breaks, and suggest the fix. Never write "consider" when you mean "please change".', 'you', '12 Sep'),
+  F('agent', 'reviewer', 'Lessons', false, 'Ledger PRs: check that every write is an insert. Two updates have slipped past review already.', 'Orbit Billing', '22 Oct'),
+  F('agent', 'triage', 'Role', true, 'Sort incoming tickets by area and urgency, link duplicates, and ask the reporter for whatever is missing before assigning.', 'you', '10 Sep'),
+  F('agent', 'triage', 'Lessons', false, 'Crashes on Harbor Mobile with "shared framework" in the trace are stale builds, not bugs. Reply with the gradle command.', 'Harbor Mobile', '14 Oct'),
+  F('agent', 'release', 'Role', true, 'Cut the release branch from main on Thursdays, rebase open work onto it, and watch the deploy until every check is green.', 'you', '10 Sep'),
+  F('agent', 'release', 'Lessons', false, 'Hold the release if the nightly reconciliation job has not finished. It overlapped a deploy once and double-posted.', 'Orbit Billing', '23 Oct'),
+  F('agent', 'support', 'Role', true, 'Draft answers from the docs and recent fixes. Flag anything you are not sure about rather than guessing in the customer\'s inbox.', 'you', '10 Sep'),
+  F('agent', 'planner', 'Role', true, 'Plan Terraform changes module by module and explain the blast radius before touching anything.', 'you', '10 Sep'),
+  F('agent', 'planner', 'Lessons', false, 'The staging VPC shares a NAT gateway with the data pipelines. Resizing it affects Kiln jobs.', 'Fleet Infra', '5 Oct')
+];
+FACTS.forEach((f, i) => { f.id = 'f' + i; });
+
+const enc = new TextEncoder();
+const srcLabel = (f) => f.src === 'you' ? 'written by you' : 'learned on ' + f.src;
+const asLine = (f) => '- ' + f.text + ' (' + srcLabel(f) + ', ' + f.at + ')\n';
+const bytesOf = (f) => enc.encode(asLine(f)).length;
+const headBytes = (s) => enc.encode('## ' + s + '\n').length;
+function sectionsFor(level, list) {
+  const base = SECTIONS[level].slice();
+  list.forEach((f) => { if (!base.includes(f.section)) base.push(f.section); });
+  return base.filter((s) => list.some((f) => f.section === s));
+}
+function sizeOf(level, list) {
+  return sectionsFor(level, list).reduce((n, s) => n + headBytes(s), 0) + list.reduce((n, f) => n + bytesOf(f), 0);
+}
+const kb = (b) => (Math.round(b / 102.4) / 10).toFixed(1) + ' KB';
+const fmtB = (b) => b < 1024 ? b + ' B' : kb(b);
+const stateOf = (b) => b >= LIMIT ? 'over' : b >= LIMIT * 0.8 ? 'near' : 'ok';
+const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+const ownerName = (level, owner) => level === 'global' ? 'Global' : level === 'ws' ? (WS.find((w) => w.id === owner) || {}).name : (AGENTS.find((a) => a.id === owner) || {}).name;
+
+const INIT = { level: 'global', ws: 'orbit', agent: 'implementer', q: '', facts: FACTS.map((f) => ({ ...f })), editing: null, editText: '', draft: null, lastAdded: null, msg: '', nextId: FACTS.length };
+
+class Component extends DCLogic {
+  state = { ...INIT, facts: INIT.facts.map((f) => ({ ...f })) };
+  els = {};
+  bind(key, val) {
+    return (el) => { if (!el) return; this.els[key] = el; if (document.activeElement !== el && el.value !== val) el.value = val; };
+  }
+  renderVals() {
+    const st = this.state;
+    const q = st.q.trim().toLowerCase();
+    const match = (f) => !q || f.text.toLowerCase().includes(q) || f.section.toLowerCase().includes(q);
+    const at = (level, owner) => st.facts.filter((f) => f.level === level && (level === 'global' || f.owner === owner));
+    const owner = st.level === 'ws' ? st.ws : st.level === 'agent' ? st.agent : null;
+    const here = at(st.level, owner);
+    const shown = here.filter(match);
+    const bytes = sizeOf(st.level, here);
+    const pinned = here.filter((f) => f.pinned);
+    const pinBytes = sizeOf(st.level, pinned);
+    const stt = stateOf(bytes);
+    const name = ownerName(st.level, owner);
+    const setFacts = (facts, extra) => this.setState({ facts, ...(extra || {}) });
+
+    // counts per level, for the tabs
+    const gAll = at('global', null);
+    const wsStates = WS.map((w) => ({ w, list: at('ws', w.id) })).map((x) => ({ ...x, bytes: sizeOf('ws', x.list) }));
+    const agStates = AGENTS.map((a) => ({ a, list: at('agent', a.id) })).map((x) => ({ ...x, bytes: sizeOf('agent', x.list) }));
+    const wsOver = wsStates.filter((x) => stateOf(x.bytes) === 'over').length;
+    const agOver = agStates.filter((x) => stateOf(x.bytes) === 'over').length;
+    const matchesIn = (level) => st.facts.filter((f) => f.level === level && match(f)).length;
+    const gBytes = sizeOf('global', gAll);
+    const tabDetail = (level) => {
+      if (q) return plural(matchesIn(level), 'match');
+      if (level === 'global') return kb(gBytes) + ' of 4 KB';
+      if (level === 'ws') return WS.length + ' workspaces' + (wsOver ? ' · ' + wsOver + ' over' : '');
+      return AGENTS.length + ' agents' + (agOver ? ' · ' + agOver + ' over' : '');
+    };
+    const tabState = (level) => level === 'global' ? stateOf(gBytes) : (level === 'ws' ? wsOver : agOver) ? 'over' : 'ok';
+    const tabs = LEVELS.map((l) => {
+      const badge = l.id === 'ws' ? wsOver : l.id === 'agent' ? agOver : 0;
+      return { label: l.id === 'global' ? 'Global' : l.id === 'ws' ? 'Workspaces' : 'Agents', detail: tabDetail(l.id), on: st.level === l.id, cls: (st.level === l.id ? 'is-on ' : '') + 'is-' + tabState(l.id), hasBadge: badge > 0, badge, pick: () => this.setState({ level: l.id, editing: null, lastAdded: null }) };
+    });
+
+    const allN = st.facts.length, pinN = st.facts.filter((f) => f.pinned).length;
+    const also = q ? LEVELS.filter((l) => l.id !== st.level).map((l) => ({ l, n: matchesIn(l.id) })).filter((x) => x.n) : [];
+
+    // sections and rows
+    const row = (f) => {
+      const editing = st.editing === f.id;
+      return {
+        text: f.text, pinned: f.pinned, viewing: !editing, editing,
+        cls: (f.pinned ? 'is-pin ' : '') + (st.lastAdded === f.id ? 'is-new' : ''),
+        pinCls: f.pinned ? 'is-on' : '', pinAria: (f.pinned ? 'Unpin: ' : 'Pin: ') + f.text.slice(0, 40),
+        togglePin: () => setFacts(st.facts.map((x) => x.id === f.id ? { ...x, pinned: !x.pinned } : x), { msg: (f.pinned ? 'Unpinned a fact · it now answers search_memory only' : 'Pinned a fact · it rides along in every ' + (st.level === 'global' ? 'session' : st.level === 'ws' ? 'session on ' + name : 'session with ' + name)) }),
+        meta: srcLabel(f) + ' · ' + f.at, rides: f.pinned ? '· in every session' : '· via search',
+        isNew: st.lastAdded === f.id, bytes: fmtB(bytesOf(f)),
+        edit: () => this.setState({ editing: f.id, editText: f.text }),
+        editRef: this.bind('edit-' + f.id, editing ? st.editText : f.text),
+        editInput: (e) => this.setState({ editText: e.currentTarget.value }),
+        saveEdit: () => { const t = st.editText.trim(); if (!t) return; setFacts(st.facts.map((x) => x.id === f.id ? { ...x, text: t, at: TODAY } : x), { editing: null, msg: 'Edited a fact · its size on the ruler moved with it' }); },
+        cancelEdit: () => this.setState({ editing: null }),
+        forget: () => setFacts(st.facts.filter((x) => x.id !== f.id), { msg: 'Forgot a fact · Reset demo brings it back', editing: st.editing === f.id ? null : st.editing }),
+        forgetAria: 'Forget: ' + f.text.slice(0, 40)
+      };
+    };
+    const sections = sectionsFor(st.level, here).map((s) => ({ name: s, n: here.filter((f) => f.section === s).length, facts: shown.filter((f) => f.section === s).map(row) })).filter((s) => s.facts.length);
+
+    // budget
+    const avg = here.length ? bytes / here.length : 190;
+    const free = LIMIT - bytes;
+    let bLine;
+    if (stt === 'over') bLine = 'Over by ' + fmtB(bytes - LIMIT) + ' · forgetting ' + Math.ceil((bytes - LIMIT) / avg) + ' facts like these gets it back under.';
+    else if (stt === 'near') bLine = 'Room for about ' + Math.floor(free / avg) + ' more facts like these before it is full.';
+    else if (!here.length) bLine = 'Empty · everything here is still to be learned.';
+    else bLine = 'Room for about ' + Math.floor(free / avg) + ' more facts like these.';
+
+    // draft (new fact note)
+    const d = st.draft;
+    let dv = {};
+    if (d) {
+      const dOwner = d.level === 'ws' ? d.ws : d.level === 'agent' ? d.agent : null;
+      const target = at(d.level, dOwner);
+      const existing = sectionsFor(d.level, target);
+      const allSecs = SECTIONS[d.level].slice(); existing.forEach((s) => { if (!allSecs.includes(s)) allSecs.push(s); });
+      const section = d.custom.trim() || d.section;
+      const text = d.text.trim();
+      const tmp = { text: text || '…', src: 'you', at: TODAY };
+      const add = text ? bytesOf(tmp) + (existing.includes(section) || !section ? 0 : headBytes(section)) : 0;
+      const now = sizeOf(d.level, target);
+      const after = now + add;
+      const tName = ownerName(d.level, dOwner);
+      const canAdd = !!text && !!section;
+      const setD = (patch) => this.setState({ draft: { ...d, ...patch } });
+      dv = {
+        dWhere: 'goes to ' + tName,
+        dLevels: LEVELS.map((l) => ({ label: l.label, on: d.level === l.id, cls: d.level === l.id ? 'is-on' : '', pick: () => setD({ level: l.id, section: d.custom.trim() ? d.section : (SECTIONS[l.id].includes(d.section) ? d.section : SECTIONS[l.id][0]) }) })),
+        dIsWs: d.level === 'ws', dIsAgent: d.level === 'agent',
+        dWs: WS.map((w) => ({ name: w.name, color: w.color, on: d.ws === w.id, cls: d.ws === w.id ? 'is-on' : '', pick: () => setD({ ws: w.id }) })),
+        dAgents: AGENTS.map((a) => ({ name: a.name, px: px(SPRITES[a.id]), on: d.agent === a.id, cls: d.agent === a.id ? 'is-on' : '', pick: () => setD({ agent: a.id }) })),
+        dSections: allSecs.map((s) => ({ name: s, on: !d.custom.trim() && d.section === s, cls: !d.custom.trim() && d.section === s ? 'is-on' : '', pick: () => { setD({ section: s, custom: '' }); if (this.els.sec) this.els.sec.value = ''; } })),
+        dSecRef: this.bind('sec', d.custom), dSecInput: (e) => setD({ custom: e.currentTarget.value }),
+        dTextRef: this.bind('text', d.text), dTextInput: (e) => setD({ text: e.currentTarget.value }),
+        dPin: d.pin, dTogglePin: () => setD({ pin: !d.pin }), dPinHint: d.pin ? 'rides along in every session' : 'answers search_memory only',
+        dEst: !text ? 'Write the fact to see what it adds.' : 'Adds ' + fmtB(add) + ' · ' + tName + ' would be at ' + kb(after) + (after > LIMIT ? ', over by ' + fmtB(after - LIMIT) : ' of 4 KB') + (!section ? ' · pick a section' : ''),
+        dEstCls: after > LIMIT && text ? 'is-over' : '',
+        dAddCls: canAdd ? '' : 'is-clean',
+        dAdd: () => {
+          if (!canAdd) return;
+          const nf = { id: 'f' + st.nextId, level: d.level, owner: dOwner, section, pinned: d.pin, text, src: 'you', at: TODAY };
+          const patch = { facts: st.facts.concat([nf]), draft: null, lastAdded: nf.id, nextId: st.nextId + 1, level: d.level, q: '', editing: null, msg: 'Added a fact to ' + tName + ' under ' + section + (d.pin ? ' · pinned' : '') + (after > LIMIT ? ' · now over the limit' : '') };
+          if (d.level === 'ws') patch.ws = d.ws; if (d.level === 'agent') patch.agent = d.agent;
+          if (this.els.q) this.els.q.value = '';
+          this.setState(patch);
+        },
+        dCancel: () => this.setState({ draft: null }),
+        dKey: (e) => { if (e.key === 'Escape') this.setState({ draft: null }); }
+      };
+    }
+
+    const defaultMsg = 'Global is nearly full · Workspaces → Orbit Billing is over its 4 KB · tap a tack to pin or unpin, × to forget, New fact to add one';
+    return {
+      nav: NAV.map((n) => ({ ...n, cls: n.id === 'memory' ? 'is-on' : '', cur: n.id === 'memory' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
+      sub: q ? plural(shown.length, 'match') + ' for “' + st.q.trim() + '” here' : plural(allN, 'fact') + ' · ' + pinN + ' pinned · global, ' + WS.length + ' workspaces, ' + AGENTS.length + ' agents',
+      qRef: (el) => { if (el) this.els.q = el; },
+      onSearch: (e) => this.setState({ q: e.currentTarget.value, editing: null, lastAdded: null }),
+      openNew: () => this.setState({ draft: { level: st.level, ws: st.ws, agent: st.agent, section: SECTIONS[st.level][0], custom: '', text: '', pin: false }, editing: null }),
+      tabs,
+      tabHint: q ? 'matching facts, by level' : 'three levels · 4 KB each',
+      isGlobal: st.level === 'global', isWs: st.level === 'ws', isAgent: st.level === 'agent',
+      wsChips: wsStates.map((x) => ({ name: x.w.name, color: x.w.color, on: st.ws === x.w.id, cls: (st.ws === x.w.id ? 'is-on ' : '') + 'is-' + stateOf(x.bytes), pct: Math.min(100, x.bytes / LIMIT * 100), kb: q ? plural(x.list.filter(match).length, 'match') : x.list.length ? kb(x.bytes) : 'empty', over: stateOf(x.bytes) === 'over', pick: () => this.setState({ ws: x.w.id, editing: null, lastAdded: null }) })),
+      agentChips: agStates.map((x) => ({ name: x.a.name, px: px(SPRITES[x.a.id]), on: st.agent === x.a.id, cls: (st.agent === x.a.id ? 'is-on ' : '') + 'is-' + stateOf(x.bytes), pct: Math.min(100, x.bytes / LIMIT * 100), kb: q ? plural(x.list.filter(match).length, 'match') : x.list.length ? kb(x.bytes) : 'empty', over: stateOf(x.bytes) === 'over', pick: () => this.setState({ agent: x.a.id, editing: null, lastAdded: null }) })),
+      sheetTitle: st.level === 'global' ? 'Global memory' : name + ' · ' + (st.level === 'ws' ? 'workspace' : 'agent') + ' memory',
+      sheetHint: plural(here.length, 'fact') + ' · ' + pinned.length + ' pinned · ' + plural(sectionsFor(st.level, here).length, 'section'),
+      sections,
+      noneHere: shown.length === 0,
+      emptyText: q ? 'Nothing here matches “' + st.q.trim() + '”' : 'Nothing remembered for ' + name + ' yet. Sessions will add facts as they learn them, or write one.',
+      hasAlso: also.length > 0,
+      alsoText: 'also ' + also.map((x) => x.n + ' in ' + (x.l.id === 'global' ? 'global' : x.l.id === 'ws' ? 'workspaces' : 'agents')).join(', '),
+      bCls: 'is-' + stt, bBig: kb(bytes), bOf: stt === 'over' ? 'of the 4 KB recommended' : 'of 4 KB', bBytes: bytes,
+      bOver: stt === 'over', bNear: stt === 'near', bOverBy: fmtB(bytes - LIMIT),
+      bAllPct: Math.min(100, bytes / LIMIT * 100), bPinPct: Math.min(100, pinBytes / LIMIT * 100),
+      bSpillPct: stt === 'over' ? Math.min(30, (bytes - LIMIT) / LIMIT * 100) : 0,
+      bPinKb: fmtB(pinBytes), bSearchKb: fmtB(bytes - pinBytes), bFreeLabel: stt === 'over' ? 'no room left' : 'free ' + fmtB(free),
+      bLine,
+      demoText: st.msg || defaultMsg,
+      hasDraft: !!d, veilClick: () => this.setState({ draft: null }), stop: (e) => e.stopPropagation(),
+      ...dv,
+      reset: () => { if (this.els.q) this.els.q.value = ''; this.setState({ ...INIT, facts: INIT.facts.map((f) => ({ ...f })) }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
