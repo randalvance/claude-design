@@ -238,12 +238,12 @@ button,input,textarea{font:inherit}
         <sc-if value="{{isCols}}" hint-placeholder-val="{{true}}">
           <div class="colsview">
             <sc-for list="{{cols}}" as="c" hint-placeholder-count="5">
-              <div class="col {{c.cls}}" onDragover="{{c.over}}" onDragenter="{{c.enter}}" onDragleave="{{c.leave}}" onDrop="{{c.drop}}" aria-label="{{c.name}}">
+              <div class="col {{c.cls}}" onDragOver="{{c.over}}" onDragEnter="{{c.enter}}" onDragLeave="{{c.leave}}" onDrop="{{c.drop}}" aria-label="{{c.name}}">
                 <div class="colh"><span class="tack" aria-hidden="true"></span>{{c.name}}<span class="n">{{c.n}}</span></div>
                 <sc-for list="{{c.groups}}" as="g" hint-placeholder-count="1">
                   <sc-if value="{{g.labelled}}" hint-placeholder-val="{{false}}"><div class="eh"><span class="ek">{{g.key}}</span>{{g.name}}</div></sc-if>
                   <sc-for list="{{g.notes}}" as="t" hint-placeholder-count="3">
-                    <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" role="button" tabindex="0" draggable="true" onClick="{{t.open}}" onKeydown="{{t.key}}" onDragstart="{{t.dragstart}}" onDragend="{{t.dragend}}" aria-label="{{t.aria}}">
+                    <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" role="button" tabindex="0" draggable="true" onClick="{{t.open}}" onKeyDown="{{t.key}}" onDragStart="{{t.dragstart}}" onDragEnd="{{t.dragend}}" aria-label="{{t.aria}}">
                       <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span class="new">{{t.newText}}</span></sc-if></span>
                       <span class="nt">{{t.title}}</span>
                       <span class="nf"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><span class="who">{{t.agentName}}</span><span class="when">{{t.updated}}</span></span>
@@ -262,7 +262,7 @@ button,input,textarea{font:inherit}
               <div class="epic {{g.cls}}">
                 <div class="el"><span class="ek">{{g.key}}</span>{{g.name}}<span class="n">{{g.n}}</span></div>
                 <sc-for list="{{g.notes}}" as="t" hint-placeholder-count="3">
-                  <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" data-id="{{t.id}}" role="button" tabindex="0" onClick="{{t.open}}" onKeydown="{{t.key}}" aria-label="{{t.aria}}">
+                  <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" data-id="{{t.id}}" role="button" tabindex="0" onClick="{{t.open}}" onKeyDown="{{t.key}}" aria-label="{{t.aria}}">
                     <span class="tack" aria-hidden="true"></span>
                     <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<span class="new">{{t.colName}}</span></span>
                     <span class="nt">{{t.title}}</span>

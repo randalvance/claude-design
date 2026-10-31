@@ -105,6 +105,26 @@
       "page": "paper",
       "expand": "fill",
       "is_interactive": true
+    },
+    "Skills.dc.html": {
+      "x": 0,
+      "y": 9000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skills — list page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Skill.dc.html": {
+      "x": 0,
+      "y": 10000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skill — detail and edit page, paper, live demo",
+      "page": "paper",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -116,7 +136,9 @@
     "Kanban.dc.html",
     "Board.dc.html",
     "Memory.dc.html",
-    "Background.dc.html"
+    "Background.dc.html",
+    "Skills.dc.html",
+    "Skill.dc.html"
   ],
   "notes": {
     "p1": {
@@ -196,6 +218,22 @@
       "y": 8000,
       "w": 320,
       "text": "Background page: a timetable sheet of every job. Each row has a rubber-stamped kind (JOB in ink, WORKFLOW in blue), the name with the agent it runs as and a description, the trigger (a clock with the cron expression in mono and a hand-written reading, or an amber bolt with the event name, like cloud.file.created when a file lands in Drive › inbox), the last run as a sticker (Done, Failed, Running with a stepped pinwheel, Skipped) with when and how long, the next run (or \"waits for the next file\" for events, struck-through \"paused\" when paused), Run now and Pause/Resume. Paused rows fade under a red PAUSED stamp. A kraft Up next note lists the next three scheduled runs. Click a job for the drawer: trigger, runs-as portrait, workspace, last and next run, an enabled switch, the steps of a workflow, and the run history as a ledger with status, time, cause (on schedule, by hand, or the event with its file or deploy), a note and the duration; failed runs get Run again. Run now turns the sticker amber for a couple of seconds, then Done, and writes a new line in the ledger.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p11": {
+      "x": 1520,
+      "y": 9000,
+      "w": 320,
+      "text": "Skills list: one index card per skill with a rubber-stamped source (Built-in in ink, Plugin in blue with the plugin name, Project in green with the workspace, Yours in red), the version in hand-writing and a paper switch that turns the skill off everywhere. The card body is the name with its slash command in mono, the description agents read, and what the folder holds (scripts, references). The footer shows which agents have it as portraits and which workspaces as colour squares, and when it was last used. Off cards go grey. Filters: All, On, Off, Built-in, From plugins, From a project, Yours; search is live. Click a card to open the skill.",
+      "fill": "orange",
+      "page": "paper"
+    },
+    "p12": {
+      "x": 1520,
+      "y": 10000,
+      "w": 320,
+      "text": "Skill page: sticky header with a crumb back to Skills, the editable serif name with its live slash command, the Yours stamp, version · edited · files · size, the save state, an enabled switch, Try it in a chat, Delete skill and Save skill (kraft-grey until something changes; saving bumps the version and thumps a Saved sticker). Left: Description (what agents read), When to use it (highlighter phrase chips, × to remove, Enter to add), Instructions (the SKILL.md body on a ruled mono sheet with character and token counts), Files in this skill (mono paths with a note each, Open, Add a file). Right: On for (checkbox rows of agents with portraits and workspaces with colour squares), Usage (a paper bar chart of runs per day for two weeks, then recent runs with agent, workspace and what came out), About (source, version, folder path, created, Export as a plugin). Delete asks on a kraft note, then shows a torn scrap with Undo.",
       "fill": "orange",
       "page": "paper"
     }

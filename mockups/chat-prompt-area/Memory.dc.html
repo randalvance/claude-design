@@ -175,7 +175,7 @@ button{font:inherit}
 .demo{display:flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-hand);font-size:16px;color:var(--mute);padding:8px 28px 16px;flex-wrap:wrap;margin-top:auto;text-align:center}
 
 /* new fact note */
-.veil{position:absolute;inset:0;z-index:5;background:#2a221959;display:grid;place-items:center;animation:fade .2s steps(2) both;padding:20px;box-sizing:border-box}
+.veil{position:fixed;inset:0;z-index:5;background:#2a221959;display:grid;place-items:center;animation:fade .2s steps(2) both;padding:20px;box-sizing:border-box}
 .cnote{position:relative;background:var(--kraft);box-shadow:4px 5px 0 var(--kraft-2);padding:22px 26px 20px;width:560px;max-width:100%;box-sizing:border-box;transform:rotate(-.8deg);animation:drop .3s steps(4) both}
 .cnote::before{content:"";position:absolute;left:50%;top:-10px;width:70px;height:18px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
 .cnote h3{margin:0 0 4px;font-family:var(--font-hand);font-size:28px;font-weight:600;line-height:1.1;display:flex;align-items:baseline;gap:10px}
@@ -325,7 +325,7 @@ button{font:inherit}
 
     <sc-if value="{{hasDraft}}" hint-placeholder-val="{{false}}">
       <div class="veil" onClick="{{veilClick}}">
-        <div class="cnote" role="dialog" aria-label="New fact" onClick="{{stop}}" onKeydown="{{dKey}}">
+        <div class="cnote" role="dialog" aria-label="New fact" onClick="{{stop}}" onKeyDown="{{dKey}}">
           <h3>New fact<span class="hh">{{dWhere}}</span></h3>
           <div class="lab">Level</div>
           <div class="rowc" role="radiogroup" aria-label="Level">

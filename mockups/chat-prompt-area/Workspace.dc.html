@@ -258,7 +258,7 @@ button,input,textarea{font:inherit}
                 <div class="frow"><button class="pin {{f.pinCls}}" onClick="{{f.togglePin}}" aria-pressed="{{f.pinned}}" aria-label="{{f.pinAria}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2l8 8-3 1-4 4 1 6-4-4-6 6-1-1 6-6-4-4 6 1 4-4z"></path></svg></button><span class="ft"><span class="fx">{{f.text}}</span><span class="fm">{{f.meta}}</span></span><button class="x" onClick="{{f.forget}}" aria-label="{{f.forgetAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
               </sc-for>
               <sc-if value="{{noFacts}}" hint-placeholder-val="{{false}}"><div class="empty">Nothing remembered yet. Sessions add facts as they learn them.</div></sc-if>
-              <div class="addrow"><input class="addf" type="text" placeholder="Write a fact every session here should remember…" aria-label="New memory fact" ref="{{factRef}}" onKeydown="{{factKey}}"><button class="pp-dashed" onClick="{{addFact}}">Remember</button></div>
+              <div class="addrow"><input class="addf" type="text" placeholder="Write a fact every session here should remember…" aria-label="New memory fact" ref="{{factRef}}" onKeyDown="{{factKey}}"><button class="pp-dashed" onClick="{{addFact}}">Remember</button></div>
             </div>
           </section>
         </div>
