@@ -22,7 +22,7 @@ button{font:inherit}
 .app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
 
 /* rail (Paper Chat: Rail) */
-.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:relative;z-index:1}
+.pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:sticky;top:0;height:100vh;align-self:flex-start;z-index:1}
 .pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
 .pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .2s steps(2),background .2s steps(2)}
 .pp-rb svg{width:18px;height:18px}
@@ -155,7 +155,7 @@ button{font:inherit}
 @keyframes thump{from{transform:rotate(-4deg) scale(1.7);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @media (max-width:1000px){.cols{grid-template-columns:1fr}}
-@media (max-width:860px){.app{flex-direction:column}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.hdr,.cols,.demo{padding-left:16px;padding-right:16px}.hdr{position:static}.hacts{width:100%}}
+@media (max-width:860px){.app{flex-direction:column}.pp-rail{position:static;height:auto;width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.hdr,.cols,.demo{padding-left:16px;padding-right:16px}.hdr{position:static}.hacts{width:100%}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </helmet>
