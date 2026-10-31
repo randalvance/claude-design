@@ -156,7 +156,7 @@
       "x": 1520,
       "y": 0,
       "w": 320,
-      "text": "Paper: every surface is a cut sheet with a hard offset shadow, so depth comes from stacking, not blur. Motion runs on steps() at 8–12 fps like a stop-motion puppet: capsules boil while working, notes drop in, the YOLO and MAX stamps thump down. Sessions are folder tabs over ruled index cards; the selected one is highlighter.",
+      "text": "Paper: every surface is a cut sheet with a hard offset shadow, so depth comes from stacking, not blur. Motion runs on steps() at 8–12 fps like a stop-motion puppet: capsules boil while working, notes drop in, the YOLO and MAX stamps thump down. Sessions are folder tabs over ruled index cards; the selected one is highlighter. Sessions is the top of the rail (there is no Home). With no session open the sheet is a greeting: a hand-written good morning, one prompt card and an Advanced options switch that reveals model and effort, workspace, agent and the YOLO stamp; a hand-written line says what the session will use while they are hidden. ↵ starts the session in the chosen workspace, drops it at the top of that workspace in the panel and opens the chat with a fresh gauge; × in the session header goes back to the greeting.",
       "fill": "orange",
       "page": "paper"
     },
