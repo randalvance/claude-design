@@ -61,7 +61,39 @@ button,input,textarea{font:inherit}
 
 /* cork */
 .body{flex:1;min-height:0;display:flex}
-.cork{flex:1;min-width:0;overflow:auto;position:relative;background-color:var(--cork);background-image:radial-gradient(rgba(0,0,0,.16) 1px,transparent 1.6px),radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.6px),radial-gradient(rgba(0,0,0,.09) 2px,transparent 2.8px);background-size:7px 7px,11px 11px,23px 23px;background-position:0 0,3px 5px,9px 2px;box-shadow:inset 0 0 0 10px var(--cork-2),inset 0 0 0 12px #c9a06c,inset 0 0 40px rgba(0,0,0,.25);display:flex;gap:16px;padding:28px 24px 28px;align-items:flex-start}
+.cork{flex:1;min-width:0;overflow:auto;position:relative;background-color:var(--cork);background-image:radial-gradient(rgba(0,0,0,.16) 1px,transparent 1.6px),radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.6px),radial-gradient(rgba(0,0,0,.09) 2px,transparent 2.8px);background-size:7px 7px,11px 11px,23px 23px;background-position:0 0,3px 5px,9px 2px;box-shadow:inset 0 0 0 10px var(--cork-2),inset 0 0 0 12px #c9a06c,inset 0 0 40px rgba(0,0,0,.25);display:block;padding:28px 24px 28px;box-sizing:border-box}
+.colsview{display:flex;gap:16px;align-items:flex-start}
+.views{display:inline-flex;border:1px solid var(--line);background:var(--sheet);box-shadow:2px 2px 0 var(--shadow)}
+.vt{all:unset;cursor:pointer;height:30px;padding:0 12px;font-size:12px;font-weight:800;color:var(--mute);display:inline-flex;align-items:center;gap:6px;transition:background .15s steps(2)}
+.vt:hover{color:var(--ink)}
+.vt:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.vt.is-on{background:var(--highlighter);color:var(--ink)}
+.vt svg{width:14px;height:14px}
+.gchip{all:unset;cursor:pointer;height:28px;padding:0 10px;font-size:11.5px;font-weight:800;border:1.5px dashed var(--bar);color:var(--mute);border-radius:3px;display:inline-flex;align-items:center;gap:6px;box-sizing:border-box;transition:transform .2s steps(2)}
+.gchip:hover{color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
+.gchip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.gchip.is-on{border-style:solid;border-color:var(--highlighter-2);background:var(--highlighter);color:var(--ink)}
+.eh{display:flex;align-items:center;gap:6px;margin:4px 4px -4px;font-family:var(--font-hand);font-size:15px;font-weight:600;color:rgba(255,253,247,.92);text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.eh .ek{font-family:var(--font-mono);font-size:9.5px;font-weight:700;background:var(--kraft);color:var(--ink);padding:1px 5px;text-shadow:none;transform:rotate(-2deg)}
+.depwrap{position:relative;display:flex;flex-wrap:wrap;gap:38px 28px;padding:14px 4px 28px;align-items:flex-start;box-sizing:border-box}
+.strings{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2}
+.strings .sh{fill:none;stroke:rgba(0,0,0,.32);stroke-width:3;transform:translate(1.5px,2.5px)}
+.strings .str{fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round;opacity:.92;transition:opacity .15s steps(2)}
+.strings .str.rel{stroke:#dcc08f;stroke-width:2}
+.strings .str.is-hot{stroke-width:3.2;opacity:1}
+.strings.has-sel .str:not(.is-hot){opacity:.4}
+.epic{position:relative;border:2px dashed rgba(255,253,247,.5);border-radius:6px;padding:28px 14px 16px;display:grid;grid-template-columns:repeat(2,176px);gap:22px 14px;align-content:start;min-height:120px}
+.epic.loose{border-style:dotted;grid-template-columns:repeat(1,176px)}
+.el{position:absolute;top:-13px;left:14px;background:var(--kraft);padding:4px 10px;font-weight:800;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);box-shadow:2px 2px 0 rgba(0,0,0,.28);transform:rotate(-1.5deg);display:flex;gap:8px;align-items:center;white-space:nowrap;z-index:1}
+.el .ek{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0;background:var(--sheet);padding:1px 5px}
+.el .n{font-family:var(--font-hand);font-size:15px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--mute)}
+.depwrap .note{width:176px;cursor:pointer;padding-top:14px}
+.depwrap .note .tack{top:-6px;z-index:3}
+.depwrap .note:hover{transform:rotate(var(--r)) translateY(-1px)}
+.depwrap .note .new{color:var(--mute);transform:none;font-size:13px}
+.legend{width:100%;font-family:var(--font-hand);font-size:15px;color:rgba(255,253,247,.88);text-shadow:0 1px 0 rgba(0,0,0,.35);display:flex;gap:18px;align-items:center;padding:0 6px;flex-wrap:wrap}
+.legend i{display:inline-block;width:26px;height:0;border-top:2.5px solid var(--red);vertical-align:middle;margin-right:6px;border-radius:2px}
+.legend i.rel{border-color:#dcc08f}
 .col{width:226px;flex:none;display:flex;flex-direction:column;gap:14px;padding:6px 6px 34px;min-height:440px;border-radius:4px;transition:background .15s steps(2)}
 .col.is-over{background:rgba(255,253,247,.14);outline:2px dashed rgba(255,253,247,.75);outline-offset:-4px}
 .colh{position:relative;background:var(--kraft);padding:7px 10px 6px 12px;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);box-shadow:2px 3px 0 rgba(0,0,0,.28);transform:rotate(-1.2deg);display:flex;align-items:center;gap:8px;margin:0 4px}
@@ -189,6 +221,11 @@ button,input,textarea{font:inherit}
         <h1 class="bname">Billing migration <span class="stamp">Jira · ORB</span></h1>
         <span class="meta {{metaCls}}">{{meta}}</span>
         <span class="wss"><span class="wsc"><i style="background: #c8553d" aria-hidden="true"></i>Orbit Billing</span><span class="wsc"><i style="background: #b8792f" aria-hidden="true"></i>Fleet Infra</span></span>
+        <div class="views" role="tablist" aria-label="View">
+          <button class="vt {{colsCls}}" role="tab" aria-selected="{{isCols}}" onClick="{{viewCols}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>Columns</button>
+          <button class="vt {{depsCls}}" role="tab" aria-selected="{{isDeps}}" onClick="{{viewDeps}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><circle cx="10" cy="18" r="2.5"></circle><path d="M8.4 6.6l7.2.8M7 8.3l2.3 7.3M16.5 10.2l-5 5.8"></path></svg>Dependencies</button>
+        </div>
+        <sc-if value="{{isCols}}" hint-placeholder-val="{{true}}"><button class="gchip {{groupCls}}" aria-pressed="{{groupBy}}" onClick="{{toggleGroup}}">Group by epic</button></sc-if>
         <div class="top-r">
           <button class="pp-btn ghost {{syncCls}}" onClick="{{sync}}" aria-busy="{{syncing}}"><svg class="pp-ic {{syncSpin}}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"></path></svg>{{syncLabel}}</button>
           <button class="pp-btn" onClick="{{addCard}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add card</button>
@@ -198,19 +235,45 @@ button,input,textarea{font:inherit}
 
     <div class="body">
       <section class="cork" aria-label="Board">
-        <sc-for list="{{cols}}" as="c" hint-placeholder-count="5">
-          <div class="col {{c.cls}}" onDragover="{{c.over}}" onDragenter="{{c.enter}}" onDragleave="{{c.leave}}" onDrop="{{c.drop}}" aria-label="{{c.name}}">
-            <div class="colh"><span class="tack" aria-hidden="true"></span>{{c.name}}<span class="n">{{c.n}}</span></div>
-            <sc-for list="{{c.notes}}" as="t" hint-placeholder-count="3">
-              <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" role="button" tabindex="0" draggable="true" onClick="{{t.open}}" onKeydown="{{t.key}}" onDragstart="{{t.dragstart}}" onDragend="{{t.dragend}}" aria-label="{{t.aria}}">
-                <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span class="new">{{t.newText}}</span></sc-if></span>
-                <span class="nt">{{t.title}}</span>
-                <span class="nf"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><span class="who">{{t.agentName}}</span><span class="when">{{t.updated}}</span></span>
+        <sc-if value="{{isCols}}" hint-placeholder-val="{{true}}">
+          <div class="colsview">
+            <sc-for list="{{cols}}" as="c" hint-placeholder-count="5">
+              <div class="col {{c.cls}}" onDragover="{{c.over}}" onDragenter="{{c.enter}}" onDragleave="{{c.leave}}" onDrop="{{c.drop}}" aria-label="{{c.name}}">
+                <div class="colh"><span class="tack" aria-hidden="true"></span>{{c.name}}<span class="n">{{c.n}}</span></div>
+                <sc-for list="{{c.groups}}" as="g" hint-placeholder-count="1">
+                  <sc-if value="{{g.labelled}}" hint-placeholder-val="{{false}}"><div class="eh"><span class="ek">{{g.key}}</span>{{g.name}}</div></sc-if>
+                  <sc-for list="{{g.notes}}" as="t" hint-placeholder-count="3">
+                    <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" role="button" tabindex="0" draggable="true" onClick="{{t.open}}" onKeydown="{{t.key}}" onDragstart="{{t.dragstart}}" onDragend="{{t.dragend}}" aria-label="{{t.aria}}">
+                      <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span class="new">{{t.newText}}</span></sc-if></span>
+                      <span class="nt">{{t.title}}</span>
+                      <span class="nf"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><span class="who">{{t.agentName}}</span><span class="when">{{t.updated}}</span></span>
+                    </div>
+                  </sc-for>
+                </sc-for>
+                <sc-if value="{{c.empty}}" hint-placeholder-val="{{false}}"><div class="hint">drop a note here</div></sc-if>
               </div>
             </sc-for>
-            <sc-if value="{{c.empty}}" hint-placeholder-val="{{false}}"><div class="hint">drop a note here</div></sc-if>
           </div>
-        </sc-for>
+        </sc-if>
+        <sc-if value="{{isDeps}}" hint-placeholder-val="{{false}}">
+          <div class="depwrap" ref="{{depRef}}">
+            <svg class="strings {{stringsCls}}" aria-hidden="true"><sc-for list="{{strings}}" as="e" hint-placeholder-count="7"><path class="sh" d="{{e.d}}"></path><path class="str {{e.cls}}" d="{{e.d}}"></path></sc-for></svg>
+            <sc-for list="{{epics}}" as="g" hint-placeholder-count="5">
+              <div class="epic {{g.cls}}">
+                <div class="el"><span class="ek">{{g.key}}</span>{{g.name}}<span class="n">{{g.n}}</span></div>
+                <sc-for list="{{g.notes}}" as="t" hint-placeholder-count="3">
+                  <div class="note {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}" data-id="{{t.id}}" role="button" tabindex="0" onClick="{{t.open}}" onKeydown="{{t.key}}" aria-label="{{t.aria}}">
+                    <span class="tack" aria-hidden="true"></span>
+                    <span class="nk"><i class="pri {{t.pri}}" aria-hidden="true"></i>{{t.id}}<span class="new">{{t.colName}}</span></span>
+                    <span class="nt">{{t.title}}</span>
+                    <span class="nf"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><span class="who">{{t.agentName}}</span><span class="when">{{t.updated}}</span></span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+            <div class="legend"><span><i aria-hidden="true"></i>red string: blocks</span><span><i class="rel" aria-hidden="true"></i>twine: relates to</span><span>{{stringN}} strings · click a note to light up its own</span></div>
+          </div>
+        </sc-if>
       </section>
 
       <sc-if value="{{open}}" hint-placeholder-val="{{true}}">
@@ -225,6 +288,7 @@ button,input,textarea{font:inherit}
               <div class="facts">
                 <div class="fact"><span class="fl">Workspace</span><span class="fv"><i class="ws" style="background: {{t.wsColor}}" aria-hidden="true"></i>{{t.wsName}}</span></div>
                 <div class="fact"><span class="fl">Agent</span><span class="fv"><span class="ap" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{t.px}}" as="p" hint-placeholder-count="60"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>{{t.agentName}}<button class="pp-dashed" onClick="{{t.nextAgent}}">change</button></span></div>
+                <div class="fact"><span class="fl">Epic</span><span class="fv"><sc-if value="{{t.hasEpic}}" hint-placeholder-val="{{true}}"><span class="tag">{{t.epicKey}}</span>{{t.epicName}}</sc-if><sc-if value="{{t.noEpic}}" hint-placeholder-val="{{false}}"><span class="sub">none · loose on the board</span></sc-if></span></div>
                 <div class="fact"><span class="fl">Created</span><span class="fv">{{t.created}}<span class="sub">by {{t.createdBy}}</span></span></div>
                 <div class="fact"><span class="fl">Updated</span><span class="fv">{{t.updated}}<span class="sub">by {{t.updatedBy}}</span></span></div>
               </div>
@@ -305,30 +369,45 @@ const COLORS = ['#fff39b', '#ffc9d2', '#c4e4ff', '#cdf0b9', '#ffd9a1'];
 const ROTS = ['-1.5deg', '1deg', '-.6deg', '1.6deg', '-1deg', '.4deg', '-1.2deg'];
 const SESS_LABEL = { working: 'Working', done: 'Done', attn: 'Needs you' };
 const T = (id, title, col, ws, agent, pri, created, createdBy, updated, updatedBy, extra) => Object.assign({ id, title, col, ws, agent, pri, created, createdBy, updated, updatedBy, links: [], desc: '', notes: '', history: [{ what: 'synced from Jira', when: '4 min ago', who: 'sync' }, { what: 'created', when: created, who: createdBy + ' (Jira)' }], sessions: [], isNew: false }, extra || {});
+const EPICS = { 'ORB-120': 'Invoice PDF overhaul', 'ORB-100': 'Ledger v2', 'ORB-110': 'Payments hardening', 'ORB-115': 'Plans & coupons' };
+const EPIC_IDS = Object.keys(EPICS);
 const TICKETS = [
-  T('ORB-151', 'Dunning emails: retry schedule config', 'backlog', 'orbit', 'triage', 'low', '28 Oct', 'Mara', '2 d ago', 'sync'),
-  T('ORB-149', 'Export ledger as CSV', 'backlog', 'orbit', 'implementer', 'normal', '27 Oct', 'Jonas', '2 d ago', 'sync'),
-  T('ORB-147', 'Rate-limit the invoice PDF endpoint', 'backlog', 'fleet', 'planner', 'normal', '26 Oct', 'Mara', '3 d ago', 'sync'),
-  T('ORB-146', 'Tax rounding differs from Jira totals', 'todo', 'orbit', 'implementer', 'high', '25 Oct', 'Priya', 'yesterday', 'Triage', { desc: 'Totals on the invoice list differ from the Jira finance export by a cent on some multi-line invoices. Rounding happens per line in one place and per invoice in the other.' }),
-  T('ORB-145', 'Migrate coupons table', 'todo', 'orbit', 'implementer', 'normal', '24 Oct', 'Jonas', 'yesterday', 'sync'),
-  T('ORB-144', 'Nightly reconciliation job', 'todo', 'fleet', 'planner', 'normal', '22 Oct', 'Mara', '3 d ago', 'sync'),
+  T('ORB-151', 'Dunning emails: retry schedule config', 'backlog', 'orbit', 'triage', 'low', '28 Oct', 'Mara', '2 d ago', 'sync', { epic: 'ORB-110' }),
+  T('ORB-149', 'Export ledger as CSV', 'backlog', 'orbit', 'implementer', 'normal', '27 Oct', 'Jonas', '2 d ago', 'sync', { epic: 'ORB-100', links: [{ rel: 'relates to', id: 'ORB-131', title: 'Backfill 2024 invoices', col: 'Done' }] }),
+  T('ORB-147', 'Rate-limit the invoice PDF endpoint', 'backlog', 'fleet', 'planner', 'normal', '26 Oct', 'Mara', '3 d ago', 'sync', { epic: 'ORB-120', links: [{ rel: 'blocked by', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }] }),
+  T('ORB-146', 'Tax rounding differs from Jira totals', 'todo', 'orbit', 'implementer', 'high', '25 Oct', 'Priya', 'yesterday', 'Triage', { epic: 'ORB-100', links: [{ rel: 'relates to', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }], desc: 'Totals on the invoice list differ from the Jira finance export by a cent on some multi-line invoices. Rounding happens per line in one place and per invoice in the other.' }),
+  T('ORB-145', 'Migrate coupons table', 'todo', 'orbit', 'implementer', 'normal', '24 Oct', 'Jonas', 'yesterday', 'sync', { epic: 'ORB-115', links: [{ rel: 'blocks', id: 'ORB-138', title: 'Proration on plan downgrade', col: 'Doing' }] }),
+  T('ORB-144', 'Nightly reconciliation job', 'todo', 'fleet', 'planner', 'normal', '22 Oct', 'Mara', '3 d ago', 'sync', { epic: 'ORB-100', links: [{ rel: 'blocked by', id: 'ORB-131', title: 'Backfill 2024 invoices', col: 'Done' }] }),
   T('ORB-142', 'Invoice PDF renders wrong currency symbol', 'doing', 'orbit', 'implementer', 'high', '12 Oct', 'Mara', '2 h ago', 'Implementer', {
-    links: [{ rel: 'parent', id: 'ORB-120', title: 'Invoice PDF overhaul', col: 'Doing' }, { rel: 'relates to', id: 'ORB-146', title: 'Tax rounding differs from Jira totals', col: 'To do' }, { rel: 'blocks', id: 'ORB-137', title: 'Ledger double-entry audit', col: 'Review' }],
+    epic: 'ORB-120',
+    links: [{ rel: 'parent', id: 'ORB-120', title: 'Invoice PDF overhaul', col: 'Epic' }, { rel: 'relates to', id: 'ORB-146', title: 'Tax rounding differs from Jira totals', col: 'To do' }, { rel: 'blocks', id: 'ORB-137', title: 'Ledger double-entry audit', col: 'Review' }, { rel: 'blocks', id: 'ORB-147', title: 'Rate-limit the invoice PDF endpoint', col: 'Backlog' }],
     desc: 'Invoices for customers billed in EUR render the € as a box in the PDF. The PDF service uses the Lato subset without the currency glyphs.\n\nExpected: € and £ render. Actual: ☐.\n\nRepro: open any EUR invoice from the portal, Download PDF. Started after the font subsetting change in ORB-118.',
     notes: 'Use the full Lato font, not the subset; the size budget was lifted in the ORB-118 follow-up. Check £ and ¥ too while you are there.',
     history: [{ what: 'moved to Doing', when: '2 h ago', who: 'Implementer' }, { what: 'assigned to Implementer', when: 'yesterday', who: 'you' }, { what: 'note to the agent added', when: 'yesterday', who: 'you' }, { what: 'synced from Jira', when: '3 d ago', who: 'sync' }, { what: 'created', when: '12 Oct', who: 'Mara (Jira)' }],
     sessions: [{ title: 'Fix currency glyphs in invoice PDF', status: 'working', meta: '41 min · 12k tokens' }, { title: 'Reproduce the EUR invoice bug', status: 'done', meta: '9 min · 3k tokens' }]
   }),
-  T('ORB-140', 'Webhook signature v2', 'doing', 'orbit', 'implementer', 'normal', '18 Oct', 'Priya', '5 h ago', 'Implementer', { sessions: [{ title: 'Implement v2 signatures', status: 'attn', meta: '1 h 12 min · 28k tokens' }], history: [{ what: 'session needs you', when: '5 h ago', who: 'Implementer' }, { what: 'moved to Doing', when: 'yesterday', who: 'you' }, { what: 'created', when: '18 Oct', who: 'Priya (Jira)' }] }),
-  T('ORB-138', 'Proration on plan downgrade', 'doing', 'orbit', 'reviewer', 'normal', '16 Oct', 'Mara', 'yesterday', 'Reviewer'),
-  T('ORB-137', 'Ledger double-entry audit', 'review', 'orbit', 'reviewer', 'high', '15 Oct', 'Jonas', '3 h ago', 'Reviewer', { links: [{ rel: 'blocked by', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }], sessions: [{ title: 'Audit ledger entries', status: 'done', meta: '2 h 4 min · 61k tokens' }] }),
-  T('ORB-135', 'Move Stripe keys to vault', 'review', 'fleet', 'planner', 'high', '14 Oct', 'Mara', '6 h ago', 'Infra Planner', { sessions: [{ title: 'Vault migration plan', status: 'done', meta: '38 min · 9k tokens' }] }),
-  T('ORB-131', 'Backfill 2024 invoices', 'done', 'orbit', 'implementer', 'normal', '9 Oct', 'Jonas', '4 d ago', 'Release Captain'),
-  T('ORB-129', 'Remove legacy billing cron', 'done', 'fleet', 'release', 'low', '8 Oct', 'Mara', '5 d ago', 'Release Captain'),
-  T('ORB-126', 'Customer portal: receipts tab', 'done', 'orbit', 'implementer', 'normal', '3 Oct', 'Priya', '1 w ago', 'Reviewer')
+  T('ORB-140', 'Webhook signature v2', 'doing', 'orbit', 'implementer', 'normal', '18 Oct', 'Priya', '5 h ago', 'Implementer', { epic: 'ORB-110', links: [{ rel: 'blocked by', id: 'ORB-135', title: 'Move Stripe keys to vault', col: 'Review' }], sessions: [{ title: 'Implement v2 signatures', status: 'attn', meta: '1 h 12 min · 28k tokens' }], history: [{ what: 'session needs you', when: '5 h ago', who: 'Implementer' }, { what: 'moved to Doing', when: 'yesterday', who: 'you' }, { what: 'created', when: '18 Oct', who: 'Priya (Jira)' }] }),
+  T('ORB-138', 'Proration on plan downgrade', 'doing', 'orbit', 'reviewer', 'normal', '16 Oct', 'Mara', 'yesterday', 'Reviewer', { epic: 'ORB-115', links: [{ rel: 'blocked by', id: 'ORB-145', title: 'Migrate coupons table', col: 'To do' }] }),
+  T('ORB-137', 'Ledger double-entry audit', 'review', 'orbit', 'reviewer', 'high', '15 Oct', 'Jonas', '3 h ago', 'Reviewer', { epic: 'ORB-100', links: [{ rel: 'blocked by', id: 'ORB-142', title: 'Invoice PDF renders wrong currency symbol', col: 'Doing' }], sessions: [{ title: 'Audit ledger entries', status: 'done', meta: '2 h 4 min · 61k tokens' }] }),
+  T('ORB-135', 'Move Stripe keys to vault', 'review', 'fleet', 'planner', 'high', '14 Oct', 'Mara', '6 h ago', 'Infra Planner', { epic: 'ORB-110', links: [{ rel: 'blocks', id: 'ORB-140', title: 'Webhook signature v2', col: 'Doing' }], sessions: [{ title: 'Vault migration plan', status: 'done', meta: '38 min · 9k tokens' }] }),
+  T('ORB-131', 'Backfill 2024 invoices', 'done', 'orbit', 'implementer', 'normal', '9 Oct', 'Jonas', '4 d ago', 'Release Captain', { epic: 'ORB-100', links: [{ rel: 'blocks', id: 'ORB-144', title: 'Nightly reconciliation job', col: 'To do' }, { rel: 'relates to', id: 'ORB-149', title: 'Export ledger as CSV', col: 'Backlog' }] }),
+  T('ORB-129', 'Remove legacy billing cron', 'done', 'fleet', 'release', 'low', '8 Oct', 'Mara', '5 d ago', 'Release Captain', { epic: 'ORB-110' }),
+  T('ORB-126', 'Customer portal: receipts tab', 'done', 'orbit', 'implementer', 'normal', '3 Oct', 'Priya', '1 w ago', 'Reviewer', { epic: 'ORB-115' })
 ];
 const clone = (o) => JSON.parse(JSON.stringify(o));
-const INIT = { tickets: TICKETS, sel: 'ORB-142', drag: null, over: null, syncing: false, synced: '4 min ago', justSynced: false, nextId: 152, noteSaved: {}, opened: 'ORB-142' };
+const INIT = { tickets: TICKETS, sel: 'ORB-142', drag: null, over: null, syncing: false, synced: '4 min ago', justSynced: false, nextId: 152, noteSaved: {}, view: 'cols', groupBy: false, coords: {} };
+const STRING_RELS = ['blocks', 'blocked by', 'relates to'];
+function edgesOf(tickets) {
+  const edges = []; const seen = new Set();
+  tickets.forEach((t) => (t.links || []).forEach((l) => {
+    if (!STRING_RELS.includes(l.rel) || !tickets.some((x) => x.id === l.id)) return;
+    const rel = l.rel === 'relates to';
+    const a = l.rel === 'blocked by' ? l.id : t.id, b = l.rel === 'blocked by' ? t.id : l.id;
+    const key = rel ? 'rel:' + [a, b].sort().join('~') : 'blk:' + a + '>' + b;
+    if (seen.has(key)) return; seen.add(key); edges.push({ key, a, b, rel });
+  }));
+  return edges;
+}
 
 class Component extends DCLogic {
   state = clone(INIT);
@@ -345,12 +424,29 @@ class Component extends DCLogic {
     if (!t || t.col === col) return;
     this.patchTicket(id, (x) => { x.col = col; return this.touch(x, 'moved to ' + COLNAME[col], 'you'); });
   }
+  // Dependencies view: measure where each note's tack sits and keep the strings pinned to them.
+  measure() {
+    const el = this.depEl;
+    if (!el || !el.isConnected) return;
+    const wr = el.getBoundingClientRect();
+    const pos = {};
+    el.querySelectorAll('.note[data-id]').forEach((n) => { const r = n.getBoundingClientRect(); pos[n.dataset.id] = { x: Math.round(r.left - wr.left + r.width / 2), y: Math.round(r.top - wr.top + 1) }; });
+    const next = JSON.stringify(pos);
+    if (next !== this.lastPos) { this.lastPos = next; this.setState({ coords: pos }); }
+  }
+  scheduleMeasure() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = requestAnimationFrame(() => { this.raf = null; this.measure(); });
+  }
   renderVals() {
     const st = this.state;
     const sel = st.tickets.find((t) => t.id === st.sel) || null;
     const byCol = (c) => st.tickets.filter((t) => t.col === c);
+    const isDeps = st.view === 'deps';
+    if (!this.listening) { this.listening = true; window.addEventListener('resize', () => this.scheduleMeasure()); }
+    if (isDeps) { this.scheduleMeasure(); if (!this.settle) { this.settle = true; [500, 1200, 2500].forEach((ms) => this.later(() => this.scheduleMeasure(), ms)); } }
     const view = (t, i) => ({
-      id: t.id, title: t.title, pri: t.pri, isNew: !!t.isNew, newText: t.newText || '',
+      id: t.id, title: t.title, pri: t.pri, isNew: !!t.isNew, newText: t.newText || '', colName: COLNAME[t.col],
       color: t.color || COLORS[(t.id.charCodeAt(t.id.length - 1) + i) % COLORS.length], rot: ROTS[(i + t.id.length) % ROTS.length],
       wsColor: WS[t.ws].color, px: PX[t.agent], agentName: AGENTS[t.agent], updated: t.updated,
       cls: (st.sel === t.id ? 'is-sel ' : '') + (st.drag === t.id ? 'is-drag' : ''),
@@ -360,9 +456,29 @@ class Component extends DCLogic {
       dragstart: (e) => { try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', t.id); } catch (_) {} this.setState({ drag: t.id }); },
       dragend: () => this.setState({ drag: null, over: null })
     });
+    const edges = edgesOf(st.tickets);
+    const groupsOf = (list) => {
+      if (!st.groupBy) return [{ labelled: false, key: '', name: '', notes: list.map(view) }];
+      return [...EPIC_IDS.map((k) => ({ labelled: true, key: k, name: EPICS[k], notes: list.filter((t) => t.epic === k).map(view) })), { labelled: true, key: '—', name: 'loose', notes: list.filter((t) => !t.epic).map(view) }].filter((g) => g.notes.length);
+    };
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'kanban' ? 'is-on' : '', cur: n.id === 'kanban' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
-      meta: st.syncing ? 'pulling tickets from Jira…' : (st.justSynced ? st.tickets.length + ' cards · synced just now · 1 new' : st.tickets.length + ' cards · synced ' + st.synced),
+      isCols: !isDeps, isDeps, colsCls: !isDeps ? 'is-on' : '', depsCls: isDeps ? 'is-on' : '',
+      viewCols: () => this.setState({ view: 'cols', drag: null, over: null }),
+      viewDeps: () => { this.lastPos = null; this.settle = false; this.setState({ view: 'deps', drag: null, over: null }); },
+      groupBy: st.groupBy, groupCls: st.groupBy ? 'is-on' : '', toggleGroup: () => this.setState({ groupBy: !st.groupBy }),
+      depRef: (el) => { this.depEl = el; if (el) this.scheduleMeasure(); },
+      strings: edges.map((e) => {
+        const p = st.coords[e.a], q = st.coords[e.b];
+        if (!p || !q) return null;
+        const dist = Math.hypot(q.x - p.x, q.y - p.y);
+        const cx = (p.x + q.x) / 2, cy = Math.max(p.y, q.y) + 16 + dist * 0.12;
+        return { d: 'M' + p.x + ' ' + p.y + ' Q' + cx + ' ' + cy + ' ' + q.x + ' ' + q.y, cls: (e.rel ? 'rel ' : '') + ((st.sel === e.a || st.sel === e.b) ? 'is-hot' : '') };
+      }).filter(Boolean),
+      stringN: edges.length,
+      stringsCls: sel && edges.some((e) => e.a === sel.id || e.b === sel.id) ? 'has-sel' : '',
+      epics: [...EPIC_IDS.map((k) => ({ key: k, name: EPICS[k], loose: false, notes: st.tickets.filter((t) => t.epic === k) })), { key: '—', name: 'Loose · no epic', loose: true, notes: st.tickets.filter((t) => !t.epic) }].filter((g) => g.notes.length).map((g) => ({ key: g.key, name: g.name, n: g.notes.length, cls: g.loose ? 'loose' : '', notes: g.notes.map(view) })),
+      meta: st.syncing ? 'pulling tickets from Jira…' : isDeps ? st.tickets.length + ' cards · ' + edges.length + ' strings · ' + EPIC_IDS.length + ' epics' : (st.justSynced ? st.tickets.length + ' cards · synced just now · 1 new' : st.tickets.length + ' cards · synced ' + st.synced),
       metaCls: st.syncing ? 'is-busy' : (st.justSynced ? 'is-new' : ''),
       syncing: st.syncing, syncCls: st.syncing ? 'is-busy' : '', syncSpin: st.syncing ? 'spin' : '', syncLabel: st.syncing ? 'Syncing…' : 'Sync with Jira',
       sync: () => {
@@ -384,7 +500,7 @@ class Component extends DCLogic {
         const list = byCol(c);
         return {
           name, n: list.length, cls: st.over === c ? 'is-over' : '', empty: list.length === 0,
-          notes: list.map(view),
+          groups: groupsOf(list),
           enter: (e) => { e.preventDefault(); },
           over: (e) => { e.preventDefault(); try { e.dataTransfer.dropEffect = 'move'; } catch (_) {} if (this.state.over !== c) this.setState({ over: c }); },
           leave: (e) => { if (!e.currentTarget.contains(e.relatedTarget)) this.setState({ over: null }); },
@@ -398,6 +514,7 @@ class Component extends DCLogic {
         id: sel.id, title: sel.title, origin: sel.isNew && sel.newText === 'not in Jira yet' ? 'Local · pending' : 'Jira', extLabel: sel.isNew && sel.newText === 'not in Jira yet' ? 'will be created in Jira' : 'open in Jira',
         colChips: COLS.map(([c, name]) => ({ name, on: sel.col === c, cls: sel.col === c ? 'is-on' : '', pick: () => this.moveTo(sel.id, c) })),
         wsName: WS[sel.ws].name, wsColor: WS[sel.ws].color, px: PX[sel.agent], agentName: AGENTS[sel.agent],
+        hasEpic: !!sel.epic, noEpic: !sel.epic, epicKey: sel.epic || '', epicName: sel.epic ? EPICS[sel.epic] : '',
         nextAgent: () => { const next = AGENT_ORDER[(AGENT_ORDER.indexOf(sel.agent) + 1) % AGENT_ORDER.length]; this.patchTicket(sel.id, (x) => { x.agent = next; return this.touch(x, 'assigned to ' + AGENTS[next], 'you'); }); },
         created: sel.created, createdBy: sel.createdBy, updated: sel.updated, updatedBy: sel.updatedBy,
         links: sel.links, noLinks: sel.links.length === 0, linkHint: sel.links.length ? sel.links.length + ' linked' : 'none',
@@ -411,8 +528,8 @@ class Component extends DCLogic {
         sessHint: sel.sessions.length ? sel.sessions.filter((s) => s.status === 'working').length + ' working · ' + sel.sessions.length + ' total' : 'none yet',
         startSession: () => this.patchTicket(sel.id, (x) => { x.sessions = [{ title: 'Work on ' + x.id + ': ' + x.title, status: 'working', meta: 'just started' }, ...x.sessions]; if (x.col === 'backlog' || x.col === 'todo') x.col = 'doing'; return this.touch(x, 'session started' + (x.col === 'doing' ? ' · moved to Doing' : ''), 'you'); })
       } : {},
-      demoText: st.drag ? 'drop it on a column' : (sel ? 'Drag notes between columns, or pick a column in the drawer · ' + sel.id + ' is open' : 'Drag notes between columns · click one to open it'),
-      reset: () => { this.timers.forEach(clearTimeout); this.timers = []; if (this.els.notes) this.els.notes.value = TICKETS.find((t) => t.id === 'ORB-142').notes; this.setState(clone(INIT)); }
+      demoText: st.drag ? 'drop it on a column' : isDeps ? 'Notes sit in their epic · strings run tack to tack between dependent notes · click one to light up its strings' : (sel ? 'Drag notes between columns, or pick a column in the drawer · ' + sel.id + ' is open' : 'Drag notes between columns · click one to open it'),
+      reset: () => { this.timers.forEach(clearTimeout); this.timers = []; this.lastPos = null; this.settle = false; if (this.els.notes) this.els.notes.value = TICKETS.find((t) => t.id === 'ORB-142').notes; this.setState(clone(INIT)); }
     };
   }
 }

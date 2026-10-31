@@ -244,7 +244,7 @@
       "x": 1520,
       "y": 6000,
       "w": 320,
-      "text": "Board: a framed cork board. Columns are kraft labels pinned with a red tack; cards are sticky notes in five pastel colours, each a little crooked, with the ticket key, a hand-written title, the workspace swatch, the agent's portrait and when it last moved. Drag a note onto another column to move it (the column lights up); click one to open the ticket drawer on the right: column chips, workspace, agent (change cycles), created, updated, links, description, notes to the agent, history and sessions with a Start a session button. Sync pulls a new note in from Jira; Add card pins a local one that goes to Jira on the next sync.",
+      "text": "Board: a framed cork board. Columns are kraft labels pinned with a red tack; cards are sticky notes in five pastel colours, each a little crooked, with the ticket key, a hand-written title, the workspace swatch, the agent's portrait and when it last moved. Drag a note onto another column to move it (the column lights up); click one to open the ticket drawer on the right: column chips, workspace, agent (change cycles), epic, created, updated, links, description, notes to the agent, history and sessions with a Start a session button. Sync pulls a new note in from Jira; Add card pins a local one that goes to Jira on the next sync. Views: Columns (with Group by epic, which puts hand-written epic labels inside each column) and Dependencies, where notes cluster inside dashed epic regions with kraft labels, each note gets its own tack, and red string sags tack to tack between blocking notes, twine between related ones. Click a note to light up its strings.",
       "fill": "orange",
       "page": "paper"
     },
