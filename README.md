@@ -27,6 +27,7 @@ animations/            motion studies (loaders, session states, light effects)
 | `design-systems/agent-teams/` | Dark, glow-driven system for the agent-teams app: 49 tokens, 15 React components | https://claude.ai/artifact/DhusFk34yTB6vNqpvFvT66 |
 | `apps/agent-teams/screens/` | 12 interactive screens: agent builder, session chat, team graph, swimlanes, skills, connectors, launcher, team space, board, 3 compaction studies | https://claude.ai/artifact/NaBZvNXBYvMsXdRmX34362 |
 | `mockups/agent-turn-capsules/` | Two directions for collapsing an agent's turn into one row; the capsule anatomy the system adopted | https://claude.ai/artifact/7984nwgZoW7KB1GmfjrwuF |
+| `mockups/primepaw/` | Primepaw, the chat app, in the Paper design language: app shell, Agents, Workspaces, Kanban + cork board, Memory, Background, Skills, MCP servers as 12 interactive boards, plus the Paper Chat design system under `design-system/` | https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis |
 | `animations/` | Chat loading indicators, session card states, aurora and signal-field light effects | — |
 
 `animations/*/_ds/meridian-exposure-design-system-*` is an older financial-dashboard system embedded by the canvas export; it belongs under `design-systems/meridian-exposure/` when it is next touched.

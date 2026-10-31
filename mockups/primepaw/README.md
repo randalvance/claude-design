@@ -1,6 +1,6 @@
-# Chat prompt area + app shell (Paper)
+# Primepaw (Paper)
 
-The chat app's interface in the Paper design language: every surface is a cut sheet with a hard
+Primepaw is the chat app. Its interface in the Paper design language: every surface is a cut sheet with a hard
 offset shadow, motion runs on `steps()` at 8–12 fps so it reads as stop motion, and Fraunces,
 Nunito, Caveat and Courier New carry the type. One canvas page holds the app shell (icon rail,
 sessions panel grouped by workspace, chat window with capsules, composer) and the Agents,
