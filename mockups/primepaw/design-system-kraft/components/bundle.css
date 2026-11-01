@@ -161,6 +161,7 @@
 @media (prefers-reduced-motion:reduce){.kr-btn,.kr-ib,.kr-tab,.kr-switch,.kr-switch::after,.kr-check{transition-duration:.01ms}.kr-pin svg g{animation-duration:.01ms;animation-iteration-count:1}}
 /* titles and headings */
 .kr-title{margin:0;padding-bottom:3px;font-family:var(--font-hand);font-size:38px;font-weight:600;line-height:1.05;color:transparent;background-image:var(--pulp-paper),var(--pulp-paper),linear-gradient(var(--ink),var(--ink));-webkit-background-clip:text;background-clip:text;mix-blend-mode:multiply}
+.kr-title.is-session{font-size:26px}
 .kr-title.is-greeting{font-size:50px;transform:rotate(-1.2deg);transform-origin:left bottom}
 .kr-heading{margin:0;font-family:var(--font-serif);font-size:17px;font-weight:600;line-height:1.25}
 .kr-heading.is-lg{font-size:20px}

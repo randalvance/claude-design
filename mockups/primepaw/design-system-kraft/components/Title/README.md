@@ -1,3 +1,3 @@
 # Title
 
-`kr-title` is every page and session title: Caveat at 38px, with the wall texture running through the letters and the ink blending into the sheet. `is-greeting` is the 50px home greeting, with its slight lean. `kr-heading` is Fraunces at 17px for sections and cards, `is-lg` at 20px for drawer titles, `is-sm` at 15px for subheadings.
+`kr-title` is every page title: Caveat at 38px, with the wall texture running through the letters and the ink blending into the sheet. `is-session` is the 26px title of an open session, smaller because it shares a bar with its branch, status and buttons and session titles run long. When the bar runs short of room, the role and workspace beside it give way before the title does, and the status sticker always stays. `is-greeting` is the 50px home greeting, with its slight lean. `kr-heading` is Fraunces at 17px for sections and cards, `is-lg` at 20px for drawer titles, `is-sm` at 15px for subheadings.

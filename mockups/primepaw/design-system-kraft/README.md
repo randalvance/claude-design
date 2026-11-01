@@ -29,7 +29,7 @@ Every button is thick card with the `pulp-paper` texture: `kr-btn` in `board` wi
 
 ## Type
 
-Set page and session titles in `title` (`kr-title`), section and card headings in `heading`, drawer titles in `heading-lg`, and the agent's narration in `said`. Set body copy in `body` and every control label in `label` or `label-sm`. Write counts, durations, placeholders and link buttons in `hand`, chips in `chip`. Badges use `badge`, uppercase with 0.06em tracking. Load Fraunces, Nunito and Caveat from Google Fonts; fall back to Georgia, system-ui and cursive.
+Set page titles in `title` (`kr-title`), the title of an open session in `title-session` (`kr-title is-session`), section and card headings in `heading`, drawer titles in `heading-lg`, and the agent's narration in `said`. Set body copy in `body` and every control label in `label` or `label-sm`. Write counts, durations, placeholders and link buttons in `hand`, chips in `chip`. Badges use `badge`, uppercase with 0.06em tracking. Load Fraunces, Nunito and Caveat from Google Fonts; fall back to Georgia, system-ui and cursive.
 
 ## Depth
 
@@ -63,7 +63,7 @@ Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so ca
 
 ## One way to do each thing
 
-- **Type scale.** Nunito 11, 12, 13, 14, 15. Caveat 15, 17, 20, 38, 50. Courier 10, 11, 12. Fraunces 15, 17, 20, and 36 for one big figure or initial. Nothing in between.
+- **Type scale.** Nunito 11, 12, 13, 14, 15. Caveat 15, 17, 20, 26, 38, 50. Courier 10, 11, 12. Fraunces 15, 17, 20, and 36 for one big figure or initial. Nothing in between.
 - **Headings by level.** Page title `title`. Drawer title `heading-lg`. Section and card heading `heading`. Subheading `heading-sm`.
 - **Page headers.** A list page has a title row with no rule. An edit page has a sticky header with a dashed rule, 14px by 28px of padding, and its back link above the title.
 - **Button sizes.** 32px for page and card actions, 26px for filters and row actions, 40px only for a lone call to action. Discs are 26px. The rail tile (44px) and the composer's send disc (42px) are their own sizes.

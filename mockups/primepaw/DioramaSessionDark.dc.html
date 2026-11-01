@@ -113,10 +113,15 @@ button{font:inherit}
 .top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
 .ttl{display:flex;align-items:center;gap:12px;min-width:0;flex:0 1 auto}
 .top:has(>.ttl h1,>.ttl .ttli){flex-wrap:nowrap;align-items:center}
-.top:has(>.ttl h1,>.ttl .ttli) .meta,.top:has(>.ttl h1,>.ttl .ttli) .top-r,.ttl .tagw{flex:none}
+.top:has(>.ttl h1,>.ttl .ttli) .top-r,.ttl .tagw{flex:none}
+/* short of room, the role and workspace give way before the title does; the status sticker always stays */
+.top:has(>.ttl h1,>.ttl .ttli) .meta{flex:0 1000 auto;min-width:148px;flex-wrap:nowrap}
+.top:has(>.ttl h1,>.ttl .ttli) .meta>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top:has(>.ttl h1,>.ttl .ttli) .meta .sticker{flex:none}
+@media (max-width:1320px){.top:has(>.ttl h1,>.ttl .ttli) .meta{flex:none;min-width:0}.top:has(>.ttl h1,>.ttl .ttli) .meta>span:first-child{display:none}}
 .ttl h1{min-width:0}
 @media (max-width:1100px){.top:has(>.ttl h1,>.ttl .ttli){flex-wrap:wrap}}
-.ttl h1{margin:0;padding:0 2px 3px 0;font-family:var(--hand);font-weight:600;font-size:38px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:520px}
+.ttl h1{margin:0;padding:0 2px 3px 0;font-family:var(--hand);font-weight:600;font-size:26px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* big titles are ink soaked into the paper: the wall texture runs through the letters and they multiply into the sheet */
 .ttl h1,h1.hi{color:transparent;background-image:var(--pulp),var(--pulp),linear-gradient(var(--ink),var(--ink));-webkit-background-clip:text;background-clip:text;mix-blend-mode:multiply}
 .page.night .ttl h1,.page.night h1.hi{mix-blend-mode:screen}
@@ -125,7 +130,7 @@ button{font:inherit}
 .ttl h1:hover{border-color:var(--bar)}
 .ttlb{cursor:text}
 .ttlb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.ttli{all:unset;box-sizing:border-box;width:min(520px,42vw);min-width:0;padding:0 2px 3px 0;font-family:var(--hand);font-size:38px;font-weight:600;line-height:1.05;color:var(--ink);border-bottom:2px dashed var(--ink)}
+.ttli{all:unset;box-sizing:border-box;width:min(520px,42vw);min-width:0;padding:0 2px 3px 0;font-family:var(--hand);font-size:26px;font-weight:600;line-height:1.05;color:var(--ink);border-bottom:2px dashed var(--ink)}
 .aigen{all:unset;cursor:pointer;position:relative;flex:none;box-sizing:border-box;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;color:var(--ink);transition:background .12s var(--ease)}
 .aigen svg{width:22px;height:22px;overflow:visible}
 .aigen .drawn{transform:rotate(-4deg);mix-blend-mode:multiply;transition:transform .15s var(--ease)}
