@@ -303,6 +303,16 @@ button{font:inherit}
 .pp-dashed.is-on,.lvl.is-on,.gchip.is-on,.mini.open,.pp-dashed.is-on:hover,.lvl.is-on:hover,.gchip.is-on:hover,.mini.open:hover{transform:translate(2px,3px);box-shadow:0 0 0 var(--board-2),1px 1px 2px var(--amb);background-color:color-mix(in srgb,var(--board) 82%,var(--board-2));color:var(--ink);border-color:color-mix(in srgb,var(--board-2) 60%,color-mix(in srgb,var(--board) 82%,var(--board-2)))}
 
 .newc .plus{background-color:var(--board);background-image:var(--face),var(--pulp);box-shadow:2px 3px 0 var(--board-2),4px 6px 7px var(--amb);transform:none;border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));box-sizing:border-box}
+/* ---------- titles are ink soaked into the paper ---------- */
+.main h1{color:transparent;background-image:var(--pulp),var(--pulp),linear-gradient(var(--ink),var(--ink));-webkit-background-clip:text;background-clip:text;mix-blend-mode:multiply}
+.namef,.nmf{color:color-mix(in srgb,var(--ink) 92%,transparent);mix-blend-mode:multiply}
+.page.night .main h1,.page.night .namef,.page.night .nmf{mix-blend-mode:screen}
+/* ---------- a selected row is real highlighter: translucent marker strokes over the paper, its texture showing through ---------- */
+.sheet,.pop,.deck{isolation:isolate}
+.jrow.is-sel,.srow.is-sel,.frow.is-open,.mrow.is-on{--marker:color-mix(in srgb,var(--highlighter) 62%,#ffd92e);position:relative;background-color:transparent;box-shadow:none;border-color:transparent;transform:none;animation:none}
+.jrow.is-sel::before,.srow.is-sel::before,.frow.is-open::before,.mrow.is-on::before{content:"";position:absolute;inset:2px -4px 2px -5px;z-index:-1;pointer-events:none;background-color:var(--marker);background-image:repeating-linear-gradient(178.6deg,rgba(0,0,0,.05) 0 3px,rgba(255,255,255,.14) 3px 5px,rgba(0,0,0,0) 5px 13px);border-radius:4px 9px 5px 11px / 9px 4px 11px 5px;mix-blend-mode:multiply}
+.page.night .jrow.is-sel,.page.night .srow.is-sel,.page.night .frow.is-open,.page.night .mrow.is-on{--marker:var(--highlighter)}
+.page.night .jrow.is-sel::before,.page.night .srow.is-sel::before,.page.night .frow.is-open::before,.page.night .mrow.is-on::before{mix-blend-mode:screen;opacity:.6}
 /* ---------- tabs carry the paper texture too ---------- */
 .ftab{background-image:var(--face),var(--pulp)}
 /* ---------- sticky notes are paper too ---------- */
@@ -323,8 +333,6 @@ button{font:inherit}
 /* sticky notes stay their colour after dark, dimmed, and keep dark ink */
 .page.night .note{--ink:#2a2219;--mute:#5d5142;--faint:#6f6252;filter:brightness(.84) saturate(.9)}
 .page.night .note.is-sel{outline-color:var(--knob)}
-/* a selected row is a quieter highlighter at night so red text still reads on it */
-.page.night .jrow.is-sel,.page.night .srow.is-sel{background-color:color-mix(in srgb,var(--highlighter) 45%,var(--sheet))}
 .page.night .lw.err,.page.night .upnext b,.page.night .headsup b{color:color-mix(in srgb,var(--red) 72%,var(--white))}
 @media (max-width:860px){.page{padding:3px}.app{flex-direction:column}.railwrap{position:static;height:auto;width:auto;margin:0 0 8px}.pp-rail{height:auto;flex-direction:row;justify-content:center;flex-wrap:wrap;padding:8px}.pp-rail .pp-sp{display:none}.pp-rb{width:auto}.main{margin:0}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
