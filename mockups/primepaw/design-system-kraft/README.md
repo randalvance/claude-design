@@ -2,7 +2,7 @@ Kraft is the material language of the Primepaw diorama: one cream sheet of `desk
 
 ## Principles
 
-- **Three materials, nothing else.** Cardboard holds things: the rail, the sessions board, the mats, the composer frame. Paper carries words: sheets, rows, tabs, the leaf, cards. Stickers mark things: icons, badges, pills, the paw, the selected state. A part that is none of these is printed on the paper: a dashed outline, a rule, a line of hand-writing.
+- **Three materials, nothing else.** Cardboard holds things and takes the pressing: the rail, the sessions board, the mats, the composer frame and every button. Paper carries words: sheets, rows, tabs, the leaf, cards. Stickers mark things: icons, badges, pills, the paw, the selected state. A part that is none of these is printed on the paper: a dashed outline, a rule, a line of hand-writing.
 - **One light, one shadow.** Light comes from the top left. Every cut piece gets a `face` gradient fading to clear at 55%, a solid cut edge along the bottom and right (`edge`, `edge-2`, `board-2`, `kraft-2`, `mat-green-2`, `mat-red-2`) and one cast shadow down and to the right in `amb`, with `amb-2` under the tallest pieces. Taller means a thicker edge and a longer shadow: `lift-paper-1`, `lift-paper-2`, `lift-paper-3`, `lift-board`.
 - **Stickers are flat.** A sticker has a `sticker-cut` die-cut border, `gloss` across its top and no shadow, ever: it is stuck to the surface it sits on. Stickers are the only things that tilt and the only things that take the gold `attn` ring (`sticker-on`) when selected.
 - **Depth is stacking.** `desk`, then the boards and the chat sheet on the same level, then paper rows and mats on them, then the leaf over the tabs, then the composer frame, then stickers on whatever they are stuck to. Nothing floats; no blur-only shadows; no border where a cut edge will do.
@@ -14,12 +14,14 @@ Kraft is the material language of the Primepaw diorama: one cream sheet of `desk
 
 See the Materials section for the recipe of each. In short: cardboard is `board` on `board-2` with `flute` hairlines and `lift-board`; paper is `sheet` (or `card`, `sheet-warm`, `kraft`, `highlighter`) on `edge` with a `lift-paper-*` shadow; a sticker is a solid identity colour with `gloss`, a `sticker` cut and no shadow.
 
+Every button is cardboard: `kr-btn` in `board` with a `board-2` edge and `lift-board-sm`, `kr-green` (`mat-green`) for the one committing action on a sheet, `kr-red` (`mat-red-2` on `mat-red-3`) for a destructive one, `is-on` pressed flat for a latched filter or mode. Paper and stickers are never buttons; the rail's navigation stickers are marks, not actions.
+
 ## Colour
 
 - Grounds: `desk` behind everything, `sheet` for working paper, `card` for the paper closest to the reader (the leaf, the composer card, the selected tab), `sheet-warm` for the chat sheet, `paper` and `paper-2` for paper inside paper.
-- Cardboard comes in four faces only: `board` (rail, sessions board), `kraft` (tabs and folders, lighter), `mat-green` (under capsule decks, the confirm button) and `mat-red` (the frame around the composer). Each has its `-2` cut edge; never cast a cardboard shadow in a colour other than its own edge.
+- Cardboard comes in four faces only: `board` (rail, sessions board, every button), `kraft` (tabs and folders, lighter), `mat-green` (under capsule decks, the sage confirm button) and `mat-red` (the frame around the composer; its edge `mat-red-2` is the face of the destructive button, on `mat-red-3`). Each has its `-2` cut edge; never cast a cardboard shadow in a colour other than its own edge.
 - Sticker colours are identity colours at full value: `blue` for sessions and the primary action, `red` for the paw, memory and badges, `red-2` for pull requests and destructive actions, `green` for MCPs and done, `amber` for skills and busy, `max` for workspaces, `kind-think` for workflows, `kind-sub` for kanban, `attn` for the selected ring and attention, `kraft-2` for an uncoloured sticker.
-- Text on a sticker is `white` for glyphs and `on-blue` or `on-attn` for words. Only `blue`, `red-2` and `attn` carry words; the rest carry glyphs, chips and badges (see each token's contrast note).
+- Text on a sticker is `white` for glyphs, `on-blue` on the blue sticker and `on-attn` on gold. Only `attn` pills carry words; the rest carry glyphs, chips and badges (see each token's contrast note). Words that can be pressed go on cardboard.
 - Ink is `ink` for copy and labels, `mute` for secondary and hand-written copy, `faint` for placeholders only. `highlighter` marks the selected row or filter; it is paper, so it keeps a cut edge in `highlighter-2`.
 - Night is the same diorama after dark: boards go to dark brown, paper to warm charcoal, the sticker cut to parchment (`sticker-cut`), the shadows to black. Every token has a night value; never hard-code a colour.
 
@@ -34,7 +36,8 @@ Set titles in `title` and the agent's narration in `said`. Set body copy in `bod
 | 0 | the desk | none | none | the page |
 | 1 | cardboard | `board-2`, 2 to 3px | `lift-board` | rail, sessions board |
 | 1 | tall paper | `edge-2`, 2px | `lift-paper-3` | the chat sheet |
-| 2 | paper | `edge`, 1px | `lift-paper-1`, `lift-paper-2` on hover | rows, fields, filters, buttons |
+| 2 | paper | `edge`, 1px | `lift-paper-1`, `lift-paper-2` on hover | rows, fields |
+| 2 | cardboard | `board-2`, 2px by 3px | `lift-board-sm`, `lift-board-up` on hover, `press-board` pressed | every button and icon disc |
 | 2 | mat | `mat-green-2`, 2px | `lift-mat` | capsule decks |
 | 3 | tall paper | `edge-2`, 2px | `lift-paper-3` | the leaf over the tabs |
 | 4 | frame | `mat-red-2`, 3px | `lift-frame`, card inside `recess` | the composer |
@@ -50,7 +53,7 @@ Labels are sentence case, verb first: "New session", "Run on main", "Open folder
 
 ## Motion
 
-Hover: a sticker tilts `tilt-hover` and grows 4%; paper lifts 1px to `lift-paper-2`; cardboard lifts 1px with a longer edge. Press: a sticker scales to 96%; paper moves 1px down-right onto the desk (`press-paper`); cardboard travels 2px right and 3px down until its edge is gone (`press-board`). Selected: a sticker takes `sticker-on` and `tilt-sticker-on`; paper turns `highlighter`. Everything on `ease` at `dur-hover`; stickers land on `ease-pop` at `dur-land`. Under `prefers-reduced-motion` durations go to 0.01ms.
+Hover: a button lifts 1px up and left so its edge grows (`lift-board-up`); a row lifts 1px to `lift-paper-2`; a rail sticker tilts `tilt-hover` and grows 6%. Press: a button travels 2px right and 3px down until its edge is gone (`press-board`) and springs back; a row sits down 1px (`press-paper`); a rail sticker scales to 94%. Selected: a button stays pressed (`is-on`); a rail sticker takes `sticker-on` and `tilt-sticker-on`; a row turns `highlighter`. Everything on `ease` at `dur-hover`; stickers land on `ease-pop` at `dur-land`. Under `prefers-reduced-motion` durations go to 0.01ms.
 
 ## Grain
 

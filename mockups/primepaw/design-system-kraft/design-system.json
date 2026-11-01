@@ -1,21 +1,166 @@
 {
   "v": 3,
-  "layout": "files",
-  "createdOnFiles": {
-    "v": 1,
-    "at": "2026-11-01T08:22:44Z"
-  },
-  "title": "Kraft",
-  "namespace": "Kraft",
-  "libraries": [],
-  "sections": {},
-  "groups": [
-    "Icons"
-  ],
   "assetGroups": {
     "Icons": {
+      "files": {
+        "agent.svg": {
+          "blob": "029949a382540dcc47efc101e19c7c27",
+          "name": "agent.svg",
+          "size": 260,
+          "type": "image/svg+xml"
+        },
+        "agents.svg": {
+          "blob": "d1a372db7e344311a13e43e958ca8eeb",
+          "name": "agents.svg",
+          "size": 233,
+          "type": "image/svg+xml"
+        },
+        "background.svg": {
+          "blob": "fb1ced8afec4a1f217ef64c487c36171",
+          "name": "background.svg",
+          "size": 211,
+          "type": "image/svg+xml"
+        },
+        "branch.svg": {
+          "blob": "ea796c4e224f131dd833420ea35aa8d7",
+          "name": "branch.svg",
+          "size": 328,
+          "type": "image/svg+xml"
+        },
+        "check.svg": {
+          "blob": "d19116b9a39e2f403ee8b7119c3317bd",
+          "name": "check.svg",
+          "size": 193,
+          "type": "image/svg+xml"
+        },
+        "chevron-down.svg": {
+          "blob": "ec8577d6e4d3128090013bcfd8f04306",
+          "name": "chevron-down.svg",
+          "size": 191,
+          "type": "image/svg+xml"
+        },
+        "code.svg": {
+          "blob": "46b5db99d9b15f29eb1c7ce1e98ccf3e",
+          "name": "code.svg",
+          "size": 206,
+          "type": "image/svg+xml"
+        },
+        "copy.svg": {
+          "blob": "6a9920e4d7d24a27f1858b6cde0c561d",
+          "name": "copy.svg",
+          "size": 258,
+          "type": "image/svg+xml"
+        },
+        "home.svg": {
+          "blob": "3411b1333142268d88d6a7e5694f4d83",
+          "name": "home.svg",
+          "size": 236,
+          "type": "image/svg+xml"
+        },
+        "kanban.svg": {
+          "blob": "706801c6078043f465573a9190dac6fe",
+          "name": "kanban.svg",
+          "size": 218,
+          "type": "image/svg+xml"
+        },
+        "mark.svg": {
+          "blob": "04469ce64be5408d7559ff7019be853b",
+          "name": "mark.svg",
+          "size": 324,
+          "type": "image/svg+xml"
+        },
+        "mcps.svg": {
+          "blob": "de32bf3f6a55c02bf66f84b0d12c4a2d",
+          "name": "mcps.svg",
+          "size": 225,
+          "type": "image/svg+xml"
+        },
+        "memory.svg": {
+          "blob": "9694dad1dbded322ccac4beda2819a5e",
+          "name": "memory.svg",
+          "size": 318,
+          "type": "image/svg+xml"
+        },
+        "pinwheel.svg": {
+          "blob": "a0868ffba4d7747217d7772a9a620288",
+          "name": "pinwheel.svg",
+          "size": 154,
+          "type": "image/svg+xml"
+        },
+        "plus.svg": {
+          "blob": "b3328fadb1f193cd8722b7bc692985ba",
+          "name": "plus.svg",
+          "size": 195,
+          "type": "image/svg+xml"
+        },
+        "pull-requests.svg": {
+          "blob": "a2da59c21258a708219134395883ae56",
+          "name": "pull-requests.svg",
+          "size": 326,
+          "type": "image/svg+xml"
+        },
+        "search.svg": {
+          "blob": "09bdb53713551326ed77167304bb4f27",
+          "name": "search.svg",
+          "size": 233,
+          "type": "image/svg+xml"
+        },
+        "send.svg": {
+          "blob": "d1025b04a5bf440a376c4dbfd70ef5fa",
+          "name": "send.svg",
+          "size": 200,
+          "type": "image/svg+xml"
+        },
+        "sessions.svg": {
+          "blob": "12b644a2a1e5d150ee539d873ee416b6",
+          "name": "sessions.svg",
+          "size": 234,
+          "type": "image/svg+xml"
+        },
+        "settings.svg": {
+          "blob": "ffe05a550f97825d949a20d9f5cfc447",
+          "name": "settings.svg",
+          "size": 761,
+          "type": "image/svg+xml"
+        },
+        "share.svg": {
+          "blob": "b4ed310d344064cac8d5ecdddc845398",
+          "name": "share.svg",
+          "size": 325,
+          "type": "image/svg+xml"
+        },
+        "skills.svg": {
+          "blob": "6aff971caf7ec5a346b502b1cc55a283",
+          "name": "skills.svg",
+          "size": 248,
+          "type": "image/svg+xml"
+        },
+        "stop.svg": {
+          "blob": "d2f49ed4861aeb41252ff503b52d592f",
+          "name": "stop.svg",
+          "size": 136,
+          "type": "image/svg+xml"
+        },
+        "trash.svg": {
+          "blob": "d07dd4323282c33ae4ac111197d3037a",
+          "name": "trash.svg",
+          "size": 229,
+          "type": "image/svg+xml"
+        },
+        "workflows.svg": {
+          "blob": "ac82fd5476563dbc4aa2cbefc46e7aac",
+          "name": "workflows.svg",
+          "size": 273,
+          "type": "image/svg+xml"
+        },
+        "workspaces.svg": {
+          "blob": "bfc8044ca4ee71ad98da84db7214fc76",
+          "name": "workspaces.svg",
+          "size": 252,
+          "type": "image/svg+xml"
+        }
+      },
       "name": "Icons",
-      "tile": "s",
       "order": [
         "mark.svg",
         "home.svg",
@@ -44,177 +189,32 @@
         "stop.svg",
         "pinwheel.svg"
       ],
-      "files": {
-        "mark.svg": {
-          "name": "mark.svg",
-          "blob": "04469ce64be5408d7559ff7019be853b",
-          "size": 324,
-          "type": "image/svg+xml"
-        },
-        "home.svg": {
-          "name": "home.svg",
-          "blob": "3411b1333142268d88d6a7e5694f4d83",
-          "size": 236,
-          "type": "image/svg+xml"
-        },
-        "agents.svg": {
-          "name": "agents.svg",
-          "blob": "d1a372db7e344311a13e43e958ca8eeb",
-          "size": 233,
-          "type": "image/svg+xml"
-        },
-        "sessions.svg": {
-          "name": "sessions.svg",
-          "blob": "12b644a2a1e5d150ee539d873ee416b6",
-          "size": 234,
-          "type": "image/svg+xml"
-        },
-        "skills.svg": {
-          "name": "skills.svg",
-          "blob": "6aff971caf7ec5a346b502b1cc55a283",
-          "size": 248,
-          "type": "image/svg+xml"
-        },
-        "workspaces.svg": {
-          "name": "workspaces.svg",
-          "blob": "bfc8044ca4ee71ad98da84db7214fc76",
-          "size": 252,
-          "type": "image/svg+xml"
-        },
-        "memory.svg": {
-          "name": "memory.svg",
-          "blob": "9694dad1dbded322ccac4beda2819a5e",
-          "size": 318,
-          "type": "image/svg+xml"
-        },
-        "mcps.svg": {
-          "name": "mcps.svg",
-          "blob": "de32bf3f6a55c02bf66f84b0d12c4a2d",
-          "size": 225,
-          "type": "image/svg+xml"
-        },
-        "workflows.svg": {
-          "name": "workflows.svg",
-          "blob": "ac82fd5476563dbc4aa2cbefc46e7aac",
-          "size": 273,
-          "type": "image/svg+xml"
-        },
-        "kanban.svg": {
-          "name": "kanban.svg",
-          "blob": "706801c6078043f465573a9190dac6fe",
-          "size": 218,
-          "type": "image/svg+xml"
-        },
-        "pull-requests.svg": {
-          "name": "pull-requests.svg",
-          "blob": "a2da59c21258a708219134395883ae56",
-          "size": 326,
-          "type": "image/svg+xml"
-        },
-        "background.svg": {
-          "name": "background.svg",
-          "blob": "fb1ced8afec4a1f217ef64c487c36171",
-          "size": 211,
-          "type": "image/svg+xml"
-        },
-        "settings.svg": {
-          "name": "settings.svg",
-          "blob": "ffe05a550f97825d949a20d9f5cfc447",
-          "size": 761,
-          "type": "image/svg+xml"
-        },
-        "search.svg": {
-          "name": "search.svg",
-          "blob": "09bdb53713551326ed77167304bb4f27",
-          "size": 233,
-          "type": "image/svg+xml"
-        },
-        "plus.svg": {
-          "name": "plus.svg",
-          "blob": "b3328fadb1f193cd8722b7bc692985ba",
-          "size": 195,
-          "type": "image/svg+xml"
-        },
-        "chevron-down.svg": {
-          "name": "chevron-down.svg",
-          "blob": "ec8577d6e4d3128090013bcfd8f04306",
-          "size": 191,
-          "type": "image/svg+xml"
-        },
-        "check.svg": {
-          "name": "check.svg",
-          "blob": "d19116b9a39e2f403ee8b7119c3317bd",
-          "size": 193,
-          "type": "image/svg+xml"
-        },
-        "copy.svg": {
-          "name": "copy.svg",
-          "blob": "6a9920e4d7d24a27f1858b6cde0c561d",
-          "size": 258,
-          "type": "image/svg+xml"
-        },
-        "trash.svg": {
-          "name": "trash.svg",
-          "blob": "d07dd4323282c33ae4ac111197d3037a",
-          "size": 229,
-          "type": "image/svg+xml"
-        },
-        "share.svg": {
-          "name": "share.svg",
-          "blob": "b4ed310d344064cac8d5ecdddc845398",
-          "size": 325,
-          "type": "image/svg+xml"
-        },
-        "code.svg": {
-          "name": "code.svg",
-          "blob": "46b5db99d9b15f29eb1c7ce1e98ccf3e",
-          "size": 206,
-          "type": "image/svg+xml"
-        },
-        "agent.svg": {
-          "name": "agent.svg",
-          "blob": "029949a382540dcc47efc101e19c7c27",
-          "size": 260,
-          "type": "image/svg+xml"
-        },
-        "branch.svg": {
-          "name": "branch.svg",
-          "blob": "ea796c4e224f131dd833420ea35aa8d7",
-          "size": 328,
-          "type": "image/svg+xml"
-        },
-        "send.svg": {
-          "name": "send.svg",
-          "blob": "d1025b04a5bf440a376c4dbfd70ef5fa",
-          "size": 200,
-          "type": "image/svg+xml"
-        },
-        "stop.svg": {
-          "name": "stop.svg",
-          "blob": "d2f49ed4861aeb41252ff503b52d592f",
-          "size": 136,
-          "type": "image/svg+xml"
-        },
-        "pinwheel.svg": {
-          "name": "pinwheel.svg",
-          "blob": "a0868ffba4d7747217d7772a9a620288",
-          "size": 154,
-          "type": "image/svg+xml"
-        }
-      }
+      "tile": "s"
     }
   },
   "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-11-01T08:22:44Z",
+    "v": 1
+  },
   "docs": {
     "readme": "project/README.md",
     "sections": [
       "project/materials.md"
     ]
   },
+  "groups": [
+    "Icons"
+  ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-01T08:22:44Z",
+    "at": "2026-11-01T08:37:27Z",
     "via": "Claude Code",
-    "note": "First version, built from the Paper diorama board of the Primepaw canvas"
-  }
+    "note": "Every button is cardboard: kraft, sage and terracotta, latched when on"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "Kraft",
+  "sections": {},
+  "title": "Kraft"
 }

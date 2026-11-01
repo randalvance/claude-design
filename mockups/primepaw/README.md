@@ -52,17 +52,18 @@ The canvas records it in `designSystems` and carries its tokens at `project/ds/p
 The Paper diorama has its own material system, Kraft, published as a Design System artifact at
 https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV and mirrored under `design-system-kraft/`:
 
-- `tokens.json` — two themes (Paper, Night): 47 colour tokens for the cream desk, the three
+- `tokens.json` — two themes (Paper, Night): 48 colour tokens for the cream desk, the three
   cardboard faces and their cut edges, the papers, the ink and the sticker colours; the same four
-  type families in 10 styles; spacing and radii by pixel value; 13 shadows that are a solid cut
-  edge plus one soft cast shadow (`lift-paper-1..3`, `lift-board`, `lift-mat`, `lift-frame`, the
-  `press-*` states) and the shadowless sticker cuts (`sticker`, `sticker-s`, `sticker-on`); tilt,
+  type families in 10 styles; spacing and radii by pixel value; 14 shadows that are a solid cut
+  edge plus one soft cast shadow (`lift-paper-1..3`, `lift-board`, `lift-board-sm`, `lift-board-up`,
+  `lift-mat`, `lift-frame`, the `press-*` states) and the shadowless sticker cuts (`sticker`, `sticker-s`, `sticker-on`); tilt,
   stroke and motion scales.
 - `README.md` and `materials.md` — the brand book (three materials, one light, flat stickers,
   depth by stacking, colour, type, motion, grain) and the material recipe table.
 - `components/bundle.css` — `kr-*` classes for the materials (`kr-board`, `kr-sheet`,
-  `kr-sticker`) and the parts cut from them: Button (sticker, paper, cardboard, printed, written),
-  IconButton, Toggle, Sheet, Board, Sticker, Tab, each with a `preview.html` and `README.md`, and
+  `kr-sticker`) and the parts cut from them: Button (every button is cardboard: kraft, sage for the
+  confirm, terracotta for the destructive one, latched flat when on), IconButton (rail stickers and
+  cardboard discs), Toggle, Sheet, Board, Sticker, Tab, each with a `preview.html` and `README.md`, and
   the cover.
 - `assets/Icons/` — the same 26 single-ink icons, copied from Paper Chat.
 
