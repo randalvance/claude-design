@@ -171,8 +171,12 @@ button,input{font:inherit}
 
 .newc .plus{background-color:var(--board);background-image:var(--face),var(--pulp);box-shadow:2px 3px 0 var(--board-2),4px 6px 7px var(--amb);transform:none;border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));box-sizing:border-box}
 /* ---------- titles are ink soaked into the paper ---------- */
-.main h1{color:transparent;background-image:var(--pulp),var(--pulp),linear-gradient(var(--ink),var(--ink));-webkit-background-clip:text;background-clip:text;mix-blend-mode:multiply}
-.namef,.nmf{color:color-mix(in srgb,var(--ink) 92%,transparent);mix-blend-mode:multiply}
+.main h1,.namef,.nmf{font-family:var(--font-hand);font-weight:600;font-size:38px;line-height:1.05;letter-spacing:0;font-variation-settings:normal;padding-bottom:3px;color:transparent;background-image:var(--pulp),var(--pulp),linear-gradient(var(--ink),var(--ink));-webkit-background-clip:text;background-clip:text;mix-blend-mode:multiply}
+.namef,.nmf{caret-color:var(--ink)}
+.bname{margin:0;font-size:38px}
+.hrow:has(>.bname){align-items:center}
+.namef::placeholder,.nmf::placeholder{color:var(--faint)}
+.namef::selection,.nmf::selection{color:var(--ink);background:var(--highlighter)}
 .page.night .main h1,.page.night .namef,.page.night .nmf{mix-blend-mode:screen}
 /* ---------- a selected row is real highlighter: translucent marker strokes over the paper, its texture showing through ---------- */
 .sheet,.pop,.deck{isolation:isolate}
