@@ -1,10 +1,10 @@
-Paper Chat is the cut-paper skin of the chat app. Every surface is a sheet laid on a desk, depth comes from stacking and hard offset shadows, nothing sits perfectly straight, and every movement is a stop-motion puppet at 8 to 12 frames a second.
+Paper Chat is the cut-paper skin of the chat app. Every surface is a sheet laid on a desk, depth comes from stacking and hard offset shadows, nothing sits perfectly straight, and every movement is quick and smooth, easing out in well under a quarter of a second.
 
 ## Principles
 
 - **Depth by stacking, never by blur.** A sheet casts a solid shadow (`shadow-sheet`, `shadow-sheet-lg`) offset down and right. Blur, gradients and translucent overlays are not part of this system; the one exception is the grain and the tape.
 - **Everything stuck on is a little crooked.** Stickers, badges, stamps, the logo and the token circle carry a fixed tilt from the Tilt tokens. Sheets themselves stay square; only what is stuck onto them tilts.
-- **Motion is stepped.** Every transition and keyframe runs on `steps()`. Nothing eases. See the Motion section for the full table.
+- **Motion is quick and smooth.** Transitions ease out in under 200 ms, stamps land with a soft overshoot, spinners turn continuously and the working capsule breathes. Nothing is stepped. See the Motion section for the full table.
 - **Three voices.** Fraunces for what the agent says and the session's name, Nunito for the interface, Caveat for what is written in the margin.
 
 ## Content fundamentals
