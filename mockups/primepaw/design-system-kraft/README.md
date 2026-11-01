@@ -74,5 +74,6 @@ Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so ca
 - **Hover.** Card lifts. Paper tints to `hover` and keeps its texture.
 - **Status stickers.** White text sits on `st-green`, `st-amber` or `st-red`, which hold 4.5:1 in both themes.
 - **Stamps.** One angle, `tilt-stamp`.
+- **When the agent needs you.** The turn stops on a sheet on an amber mat in the thread: a `kr-slip` for a tool approval, the same mat with `kr-q` questions for a question. It holds still; only amber, the sticker and the row badge signal it. The composer stays open as the other way to answer. Your choice is struck with a `kr-stamp`, and the sheet folds to a stub. YOLO belongs to the session, skips slips but not questions, and approves a slip that's already waiting.
 - **Side panel.** What sits beside a conversation lives in one panel opened by tabs at the right of the strip: artifacts on a `kr-clipboard`, the side chat on a `kr-pad`. With both open they stack. An artifact also shows in the thread as a `kr-artchip`.
 - **Page or drawer.** Things you author (agents, skills, workspaces) open an edit page. Things that run or that you inspect in place (MCP servers, jobs, cards) open a drawer.

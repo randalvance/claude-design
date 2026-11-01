@@ -38,7 +38,7 @@
     },
     "DioramaAgents.dc.html": {
       "x": 0,
-      "y": 2000,
+      "y": 4000,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, live demo",
@@ -48,7 +48,7 @@
     },
     "DioramaAgentsDark.dc.html": {
       "x": 1540,
-      "y": 2000,
+      "y": 4000,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, dark mode, live demo",
@@ -58,7 +58,7 @@
     },
     "DioramaAgent.dc.html": {
       "x": 0,
-      "y": 3000,
+      "y": 5000,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, live demo",
@@ -68,7 +68,7 @@
     },
     "DioramaAgentDark.dc.html": {
       "x": 1540,
-      "y": 3000,
+      "y": 5000,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, dark mode, live demo",
@@ -78,7 +78,7 @@
     },
     "DioramaSkills.dc.html": {
       "x": 0,
-      "y": 4000,
+      "y": 6000,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, live demo",
@@ -88,7 +88,7 @@
     },
     "DioramaSkillsDark.dc.html": {
       "x": 1540,
-      "y": 4000,
+      "y": 6000,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, dark mode, live demo",
@@ -98,7 +98,7 @@
     },
     "DioramaSkill.dc.html": {
       "x": 0,
-      "y": 5000,
+      "y": 7000,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, live demo",
@@ -108,7 +108,7 @@
     },
     "DioramaSkillDark.dc.html": {
       "x": 1540,
-      "y": 5000,
+      "y": 7000,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, dark mode, live demo",
@@ -118,7 +118,7 @@
     },
     "DioramaWorkspaces.dc.html": {
       "x": 0,
-      "y": 6000,
+      "y": 8000,
       "w": 1440,
       "h": 900,
       "title": "Workspaces, list page, paper diorama, live demo",
@@ -128,7 +128,7 @@
     },
     "DioramaWorkspacesDark.dc.html": {
       "x": 1540,
-      "y": 6000,
+      "y": 8000,
       "w": 1440,
       "h": 900,
       "title": "Workspaces, list page, paper diorama, dark mode, live demo",
@@ -138,7 +138,7 @@
     },
     "DioramaWorkspace.dc.html": {
       "x": 0,
-      "y": 7000,
+      "y": 9000,
       "w": 1440,
       "h": 900,
       "title": "Workspace, edit page, paper diorama, live demo",
@@ -148,7 +148,7 @@
     },
     "DioramaWorkspaceDark.dc.html": {
       "x": 1540,
-      "y": 7000,
+      "y": 9000,
       "w": 1440,
       "h": 900,
       "title": "Workspace, edit page, paper diorama, dark mode, live demo",
@@ -158,7 +158,7 @@
     },
     "DioramaMemory.dc.html": {
       "x": 0,
-      "y": 8000,
+      "y": 10000,
       "w": 1440,
       "h": 900,
       "title": "Memory, paper diorama, live demo",
@@ -168,7 +168,7 @@
     },
     "DioramaMemoryDark.dc.html": {
       "x": 1540,
-      "y": 8000,
+      "y": 10000,
       "w": 1440,
       "h": 900,
       "title": "Memory, paper diorama, dark mode, live demo",
@@ -178,7 +178,7 @@
     },
     "DioramaMCPs.dc.html": {
       "x": 0,
-      "y": 9000,
+      "y": 11000,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, live demo",
@@ -188,7 +188,7 @@
     },
     "DioramaMCPsDark.dc.html": {
       "x": 1540,
-      "y": 9000,
+      "y": 11000,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, dark mode, live demo",
@@ -198,7 +198,7 @@
     },
     "DioramaKanban.dc.html": {
       "x": 0,
-      "y": 10000,
+      "y": 12000,
       "w": 1440,
       "h": 900,
       "title": "Kanban, boards, paper diorama, live demo",
@@ -208,7 +208,7 @@
     },
     "DioramaKanbanDark.dc.html": {
       "x": 1540,
-      "y": 10000,
+      "y": 12000,
       "w": 1440,
       "h": 900,
       "title": "Kanban, boards, paper diorama, dark mode, live demo",
@@ -218,7 +218,7 @@
     },
     "DioramaBoard.dc.html": {
       "x": 0,
-      "y": 11000,
+      "y": 13000,
       "w": 1440,
       "h": 900,
       "title": "Kanban, one board, paper diorama, live demo",
@@ -228,7 +228,7 @@
     },
     "DioramaBoardDark.dc.html": {
       "x": 1540,
-      "y": 11000,
+      "y": 13000,
       "w": 1440,
       "h": 900,
       "title": "Kanban, one board, paper diorama, dark mode, live demo",
@@ -238,7 +238,7 @@
     },
     "DioramaBackground.dc.html": {
       "x": 0,
-      "y": 12000,
+      "y": 14000,
       "w": 1440,
       "h": 900,
       "title": "Background jobs, paper diorama, live demo",
@@ -248,7 +248,7 @@
     },
     "DioramaBackgroundDark.dc.html": {
       "x": 1540,
-      "y": 12000,
+      "y": 14000,
       "w": 1440,
       "h": 900,
       "title": "Background jobs, paper diorama, dark mode, live demo",
@@ -272,6 +272,46 @@
       "w": 1440,
       "h": 900,
       "title": "Session with artifacts and side chat, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaApproval.dc.html": {
+      "x": 0,
+      "y": 2000,
+      "w": 1440,
+      "h": 900,
+      "title": "Session waiting on a tool approval, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaApprovalDark.dc.html": {
+      "x": 1540,
+      "y": 2000,
+      "w": 1440,
+      "h": 900,
+      "title": "Session waiting on a tool approval, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaQuestion.dc.html": {
+      "x": 0,
+      "y": 3000,
+      "w": 1440,
+      "h": 900,
+      "title": "Session waiting on your answers, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaQuestionDark.dc.html": {
+      "x": 1540,
+      "y": 3000,
+      "w": 1440,
+      "h": 900,
+      "title": "Session waiting on your answers, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -303,7 +343,11 @@
     "DioramaBackground.dc.html",
     "DioramaBackgroundDark.dc.html",
     "DioramaSession.dc.html",
-    "DioramaSessionDark.dc.html"
+    "DioramaSessionDark.dc.html",
+    "DioramaApproval.dc.html",
+    "DioramaApprovalDark.dc.html",
+    "DioramaQuestion.dc.html",
+    "DioramaQuestionDark.dc.html"
   ],
   "notes": {
     "p14": {
@@ -322,7 +366,7 @@
     },
     "p16": {
       "x": 3080,
-      "y": 2000,
+      "y": 4000,
       "w": 320,
       "page": "diorama",
       "text": "The other screens, light on the left and dark on the right. Each is a live demo on the same materials: a cardboard rail with coloured thick-card tiles, one paper sheet for the content, paper pieces with the wall texture, thick-card buttons, sticker pills and rubber stamps inked on the paper."
@@ -333,6 +377,13 @@
       "w": 320,
       "page": "diorama",
       "text": "A session with its side panel open. Two tabs at the right of the strip open it. Artifacts are clipped to a cardboard clipboard: one tab per artifact, a version stepper, and Copy, Download and Ask on the side under the sheet. Each artifact also shows in the thread as a paper chip with a folded corner, which turns highlighter yellow while it is the one on the clipboard. A web page artifact is a white printout taped to the sheet, because it has its own design. The side chat is a legal pad: asides stay out of the session, the session keeps working meanwhile, and Put in chat carries an answer into the composer. With both open they stack, so you can read and ask at once. The left edge of the panel drags to resize. All the contents are fake."
+    },
+    "p18": {
+      "x": 3080,
+      "y": 2000,
+      "w": 320,
+      "page": "diorama",
+      "text": "When the agent needs you, the turn stops and a sheet on an amber mat lands in the thread. It holds still: the amber, the Needs you sticker and the badge on the session row are the signal. A tool approval is a permission slip with the command or diff, what it will do, and Allow once, Allow for this session or Deny. A question is one form with everything in view: pick one or pick any, a recommended choice, a line for something else, and You decide to leave it to the agent. Either way you can just write in the composer instead. Your choice is struck with a rubber stamp, then the sheet folds to a stub and the agent carries on. YOLO now belongs to the session, skips slips but not questions, and turning it on approves a waiting slip. Try it: these two boards are one flow in ORB-272, and with YOLO off any message you send stops at an edit slip."
     }
   },
   "designSystems": [
@@ -340,8 +391,8 @@
       "title": "Kraft",
       "namespace": "kraft",
       "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
-      "version": "1793575062-61cd",
-      "copiedAt": "2026-11-01T23:17:56Z"
+      "version": "1793576673-0d71",
+      "copiedAt": "2026-11-01T23:44:49Z"
     }
   ]
 }

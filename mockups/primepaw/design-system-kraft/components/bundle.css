@@ -237,3 +237,40 @@
 .kr-pad-b{display:flex;flex-direction:column;gap:11px;padding:11px 12px 11px 36px;font-size:13px;line-height:22px;background-attachment:local;background-image:linear-gradient(90deg,transparent 25px,color-mix(in srgb,var(--red) 45%,transparent) 25px 26px,transparent 26px),repeating-linear-gradient(180deg,transparent 0 21px,color-mix(in srgb,var(--blue) 20%,transparent) 21px 22px)}
 .kr-pad-q{align-self:flex-end;max-width:88%;box-sizing:border-box;padding:6px 10px;line-height:18px;background-color:var(--kraft);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid var(--kraft-2);border-radius:var(--radius-3);box-shadow:1px 1px 0 var(--kraft-2),2px 3px 4px var(--amb);transform:rotate(-.5deg)}
 .kr-pad-f{padding:8px 10px 10px;border-top:1px dashed var(--bar);font-size:11px;font-weight:700}
+
+/* When the agent needs you: a sheet on an amber mat that holds still, then folds to a stub with the stamp on it */
+.kr-slip{position:relative;max-width:760px;padding:var(--space-6);background-color:color-mix(in srgb,var(--amber) 58%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid color-mix(in srgb,var(--amber) 62%,var(--edge-2));border-radius:9px;box-shadow:1.5px 2px 0 color-mix(in srgb,var(--amber) 62%,var(--edge-2)),4px 6px 7px var(--amb),8px 14px 20px -8px var(--amb-2)}
+.kr-slip-in{position:relative;padding:var(--space-14) var(--space-16) var(--space-12);background-color:var(--sheet);background-image:var(--face),var(--pulp-paper);border-radius:var(--radius-4);box-shadow:var(--lift-paper-1,0 1px 0 var(--edge),2px 3px 3px var(--amb));color:var(--ink)}
+.kr-slip-h{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-12);margin:0 0 var(--space-8)}
+.kr-slip-q{margin:0;font-family:var(--font-hand);font-size:20px;font-weight:600;line-height:1.1}
+.kr-slip-k{flex:none;font-family:var(--font-mono);font-size:11px;color:var(--mute)}
+.kr-slip-cmd{display:block;padding:var(--space-8) var(--space-10);font-family:var(--font-mono);font-size:12px;line-height:1.5;word-break:break-word;background-color:var(--card);background-image:var(--pulp-paper);border-radius:2px;box-shadow:var(--recess)}
+.kr-slip-why{margin:var(--space-8) 0 0;font-size:14px;line-height:1.45}
+.kr-slip-tags{margin:var(--space-6) 0 0;font-family:var(--font-hand);font-size:17px;font-weight:500;line-height:1.2;color:var(--ink)}
+.kr-slip-act{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-8) var(--space-10);margin-top:var(--space-12);padding-top:var(--space-12);border-top:2px dotted var(--line)}
+.kr-slip-or{margin-left:auto;font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1.1;color:var(--mute)}
+.kr-slip.is-stub{padding:0;background:none;border:0;box-shadow:none}
+.kr-slip.is-stub .kr-slip-in{display:flex;align-items:center;gap:var(--space-10);min-height:42px;box-sizing:border-box;padding:var(--space-6) var(--space-12);background-color:var(--card);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:var(--radius-3)}
+.kr-slip.is-stub code{flex:1;min-width:0;font-family:var(--font-mono);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kr-stamp.is-green{color:color-mix(in srgb,var(--green) 92%,var(--ink))}
+.kr-btn.is-go{color:var(--white);background-color:color-mix(in srgb,var(--blue) var(--dye,100%),var(--desk));border-color:var(--blue-2);box-shadow:2px 3px 0 var(--blue-2),4px 6px 7px var(--amb)}
+.kr-btn.is-go:hover{box-shadow:3px 4px 0 var(--blue-2),5px 8px 9px var(--amb)}
+.kr-btn.is-go:active{box-shadow:0 0 0 var(--blue-2),1px 1px 2px var(--amb)}
+.kr-q{border:0;margin:0;padding:var(--space-10) 0 0}
+.kr-q+.kr-q{margin-top:var(--space-6);border-top:1px dashed var(--line)}
+.kr-q-h{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0 var(--space-12);margin:0 0 var(--space-4)}
+.kr-q-t{font-family:var(--font-serif);font-size:15px;font-weight:600;line-height:1.35}
+.kr-q-hint{font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1.2;color:var(--mute)}
+.kr-qo{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:flex-start;gap:var(--space-10);width:100%;padding:5px var(--space-6);border-radius:2px;font-size:14px;line-height:1.35}
+.kr-qo:hover{background-color:var(--hover);background-image:var(--face),var(--pulp-paper)}
+.kr-qo:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.kr-qo-box{flex:none;display:grid;place-items:center;box-sizing:border-box;width:18px;height:18px;margin-top:1px;border:2px solid var(--ink);border-radius:2px;background-color:var(--sheet);color:var(--white)}
+.kr-qo-box.is-round{border-radius:50%}
+.kr-qo-box svg{width:13px;height:13px;opacity:0}
+.kr-qo.is-on .kr-qo-box{border-color:transparent;background-color:var(--st-green);background-image:var(--gloss);transform:rotate(-4deg)}
+.kr-qo.is-on .kr-qo-box svg{opacity:1}
+.kr-qo b{font-weight:800}
+.kr-qo em{margin-left:var(--space-8);font-family:var(--font-hand);font-style:normal;font-size:15px;font-weight:600;background-image:linear-gradient(transparent 55%,var(--highlighter) 55%)}
+.kr-qo small{margin-left:var(--space-8);font-size:13px;color:var(--mute)}
+.kr-qo-in{all:unset;flex:1;min-width:0;box-sizing:border-box;height:24px;font-family:var(--font-hand);font-size:17px;line-height:24px;border-bottom:1.5px dashed var(--bar)}
+.kr-qo-in::placeholder{color:var(--mute);opacity:1}

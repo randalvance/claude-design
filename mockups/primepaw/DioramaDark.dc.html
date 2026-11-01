@@ -476,6 +476,81 @@ button{font:inherit}
 .pad-send.ready{background-color:color-mix(in srgb,var(--blue) var(--dye,100%),var(--desk));color:var(--white);border-color:var(--blue-2);box-shadow:2px 3px 0 var(--blue-2),4px 6px 7px var(--amb)}
 @media (max-width:1180px){.side{width:min(460px,100%);margin-left:calc(-1 * min(460px,100%));height:calc(100vh - 186px);min-height:420px;padding-left:14px;z-index:6}.side-grip{display:none}}
 @media (prefers-reduced-motion:reduce){.side,.chit{animation:none}}
+
+/* The agent needs you: a sheet on an amber mat, the capsule's sibling. It holds still, nothing pulses; the amber and the sticker are the signal. Once settled it folds to a stub with the stamp on it. */
+.slipw{position:relative;max-width:760px;margin:4px 0 4px 14px;animation:drop .28s var(--ease) both}
+.slipw.open{padding:7px;background-color:color-mix(in srgb,var(--amber) 58%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid color-mix(in srgb,var(--amber) 62%,var(--edge-2));border-radius:9px;box-shadow:1.5px 2px 0 color-mix(in srgb,var(--amber) 62%,var(--edge-2)),4px 6px 7px var(--amb),8px 14px 20px -8px var(--amb-2)}
+.slip{position:relative;padding:14px 16px 12px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border-radius:4px;box-shadow:var(--lift-1);color:var(--ink)}
+.slip>.tape{top:-16px;width:64px;height:20px}
+.slip-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 8px}
+.slip-q{margin:0;font-family:var(--hand);font-size:20px;font-weight:700;line-height:1.1}
+.slip-k{display:inline-flex;align-items:center;gap:6px;flex:none;font-family:var(--mono);font-size:11px;color:var(--mute)}
+.slip-k .dot{width:9px;height:9px}
+.slip-cmd{display:block;padding:8px 10px;font-family:var(--mono);font-size:12px;line-height:1.5;word-break:break-word;background-color:var(--card);background-image:var(--pulp);border-radius:2px;box-shadow:var(--recess)}
+.slip-cmd::before{content:"$ ";color:var(--mute)}
+.slip-file{display:flex;align-items:center;gap:8px;padding:6px 10px;font-family:var(--mono);font-size:12px;background-color:var(--card);background-image:var(--pulp);border-radius:2px 2px 0 0;box-shadow:var(--recess)}
+.slip-file .sum{margin-left:auto;font-size:11px;color:var(--mute);white-space:nowrap}
+.slip-diff{margin:0;padding:6px 0;list-style:none;font-family:var(--mono);font-size:12px;line-height:1.5;background-color:var(--card);background-image:var(--pulp);border-top:1px dashed var(--line);border-radius:0 0 2px 2px;box-shadow:var(--recess);overflow:auto}
+.slip-diff li{padding:0 10px;white-space:pre}
+.slip-diff .add{background-color:color-mix(in srgb,var(--st-green) 20%,transparent)}
+.slip-diff .del{background-color:color-mix(in srgb,var(--st-red) 18%,transparent)}
+.slip-why{margin:9px 0 0;font-size:14px;line-height:1.45;max-width:64ch}
+.slip-tags{display:flex;flex-wrap:wrap;gap:6px 14px;margin:6px 0 0;padding:0;list-style:none;font-family:var(--hand);font-size:17px;font-weight:500;line-height:1.2;color:var(--ink)}
+.slip-act{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin-top:12px;padding-top:12px;border-top:2px dotted var(--line)}
+.slip-act .abtn{height:32px;padding:0 12px;font-size:13px}
+.abtn.go{color:var(--white);background-color:color-mix(in srgb,var(--blue) var(--dye,100%),var(--desk));border-color:var(--blue-2);box-shadow:2px 3px 0 var(--blue-2),4px 6px 7px var(--amb)}
+.abtn.go:hover{box-shadow:3px 4px 0 var(--blue-2),5px 8px 9px var(--amb)}
+.abtn.go:active{box-shadow:0 0 0 var(--blue-2),1px 1px 2px var(--amb)}
+.abtn.go.off,.abtn.go.off:hover,.abtn.go.off:active{cursor:default;transform:none;color:var(--ink);opacity:.55;background-color:var(--board);border-color:var(--board-2);box-shadow:var(--lift-board-sm)}
+.abtn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.slip-or{margin-left:auto;font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.1;color:var(--mute);text-align:right}
+.slip-act.settled{visibility:hidden}
+.sticker.needs{background-color:var(--st-amber)}
+/* the verdict is struck by hand with the same rubber as YOLO */
+.pstamp{display:inline-grid;place-items:center;box-sizing:border-box;height:26px;padding:0 8px;border:2px solid currentColor;border-radius:3px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;white-space:nowrap;transform:rotate(-4deg);filter:url(#inkstamp);mix-blend-mode:multiply;flex:none}
+.page.night .pstamp{mix-blend-mode:screen}
+.pstamp.ok{color:color-mix(in srgb,var(--green) 92%,var(--ink))}
+.pstamp.no{color:color-mix(in srgb,var(--red) 88%,var(--ink))}
+.pstamp.meh{color:var(--mute)}
+.slip>.pstamp{position:absolute;right:18px;bottom:15px;animation:stampdown .26s var(--ease-pop) both}
+/* the stub it folds to */
+.slipw.stub{margin-top:0;animation:none}
+.slip.done{display:flex;align-items:center;gap:10px;min-height:42px;box-sizing:border-box;padding:7px 12px;background-color:var(--card);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:3px;box-shadow:var(--lift-1)}
+.slip.done .dot{flex:none;width:9px;height:9px}
+.slip.done code{min-width:0;flex:1;font-family:var(--mono);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slip.done .pstamp{margin-left:auto}
+.qdone{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;font-size:13px;line-height:1.4}
+.qdone dt{font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.3;color:var(--mute)}
+.qdone dd{margin:0;font-weight:700;min-width:0}
+/* the question sheet: one form, all of it in view */
+.qsheet{padding-bottom:12px}
+.q{border:0;margin:0;padding:10px 0 0;min-width:0}
+.q+.q{margin-top:6px;border-top:1px dashed var(--line)}
+.q legend{display:contents}
+.q-h{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0 12px;margin:0 0 5px}
+.qt{font-family:var(--serif);font-size:15px;font-weight:600;line-height:1.35}
+.qh{font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.2;color:var(--mute)}
+.qo{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:flex-start;gap:10px;width:100%;padding:5px 6px;border-radius:2px;transition:background .12s var(--ease)}
+.qo:hover{background-color:var(--hover);background-image:var(--face),var(--pulp)}
+.qo:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.qo .box{margin-top:1px}
+.qo .box.round{border-radius:50%}
+.qo .box svg{width:13px;height:13px}
+.qo.on .box{border-color:transparent;background-color:var(--st-green);background-image:var(--gloss);box-shadow:var(--sticker-s);color:var(--white);transform:rotate(-4deg)}
+.qo.on .box svg{opacity:1}
+.qo-t{min-width:0;display:block;font-size:14px;line-height:1.35}
+.qo-t b{font-weight:800}
+.qo-t em{margin-left:8px;font-family:var(--hand);font-style:normal;font-size:15px;font-weight:600;color:var(--ink);background-image:linear-gradient(transparent 55%,var(--highlighter) 55%)}
+.qo-d{margin-left:8px;font-size:13px;color:var(--mute)}
+@container (max-width:680px){.qo-d{display:block;margin-left:0}}
+.qo.oth{cursor:text;align-items:center}
+.qo-in{all:unset;flex:1;min-width:0;box-sizing:border-box;height:24px;font-family:var(--hand);font-size:17px;line-height:24px;border-bottom:1.5px dashed var(--bar)}
+.qo-in::placeholder{color:var(--mute);opacity:1}
+.qo-in:focus{border-bottom-color:var(--ink)}
+.q-act{margin-top:10px}
+.q-count{font-family:var(--hand);font-size:15px;font-weight:500;color:var(--mute)}
+.maincol:has(.slip-or) .slip-or{min-width:0}
+@container (max-width:680px){.slip-or{margin-left:0;width:100%;text-align:left}.slip>.pstamp{bottom:auto;top:14px;right:14px}}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -645,6 +720,32 @@ button{font:inherit}
       <sc-for list="{{thread}}" as="it" hint-placeholder-count="6">
         <sc-if value="{{it.isUser}}" hint-placeholder-val="{{false}}"><div class="note {{it.foldCls}}"><span class="tape" aria-hidden="true"></span><div class="note-in">{{it.text}}</div><sc-if value="{{it.isLong}}" hint-placeholder-val="{{false}}"><button class="unfold" onClick="{{it.toggleFold}}">{{it.foldLabel}}</button></sc-if></div></sc-if>
         <sc-if value="{{it.isSaid}}" hint-placeholder-val="{{false}}"><p class="said">{{it.text}}</p></sc-if>
+<sc-if value="{{it.isSlip}}" hint-placeholder-val="{{false}}"><section class="slipw {{it.slip.cls}}" aria-label="Permission request" aria-live="polite" ref="{{it.slip.ref}}">
+  <sc-if value="{{it.slip.open}}" hint-placeholder-val="{{true}}"><div class="slip"><span class="tape" aria-hidden="true"></span>
+    <div class="slip-h"><h4 class="slip-q">{{it.slip.ask}}</h4><span class="slip-k"><i class="dot {{it.slip.kind}}" aria-hidden="true" style="animation: none"></i>{{it.slip.kind}}</span></div>
+    <sc-if value="{{it.slip.isCmd}}" hint-placeholder-val="{{true}}"><code class="slip-cmd">{{it.slip.cmd}}</code></sc-if>
+    <sc-if value="{{it.slip.isDiff}}" hint-placeholder-val="{{false}}"><div class="slip-file"><span>{{it.slip.cmd}}</span><span class="sum">{{it.slip.sum}}</span></div><ol class="slip-diff"><sc-for list="{{it.slip.diff}}" as="dl" hint-placeholder-count="4"><li class="{{dl.c}}">{{dl.t}}</li></sc-for></ol></sc-if>
+    <p class="slip-why">{{it.slip.why}}</p>
+    <ul class="slip-tags"><sc-for list="{{it.slip.tags}}" as="tg" hint-placeholder-count="2"><li>{{tg.t}}</li></sc-for></ul>
+    <div class="slip-act {{it.slip.actCls}}"><button class="abtn go" onClick="{{it.slip.allow}}">Allow once</button><button class="abtn" onClick="{{it.slip.always}}">Allow for this session</button><button class="abtn" onClick="{{it.slip.deny}}">Deny</button><span class="slip-or">or write what to do instead, below</span></div>
+    <sc-if value="{{it.slip.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{it.slip.stampCls}}" role="status">{{it.slip.stamp}}</span></sc-if>
+  </div></sc-if>
+  <sc-if value="{{it.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{it.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{it.slip.cmd}}</code><span class="pstamp {{it.slip.stampCls}}">{{it.slip.stamp}}</span></div></sc-if>
+</section></sc-if>
+<sc-if value="{{it.isAsk}}" hint-placeholder-val="{{false}}"><section class="slipw {{it.ask.cls}}" aria-label="The agent has a question" aria-live="polite" ref="{{it.ask.ref}}">
+  <sc-if value="{{it.ask.open}}" hint-placeholder-val="{{true}}"><div class="slip qsheet"><span class="tape" aria-hidden="true"></span>
+    <div class="slip-h"><h4 class="slip-q">{{it.ask.title}}</h4><span class="q-count">{{it.ask.count}}</span></div>
+    <sc-for list="{{it.ask.qs}}" as="q" hint-placeholder-count="2"><div class="q" role="{{q.group}}" aria-label="{{q.text}}">
+      <div class="q-h"><span class="qt">{{q.text}}</span><span class="qh">{{q.hint}}</span></div>
+      <sc-for list="{{q.opts}}" as="o" hint-placeholder-count="3"><button class="qo {{o.cls}}" role="{{q.role}}" aria-checked="{{o.on}}" onClick="{{o.pick}}"><span class="box {{q.boxCls}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span class="qo-t"><b>{{o.name}}</b><sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><em>recommended</em></sc-if><span class="qo-d">{{o.desc}}</span></span></button></sc-for>
+      <label class="qo oth {{q.othCls}}"><span class="box {{q.boxCls}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span class="sr">Something else</span><input class="qo-in" placeholder="Something else…" onInput="{{q.onOther}}"></label>
+    </div></sc-for>
+    <div class="slip-act q-act {{it.ask.actCls}}"><button class="abtn go {{it.ask.sendCls}}" aria-disabled="{{it.ask.notReady}}" onClick="{{it.ask.send}}">Send answers</button><button class="abtn" onClick="{{it.ask.skip}}">You decide</button><span class="slip-or">or just write your answer below</span></div>
+    <sc-if value="{{it.ask.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{it.ask.stampCls}}" role="status">{{it.ask.stamp}}</span></sc-if>
+  </div></sc-if>
+  <sc-if value="{{it.ask.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><dl class="qdone"><sc-for list="{{it.ask.rows}}" as="r" hint-placeholder-count="2"><dt>{{r.h}}</dt><dd>{{r.a}}</dd></sc-for></dl><span class="pstamp {{it.ask.stampCls}}">{{it.ask.stamp}}</span></div></sc-if>
+</section></sc-if>
+<sc-if value="{{it.isReply}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{it.text}}</p></div></sc-if>
         <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
           <section class="deck {{it.cls}}" aria-label="Agent work">
             <button class="cap" onClick="{{it.toggle}}" aria-expanded="{{it.open}}">
@@ -702,7 +803,19 @@ button{font:inherit}
             </ol>
           </div></div>
         </section>
-        <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{m.reply}}</p></div></sc-if>
+        <sc-if value="{{m.isSlip}}" hint-placeholder-val="{{false}}"><section class="slipw {{m.slip.cls}}" aria-label="Permission request" aria-live="polite" ref="{{m.slip.ref}}">
+  <sc-if value="{{m.slip.open}}" hint-placeholder-val="{{true}}"><div class="slip"><span class="tape" aria-hidden="true"></span>
+    <div class="slip-h"><h4 class="slip-q">{{m.slip.ask}}</h4><span class="slip-k"><i class="dot {{m.slip.kind}}" aria-hidden="true" style="animation: none"></i>{{m.slip.kind}}</span></div>
+    <sc-if value="{{m.slip.isCmd}}" hint-placeholder-val="{{true}}"><code class="slip-cmd">{{m.slip.cmd}}</code></sc-if>
+    <sc-if value="{{m.slip.isDiff}}" hint-placeholder-val="{{false}}"><div class="slip-file"><span>{{m.slip.cmd}}</span><span class="sum">{{m.slip.sum}}</span></div><ol class="slip-diff"><sc-for list="{{m.slip.diff}}" as="dl" hint-placeholder-count="4"><li class="{{dl.c}}">{{dl.t}}</li></sc-for></ol></sc-if>
+    <p class="slip-why">{{m.slip.why}}</p>
+    <ul class="slip-tags"><sc-for list="{{m.slip.tags}}" as="tg" hint-placeholder-count="2"><li>{{tg.t}}</li></sc-for></ul>
+    <div class="slip-act {{m.slip.actCls}}"><button class="abtn go" onClick="{{m.slip.allow}}">Allow once</button><button class="abtn" onClick="{{m.slip.always}}">Allow for this session</button><button class="abtn" onClick="{{m.slip.deny}}">Deny</button><span class="slip-or">or write what to do instead, below</span></div>
+    <sc-if value="{{m.slip.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{m.slip.stampCls}}" role="status">{{m.slip.stamp}}</span></sc-if>
+  </div></sc-if>
+  <sc-if value="{{m.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{m.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{m.slip.cmd}}</code><span class="pstamp {{m.slip.stampCls}}">{{m.slip.stamp}}</span></div></sc-if>
+</section></sc-if>
+<sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{m.reply}}</p></div></sc-if>
         <sc-if value="{{m.hasChit}}" hint-placeholder-val="{{false}}"><div class="chits"><button class="chit {{m.chit.cls}}" onClick="{{m.chit.open}}" aria-label="Open {{m.chit.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{m.chit.icon}}"></path></svg><span><b>{{m.chit.title}}</b><em>{{m.chit.meta}}</em></span></button></div></sc-if>
       </sc-for>
     </sc-if>
@@ -967,12 +1080,46 @@ const PAD_ANSWERS = [
   (w) => 'It’s safe to leave for now. ' + w + ' doesn’t depend on it, so it can wait for a follow-up.'
 ];
 
+
+const STAMPS = { once: ['APPROVED', 'ok'], always: ['APPROVED FOR SESSION', 'ok'], yolo: ['YOLO', 'no'], denied: ['DENIED', 'no'], replied: ['ANSWERED BELOW', 'meh'], answered: ['ANSWERED', 'ok'], skipped: ['LEFT TO THE AGENT', 'meh'] };
+const LIVE_EDIT = { kind: 'edit', ask: 'May I edit this file?', cmd: 'src/lib/retry.ts', sum: '+3 −1', isDiff: true, diff: [{ c: '', t: '  export async function send(req) {' }, { c: 'del', t: '-   return fetch(req);' }, { c: 'add', t: '+   return retry(() => fetch(req), {' }, { c: 'add', t: '+     attempts: 3, backoff: 200,' }, { c: 'add', t: '+   });' }, { c: '', t: '  }' }], why: 'Retries the failing request up to three times, waiting a little longer each time.', tags: ['changes 1 file', 'no commit yet'] };
+const FLOWS = { s5: {
+  seed: [
+    { k: 'user', text: 'Add browser telemetry for checkout errors, behind a flag. Ask me if anything is ambiguous.' },
+    { k: 'cap', id: 'f1', time: '0:22', sub: '2 LLM calls · 3 tool calls', dots: ['think', 'read', 'read', 'read'], steps: [
+      { k: 'think', label: 'thinking', detail: 'Errors have to outlive the page, so they need a table', time: '6s' },
+      { k: 'read', label: 'read', detail: 'src/checkout/error-boundary.tsx', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'packages/db/schema.prisma', time: '0.2s' },
+      { k: 'read', label: 'read', detail: 'src/flags/index.ts', time: '0.1s' } ] },
+    { k: 'said', text: 'The collector needs somewhere to write, so I drafted a migration for a browser_events table. It has to run before anything else works.' } ],
+  stages: [
+    { tool: { id: 't1', kind: 'bash', ask: 'May I run this?', cmd: 'pnpm prisma migrate dev --name add_browser_events', why: 'Creates the browser_events table in your local database. Your existing tables stay as they are.', tags: ['writes to your local database', 'runs in packages/db'] } },
+    { work: { id: 'f2', sub: '1 LLM call · 2 tool calls', time: '0:09', now: 'Wiring up the collector', dots: ['bash', 'edit'], steps: [
+        { k: 'bash', label: 'bash', detail: 'pnpm prisma generate', time: '2.1s' },
+        { k: 'edit', label: 'edit', detail: 'src/telemetry/collector.ts', time: '0.4s' } ] },
+      said: (f) => (f.res.t1 && f.res.t1.status === 'denied' ? 'Okay, I left the database alone and kept the migration as a file for you to run. ' : 'The migration is in. ') + 'Two decisions are yours before I finish the collector.' },
+    { ask: { id: 'a1', title: 'Two quick questions', qs: [
+      { id: 'q1', head: 'Retention', text: 'How long should browser events be kept?', multi: false, opts: [
+        { id: '7', name: '7 days', desc: 'Enough to debug a bad release, and the smallest table.' },
+        { id: '30', name: '30 days', rec: true, desc: 'Covers a full billing cycle.' },
+        { id: '90', name: '90 days', desc: 'Matches the server logs, but the table grows fast.' } ] },
+      { id: 'q2', head: 'Events', text: 'Which events should it capture?', multi: true, opts: [
+        { id: 'err', name: 'Checkout errors', rec: true, desc: 'What the ticket asks for.' },
+        { id: 'pay', name: 'Failed payments', desc: 'Card declines and processor timeouts.' },
+        { id: 'slow', name: 'Slow page loads', desc: 'Anything over three seconds.' } ] } ] } },
+    { work: { id: 'f3', sub: '3 LLM calls · 4 tool calls', time: '0:31', now: 'Finishing the collector', dots: ['edit', 'edit', 'bash'], steps: [
+        { k: 'edit', label: 'edit', detail: 'src/telemetry/collector.ts', time: '0.5s' },
+        { k: 'edit', label: 'edit', detail: 'src/flags/index.ts', time: '0.2s' },
+        { k: 'bash', label: 'bash', detail: 'pnpm test telemetry', time: '6.4s' } ] },
+      reply: (a) => a ? 'Done. Browser telemetry is in behind the browser_telemetry flag, which is off by default. Events are kept for ' + a.q1 + ', and it captures: ' + a.q2 + '. The tests pass.' : 'Done. You left it to me, so events are kept for 30 days and it captures checkout errors only. It sits behind the browser_telemetry flag, which is off by default. The tests pass.' } ],
+} };
+
 class Component extends DCLogic {
   ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
   titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
-  state = { artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
+  state = { flow: {}, askDraft: {}, allow: {}, yoloBy: {}, artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
-  componentWillUnmount() { clearTimeout(this.tp); clearTimeout(this.tpe); clearTimeout(this.tpf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
+  componentWillUnmount() { (this.tprompt || []).forEach(clearTimeout); clearTimeout(this.tbring); clearInterval(this.tflow); clearTimeout(this.tp); clearTimeout(this.tpe); clearTimeout(this.tpf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
   curMsgs() { return this.state.msgs[this.state.sid] || []; }
   // Long notes fold after twelve lines (about 72 characters per line at the capped measure); the reader unfolds them by hand.
@@ -984,15 +1131,16 @@ class Component extends DCLogic {
   }
   sess(id) { const n = this.state.newSessions.find((x) => x.id === id); if (n) { const m = (this.state.msgs[id] || [])[0]; const live = !!m && !m.done; return { ...n, ws: WS.find((w) => w.id === n.wsId).name, st: live ? 'busy' : 'idle', dur: m ? (live ? fmtSec(Date.now() - m.start) : m.elapsed) : '—' }; } return findSession(id); }
   usedOf(sid) { if (sid in this.state.used) return this.state.used[sid]; return typeof sid === 'string' && sid[0] === 'n' ? 1800 : BASE; }
-  busy() { return this.curMsgs().some((m) => !m.done); }
+  busy() { return this.curMsgs().some((m) => !m.done && !(m.tool && !m.tool.status)) || !!this.flowOf(this.state.sid).working; }
   stop() {
+    if (this.flowOf(this.state.sid).working) { this.stopFlow(); return; }
     clearInterval(this.ticker); clearTimeout(this.t3);
     const sid = this.state.sid;
     this.setState({ msgs: { ...this.state.msgs, [sid]: this.curMsgs().map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), n: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) } });
   }
   artsOf(sid, c) {
     const seed = ARTS[sid] || (c.isNew ? [] : genericArts({ ...c, id: sid }));
-    const turns = (this.state.msgs[sid] || []).filter((m) => m.done && !m.stopped).map((m, i) => ({ id: 'm' + m.id, title: 'Turn ' + (i + 1) + ' notes', short: 'Turn ' + (i + 1), kind: 'doc', meta: 'Markdown', versions: [[h4('What you asked'), pp(m.text), h4('What happened'), li('Read the last reply and the working tree.'), li('Nothing to commit. The tree is clean.')]] }));
+    const turns = (this.state.msgs[sid] || []).filter((m) => m.done && !m.stopped && !(m.tool && (m.tool.status === 'denied' || m.tool.status === 'replied'))).map((m, i) => ({ id: 'm' + m.id, title: 'Turn ' + (i + 1) + ' notes', short: 'Turn ' + (i + 1), kind: 'doc', meta: 'Markdown', versions: [[h4('What you asked'), pp(m.text), h4('What happened'), li('Read the last reply and the working tree.'), li('Nothing to commit. The tree is clean.')]] }));
     return seed.concat(turns);
   }
   artSelOf(sid, arts) { return arts.find((a) => a.id === (this.state.artSel || {})[sid]) || arts[0] || null; }
@@ -1039,7 +1187,7 @@ class Component extends DCLogic {
       hasArts: arts.length > 0, noArts: arts.length === 0, artCount: String(arts.length),
       arts: arts.map((a) => ({ short: a.short, icon: ART_ICON[a.kind], cls: sel && sel.id === a.id ? 'on' : '', cur: sel && sel.id === a.id ? 'page' : false, pick: () => this.openArt(a.id) })),
       artv,
-      seedChits: seedOnly.map((a) => this.chitView(a, sid, arts)), hasSeedChits: seedOnly.length > 0,
+      seedChits: seedOnly.map((a) => this.chitView(a, sid, arts)), hasSeedChits: seedOnly.length > 0 && !(FLOWS[sid] && this.flowOf(sid).at < FLOWS[sid].stages.length),
       artCopyLabel: st.artCopied ? 'Copied' : 'Copy', artSaveLabel: st.artSaved ? 'Downloaded' : 'Download',
       artCopy: () => { try { navigator.clipboard.writeText(copyText).catch(() => {}); } catch (e) {} this.flash('artCopied'); },
       artSave: () => this.flash('artSaved'),
@@ -1056,9 +1204,121 @@ class Component extends DCLogic {
       gripKey: (e) => { if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; e.preventDefault(); const side = e.currentTarget.parentElement; const max = side.parentElement.offsetWidth - 440; setW(Math.max(320, Math.min(max, side.offsetWidth + (e.key === 'ArrowLeft' ? 24 : -24)))); }
     };
   }
+  yoloOf(sid) { const st = this.state; if (!sid) return st.yolo; const b = st.yoloBy[sid]; return b !== undefined ? b : FLOWS[sid] ? false : st.yolo; }
+  flowOf(sid) { return this.state.flow[sid] || { at: 0, res: {} }; }
+  flowPending(sid) {
+    const F = FLOWS[sid]; if (!F) return null; const f = this.flowOf(sid); if (f.halt || f.at >= F.stages.length) return null;
+    const s = F.stages[f.at]; const p = s.tool || s.ask; if (!p) return null; const r = f.res[p.id];
+    return r && r.status ? null : s;
+  }
+  // what a session looks like right now, once its prompts are counted
+  liveSess(s) {
+    if (!s) return s;
+    const waiting = !!this.flowPending(s.id) || (this.state.msgs[s.id] || []).some((m) => !m.done && m.tool && !m.tool.status);
+    if (waiting) return { ...s, st: 'wait', attn: 1 };
+    if (FLOWS[s.id]) { const f = this.flowOf(s.id); const going = !!f.working || (!f.halt && f.at < FLOWS[s.id].stages.length); return { ...s, st: going ? 'busy' : 'idle', attn: 0 }; }
+    return s;
+  }
+  needsTotal() { let n = 0; WS.forEach((w) => w.sessions.concat(this.state.newSessions.filter((x) => x.wsId === w.id)).forEach((s) => { const v = this.liveSess(s); if (v.attn) n += 1; })); return n; }
+  bringIn() { clearTimeout(this.tbring); this.tbring = setTimeout(() => { const el = this.promptEl; const doc = document.scrollingElement; if (!el || !el.isConnected || !doc) return; const a = el.getBoundingClientRect(); const d = Math.min(a.bottom - window.innerHeight + 24, a.top - 24); if (d > 0) doc.scrollTo({ top: doc.scrollTop + d, behavior: 'smooth' }); }, 80); }
+  later(fn, ms) { const id = setTimeout(fn, ms); (this.tprompt = this.tprompt || []).push(id); return id; }
+  setFlow(sid, patch) { this.setState({ flow: { ...this.state.flow, [sid]: { ...this.flowOf(sid), ...patch } } }); }
+  // Settling a prompt: the stamp strikes, a beat later the sheet folds to its stub and the agent gets back to work.
+  settle(sid, id, res) {
+    const f = this.flowOf(sid); const F = FLOWS[sid]; const s = F.stages[f.at];
+    const p = { res: { ...f.res, [id]: { ...res } } };
+    if (s.tool && (res.status === 'always')) this.setState({ allow: { ...this.state.allow, [sid]: { ...(this.state.allow[sid] || {}), [s.tool.kind]: true } } });
+    this.setFlow(sid, p);
+    this.later(() => { const g = this.flowOf(sid); this.setFlow(sid, { res: { ...g.res, [id]: { ...g.res[id], folded: true } } }); this.nextStage(sid); }, 750);
+  }
+  nextStage(sid) {
+    const F = FLOWS[sid]; const f = this.flowOf(sid); const at = f.at + 1; const s = F.stages[at];
+    if (!s) { this.setFlow(sid, { at, working: false }); return; }
+    if (s.work) { this.setFlow(sid, { at, working: true, start: Date.now() }); clearInterval(this.tflow); this.tflow = setInterval(() => this.setState({ tick: Date.now() }), 400);
+      this.tflowEnd = this.later(() => { clearInterval(this.tflow); const g = this.flowOf(sid); const nextAt = g.at + 1; const nx = F.stages[nextAt]; this.setFlow(sid, { at: nextAt, working: false }); if (nx) this.bringIn(); }, 1700); return; }
+    this.setFlow(sid, { at, working: false }); this.bringIn();
+  }
+  stopFlow() { const sid = this.state.sid; clearInterval(this.tflow); clearTimeout(this.tflowEnd); this.setFlow(sid, { working: false, halt: true, stopped: true }); }
+  // the composer answers a waiting prompt: the agent drops it and follows what was written
+  replyToPrompt(sid) {
+    const s = this.flowPending(sid);
+    if (s) { const f = this.flowOf(sid); const p = s.tool || s.ask; this.setFlow(sid, { halt: true, res: { ...f.res, [p.id]: { status: 'replied', folded: true } } }); }
+    const ms = this.state.msgs[sid] || [];
+    if (ms.some((m) => !m.done && m.tool && !m.tool.status)) this.setState({ msgs: { ...this.state.msgs, [sid]: ms.map((m) => !m.done && m.tool && !m.tool.status ? { ...m, done: true, tool: { status: 'replied', folded: true } } : m) } });
+  }
+  pauseMsg(sid, id) { clearInterval(this.ticker); this.setState({ msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, tool: { status: null }, elapsed: fmtSec(Date.now() - m.start), pausedAt: Date.now() } : m) } }); this.bringIn(); }
+  finishMsg(sid, id) { clearInterval(this.ticker); this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } }); }
+  settleMsg(sid, id, status) {
+    const patchMsg = (fn) => this.setState({ msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? fn(m) : m) } });
+    if (status === 'always') this.setState({ allow: { ...this.state.allow, [sid]: { ...(this.state.allow[sid] || {}), edit: true } } });
+    patchMsg((m) => ({ ...m, tool: { status }, start: m.start + (Date.now() - (m.pausedAt || Date.now())), ...(status === 'denied' ? { done: true } : {}) }));
+    this.later(() => patchMsg((m) => ({ ...m, tool: { ...m.tool, folded: true } })), 750);
+    if (status !== 'denied') { clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400); clearTimeout(this.t3); this.t3 = setTimeout(() => this.finishMsg(sid, id), 1500); }
+  }
+  slipView(p, r, handlers, isPending) {
+    const status = r && r.status; const stamp = status === 'replied' ? ['SET ASIDE', 'meh'] : status ? STAMPS[status] : ['', '']; const folded = !!(r && r.folded); const open = !folded;
+    return { ...p, isCmd: !p.isDiff, isDiff: !!p.isDiff, sum: p.sum || '', diff: p.diff || [], tags: (p.tags || []).map((t) => ({ t })), open, folded, hasStamp: !!status, stamp: stamp[0], stampCls: stamp[1],
+      cls: folded ? 'stub' : 'open', actCls: status ? 'settled' : '', ref: isPending ? ((el) => { if (el) this.promptEl = el; }) : (() => {}), ...handlers };
+  }
+  askAnswer(q, d) {
+    const a = (d && d[q.id]) || {}; const other = (a.other || '').trim();
+    if (q.multi) { const names = q.opts.filter((o) => (a.sel || {})[o.id]).map((o) => o.name); if (other) names.push(other); return names.join(', '); }
+    if (a.sel === '__other') return other; const o = q.opts.find((x) => x.id === a.sel); return o ? o.name : '';
+  }
+  askView(sid, p) {
+    const f = this.flowOf(sid); const r = f.res[p.id]; const status = r && r.status; const folded = !!(r && r.folded); const stamp = status ? STAMPS[status] : ['', ''];
+    const all = this.state.askDraft; const d = all[p.id] || {};
+    const put = (qid, v) => this.setState({ askDraft: { ...this.state.askDraft, [p.id]: { ...(this.state.askDraft[p.id] || {}), [qid]: { ...((this.state.askDraft[p.id] || {})[qid] || {}), ...v } } } });
+    const qs = p.qs.map((q) => { const a = d[q.id] || {}; const sel = a.sel; const othOn = q.multi ? !!(a.other || '').trim() : sel === '__other' && !!(a.other || '').trim();
+      return { text: q.text, hint: q.head + ' · ' + (q.multi ? 'pick any' : 'pick one'), group: q.multi ? 'group' : 'radiogroup', role: q.multi ? 'checkbox' : 'radio', boxCls: q.multi ? '' : 'round', othCls: othOn ? 'on' : '',
+        onOther: (e) => { const v = e.target.value; put(q.id, q.multi ? { other: v } : { other: v, sel: v.trim() ? '__other' : (a.sel === '__other' ? null : a.sel) }); },
+        opts: q.opts.map((o) => { const on = q.multi ? !!(sel || {})[o.id] : sel === o.id; return { name: o.name, desc: o.desc, rec: !!o.rec, on, cls: on ? 'on' : '', pick: () => put(q.id, { sel: q.multi ? { ...(sel || {}), [o.id]: !on } : o.id }) }; }) }; });
+    const n = p.qs.filter((q) => !!this.askAnswer(q, d)).length; const ready = n === p.qs.length;
+    const rows = status === 'skipped' ? [{ h: 'Your call', a: 'You left it to the agent' }] : status === 'replied' ? [{ h: 'Your call', a: 'You answered in your own message' }] : p.qs.map((q) => ({ h: q.head, a: this.askAnswer(q, d) }));
+    return { title: p.title, qs, rows, count: n + ' of ' + p.qs.length + ' answered', open: !folded, folded, hasStamp: !!status, stamp: stamp[0], stampCls: stamp[1], cls: folded ? 'stub' : 'open', actCls: status ? 'settled' : '', sendCls: ready ? '' : 'off', notReady: !ready,
+      ref: !status ? ((el) => { if (el) this.promptEl = el; }) : (() => {}),
+      send: () => { if (!ready) return; const answers = {}; p.qs.forEach((q) => { answers[q.id] = this.askAnswer(q, d); }); this.settle(sid, p.id, { status: 'answered', answers }); },
+      skip: () => this.settle(sid, p.id, { status: 'skipped' }) };
+  }
+  flowThread(sid) {
+    const F = FLOWS[sid]; const f = this.flowOf(sid); const out = F.seed.slice();
+    for (let i = 0; i < F.stages.length && i <= f.at; i += 1) {
+      const s = F.stages[i];
+      if (s.tool) { const r = f.res[s.tool.id]; out.push({ view: { isSlip: true, slip: this.slipView(s.tool, r, { allow: () => this.settle(sid, s.tool.id, { status: 'once' }), always: () => this.settle(sid, s.tool.id, { status: 'always' }), deny: () => this.settle(sid, s.tool.id, { status: 'denied' }) }, !r) } }); if (r && r.status === 'replied') break; }
+      if (s.ask) { out.push({ view: { isAsk: true, ask: this.askView(sid, s.ask) } }); const r = f.res[s.ask.id]; if (r && r.status === 'replied') break; }
+      if (s.work) {
+        if (i === f.at && f.working) out.push({ k: 'cap', ...s.work, live: true, time: fmtSec(Date.now() - f.start) });
+        else if (i === f.at && f.stopped) { out.push({ view: { ...this.capView({ ...s.work, time: '0:04', sub: 'Interrupted' }, sid), title: 'Stopped', ok: false } }); out.push({ view: { isReply: true, text: 'Stopped. Nothing else was changed. Tell me how to proceed.' } }); break; }
+        else { out.push({ k: 'cap', ...s.work }); if (s.said) out.push({ k: 'said', text: s.said(f) }); if (s.reply) out.push({ view: { isReply: true, text: s.reply(f.res.a1 && f.res.a1.answers) } }); }
+      }
+    }
+    return out;
+  }
+  msgSlip(m, sid) {
+    if (!m.tool) return { isSlip: false, slip: this.slipView(LIVE_EDIT, null, { allow: () => {}, always: () => {}, deny: () => {} }, false) };
+    return { isSlip: true, slip: this.slipView(LIVE_EDIT, m.tool, { allow: () => this.settleMsg(sid, m.id, 'once'), always: () => this.settleMsg(sid, m.id, 'always'), deny: () => this.settleMsg(sid, m.id, 'denied') }, !m.tool.status) };
+  }
+  msgReply(m, stopped) {
+    if (stopped) return 'Stopped. Nothing was changed. Tell me how to proceed.';
+    const t = m.tool && m.tool.status;
+    if (t === 'denied') return 'I left src/lib/retry.ts as it was. Tell me how you’d like to handle it.';
+    if (t === 'replied') return 'I left that edit alone and picked up your new message instead.';
+    if (t === 'yolo') return 'Done. YOLO approved the edit to src/lib/retry.ts.';
+    if (t) return 'Done. You approved the edit to src/lib/retry.ts, and the retry is in.';
+    if (m.how === 'session') return 'Done. Edits are already allowed in this session, so I didn’t ask again.';
+    return 'Done without asking. YOLO skipped the permission prompt.';
+  }
+  togglePromptYolo() {
+    const st = this.state; const sid = st.sid; if (!sid) { this.setState({ yolo: !st.yolo }); return; }
+    const on = !this.yoloOf(sid); this.setState({ yoloBy: { ...st.yoloBy, [sid]: on } });
+    if (!on) return;
+    const s = this.flowPending(sid); if (s && s.tool) this.settle(sid, s.tool.id, { status: 'yolo' });
+    (st.msgs[sid] || []).forEach((m) => { if (!m.done && m.tool && !m.tool.status) this.settleMsg(sid, m.id, 'yolo'); });
+  }
   send() {
     const el = this.ta;
     if (this.busy() || !el || !el.value.trim()) return;
+    if (this.state.sid) this.replyToPrompt(this.state.sid);
     const text = el.value.trim(); const id = Date.now(); let sid = this.state.sid; const patch = {};
     if (!sid) {
       sid = 'n' + this.state.nextId;
@@ -1066,14 +1326,12 @@ class Component extends DCLogic {
       Object.assign(patch, { sid, tab: 'Chat', nextId: this.state.nextId + 1, newSessions: [{ id: sid, wsId: this.state.newWs, t, role: this.state.newRole, branch: 'main', isNew: true }].concat(this.state.newSessions), openWs: { ...this.state.openWs, [this.state.newWs]: true } });
     }
     el.value = ''; el.style.height = '';
-    this.setState({ ...patch, msgs: { ...this.state.msgs, [sid]: [...(this.state.msgs[sid] || []), { id, text, start: id, done: false }] }, draft: 0, used: { ...this.state.used, [sid]: this.usedOf(sid) + Math.max(40, text.length * TPC) }, fly: true, open: null });
+    const yoloNow = this.yoloOf(this.state.sid ? sid : null); const allowed = !!(this.state.allow[sid] || {}).edit;
+    this.setState({ ...patch, msgs: { ...this.state.msgs, [sid]: [...(this.state.msgs[sid] || []), { id, text, start: id, done: false, how: yoloNow ? 'yolo' : allowed ? 'session' : '' }] }, draft: 0, used: { ...this.state.used, [sid]: this.usedOf(sid) + Math.max(40, text.length * TPC) }, fly: true, open: null });
     clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ fly: false }), 500);
     clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400);
     clearTimeout(this.t3);
-    this.t3 = setTimeout(() => {
-      clearInterval(this.ticker);
-      this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } });
-    }, 2600);
+    const askFirst = !yoloNow && !allowed; this.t3 = setTimeout(() => askFirst ? this.pauseMsg(sid, id) : this.finishMsg(sid, id), askFirst ? 1500 : 2600);
   }
   capView(c, sid) {
     const key = sid + c.id; const open = !!this.state.caps[key]; const live = !!c.live;
@@ -1098,37 +1356,37 @@ class Component extends DCLogic {
     const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
     const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0];
     const busy = this.busy();
-    const cur = st.sid ? this.sess(st.sid) : null;
+    const cur = st.sid ? this.liveSess(this.sess(st.sid)) : null;
     const c = cur || { t: '', role: '', ws: '', branch: '', st: 'idle', attn: 0, isNew: false };
     const sessionBusy = busy || c.st === 'busy';
     const h = new Date().getHours(); const greeting = h < 5 ? 'Still up?' : h < 12 ? 'Good morning.' : h < 18 ? 'Good afternoon.' : 'Good evening.';
     const pickWs = WS.find((w) => w.id === st.newWs) || WS[0];
     const msgs = this.curMsgs().map((m) => {
-      const live = !m.done; const stopped = !!m.stopped;
-      const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.n || 1) : 3);
+      const waiting = !m.done && !!m.tool && !m.tool.status; const live = !m.done && !waiting; const stopped = !!m.stopped;
+      const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (waiting ? 2 : stopped ? (m.n || 1) : 3);
       const open = !!st.caps[m.id];
-      const mArts = st.sid ? this.artsOf(st.sid, c) : []; const mArt = mArts.find((a) => a.id === 'm' + m.id); return { hasChit: !!mArt, chit: mArt ? this.chitView(mArt, st.sid, mArts) : { title: '', meta: '', icon: '', cls: '', open: () => {} }, text: m.text, ...this.foldView(m.text, 'm' + m.id), done: !live, live, ok: !live && !stopped, stopped, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''),
-        time: live ? fmtSec(Date.now() - m.start) : (m.elapsed || '0:03'), title: live ? 'Working' : stopped ? 'Stopped' : 'Done',
-        sub: live ? n + (n === 1 ? ' step' : ' steps') : stopped ? n + ' steps · interrupted' : '3 LLM calls · 3 tool calls',
+      const mArts = st.sid ? this.artsOf(st.sid, c) : []; const mArt = mArts.find((a) => a.id === 'm' + m.id); return { hasChit: !!mArt, chit: mArt ? this.chitView(mArt, st.sid, mArts) : { title: '', meta: '', icon: '', cls: '', open: () => {} }, ...this.msgSlip(m, st.sid), text: m.text, ...this.foldView(m.text, 'm' + m.id), done: !!m.done, live, ok: !!m.done && !stopped && !(m.tool && m.tool.status === 'denied'), stopped, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''),
+        time: live ? fmtSec(Date.now() - m.start) : (m.elapsed || '0:03'), title: waiting ? 'Waiting for you' : live ? 'Working' : stopped ? 'Stopped' : (m.tool && (m.tool.status === 'denied' || m.tool.status === 'replied')) ? 'Set aside' : 'Done',
+        sub: waiting ? '2 steps · paused' : live ? n + (n === 1 ? ' step' : ' steps') : stopped ? n + ' steps · interrupted' : '3 LLM calls · 3 tool calls',
         now: live ? NOW[n - 1] : '',
         dots: LIVE_STEPS.slice(0, n).map((s, i) => ({ cls: s.k + (live && i === n - 1 ? ' run' : '') + (stopped && i === n - 1 ? ' err' : '') })),
         steps: LIVE_STEPS.slice(0, n).map((s, i) => ({ ...s, delay: (30 + i * 45) + 'ms' })),
-        reply: stopped ? 'Stopped. Nothing was changed. Tell me how to proceed.' : st.yolo ? 'Done without asking. YOLO skipped two permission prompts along the way.' : 'Done. One permission prompt is waiting for you above.',
+        reply: this.msgReply(m, stopped),
         toggle: () => this.setState({ caps: { ...st.caps, [m.id]: !open } }) };
     });
     const todoList = st.todos[st.sid] || DEFAULT_TODOS;
     const todos = todoList.map((t, i) => ({ t: t.t, done: t.d, cls: t.d ? 'done' : '', toggle: () => this.setState({ todos: { ...st.todos, [st.sid]: todoList.map((x, j) => j === i ? { ...x, d: !x.d } : x) } }) }));
     return {
-      cls: [st.focus ? 'focus' : '', isMax ? 'max' : '', st.yolo ? 'yolo' : ''].join(' '),
-      nav: NAV.map((n) => ({ ...n, cls: n.id === 'sessions' ? 'on' : '', cur: n.id === 'sessions' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
+      cls: [st.focus ? 'focus' : '', isMax ? 'max' : '', this.yoloOf(st.sid) ? 'yolo' : ''].join(' '),
+      nav: NAV.map((n) => { const b = n.id === 'sessions' ? this.needsTotal() : n.badge; return { ...n, cls: n.id === 'sessions' ? 'on' : '', cur: n.id === 'sessions' ? 'page' : false, hasBadge: !!b, badge: b || '', pick: () => {} }; }),
       activeOnly: st.activeOnly, activeCls: st.activeOnly ? 'on' : '',
       toggleActive: () => this.setState({ activeOnly: !st.activeOnly }),
       workspaces: WS.map((w) => {
         const open = !!st.openWs[w.id];
         const sessions = st.newSessions.filter((n) => n.wsId === w.id).map((n) => this.sess(n.id)).concat(w.sessions).filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
-        return { name: w.name, color: w.color, attn: !!w.attn, count: sessions.length, open, cls: open ? '' : 'closed',
+        return { name: w.name, color: w.color, attn: sessions.some((s) => this.liveSess(s).attn), count: sessions.length, open, cls: open ? '' : 'closed',
           toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
-          sessions: sessions.map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+          sessions: sessions.map((s0) => this.liveSess(s0)).map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
             pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
       }),
@@ -1144,13 +1402,13 @@ class Component extends DCLogic {
       roleOpen: st.open === 'role', toggleRole: () => this.setState({ open: st.open === 'role' ? null : 'role' }), pickRole: st.newRole,
       roleRows: ROLES.map((r) => ({ name: r[0], desc: r[1], sel: r[0] === st.newRole, cls: r[0] === st.newRole ? 'sel' : '', pick: () => this.setState({ newRole: r[0], open: null }) })),
       cur: { t: this.titleOf(st.sid, c.t), role: c.role, ws: c.ws, branch: c.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
-      stCls: sessionBusy ? 'busy' : c.attn ? 'attn' : '', stLabel: sessionBusy ? 'Busy' : c.attn ? 'Needs attention' : 'Idle',
+      stCls: c.attn ? 'needs' : sessionBusy ? 'busy' : '', stLabel: c.attn ? 'Needs you' : sessionBusy ? 'Busy' : 'Idle',
       tabs: TABS.map((t) => ({ label: t, icon: TAB_ICONS[t], cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
       isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab,
-      thread: (c.isNew ? [] : (THREADS[st.sid] || GENERIC)).map((it, i) => it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text, ...this.foldView(it.text, 't' + st.sid + '-' + i) }),
-      isIssue: st.sid === 's3', isGeneric: !c.isNew && !THREADS[st.sid],
+      thread: (c.isNew ? [] : FLOWS[st.sid] ? this.flowThread(st.sid) : (THREADS[st.sid] || GENERIC)).map((it, i) => it.view ? it.view : it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text, ...this.foldView(it.text, 't' + st.sid + '-' + i) }),
+      isIssue: st.sid === 's3', isGeneric: !c.isNew && !THREADS[st.sid] && !FLOWS[st.sid],
       msgs, todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
-      placeholder: isMax ? 'Max effort. Give it the hard one…' : st.yolo ? 'Write to the agent · no permission prompts' : 'Write to the agent…',
+      placeholder: (this.flowPending(st.sid) || {}).ask ? 'Or write your answer…' : this.flowPending(st.sid) || this.curMsgs().some((m) => !m.done && m.tool && !m.tool.status) ? 'Or write what to do instead…' : isMax ? 'Max effort. Give it the hard one…' : this.yoloOf(st.sid) ? 'Write to the agent · no permission prompts' : 'Write to the agent…',
       hint: busy ? '⎋ stop · agent is working' : '↵ send · ⇧↵ newline',
       taRef: (el) => { if (el) this.ta = el; },
       onInput: (e) => { const el = e.currentTarget; this.ta = el; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); },
@@ -1169,7 +1427,7 @@ class Component extends DCLogic {
       gaugeCls, pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
       arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC, draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC, draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
       ctxAria: 'Context window: ' + Math.round(remaining * 100) + ' percent left, ' + kfmt(total - used) + ' of ' + kfmt(total) + ' tokens',
-      yolo: st.yolo, toggleYolo: () => this.setState({ yolo: !st.yolo }),
+      yolo: this.yoloOf(st.sid), toggleYolo: () => this.togglePromptYolo(),
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
       reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, unfolded: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: {}, activeOnly: false, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }

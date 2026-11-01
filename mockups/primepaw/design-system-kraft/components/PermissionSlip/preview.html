@@ -1,0 +1,22 @@
+<!-- @dsCard group="Paper parts" height=430 subtitle="A tool approval on an amber mat, and the stub it folds to" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft · PermissionSlip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-height:100%}
+.wrap{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;padding:24px}
+
+</style>
+</head>
+<body class="kr-root">
+<div class="wrap" style="flex-direction:column;align-items:stretch">
+  <section class="kr-slip"><div class="kr-slip-in"><div class="kr-slip-h"><h4 class="kr-slip-q">May I run this?</h4><span class="kr-slip-k">bash</span></div><code class="kr-slip-cmd">$ pnpm prisma migrate dev --name add_browser_events</code><p class="kr-slip-why">Creates the browser_events table in your local database. Your existing tables stay as they are.</p><p class="kr-slip-tags">writes to your local database &nbsp; runs in packages/db</p><div class="kr-slip-act"><button class="kr-btn is-go">Allow once</button><button class="kr-btn">Allow for this session</button><button class="kr-btn">Deny</button><span class="kr-slip-or">or write what to do instead, below</span></div></div></section>
+  <section class="kr-slip is-stub"><div class="kr-slip-in"><code>pnpm prisma migrate dev --name add_browser_events</code><span class="kr-stamp is-green">APPROVED</span></div></section>
+  <section class="kr-slip is-stub"><div class="kr-slip-in"><code>rm -rf packages/db/migrations</code><span class="kr-stamp is-red">DENIED</span></div></section>
+</div>
+</body>
+</html>
