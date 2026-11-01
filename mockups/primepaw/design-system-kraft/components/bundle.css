@@ -130,7 +130,7 @@
 
 /* ---------- tabs and the leaf ---------- */
 .kr-tabs{display:flex;align-items:flex-end;gap:var(--space-6);padding:0 var(--space-10);position:relative;z-index:2}
-.kr-tab{all:unset;-webkit-appearance:none;appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--space-6);box-sizing:border-box;padding:var(--space-8) var(--space-14) 15px;background-color:var(--kraft);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%);border-radius:var(--radius-7) var(--radius-7) 0 0;font-family:var(--font-sans);font-size:12px;font-weight:700;line-height:1.2;color:var(--ink);transform:translateY(1px);box-shadow:1px 1px 0 var(--kraft-2),3px 3px 4px var(--amb);transition:transform var(--dur-hover) var(--ease)}
+.kr-tab{all:unset;-webkit-appearance:none;appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--space-6);box-sizing:border-box;padding:var(--space-8) var(--space-14) 15px;background-color:var(--kraft);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border-radius:var(--radius-7) var(--radius-7) 0 0;font-family:var(--font-sans);font-size:12px;font-weight:700;line-height:1.2;color:var(--ink);transform:translateY(1px);box-shadow:1px 1px 0 var(--kraft-2),3px 3px 4px var(--amb);transition:transform var(--dur-hover) var(--ease)}
 .kr-tab svg{width:14px;height:14px;display:block}
 .kr-tab:hover{transform:translateY(-1px)}
 .kr-tab.is-on{background-color:var(--card);transform:translateY(1.5px);box-shadow:1px 1px 0 var(--edge),3px 4px 5px var(--amb);border-top:var(--stroke-tab) solid var(--red)}

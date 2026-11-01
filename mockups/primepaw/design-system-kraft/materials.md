@@ -6,7 +6,7 @@ Three materials, each with a fixed recipe. Pick the material by what the part do
 | --- | --- | --- | --- |
 | Holds | the rail and its icon tiles, the sessions board, mats, the composer frame, every button and icon disc | rows, fields, tabs, the chat sheet, the leaf, cards, the workspace strips | badges, pills, chips, dots, the paw, the cat |
 | Face | `board`, `kraft`, `mat-green`, `mat-red` with `face` on top | `sheet`, `sheet-warm`, `card`, `paper`, `highlighter` with `face` on top | one identity colour with `gloss` on top |
-| Texture | `pulp-board` on boards, mats and frames: a flecked, unfluted board. Buttons and discs carry `pulp-paper` over their colour | `pulp-paper` on white paper: the workshop wall, pulp clouds and lit fibers; kraft paper and the composer card plain | none: a sticker is printed |
+| Texture | `pulp-board` on boards, mats and frames: a flecked, unfluted board. Buttons and discs carry `pulp-paper` over their colour | `pulp-paper` on white paper: the workshop wall, pulp clouds and lit fibers; tabs take it over their kraft colour; kraft notes and the composer card plain | none: a sticker is printed |
 | At night | dark brown boards; textures swap to their night tiles; identity colours on buttons mix down to 62% into `desk` (`--dye`) | warm charcoal, the night `pulp-paper` tile | the cut turns parchment |
 | Border | 1px, the edge colour at 60% | 1px black at 7%, or the edge colour at 40% for tall paper | none |
 | Cut edge | `board-2` (or the matching `-2`), 2px right and 3px down | `edge` 1px, `edge-2` 2px for tall paper | `sticker-cut`, 2px (1.5px when small) all round |
