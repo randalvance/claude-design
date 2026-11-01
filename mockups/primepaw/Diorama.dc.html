@@ -14,9 +14,9 @@
 body{margin:0;background:#ece4d3;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
 a{color:#3b5b9a}a:hover{color:#2a4070}
 /* Diorama: one flat sheet of cream paper, with cardboard and paper cut-outs laid on top of it. Light comes from the top left, so every piece casts one soft shadow down and to the right. Cardboard (the rail, the sessions board, the capsule mats, the composer frame) is thick: its cut edge shows as a darker band along the bottom and the right. Paper (the chat sheet, rows, plates, tabs, notes) is thin, with a hairline edge. Every badge is a die-cut sticker with a white border, stuck flat on its surface, so it has a hairline edge and no cast shadow. */
-.page{--desk:#f4eee2;--desk-2:#e4dac6;--paper:#f6f0e4;--paper-2:#efe7d6;--hover:#f1e9d8;--sheet:#fbf7ee;--sheet-warm:#f9f4e8;--card:#fdfaf3;--rail:#c9a86f;--panel:#cfae78;--board:#cfae78;--board-2:#a3844f;--mat-green:#8fb08a;--mat-green-2:#5f8a5e;--mat-red:#cf6a52;--mat-red-2:#9e4530;--deck-1:#ede4d2;--deck-2:#e6dcc8;--line:#d9ccb1;--rule:#dfe5ee;--kraft:#dcc08c;--kraft-2:#b3905a;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--attn:#f0c24a;--blush:#e8a9a2;--max:#c7935a;--max-2:#d9b48a;--kind-think:#4a8f99;--kind-sub:#8b6bb3;--white:#ffffff;--tape:#f1e3a6b8;--stamp-ground:#fffdf8cc;--stamp-ground-soft:#fffdf8aa;--veil:#2a221959;--knob:#ffffff;--glass:#fffdf780;--on-attn:#2a2219;--edge:#cbbc9a;--edge-2:#a89570;--hi:rgba(255,255,255,.6);--amb:rgba(60,40,15,.36);--amb-2:rgba(60,40,15,.22);--stk:#ffffff;--face:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%);--lift-1:0 1px 0 var(--edge),2px 3px 3px var(--amb);--lift-2:1px 1px 0 var(--edge),3px 5px 6px var(--amb);--lift-3:1px 2px 0 var(--edge-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2);--sticker:0 0 0 2px var(--stk),0 0 0 2.6px rgba(0,0,0,.16);--sticker-s:0 0 0 1.5px var(--stk),0 0 0 2px rgba(0,0,0,.16);--recess:inset 1px 1px 3px rgba(0,0,0,.14);--gloss:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 55%);--ease:cubic-bezier(.2,.7,.2,1);--ease-pop:cubic-bezier(.34,1.5,.64,1);--ease-io:cubic-bezier(.45,0,.55,1);--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;--paper2:var(--paper-2);--kraft2:var(--kraft-2);--mono:var(--font-mono);--hand:var(--font-hand);--serif:var(--font-serif);min-height:100vh;box-sizing:border-box;padding:3px;display:flex;justify-content:center;position:relative;background:radial-gradient(140% 120% at 40% 30%,var(--desk),var(--desk-2));color:var(--ink)}
+.page{--desk:#f4eee2;--desk-2:#e4dac6;--paper:#f6f0e4;--paper-2:#efe7d6;--hover:#f1e9d8;--sheet:#fbf7ee;--sheet-warm:#f9f4e8;--card:#fdfaf3;--rail:#c9a86f;--panel:#cfae78;--board:#cfae78;--board-2:#a3844f;--mat-green:#8fb08a;--mat-green-2:#5f8a5e;--mat-red:#cf6a52;--mat-red-2:#9e4530;--mat-red-3:#6b2a1c;--flute:rgba(0,0,0,.028);--lift-board-sm:2px 3px 0 var(--board-2),4px 6px 7px var(--amb);--lift-board-up:3px 4px 0 var(--board-2),6px 9px 10px var(--amb);--press-board:0 0 0 var(--board-2),1px 1px 2px var(--amb);--deck-1:#ede4d2;--deck-2:#e6dcc8;--line:#d9ccb1;--rule:#dfe5ee;--kraft:#dcc08c;--kraft-2:#b3905a;--shadow:#cdbf9f;--ink:#2a2219;--mute:#6f6252;--faint:#9a8c74;--bar:#b9a98a;--red:#c8553d;--red-2:#8f3a2a;--blue:#3b5b9a;--blue-2:#2a4070;--green:#5b8c5a;--amber:#b8792f;--highlighter:#fff0a0;--highlighter-2:#d9b84a;--attn:#f0c24a;--blush:#e8a9a2;--max:#c7935a;--max-2:#d9b48a;--kind-think:#4a8f99;--kind-sub:#8b6bb3;--white:#ffffff;--tape:#f1e3a6b8;--stamp-ground:#fffdf8cc;--stamp-ground-soft:#fffdf8aa;--veil:#2a221959;--knob:#ffffff;--glass:#fffdf780;--on-attn:#2a2219;--edge:#cbbc9a;--edge-2:#a89570;--hi:rgba(255,255,255,.6);--amb:rgba(60,40,15,.36);--amb-2:rgba(60,40,15,.22);--stk:#ffffff;--face:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%);--lift-1:0 1px 0 var(--edge),2px 3px 3px var(--amb);--lift-2:1px 1px 0 var(--edge),3px 5px 6px var(--amb);--lift-3:1px 2px 0 var(--edge-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2);--sticker:0 0 0 2px var(--stk),0 0 0 2.6px rgba(0,0,0,.16);--sticker-s:0 0 0 1.5px var(--stk),0 0 0 2px rgba(0,0,0,.16);--recess:inset 1px 1px 3px rgba(0,0,0,.14);--gloss:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 55%);--ease:cubic-bezier(.2,.7,.2,1);--ease-pop:cubic-bezier(.34,1.5,.64,1);--ease-io:cubic-bezier(.45,0,.55,1);--font-serif:"Fraunces",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--font-hand:"Caveat",cursive;--font-mono:"Courier New",Courier,ui-monospace,monospace;--paper2:var(--paper-2);--kraft2:var(--kraft-2);--mono:var(--font-mono);--hand:var(--font-hand);--serif:var(--font-serif);min-height:100vh;box-sizing:border-box;padding:3px;display:flex;justify-content:center;position:relative;background:radial-gradient(140% 120% at 40% 30%,var(--desk),var(--desk-2));color:var(--ink)}
 /* Night: the same desk after dark. Paper edges go near-black, the sticker borders turn to cream so they still read as cut vinyl. */
-.page.night{--desk:#1c1712;--desk-2:#100d09;--paper:#211c16;--paper-2:#2b251e;--hover:#3f362a;--sheet:#2d2720;--sheet-warm:#29231c;--card:#302a22;--rail:#3a2d1b;--panel:#4a3a24;--board:#4a3a24;--board-2:#1f170c;--mat-green:#3f5c3e;--mat-green-2:#1f3320;--mat-red:#8a3f2d;--mat-red-2:#4f2217;--deck-1:#27221b;--deck-2:#221d17;--line:#4a4034;--rule:#3b4350;--kraft:#6f5530;--kraft-2:#4e3a1f;--shadow:#0c0a07;--ink:#efe6d3;--mute:#b4a68e;--faint:#857863;--bar:#5e5343;--red:#d9654c;--red-2:#a8432e;--blue:#7d9bd8;--blue-2:#3d5a94;--green:#78a876;--amber:#d6964a;--highlighter:#5c4f14;--highlighter-2:#a88f2e;--attn:#e3b53a;--blush:#7a3d36;--max:#8c6436;--max-2:#5f4425;--kind-think:#5fa9b3;--kind-sub:#a58ad0;--white:#ffffff;--tape:#ffec9640;--stamp-ground:#211c16cc;--stamp-ground-soft:#211c168c;--veil:#000000a6;--knob:#efe6d3;--glass:var(--sheet)14;--on-attn:#2a2219;--edge:#0f0b07;--edge-2:#070503;--hi:rgba(255,255,255,.06);--amb:rgba(0,0,0,.62);--amb-2:rgba(0,0,0,.42);--stk:#d9cfb8;--face:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);--recess:inset 1px 1px 3px rgba(0,0,0,.45);--gloss:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 55%);color-scheme:dark}
+.page.night{--desk:#1c1712;--desk-2:#100d09;--paper:#211c16;--paper-2:#2b251e;--hover:#3f362a;--sheet:#2d2720;--sheet-warm:#29231c;--card:#302a22;--rail:#3a2d1b;--panel:#4a3a24;--board:#4a3a24;--board-2:#1f170c;--mat-green:#3f5c3e;--mat-green-2:#1f3320;--mat-red:#8a3f2d;--mat-red-2:#4f2217;--mat-red-3:#2a110a;--flute:rgba(0,0,0,.06);--deck-1:#27221b;--deck-2:#221d17;--line:#4a4034;--rule:#3b4350;--kraft:#6f5530;--kraft-2:#4e3a1f;--shadow:#0c0a07;--ink:#efe6d3;--mute:#b4a68e;--faint:#857863;--bar:#5e5343;--red:#d9654c;--red-2:#a8432e;--blue:#7d9bd8;--blue-2:#3d5a94;--green:#78a876;--amber:#d6964a;--highlighter:#5c4f14;--highlighter-2:#a88f2e;--attn:#e3b53a;--blush:#7a3d36;--max:#8c6436;--max-2:#5f4425;--kind-think:#5fa9b3;--kind-sub:#a58ad0;--white:#ffffff;--tape:#ffec9640;--stamp-ground:#211c16cc;--stamp-ground-soft:#211c168c;--veil:#000000a6;--knob:#efe6d3;--glass:var(--sheet)14;--on-attn:#2a2219;--edge:#0f0b07;--edge-2:#070503;--hi:rgba(255,255,255,.06);--amb:rgba(0,0,0,.62);--amb-2:rgba(0,0,0,.42);--stk:#d9cfb8;--face:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);--recess:inset 1px 1px 3px rgba(0,0,0,.45);--gloss:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 55%);color-scheme:dark}
 .page.night::after{background:#000;mix-blend-mode:screen;opacity:.14}
 
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -194,11 +194,11 @@ button{font:inherit}
 .adv .lbl{color:var(--ink);font-weight:600}
 .adv .sum{flex:1;min-width:0;text-align:right}
 .adv .sum b{font-weight:600;color:var(--ink)}
-.sw{all:unset;cursor:pointer;position:relative;width:36px;height:20px;border:1.5px solid var(--ink);background:var(--sheet);box-sizing:border-box;flex:none;box-shadow:1px 1px 0 var(--ink),3px 4px 4px var(--amb);transition:background .15s var(--ease)}
-.sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--ink);transition:transform .15s var(--ease),background .15s var(--ease)}
-.sw[aria-checked="true"]{background:var(--green)}
-.sw[aria-checked="true"]::after{transform:translateX(17px);background:var(--knob)}
-.sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sw{all:unset;cursor:pointer;position:relative;width:44px;height:24px;box-sizing:border-box;flex:none;border-radius:999px;background:var(--paper-2);border:1px solid rgba(0,0,0,.08);box-shadow:var(--recess);transition:background .15s var(--ease)}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background-color:var(--kraft-2);background-image:var(--gloss);box-shadow:var(--sticker-s);transition:transform .15s var(--ease),background-color .15s var(--ease)}
+.sw[aria-checked="true"]{background:var(--highlighter)}
+.sw[aria-checked="true"]::after{transform:translateX(20px);background-color:var(--blue)}
+.sw:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .mbtn .wsd{width:9px;height:9px}
 .orl{font-family:var(--hand);font-size:17px;color:var(--faint);text-align:center;margin-top:10px}
 .foot-in{max-width:980px;position:relative;padding:9px 9px 12px}
@@ -231,11 +231,11 @@ button{font:inherit}
 .needle{stroke:var(--ink);stroke-width:2;stroke-linecap:round;transform-origin:20px 20px;transition:transform .45s var(--ease)}
 .hub{fill:var(--ink)}
 .g text{font-family:var(--hand);font-size:9px;fill:var(--mute)}
-.stampbtn{all:unset;cursor:pointer;position:relative;padding:4px 10px;border:1.5px dashed var(--bar);border-radius:3px;font-weight:800;font-size:11.5px;letter-spacing:.1em;color:var(--mute);min-width:40px;text-align:center;transition:transform .15s var(--ease)}
-.stampbtn:hover{transform:translateY(-1px)}
-.stampbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-.stampbtn[aria-checked="true"]{border-color:transparent;color:transparent}
-.stamp{position:absolute;inset:-7px -10px;border-radius:6px;background:var(--red);background-image:var(--gloss);color:var(--white);font-weight:900;font-size:14px;letter-spacing:.1em;display:grid;place-items:center;transform:rotate(-8deg);box-shadow:var(--sticker);animation:stamp .26s var(--ease-pop) both}
+.stampbtn{all:unset;cursor:pointer;position:relative;display:inline-grid;place-items:center;box-sizing:border-box;height:26px;padding:0 10px;min-width:40px;background-color:var(--board);background-image:var(--face),repeating-linear-gradient(0deg,var(--flute) 0 1px,transparent 1px 3px);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:4px;box-shadow:var(--lift-board-sm);font-weight:800;font-size:11.5px;letter-spacing:.1em;color:var(--ink);text-align:center;transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
+.stampbtn:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
+.stampbtn:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.stampbtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.stampbtn[aria-checked="true"]{transform:translate(2px,3px);background-color:var(--mat-red-2);color:var(--white);border-color:var(--mat-red-3);box-shadow:0 0 0 var(--mat-red-3),1px 1px 2px var(--amb)}
 .dirtag{display:inline-flex;align-items:center;gap:6px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
 .hint{margin-left:auto;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
 .send{all:unset;position:relative;cursor:pointer;width:42px;height:42px;border-radius:50%;background:var(--sheet);background-image:var(--gloss);color:var(--kraft-2);display:grid;place-items:center;box-shadow:var(--sticker);transition:transform .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease);flex:none}
@@ -257,16 +257,18 @@ button{font:inherit}
 .mrow:hover{background:var(--hover)}
 .mrow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
 .mrow .mdesc{margin-left:auto;font-weight:400;font-size:12px;color:var(--mute)}
-.mrow .box{width:16px;height:16px}
-.mrow .box svg{opacity:0}
+.mrow .box{width:16px;height:16px;border:2px solid var(--bar);border-radius:2px;background:var(--sheet);color:var(--white);transition:transform .26s var(--ease-pop)}
+.mrow .box svg{opacity:0;width:11px;height:11px}
+.mrow.sel .box{border-color:transparent;background-color:var(--green);background-image:var(--gloss);box-shadow:var(--sticker-s);transform:rotate(-4deg)}
 .mrow.sel .box svg{opacity:1;animation:stamp .21s var(--ease-pop) both}
 .efs{display:flex;gap:6px;margin:4px 2px 0}
-.ef{all:unset;cursor:pointer;position:relative;flex:1;height:30px;border:2px solid var(--ink);border-radius:3px;display:grid;place-items:center;font-size:10.5px;font-weight:800;letter-spacing:.04em;background:var(--sheet);box-shadow:1px 1px 0 var(--ink),3px 4px 4px var(--amb);transition:transform .12s var(--ease)}
-.ef:hover{transform:translateY(-1px)}
-.ef:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.ef.on{background:var(--ink);color:var(--paper)}
+.ef{all:unset;cursor:pointer;position:relative;flex:1;height:28px;box-sizing:border-box;display:grid;place-items:center;font-size:10.5px;font-weight:800;letter-spacing:.04em;color:var(--ink);background-color:var(--board);background-image:var(--face),repeating-linear-gradient(0deg,var(--flute) 0 1px,transparent 1px 3px);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:4px;box-shadow:var(--lift-board-sm);transition:transform .12s var(--ease),box-shadow .12s var(--ease),background-color .12s var(--ease)}
+.ef:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
+.ef:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.ef:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.ef.on{transform:translate(2px,3px);box-shadow:var(--press-board);background-color:color-mix(in srgb,var(--board) 82%,var(--board-2))}
 .ef.def::after{content:"";position:absolute;left:50%;bottom:-8px;width:4px;height:4px;border-radius:50%;background:var(--mute);transform:translateX(-50%)}
-.ef.maxon{background:var(--red);border-color:var(--red)}
+.ef.maxon{background-color:var(--mat-red-2);color:var(--white);border-color:var(--mat-red-3);box-shadow:0 0 0 var(--mat-red-3),1px 1px 2px var(--amb)}
 .adapt{display:flex;gap:8px;align-items:flex-start;margin:14px 2px 0;font-size:12px;line-height:1.45;color:var(--mute)}
 .lnk{all:unset;cursor:pointer;font-family:var(--hand);font-size:16px;color:var(--blue);white-space:nowrap}
 .lnk:hover{text-decoration:underline}
@@ -381,7 +383,7 @@ button{font:inherit}
                 <div class="pop" role="dialog" aria-label="Model and effort">
                   <div class="pop-h"><span>Model</span></div>
                   <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
-                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
                   </sc-for>
                   <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
                   <div class="efs" role="group" aria-label="Effort level">
@@ -401,7 +403,7 @@ button{font:inherit}
                 <div class="pop" role="dialog" aria-label="Workspace">
                   <div class="pop-h"><span>Workspace</span><span class="mode">its folders get mounted</span></div>
                   <sc-for list="{{wsRows}}" as="w" hint-placeholder-count="4">
-                    <button class="mrow {{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><i class="wsd" style="background: {{w.color}}" aria-hidden="true"></i><span>{{w.name}}</span><span class="mdesc">{{w.n}}</span></button>
+                    <button class="mrow {{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><i class="wsd" style="background: {{w.color}}" aria-hidden="true"></i><span>{{w.name}}</span><span class="mdesc">{{w.n}}</span></button>
                   </sc-for>
                 </div>
               </sc-if>
@@ -413,7 +415,7 @@ button{font:inherit}
                 <div class="pop" role="dialog" aria-label="Agent">
                   <div class="pop-h"><span>Agent</span><span class="mode">who runs the session</span></div>
                   <sc-for list="{{roleRows}}" as="r" hint-placeholder-count="5">
-                    <button class="mrow {{r.cls}}" onClick="{{r.pick}}" aria-pressed="{{r.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{r.name}}</span><span class="mdesc">{{r.desc}}</span></button>
+                    <button class="mrow {{r.cls}}" onClick="{{r.pick}}" aria-pressed="{{r.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{r.name}}</span><span class="mdesc">{{r.desc}}</span></button>
                   </sc-for>
                 </div>
               </sc-if>
@@ -421,7 +423,6 @@ button{font:inherit}
 
             <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
               YOLO
-              <sc-if value="{{yolo}}" hint-placeholder-val="{{true}}"><span class="stamp" aria-hidden="true">YOLO</span></sc-if>
             </button>
                 </div>
               </sc-if>
@@ -568,7 +569,7 @@ button{font:inherit}
                 <div class="pop" role="dialog" aria-label="Model and effort">
                   <div class="pop-h"><span>Model</span></div>
                   <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
-                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#c8553d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
                   </sc-for>
                   <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
                   <div class="efs" role="group" aria-label="Effort level">
@@ -596,7 +597,6 @@ button{font:inherit}
 
             <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
               YOLO
-              <sc-if value="{{yolo}}" hint-placeholder-val="{{true}}"><span class="stamp" aria-hidden="true">YOLO</span></sc-if>
             </button>
 
             <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{cur.ws}}</span>
