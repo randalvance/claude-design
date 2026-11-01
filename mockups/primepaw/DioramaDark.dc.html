@@ -124,12 +124,15 @@ button{font:inherit}
 .ttlb{cursor:text}
 .ttlb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .ttli{all:unset;box-sizing:border-box;width:min(520px,42vw);min-width:0;padding:0 2px 3px 0;font-family:var(--hand);font-size:38px;font-weight:600;line-height:1.05;color:var(--ink);border-bottom:2px dashed var(--ink)}
-.aigen{all:unset;cursor:pointer;position:relative;flex:none;box-sizing:border-box;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));box-shadow:var(--lift-board-sm);color:var(--ink);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
-.aigen svg{width:15px;height:15px}
-.aigen:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
-.aigen:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
-.aigen:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-.aigen.busy{cursor:progress;transform:translate(2px,3px);box-shadow:var(--press-board)}
+.aigen{all:unset;cursor:pointer;position:relative;flex:none;box-sizing:border-box;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;color:var(--ink);transition:background .12s var(--ease)}
+.aigen svg{width:22px;height:22px;overflow:visible}
+.aigen .drawn{transform:rotate(-4deg);mix-blend-mode:multiply;transition:transform .15s var(--ease)}
+.aigen .drawn .again{stroke-width:1;opacity:.55}
+.page.night .aigen .drawn{mix-blend-mode:screen}
+.aigen:hover{background-color:var(--hover);background-image:var(--face),var(--pulp)}
+.aigen:hover .drawn{transform:rotate(4deg)}
+.aigen:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.aigen.busy{cursor:progress}
 .tagb{position:relative;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px 0 16px;background-color:var(--kraft);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:700;clip-path:polygon(0 50%,9px 0,100% 0,100% 100%,9px 100%);white-space:nowrap;background-image:var(--face),var(--pulp)}
 .tagb::before{content:"";position:absolute;left:6px;top:50%;width:5px;height:5px;border-radius:50%;background-color:var(--paper);transform:translateY(-50%);box-shadow:inset 0 1px 1px rgba(0,0,0,.3)}
 .tagw{filter:drop-shadow(1px 1px 0 var(--kraft2)) drop-shadow(3px 4px 4px var(--amb-2))}
@@ -495,7 +498,7 @@ button{font:inherit}
   <sc-if value="{{hasSession}}" hint-placeholder-val="{{false}}">
   <header class="top">
     <div class="ttl">
-      <sc-if value="{{titleEditing}}" hint-placeholder-val="{{false}}"><input class="ttli" aria-label="Session title" ref="{{titleRef}}" onKeyDown="{{titleKey}}" onBlur="{{titleCommit}}"></sc-if><sc-if value="{{titleShown}}" hint-placeholder-val="{{true}}"><h1><span class="ttlb" role="button" tabindex="0" onClick="{{titleEdit}}" onKeyDown="{{titleOpenKey}}" title="Click to rename">{{cur.t}}</span></h1></sc-if><button class="aigen {{titleCls}}" onClick="{{titleGen}}" aria-label="{{titleGenLabel}}" title="{{titleGenLabel}}" aria-busy="{{titleBusy}}"><sc-if value="{{titleBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{titleIdle}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"></path></svg></sc-if></button>
+      <sc-if value="{{titleEditing}}" hint-placeholder-val="{{false}}"><input class="ttli" aria-label="Session title" ref="{{titleRef}}" onKeyDown="{{titleKey}}" onBlur="{{titleCommit}}"></sc-if><sc-if value="{{titleShown}}" hint-placeholder-val="{{true}}"><h1><span class="ttlb" role="button" tabindex="0" onClick="{{titleEdit}}" onKeyDown="{{titleOpenKey}}" title="Click to rename">{{cur.t}}</span></h1></sc-if><button class="aigen {{titleCls}}" onClick="{{titleGen}}" aria-label="{{titleGenLabel}}" title="{{titleGenLabel}}" aria-busy="{{titleBusy}}"><sc-if value="{{titleBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{titleIdle}}" hint-placeholder-val="{{true}}"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2.6c.3 3.8 1.9 6 6.6 7.1"></path><path d="M17.9 9.4c-4.7 1.2-6.4 3.4-7 7.9"></path><path d="M11 17.9c-.5-4.5-2.4-6.8-7.3-7.9"></path><path d="M3.4 10.3c4.9-1 6.9-3.2 7.8-7.9"></path><path d="M18.8 14.4c.1 1.9-.1 4.2.1 6.3"></path><path d="M16 17.6c1.9-.2 3.9.1 5.7-.1"></path><path d="M18.6 3.4l.5 2.5"></path><path d="M21.5 5.2l-2 1"></path><path class="again" d="M8.2 11.3l2.9-2.9"></path><path class="again" d="M9 13.2l3.6-3.6"></path><path class="again" d="M10.4 14.3l2.4-2.4"></path></svg></sc-if></button>
       <span class="tagw"><span class="tagb">{{cur.branch}}</span></span>
     </div>
     <div class="meta"><span>{{cur.role}} · {{cur.ws}}</span><span class="sticker {{stCls}}"><i aria-hidden="true"></i>{{stLabel}}</span></div>
