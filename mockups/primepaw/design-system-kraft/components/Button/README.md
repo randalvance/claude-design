@@ -15,5 +15,5 @@ States
 - Press travels it 2px right and 3px down until the edge is gone (`press-board`), then it springs back on `ease`.
 - Focus is a 2px `ink` pencil ring 3px off the cardboard.
 - Disabled is printed grey: `paper-2`, `faint` ink, no edge, no shadow. A disabled button is not cardboard any more.
-- Busy keeps the label and puts a `kr-pin` pinwheel sticker where the icon was; set `aria-busy`. Nothing pulses.
+- Busy keeps the label and puts a `kr-pin` paper pinwheel where the icon was (four coloured blades on an ink pin, turning); set `aria-busy`. Nothing pulses.
 - Nothing tilts and nothing scales: a button is a piece of cardboard, so it only travels.
