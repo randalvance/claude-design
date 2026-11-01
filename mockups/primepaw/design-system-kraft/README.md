@@ -14,8 +14,6 @@ Kraft is the material language of the Primepaw diorama: one cream sheet of `desk
 
 See the Materials section for the recipe of each. In short: cardboard is `board` on `board-2` with `flute` hairlines and `lift-board`; paper is `sheet` (or `card`, `sheet-warm`, `kraft`, `highlighter`) on `edge` with a `lift-paper-*` shadow; a sticker is a solid identity colour with `gloss`, a `sticker` cut and no shadow.
 
-Paper and cardboard are pulped, after the paper walls of the Factory Overseer workshop: soft pulp clouds and short light and dark fibers on a seamless 200px tile (`--pulp-paper` and the coarser `--pulp-board` in bundle.css, drawn from the Texture tokens) sit under the `face` gradient of every sheet, row, tab, leaf, board and button, with a night variant that keeps the fibers from glaring on dark paper. Stickers are printed: no pulp, ever.
-
 Every button is cardboard: `kr-btn` in `board` with a `board-2` edge and `lift-board-sm`, `kr-green` (`mat-green`) for the one committing action on a sheet, `kr-red` (`mat-red-2` on `mat-red-3`) for a destructive one, `is-on` pressed flat for a latched filter or mode. Paper and stickers are never buttons; the rail's navigation stickers are marks, not actions.
 
 ## Colour
@@ -57,8 +55,6 @@ Labels are sentence case, verb first: "New session", "Run on main", "Open folder
 
 Hover: a button lifts 1px up and left so its edge grows (`lift-board-up`); a row lifts 1px to `lift-paper-2`; a rail sticker tilts `tilt-hover` and grows 6%. Press: a button travels 2px right and 3px down until its edge is gone (`press-board`) and springs back; a row sits down 1px (`press-paper`); a rail sticker scales to 94%. Selected: a button stays pressed (`is-on`); a rail sticker takes `sticker-on` and `tilt-sticker-on`; a row turns `highlighter`. Everything on `ease` at `dur-hover`; stickers land on `ease-pop` at `dur-land`. Under `prefers-reduced-motion` durations go to 0.01ms.
 
-## Grain and pulp
+## Grain
 
 Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so cardboard, paper and sticker share one surface. Never grain a single piece.
-
-Pulp is the other way round: it belongs to the piece, not the page. Every paper and cardboard face carries its own pulp tile under its `face` gradient, the clouds about `pulp-cell` across and the fibers `fiber-length` long, at the strengths in the Texture tokens. Keep the clouds under a fifth and the fibers a pixel wide, so words stay legible and the texture reads as the material rather than a print on it.
