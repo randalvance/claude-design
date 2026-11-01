@@ -151,11 +151,231 @@
       "is_interactive": true
     },
     "DioramaDark.dc.html": {
+      "x": 1540,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "App shell — paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaAgents.dc.html": {
       "x": 0,
       "y": 1000,
       "w": 1440,
       "h": 900,
-      "title": "App shell — paper diorama, dark mode, live demo",
+      "title": "Agents, list page, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaAgentsDark.dc.html": {
+      "x": 1540,
+      "y": 1000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agents, list page, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaAgent.dc.html": {
+      "x": 0,
+      "y": 2000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agent, edit page, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaAgentDark.dc.html": {
+      "x": 1540,
+      "y": 2000,
+      "w": 1440,
+      "h": 900,
+      "title": "Agent, edit page, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSkills.dc.html": {
+      "x": 0,
+      "y": 3000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skills, list page, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSkillsDark.dc.html": {
+      "x": 1540,
+      "y": 3000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skills, list page, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSkill.dc.html": {
+      "x": 0,
+      "y": 4000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skill, edit page, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSkillDark.dc.html": {
+      "x": 1540,
+      "y": 4000,
+      "w": 1440,
+      "h": 900,
+      "title": "Skill, edit page, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspaces.dc.html": {
+      "x": 0,
+      "y": 5000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspaces, list page, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesDark.dc.html": {
+      "x": 1540,
+      "y": 5000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspaces, list page, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspace.dc.html": {
+      "x": 0,
+      "y": 6000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspace, edit page, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspaceDark.dc.html": {
+      "x": 1540,
+      "y": 6000,
+      "w": 1440,
+      "h": 900,
+      "title": "Workspace, edit page, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaMemory.dc.html": {
+      "x": 0,
+      "y": 7000,
+      "w": 1440,
+      "h": 900,
+      "title": "Memory, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaMemoryDark.dc.html": {
+      "x": 1540,
+      "y": 7000,
+      "w": 1440,
+      "h": 900,
+      "title": "Memory, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaMCPs.dc.html": {
+      "x": 0,
+      "y": 8000,
+      "w": 1440,
+      "h": 900,
+      "title": "MCP servers, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaMCPsDark.dc.html": {
+      "x": 1540,
+      "y": 8000,
+      "w": 1440,
+      "h": 900,
+      "title": "MCP servers, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaKanban.dc.html": {
+      "x": 0,
+      "y": 9000,
+      "w": 1440,
+      "h": 900,
+      "title": "Kanban, boards, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaKanbanDark.dc.html": {
+      "x": 1540,
+      "y": 9000,
+      "w": 1440,
+      "h": 900,
+      "title": "Kanban, boards, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaBoard.dc.html": {
+      "x": 0,
+      "y": 10000,
+      "w": 1440,
+      "h": 900,
+      "title": "Kanban, one board, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaBoardDark.dc.html": {
+      "x": 1540,
+      "y": 10000,
+      "w": 1440,
+      "h": 900,
+      "title": "Kanban, one board, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaBackground.dc.html": {
+      "x": 0,
+      "y": 11000,
+      "w": 1440,
+      "h": 900,
+      "title": "Background jobs, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaBackgroundDark.dc.html": {
+      "x": 1540,
+      "y": 11000,
+      "w": 1440,
+      "h": 900,
+      "title": "Background jobs, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -175,7 +395,29 @@
     "Skill.dc.html",
     "MCPs.dc.html",
     "Diorama.dc.html",
-    "DioramaDark.dc.html"
+    "DioramaDark.dc.html",
+    "DioramaAgents.dc.html",
+    "DioramaAgentsDark.dc.html",
+    "DioramaAgent.dc.html",
+    "DioramaAgentDark.dc.html",
+    "DioramaSkills.dc.html",
+    "DioramaSkillsDark.dc.html",
+    "DioramaSkill.dc.html",
+    "DioramaSkillDark.dc.html",
+    "DioramaWorkspaces.dc.html",
+    "DioramaWorkspacesDark.dc.html",
+    "DioramaWorkspace.dc.html",
+    "DioramaWorkspaceDark.dc.html",
+    "DioramaMemory.dc.html",
+    "DioramaMemoryDark.dc.html",
+    "DioramaMCPs.dc.html",
+    "DioramaMCPsDark.dc.html",
+    "DioramaKanban.dc.html",
+    "DioramaKanbanDark.dc.html",
+    "DioramaBoard.dc.html",
+    "DioramaBoardDark.dc.html",
+    "DioramaBackground.dc.html",
+    "DioramaBackgroundDark.dc.html"
   ],
   "notes": {
     "p1": {
@@ -283,18 +525,25 @@
       "page": "paper"
     },
     "p14": {
-      "x": 1520,
+      "x": 3080,
       "y": 0,
       "w": 320,
       "page": "diorama",
       "text": "Paper diorama: the same shell as the Paper page, rebuilt as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the cat peeking over the composer are stickers too. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a slot with a sticker knob, and YOLO, the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for YOLO and Max, a green sticker check on a picked row. The white paper (the chat sheet, the leaf, the rows and fields) carries the paper texture of the Factory Overseer workshop walls with its colour kept; cardboard is a flecked board; the workspace headers are paper strips in their workspace’s colour with the rows’ texture, their count and caret written in pen ink, and the first session tucks under its header; the prompt box stays plain. The rail icons, the Select button and every other button are cut-outs in their own colours carrying the same paper texture as the chat sheet and the session rows, not stickers. Sessions under a header stack like a deck of cards, and a working session carries a paper pinwheel: four coloured blades with folded tips on an ink pin, turning. Same live demo, same Night toggle."
     },
     "p15": {
-      "x": 1520,
-      "y": 1000,
+      "x": 3080,
+      "y": 520,
       "w": 320,
       "page": "diorama",
       "text": "Dark mode: the same diorama after dark, opening in the night theme (the rail button flips it back to day). Boards go dark brown, paper warm charcoal, and every texture switches to its night tile. Identity colours on buttons are mixed down into the desk so white glyphs stay readable."
+    },
+    "p16": {
+      "x": 3080,
+      "y": 1000,
+      "w": 320,
+      "page": "diorama",
+      "text": "The other screens, light on the left and dark on the right. Each keeps the template and live demo of its Paper page and is rebuilt on the same materials: a cardboard rail with coloured thick-card tiles, one paper sheet for the content, paper pieces with the wall texture, thick-card buttons, sticker pills and rubber stamps inked on the paper."
     }
   },
   "designSystems": [
