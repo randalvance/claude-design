@@ -150,7 +150,7 @@ button{font:inherit}
 .open .step{animation:slide .3s steps(4) both}
 .step .k{font-weight:800;min-width:60px}
 .step code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
-.step .tm{font-family:var(--hand);font-size:15px;color:var(--mute)}
+.step .tm{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
 
 .ledger{max-width:760px;background:#fffdf7;border:1px solid var(--line);box-shadow:3px 4px 0 var(--shadow);padding:6px 16px}
 .ledger h3{margin:8px 0 6px;font-family:var(--hand);font-weight:600;font-size:20px;color:var(--mute)}
@@ -620,28 +620,28 @@ const NAV = [
 const ROLES = [['Orchestrator', 'plans, delegates, reports back'], ['Implementer', 'writes the code itself'], ['Curator', 'reads, summarises, drafts'], ['Reviewer', 'reads diffs, leaves comments'], ['Triage', 'sorts and labels']];
 const WS = [
   { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', sessions: [
-    { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22m 21s', role: 'Orchestrator', branch: 'feat/curator-digest' },
-    { id: 's2', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4m 55s', role: 'Implementer', branch: 'feat/LH-281' },
+    { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22:21', role: 'Orchestrator', branch: 'feat/curator-digest' },
+    { id: 's2', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4:55', role: 'Implementer', branch: 'feat/LH-281' },
     { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
   { id: 'orbit', name: 'Orbit Billing', color: '#d06a8c', attn: true, sessions: [
     { id: 's4', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
     { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/ORB-272-telemetry' },
-    { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1m 40s', jira: true, role: 'Implementer', branch: 'main' },
-    { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2m 50s', role: 'Implementer', branch: 'main' },
-    { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1m 02s', role: 'Implementer', branch: 'main' },
-    { id: 's9', t: 'Move worker pool to private subnets', st: 'done', dur: '34s', role: 'Orchestrator', branch: 'feat/private-workers' },
+    { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1:40', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2:50', role: 'Implementer', branch: 'main' },
+    { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1:02', role: 'Implementer', branch: 'main' },
+    { id: 's9', t: 'Move worker pool to private subnets', st: 'done', dur: '0:34', role: 'Orchestrator', branch: 'feat/private-workers' },
     { id: 's10', t: 'Fill in access-request roles', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
-    { id: 's11', t: 'Onboarding form autofill', st: 'idle', dur: '45m 40s', jira: true, role: 'Implementer', branch: 'main' },
-    { id: 's12', t: 'Cross-tenant access audit', st: 'idle', dur: '46m 18s', role: 'Orchestrator', branch: 'fix/ORB-266' },
+    { id: 's11', t: 'Onboarding form autofill', st: 'idle', dur: '45:40', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's12', t: 'Cross-tenant access audit', st: 'idle', dur: '46:18', role: 'Orchestrator', branch: 'fix/ORB-266' },
     { id: 's13', t: 'Find recent ORB-prefixed pull requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
     { id: 's14', t: 'Guardrails check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
     { id: 's15', t: 'Is stale PR ORB-205 still relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
     { id: 's16', t: 'Support answers draft', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
   { id: 'fleet', name: 'Fleet Infra Deploy', color: '#c8884a', sessions: [
-    { id: 's17', t: 'Update image digest', st: 'idle', dur: '29m 03s', role: 'Implementer', branch: 'main' },
-    { id: 's18', t: 'Find and move preprod images', st: 'busy', dur: '31m 15s', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
+    { id: 's17', t: 'Update image digest', st: 'idle', dur: '29:03', role: 'Implementer', branch: 'main' },
+    { id: 's18', t: 'Find and move preprod images', st: 'busy', dur: '31:15', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
   { id: 'tf', name: 'Fleet Infra Terraform', color: '#9a8c74', sessions: [
-    { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12m 08s', role: 'Orchestrator', branch: 'main' } ] }
+    { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12:08', role: 'Orchestrator', branch: 'main' } ] }
 ];
 const THREADS = {
   s3: [
