@@ -10,7 +10,6 @@
 .kr-board.is-mat{background-color:var(--mat-green);border:1.5px solid var(--mat-green-2);border-radius:var(--radius-9);box-shadow:var(--lift-mat)}
 .kr-board.is-frame{background-color:var(--mat-red);border:1.5px solid var(--mat-red-2);border-radius:var(--radius-10);padding:var(--stroke-frame);box-shadow:var(--lift-frame)}
 .kr-board.is-frame>.kr-sheet{box-shadow:var(--recess);border-color:rgba(0,0,0,.12)}
-.kr-board.is-strip{background-color:color-mix(in srgb,var(--wc,var(--green)) 62%,var(--sheet));border:1px solid rgba(0,0,0,.1);border-radius:var(--radius-5);box-shadow:1px 1px 0 color-mix(in srgb,var(--wc,var(--green)) 55%,var(--edge-2)),3px 4px 5px var(--amb)}
 
 /* ---------- paper: the workshop wall texture under the face; kraft paper plain ---------- */
 .kr-sheet{position:relative;box-sizing:border-box;background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.07);border-radius:var(--radius-4);box-shadow:var(--lift-paper-1)}
@@ -26,6 +25,8 @@
 .kr-pen svg{width:14px;height:14px;display:block}
 [data-theme="night"] .kr-pen{mix-blend-mode:screen}
 .kr-rule{border:0;border-top:1px dashed var(--line);margin:0}
+.kr-sheet.is-strip{position:relative;z-index:22;background-color:color-mix(in srgb,var(--wc,var(--green)) 62%,var(--sheet));border:1px solid rgba(0,0,0,.1);border-radius:var(--radius-5);box-shadow:1px 1px 0 color-mix(in srgb,var(--wc,var(--green)) 55%,var(--edge-2)),3px 4px 5px var(--amb)}
+.kr-sheet.is-strip+.kr-stack{margin-top:-3px}
 /* a deck: sheets stacked, each 3px under the one above with a tiny lean, two card edges showing under the last */
 .kr-stack{display:flex;flex-direction:column;padding-bottom:8px}
 .kr-stack>.kr-sheet{position:relative;transform:translate(var(--dx,0),0) rotate(var(--rot,0deg))}
@@ -85,11 +86,12 @@
 .kr-btn.kr-green:disabled,.kr-btn.kr-red:disabled{background-color:var(--paper-2);color:var(--faint);border-color:transparent;box-shadow:none}
 
 /* ---------- icon buttons: rail stickers, and cardboard discs everywhere else ---------- */
-.kr-ib{all:unset;-webkit-appearance:none;appearance:none;cursor:pointer;position:relative;display:inline-grid;place-items:center;box-sizing:border-box;width:44px;height:44px;padding:var(--space-10);border-radius:var(--radius-10);background-color:var(--kraft-2);background-image:linear-gradient(180deg,var(--gloss),rgba(255,255,255,0) 55%);color:var(--white);box-shadow:var(--sticker);transition:transform var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
+.kr-ib{all:unset;-webkit-appearance:none;appearance:none;cursor:pointer;position:relative;display:inline-grid;place-items:center;box-sizing:border-box;width:44px;height:44px;padding:9px;--c:var(--kraft-2);border-radius:var(--radius-10);background-color:var(--c);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);border:1px solid rgba(0,0,0,.18);color:var(--white);box-shadow:2px 3px 0 color-mix(in srgb,var(--c) 55%,var(--edge-2)),4px 6px 7px var(--amb);transition:transform var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
 .kr-ib svg{display:block;width:24px;height:24px}
-.kr-ib:hover{transform:rotate(var(--tilt-hover)) scale(1.06)}
-.kr-ib:active{transform:scale(.94)}
-.kr-ib.is-on{transform:rotate(var(--tilt-sticker-on)) scale(1.08);box-shadow:var(--sticker-on)}
+.kr-ib:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
+.kr-ib:active,.kr-ib.is-on{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
+.kr-ib.is-on{background-color:color-mix(in srgb,var(--c) 82%,var(--edge-2))}
+.kr-ib.kr-blue{--c:var(--blue)}.kr-ib.kr-blue-2{--c:var(--blue-2)}.kr-ib.kr-red{--c:var(--red)}.kr-ib.kr-red-2{--c:var(--red-2)}.kr-ib.kr-green{--c:var(--green)}.kr-ib.kr-amber{--c:var(--amber)}.kr-ib.kr-max{--c:var(--max)}.kr-ib.kr-teal{--c:var(--kind-think)}.kr-ib.kr-violet{--c:var(--kind-sub)}.kr-ib.kr-attn{--c:var(--attn)}
 .kr-ib:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .kr-ib:disabled{cursor:not-allowed;background-color:var(--paper-2);background-image:none;color:var(--faint);box-shadow:none;transform:none}
 .kr-ib>.kr-nb{position:absolute;top:-4px;right:-1px;z-index:1}
