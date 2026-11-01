@@ -276,7 +276,7 @@
       "y": 0,
       "w": 320,
       "page": "diorama",
-      "text": "Paper diorama: the same shell as the Paper page, rebuilt as a layered paper diorama. The app is one big sheet lifted off a cream desk; the rail and the sessions panel are kraft boards; every session is its own strip of paper with a paper edge and a soft shadow, the workspace headers are tinted strips, the capsules are cream plates on kraft mats with the time badge straddling the edge, and the composer sits on a kraft mat. Badges, dots, the pinwheel, the busy pill and the rail icons are die-cut stickers with white borders and a gloss. A paper plant and a paper cat are stuck on for scale. Same live demo, same Night toggle (sticker borders turn cream after dark)."
+      "text": "Paper diorama: the same shell as the Paper page, rebuilt as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with the fluting showing along their cut edges. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel and the busy pill are stickers too, and a paper cat peeks over the composer. Boards run edge to edge with a 3px margin. Same live demo, same Night toggle."
     }
   },
   "designSystems": [
