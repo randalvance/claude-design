@@ -19,7 +19,7 @@ Paper Chat is the cut-paper skin of the chat app. Every surface is a sheet laid 
 
 ### Colour
 
-One theme, on purpose: the design is a lit desk. Grounds, from the back forward: `desk`, `paper`, `panel`, `rail`, then the sheets `sheet`, `sheet-warm`, `card`. Text is `ink` on any of them; `mute` is secondary text and every hand annotation; `faint` is for placeholders and source icons only, since it reads at 3.2:1 on `sheet`.
+Two themes. Paper is the lit desk the design was drawn on; Night is the same desk after dark, every token carrying a `night` value: grounds drop to a warm near-black, ink turns to cream, kraft darkens so cream reads on it, the signal colours lift a step, the highlighter becomes a dim olive band and the tape goes translucent. Nothing moves and no shadow softens; only the values change. Paper first: the design is a lit desk. Grounds, from the back forward: `desk`, `paper`, `panel`, `rail`, then the sheets `sheet`, `sheet-warm`, `card`. Text is `ink` on any of them; `mute` is secondary text and every hand annotation; `faint` is for placeholders and source icons only, since it reads at 3.2:1 on `sheet`.
 
 Kraft is the second material: `kraft` for the user's notes, workspace folder tabs, the branch tag, the model tag and the capsule token circle, with `kraft-2` as its shadow.
 
