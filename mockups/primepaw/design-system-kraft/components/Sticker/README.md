@@ -10,3 +10,5 @@ A mark stuck onto cardboard or paper: the paw, number badges, status pills, the 
 - `kr-dot` is a 10px square workspace dot in any identity colour; `kr-pin` is not a sticker any more: it is a paper pinwheel, four blades in `red`, `blue`, `green` and `amber` with folded lighter tips on an `ink` pin, casting one shadow and turning on `dur-loop`.
 
 Give meaning-carrying stickers an `aria-label`; decorative dots get `aria-hidden`. A sticker is stuck to one piece and never straddles two. Nothing pulses: a busy sticker is red, not blinking.
+
+A sticker with white text sits on `st-green`, `st-amber` or `st-red`, which hold 4.5:1 in both themes. A coloured square with no text may use the plain identity colour.

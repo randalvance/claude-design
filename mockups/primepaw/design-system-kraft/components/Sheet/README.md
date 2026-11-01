@@ -9,3 +9,5 @@ A piece of paper laid on the desk or on a board. Paper carries words: rows, fiel
 `kr-stack` lays sheets as a deck of cards: each one 3px under the one above with a tiny alternating lean, the first on top, and two card edges showing under the last. The sessions under a workspace strip are such a stack; a hovered sheet rises to the top.
 
 Rules: paper lies straight; only the selected row leans `tilt-row-on`. Padding is `space-8` to `space-12` on strips and `space-24` on the leaf. Rules printed on paper are `kr-rule`, dashed in `line`. Give a sheet a semantic element (`article`, `li`, `button`) and let the class carry only the material.
+
+`is-hl` is `marker` with its strokes over the paper texture. `kr-marked` marks a row inside a sheet the same way, translucent so the paper shows through.

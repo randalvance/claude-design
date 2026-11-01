@@ -1,6 +1,6 @@
 # Button
 
-Every button is cut from thick card. The face is `board` with `face` light over `pulp-paper`, the same texture as the chat sheet and the session rows, the cut edge is `board-2` (2px right, 3px down: `lift-board-sm`), the corners `radius-6`, the label `label` in `ink`. There is no other button material: paper carries words, stickers mark things, thick card is what you press. `kr-blue` is the blue button for a primary tool such as Select; at night it mixes down through `--dye` so its white label stays readable.
+Every button is cut from thick card. The face is `board` with `face` light over `pulp-paper`, the same texture as the chat sheet and the session rows, the cut edge is `board-2` (2px right, 3px down: `lift-board-sm`), the corners `radius-4` at every size, the label `label` in `ink`. There is no other button material: paper carries words, stickers mark things, thick card is what you press. `kr-blue` is the blue button for a primary tool such as Select; at night it mixes down through `--dye` so its white label stays readable.
 
 - `kr-btn` is kraft cardboard, for every action including the primary one. The primary action is the one nearest the composer or at the end of a row, not a different colour.
 - `kr-green` is sage cardboard, `mat-green` on `mat-green-2` with `ink` (6.3:1), for the committing action on a form: Merge, Run, Save. At most one per sheet.

@@ -7,14 +7,14 @@ Kraft is the material language of the Primepaw diorama: one cream sheet of `desk
 - **Stickers are flat.** A sticker has a `sticker-cut` die-cut border, `gloss` across its top and no shadow, ever: it is stuck to the surface it sits on. Stickers are the only things that tilt and the only things that take the gold `attn` ring (`sticker-on`) when selected.
 - **Depth is stacking.** `desk`, then the boards and the chat sheet on the same level, then paper rows and mats on them, then the leaf over the tabs, then the composer frame, then stickers on whatever they are stuck to. Nothing floats; no blur-only shadows; no border where a cut edge will do.
 - **The page is one piece of furniture.** `space-3` of desk around everything, then boards edge to edge; the rail and the sessions board stay put while the sheet scrolls.
-- **Three voices.** Fraunces for titles and the agent's margin notes (`title`, `said`), Nunito for everything set in type (`body`, `label`), Caveat for everything written by hand (`hand`, `chip`): counts, durations, placeholders, chips and link buttons.
+- **Three voices.** Caveat for page titles, inked into the paper (`title`). Fraunces for section and card headings and the agent's margin notes (`heading`, `said`), Nunito for everything set in type (`body`, `label`), Caveat for everything written by hand (`hand`, `chip`): counts, durations, placeholders, chips and link buttons.
 - **Quick and smooth.** Stickers scale and tilt, paper and cardboard travel down onto the desk when pressed. Durations from `dur-hover` to `dur-land`; loops only while the agent works, and nothing ever pulses.
 
 ## Materials
 
 See the Materials section for the recipe of each. In short: cardboard is `board` on `board-2` with the flecked `pulp-board` tile and `lift-board`; paper is `sheet` (or `card`, `sheet-warm`, `kraft`, `highlighter`) on `edge` with a `lift-paper-*` shadow; a sticker is a solid identity colour with `gloss`, a `sticker` cut and no shadow.
 
-Each material has a texture and keeps its colour. White paper carries the paper texture of the Factory Overseer workshop walls, ported texel for texel and lit from the top left (`pulp-paper`): soft pulp clouds and short fibers under the `face` gradient of the chat sheet, the leaf, rows, fields and cards. Boards, mats and frames are a flecked, unfluted board (`pulp-board`). Every button takes the paper texture over its own colour, so a button reads as the same stock as the sheet and the rows. The workspace header strips are paper tinted with their workspace's colour (`kr-sheet is-strip`, `--wc`), textured like the rows, and what is on them is written in pen: the count and the caret are `kr-pen`, Caveat in `ink`. Under a strip the sessions stack like a deck of cards (`kr-stack`), the first card tucked 3px under the strip. Tabs carry the paper texture over their kraft colour. Kraft notes, stickers and the composer card stay plain. A working session carries a paper pinwheel (`kr-pin`): four blades in red, blue, green and amber with folded lighter tips on an ink pin, with its own shadow, turning on `dur-loop`. See the Texture tokens.
+Each material has a texture and keeps its colour. White paper carries the paper texture of the Factory Overseer workshop walls, ported texel for texel and lit from the top left (`pulp-paper`): soft pulp clouds and short fibers under the `face` gradient of the chat sheet, the leaf, rows, fields and cards. Boards, mats and frames are a flecked, unfluted board (`pulp-board`). Every button takes the paper texture over its own colour, so a button reads as the same stock as the sheet and the rows. The workspace header strips are paper tinted with their workspace's colour (`kr-sheet is-strip`, `--wc`), textured like the rows, and what is on them is written in pen: the count and the caret are `kr-pen`, Caveat in `ink`. Under a strip the sessions stack like a deck of cards (`kr-stack`), the first card tucked 3px under the strip. Tabs carry the paper texture over their kraft colour. All kraft takes the same texture. Stickers and the composer card stay plain. A working session carries a paper pinwheel (`kr-pin`): four blades in red, blue, green and amber with folded lighter tips on an ink pin, with its own shadow, turning on `dur-loop`. See the Texture tokens.
 
 Every button is thick card with the `pulp-paper` texture: `kr-btn` in `board` with a `board-2` edge and `lift-board-sm`, `kr-blue` for a primary tool like Select, `kr-green` (`mat-green`) for the one committing action on a sheet, `kr-red` (`mat-red-2` on `mat-red-3`) for a destructive one, `is-on` pressed flat for a latched filter or mode. Paper and stickers are never buttons; the rail's navigation is a column of cardboard tiles (`kr-ib`), each in its identity colour under the paper texture, its edge a darker shade of the same.
 
@@ -29,7 +29,7 @@ Every button is thick card with the `pulp-paper` texture: `kr-btn` in `board` wi
 
 ## Type
 
-Set titles in `title` and the agent's narration in `said`. Set body copy in `body` and every control label in `label` or `label-sm`. Write counts, durations, placeholders and link buttons in `hand`, chips in `chip`. Badges use `badge`, uppercase with 0.06em tracking. Load Fraunces, Nunito and Caveat from Google Fonts; fall back to Georgia, system-ui and cursive.
+Set page and session titles in `title` (`kr-title`), section and card headings in `heading`, drawer titles in `heading-lg`, and the agent's narration in `said`. Set body copy in `body` and every control label in `label` or `label-sm`. Write counts, durations, placeholders and link buttons in `hand`, chips in `chip`. Badges use `badge`, uppercase with 0.06em tracking. Load Fraunces, Nunito and Caveat from Google Fonts; fall back to Georgia, system-ui and cursive.
 
 ## Depth
 
@@ -60,3 +60,17 @@ Hover: a button lifts 1px up and left so its edge grows (`lift-board-up`); a row
 ## Grain
 
 Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so cardboard, paper and sticker share one surface. Never grain a single piece; the material textures (`pulp-paper`, `pulp-board`) belong to the piece and sit under its face.
+
+## One way to do each thing
+
+- **Type scale.** Nunito 11, 12, 13, 14, 15. Caveat 15, 17, 20, 38, 50. Courier 10, 11, 12. Fraunces 15, 17, 20, and 36 for one big figure or initial. Nothing in between.
+- **Headings by level.** Page title `title`. Drawer title `heading-lg`. Section and card heading `heading`. Subheading `heading-sm`.
+- **Page headers.** A list page has a title row with no rule. An edit page has a sticky header with a dashed rule, 14px by 28px of padding, and its back link above the title.
+- **Button sizes.** 32px for page and card actions, 26px for filters and row actions, 40px only for a lone call to action. Discs are 26px. The rail tile (44px) and the composer's send disc (42px) are their own sizes.
+- **Bare marks.** Dismiss, edit and pin are the only presses that aren't thick card. They are small pen marks on a row, 26px to the touch, and they tint on hover.
+- **Tabs.** Always kraft with paper texture, rounded top corners and an icon. The selected one is cut from `card` with a red top edge.
+- **Highlighter.** Always `marker` with its strokes over the paper. A selected row uses `kr-marked`; a selected sheet uses `is-hl`.
+- **Hover.** Card lifts. Paper tints to `hover` and keeps its texture.
+- **Status stickers.** White text sits on `st-green`, `st-amber` or `st-red`, which hold 4.5:1 in both themes.
+- **Stamps.** One angle, `tilt-stamp`.
+- **Page or drawer.** Things you author (agents, skills, workspaces) open an edit page. Things that run or that you inspect in place (MCP servers, jobs, cards) open a drawer.

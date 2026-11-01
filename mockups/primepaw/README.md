@@ -28,7 +28,7 @@ Every screen is a live demo with a light board and a `…Dark` board.
 | `canvas.json` | Canvas index: the Paper diorama page, its frames, order and notes. |
 | `support.js` | The runtime the boards load. |
 
-All screens share the rail, one paper sheet for the content, the wall texture on paper, thick-card buttons, stickers with a cut edge, paper pinwheels, torn-paper popups, a paper pull-tab toggle and real highlighter on selected rows. Stamps stay ink on the paper and the Board keeps its cork.
+All screens share the rail, one paper sheet for the content, the wall texture on paper, thick-card buttons, stickers with a cut edge, paper pinwheels, torn-paper popups, a paper pull-tab toggle and real highlighter on selected rows. Stamps stay ink on the paper and the Board keeps its cork. Kraft's "One way to do each thing" section lists the shared rules: type scale, heading levels, header and button sizes, tabs, highlighter, hover and status colours.
 
 ## Kraft design system
 
@@ -47,7 +47,8 @@ https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV and mirrored under `design-sys
   `kr-sticker`) and the parts cut from them: Button (every button is thick card with the paper texture:
   kraft, blue, sage for the confirm, terracotta for the destructive one, latched flat when on),
   IconButton (rail tiles and discs), Toggle (a paper pull-tab in a cut slot), Sheet, Board, Sticker, Tab,
-  each with a `preview.html` and `README.md`, a Dark mode card, and the cover.
+  Title, Stamp, Popup, Note, Cork, Capsule and Gauge, each with a `preview.html` and `README.md`, a Dark
+  mode card, and the cover.
 - `assets/Icons/` — the 26 single-ink icons as SVG.
 
 The canvas records it in `designSystems` too and carries its tokens at `project/ds/kraft/`.
