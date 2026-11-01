@@ -52,6 +52,8 @@ The canvas records it in `designSystems` and carries its tokens at `project/ds/p
   App shell, Futuristic and Professional SaaS pages were removed; their boards live in git
   history before this commit.
 
+Every board has a Night theme: the same desk after dark, with every ground a warm near-black, cream ink, darker kraft and the signal colours lifted a step so they keep their contrast. The `theme` prop on each board picks the default (paper or night) and the moon button above Settings in the rail flips it for that view. Both themes come from one set of tokens (`design-system/tokens.json` carries the `night` value of each colour), so a board never hardcodes a surface colour.
+
 - The gauge reads like a fuel gauge: F is a fresh conversation, E is a full context window.
   The arc is what is left; a ghost segment previews what the current draft will consume.
 - Max effort is the only state that animates continuously: conic ring, flame slider,
