@@ -78,7 +78,7 @@
         "memory.svg": {
           "blob": "9694dad1dbded322ccac4beda2819a5e",
           "name": "memory.svg",
-          "size": 318,
+          "size": 568,
           "type": "image/svg+xml"
         },
         "pinwheel.svg": {
@@ -208,9 +208,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-01T13:47:24Z",
+    "at": "2026-11-01T14:01:03Z",
     "via": "Claude Code",
-    "note": "Clipboard, legal pad and artifact chip for artifacts and the side chat"
+    "note": "Memory is a brain; session tabs take the workspace paper"
   },
   "layout": "files",
   "libraries": [],

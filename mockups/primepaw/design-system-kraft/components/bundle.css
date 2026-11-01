@@ -209,6 +209,7 @@
 .kr-gauge .hub{fill:var(--ink)}
 .kr-gauge text{font-family:var(--font-hand);font-size:9px;fill:var(--mute)}
 
+.kr-tab.is-ws:not(.is-on){background-color:color-mix(in srgb,var(--wc,var(--green)) 30%,var(--sheet));box-shadow:1px 1px 0 color-mix(in srgb,var(--wc,var(--green)) 55%,var(--edge-2)),2px 3px 4px var(--amb)}
 /* Clipboard: artifacts clipped to cardboard. Legal pad: a side chat. Artifact chip: an artifact in the thread. */
 .kr-clipboard{position:relative;display:flex;flex-direction:column;box-sizing:border-box;padding:18px 10px 10px;background-color:var(--board);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:8px;box-shadow:var(--lift-board-sm)}
 .kr-clipboard-clip{position:absolute;left:50%;top:-9px;width:92px;margin-left:-46px;z-index:5;filter:drop-shadow(1px 2px 1px var(--amb));pointer-events:none}
