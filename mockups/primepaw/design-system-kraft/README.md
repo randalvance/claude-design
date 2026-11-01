@@ -67,6 +67,7 @@ Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so ca
 - **Headings by level.** Page title `title`. Drawer title `heading-lg`. Section and card heading `heading`. Subheading `heading-sm`.
 - **Page headers.** A list page has a title row with no rule. An edit page has a sticky header with a dashed rule, 14px by 28px of padding, and its back link above the title.
 - **Button sizes.** 32px for page and card actions, 26px for filters and row actions, 40px only for a lone call to action. Discs are 26px. The rail tile (44px) and the composer's send disc (42px) are their own sizes.
+- **YOLO is a stamp.** The one mode that changes how a whole session runs is struck on the paper (`kr-stamp is-toggle`): a faded black outline when off, red ink when on.
 - **Bare marks.** Dismiss, edit, pin and generate are the only presses that aren't thick card. They are small pen marks on the paper, 26px to the touch, and they tint on hover. Generate is a sparkle drawn in ink: loose overlapping pen strokes with a little hatching, never a clean icon.
 - **Tabs.** Always kraft with paper texture, rounded top corners and an icon. The selected one is cut from `card` with a red top edge.
 - **Highlighter.** Always `marker` with its strokes over the paper. A selected row uses `kr-marked`; a selected sheet uses `is-hl`.

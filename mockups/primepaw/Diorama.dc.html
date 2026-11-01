@@ -278,11 +278,13 @@ button{font:inherit}
 .needle{stroke:var(--ink);stroke-width:2;stroke-linecap:round;transform-origin:20px 20px;transition:transform .45s var(--ease)}
 .hub{fill:var(--ink)}
 .g text{font-family:var(--hand);font-size:9px;fill:var(--mute)}
-.stampbtn{all:unset;cursor:pointer;position:relative;display:inline-grid;place-items:center;box-sizing:border-box;height:26px;padding:0 10px;min-width:40px;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:4px;box-shadow:var(--lift-board-sm);font-weight:800;font-size:12px;letter-spacing:.1em;color:var(--ink);text-align:center;transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
-.stampbtn:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
-.stampbtn:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.stampbtn{all:unset;cursor:pointer;position:relative;display:inline-grid;place-items:center;box-sizing:border-box;height:26px;padding:0 8px;min-width:48px;border:2px solid currentColor;border-radius:3px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink);opacity:.5;transform:rotate(-4deg);filter:url(#inkstamp);mix-blend-mode:multiply;transition:opacity .12s var(--ease)}
+.stampbtn:hover{opacity:.72}
+.stampbtn:active{transform:rotate(-4deg) scale(.94)}
 .stampbtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-.stampbtn[aria-checked="true"]{transform:translate(2px,3px);background-color:var(--mat-red-2);color:var(--white);border-color:var(--mat-red-3);box-shadow:0 0 0 var(--mat-red-3),1px 1px 2px var(--amb)}
+.stampbtn[aria-checked="true"]{color:color-mix(in srgb,var(--red) 88%,var(--ink));opacity:.95;animation:stampdown .26s var(--ease-pop) both}
+.page.night .stampbtn{mix-blend-mode:normal}
+@keyframes stampdown{0%{transform:rotate(-9deg) scale(1.7);opacity:0}100%{transform:rotate(-4deg) scale(1);opacity:.95}}
 .dirtag{display:inline-flex;align-items:center;gap:6px;font-family:var(--hand);font-size:17px;color:var(--mute);white-space:nowrap}
 .hint{margin-left:auto;font-family:var(--hand);font-size:17px;color:var(--mute);white-space:nowrap}
 .send{all:unset;position:relative;cursor:pointer;box-sizing:border-box;width:42px;height:42px;border-radius:50%;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));color:var(--ink);display:grid;place-items:center;box-shadow:var(--lift-board-sm);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease);flex:none}
@@ -352,7 +354,7 @@ button{font:inherit}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
-<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="inkstamp" x="-6%" y="-12%" width="112%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" result="d"></feDisplacementMap><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 2.3" result="holes"></feColorMatrix><feComposite in="d" in2="holes" operator="in"></feComposite></filter><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
 <div class="app">
 
   <div class="railwrap board"><nav class="rail" aria-label="Primary">
