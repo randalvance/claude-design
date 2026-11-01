@@ -353,6 +353,112 @@ button{font:inherit}
 @media (max-width:860px){.page{padding:3px}.app{flex-direction:column;min-height:calc(100vh - 6px)}.railwrap{position:static;height:auto;width:auto;margin:0 0 8px}.rail{height:auto;flex-direction:row;justify-content:center;padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{position:static;height:auto;width:auto;margin:0 0 8px;max-height:40vh}.sheet{margin:0}.note{max-width:min(92%,62ch)}.hint{display:none}.top{padding:16px 16px 0}.tabs,.content,.foot,.hello{padding-left:16px;padding-right:16px}.hi{font-size:40px}.pop{width:min(286px,calc(100vw - 40px))}.prop.cat{display:none}}
 .page.night .wsh .cnt,.page.night .wsh .chev{mix-blend-mode:screen}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Session side panel: artifacts on a clipboard, the side chat on a legal pad */
+.leaf{flex-direction:row}
+.maincol{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;container-type:inline-size}
+.maincol:has(.scrim){z-index:5}
+@container (max-width:680px){.maincol .hint{display:none}.maincol .send{margin-left:auto}}
+.tabs-r{margin-left:auto;display:flex;gap:4px;padding-left:8px}
+.tabn{font-family:var(--hand);font-size:17px;font-weight:700;line-height:1;margin-left:2px}
+.side{position:sticky;top:8px;align-self:flex-start;flex:none;display:flex;flex-direction:column;gap:14px;box-sizing:border-box;width:min(var(--sidew,460px),calc(100% - 440px));height:calc(100vh - 134px);min-height:460px;padding:14px 14px 14px 4px;z-index:2;animation:slide .24s var(--ease) both}
+.side-grip{position:absolute;left:-6px;top:14px;bottom:14px;width:10px;border-radius:5px;cursor:col-resize;touch-action:none;transition:background-color .12s var(--ease)}
+.side-grip::after{content:"";position:absolute;left:4px;top:50%;width:2px;height:26px;margin-top:-13px;border-radius:1px;background-image:repeating-linear-gradient(180deg,var(--mute) 0 2px,transparent 2px 6px)}
+.side-grip:hover{background-color:var(--hover);background-image:var(--pulp)}
+.side-grip:focus-visible{outline:2px solid var(--ink)}
+.abtn{all:unset;cursor:pointer;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;font-size:12px;font-weight:800;color:var(--ink);white-space:nowrap;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:4px;box-shadow:var(--lift-board-sm);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.abtn svg{width:13px;height:13px;flex:none}
+.abtn:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
+.abtn:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.abtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.clipb{position:relative;flex:1 1 58%;min-height:0;display:flex;flex-direction:column;box-sizing:border-box;padding:18px 10px 10px;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:8px;box-shadow:var(--lift-board-sm)}
+.clipb-clip{position:absolute;left:50%;top:-9px;width:92px;margin-left:-46px;z-index:5;filter:drop-shadow(1px 2px 1px var(--amb));pointer-events:none}
+.clipb-clip svg{display:block;width:100%;height:auto}
+.clipb-clip .jaw{fill:color-mix(in srgb,var(--blue-2) var(--dye,100%),var(--desk))}
+.clipb-clip .wire{fill:none;stroke:color-mix(in srgb,var(--blue-2) var(--dye,100%),var(--desk));stroke-width:3}
+.clipb-clip .crease{fill:none;stroke:rgba(255,255,255,.28);stroke-width:1}
+.clipb-h{display:flex;align-items:center;justify-content:space-between;padding:0 2px 6px 4px}
+.clipb-h h2{margin:0;font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink)}
+.clipb .ib,.pad-h .ib{color:var(--ink)}
+.clipb-h .ib svg,.pad-h .ib svg{width:14px;height:14px}
+.arttabs{padding:0 6px;margin:0;flex:none}
+.arttabs .tab{font-size:12px;padding:6px 10px 12px}
+.arttabs .tab.on{padding-top:4px}
+.art{position:relative;z-index:3;flex:1;min-height:0;display:flex;flex-direction:column;margin-top:-5px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:3px;box-shadow:var(--lift-2)}
+.art-h{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 14px 9px;border-bottom:1px dashed var(--bar)}
+.art-h h3{margin:0;font-family:var(--serif);font-size:17px;font-weight:600;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+.art-k{display:block;margin-top:3px;font-family:var(--mono);font-size:11px;color:var(--mute)}
+.ver{flex:none;display:flex;align-items:center;gap:2px;font-family:var(--mono);font-size:11px;color:var(--ink);white-space:nowrap}
+.ver .ib svg{width:13px;height:13px}
+.ver .ib.off{opacity:.3;cursor:default}
+.art-old{font-family:var(--hand);font-size:15px;color:var(--mute);margin-right:4px}
+.art-b{flex:1;min-height:0;overflow:auto;padding:12px 14px 16px;font-size:13px;line-height:1.55;color:var(--ink)}
+.art-b h4{margin:12px 0 4px;font-family:var(--serif);font-size:15px;font-weight:600;line-height:1.3}
+.art-b h4:first-child{margin-top:0}
+.art-b p{margin:0 0 8px}
+.art-li{position:relative;padding-left:16px;margin:0 0 4px}
+.art-li::before{content:"";position:absolute;left:2px;top:.72em;width:8px;height:2px;border-radius:1px;background-color:var(--ink);transform:rotate(-6deg)}
+.art-row{display:flex;justify-content:space-between;gap:16px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.art-row b{font-weight:800}
+.art-f{flex:none;display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:9px 12px 10px;border-top:1px dashed var(--bar)}
+.art-f .far{margin-left:auto}
+.codeb{font-family:var(--mono);font-size:12px;line-height:20px;overflow-x:auto;margin:-2px -14px 0;padding:0 14px}
+.ln{display:flex;min-width:max-content;border-radius:2px}
+.ln i{flex:none;width:30px;font-style:normal;color:var(--mute);text-align:right;padding-right:6px;user-select:none}
+.ln s{flex:none;width:14px;text-decoration:none;font-weight:700}
+.ln code{font:inherit;white-space:pre}
+.ln.add{background-color:color-mix(in srgb,var(--green) 18%,transparent)}
+.ln.del{background-color:color-mix(in srgb,var(--red) 15%,transparent)}
+.print{position:relative;margin:10px 4px 6px;padding:18px 18px 16px;background:#fff;color:#1d2433;font-family:system-ui,sans-serif;box-shadow:var(--lift-2)}
+.print .tape{top:-11px;width:64px;height:20px}
+.print h5{margin:0;font-size:15px;font-weight:700;line-height:1.3}
+.print-s{margin:2px 0 12px;font-size:12px;color:#5a6478}
+.print-st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.print-st div{padding:8px;border:1px solid #dfe3ea;border-radius:6px}
+.print-st b{display:block;font-size:15px;font-weight:700}
+.print-st span{font-size:11px;color:#5a6478}
+.print-b{display:flex;align-items:flex-end;gap:5px;height:72px;border-bottom:1px solid #dfe3ea}
+.print-b i{flex:1;background:#3b5b9a;border-radius:2px 2px 0 0}
+.art-e{margin-top:0}
+.art-none{margin:auto;padding:24px 18px;text-align:center;font-family:var(--hand);font-size:20px;line-height:1.2;color:var(--ink)}
+.chits{display:flex;flex-wrap:wrap;gap:12px;max-width:760px}
+.chit{all:unset;cursor:pointer;box-sizing:border-box;position:relative;display:flex;align-items:center;gap:10px;width:240px;min-height:50px;padding:8px 18px 8px 10px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:2px;box-shadow:var(--lift-2);clip-path:polygon(0 -8px,calc(100% - 12px) -8px,calc(100% + 8px) 12px,calc(100% + 8px) calc(100% + 10px),0 calc(100% + 10px),-3px 50%);animation:drop .26s var(--ease) both;transition:transform .15s var(--ease)}
+.chit::after{content:"";position:absolute;right:-1px;top:-1px;width:12px;height:12px;background-color:var(--paper-2);box-shadow:-1px 1px 1px var(--amb);clip-path:polygon(0 0,100% 100%,0 100%)}
+.chit svg{width:18px;height:18px;flex:none;color:var(--ink)}
+.chit span{min-width:0}
+.chit b{display:block;font-size:13px;font-weight:800;line-height:1.25;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chit em{display:block;font-style:normal;font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chit:hover{transform:translateY(-2px)}
+.chit:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.chit.on{background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp)}
+.chit.on em{color:var(--ink)}
+.pad{--pad:color-mix(in srgb,var(--highlighter) 42%,var(--card));position:relative;flex:1 1 42%;min-height:0;display:flex;flex-direction:column;background-color:var(--pad);background-image:var(--face),var(--pulp);border-radius:3px 3px 4px 4px;box-shadow:var(--lift-2)}
+.pad-h{flex:none;display:flex;align-items:center;justify-content:space-between;padding:5px 6px 5px 12px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border-radius:3px 3px 0 0;border-bottom:2px dotted color-mix(in srgb,var(--kraft-2) 70%,var(--pad));color:var(--ink)}
+.pad-h h2{margin:0;font-family:var(--hand);font-size:20px;font-weight:700;line-height:1;color:var(--ink)}
+.pad-b{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:11px;padding:11px 12px 11px 36px;font-size:13px;line-height:22px;color:var(--ink);background-attachment:local;background-image:linear-gradient(90deg,transparent 25px,color-mix(in srgb,var(--red) 45%,transparent) 25px 26px,transparent 26px),repeating-linear-gradient(180deg,transparent 0 21px,color-mix(in srgb,var(--blue) 20%,transparent) 21px 22px)}
+.pad-q{align-self:flex-end;max-width:88%;box-sizing:border-box;padding:6px 10px;font-size:13px;line-height:18px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid var(--kraft-2);border-radius:3px;box-shadow:1px 1px 0 var(--kraft-2),2px 3px 4px var(--amb);transform:rotate(-.5deg);white-space:pre-wrap;overflow-wrap:anywhere}
+.pad-a p{margin:0 0 6px;overflow-wrap:anywhere}
+.pad-think{display:flex;align-items:center;gap:8px;font-family:var(--hand);font-size:17px;line-height:22px}
+.pad-e{margin:auto 0;font-family:var(--hand);font-size:20px;line-height:22px;color:var(--ink)}
+.pad-f{flex:none;display:flex;flex-direction:column;gap:6px;padding:8px 10px 10px;border-top:1px dashed var(--bar)}
+.pad-see{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:11px;font-weight:700;color:var(--ink)}
+.pad-ctx{display:inline-flex;align-items:center;gap:2px;height:20px;padding:0 2px 0 8px;font-family:var(--mono);font-size:11px;background-color:var(--card);background-image:var(--pulp);border:1px solid var(--bar);border-radius:2px}
+.pad-ctx button{all:unset;cursor:pointer;display:grid;place-items:center;width:18px;height:18px;border-radius:50%}
+.pad-ctx button:hover{background-color:var(--hover);background-image:var(--pulp)}
+.pad-ctx button:focus-visible{outline:2px solid var(--ink)}
+.pad-ctx svg{width:10px;height:10px}
+.pad-in{display:flex;align-items:flex-end;gap:8px;padding:3px 3px 3px 10px;background-color:var(--card);border:1px solid var(--bar);border-radius:4px;box-shadow:var(--recess)}
+.pad-in:focus-within{outline:2px solid var(--ink);outline-offset:1px}
+.pad-ta{flex:1;min-width:0;display:block;box-sizing:border-box;min-height:26px;max-height:92px;resize:none;border:0;background:transparent;font:inherit;font-size:13px;line-height:18px;padding:4px 0;color:var(--ink);outline:none}
+.pad-ta::placeholder{color:var(--faint);font-family:var(--hand);font-size:17px}
+.pad-send{all:unset;cursor:pointer;box-sizing:border-box;flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:var(--ink);background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));box-shadow:var(--lift-board-sm);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.pad-send svg{width:13px;height:13px}
+.pad-send:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
+.pad-send:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.pad-send:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pad-send.ready{background-color:color-mix(in srgb,var(--blue) var(--dye,100%),var(--desk));color:var(--white);border-color:var(--blue-2);box-shadow:2px 3px 0 var(--blue-2),4px 6px 7px var(--amb)}
+@media (max-width:1180px){.side{width:min(460px,100%);margin-left:calc(-1 * min(460px,100%));height:calc(100vh - 186px);min-height:420px;padding-left:14px;z-index:6}.side-grip{display:none}}
+@media (prefers-reduced-motion:reduce){.side,.chit{animation:none}}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -514,10 +620,10 @@ button{font:inherit}
   </header>
 
   <nav class="tabs" aria-label="Session views">
-    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab {{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg>{{t.label}}</button></sc-for>
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab {{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg>{{t.label}}</button></sc-for><span class="tabs-r"><button class="tab {{artsTabCls}}" onClick="{{toggleArts}}" aria-pressed="{{artsOpen}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8v4H8zM8 5H5v16h14V5h-3M9 12h6M9 16h6"></path></svg>Artifacts<sc-if value="{{hasArts}}" hint-placeholder-val="{{true}}"><span class="tabn">{{artCount}}</span></sc-if></button><button class="tab {{padTabCls}}" onClick="{{togglePad}}" aria-pressed="{{padOpen}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h13v9H9l-4 3v-3H3zM19 8h2v9h-1v3l-3-3h-5"></path></svg>Side chat</button></span>
   </nav>
 
-  <div class="leaf">
+  <div class="leaf"><div class="maincol">
   <div class="content">
     <sc-if value="{{isChat}}" hint-placeholder-val="{{true}}">
       <sc-for list="{{thread}}" as="it" hint-placeholder-count="6">
@@ -557,6 +663,7 @@ button{font:inherit}
         </div>
       </sc-if>
       <sc-if value="{{isGeneric}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{cur.reply}}</p></div></sc-if>
+      <sc-if value="{{hasSeedChits}}" hint-placeholder-val="{{true}}"><div class="chits"><sc-for list="{{seedChits}}" as="ch" hint-placeholder-count="3"><button class="chit {{ch.cls}}" onClick="{{ch.open}}" aria-label="Open {{ch.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ch.icon}}"></path></svg><span><b>{{ch.title}}</b><em>{{ch.meta}}</em></span></button></sc-for></div></sc-if>
 
       <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
         <div class="note {{m.foldCls}}"><span class="tape" aria-hidden="true"></span><div class="note-in">{{m.text}}</div><sc-if value="{{m.isLong}}" hint-placeholder-val="{{false}}"><button class="unfold" onClick="{{m.toggleFold}}">{{m.foldLabel}}</button></sc-if></div>
@@ -580,6 +687,7 @@ button{font:inherit}
           </div></div>
         </section>
         <sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{m.reply}}</p></div></sc-if>
+        <sc-if value="{{m.hasChit}}" hint-placeholder-val="{{false}}"><div class="chits"><button class="chit {{m.chit.cls}}" onClick="{{m.chit.open}}" aria-label="Open {{m.chit.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{m.chit.icon}}"></path></svg><span><b>{{m.chit.title}}</b><em>{{m.chit.meta}}</em></span></button></div></sc-if>
       </sc-for>
     </sc-if>
 
@@ -668,6 +776,41 @@ button{font:inherit}
       </div>
     </div>
   </footer>
+  </div>
+    <sc-if value="{{sideShown}}" hint-placeholder-val="{{false}}"><aside class="side" style="--sidew: {{sideWidth}}" aria-label="Artifacts and side chat">
+      <div class="side-grip" role="separator" aria-orientation="vertical" aria-label="Resize this panel" tabindex="0" onPointerDown="{{gripDown}}" onKeyDown="{{gripKey}}"></div>
+      <sc-if value="{{artsOpen}}" hint-placeholder-val="{{false}}"><section class="clipb" aria-label="Artifacts">
+        <span class="clipb-clip" aria-hidden="true"><svg viewBox="0 0 92 30"><path class="wire" d="M32 12V8a14 6 0 0 1 28 0v4"></path><path class="jaw" d="M12 11h68l10 17H2z"></path><path class="crease" d="M12 15h68"></path></svg></span>
+        <header class="clipb-h"><h2>Artifacts</h2><button class="ib" onClick="{{toggleArts}}" aria-label="Close artifacts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
+        <sc-if value="{{hasArts}}" hint-placeholder-val="{{false}}">
+          <nav class="tabs arttabs" aria-label="Artifacts in this session"><sc-for list="{{arts}}" as="a" hint-placeholder-count="3"><button class="tab {{a.cls}}" onClick="{{a.pick}}" aria-current="{{a.cur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{a.icon}}"></path></svg>{{a.short}}</button></sc-for></nav>
+          <article class="art">
+            <div class="art-h"><div><h3>{{artv.title}}</h3><span class="art-k">{{artv.meta}}</span></div>
+              <sc-if value="{{artv.hasVers}}" hint-placeholder-val="{{false}}"><div class="ver" role="group" aria-label="Versions"><sc-if value="{{artv.isOld}}" hint-placeholder-val="{{false}}"><span class="art-old">older</span></sc-if><button class="ib {{artv.prevCls}}" onClick="{{artv.prev}}" aria-label="Older version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span>{{artv.verLabel}}</span><button class="ib {{artv.nextCls}}" onClick="{{artv.next}}" aria-label="Newer version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div></sc-if>
+            </div>
+            <div class="art-b">
+              <sc-if value="{{artv.isDoc}}" hint-placeholder-val="{{false}}"><sc-for list="{{artv.blocks}}" as="b" hint-placeholder-count="4"><sc-if value="{{b.isH}}" hint-placeholder-val="{{false}}"><h4>{{b.t}}</h4></sc-if><sc-if value="{{b.isP}}" hint-placeholder-val="{{false}}"><p>{{b.t}}</p></sc-if><sc-if value="{{b.isLi}}" hint-placeholder-val="{{false}}"><div class="art-li">{{b.t}}</div></sc-if><sc-if value="{{b.isRow}}" hint-placeholder-val="{{false}}"><div class="art-row"><span>{{b.a}}</span><b>{{b.b}}</b></div></sc-if></sc-for></sc-if>
+              <sc-if value="{{artv.isCode}}" hint-placeholder-val="{{false}}"><div class="codeb"><sc-for list="{{artv.lines}}" as="l" hint-placeholder-count="6"><div class="ln {{l.cls}}"><i>{{l.n}}</i><s>{{l.mark}}</s><code>{{l.t}}</code></div></sc-for></div></sc-if>
+              <sc-if value="{{artv.isPage}}" hint-placeholder-val="{{false}}"><div class="print"><span class="tape" aria-hidden="true"></span><h5>{{artv.page.title}}</h5><p class="print-s">{{artv.page.sub}}</p><div class="print-st"><sc-for list="{{artv.page.stats}}" as="x" hint-placeholder-count="3"><div><b>{{x.v}}</b><span>{{x.l}}</span></div></sc-for></div><div class="print-b" aria-hidden="true"><sc-for list="{{artv.page.bars}}" as="h" hint-placeholder-count="8"><i style="height: {{h.h}}"></i></sc-for></div></div></sc-if>
+            </div>
+            <footer class="art-f"><button class="abtn" onClick="{{artCopy}}">{{artCopyLabel}}</button><button class="abtn" onClick="{{artSave}}">{{artSaveLabel}}</button><button class="abtn far" onClick="{{artAsk}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h13v9H9l-4 3v-3H3zM19 8h2v9h-1v3l-3-3h-5"></path></svg>Ask on the side</button></footer>
+          </article>
+        </sc-if>
+        <sc-if value="{{noArts}}" hint-placeholder-val="{{false}}"><div class="art art-e"><p class="art-none">Nothing on the clipboard yet. Anything the agent makes in this session lands here.</p></div></sc-if>
+      </section></sc-if>
+      <sc-if value="{{padOpen}}" hint-placeholder-val="{{false}}"><section class="pad" aria-label="Side chat">
+        <header class="pad-h"><h2>Side chat</h2><button class="ib" onClick="{{togglePad}}" aria-label="Close side chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
+        <div class="pad-b" ref="{{padRef}}" aria-live="polite">
+          <sc-if value="{{padEmpty}}" hint-placeholder-val="{{false}}"><p class="pad-e">Ask anything here. It stays out of the session.</p></sc-if>
+          <sc-for list="{{padMsgs}}" as="s" hint-placeholder-count="2"><sc-if value="{{s.isQ}}" hint-placeholder-val="{{false}}"><div class="pad-q">{{s.t}}</div></sc-if><sc-if value="{{s.isA}}" hint-placeholder-val="{{false}}"><div class="pad-a"><p>{{s.t}}</p><button class="abtn" onClick="{{s.toChat}}">Put in chat</button></div></sc-if></sc-for>
+          <sc-if value="{{padBusy}}" hint-placeholder-val="{{false}}"><div class="pad-think"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg>thinking…</div></sc-if>
+        </div>
+        <div class="pad-f">
+          <div class="pad-see"><span>{{padSees}}</span><sc-if value="{{padHasCtx}}" hint-placeholder-val="{{false}}"><span>Looking at</span><span class="pad-ctx">{{padCtx}}<button onClick="{{padCtxClear}}" aria-label="Stop looking at {{padCtx}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-if></div>
+          <div class="pad-in"><label class="sr" for="pad-ta">Ask on the side</label><textarea id="pad-ta" class="pad-ta" rows="1" placeholder="Ask on the side…" ref="{{padTaRef}}" onInput="{{padInput}}" onKeyDown="{{padKey}}"></textarea><button class="pad-send {{padSendCls}}" onClick="{{padSend}}" aria-label="Send to the side chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button></div>
+        </div>
+      </section></sc-if>
+    </aside></sc-if>
   </div>
   </sc-if>
 </div>
@@ -779,12 +922,41 @@ function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
 const CTX_PARTS = [['System prompt', .14, 'var(--kind-think)'], ['Memory', .09, 'var(--amber)'], ['Tools', .22, 'var(--green)'], ['This chat', .55, 'var(--blue)']];
 function findSession(id) { for (const w of WS) { const s = w.sessions.find((x) => x.id === id); if (s) return { ...s, ws: w.name }; } return null; }
 
+
+const ART_ICON = { doc: 'M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7', code: 'M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14', page: 'M3 5h18v14H3zM3 9h18M6 7h.01M9 7h.01' };
+const h4 = (t) => ({ k: 'h', t }); const pp = (t) => ({ k: 'p', t }); const li = (t) => ({ k: 'li', t }); const kv = (a, b) => ({ k: 'row', a, b });
+const code = (s) => s.split('\n').map((x, i) => { const m = x[0] === '+' ? 'add' : x[0] === '-' ? 'del' : ''; return { n: String(i + 1), cls: m, mark: m === 'add' ? '+' : m === 'del' ? '−' : '', t: m ? x.slice(1) : x }; });
+const ARTS = {
+  s4: [
+    { id: 'a41', title: 'Sticky checkout rollout plan', short: 'Rollout plan', kind: 'doc', meta: 'Markdown', versions: [
+      [h4('Goal'), pp('Keep a shopper on one checkout node for 12 hours so a half-finished cart survives a deploy.'), h4('Steps'), li('Turn on the cookie for all traffic in zone A.'), li('Copy the setting to zone B the next morning.')],
+      [h4('Goal'), pp('Keep a shopper on one checkout node for 12 hours so a half-finished cart survives a deploy.'), h4('Steps'), li('Turn on the cookie for 5% of traffic in zone A.'), li('Watch cart errors for one hour, then go to 50%.'), li('Copy the setting to zone B once zone A has run clean overnight.'), h4('Numbers to watch'), kv('Cart errors', 'under 0.2%'), kv('Node imbalance', 'under 15%'), kv('Health check', '200 in both zones'), h4('Way back'), pp('Clearing the cookie setting returns traffic to round robin within one minute. No shopper loses a cart.')]
+    ] },
+    { id: 'a42', title: 'sticky_cookie.tf', short: 'sticky_cookie.tf', kind: 'code', meta: 'Terraform · 3 lines', versions: [code('resource "lb_target_group" "checkout" {\n  name     = "checkout"\n  port     = 8443\n  protocol = "HTTPS"\n\n-  stickiness { enabled = false }\n+  stickiness {\n+    enabled  = true\n+    type     = "lb_cookie"\n+    duration = 43200\n+  }\n\n  health_check {\n    path     = "/healthz"\n    interval = 15\n  }\n}')] },
+    { id: 'a43', title: 'Checkout health page', short: 'Health page', kind: 'page', meta: 'Web page · preview', versions: [{ title: 'Checkout health', sub: 'Both zones, last 8 hours', stats: [{ v: '0.08%', l: 'cart errors' }, { v: '11%', l: 'node imbalance' }, { v: '200', l: 'health check' }], bars: [38, 52, 44, 61, 47, 70, 58, 42] }] }
+  ],
+  s1: [
+    { id: 'a11', title: 'Nightly digest, 30 October', short: 'Digest', kind: 'doc', meta: 'Markdown', versions: [[h4('Shipped'), li('Search filters remember the last workspace.'), li('Card detail renders synced markdown.'), h4('Fixed'), li('Webhook retries no longer double post.'), h4('Still open'), pp('Two feeds return 403. The curator retries them with the service account tonight.')]] },
+    { id: 'a12', title: 'curator.ts', short: 'curator.ts', kind: 'code', meta: 'TypeScript · 2 lines', versions: [code('export async function draftDigest(day: string) {\n  const items = await readFeeds(day);\n-  return render(items);\n+  const fresh = items.filter((i) => !i.seen);\n+  return render(fresh);\n}')] }
+  ],
+  s3: [
+    { id: 'a31', title: 'Issue 218 draft', short: 'Issue 218', kind: 'doc', meta: 'Markdown', versions: [[h4('Render synced card descriptions'), pp('Synced cards show plain text today. Use the markdown view that local cards already use, with raw HTML left off.'), h4('Rules'), li('Links use safe schemes and open in a new tab.'), li('Remote images never load on their own.'), li('Task lists are read-only.')]] }
+  ]
+};
+function genericArts(c) { const topic = String(c.branch || c.t).split('/').pop().replace(/[-_]/g, ' '); const T = topic.charAt(0).toUpperCase() + topic.slice(1); return [{ id: 'g-' + c.id, title: T + ' notes', short: 'Notes', kind: 'doc', meta: 'Markdown', versions: [[h4('Where this stands'), pp('The working tree on ' + c.branch + ' is clean and the last reply is still accurate.'), h4('Next'), li('Confirm the next step with you.'), li('Open a pull request once the tests pass.')]] }]; }
+const PAD_SEED = { s4: [{ q: 'Will a 12 hour cookie survive a node drain?' }, { a: 'Yes. The load balancer moves a drained node’s shoppers to a healthy node and writes them a new cookie, so their carts stay put.' }] };
+const PAD_ANSWERS = [
+  (w) => 'Short answer: yes. ' + w + ' already covers it, and nothing else has to change.',
+  (w) => 'Not yet. ' + w + ' only handles the common case. I’d raise the edge case with the session before it merges.',
+  (w) => 'It’s safe to leave for now. ' + w + ' doesn’t depend on it, so it can wait for a follow-up.'
+];
+
 class Component extends DCLogic {
   ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
   titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
-  state = { sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
+  state = { artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
-  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
+  componentWillUnmount() { clearTimeout(this.tp); clearTimeout(this.tpe); clearTimeout(this.tpf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
   curMsgs() { return this.state.msgs[this.state.sid] || []; }
   // Long notes fold after twelve lines (about 72 characters per line at the capped measure); the reader unfolds them by hand.
@@ -801,6 +973,72 @@ class Component extends DCLogic {
     clearInterval(this.ticker); clearTimeout(this.t3);
     const sid = this.state.sid;
     this.setState({ msgs: { ...this.state.msgs, [sid]: this.curMsgs().map((m) => m.done ? m : { ...m, done: true, stopped: true, elapsed: fmtSec(Date.now() - m.start), n: Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) }) } });
+  }
+  artsOf(sid, c) {
+    const seed = ARTS[sid] || (c.isNew ? [] : genericArts({ ...c, id: sid }));
+    const turns = (this.state.msgs[sid] || []).filter((m) => m.done && !m.stopped).map((m, i) => ({ id: 'm' + m.id, title: 'Turn ' + (i + 1) + ' notes', short: 'Turn ' + (i + 1), kind: 'doc', meta: 'Markdown', versions: [[h4('What you asked'), pp(m.text), h4('What happened'), li('Read the last reply and the working tree.'), li('Nothing to commit. The tree is clean.')]] }));
+    return seed.concat(turns);
+  }
+  artSelOf(sid, arts) { return arts.find((a) => a.id === (this.state.artSel || {})[sid]) || arts[0] || null; }
+  openArt(id) { const sid = this.state.sid; this.setState({ artsOpen: true, artSel: { ...this.state.artSel, [sid]: id } }); }
+  chitView(a, sid, arts) { const sel = this.artSelOf(sid, arts); return { title: a.title, meta: a.meta + (a.versions.length > 1 ? ' · v' + a.versions.length : ''), icon: ART_ICON[a.kind], cls: this.state.artsOpen && sel && sel.id === a.id ? 'on' : '', open: () => this.openArt(a.id) }; }
+  padOf(sid) { return (this.state.pad || {})[sid] || PAD_SEED[sid] || []; }
+  padSendNow(c, ctxTitle) {
+    const el = this.padTa; const sid = this.state.sid;
+    if (!el || !el.value.trim() || this.state.padBusy) return;
+    const q = el.value.trim(); el.value = ''; el.style.height = '';
+    const list = this.padOf(sid).concat([{ q }]);
+    this.setState({ pad: { ...this.state.pad, [sid]: list }, padBusy: sid, padDraft: 0 });
+    this.padEnd();
+    clearTimeout(this.tp);
+    this.tp = setTimeout(() => {
+      const n = list.filter((x) => x.a).length; const a = PAD_ANSWERS[n % PAD_ANSWERS.length](ctxTitle || 'The session');
+      this.setState({ pad: { ...this.state.pad, [sid]: this.padOf(sid).concat([{ a }]) }, padBusy: null });
+      this.padEnd();
+    }, 1100);
+  }
+  padEnd() { clearTimeout(this.tpe); this.tpe = setTimeout(() => { if (this.padEl) this.padEl.scrollTop = this.padEl.scrollHeight; }, 30); }
+  flash(key) { this.setState({ [key]: true }); clearTimeout(this['t' + key]); this['t' + key] = setTimeout(() => this.setState({ [key]: false }), 1200); }
+  sideVals(st, c, sessionBusy) {
+    const sid = st.sid; const arts = sid ? this.artsOf(sid, c) : []; const sel = sid ? this.artSelOf(sid, arts) : null;
+    const seedOnly = sid ? (ARTS[sid] || (c.isNew ? [] : genericArts({ ...c, id: sid }))) : [];
+    let artv = { title: '', meta: '', isDoc: false, isCode: false, isPage: false, hasVers: false, isOld: false, blocks: [], lines: [], page: { title: '', sub: '', stats: [], bars: [] }, verLabel: '', prevCls: '', nextCls: '', prev: () => {}, next: () => {} };
+    let copyText = '';
+    if (sel) {
+      const n = sel.versions.length; const saved = (st.artVer || {})[sel.id]; const vi = saved == null ? n - 1 : Math.min(n - 1, saved); const v = sel.versions[vi];
+      const go = (d) => { const to = vi + d; if (to < 0 || to > n - 1) return; this.setState({ artVer: { ...st.artVer, [sel.id]: to } }); };
+      artv = { ...artv, title: sel.title, meta: sel.meta, hasVers: n > 1, isOld: vi < n - 1, verLabel: 'v' + (vi + 1) + ' of ' + n, prevCls: vi === 0 ? 'off' : '', nextCls: vi === n - 1 ? 'off' : '', prev: () => go(-1), next: () => go(1), isDoc: sel.kind === 'doc', isCode: sel.kind === 'code', isPage: sel.kind === 'page' };
+      if (sel.kind === 'doc') { artv.blocks = v.map((b) => ({ isH: b.k === 'h', isP: b.k === 'p', isLi: b.k === 'li', isRow: b.k === 'row', t: b.t || '', a: b.a || '', b: b.b || '' })); copyText = v.map((b) => b.t || (b.a + ': ' + b.b)).join('\n'); }
+      if (sel.kind === 'code') { artv.lines = v; copyText = v.map((l) => l.t).join('\n'); }
+      if (sel.kind === 'page') { artv.page = { ...v, bars: v.bars.map((b) => ({ h: b + '%' })) }; copyText = v.title; }
+    }
+    const padList = sid ? this.padOf(sid) : []; const ctxId = (st.padCtx || {})[sid]; const ctxArt = arts.find((a) => a.id === ctxId) || null;
+    const putInChat = (text) => { const el = this.ta; if (!el) return; el.value = (el.value ? el.value + '\n' : '') + text; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; el.focus(); this.setState({ draft: el.value.length, tab: 'Chat' }); };
+    const setW = (w) => this.setState({ sideW: w });
+    return {
+      sideShown: !!sid && (st.artsOpen || st.padOpen), artsOpen: !!st.artsOpen, padOpen: !!st.padOpen,
+      sideWidth: (st.sideW || (st.artsOpen ? 460 : 360)) + 'px',
+      artsTabCls: st.artsOpen ? 'on' : '', padTabCls: st.padOpen ? 'on' : '',
+      toggleArts: () => this.setState({ artsOpen: !st.artsOpen }), togglePad: () => { this.setState({ padOpen: !st.padOpen }); this.padEnd(); },
+      hasArts: arts.length > 0, noArts: arts.length === 0, artCount: String(arts.length),
+      arts: arts.map((a) => ({ short: a.short, icon: ART_ICON[a.kind], cls: sel && sel.id === a.id ? 'on' : '', cur: sel && sel.id === a.id ? 'page' : false, pick: () => this.openArt(a.id) })),
+      artv,
+      seedChits: seedOnly.map((a) => this.chitView(a, sid, arts)), hasSeedChits: seedOnly.length > 0,
+      artCopyLabel: st.artCopied ? 'Copied' : 'Copy', artSaveLabel: st.artSaved ? 'Downloaded' : 'Download',
+      artCopy: () => { try { navigator.clipboard.writeText(copyText).catch(() => {}); } catch (e) {} this.flash('artCopied'); },
+      artSave: () => this.flash('artSaved'),
+      artAsk: () => { if (!sel) return; this.setState({ padOpen: true, padCtx: { ...st.padCtx, [sid]: sel.id } }); this.padEnd(); clearTimeout(this.tpf); this.tpf = setTimeout(() => { if (this.padTa) this.padTa.focus(); }, 60); },
+      padMsgs: padList.map((m) => ({ isQ: !!m.q, isA: !!m.a, t: m.q || m.a, toChat: () => putInChat(m.a || m.q) })),
+      padEmpty: padList.length === 0 && st.padBusy !== sid, padBusy: st.padBusy === sid && !!sid,
+      padSees: sessionBusy ? 'The session keeps working while you ask.' : 'Nothing here goes into the session.',
+      padHasCtx: !!ctxArt, padCtx: ctxArt ? ctxArt.short : '', padCtxClear: () => this.setState({ padCtx: { ...st.padCtx, [sid]: null } }),
+      padRef: (el) => { if (el) this.padEl = el; }, padTaRef: (el) => { if (el) this.padTa = el; },
+      padInput: (e) => { const el = e.currentTarget; this.padTa = el; el.style.height = 'auto'; el.style.height = Math.min(92, el.scrollHeight) + 'px'; this.setState({ padDraft: el.value.length }); },
+      padKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.padSendNow(c, ctxArt && ctxArt.title); } },
+      padSend: () => this.padSendNow(c, ctxArt && ctxArt.title), padSendCls: st.padDraft ? 'ready' : '',
+      gripDown: (e) => { e.preventDefault(); const side = e.currentTarget.parentElement; const leaf = side.parentElement; const x0 = e.clientX; const w0 = side.offsetWidth; const max = leaf.offsetWidth - 440; let w = w0; const mv = (ev) => { w = Math.max(320, Math.min(max, w0 + x0 - ev.clientX)); side.style.setProperty('--sidew', w + 'px'); }; const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); setW(w); }; window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up); },
+      gripKey: (e) => { if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; e.preventDefault(); const side = e.currentTarget.parentElement; const max = side.parentElement.offsetWidth - 440; setW(Math.max(320, Math.min(max, side.offsetWidth + (e.key === 'ArrowLeft' ? 24 : -24)))); }
+    };
   }
   send() {
     const el = this.ta;
@@ -853,7 +1091,7 @@ class Component extends DCLogic {
       const live = !m.done; const stopped = !!m.stopped;
       const n = live ? Math.min(3, 1 + Math.floor((Date.now() - m.start) / 900)) : (stopped ? (m.n || 1) : 3);
       const open = !!st.caps[m.id];
-      return { text: m.text, ...this.foldView(m.text, 'm' + m.id), done: !live, live, ok: !live && !stopped, stopped, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''),
+      const mArts = st.sid ? this.artsOf(st.sid, c) : []; const mArt = mArts.find((a) => a.id === 'm' + m.id); return { hasChit: !!mArt, chit: mArt ? this.chitView(mArt, st.sid, mArts) : { title: '', meta: '', icon: '', cls: '', open: () => {} }, text: m.text, ...this.foldView(m.text, 'm' + m.id), done: !live, live, ok: !live && !stopped, stopped, open, cls: (open ? 'open ' : '') + (live ? 'live' : ''),
         time: live ? fmtSec(Date.now() - m.start) : (m.elapsed || '0:03'), title: live ? 'Working' : stopped ? 'Stopped' : 'Done',
         sub: live ? n + (n === 1 ? ' step' : ' steps') : stopped ? n + ' steps · interrupted' : '3 LLM calls · 3 tool calls',
         now: live ? NOW[n - 1] : '',
@@ -878,7 +1116,7 @@ class Component extends DCLogic {
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
             pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
       }),
-      hasSession: !!cur,
+      ...this.sideVals(st, c, sessionBusy), hasSession: !!cur,
       sheetCls: cur ? 'inws' : '', sheetWc: cur ? ((WS.find((w) => w.name === c.ws) || {}).color || '') : '', noSession: !cur, closeSession: () => this.setState({ sid: null, open: null, draft: 0 }),
       greeting, greetSub: 'What are we working on? One line is enough; the agent asks when it needs more.',
       helloPlaceholder: isMax ? 'Max effort. Give it the hard one…' : 'Describe the job, or paste a ticket…',

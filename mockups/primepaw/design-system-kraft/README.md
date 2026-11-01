@@ -74,4 +74,5 @@ Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so ca
 - **Hover.** Card lifts. Paper tints to `hover` and keeps its texture.
 - **Status stickers.** White text sits on `st-green`, `st-amber` or `st-red`, which hold 4.5:1 in both themes.
 - **Stamps.** One angle, `tilt-stamp`.
+- **Side panel.** What sits beside a conversation lives in one panel opened by tabs at the right of the strip: artifacts on a `kr-clipboard`, the side chat on a `kr-pad`. With both open they stack. An artifact also shows in the thread as a `kr-artchip`.
 - **Page or drawer.** Things you author (agents, skills, workspaces) open an edit page. Things that run or that you inspect in place (MCP servers, jobs, cards) open a drawer.
