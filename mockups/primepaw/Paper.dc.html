@@ -646,22 +646,22 @@ const WS = [
 const THREADS = {
   s3: [
     { k: 'user', text: 'Open an issue for synced cards showing markdown as plain text. Check how local cards render it first.' },
-    { k: 'cap', id: 'c1', time: '13s', sub: '2 LLM calls · 1 tool call', dots: ['think', 'read'], steps: [
+    { k: 'cap', id: 'c1', time: '0:13', sub: '2 LLM calls · 1 tool call', dots: ['think', 'read'], steps: [
       { k: 'think', label: 'thinking', detail: 'Local vs synced cards share one view; find the branch', time: '4s' },
       { k: 'read', label: 'read', detail: 'src/cards/card-detail.tsx', time: '0.3s' } ] },
     { k: 'said', text: 'Line 212 renders markdown but line 180 renders plain text, so I\'ll check what separates them.' },
-    { k: 'cap', id: 'c2', time: '31s', sub: '4 LLM calls · 4 tool calls', dots: ['bash', 'read', 'read', 'bash'], steps: [
+    { k: 'cap', id: 'c2', time: '0:31', sub: '4 LLM calls · 4 tool calls', dots: ['bash', 'read', 'read', 'bash'], steps: [
       { k: 'bash', label: 'bash', detail: "git log -S'plain text' -- src/cards/card-detail.tsx", time: '1.1s' },
       { k: 'read', label: 'read', detail: 'src/ui/markdown-view.tsx', time: '0.2s' },
       { k: 'read', label: 'read', detail: 'src/sync/tracker.ts', time: '0.2s' },
       { k: 'bash', label: 'bash', detail: 'grep -rn "allowRawHtml" src/ | head', time: '0.4s' } ] },
     { k: 'said', text: 'Local cards render markdown, but synced cards from the tracker deliberately show plain text. That is what the ticket needs to change.' },
-    { k: 'cap', id: 'c3', time: '10s', sub: '1 LLM call · 1 tool call · turn 55s', dots: ['ask'], steps: [
+    { k: 'cap', id: 'c3', time: '0:10', sub: '1 LLM call · 1 tool call · turn 55s', dots: ['ask'], steps: [
       { k: 'ask', label: 'gh', detail: 'gh issue create --title "Render synced card descriptions as markdown" --label enhancement', time: '3.0s' } ] }
   ],
   s5: [
     { k: 'user', text: 'Enable browser telemetry in the Orbit checkout. Keep the client token out of the bundle and gate it behind a flag.' },
-    { k: 'cap', id: 'r1', time: '48s', sub: '5 LLM calls · 6 tool calls', dots: ['read', 'read', 'bash', 'edit', 'edit', 'bash'], steps: [
+    { k: 'cap', id: 'r1', time: '0:48', sub: '5 LLM calls · 6 tool calls', dots: ['read', 'read', 'bash', 'edit', 'edit', 'bash'], steps: [
       { k: 'read', label: 'read', detail: 'src/root.tsx', time: '0.2s' },
       { k: 'bash', label: 'bash', detail: 'pnpm add @acme/browser-telemetry', time: '9.4s' },
       { k: 'edit', label: 'edit', detail: 'src/root.tsx (+24)', time: '0.3s' },
@@ -673,7 +673,7 @@ const THREADS = {
 };
 const GENERIC = [
   { k: 'user', text: 'Pick this up from where the last session left off and summarise the state.' },
-  { k: 'cap', id: 'g1', time: '21s', sub: '3 LLM calls · 2 tool calls', dots: ['think', 'read', 'bash'], steps: [
+  { k: 'cap', id: 'g1', time: '0:21', sub: '3 LLM calls · 2 tool calls', dots: ['think', 'read', 'bash'], steps: [
     { k: 'think', label: 'thinking', detail: 'Read the last reply and the working tree first', time: '6s' },
     { k: 'read', label: 'read', detail: 'last reply · 1.4k tokens', time: '0.2s' },
     { k: 'bash', label: 'bash', detail: 'git status --short && git log --oneline -3', time: '0.9s' } ] }
