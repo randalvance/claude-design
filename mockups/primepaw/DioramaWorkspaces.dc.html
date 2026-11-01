@@ -21,14 +21,14 @@ button,input{font:inherit}
 .pp-ic{width:16px;height:16px;flex:none}
 
 .app{position:relative;width:100%;display:flex;background-color:var(--paper);min-height:100vh}
-.app::after{content:"";position:absolute;inset:0;background:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
+.app::after{content:"";position:absolute;inset:0;background-color:#fff;filter:url(#pp-grain);opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:3}
 
 
 .pp-rail{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0 10px;background-color:var(--rail);border-right:1px solid var(--line);box-sizing:border-box;overflow:auto;position:sticky;top:0;height:100vh;align-self:flex-start;z-index:1}
 .pp-logo{width:36px;height:36px;display:grid;place-items:center;color:var(--red);margin-bottom:6px;transform:rotate(-6deg)}
 .pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mute);font-size:10px;font-weight:800;border-radius:3px;transition:transform .15s var(--ease),background .15s var(--ease)}
 .pp-rb svg{width:18px;height:18px}
-.pp-rb:hover{background-color:var(--sheet-warm);transform:translateY(-1px)}
+.pp-rb:hover{background-color:var(--sheet-warm);transform:translateY(-1px);background-image:var(--face),var(--pulp)}
 .pp-rb.is-on{background-color:var(--sheet-warm);color:var(--ink);box-shadow:var(--lift-1);transform:rotate(-2deg)}
 .pp-rb:focus-visible{outline:2px solid var(--blue)}
 .pp-rb .pp-nb{position:absolute;top:0;right:4px;transform:rotate(8deg)}
