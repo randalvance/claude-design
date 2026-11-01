@@ -114,6 +114,18 @@ button{font:inherit}
 /* big titles are ink soaked into the paper: the wall texture runs through the letters and they multiply into the sheet */
 .ttl h1,h1.hi{color:transparent;background-image:var(--pulp),var(--pulp),linear-gradient(var(--ink),var(--ink));-webkit-background-clip:text;background-clip:text;mix-blend-mode:multiply}
 .page.night .ttl h1,.page.night h1.hi{mix-blend-mode:screen}
+/* the title is written on the paper: click it to rewrite it */
+.ttl h1{border-bottom:2px dashed transparent;transition:border-color .15s var(--ease)}
+.ttl h1:hover{border-color:var(--bar)}
+.ttlb{cursor:text}
+.ttlb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ttli{all:unset;box-sizing:border-box;width:min(520px,42vw);min-width:0;padding:0 2px 3px 0;font-family:var(--hand);font-size:38px;font-weight:600;line-height:1.05;color:var(--ink);border-bottom:2px dashed var(--ink)}
+.aigen{all:unset;cursor:pointer;position:relative;flex:none;box-sizing:border-box;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));box-shadow:var(--lift-board-sm);color:var(--ink);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.aigen svg{width:15px;height:15px}
+.aigen:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
+.aigen:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.aigen:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.aigen.busy{cursor:progress;transform:translate(2px,3px);box-shadow:var(--press-board)}
 .tagb{position:relative;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px 0 16px;background-color:var(--kraft);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:700;clip-path:polygon(0 50%,9px 0,100% 0,100% 100%,9px 100%);white-space:nowrap}
 .tagb::before{content:"";position:absolute;left:6px;top:50%;width:5px;height:5px;border-radius:50%;background-color:var(--paper);transform:translateY(-50%);box-shadow:inset 0 1px 1px rgba(0,0,0,.3)}
 .tagw{filter:drop-shadow(1px 1px 0 var(--kraft2)) drop-shadow(3px 4px 4px var(--amb-2))}
@@ -476,7 +488,7 @@ button{font:inherit}
   <sc-if value="{{hasSession}}" hint-placeholder-val="{{false}}">
   <header class="top">
     <div class="ttl">
-      <h1>{{cur.t}}</h1>
+      <sc-if value="{{titleEditing}}" hint-placeholder-val="{{false}}"><input class="ttli" aria-label="Session title" ref="{{titleRef}}" onKeyDown="{{titleKey}}" onBlur="{{titleCommit}}"></sc-if><sc-if value="{{titleShown}}" hint-placeholder-val="{{true}}"><h1><span class="ttlb" role="button" tabindex="0" onClick="{{titleEdit}}" onKeyDown="{{titleOpenKey}}" title="Click to rename">{{cur.t}}</span></h1></sc-if><button class="aigen {{titleCls}}" onClick="{{titleGen}}" aria-label="{{titleGenLabel}}" title="{{titleGenLabel}}" aria-busy="{{titleBusy}}"><sc-if value="{{titleBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{titleIdle}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"></path></svg></sc-if></button>
       <span class="tagw"><span class="tagb">{{cur.branch}}</span></span>
     </div>
     <div class="meta"><span>{{cur.role}} · {{cur.ws}}</span><span class="sticker {{stCls}}"><i aria-hidden="true"></i>{{stLabel}}</span></div>
@@ -748,12 +760,14 @@ const LIVE_STEPS = [
 const NOW = ['thinking…', 'reading the last reply…', 'running git status…'];
 const DEFAULT_TODOS = [{ t: 'Summarise the current state', d: true }, { t: 'Confirm next step with the user', d: false }];
 function fmtSec(ms) { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+function titleIdeas(c) { const topic = String(c.branch || c.t).split('/').pop().replace(/[-_]/g, ' '); const T = topic.charAt(0).toUpperCase() + topic.slice(1); return [T + ': where it stands', 'Finish ' + topic, c.role + ' on ' + topic, T + ' and what is left']; }
 function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
 const CTX_PARTS = [['System prompt', .14, 'var(--kind-think)'], ['Memory', .09, 'var(--amber)'], ['Tools', .22, 'var(--green)'], ['This chat', .55, 'var(--blue)']];
 function findSession(id) { for (const w of WS) { const s = w.sessions.find((x) => x.id === id); if (s) return { ...s, ws: w.name }; } return null; }
 
 class Component extends DCLogic {
   ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
+  titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
   state = { sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
   componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
@@ -846,7 +860,7 @@ class Component extends DCLogic {
         const sessions = st.newSessions.filter((n) => n.wsId === w.id).map((n) => this.sess(n.id)).concat(w.sessions).filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
         return { name: w.name, color: w.color, attn: !!w.attn, count: sessions.length, open, cls: open ? '' : 'closed',
           toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
-          sessions: sessions.map((s) => ({ t: s.t, dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+          sessions: sessions.map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
             pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
       }),
@@ -860,7 +874,7 @@ class Component extends DCLogic {
       wsRows: WS.map((w) => ({ name: w.name, color: w.color, n: w.sessions.length + ' sessions', sel: w.id === st.newWs, cls: w.id === st.newWs ? 'sel' : '', pick: () => this.setState({ newWs: w.id, open: null }) })),
       roleOpen: st.open === 'role', toggleRole: () => this.setState({ open: st.open === 'role' ? null : 'role' }), pickRole: st.newRole,
       roleRows: ROLES.map((r) => ({ name: r[0], desc: r[1], sel: r[0] === st.newRole, cls: r[0] === st.newRole ? 'sel' : '', pick: () => this.setState({ newRole: r[0], open: null }) })),
-      cur: { t: c.t, role: c.role, ws: c.ws, branch: c.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
+      cur: { t: this.titleOf(st.sid, c.t), role: c.role, ws: c.ws, branch: c.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
       stCls: sessionBusy ? 'busy' : c.attn ? 'attn' : '', stLabel: sessionBusy ? 'Busy' : c.attn ? 'Needs attention' : 'Idle',
       tabs: TABS.map((t) => ({ label: t, icon: TAB_ICONS[t], cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
       isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab,
@@ -876,7 +890,7 @@ class Component extends DCLogic {
       onBlur: () => { clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ focus: false }), 120); },
       modelOpen: st.open === 'model', anyOpen: !!st.open, ctxOpen: st.open === 'ctx', toggleCtx: () => this.setState({ open: st.open === 'ctx' ? null : 'ctx' }), ...this.ctxCard(used, total),
       toggleModel: () => this.setState({ open: st.open === 'model' ? null : 'model' }),
-      closeAll: () => this.setState({ open: null }),
+      closeAll: () => this.setState({ open: null }), titleEditing: !!st.titleEditing, titleShown: !st.titleEditing, titleBusy: !!st.titleBusy, titleIdle: !st.titleBusy, titleCls: st.titleBusy ? 'busy' : '', titleGenLabel: st.titleBusy ? 'Writing a title' : 'Generate a title', titleEdit: () => this.setState({ titleEditing: true }), titleOpenKey: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.setState({ titleEditing: true }); } }, titleRef: (el) => { if (el && !el.dataset.ready) { el.dataset.ready = '1'; el.value = this.titleOf(st.sid, c.t); el.focus(); el.select(); } }, titleKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); e.currentTarget.blur(); } if (e.key === 'Escape') { this.skipTitle = true; e.currentTarget.blur(); } }, titleCommit: (e) => { const v = e.currentTarget.value.trim(); const skip = this.skipTitle; this.skipTitle = false; this.setState({ titleEditing: false, ...(skip || !v ? {} : { titles: { ...(this.state.titles || {}), [st.sid]: v } }) }); }, titleGen: () => { if (this.state.titleBusy) return; const sid = st.sid; const ideas = titleIdeas(this.sess(sid)); this.setState({ titleBusy: true, titleEditing: false }); clearTimeout(this.tg); this.tg = setTimeout(() => { const n = (this.state.titleGenN || 0) + 1; this.setState({ titleBusy: false, titleGenN: n, titles: { ...(this.state.titles || {}), [sid]: ideas[n % ideas.length] } }); }, 900); },
       modelName: model.name,
       models: MODELS.map((m) => ({ ...m, defLabel: EFFORT_FULL[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
       ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
