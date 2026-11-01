@@ -1,0 +1,63 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%}
+body{background:var(--desk);color:var(--ink);font-family:var(--font-sans);overflow:hidden}
+.cover{position:relative;height:320px;overflow:hidden}
+.art{position:absolute;top:0;left:480px;width:480px;height:320px;overflow:hidden}
+.art svg{display:block;width:480px;height:320px}
+.board{fill:var(--board)}.board2{fill:var(--board-2)}.amb{fill:var(--amb)}
+.sheet{fill:var(--sheet)}.edge2{fill:var(--edge-2)}
+.blue{fill:var(--blue)}.red{fill:var(--red)}.kraft2{fill:var(--kraft-2)}.cut{fill:var(--sticker-cut)}.attn{fill:var(--attn)}
+.flute{stroke:var(--board-2);stroke-width:1;fill:none;opacity:.45}
+.slab{rx:var(--radius-10)}.card{rx:var(--radius-4)}.stk{rx:var(--radius-8)}.stkcut{rx:var(--radius-10)}
+.words{position:absolute;left:28px;bottom:28px;max-width:440px}
+.name{margin:0;font-family:var(--font-serif);font-size:120px;line-height:.95;font-weight:600;letter-spacing:-.01em;font-variation-settings:"opsz" 144;color:var(--ink)}
+.tag{margin:8px 0 0 4px;font-size:14px;line-height:20px;color:var(--mute)}
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 320" width="480" height="320">
+<!--
+  blocks      board 232×232 cardboard slab on its board-2 cut edge and an amb shadow block · sheet 184×128 paper on its edge-2 cut edge · blue 112×64 sticker inside a sticker-cut block · red disc r34 inside a sticker-cut disc · kraft-2 disc r22 ringed sticker-cut then attn (the selected sticker)
+  arrangement the diorama's stack: the cardboard slab at the back, tilted -2°, the paper laid on it at 1.5°, the stickers stuck flat on both, each cut edge 2–3px right and 3–4px down; the blue sticker bleeds toward the top right
+  pattern     corrugation flutes across the cardboard: 28 hairlines in board-2 at the space-8 pitch, clipped to the slab ("cardboard is fluted")
+  scales      edges space-2/space-3 (board 3×4, paper 2×3), pitch space-8, corners radius-10 on the slab and the sticker cut, radius-8 on the sticker, radius-4 on the paper, discs radius-round
+-->
+<defs><clipPath id="slab"><rect x="34" y="54" width="232" height="232" rx="10"/></clipPath></defs>
+<g transform="rotate(-2 150 170)">
+<rect class="amb slab" x="39" y="62" width="232" height="232" rx="10"/>
+<rect class="board2 slab" x="37" y="58" width="232" height="232" rx="10"/>
+<rect class="board slab" x="34" y="54" width="232" height="232" rx="10"/>
+<path class="flute" clip-path="url(#slab)" d="M34 62H266M34 70H266M34 78H266M34 86H266M34 94H266M34 102H266M34 110H266M34 118H266M34 126H266M34 134H266M34 142H266M34 150H266M34 158H266M34 166H266M34 174H266M34 182H266M34 190H266M34 198H266M34 206H266M34 214H266M34 222H266M34 230H266M34 238H266M34 246H266M34 254H266M34 262H266M34 270H266M34 278H266"/>
+</g>
+<g transform="rotate(1.5 256 200)">
+<rect class="edge2 card" x="166" y="139" width="184" height="128" rx="4"/>
+<rect class="sheet card" x="164" y="136" width="184" height="128" rx="4"/>
+</g>
+<g transform="rotate(-6 388 92)">
+<rect class="cut stkcut" x="330" y="58" width="116" height="68" rx="10"/>
+<rect class="blue stk" x="332" y="60" width="112" height="64" rx="8"/>
+</g>
+<circle class="cut" cx="122" cy="98" r="36"/>
+<circle class="red" cx="122" cy="98" r="34"/>
+<circle class="attn" cx="308" cy="232" r="26.5"/>
+<circle class="cut" cx="308" cy="232" r="24"/>
+<circle class="kraft2" cx="308" cy="232" r="22"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Kraft</h1>
+<p class="tag">Cardboard, paper and stickers on one cream sheet.</p>
+</div>
+</div>
+</body>
+</html>

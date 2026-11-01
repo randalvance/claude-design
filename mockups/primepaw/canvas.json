@@ -286,6 +286,13 @@
       "artifact": "https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh",
       "version": "1793353188-d80b",
       "copiedAt": "2026-10-30T09:40:00Z"
+    },
+    {
+      "title": "Kraft",
+      "namespace": "kraft",
+      "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
+      "version": "1793521553-7651",
+      "copiedAt": "2026-11-01T08:26:33Z"
     }
   ]
 }

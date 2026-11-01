@@ -1,0 +1,29 @@
+<!-- @dsCard group="Materials" height=290 subtitle="Paper at three heights, kraft, highlighter, a card" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft · Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-height:100%}
+.wrap{padding:24px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px 26px;align-items:start}
+.p{padding:10px 12px;font-size:12.5px}
+.p b{font-weight:800}
+.p i{font-family:var(--font-hand);font-style:normal;font-size:15px;color:var(--mute)}
+.p .t{font-family:var(--font-serif);font-size:20px;font-weight:600;line-height:1.2;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
+.lab{font-family:var(--font-hand);font-size:15px;color:var(--mute);margin-bottom:8px;line-height:1}
+</style>
+</head>
+<body class="kr-root">
+<div class="wrap kr-desk">
+  <div><div class="lab">paper · lift-paper-1</div><div class="kr-sheet p"><b>Issue Creator</b> <i>2h ago</i></div></div>
+  <div><div class="lab">hovered · lift-paper-2</div><div class="kr-sheet is-2 p" style="background-color:var(--hover)"><b>Paper diorama</b> <i>12m ago</i></div></div>
+  <div><div class="lab">selected · highlighter</div><div class="kr-sheet is-hl p" style="transform:rotate(var(--tilt-row-on))"><b>Kraft design system</b> <i>now</i></div></div>
+  <div><div class="lab">kraft paper</div><div class="kr-sheet is-kraft p"><b>Primepaw</b> <i>3 workspaces</i></div></div>
+  <div><div class="lab">tall paper · lift-paper-3</div><div class="kr-sheet is-3 is-warm p" style="padding:14px 16px"><div class="t">Issue Creator</div><i>agents · 4 steps</i></div></div>
+  <div><div class="lab">card inside paper · inner</div><div class="kr-sheet is-3 is-card p" style="padding:12px"><div class="kr-sheet is-inner p" style="margin-bottom:8px">Local cards render markdown.</div><div class="kr-sheet is-inner p">Synced cards show plain text.</div></div></div>
+</div>
+</body>
+</html>

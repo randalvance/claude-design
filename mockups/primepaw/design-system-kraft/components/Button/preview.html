@@ -1,0 +1,50 @@
+<!-- @dsCard group="Actions" height=300 subtitle="Sticker, paper, cardboard, printed, written" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft · Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-height:100%}
+.cap{font-family:var(--font-hand);font-size:16px;color:var(--mute);width:86px;flex:none;line-height:1}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.wrap{display:flex;flex-direction:column;gap:18px;padding:20px 24px}
+</style>
+</head>
+<body class="kr-root">
+<div class="wrap">
+  <div class="row"><span class="cap">sticker</span>
+    <button class="kr-btn kr-btn-sticker"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>New session</button>
+    <button class="kr-btn kr-btn-sticker kr-red-2"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></svg>Delete</button>
+    <button class="kr-btn kr-btn-sticker kr-attn">Needs you</button>
+    <button class="kr-btn kr-btn-sticker is-on" aria-pressed="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Following</button>
+    <button class="kr-btn kr-btn-sticker" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Send</button>
+  </div>
+  <div class="row"><span class="cap">paper</span>
+    <button class="kr-btn kr-btn-paper">Cancel</button>
+    <button class="kr-btn kr-btn-paper"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy link</button>
+    <button class="kr-btn kr-btn-paper is-on" aria-pressed="true">Filters</button>
+    <button class="kr-btn kr-btn-paper kr-kraft">Open folder</button>
+    <button class="kr-btn kr-btn-paper" disabled>Cancel</button>
+  </div>
+  <div class="row"><span class="cap">cardboard</span>
+    <button class="kr-btn kr-btn-board"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5c0 4-12 3-12 5"/></svg>Run on main</button>
+    <button class="kr-btn kr-btn-board kr-green"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Merge</button>
+  </div>
+  <div class="row"><span class="cap">printed</span>
+    <button class="kr-btn kr-btn-print">Pin</button>
+    <button class="kr-btn kr-btn-print is-on" aria-pressed="true">Pinned</button>
+    <span class="cap" style="width:auto">written</span>
+    <button class="kr-btn kr-btn-link">show all 12</button>
+  </div>
+  <div class="row"><span class="cap">sizes</span>
+    <button class="kr-btn kr-btn-sticker is-sm"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>New</button>
+    <button class="kr-btn kr-btn-paper is-sm">Cancel</button>
+    <button class="kr-btn kr-btn-sticker is-lg"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Send to agent</button>
+    <button class="kr-btn kr-btn-paper is-lg">Save draft</button>
+  </div>
+</div>
+</body>
+</html>
