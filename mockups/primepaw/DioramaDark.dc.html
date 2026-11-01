@@ -354,6 +354,16 @@ button{font:inherit}
 .page.night .wsh .cnt,.page.night .wsh .chev{mix-blend-mode:screen}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+/* Session rows: the row's press is a stretched button, so the menu mark beside it can be a real button too */
+.row .rowhit{all:unset;position:absolute;inset:0;z-index:0;cursor:pointer;border-radius:3px}
+.row>*:not(.rowhit){pointer-events:none}
+.row:has(.rowhit:focus-visible){outline:2px solid var(--blue);outline-offset:-2px}
+.row .rowmore{all:unset;cursor:pointer;pointer-events:auto;position:relative;z-index:1;flex:none;box-sizing:border-box;width:18px;height:26px;margin:-4px -7px -4px -2px;display:grid;place-items:center;color:var(--ink);border-radius:3px;opacity:0;transition:opacity .12s var(--ease),background-color .12s var(--ease)}
+.row .rowmore svg{width:14px;height:14px;display:block}
+.row:hover .rowmore,.row:has(:focus-visible) .rowmore{opacity:1}
+.row .rowmore:hover{background-color:color-mix(in srgb,var(--ink) 12%,transparent);background-image:var(--pulp)}
+.row .rowmore:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+@media (hover:none){.row .rowmore{opacity:1}}
 /* Session side panel: artifacts on a clipboard, the side chat on a legal pad */
 .leaf{flex-direction:row}
 .maincol{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;container-type:inline-size}
@@ -503,7 +513,7 @@ button{font:inherit}
           <div class="wsb"><div class="wsi">
             <div class="rows">
               <sc-for list="{{w.sessions}}" as="s" hint-placeholder-count="3">
-                <button class="row {{s.cls}}" onClick="{{s.pick}}" aria-current="{{s.cur}}">
+                <div class="row {{s.cls}}"><button class="rowhit" onClick="{{s.pick}}" aria-current="{{s.cur}}" aria-label="{{s.t}}"></button>
                   <sc-if value="{{s.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{s.attn}}</span></sc-if>
                   <span class="src" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg>
@@ -512,8 +522,7 @@ button{font:inherit}
                   <span class="t">{{s.t}}</span>
                   <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}"><span class="subn" title="Subagents">{{s.sub}}</span></sc-if>
                   <sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if>
-                  <span class="dur">{{s.dur}}</span>
-                </button>
+                  <span class="dur">{{s.dur}}</span><button class="rowmore" aria-label="More for {{s.t}}" title="More"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></div>
               </sc-for>
             </div>
           </div></div>
