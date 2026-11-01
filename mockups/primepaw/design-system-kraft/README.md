@@ -12,7 +12,9 @@ Kraft is the material language of the Primepaw diorama: one cream sheet of `desk
 
 ## Materials
 
-See the Materials section for the recipe of each. In short: cardboard is `board` on `board-2` with `flute` hairlines and `lift-board`; paper is `sheet` (or `card`, `sheet-warm`, `kraft`, `highlighter`) on `edge` with a `lift-paper-*` shadow; a sticker is a solid identity colour with `gloss`, a `sticker` cut and no shadow.
+See the Materials section for the recipe of each. In short: cardboard is `board` on `board-2` with the flecked `pulp-board` tile and `lift-board`; paper is `sheet` (or `card`, `sheet-warm`, `kraft`, `highlighter`) on `edge` with a `lift-paper-*` shadow; a sticker is a solid identity colour with `gloss`, a `sticker` cut and no shadow.
+
+Each material has a texture and keeps its colour. White paper carries the paper texture of the Factory Overseer workshop walls, ported texel for texel and lit from the top left (`pulp-paper`): soft pulp clouds and short fibers under the `face` gradient of the chat sheet, the leaf, rows, fields and cards. Cardboard is a flecked, unfluted board (`pulp-board`). The workspace header strips are felt (`pulp-felt`, `is-felt`), and what is on them is written in pen: the count and the caret are `kr-pen`, Caveat in `ink`. Kraft paper and stickers stay plain. See the Texture tokens.
 
 Every button is cardboard: `kr-btn` in `board` with a `board-2` edge and `lift-board-sm`, `kr-green` (`mat-green`) for the one committing action on a sheet, `kr-red` (`mat-red-2` on `mat-red-3`) for a destructive one, `is-on` pressed flat for a latched filter or mode. Paper and stickers are never buttons; the rail's navigation stickers are marks, not actions.
 
@@ -57,4 +59,4 @@ Hover: a button lifts 1px up and left so its edge grows (`lift-board-up`); a row
 
 ## Grain
 
-Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so cardboard, paper and sticker share one surface. Never grain a single piece.
+Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so cardboard, paper and sticker share one surface. Never grain a single piece; the material textures (`pulp-paper`, `pulp-board`, `pulp-felt`) belong to the piece and sit under its face.

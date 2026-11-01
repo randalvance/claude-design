@@ -1,6 +1,6 @@
 # Button
 
-Every button is cut from cardboard. The face is `board` with `face` light and `flute` hairlines, the cut edge is `board-2` (2px right, 3px down: `lift-board-sm`), the corners `radius-6`, the label `label` in `ink`. There is no other button material: paper carries words, stickers mark things, cardboard is what you press.
+Every button is cut from cardboard. The face is `board` with `face` light over the flecked `pulp-board` tile, the cut edge is `board-2` (2px right, 3px down: `lift-board-sm`), the corners `radius-6`, the label `label` in `ink`. There is no other button material: paper carries words, stickers mark things, cardboard is what you press.
 
 - `kr-btn` is kraft cardboard, for every action including the primary one. The primary action is the one nearest the composer or at the end of a row, not a different colour.
 - `kr-green` is sage cardboard, `mat-green` on `mat-green-2` with `ink` (6.3:1), for the committing action on a form: Merge, Run, Save. At most one per sheet.

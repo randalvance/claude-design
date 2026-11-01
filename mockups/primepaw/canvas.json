@@ -276,7 +276,7 @@
       "y": 0,
       "w": 320,
       "page": "diorama",
-      "text": "Paper diorama: the same shell as the Paper page, rebuilt as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the cat peeking over the composer are stickers too. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a slot with a sticker knob, and YOLO, the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for YOLO and Max, a green sticker check on a picked row. Same live demo, same Night toggle."
+      "text": "Paper diorama: the same shell as the Paper page, rebuilt as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the cat peeking over the composer are stickers too. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a slot with a sticker knob, and YOLO, the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for YOLO and Max, a green sticker check on a picked row. The white paper (the chat sheet, the leaf, the rows and fields) carries the paper texture of the Factory Overseer workshop walls with its colour kept; cardboard is a flecked board; the workspace headers are felt, their count and caret written in pen ink. Same live demo, same Night toggle."
     }
   },
   "designSystems": [
@@ -291,8 +291,8 @@
       "title": "Kraft",
       "namespace": "kraft",
       "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
-      "version": "1793526648-d0f5",
-      "copiedAt": "2026-11-01T09:51:06Z"
+      "version": "1793528225-204c",
+      "copiedAt": "2026-11-01T10:17:15Z"
     }
   ]
 }
