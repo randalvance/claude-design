@@ -47,7 +47,7 @@ Set titles in `title` and the agent's narration in `said`. Set body copy in `bod
 
 ## Iconography
 
-Icons are the Paper Chat set under `assets/Icons`: single-ink 24px glyphs drawn in `#2a2219`. On a sticker they are printed in `white` at 24px inside a 44px sticker (`space-10` padding); on paper they are `ink` at 16px. Inline the SVG and set the stroke to `currentColor` where the glyph must take a colour; an `<img>` cannot.
+Icons live under `assets/Icons`: single-ink 24px glyphs drawn in `#2a2219`. On a sticker they are printed in `white` at 24px inside a 44px sticker (`space-10` padding); on paper they are `ink` at 16px. Inline the SVG and set the stroke to `currentColor` where the glyph must take a colour; an `<img>` cannot.
 
 ## Content
 
