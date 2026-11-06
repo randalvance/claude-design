@@ -434,7 +434,7 @@
       "y": 15000,
       "w": 320,
       "page": "diorama",
-      "text": "Knowledge base: the book on the rail. A notes board on the left, folders as tinted strips. The note is a sheet of paper: type, title, description and tags on top, then blocks you can drag by the grip to move. Drag a list bullet to move an item, or drop it onto another item to nest it. Parent, related, links and backlinks sit in the margin. Graph pins every note to cork with thread. The second pair starts on setting up: pick a folder or clone a repo."
+      "text": "Knowledge base: the book on the rail. The notes board is a file tree on one sheet of paper: nested folders and .md files with their git state. The note is a sheet of paper: type, title, description and tags on top, then blocks you can drag by the grip to move. Drag a list bullet to move an item, or drop it onto another item to nest it. Parent, related, links and backlinks sit in the margin. Graph is react-force-graph on cork: index cards strung with thread that you drag, zoom and click open. The second pair starts on setting up: pick a folder or clone a repo."
     }
   },
   "designSystems": [
@@ -442,8 +442,8 @@
       "title": "Kraft",
       "namespace": "kraft",
       "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
-      "version": "1793941424-2946",
-      "copiedAt": "2026-11-06T05:03:44Z"
+      "version": "1793942589-f4f2",
+      "copiedAt": "2026-11-06T05:23:10Z"
     }
   ]
 }

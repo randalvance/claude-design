@@ -27,8 +27,9 @@ Every screen is a live demo with a light board and a `…Dark` board.
 | `DioramaKanban.dc.html`, `DioramaKanbanDark.dc.html` | Kanban boards list: one card per board with a stamped source, counts and sync. |
 | `DioramaBoard.dc.html`, `DioramaBoardDark.dc.html` | One board as a framed cork board with pinned sticky notes, plus a dependencies view and a card drawer. |
 | `DioramaBackground.dc.html`, `DioramaBackgroundDark.dc.html` | Background jobs: a timetable sheet of every job and workflow, with a side drawer for run history. |
-| `DioramaKnowledge.dc.html`, `DioramaKnowledgeDark.dc.html` | Knowledge base, the book on the rail. The header has the folder path, the branch, the sync state and Sync, Search, settings (remote, auto-commit, push), a Note or Graph switch and New note. The notes board on the left holds folders as tinted strips and notes as stacked rows, with a filter that also takes `#tag` and `type:`, and New note and New folder. The note is a sheet of paper on a small pile: type, title, description and tags on top, then blocks (headings, paragraphs, lists, code, quotes, tables). Click a block to write in it. Drag a block by its grip to move it, drag a list bullet to move an item, or drop it on another item to nest it. Parent, related, links and backlinks sit in the margin, and `[[links]]` open the note they name or start it. Graph pins every note to cork as an index card strung with thread. |
+| `DioramaKnowledge.dc.html`, `DioramaKnowledgeDark.dc.html` | Knowledge base, the book on the rail. The header has the folder path, the branch, the sync state and Sync, Search, settings (remote, auto-commit, push), a Note or Graph switch and New note. The notes board on the left is a file navigator printed on one sheet of paper: nested folders and `.md` files sorted folders first, git marks (`M` changed, `U` new, a dot on a folder holding either), New note, New folder and Collapse, a filter that also takes `#tag` and `type:`, and arrow keys to walk the tree. The note is a sheet of paper on a small pile: type, title, description and tags on top, then blocks (headings, paragraphs, lists, code, quotes, tables). Click a block to write in it. Drag a block by its grip to move it, drag a list bullet to move an item, or drop it on another item to nest it. Parent, related, links and backlinks sit in the margin, and `[[links]]` open the note they name or start it. Graph lays the notes out with react-force-graph on cork: index cards strung with thread that you can drag, zoom and click open. |
 | `DioramaKnowledgeSetup.dc.html`, `DioramaKnowledgeSetupDark.dc.html` | The same page before there are notes: pick a folder on this Mac or clone a repo, choose how often to commit and push, then open the knowledge base. |
+| `lib/react-force-graph-2d.js` | react-force-graph-2d 1.29.2, its UMD build with one line in front so the canvas can mount it as `ForceGraph2D`. The Knowledge base graph uses it. |
 | `canvas.json` | Canvas index: the Paper diorama page, its frames, order and notes. |
 | `support.js` | The runtime the boards load. |
 
@@ -51,7 +52,7 @@ https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV and mirrored under `design-sys
   `kr-sticker`) and the parts cut from them: Button (every button is thick card with the paper texture:
   kraft, blue, sage for the confirm, terracotta for the destructive one, latched flat when on),
   IconButton (rail tiles and discs), Toggle (a paper pull-tab in a cut slot), Sheet, Board, Sticker, Tab,
-  Title, Stamp, Popup, Note, Cork, Capsule, Gauge, Clipboard, LegalPad, ArtifactChip, PermissionSlip, QuestionSheet and NotePage, each with a `preview.html` and `README.md`, a Dark
+  Title, Stamp, Popup, Note, Cork, Capsule, Gauge, Clipboard, LegalPad, ArtifactChip, PermissionSlip, QuestionSheet, NotePage and FileTree, each with a `preview.html` and `README.md`, a Dark
   mode card, and the cover.
 - `assets/Icons/` — the 27 single-ink icons as SVG.
 

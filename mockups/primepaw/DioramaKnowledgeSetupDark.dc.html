@@ -74,44 +74,44 @@ button{font:inherit}
 .srch input::placeholder{color:var(--faint);font-family:var(--font-hand);font-size:17px}
 .srch .clr{all:unset;cursor:pointer;width:18px;height:18px;display:grid;place-items:center;color:var(--mute);border-radius:50%}
 .srch .clr:hover{color:var(--ink)}
-.kacts{display:flex;align-items:center;gap:8px}
-.kacts .kn{flex:1;min-width:0;font-family:var(--font-hand);font-size:17px;color:var(--ink);white-space:nowrap}
 .fhint{font-family:var(--font-hand);font-size:15px;color:var(--ink);opacity:.75;line-height:1.1;padding:0 2px}
 .fhint code{font-family:var(--font-mono);font-size:11px;background-color:var(--glass);padding:0 3px;border-radius:2px}
-.tree{flex:1;overflow:auto;padding:6px 10px 16px;display:flex;flex-direction:column;gap:12px;min-height:0;scrollbar-width:thin}
-.fold{position:relative}
-.fh{all:unset;cursor:pointer;position:relative;z-index:22;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:6px 10px;background:color-mix(in srgb,var(--wc,var(--green)) 62%,var(--sheet));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.1);border-radius:5px 5px 0 0;box-shadow:1px 1px 0 color-mix(in srgb,var(--wc,var(--green)) 55%,var(--edge-2)),3px 4px 5px var(--amb);font-size:13px;font-weight:800;color:var(--ink);transition:transform .15s var(--ease)}
-.fh:hover{transform:translateY(-1px)}
-.fh:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.fh .chev{width:14px;height:14px;flex:none;color:var(--ink);mix-blend-mode:multiply;transition:transform .19s var(--ease)}
-.fh .fico{width:15px;height:15px;flex:none;color:var(--ink);mix-blend-mode:multiply}
-.fold.closed .fh .chev{transform:rotate(-90deg)}
-.fold.closed .fh{border-radius:5px;box-shadow:1px 1px 0 color-mix(in srgb,var(--wc,var(--green)) 55%,var(--edge-2)),3px 5px 6px var(--amb)}
-.fh .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fh .cnt{font-family:var(--font-hand);font-size:17px;font-weight:700;color:var(--ink);mix-blend-mode:multiply}
-.page.night .fh .cnt,.page.night .fh .chev,.page.night .fh .fico{mix-blend-mode:screen}
-.fh.is-naming{cursor:default}
-.fh.is-naming:hover{transform:none}
-.fname{all:unset;flex:1;min-width:0;font-size:13px;font-weight:800;color:var(--ink);background-color:var(--glass);border-radius:2px;padding:1px 4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
-.fb{display:grid;grid-template-rows:1fr;margin-top:-3px;transition:grid-template-rows .26s var(--ease)}
-.fold.closed .fb{grid-template-rows:0fr}
-.fi{min-height:0;overflow:hidden}
-.rows{display:flex;flex-direction:column;padding:0 0 10px}
-.rows.root{padding-top:0}
-.rows .nrow+.nrow{margin-top:-3px}
-.rows::after{content:"";display:block;margin:0 4px 0 3px;height:4px;margin-top:-2px;background:linear-gradient(180deg,var(--edge) 0 1px,var(--sheet) 1px 3px,var(--edge) 3px 4px);border-radius:0 0 2px 2px}
-.rows.none::after{display:none}
-.nrow{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:6px 10px;font-size:13px;color:var(--ink);background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.07);border-radius:3px;box-shadow:var(--lift-1);transform:translate(var(--dx,0),0) rotate(var(--rot,0deg));transition:transform .12s var(--ease),box-shadow .12s var(--ease),background .12s var(--ease)}
-.nrow:nth-child(odd){--rot:-.25deg}
-.nrow:nth-child(even){--rot:.2deg;--dx:1px}
-.nrow:hover{background-color:var(--hover);transform:translate(var(--dx,0),-2px) rotate(var(--rot,0deg));box-shadow:var(--lift-2);z-index:20;background-image:var(--face),var(--pulp)}
-.nrow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.nrow.on{background-color:var(--marker);box-shadow:1px 1px 0 var(--highlighter-2),3px 5px 6px var(--amb);transform:rotate(-.5deg) translateY(-1px);z-index:21;background-image:var(--strokes),var(--face),var(--pulp)}
-.nrow .di{width:15px;height:15px;flex:none;color:var(--mute)}
-.nrow.on .di{color:var(--ink)}
-.nrow .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.nrow .ty{font-family:var(--font-mono);font-size:10px;color:var(--mute);white-space:nowrap}
-.nrow .chd{width:7px;height:7px;flex:none;border-radius:50%;background-color:var(--amber);box-shadow:0 0 0 1.5px var(--stk),0 0 0 2px rgba(0,0,0,.16)}
+.fx{flex:1;min-height:0;display:flex;flex-direction:column;margin:2px 10px 0;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.07);border-radius:4px;box-shadow:var(--lift-2);overflow:hidden}
+.fxh{display:flex;align-items:center;gap:2px;padding:6px 6px 5px 12px;border-bottom:1px dashed var(--line)}
+.fxr{flex:1;min-width:0;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fxb{all:unset;cursor:pointer;width:26px;height:26px;display:grid;place-items:center;color:var(--mute);border-radius:3px}
+.fxb svg{width:15px;height:15px}
+.fxb:hover{color:var(--ink);background-color:color-mix(in srgb,var(--ink) 8%,transparent)}
+.fxb:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.ftree{flex:1;min-height:0;overflow:auto;padding:6px 6px 14px;scrollbar-width:thin}
+.trow{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;gap:5px;width:100%;box-sizing:border-box;height:26px;padding:0 8px 0 4px;border-radius:3px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.trow:hover{background-color:color-mix(in srgb,var(--ink) 6%,transparent)}
+.trow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.trow.is-folder{font-weight:800}
+.trow.is-ctx:not(:hover){background-color:color-mix(in srgb,var(--ink) 4%,transparent)}
+.trow.on,.trow.on:hover{background-color:var(--marker);background-image:var(--strokes);box-shadow:1px 1px 0 var(--highlighter-2)}
+.ig{flex:none;align-self:stretch;width:12px;position:relative}
+.ig::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:1px solid var(--line)}
+.trow .chev{width:12px;height:12px;flex:none;color:var(--mute);transition:transform .15s var(--ease)}
+.trow[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.chsp{width:12px;flex:none}
+.fico{width:17px;height:17px;flex:none;overflow:visible}
+.fico .fb2{fill:var(--kraft-2);stroke:rgba(0,0,0,.28);stroke-width:.9}
+.fico .ff{fill:var(--kraft);stroke:rgba(0,0,0,.22);stroke-width:.9}
+.trow[aria-expanded="true"] .fico .ff{transform:skewX(-14deg) translateX(2px)}
+.fdoc{width:15px;height:15px;flex:none}
+.fdoc .pg{fill:var(--card);stroke:var(--mute);stroke-width:1.4;stroke-linejoin:round}
+.fdoc .dg{fill:none;stroke:var(--mute);stroke-width:1.4;stroke-linejoin:round}
+.fdoc .ln{fill:none;stroke:var(--faint);stroke-width:1.3;stroke-linecap:round}
+.tn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.ext{color:var(--faint);font-weight:600}
+.git{flex:none;width:12px;text-align:center;font-family:var(--font-mono);font-size:11px;font-weight:700}
+.git.mod,.git.dot{color:color-mix(in srgb,var(--amber) 70%,var(--ink))}
+.git.new{color:color-mix(in srgb,var(--green) 70%,var(--ink))}
+.git.dot{font-size:16px;line-height:1}
+.trow.is-naming{cursor:default;background-color:color-mix(in srgb,var(--blue) 7%,transparent)}
+.fname{all:unset;flex:1;min-width:0;height:20px;padding:0 5px;font-size:13px;font-weight:800;color:var(--ink);background-color:var(--card);border-radius:2px;box-shadow:inset 0 0 0 1.5px var(--blue);background-image:var(--face),var(--pulp)}
+.fname::placeholder{color:var(--faint);font-weight:600}
 .ksb{padding:10px 12px 12px;border-top:1px dashed color-mix(in srgb,var(--board-2) 70%,transparent);font-family:var(--font-hand);font-size:15px;color:var(--ink);opacity:.8;line-height:1.15}
 
 
@@ -274,23 +274,10 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
 
 .gwrap{padding:18px 28px 28px;animation:fade .2s var(--ease) both}
 .cork{position:relative;height:calc(100vh - 152px);min-height:540px;border-radius:6px;overflow:hidden;background-color:var(--cork);background-image:radial-gradient(rgba(0,0,0,.16) 1px,transparent 1.6px),radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.6px),radial-gradient(rgba(0,0,0,.09) 2px,transparent 2.8px);background-size:7px 7px,11px 11px,23px 23px;background-position:0 0,3px 5px,9px 2px;box-shadow:inset 0 0 0 10px var(--cork-2),inset 0 0 0 12px #c9a06c,inset 0 0 40px rgba(0,0,0,.25)}
-.gfield{position:absolute;inset:34px 40px 64px}
-.gsvg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;filter:drop-shadow(1px 2px 1px rgba(0,0,0,.35))}
-.ge{fill:none;stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:opacity .15s var(--ease),stroke-width .15s var(--ease)}
-.ge.link{stroke:#d9563c}
-.ge.rel{stroke:#e9e2cf}
-.ge.parent{stroke:var(--ink);stroke-dasharray:5 5;opacity:.6}
-.ge.hot{stroke-width:2.8;opacity:1}
-.ge.dim{opacity:.18}
-.gn{all:unset;cursor:pointer;position:absolute;width:150px;box-sizing:border-box;padding:12px 10px 8px;transform:translate(-50%,-50%) rotate(var(--r,0deg));background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.1);border-top:4px solid var(--fc);border-radius:2px;box-shadow:var(--lift-2);transition:transform .15s var(--ease),box-shadow .15s var(--ease),opacity .15s var(--ease);z-index:2}
-.gn:hover,.gn:focus-visible,.gn.is-hot{transform:translate(-50%,-52%) rotate(0deg) scale(1.04);box-shadow:var(--lift-3);z-index:4}
-.gn:focus-visible{outline:2px solid var(--attn);outline-offset:2px}
-.gn .tack{position:absolute;top:-8px;left:50%;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9b85,var(--red) 55%,var(--red-2));box-shadow:1px 2px 1px rgba(0,0,0,.35);transform:translateX(-50%)}
-.gn .gt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;font-weight:800;line-height:1.3;color:var(--ink)}
-.gn .gy{display:block;margin-top:3px;font-family:var(--font-mono);font-size:10px;color:var(--mute)}
-.gn.is-cur{background-color:var(--marker);border-color:var(--highlighter-2);border-top-color:var(--fc);background-image:var(--strokes),var(--face),var(--pulp)}
-.gn.is-dim{opacity:.4}
-.gn.is-new{animation:pinin .3s var(--ease-pop) both}
+.gfield{position:absolute;inset:12px;overflow:hidden;border-radius:2px}
+.gfield canvas{display:block}
+.glegend .l2{border-color:#e9e2cf;box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.glegend .gtip{color:var(--mute)}
 .glegend{position:absolute;left:22px;bottom:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:6px 12px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:3px;box-shadow:var(--lift-1);font-family:var(--font-hand);font-size:15px;color:var(--ink);transform:rotate(-.6deg);z-index:5}
 .glegend i{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
 .glegend .l1{border-color:#d9563c}.glegend .l2{border-color:#e9e2cf;box-shadow:0 1px 0 rgba(0,0,0,.25)}.glegend .l3{border-top:2px dashed var(--ink)}
@@ -355,7 +342,6 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
 
 @keyframes drop{from{transform:translateY(-10px);opacity:0}to{transform:none;opacity:1}}
 @keyframes pop{from{transform:translateY(-4px) scale(.98);opacity:0}to{transform:none;opacity:1}}
-@keyframes pinin{from{transform:translate(-50%,-80%) rotate(var(--r,0deg)) scale(1.15);opacity:0}to{transform:translate(-50%,-50%) rotate(var(--r,0deg));opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes turn{to{transform:rotate(360deg)}}
 @media (max-width:1240px){.kbody{grid-template-columns:minmax(0,1fr)}.conn{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px}.leaf{padding-left:62px;padding-right:34px}}
@@ -531,47 +517,27 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
   <aside class="kside board" aria-label="Notes">
     <sc-if value="{{isReady}}" hint-placeholder-val="{{true}}">
     <div class="ktop">
-      <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"></path></svg><input type="search" placeholder="Filter notes…" aria-label="Filter notes by title, #tag or type:" ref="{{filterRef}}" onInput="{{onFilter}}"><sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}"><button class="clr" onClick="{{clearFilter}}" aria-label="Clear the filter"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></label>
-      <div class="kacts">
-        <span class="kn">{{noteCount}}</span>
-        <button class="runb" onClick="{{newNote}}" title="New note in {{ctxName}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M12 11v6M9 14h6"></path></svg>Note</button>
-        <button class="runb" onClick="{{newFolder}}" title="New folder"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 11v6M9 14h6"></path></svg>Folder</button>
-      </div>
+      <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"></path></svg><input type="search" placeholder="Filter notes…" aria-label="Filter notes by name, #tag or type:" ref="{{filterRef}}" onInput="{{onFilter}}"><sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}"><button class="clr" onClick="{{clearFilter}}" aria-label="Clear the filter"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></label>
       <sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}"><div class="fhint">{{filterHint}}</div></sc-if>
     </div>
-    <div class="tree">
-      <sc-if value="{{hasRoot}}" hint-placeholder-val="{{true}}">
-        <div class="rows root">
-          <sc-for list="{{rootNotes}}" as="r" hint-placeholder-count="2">
-            <button class="nrow {{r.cls}}" onClick="{{r.open}}" aria-current="{{r.cur}}" ref="{{r.ref}}"><svg class="di" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4"></path></svg><span class="t">{{r.title}}</span><sc-if value="{{r.dirty}}" hint-placeholder-val="{{false}}"><i class="chd" title="Changed since the last commit"></i></sc-if><span class="ty">{{r.type}}</span></button>
-          </sc-for>
-        </div>
-      </sc-if>
-      <sc-for list="{{folders}}" as="f" hint-placeholder-count="5">
-        <section class="fold {{f.cls}}" style="--wc: {{f.color}}">
-          <sc-if value="{{f.naming}}" hint-placeholder-val="{{false}}"><div class="fh is-naming"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><input class="fname" placeholder="Name the folder" aria-label="Folder name" ref="{{f.nameRef}}" onKeyDown="{{f.nameKey}}" onBlur="{{f.nameDone}}"></div></sc-if>
-          <sc-if value="{{f.named}}" hint-placeholder-val="{{true}}">
-            <button class="fh" onClick="{{f.toggle}}" aria-expanded="{{f.open}}">
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg>
-              <span class="nm">{{f.name}}</span>
-              <span class="cnt">{{f.count}}</span>
-            </button>
-          </sc-if>
-          <div class="fb"><div class="fi">
-            <div class="rows {{f.rowsCls}}">
-              <sc-for list="{{f.notes}}" as="r" hint-placeholder-count="3">
-                <button class="nrow {{r.cls}}" onClick="{{r.open}}" aria-current="{{r.cur}}" ref="{{r.ref}}"><svg class="di" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4"></path></svg><span class="t">{{r.title}}</span><sc-if value="{{r.dirty}}" hint-placeholder-val="{{false}}"><i class="chd" title="Changed since the last commit"></i></sc-if><span class="ty">{{r.type}}</span></button>
-              </sc-for>
-            </div>
-            <sc-if value="{{f.empty}}" hint-placeholder-val="{{false}}"><div class="fhint" style="padding: 8px 6px 4px">Empty. New note puts one here.</div></sc-if>
-          </div></div>
-        </section>
-      </sc-for>
-      <sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">{{noMatchText}}</div></sc-if>
+    <div class="fx">
+      <div class="fxh">
+        <span class="fxr" title="{{kbPath}}">{{rootName}}</span>
+        <button class="fxb" onClick="{{newNote}}" aria-label="New note in {{ctxName}}" title="New note in {{ctxName}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M12 11v6M9 14h6"></path></svg></button>
+        <button class="fxb" onClick="{{newFolder}}" aria-label="New folder in {{ctxName}}" title="New folder in {{ctxName}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 11v6M9 14h6"></path></svg></button>
+        <button class="fxb" onClick="{{collapseAll}}" aria-label="Collapse every folder" title="Collapse every folder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4zM8 12h8"></path></svg></button>
+      </div>
+      <div class="ftree" role="tree" aria-label="Notes in {{rootName}}" onKeyDown="{{treeKey}}">
+        <sc-for list="{{tree}}" as="r" hint-placeholder-count="14">
+          <sc-if value="{{r.naming}}" hint-placeholder-val="{{false}}"><div class="trow is-naming" style="--dp: {{r.depth}}"><sc-for list="{{r.guides}}" as="g" hint-placeholder-count="1"><i class="ig" aria-hidden="true"></i></sc-for><span class="chsp"></span><svg class="fico" viewBox="0 0 24 24" aria-hidden="true"><path class="fb2" d="M2.5 6.5a1.5 1.5 0 0 1 1.5-1.5h5l2 2.2h9a1.5 1.5 0 0 1 1.5 1.5V18a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18z"></path><path class="ff" d="M2.5 9.5h19V18a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18z"></path></svg><input class="fname" placeholder="folder name" aria-label="New folder name" ref="{{r.nameRef}}" onKeyDown="{{r.nameKey}}" onBlur="{{r.nameDone}}"></div></sc-if>
+          <sc-if value="{{r.plain}}" hint-placeholder-val="{{true}}"><button class="trow {{r.cls}}" role="treeitem" data-k="{{r.key}}" aria-level="{{r.level}}" aria-expanded="{{r.expanded}}" aria-selected="{{r.selected}}" tabIndex="{{r.tab}}" title="{{r.tip}}" onClick="{{r.click}}" ref="{{r.ref}}"><sc-for list="{{r.guides}}" as="g" hint-placeholder-count="1"><i class="ig" aria-hidden="true"></i></sc-for><sc-if value="{{r.isFolder}}" hint-placeholder-val="{{false}}"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg><svg class="fico" viewBox="0 0 24 24" aria-hidden="true"><path class="fb2" d="M2.5 6.5a1.5 1.5 0 0 1 1.5-1.5h5l2 2.2h9a1.5 1.5 0 0 1 1.5 1.5V18a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18z"></path><path class="ff" d="M2.5 9.5h19V18a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18z"></path></svg></sc-if><sc-if value="{{r.isFile}}" hint-placeholder-val="{{true}}"><span class="chsp"></span><svg class="fdoc" viewBox="0 0 24 24" aria-hidden="true"><path class="pg" d="M6 2.5h8l4.5 4.5v13a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 20V4A1.5 1.5 0 0 1 6 2.5z"></path><path class="dg" d="M14 2.5V7h4.5"></path><path class="ln" d="M7.5 11.5h8M7.5 14.5h8M7.5 17.5h5"></path></svg></sc-if><span class="tn">{{r.name}}<span class="ext">{{r.ext}}</span></span><sc-if value="{{r.hasGit}}" hint-placeholder-val="{{false}}"><span class="git {{r.gitCls}}" title="{{r.gitTip}}">{{r.git}}</span></sc-if></button></sc-if>
+        </sc-for>
+        <sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">{{noMatchText}}</div></sc-if>
+      </div>
     </div>
     <div class="ksb">{{sideFoot}}</div>
     </sc-if>
-    <sc-if value="{{isSetup}}" hint-placeholder-val="{{false}}"><div class="pp-scrap" style="padding-top: 120px">No notes yet. Pick a folder or clone a repo, and they show up here.</div></sc-if>
+    <sc-if value="{{isSetup}}" hint-placeholder-val="{{false}}"><div class="pp-scrap" style="padding-top: 120px">No notes yet. Pick a folder or clone a repo, and its files show up here.</div></sc-if>
   </aside>
 
   <main class="main">
@@ -585,7 +551,7 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
       <sc-if value="{{isReady}}" hint-placeholder-val="{{true}}">
       <div class="top-r">
         <button class="pp-btn ghost {{syncCls}}" onClick="{{sync}}" aria-label="{{syncAria}}" title="Pull, commit and push now"><sc-if value="{{syncing}}" hint-placeholder-val="{{false}}"><svg class="pw" viewBox="0 0 24 24" aria-hidden="true"><g class="pwg"><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{notSyncing}}" hint-placeholder-val="{{true}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"></path></svg></sc-if>{{syncWord}}<sc-if value="{{hasChanges}}" hint-placeholder-val="{{true}}"><span class="pp-nb" aria-hidden="true">{{changeN}}</span></sc-if></button>
-        <button class="pp-btn ghost" onClick="{{openSearch}}" aria-haspopup="dialog"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search<span class="kbd">⌘K</span></button>
+        <button class="pp-btn ghost" onClick="{{openSearch}}" aria-haspopup="dialog"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search</button>
         <button class="pp-btn ghost ico" onClick="{{openSettings}}" aria-haspopup="dialog" aria-label="Knowledge base settings" title="Settings: remote, auto-commit and push"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></button>
         <div class="views" role="group" aria-label="View">
           <button class="vt {{noteViewCls}}" onClick="{{showNote}}" aria-pressed="{{isNoteView}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4"></path></svg>Note</button>
@@ -603,7 +569,7 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
         <textarea class="ntitle" rows="1" placeholder="Untitled" aria-label="Title" ref="{{titleRef}}" onInput="{{onTitle}}" onKeyDown="{{titleKey}}"></textarea>
         <div class="props">
           <span class="pk">type</span>
-          <div class="pv">
+          <div class="pv" onKeyDown="{{menuKey}}">
             <button class="mini {{typeBtnCls}}" onClick="{{toggleTypeMenu}}" aria-haspopup="menu" aria-expanded="{{typeMenuOpen}}" aria-label="Type: {{noteType}}">{{noteType}}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
             <sc-if value="{{typeMenuOpen}}" hint-placeholder-val="{{false}}"><div class="mscrim" onClick="{{closeMenus}}"></div><div class="bmenu typem" role="menu" aria-label="Note type"><sc-for list="{{typeOpts}}" as="o" hint-placeholder-count="6"><button class="bmi {{o.cls}}" role="menuitemradio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.label}}<span class="k">{{o.hint}}</span></button></sc-for></div></sc-if>
           </div>
@@ -618,7 +584,7 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
 
         <div class="blocks">
           <sc-for list="{{blocks}}" as="b" hint-placeholder-count="8">
-            <div class="blk {{b.cls}}" onDragOver="{{b.over}}" onDrop="{{b.drop}}">
+            <div class="blk {{b.cls}}" onDragOver="{{b.over}}" onDrop="{{b.drop}}" onKeyDown="{{menuKey}}">
               <div class="gut">
                 <button class="gbtn gadd" onClick="{{b.add}}" aria-label="Add a block below" title="Add a block below"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
                 <button class="gbtn grip" draggable="true" onDragStart="{{b.dstart}}" onDragEnd="{{dragEnd}}" onClick="{{b.menu}}" onKeyDown="{{b.gripKey}}" aria-haspopup="menu" aria-label="{{b.gripAria}}" title="Drag to move · click for options · Alt+↑↓ to move"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.6"></circle><circle cx="15" cy="6" r="1.6"></circle><circle cx="9" cy="12" r="1.6"></circle><circle cx="15" cy="12" r="1.6"></circle><circle cx="9" cy="18" r="1.6"></circle><circle cx="15" cy="18" r="1.6"></circle></svg></button>
@@ -633,7 +599,7 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
             </div>
           </sc-for>
         </div>
-        <div style="position: relative">
+        <div style="position: relative" onKeyDown="{{menuKey}}">
           <button class="pp-dashed addb" onClick="{{addEnd}}" aria-haspopup="menu">+ Add a block</button>
           <sc-if value="{{endMenuOpen}}" hint-placeholder-val="{{false}}"><div class="mscrim" onClick="{{closeMenus}}"></div><div class="bmenu at-end" role="menu" aria-label="Add a block"><span class="bmh">Add a block</span><sc-for list="{{endKinds}}" as="o" hint-placeholder-count="8"><button class="bmi" role="menuitem" onClick="{{o.pick}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{o.icon}}"></path></svg>{{o.label}}<span class="k">{{o.k}}</span></button></sc-for></div></sc-if>
         </div>
@@ -670,12 +636,11 @@ textarea.bc{display:block;width:100%;resize:none;field-sizing:content;outline:1p
 
     <sc-if value="{{isGraph}}" hint-placeholder-val="{{false}}">
     <div class="gwrap">
-      <div class="cork" role="group" aria-label="Graph of notes">
-        <div class="gfield">
-          <svg class="gsvg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><sc-for list="{{edges}}" as="e" hint-placeholder-count="12"><path class="ge {{e.cls}}" d="{{e.d}}"></path></sc-for></svg>
-          <sc-for list="{{gnodes}}" as="g" hint-placeholder-count="14"><button class="gn {{g.cls}}" style="left: {{g.x}}%; top: {{g.y}}%; --fc: {{g.color}}; --r: {{g.rot}}deg" onClick="{{g.open}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" onFocus="{{g.enter}}" onBlur="{{g.leave}}" aria-label="{{g.aria}}"><span class="tack" aria-hidden="true"></span><span class="gt">{{g.title}}</span><span class="gy">{{g.type}} · {{g.where}}</span></button></sc-for>
+      <div class="cork" role="group" aria-label="Graph of notes: drag a card to move it, scroll to zoom, click a card to open its note">
+        <div class="gfield" ref="{{gfieldRef}}">
+          <sc-if value="{{gReady}}" hint-placeholder-val="{{false}}"><x-import from="lib/react-force-graph-2d.js" component-from-global-scope="ForceGraph2D" ref="{{fgRef}}" graph-data="{{gData}}" width="{{gW}}" height="{{gH}}" background-color="rgba(0,0,0,0)" node-label="{{gNoLabel}}" node-canvas-object="{{gDraw}}" node-pointer-area-paint="{{gArea}}" link-color="{{gLinkColor}}" link-width="{{gLinkWidth}}" link-line-dash="{{gLinkDash}}" link-curvature="{{gCurve}}" warmup-ticks="{{gWarm}}" cooldown-ticks="{{gCool}}" auto-pause-redraw="{{gNo}}" on-node-click="{{gClick}}" on-node-hover="{{gHover}}" on-engine-stop="{{gStop}}" hint-size="100%,600px"></x-import></sc-if>
         </div>
-        <div class="glegend"><span><i class="l1"></i>links</span><span><i class="l2"></i>related</span><span><i class="l3"></i>parent</span></div>
+        <div class="glegend"><span><i class="l1"></i>links</span><span><i class="l2"></i>related</span><span><i class="l3"></i>parent</span><span class="gtip">drag a card · scroll to zoom</span></div>
         <div class="gcount">{{graphCount}}</div>
       </div>
     </div>
@@ -763,13 +728,18 @@ const NAV = [
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
+// folders are directories: a top-level one carries a colour that its subfolders and the graph share
 const FOLDERS = [
-  { id: 'arch', name: 'Architecture', color: 'var(--blue)' },
-  { id: 'runbooks', name: 'Runbooks', color: 'var(--red)' },
-  { id: 'decisions', name: 'Decisions', color: 'var(--amber)' },
-  { id: 'guides', name: 'Guides', color: 'var(--green)' },
-  { id: 'meetings', name: 'Meetings', color: 'var(--kind-sub)' }
+  { id: 'arch', name: 'architecture', parent: null, color: 'var(--blue)' },
+  { id: 'decisions', name: 'decisions', parent: null, color: 'var(--amber)' },
+  { id: 'guides', name: 'guides', parent: null, color: 'var(--green)' },
+  { id: 'meetings', name: 'meetings', parent: null, color: 'var(--kind-sub)' },
+  { id: 'm2026', name: '2026', parent: 'meetings' },
+  { id: 'runbooks', name: 'runbooks', parent: null, color: 'var(--red)' },
+  { id: 'billing', name: 'billing', parent: 'runbooks' },
+  { id: 'fleet', name: 'fleet', parent: 'runbooks' }
 ];
+const OPEN = ['arch', 'decisions', 'runbooks', 'billing'];
 const NEW_COLORS = ['var(--kind-think)', 'var(--max)', 'var(--blue-2)', 'var(--red-2)'];
 const TYPES = [
   { id: 'note', hint: 'anything' }, { id: 'guide', hint: 'how to' }, { id: 'runbook', hint: 'steps at 2am' },
@@ -820,7 +790,7 @@ const NOTES = [
     Q('Memory is the sticky note on the monitor. The knowledge base is the binder on the shelf.'),
     L(['Global: true everywhere', 'Workspace: true in one repo', 'Agent: true for one agent’s job'])
   ] },
-  { id: 'deploy', folder: 'runbooks', file: 'deploy-orbit-billing.md', type: 'runbook', title: 'Deploy Orbit Billing', desc: 'Ship Orbit Billing to production without dropping a checkout.', tags: ['deploy', 'orbit-billing', 'on-call'], parent: 'oncall', related: ['sticky', 'rotate'], edited: 'edited 3 min ago', blocks: [
+  { id: 'deploy', folder: 'billing', file: 'deploy-orbit-billing.md', type: 'runbook', title: 'Deploy Orbit Billing', desc: 'Ship Orbit Billing to production without dropping a checkout.', tags: ['deploy', 'orbit-billing', 'on-call'], parent: 'oncall', related: ['sticky', 'rotate'], edited: 'edited 3 min ago', blocks: [
     H('Before you start'),
     P('Deploys go out from the `release` branch. Check that [[Sticky sessions on the load balancer]] is on, so shoppers keep their carts while nodes drain.'),
     L(['Green build on `release`', [1, 'Unit and contract tests'], [1, 'Migration dry run on staging'], 'Nobody else is deploying: check #deploys', 'On-call knows the window']),
@@ -832,7 +802,7 @@ const NOTES = [
     H('Rolling back'),
     P('Run `./scripts/deploy.sh orbit-billing --rollback`. It keeps the migration, so read [[Rollback without losing data]] before you undo one.')
   ] },
-  { id: 'rotate', folder: 'runbooks', file: 'rotate-fleet-keys.md', type: 'runbook', title: 'Rotate the Fleet Infra keys', desc: 'Swap the deploy keys every 90 days, or at once if one leaks.', tags: ['security', 'fleet-infra'], parent: 'oncall', related: ['sandbox'], edited: '2 weeks ago', blocks: [
+  { id: 'rotate', folder: 'fleet', file: 'rotate-fleet-keys.md', type: 'runbook', title: 'Rotate the Fleet Infra keys', desc: 'Swap the deploy keys every 90 days, or at once if one leaks.', tags: ['security', 'fleet-infra'], parent: 'oncall', related: ['sandbox'], edited: '2 weeks ago', blocks: [
     P('The deploy keys live in the vault under `fleet/deploy`. Rotating takes ten minutes and needs two people.'),
     L(['Make the new key in the vault', 'Add it to the runners and wait for one green deploy', 'Remove the old key', [1, 'From the vault'], [1, 'From every runner'], 'Write the date in the table below'], true),
     T([['Rotated', 'By', 'Why'], ['2 Aug', 'Mina', '90 days'], ['30 Oct', 'Theo', '90 days']])
@@ -868,7 +838,7 @@ const NOTES = [
   { id: 'onboard', folder: 'guides', file: 'onboarding-checklist.md', type: 'guide', title: 'Onboarding checklist', desc: 'Your first week on the team.', tags: ['people'], parent: 'start', related: ['oncall'], edited: '2 months ago', blocks: [
     L(['Day one', [1, 'Get access to the Primepaw workspaces'], [1, 'Read [[Start here]]'], 'Day two', [1, 'Ship one small change with a buddy'], 'By Friday', [1, 'Shadow on-call for an afternoon'], [2, 'Read the [[On-call handbook]] first']])
   ] },
-  { id: 'sync4', folder: 'meetings', file: '2026-11-04-release-sync.md', type: 'meeting', title: 'Release sync, 4 Nov', desc: 'The billing deploy window, the stuck digest job and key rotation.', tags: ['release'], parent: null, related: [], edited: 'edited today', blocks: [
+  { id: 'sync4', folder: 'm2026', file: '2026-11-04-release-sync.md', type: 'meeting', title: 'Release sync, 4 Nov', desc: 'The billing deploy window, the stuck digest job and key rotation.', tags: ['release'], parent: null, related: [], edited: 'edited today', blocks: [
     P('Mina, Theo, Ana. 20 minutes.'),
     L(['Billing ships Thursday 14:00 with [[Deploy Orbit Billing]]', 'The nightly digest got stuck twice. Theo adds a timeout; until then, [[Recover a stuck background job]]', 'Keys were rotated on 30 Oct, next due at the end of January']),
     H('Actions', 3),
@@ -878,9 +848,26 @@ const NOTES = [
     L(['Write the runbook before the page, not after', 'Postmortems without blame', 'Plain text lasts'])
   ] }
 ];
-// where each note is pinned on the cork, in a 1000 × 600 field
-const POS = { start: [470, 250], lifecycle: [250, 140], sandbox: [95, 250], memory: [290, 350], deploy: [650, 350], rotate: [890, 340], stuck: [890, 70], oncall: [720, 185], sticky: [480, 490], sqlite: [270, 505], skill: [420, 70], onboard: [620, 60], sync4: [790, 510], reading: [90, 450] };
-
+// a force that keeps index cards from lying on top of each other
+const cardCollide = () => {
+  let nodes = [];
+  const f = (alpha) => {
+    const k = 0.9;
+    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i]; const b = nodes[j]; const dx = b.x - a.x; const dy = b.y - a.y;
+      const ox = 138 - Math.abs(dx); const oy = 66 - Math.abs(dy);
+      if (ox <= 0 || oy <= 0) continue;
+      if (ox / 138 < oy / 66) { const p = (dx < 0 ? -1 : 1) * ox * 0.5 * k; a.vx -= p; b.vx += p; }
+      else { const p = (dy < 0 ? -1 : 1) * oy * 0.5 * k; a.vy -= p; b.vy += p; }
+    }
+  };
+  f.initialize = (ns) => { nodes = ns; };
+  return f;
+};
+// and one that draws every card gently toward the middle, so a note with no threads stays on the board
+const gravity = (s) => { let nodes = []; const f = (alpha) => { nodes.forEach((n) => { n.vx -= n.x * s * alpha; n.vy -= n.y * s * alpha * 1.6; }); }; f.initialize = (ns) => { nodes = ns; }; return f; };
+const NO_GRAPH = { nodes: [], links: [] };
+const PAL = ['card', 'ink', 'mute', 'highlighter', 'red', 'red-2', 'amb', 'blue', 'blue-2', 'green', 'amber', 'kind-sub', 'kind-think', 'max', 'kraft-2'];
 const clone = (x) => JSON.parse(JSON.stringify(x));
 const slug = (s) => (s || 'untitled').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'untitled';
 const plain = (s) => (s || '').replace(/\[\[([^\]]+)\]\]/g, '$1').replace(/`([^`]+)`/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1');
@@ -929,15 +916,15 @@ const HAS_FS = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('field
 const grow = (el) => { if (!el || HAS_FS || el.tagName !== 'TEXTAREA') return; el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; };
 
 const INIT = {
-  phase: null, view: 'note', cur: 'deploy', ctx: 'runbooks', filter: '', ed: null, menu: null, pick: null, search: null, settings: null,
+  phase: null, view: 'note', cur: 'deploy', ctx: 'billing', filter: '', ed: null, menu: null, pick: null, search: null, settings: null,
   dirty: ['deploy', 'sync4'], syncing: false, lastSync: '6 min ago', dragging: null, dropB: null, dropI: null, hot: null, newIds: [],
   cfg: { commit: '15', push: 'commit', pull: true, remote: 'git@github.com:primepaw/team-kb.git', branch: 'main', msg: 'kb: {n} notes changed' },
   kbPath: '~/Notes/team-kb', setup: { mode: null, path: '', found: '', url: '', cloning: false, pct: 0, cloned: false, picks: 0 },
-  sCfg: { commit: '15', push: 'commit', pull: true }, nextF: 0
+  sCfg: { commit: '15', push: 'commit', pull: true }, nextF: 0, gW: 0, gH: 0
 };
 
 class Component extends DCLogic {
-  state = { ...clone(INIT), notes: clone(NOTES), folders: FOLDERS.map((f) => ({ ...f, open: true })) };
+  state = { ...clone(INIT), notes: clone(NOTES), folders: FOLDERS.map((f) => ({ ...f, open: OPEN.includes(f.id) })) };
   els = {};
   wantFocus = null;
   reveal = false;
@@ -965,14 +952,92 @@ class Component extends DCLogic {
   phase() { return this.state.phase ?? ((this.props.start ?? 'setup') === 'setup' ? 'setup' : 'ready'); }
   note(id) { return this.state.notes.find((n) => n.id === (id || this.state.cur)); }
   byTitle(t) { const k = (t || '').trim().toLowerCase(); return this.state.notes.find((n) => n.title.trim().toLowerCase() === k); }
-  folderName(fid) { const f = this.state.folders.find((x) => x.id === fid); return f ? f.name : 'team-kb'; }
-  fileOf(n) { const f = this.state.folders.find((x) => x.id === n.folder); return (f ? slug(f.name) + '/' : '') + (n.file || slug(n.title) + '.md'); }
-  bindKeys() {
-    if (this.keysBound) return; this.keysBound = true;
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K') && this.phase() === 'ready') { e.preventDefault(); this.openSearch(); }
-      if (e.key === 'Escape' && (this.state.menu || this.state.pick)) this.setState({ menu: null, pick: null });
-    });
+  folderOf(fid) { return this.state.folders.find((x) => x.id === fid); }
+  folderPath(fid) { const out = []; let f = this.folderOf(fid); while (f) { out.unshift(f.name || 'new-folder'); f = this.folderOf(f.parent); } return out.join('/'); }
+  folderName(fid) { return fid ? this.folderPath(fid) : 'team-kb'; }
+  topColor(fid) { let f = this.folderOf(fid); while (f && f.parent) f = this.folderOf(f.parent); return f && f.color ? f.color : 'var(--kraft-2)'; }
+  chain(fid) { const out = []; let f = this.folderOf(fid); while (f) { out.push(f.id); f = this.folderOf(f.parent); } return out; }
+  fileName(n) { return n.file || slug(n.title) + '.md'; }
+  fileOf(n) { return (n.folder ? this.folderPath(n.folder) + '/' : '') + this.fileName(n); }
+  // ---- the graph: react-force-graph lays the notes out on the cork, and each card is drawn on its canvas ----
+  readPal(el) {
+    const cs = getComputedStyle(el); const v = {};
+    PAL.forEach((k) => { v[k] = cs.getPropertyValue('--' + k).trim() || '#888'; });
+    this.pal = v;
+  }
+  col(c) { const m = /var\(--([\w-]+)\)/.exec(c || ''); return m ? ((this.pal && this.pal[m[1]]) || '#888') : c; }
+  gfieldRef = (el) => {
+    if (el === this.gEl) return;
+    if (this.ro) this.ro.disconnect();
+    this.gEl = el; if (!el) return;
+    this.readPal(el);
+    this.ro = new ResizeObserver(() => { const r = el.getBoundingClientRect(); const w = Math.round(r.width); const h = Math.round(r.height); if (w !== this.state.gW || h !== this.state.gH) this.setState({ gW: w, gH: h }); });
+    this.ro.observe(el);
+  };
+  // the forces go in before the notes do, so the warm-up ticks already lay the cards out the way they will rest
+  fgRef = (inst) => {
+    if (!inst) { this.fg = null; this.fgArmed = false; return; }
+    if (inst === this.fg) return;
+    this.fg = inst; this.fitted = false;
+    try { inst.d3Force('charge').strength(-520); inst.d3Force('link').distance(165); inst.d3Force('collide', cardCollide()); inst.d3Force('gravity', gravity(0.07)); } catch (e) {}
+    setTimeout(() => {
+      if (this.fg !== inst) return;
+      this.fgArmed = true; this.forceUpdate();
+      setTimeout(() => { if (this.fg === inst && !this.fitted) inst.zoomToFit(0, 96); }, 40);
+    }, 0);
+  };
+  graphData() {
+    const st = this.state; const pairs = {}; const rank = { link: 3, rel: 2, parent: 1 };
+    const ids = new Set(st.notes.map((x) => x.id));
+    const addE = (a, b, kind) => { if (!a || !b || a === b || !ids.has(b)) return; const k = [a, b].sort().join('|'); if (!pairs[k] || rank[kind] > rank[pairs[k].kind]) pairs[k] = { a, b, kind }; };
+    st.notes.forEach((x) => { x.blocks.forEach((b) => linksIn(textOf(b)).forEach((t) => { const y = this.byTitle(t); if (y) addE(x.id, y.id, 'link'); })); x.related.forEach((r) => addE(x.id, r, 'rel')); addE(x.id, x.parent, 'parent'); });
+    const edges = Object.values(pairs);
+    const sig = [...ids].join(',') + '#' + edges.map((e) => e.a + '-' + e.b + e.kind).join(',');
+    const old = new Map(((this.gd && this.gd.nodes) || []).map((o) => [o.id, o]));
+    const meta = (x) => ({ title: x.title || 'Untitled', type: x.type, where: this.folderName(x.folder), color: this.topColor(x.folder) });
+    // the same graph keeps the same objects, so the layout holds still while you hover or type
+    if (this.gd && this.gdSig === sig) { st.notes.forEach((x) => Object.assign(old.get(x.id), meta(x))); return this.gd; }
+    const nodes = st.notes.map((x) => Object.assign(old.get(x.id) || { id: x.id, rot: hashRot(x.id) }, meta(x)));
+    this.gd = { nodes, links: edges.map((e) => ({ source: e.a, target: e.b, kind: e.kind })) }; this.gdSig = sig;
+    return this.gd;
+  }
+  wrapTitle(ctx, t, max) {
+    ctx.font = '800 11px Nunito, sans-serif';
+    const lines = []; let cur = '';
+    (t || 'Untitled').split(' ').forEach((w) => { const tr = cur ? cur + ' ' + w : w; if (cur && ctx.measureText(tr).width > max) { lines.push(cur); cur = w; } else cur = tr; });
+    if (cur) lines.push(cur);
+    if (lines.length > 2) { lines.length = 2; lines[1] = lines[1].replace(/\s*\S*$/, '') + '…'; }
+    return lines;
+  }
+  // an index card: paper, the folder colour along the top, a red tack, the title and its type
+  drawCard(node, ctx) {
+    const v = this.gView || {}; const p = this.pal || {};
+    const W = 126; const lines = this.wrapTitle(ctx, node.title, W - 18); const H = 22 + lines.length * 14 + 12;
+    node.__w = W; node.__h = H;
+    const hot = v.hot === node.id; const near = v.near && v.near.has(node.id);
+    const dim = (v.dim && v.dim.has(node.id)) || (v.hot && !hot && !near);
+    ctx.save();
+    ctx.globalAlpha = dim ? 0.42 : 1;
+    ctx.translate(node.x, node.y); ctx.rotate((hot ? 0 : node.rot) * Math.PI / 180); if (hot) ctx.scale(1.06, 1.06);
+    const x0 = -W / 2; const y0 = -H / 2;
+    ctx.shadowColor = p.amb || 'rgba(0,0,0,.3)'; ctx.shadowBlur = hot ? 12 : 6; ctx.shadowOffsetX = hot ? 3 : 2; ctx.shadowOffsetY = hot ? 6 : 3;
+    ctx.fillStyle = node.id === v.cur ? p.highlighter : p.card; ctx.fillRect(x0, y0, W, H);
+    ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = 'rgba(0,0,0,.16)'; ctx.lineWidth = 0.6; ctx.strokeRect(x0, y0, W, H);
+    ctx.fillStyle = this.col(node.color); ctx.fillRect(x0, y0, W, 3.5);
+    const g = ctx.createRadialGradient(-1.4, y0 - 1.4, 0.4, 0, y0, 4.6); g.addColorStop(0, '#ff9b85'); g.addColorStop(0.55, p.red || '#c8553d'); g.addColorStop(1, p['red-2'] || '#8f3a2a');
+    ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 2; ctx.shadowOffsetX = 1; ctx.shadowOffsetY = 1.5;
+    ctx.beginPath(); ctx.arc(0, y0, 4.4, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.textBaseline = 'top'; ctx.fillStyle = p.ink; ctx.font = '800 11px Nunito, sans-serif';
+    lines.forEach((l, i) => ctx.fillText(l, x0 + 9, y0 + 12 + i * 14));
+    ctx.fillStyle = p.mute; ctx.font = '8.5px "Courier New", monospace';
+    ctx.fillText(node.type + ' · ' + node.where, x0 + 9, y0 + 15 + lines.length * 14, W - 18);
+    ctx.restore();
+  }
+  cardArea(node, color, ctx) {
+    const W = node.__w || 126; const H = node.__h || 50;
+    ctx.save(); ctx.translate(node.x, node.y); ctx.rotate(node.rot * Math.PI / 180); ctx.fillStyle = color; ctx.fillRect(-W / 2, -H / 2 - 5, W, H + 5); ctx.restore();
   }
   // ---- changes to notes ----
   setNote(nid, fn, extra) {
@@ -987,14 +1052,14 @@ class Component extends DCLogic {
   stopEdit(key) { if (this.wantFocus) return; if (edKey(this.state.ed) === key) this.setState({ ed: null }); }
   openNote(id, extra) {
     const n = this.note(id); if (!n) return; this.reveal = true;
-    const folders = this.state.folders.map((f) => f.id === n.folder ? { ...f, open: true } : f);
+    const up = this.chain(n.folder); const folders = this.state.folders.map((f) => up.includes(f.id) ? { ...f, open: true } : f);
     this.setState({ cur: id, ctx: n.folder, ed: null, menu: null, pick: null, search: null, view: 'note', hot: null, folders, ...(extra || {}) });
     if (typeof window !== 'undefined' && window.scrollY > 0) window.scrollTo({ top: 0 });
   }
   createNote(title, folder) {
     const st = this.state; const id = uid('n'); this.reveal = true;
     const n = { id, folder, file: null, type: 'note', title: title || '', desc: '', tags: [], parent: null, related: [], edited: 'new, not saved yet', blocks: [P('')] };
-    const folders = st.folders.map((f) => f.id === folder ? { ...f, open: true } : f);
+    const up = this.chain(folder); const folders = st.folders.map((f) => up.includes(f.id) ? { ...f, open: true } : f);
     this.wantFocus = title ? edKey({ bid: n.blocks[0].id }) : 'title';
     this.setState({ notes: st.notes.concat([n]), dirty: st.dirty.concat([id]), cur: id, ctx: folder, folders, view: 'note', ed: title ? { bid: n.blocks[0].id } : null, menu: null, pick: null, search: null, newIds: st.newIds.concat([id]) });
   }
@@ -1114,7 +1179,11 @@ class Component extends DCLogic {
     this.wantFocus = edKey(ed); this.caret = 0;
     this.setBlocks(n.id, (bs) => { const c = bs.slice(); const i = afterId ? c.findIndex((x) => x.id === afterId) + 1 : c.length; c.splice(i, 0, nb); return c; }, { ed, menu: null });
   }
-  renderVals() { this.bindKeys(); return { ...this.themeVals(), ...this.renderVals0() }; }
+  renderVals() {
+    const tv = this.themeVals();
+    if (this.palNight !== tv.isNight) { this.palNight = tv.isNight; setTimeout(() => { if (this.gEl) this.readPal(this.gEl); }, 0); }
+    return { ...tv, ...this.renderVals0() };
+  }
   renderVals0() {
     const st = this.state; const phase = this.phase(); const ready = phase === 'ready';
     const n = this.note() || st.notes[0];
@@ -1127,23 +1196,49 @@ class Component extends DCLogic {
     const textF = words.filter((w) => w[0] !== '#' && !w.startsWith('type:')).join(' ');
     const match = (x) => tagF.every((t) => x.tags.some((g) => g.includes(t))) && typeF.every((t) => x.type.startsWith(t)) && (!textF || (x.title + ' ' + x.desc + ' ' + x.tags.join(' ')).toLowerCase().includes(textF));
     const shown = st.notes.filter(match);
-    const rowOf = (x) => ({ title: x.title || 'Untitled', type: x.type, dirty: st.dirty.includes(x.id), cls: x.id === n.id ? 'on' : '', cur: x.id === n.id ? 'page' : false, ref: x.id === n.id ? this.revealRef : null, open: () => this.openNote(x.id) });
-    const rootNotes = shown.filter((x) => !x.folder).map(rowOf);
-    const folders = st.folders.filter((f) => f.naming || !raw || shown.some((x) => x.folder === f.id)).map((f) => {
-      const list = shown.filter((x) => x.folder === f.id); const open = raw ? true : f.open;
-      const commitName = (el) => {
-        const name = (el && el.value || '').trim();
-        if (!name && f.isNew) { this.setState({ folders: this.state.folders.filter((x) => x.id !== f.id), ctx: n.folder }); return; }
-        this.setState({ folders: this.state.folders.map((x) => x.id === f.id ? { ...x, name: name || x.name || 'New folder', naming: false, isNew: false } : x) });
-      };
-      return { name: f.name, color: f.color, open, cls: (open ? '' : 'closed ') + (f.naming ? 'naming' : ''), naming: !!f.naming, named: !f.naming, count: list.length || '', rowsCls: list.length ? '' : 'none', empty: !list.length && !raw,
-        toggle: () => this.setState({ folders: st.folders.map((x) => x.id === f.id ? { ...x, open: !x.open } : x), ctx: f.id }),
-        notes: list.map(rowOf),
-        nameRef: this.bindVal('folder:' + f.id, f.name || '', 'folder:' + f.id),
-        nameKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); commitName(e.currentTarget); } if (e.key === 'Escape') { e.preventDefault(); if (f.isNew) this.setState({ folders: st.folders.filter((x) => x.id !== f.id), ctx: n.folder }); else this.setState({ folders: st.folders.map((x) => x.id === f.id ? { ...x, naming: false } : x) }); } },
-        nameDone: (e) => commitName(e.currentTarget) };
-    });
-    const ctxName = st.ctx ? this.folderName(st.ctx) : 'team-kb';
+    // ---- the file tree: folders first, then files, each sorted by name ----
+    const fol = st.folders;
+    const byName = (a, b) => (a.name || '').localeCompare(b.name || '');
+    const kidsOf = (pid) => fol.filter((f) => (f.parent || null) === pid).sort(byName);
+    const filesOf = (fid) => shown.filter((x) => (x.folder || null) === fid).sort((a, b) => this.fileName(a).localeCompare(this.fileName(b)));
+    const under = (fid) => shown.some((x) => x.folder === fid) || kidsOf(fid).some((k) => under(k.id));
+    const changedUnder = (fid) => st.notes.some((x) => x.folder === fid && st.dirty.includes(x.id)) || kidsOf(fid).some((k) => changedUnder(k.id));
+    const toggleF = (fid) => this.setState({ folders: this.state.folders.map((x) => x.id === fid ? { ...x, open: !x.open } : x), ctx: fid });
+    const dropF = (fid) => this.setState({ folders: this.state.folders.filter((x) => x.id !== fid), ctx: n.folder });
+    const commitName = (f, el) => {
+      const typed = (el && el.value || '').trim(); const name = typed ? slug(typed) : '';
+      if (!name && f.isNew) { dropF(f.id); return; }
+      this.setState({ folders: this.state.folders.map((x) => x.id === f.id ? { ...x, name: name || x.name || 'new-folder', naming: false, isNew: false } : x) });
+    };
+    const tree = [];
+    const guides = (d) => Array.from({ length: d }, () => ({}));
+    const walkT = (pid, d) => {
+      kidsOf(pid).forEach((f) => {
+        if (raw && !f.naming && !under(f.id)) return;
+        const open = raw ? true : !!f.open;
+        if (f.naming) {
+          tree.push({ key: 'f:' + f.id, naming: true, plain: false, depth: d, guides: guides(d),
+            nameRef: this.bindVal('folder:' + f.id, f.name || '', 'folder:' + f.id),
+            nameKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); commitName(f, e.currentTarget); } if (e.key === 'Escape') { e.preventDefault(); if (f.isNew) dropF(f.id); else this.setState({ folders: this.state.folders.map((x) => x.id === f.id ? { ...x, naming: false } : x) }); } },
+            nameDone: (e) => commitName(f, e.currentTarget) });
+          return;
+        }
+        tree.push({ key: 'f:' + f.id, parent: f.parent || null, naming: false, plain: true, isFolder: true, isFile: false, depth: d, guides: guides(d), level: d + 1,
+          name: f.name, ext: '', expanded: open, selected: false, tab: -1, cls: 'is-folder' + (st.ctx === f.id ? ' is-ctx' : ''), tip: this.folderPath(f.id) + '/',
+          hasGit: changedUnder(f.id), git: '•', gitCls: 'dot', gitTip: 'Holds changes not committed yet', ref: null, toggle: () => toggleF(f.id), click: () => toggleF(f.id) });
+        if (open) walkT(f.id, d + 1);
+      });
+      filesOf(pid).forEach((x) => {
+        const isNew = st.newIds.includes(x.id); const on = x.id === n.id;
+        tree.push({ key: 'n:' + x.id, parent: x.folder || null, naming: false, plain: true, isFolder: false, isFile: true, depth: d, guides: guides(d), level: d + 1,
+          name: this.fileName(x).replace(/\.md$/, ''), ext: '.md', expanded: undefined, selected: on, tab: on ? 0 : -1, cls: 'is-file' + (on ? ' on' : ''),
+          tip: (x.title || 'Untitled') + ' · ' + x.type, hasGit: st.dirty.includes(x.id), git: isNew ? 'U' : 'M', gitCls: isNew ? 'new' : 'mod',
+          gitTip: isNew ? 'New, not committed yet' : 'Changed since the last commit', ref: on ? this.revealRef : null, click: () => this.openNote(x.id) });
+      });
+    };
+    walkT(null, 0);
+    if (tree.length && !tree.some((r) => r.tab === 0)) { const first = tree.find((r) => r.plain); if (first) first.tab = 0; }
+    const ctxName = st.ctx ? this.folderPath(st.ctx) : 'team-kb';
     const filterHint = !shown.length ? 'Try #tag or type:runbook' : plural(shown.length, 'note') + ' match' + (shown.length === 1 ? 'es' : '') + (tagF.length || typeF.length ? '' : ' · try #tag or type:runbook');
     // ---- status ----
     const changes = st.dirty.length;
@@ -1153,7 +1248,7 @@ class Component extends DCLogic {
     // ---- this note ----
     const typeOpts = TYPES.map((t) => ({ label: t.id, hint: t.hint, on: n.type === t.id, cls: n.type === t.id ? 'is-on' : '', pick: () => this.setNote(n.id, (x) => ({ ...x, type: t.id }), { menu: null }) }));
     const tags = n.tags.map((t) => ({ label: t, aria: 'Remove the tag ' + t, remove: () => this.setNote(n.id, (x) => ({ ...x, tags: x.tags.filter((g) => g !== t) })) }));
-    const where = (x) => x.folder ? this.folderName(x.folder) : 'team-kb';
+    const where = (x) => this.folderName(x.folder);
     const kindItems = (pick, curKind) => KINDS.map((k) => ({ ...k, cls: curKind === k.id ? 'is-on' : '', pick: () => pick(k.id) }));
     const dropB = st.dropB; const dropI = st.dropI;
     const blocks = n.blocks.map((b, bi) => {
@@ -1282,31 +1377,16 @@ class Component extends DCLogic {
     }
     const openPick = (kind) => { this.wantFocus = 'pick'; this.setState({ pick: st.pick && st.pick.kind === kind ? null : { kind, q: '' }, menu: null, ed: null }); };
     // ---- graph ----
-    const posOf = {}; const taken = [];
-    st.notes.forEach((x) => { if (POS[x.id]) { posOf[x.id] = POS[x.id]; taken.push(POS[x.id]); } });
-    st.notes.forEach((x) => {
-      if (posOf[x.id]) return; let best = [500, 300]; let bd = -1;
-      for (let gx = 90; gx <= 910; gx += 55) for (let gy = 60; gy <= 540; gy += 40) {
-        const dd = Math.min(...taken.map((p) => Math.hypot((p[0] - gx) / 1.7, p[1] - gy)));
-        if (dd > bd) { bd = dd; best = [gx, gy]; }
-      }
-      posOf[x.id] = best; taken.push(best);
-    });
-    const pairs = {}; const addE = (a, b, kind) => { if (!a || !b || a === b || !posOf[a] || !posOf[b]) return; const k = [a, b].sort().join('|'); const rank = { link: 3, rel: 2, parent: 1 }; if (!pairs[k] || rank[kind] > rank[pairs[k].kind]) pairs[k] = { a, b, kind }; };
-    st.notes.forEach((x) => { x.blocks.forEach((b) => linksIn(textOf(b)).forEach((t) => { const y = this.byTitle(t); if (y) addE(x.id, y.id, 'link'); })); x.related.forEach((r) => addE(x.id, r, 'rel')); addE(x.id, x.parent, 'parent'); });
-    const gm = st.notes.filter(match).map((x) => x.id);
-    const edges = Object.values(pairs).map((e) => {
-      const [x1, y1] = posOf[e.a]; const [x2, y2] = posOf[e.b]; const sag = 16 + Math.hypot(x2 - x1, y2 - y1) * 0.07;
-      const hot = st.hot && (e.a === st.hot || e.b === st.hot);
-      return { cls: e.kind + (hot ? ' hot' : st.hot ? ' dim' : ''), d: 'M' + x1 + ' ' + y1 + ' Q' + ((x1 + x2) / 2) + ' ' + ((y1 + y2) / 2 + sag) + ' ' + x2 + ' ' + y2 };
-    });
-    const gnodes = st.notes.map((x) => {
-      const f = st.folders.find((y) => y.id === x.folder);
-      return { title: x.title || 'Untitled', type: x.type, where: f ? f.name : 'team-kb', color: f ? f.color : 'var(--kraft-2)', x: posOf[x.id][0] / 10, y: posOf[x.id][1] / 6, rot: hashRot(x.id),
-        cls: [x.id === n.id ? 'is-cur' : '', st.hot === x.id ? 'is-hot' : '', raw && !gm.includes(x.id) ? 'is-dim' : '', st.newIds.includes(x.id) ? 'is-new' : ''].filter(Boolean).join(' '),
-        aria: 'Open ' + (x.title || 'Untitled') + ', ' + x.type + ' in ' + (f ? f.name : 'team-kb'),
-        open: () => this.openNote(x.id), enter: () => { if (this.state.hot !== x.id) this.setState({ hot: x.id }); }, leave: () => { if (this.state.hot === x.id) this.setState({ hot: null }); } };
-    });
+    const gm = new Set(st.notes.filter(match).map((x) => x.id));
+    const gd = this.graphData();
+    const lid = (e) => typeof e === 'object' && e ? e.id : e;
+    const near = new Set(); if (st.hot) gd.links.forEach((l) => { if (lid(l.source) === st.hot) near.add(lid(l.target)); if (lid(l.target) === st.hot) near.add(lid(l.source)); });
+    this.gView = { cur: n.id, hot: st.hot, near, dim: raw ? new Set(st.notes.filter((x) => !gm.has(x.id)).map((x) => x.id)) : null };
+    const inkRGB = (() => { const h = ((this.pal && this.pal.ink) || '#2a2219').replace('#', ''); const v = h.length === 3 ? h.split('').map((c) => c + c).join('') : h.slice(0, 6); return [0, 2, 4].map((i) => parseInt(v.slice(i, i + 2), 16)).join(','); })();
+    const threadColor = (l) => {
+      const hot = st.hot && (lid(l.source) === st.hot || lid(l.target) === st.hot); const a = st.hot && !hot ? 0.16 : 0.92;
+      return l.kind === 'link' ? 'rgba(217,86,60,' + a + ')' : l.kind === 'rel' ? 'rgba(233,226,207,' + a + ')' : 'rgba(' + inkRGB + ',' + (a * 0.65) + ')';
+    };
     // ---- search ----
     let results = []; let sq = '';
     if (st.search) {
@@ -1340,10 +1420,26 @@ class Component extends DCLogic {
       // board
       filterRef: this.bindVal('filter', st.filter), onFilter: (e) => this.setState({ filter: e.currentTarget.value }), hasFilter: !!raw,
       clearFilter: () => { if (this.els.filter) this.els.filter.value = ''; this.setState({ filter: '' }); },
-      filterHint, noteCount: plural(st.notes.length, 'note'), ctxName,
+      filterHint, ctxName, rootName: (st.kbPath.split('/').pop() || 'team-kb'), tree,
       newNote: () => this.createNote('', st.ctx === undefined ? n.folder : st.ctx),
-      newFolder: () => { const id = 'nf' + st.nextF; this.wantFocus = 'folder:' + id; this.setState({ folders: st.folders.concat([{ id, name: '', color: NEW_COLORS[st.nextF % NEW_COLORS.length], open: true, naming: true, isNew: true }]), nextF: st.nextF + 1, ctx: id, filter: '' }); if (this.els.filter) this.els.filter.value = ''; },
-      hasRoot: rootNotes.length > 0, rootNotes, folders, noMatch: !!raw && !shown.length, noMatchText: 'Nothing matches “' + st.filter.trim() + '”',
+      newFolder: () => {
+        const id = 'nf' + st.nextF; const parent = st.ctx && this.folderOf(st.ctx) ? st.ctx : null; this.wantFocus = 'folder:' + id;
+        this.setState({ folders: this.state.folders.map((x) => x.id === parent ? { ...x, open: true } : x).concat([{ id, name: '', parent, color: parent ? null : NEW_COLORS[st.nextF % NEW_COLORS.length], open: true, naming: true, isNew: true }]), nextF: st.nextF + 1, ctx: id, filter: '' });
+        if (this.els.filter) this.els.filter.value = '';
+      },
+      collapseAll: () => this.setState({ folders: this.state.folders.map((x) => ({ ...x, open: false })) }),
+      // arrow keys walk the tree: up and down move, right opens a folder or steps in, left closes it or steps out
+      treeKey: (e) => {
+        if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key)) return;
+        const rows = [...e.currentTarget.querySelectorAll('.trow[data-k]')]; const i = rows.indexOf(document.activeElement); if (i < 0) return;
+        e.preventDefault(); const r = tree.find((t) => t.key === rows[i].getAttribute('data-k')); if (!r) return;
+        const go = (j) => { const el = rows[Math.max(0, Math.min(rows.length - 1, j))]; if (el) el.focus(); };
+        if (e.key === 'ArrowDown') go(i + 1); else if (e.key === 'ArrowUp') go(i - 1); else if (e.key === 'Home') go(0); else if (e.key === 'End') go(rows.length - 1);
+        else if (e.key === 'ArrowRight') { if (r.isFolder && !r.expanded) r.toggle(); else if (r.isFolder) go(i + 1); }
+        else if (r.isFolder && r.expanded) r.toggle();
+        else { const p = rows.find((el) => el.getAttribute('data-k') === 'f:' + r.parent); if (p) p.focus(); }
+      },
+      noMatch: !!raw && !shown.length, noMatchText: 'Nothing matches “' + st.filter.trim() + '”',
       sideFoot: 'Plain Markdown in git. Agents search it with search_kb.',
       // header
       kbPath: st.kbPath, branch: st.cfg.branch, remote: st.cfg.remote, status, stCls: changes && !st.syncing ? 'is-dirty' : '',
@@ -1355,7 +1451,7 @@ class Component extends DCLogic {
       openSettings: () => this.setState({ settings: { ...st.cfg }, search: null, menu: null, pick: null, ed: null }),
       isNoteView: st.view === 'note', isGraph: ready && st.view === 'graph', showNoteView: ready && st.view === 'note',
       noteViewCls: st.view === 'note' ? 'is-on' : '', graphViewCls: st.view === 'graph' ? 'is-on' : '',
-      showNote: () => this.setState({ view: 'note', hot: null }), showGraph: () => this.setState({ view: 'graph', ed: null, menu: null, pick: null }),
+      showNote: () => this.setState({ view: 'note', hot: null }), showGraph: () => { this.fitted = false; this.setState({ view: 'graph', ed: null, menu: null, pick: null }); },
       // note
       leafAria: 'Note: ' + (n.title || 'Untitled'), file: this.fileOf(n), edited: n.edited, curDirty: st.dirty.includes(n.id),
       titleRef: this.bindVal('title', n.title, 'title'),
@@ -1383,7 +1479,13 @@ class Component extends DCLogic {
       pickRows, pickNone: !!pk && !pickRows.length,
       links, linkN: links.length, noLinks: !links.length, backlinks, backN: backlinks.length, noBack: !backlinks.length,
       // graph
-      edges, gnodes, graphCount: plural(st.notes.length, 'note') + ' · ' + plural(edges.length, 'thread'),
+      gReady: st.gW > 0 && st.gH > 0, gW: st.gW, gH: st.gH, gData: this.fgArmed ? gd : NO_GRAPH, gfieldRef: this.gfieldRef, fgRef: this.fgRef, gNo: false, gWarm: 160, gCool: 120, gCurve: 0.16,
+      gNoLabel: () => '', gDraw: (node, ctx) => this.drawCard(node, ctx), gArea: (node, color, ctx) => this.cardArea(node, color, ctx),
+      gLinkColor: threadColor, gLinkWidth: (l) => st.hot && (lid(l.source) === st.hot || lid(l.target) === st.hot) ? 2.8 : 1.6, gLinkDash: (l) => l.kind === 'parent' ? [5, 5] : null,
+      gClick: (node) => this.openNote(node.id), gHover: (node) => { const id = node ? node.id : null; if (this.state.hot !== id) this.setState({ hot: id }); },
+      gStop: () => { if (this.fg && !this.fitted) { this.fitted = true; this.fg.zoomToFit(500, 96); if (this.gEl) this.gEl.setAttribute('data-fitted', '1'); } },
+      graphCount: plural(st.notes.length, 'note') + ' · ' + plural(gd.links.length, 'thread'),
+      menuKey: (e) => { if (e.key === 'Escape' && (this.state.menu || this.state.pick)) { e.preventDefault(); this.setState({ menu: null, pick: null }); } },
       // search
       searchOpen: !!st.search, searchRef: this.bindVal('search', st.search ? st.search.q : '', 'search'),
       onSearch: (e) => this.setState({ search: { q: e.currentTarget.value } }), results, noResults: !!st.search && !results.length,
