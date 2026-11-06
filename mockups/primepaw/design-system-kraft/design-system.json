@@ -215,9 +215,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-06T05:21:37Z",
+    "at": "2026-11-06T23:47:12Z",
     "via": "Claude Code",
-    "note": "FileTree: the knowledge base’s notes as a file navigator; the graph is react-force-graph on cork"
+    "note": "QuestionSheet: the agent’s questions as a card in the dock and a sheet with a tab per question"
   },
   "layout": "files",
   "libraries": [],

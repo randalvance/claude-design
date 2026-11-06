@@ -523,39 +523,94 @@ button{font:inherit}
 .qdone{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;font-size:13px;line-height:1.4}
 .qdone dt{font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.3;color:var(--mute)}
 .qdone dd{margin:0;font-weight:700;min-width:0}
-/* the question sheet: one form, all of it in view */
-.qsheet{padding-bottom:12px}
-.q{border:0;margin:0;padding:10px 0 0;min-width:0}
-.q+.q{margin-top:6px;border-top:1px dashed var(--line)}
-.q legend{display:contents}
-.q-h{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0 12px;margin:0 0 5px}
-.qt{font-family:var(--serif);font-size:15px;font-weight:600;line-height:1.35}
-.qh{font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.2;color:var(--mute)}
-.qo{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:flex-start;gap:10px;width:100%;padding:5px 6px;border-radius:2px;transition:background .12s var(--ease)}
-.qo:hover{background-color:var(--hover);background-image:var(--face),var(--pulp)}
-.qo:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.qo .box{margin-top:1px}
-.qo .box.round{border-radius:50%}
-.qo .box svg{width:13px;height:13px}
-.qo.on .box{border-color:transparent;background-color:var(--st-green);background-image:var(--gloss);box-shadow:var(--sticker-s);color:var(--white);transform:rotate(-4deg)}
-.qo.on .box svg{opacity:1}
-.qo-t{min-width:0;display:block;font-size:14px;line-height:1.35}
-.qo-t b{font-weight:800}
-.qo-t em{margin-left:8px;font-family:var(--hand);font-style:normal;font-size:15px;font-weight:600;color:var(--ink);background-image:linear-gradient(transparent 55%,var(--highlighter) 55%)}
-.qo-d{margin-left:8px;font-size:13px;color:var(--mute)}
-@container (max-width:680px){.qo-d{display:block;margin-left:0}}
-.qo.oth{cursor:text;align-items:center}
-.qo-in{all:unset;flex:1;min-width:0;box-sizing:border-box;height:24px;font-family:var(--hand);font-size:17px;line-height:24px;border-bottom:1.5px dashed var(--bar)}
-.qo-in::placeholder{color:var(--mute);opacity:1}
-.qo-in:focus{border-bottom-color:var(--ink)}
-.q-act{margin-top:10px}
-.q-count{font-family:var(--hand);font-size:15px;font-weight:500;color:var(--mute)}
+/* the agent's questions: a card in the dock above the composer, and a sheet with one folder tab per question. The inbox shows the same two pieces. */
+.qdock{position:relative;margin:0 0 22px;padding:6px;background-color:color-mix(in srgb,var(--amber) 58%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid color-mix(in srgb,var(--amber) 62%,var(--edge-2));border-radius:9px;box-shadow:1.5px 2px 0 color-mix(in srgb,var(--amber) 62%,var(--edge-2)),4px 6px 7px var(--amb);animation:dropflat .28s var(--ease) both}
+.qdock-in{display:flex;align-items:center;gap:14px;padding:10px 12px 10px 16px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border-radius:4px;box-shadow:var(--lift-1)}
+.qph{position:relative;flex:none;display:grid;place-items:center;width:42px;height:42px;box-sizing:border-box;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-1);transform:rotate(-3deg)}
+.qph::before{content:"";position:absolute;left:50%;top:-6px;width:26px;height:10px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.qph svg{width:32px;height:32px;display:block;shape-rendering:crispEdges}
+.qdock-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.qdock-t b{font-size:15px;font-weight:800;line-height:1.3}
+.qwho{font-family:var(--mono);font-size:12px;font-weight:700}
+.qdock-t>span{font-family:var(--hand);font-size:17px;font-weight:500;line-height:1.15;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qdock .abtn{height:34px;padding:0 18px;font-size:13px}
+.qdlg-wrap{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:24px;overflow:auto}
+.qdlg-scrim{all:unset;position:fixed;inset:0;background-color:rgba(42,34,25,.5);cursor:default}
+.page.night .qdlg-scrim{background-color:rgba(0,0,0,.58)}
+.qdlg{position:relative;display:flex;flex-direction:column;width:min(800px,100%);animation:dropflat .24s var(--ease) both}
+.qtabs{position:relative;z-index:1;display:flex;align-items:flex-end;gap:4px;padding:0 18px;margin-bottom:-6px}
+.qtab{all:unset;cursor:pointer;position:relative;display:inline-flex;align-items:center;gap:7px;min-width:0;padding:8px 14px 15px;font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;background-color:var(--kraft);background-image:var(--face),var(--pulp);border-radius:7px 7px 0 0;box-shadow:1px 1px 0 var(--kraft-2),3px 3px 4px var(--amb);transition:transform .15s var(--ease)}
+.qtab:hover{transform:translateY(-2px)}
+.qtab.on{background-color:var(--sheet);border-top:3px solid var(--red);padding-top:6px;box-shadow:1px 1px 0 var(--edge),3px 4px 5px var(--amb);z-index:3}
+.qtab.on:hover{transform:none}
+.qtab:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.qtick{display:grid;place-items:center;box-sizing:border-box;width:17px;height:17px;flex:none;border:1.5px dashed var(--bar);border-radius:50%;color:var(--white)}
+.qtick svg{width:10px;height:10px;opacity:0}
+.qtab.done .qtick{border:0;background-color:var(--st-green);background-image:var(--gloss);box-shadow:var(--sticker-s);transform:rotate(-6deg)}
+.qtab.done .qtick svg{opacity:1;animation:stamp .21s var(--ease-pop) both}
+.qpaper{position:relative;z-index:2;padding:16px 24px 18px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--sheet));border-radius:4px;box-shadow:1px 2px 0 var(--edge-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2);color:var(--ink)}
+.qdlg-h{display:flex;align-items:center;gap:14px;padding-bottom:12px;margin-bottom:16px;border-bottom:2px dotted var(--line)}
+.qdlg-h .qph{width:36px;height:36px}
+.qdlg-h .qph svg{width:27px;height:27px}
+.qdlg-h .qph::before{width:22px;height:8px;top:-5px}
+.qdlg-h h3{flex:1;min-width:0;margin:0;font-size:15px;font-weight:800;line-height:1.3}
+.qdlg-h h3 small{display:block;font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.15;color:var(--mute)}
+.qx{all:unset;cursor:pointer;flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:4px;color:var(--mute);transition:background .12s var(--ease)}
+.qx:hover{background-color:var(--hover);color:var(--ink)}
+.qx:focus-visible{outline:2px solid var(--blue)}
+.qx svg{width:16px;height:16px}
+.qprob{margin:0;max-width:68ch;font-size:14px;line-height:1.55}
+.qq{margin:16px 0 2px;font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.005em}
+.qhint{display:block;margin:0 0 16px;font-family:var(--hand);font-size:15px;font-weight:500;line-height:1.2;color:var(--mute)}
+.qopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px 18px;align-items:start;padding-top:4px}
+.qopt{position:relative;min-width:0}
+.qbtn{all:unset;cursor:pointer;position:relative;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:42px;padding:6px 16px;font-size:14px;font-weight:800;line-height:1.2;text-align:center;color:var(--ink);background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:4px;box-shadow:var(--lift-board-sm);transition:transform .12s var(--ease),box-shadow .12s var(--ease),background-color .12s var(--ease)}
+.qbtn:hover{transform:translate(-1px,-1px);box-shadow:var(--lift-board-up)}
+.qbtn:active{transform:translate(2px,3px);box-shadow:var(--press-board)}
+.qbtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.qbtn.on,.qbtn.on:hover{transform:translate(2px,3px);box-shadow:var(--press-board);background-color:color-mix(in srgb,var(--board) 80%,var(--board-2))}
+.qk{display:none;place-items:center;flex:none;width:18px;height:18px;border-radius:50%;color:var(--white);background-color:var(--st-green);background-image:var(--gloss);box-shadow:var(--sticker-s);transform:rotate(-6deg)}
+.qk svg{width:11px;height:11px}
+.qbtn.on .qk{display:grid;animation:stamp .21s var(--ease-pop) both}
+.qrec{position:absolute;top:-11px;right:-7px;z-index:2;padding:2px 8px;font-size:11px;letter-spacing:.06em;transform:rotate(5deg);pointer-events:none}
+.qchk{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;min-height:42px;padding:6px 8px;font-size:14px;font-weight:800;line-height:1.25;border-radius:3px;transition:background .12s var(--ease)}
+.qchk:hover{background-color:var(--hover);background-image:var(--face),var(--pulp)}
+.qchk:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.qchk .box{color:var(--white);transition:transform .26s var(--ease-pop)}
+.qchk .box svg{width:12px;height:12px}
+.qchk.on .box{border-color:transparent;background-color:var(--st-green);background-image:var(--gloss);box-shadow:var(--sticker-s);transform:rotate(-4deg)}
+.qchk.on .box svg{opacity:1;animation:stamp .21s var(--ease-pop) both}
+.qdesc{margin:9px 2px 0;font-size:13px;line-height:1.45;color:var(--mute)}
+.qchk~.qdesc{margin-top:0;padding-left:36px}
+.qdlg-f{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin-top:22px;padding-top:14px;border-top:2px dotted var(--line)}
+.qstep{margin-right:auto;font-family:var(--hand);font-size:15px;font-weight:500;color:var(--mute)}
+.qdlg-f .abtn{height:34px;padding:0 16px;font-size:13px}
+.qpaper>.pstamp{position:absolute;right:26px;top:66px;height:30px;font-size:13px;animation:stampdown .26s var(--ease-pop) both}
+@media (max-width:640px){.qdlg-wrap{padding:12px}.qpaper{padding:14px 16px 16px}.qtabs{padding:0 8px;overflow-x:auto}.qopts{grid-template-columns:1fr}.qdock-in{flex-wrap:wrap}}
 .maincol:has(.slip-or) .slip-or{min-width:0}
 @container (max-width:680px){.slip-or{margin-left:0;width:100%;text-align:left}.slip>.pstamp{bottom:auto;top:14px;right:14px}}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
 <svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="inkstamp" x="-6%" y="-12%" width="112%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" result="d"></feDisplacementMap><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 2.3" result="holes"></feColorMatrix><feComposite in="d" in2="holes" operator="in"></feComposite></filter><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
+<sc-if value="{{qd.open}}" hint-placeholder-val="{{false}}"><div class="qdlg-wrap" onKeyDown="{{qd.key}}">
+  <button class="qdlg-scrim" tabIndex="-1" aria-hidden="true" onClick="{{qd.close}}"></button>
+  <section class="qdlg" role="dialog" aria-modal="true" aria-labelledby="qdlg-h" ref="{{qd.dlgRef}}">
+    <div class="qtabs" role="tablist" aria-label="Questions" onKeyDown="{{qd.tabKey}}"><sc-for list="{{qd.tabs}}" as="t" hint-placeholder-count="3"><button class="qtab {{t.cls}}" role="tab" id="{{t.id}}" aria-selected="{{t.sel}}" aria-controls="qpanel" tabIndex="{{t.tab}}" onClick="{{t.pick}}" ref="{{t.ref}}"><span class="qtick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{t.label}}<sc-if value="{{t.done}}" hint-placeholder-val="{{false}}"><span class="sr">, answered</span></sc-if></button></sc-for></div>
+    <div class="qpaper">
+      <header class="qdlg-h"><span class="qph" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{qd.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span><h3 id="qdlg-h"><span class="qwho">{{qd.who}}</span> has {{qd.count}}<small>{{qd.where}}</small></h3><button class="qx" onClick="{{qd.close}}" aria-label="Close. Your answers are kept." title="Close. Your answers are kept."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
+      <div class="qpanel" role="tabpanel" id="qpanel" aria-labelledby="{{qd.tabId}}">
+        <p class="qprob">{{qd.problem}}</p>
+        <h4 class="qq">{{qd.question}}</h4>
+        <span class="qhint">{{qd.hint}}</span>
+        <sc-if value="{{qd.isOne}}" hint-placeholder-val="{{true}}"><div class="qopts" role="radiogroup" aria-label="{{qd.question}}"><sc-for list="{{qd.opts}}" as="o" hint-placeholder-count="3"><div class="qopt"><button class="qbtn {{o.cls}}" role="radio" aria-checked="{{o.on}}" aria-describedby="{{o.descId}}" onClick="{{o.pick}}"><span class="qk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{o.name}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sr">, recommended</span></sc-if></button><sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sticker qrec" aria-hidden="true">Recommended</span></sc-if><p class="qdesc" id="{{o.descId}}">{{o.desc}}</p></div></sc-for></div></sc-if>
+        <sc-if value="{{qd.isMulti}}" hint-placeholder-val="{{false}}"><div class="qopts" role="group" aria-label="{{qd.question}}"><sc-for list="{{qd.opts}}" as="o" hint-placeholder-count="3"><div class="qopt"><button class="qchk {{o.cls}}" role="checkbox" aria-checked="{{o.on}}" aria-describedby="{{o.descId}}" onClick="{{o.pick}}"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{o.name}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sr">, recommended</span></sc-if></button><sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sticker qrec" aria-hidden="true">Recommended</span></sc-if><p class="qdesc" id="{{o.descId}}">{{o.desc}}</p></div></sc-for></div></sc-if>
+      </div>
+      <footer class="qdlg-f"><span class="qstep">{{qd.step}}</span><sc-if value="{{qd.hasNext}}" hint-placeholder-val="{{true}}"><button class="abtn" onClick="{{qd.next}}">Next question</button></sc-if><button class="abtn go {{qd.submitCls}}" aria-disabled="{{qd.notReady}}" onClick="{{qd.submit}}">{{qd.submitLabel}}</button></footer>
+      <sc-if value="{{qd.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{qd.stampCls}}" role="status">{{qd.stamp}}</span></sc-if>
+    </div>
+  </section>
+</div></sc-if>
 <div class="app">
 
   <div class="railwrap board"><nav class="rail" aria-label="Primary">
@@ -733,19 +788,7 @@ button{font:inherit}
   </div></sc-if>
   <sc-if value="{{it.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{it.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{it.slip.cmd}}</code><span class="pstamp {{it.slip.stampCls}}">{{it.slip.stamp}}</span></div></sc-if>
 </section></sc-if>
-<sc-if value="{{it.isAsk}}" hint-placeholder-val="{{false}}"><section class="slipw {{it.ask.cls}}" aria-label="The agent has a question" aria-live="polite" ref="{{it.ask.ref}}">
-  <sc-if value="{{it.ask.open}}" hint-placeholder-val="{{true}}"><div class="slip qsheet"><span class="tape" aria-hidden="true"></span>
-    <div class="slip-h"><h4 class="slip-q">{{it.ask.title}}</h4><span class="q-count">{{it.ask.count}}</span></div>
-    <sc-for list="{{it.ask.qs}}" as="q" hint-placeholder-count="2"><div class="q" role="{{q.group}}" aria-label="{{q.text}}">
-      <div class="q-h"><span class="qt">{{q.text}}</span><span class="qh">{{q.hint}}</span></div>
-      <sc-for list="{{q.opts}}" as="o" hint-placeholder-count="3"><button class="qo {{o.cls}}" role="{{q.role}}" aria-checked="{{o.on}}" onClick="{{o.pick}}"><span class="box {{q.boxCls}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span class="qo-t"><b>{{o.name}}</b><sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><em>recommended</em></sc-if><span class="qo-d">{{o.desc}}</span></span></button></sc-for>
-      <label class="qo oth {{q.othCls}}"><span class="box {{q.boxCls}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span class="sr">Something else</span><input class="qo-in" placeholder="Something else…" onInput="{{q.onOther}}"></label>
-    </div></sc-for>
-    <div class="slip-act q-act {{it.ask.actCls}}"><button class="abtn go {{it.ask.sendCls}}" aria-disabled="{{it.ask.notReady}}" onClick="{{it.ask.send}}">Send answers</button><button class="abtn" onClick="{{it.ask.skip}}">You decide</button><span class="slip-or">or just write your answer below</span></div>
-    <sc-if value="{{it.ask.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{it.ask.stampCls}}" role="status">{{it.ask.stamp}}</span></sc-if>
-  </div></sc-if>
-  <sc-if value="{{it.ask.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><dl class="qdone"><sc-for list="{{it.ask.rows}}" as="r" hint-placeholder-count="2"><dt>{{r.h}}</dt><dd>{{r.a}}</dd></sc-for></dl><span class="pstamp {{it.ask.stampCls}}">{{it.ask.stamp}}</span></div></sc-if>
-</section></sc-if>
+<sc-if value="{{it.isAsk}}" hint-placeholder-val="{{false}}"><sc-if value="{{it.ask.folded}}" hint-placeholder-val="{{false}}"><section class="slipw stub" aria-label="Your answers to the agent"><div class="slip done"><dl class="qdone"><sc-for list="{{it.ask.rows}}" as="r" hint-placeholder-count="3"><dt>{{r.h}}</dt><dd>{{r.a}}</dd></sc-for></dl><span class="pstamp {{it.ask.stampCls}}">{{it.ask.stamp}}</span></div></section></sc-if></sc-if>
 <sc-if value="{{it.isReply}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{it.text}}</p></div></sc-if>
         <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
           <section class="deck {{it.cls}}" aria-label="Agent work">
@@ -847,6 +890,11 @@ button{font:inherit}
 
   <footer class="foot">
     <div class="foot-in">
+      <sc-if value="{{qd.show}}" hint-placeholder-val="{{false}}"><section class="qdock" aria-label="Questions from the agent"><div class="qdock-in">
+        <span class="qph" aria-hidden="true"><svg viewBox="0 0 12 12"><sc-for list="{{qd.px}}" as="p" hint-placeholder-count="70"><rect x="{{p.x}}" y="{{p.y}}" width="1" height="1" fill="{{p.c}}"></rect></sc-for></svg></span>
+        <div class="qdock-t"><b><span class="qwho">{{qd.who}}</span> has {{qd.count}}</b><span>{{qd.sub}}</span></div>
+        <button class="abtn go" onClick="{{qd.openDlg}}" aria-haspopup="dialog" ref="{{qd.answerRef}}">Answer</button>
+      </div></section></sc-if>
       <span class="prop cat" aria-hidden="true"><svg viewBox="0 0 84 70" fill="none" stroke="#2a2219" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M14 30 18 6l12 12h24L66 6l4 24c0 16-12 26-28 26S14 46 14 30z" fill="#f3e9d5"></path><path d="M54 18 66 6l4 24c0 6-2 11-5 15-3-11-10-19-11-27z" fill="#d9bc86"></path><path d="M20 11l8 7M64 11l-8 7" stroke-width="1.2"></path><circle cx="33" cy="33" r="2.4" fill="#2a2219" stroke="none"></circle><circle cx="51" cy="33" r="2.4" fill="#2a2219" stroke="none"></circle><circle cx="26" cy="41" r="3.6" fill="#e8a9a2" stroke="none" opacity=".7"></circle><circle cx="58" cy="41" r="3.6" fill="#e8a9a2" stroke="none" opacity=".7"></circle><path d="M40 39h4l-2 3z" fill="#c8553d" stroke="none"></path><path d="M42 42c-1 3-4 4-6 2M42 42c1 3 4 4 6 2"></path><path d="M4 36l16 2M4 44l16-2M80 36l-16 2M80 44l-16-2" stroke-width="1.2"></path><path d="M18 70V59a8 8 0 0 1 16 0v11" fill="#f3e9d5"></path><path d="M50 70V59a8 8 0 0 1 16 0v11" fill="#f3e9d5"></path><path d="M24 64v5M29 64v5M56 64v5M61 64v5" stroke-width="1.2"></path></svg></span>
       <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
       <div class="card">
@@ -980,7 +1028,7 @@ const WS = [
     { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
   { id: 'orbit', name: 'Orbit Billing', color: '#d06a8c', attn: true, sessions: [
     { id: 's4', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
-    { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Orchestrator', branch: 'feat/ORB-272-telemetry' },
+    { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Implementer', branch: 'feat/ORB-272-telemetry' },
     { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1:40', jira: true, role: 'Implementer', branch: 'main' },
     { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2:50', role: 'Implementer', branch: 'main' },
     { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1:02', role: 'Implementer', branch: 'main' },
@@ -1083,6 +1131,11 @@ const PAD_ANSWERS = [
 ];
 
 
+// the session's agent, as its pixel portrait from the Agents page: 12×12, one letter per pixel, '.' is paper
+const FACE_PAL = { i: '#2a2219', g: '#5b8c5a', k: '#e2c48c', w: '#fffdf7' };
+const FACES = { implementer: ['............', '..gggggggg..', '..gggggggg..', '..giiiiiig..', '..giwiiwig..', '..giiiiiig..', '..gggggggg..', '..ggkkkkgg..', '..gggggggg..', '...g.gg.g...', '..kk.gg.kk..', '..kk....kk..'] };
+function facePx(role) { const rows = FACES[String(role || '').toLowerCase()] || FACES.implementer; const out = []; rows.forEach((row, y) => Array.from(row).forEach((ch, x) => { if (ch !== '.') out.push({ x, y, c: FACE_PAL[ch] }); })); return out; }
+const NO_QD = { show: false, open: false, px: [], tabs: [], opts: [] };
 const STAMPS = { once: ['APPROVED', 'ok'], always: ['APPROVED FOR SESSION', 'ok'], yolo: ['YOLO', 'no'], denied: ['DENIED', 'no'], replied: ['ANSWERED BELOW', 'meh'], answered: ['ANSWERED', 'ok'], skipped: ['LEFT TO THE AGENT', 'meh'] };
 const LIVE_EDIT = { kind: 'edit', ask: 'May I edit this file?', cmd: 'src/lib/retry.ts', sum: '+3 −1', isDiff: true, diff: [{ c: '', t: '  export async function send(req) {' }, { c: 'del', t: '-   return fetch(req);' }, { c: 'add', t: '+   return retry(() => fetch(req), {' }, { c: 'add', t: '+     attempts: 3, backoff: 200,' }, { c: 'add', t: '+   });' }, { c: '', t: '  }' }], why: 'Retries the failing request up to three times, waiting a little longer each time.', tags: ['changes 1 file', 'no commit yet'] };
 const FLOWS = { s5: {
@@ -1099,27 +1152,34 @@ const FLOWS = { s5: {
     { work: { id: 'f2', sub: '1 LLM call · 2 tool calls', time: '0:09', now: 'Wiring up the collector', dots: ['bash', 'edit'], steps: [
         { k: 'bash', label: 'bash', detail: 'pnpm prisma generate', time: '2.1s' },
         { k: 'edit', label: 'edit', detail: 'src/telemetry/collector.ts', time: '0.4s' } ] },
-      said: (f) => (f.res.t1 && f.res.t1.status === 'denied' ? 'Okay, I left the database alone and kept the migration as a file for you to run. ' : 'The migration is in. ') + 'Two decisions are yours before I finish the collector.' },
-    { ask: { id: 'a1', title: 'Two quick questions', qs: [
-      { id: 'q1', head: 'Retention', text: 'How long should browser events be kept?', multi: false, opts: [
-        { id: '7', name: '7 days', desc: 'Enough to debug a bad release, and the smallest table.' },
-        { id: '30', name: '30 days', rec: true, desc: 'Covers a full billing cycle.' },
-        { id: '90', name: '90 days', desc: 'Matches the server logs, but the table grows fast.' } ] },
-      { id: 'q2', head: 'Events', text: 'Which events should it capture?', multi: true, opts: [
-        { id: 'err', name: 'Checkout errors', rec: true, desc: 'What the ticket asks for.' },
-        { id: 'pay', name: 'Failed payments', desc: 'Card declines and processor timeouts.' },
-        { id: 'slow', name: 'Slow page loads', desc: 'Anything over three seconds.' } ] } ] } },
+      said: (f) => (f.res.t1 && f.res.t1.status === 'denied' ? 'Okay, I left the database alone and kept the migration as a file for you to run. ' : 'The migration is in. ') + 'Three decisions are yours before I finish the collector.' },
+    { ask: { id: 'a1', qs: [
+      { id: 'q1', head: 'Retention', multi: false, text: 'How long should browser events be kept?',
+        problem: 'Every checkout writes a few rows to browser_events, about 40 MB a day at today’s traffic. How long they stay sets both the storage bill and how far back you can look when something breaks.', opts: [
+        { id: '7', name: '7 days', desc: 'Enough to debug a bad release. The smallest table, around 280 MB.' },
+        { id: '30', name: '30 days', rec: true, desc: 'Covers a full billing cycle, so a disputed charge is still on record. Around 1.2 GB.' },
+        { id: '90', name: '90 days', desc: 'Matches the server logs, but the table grows to around 3.6 GB.' } ] },
+      { id: 'q2', head: 'Events', multi: true, text: 'Which events should it capture?',
+        problem: 'The ticket only asks for checkout errors. The same hook can catch failed payments and slow pages for almost no extra code, but each one adds noise to the dashboard.', opts: [
+        { id: 'err', name: 'Checkout errors', rec: true, desc: 'What ORB-272 asks for: any error thrown inside the checkout flow.' },
+        { id: 'pay', name: 'Failed payments', desc: 'Card declines and processor timeouts, with the decline code.' },
+        { id: 'slow', name: 'Slow page loads', desc: 'Any checkout step that takes more than three seconds to load.' } ] },
+      { id: 'q3', head: 'Who is recorded', multi: false, text: 'Whose sessions should it record?',
+        problem: 'Recording every shopper gives the full picture, but it sends more personal browsing data to our logs. Legal hasn’t said which they prefer, so this one is yours, not mine.', opts: [
+        { id: 'all', name: 'Everyone', desc: 'Complete data. Legal will want to review it before launch.' },
+        { id: 'tenth', name: 'One in ten', desc: 'Enough to spot trends, with a tenth of the data.' },
+        { id: 'staff', name: 'Staff only', desc: 'Safe to ship today, but real shoppers won’t show up yet.' } ] } ] } },
     { work: { id: 'f3', sub: '3 LLM calls · 4 tool calls', time: '0:31', now: 'Finishing the collector', dots: ['edit', 'edit', 'bash'], steps: [
         { k: 'edit', label: 'edit', detail: 'src/telemetry/collector.ts', time: '0.5s' },
         { k: 'edit', label: 'edit', detail: 'src/flags/index.ts', time: '0.2s' },
         { k: 'bash', label: 'bash', detail: 'pnpm test telemetry', time: '6.4s' } ] },
-      reply: (a) => a ? 'Done. Browser telemetry is in behind the browser_telemetry flag, which is off by default. Events are kept for ' + a.q1 + ', and it captures: ' + a.q2 + '. The tests pass.' : 'Done. You left it to me, so events are kept for 30 days and it captures checkout errors only. It sits behind the browser_telemetry flag, which is off by default. The tests pass.' } ],
+      reply: (a) => a ? 'Done. Browser telemetry is in behind the browser_telemetry flag, which is off by default. It captures ' + a.q2.toLowerCase().replace(/, ([^,]*)$/, ' and $1') + ', records ' + ({ Everyone: 'every session', 'One in ten': 'one session in ten', 'Staff only': 'staff sessions only' }[a.q3] || a.q3) + ', and keeps events for ' + a.q1 + '. The tests pass.' : 'Done. You left it to me, so events are kept for 30 days and it captures checkout errors only. It sits behind the browser_telemetry flag, which is off by default. The tests pass.' } ],
 } };
 
 class Component extends DCLogic {
   ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
   titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
-  state = { flow: { s5: { at: 2, res: { t1: { status: 'once', folded: true } } } }, askDraft: {}, allow: {}, yoloBy: {}, artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: 's5', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
+  state = { flow: { s5: { at: 2, res: { t1: { status: 'once', folded: true } } } }, askDraft: {}, qdOpen: true, qdTab: 0, allow: {}, yoloBy: {}, artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: 's5', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
   componentWillUnmount() { (this.tprompt || []).forEach(clearTimeout); clearTimeout(this.tbring); clearInterval(this.tflow); clearTimeout(this.tp); clearTimeout(this.tpe); clearTimeout(this.tpf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
@@ -1267,20 +1327,52 @@ class Component extends DCLogic {
     if (q.multi) { const names = q.opts.filter((o) => (a.sel || {})[o.id]).map((o) => o.name); if (other) names.push(other); return names.join(', '); }
     if (a.sel === '__other') return other; const o = q.opts.find((x) => x.id === a.sel); return o ? o.name : '';
   }
+  // once the answers are in, the thread keeps a stub of them
   askView(sid, p) {
-    const f = this.flowOf(sid); const r = f.res[p.id]; const status = r && r.status; const folded = !!(r && r.folded); const stamp = status ? STAMPS[status] : ['', ''];
-    const all = this.state.askDraft; const d = all[p.id] || {};
-    const put = (qid, v) => this.setState({ askDraft: { ...this.state.askDraft, [p.id]: { ...(this.state.askDraft[p.id] || {}), [qid]: { ...((this.state.askDraft[p.id] || {})[qid] || {}), ...v } } } });
-    const qs = p.qs.map((q) => { const a = d[q.id] || {}; const sel = a.sel; const othOn = q.multi ? !!(a.other || '').trim() : sel === '__other' && !!(a.other || '').trim();
-      return { text: q.text, hint: q.head + ' · ' + (q.multi ? 'pick any' : 'pick one'), group: q.multi ? 'group' : 'radiogroup', role: q.multi ? 'checkbox' : 'radio', boxCls: q.multi ? '' : 'round', othCls: othOn ? 'on' : '',
-        onOther: (e) => { const v = e.target.value; put(q.id, q.multi ? { other: v } : { other: v, sel: v.trim() ? '__other' : (a.sel === '__other' ? null : a.sel) }); },
-        opts: q.opts.map((o) => { const on = q.multi ? !!(sel || {})[o.id] : sel === o.id; return { name: o.name, desc: o.desc, rec: !!o.rec, on, cls: on ? 'on' : '', pick: () => put(q.id, { sel: q.multi ? { ...(sel || {}), [o.id]: !on } : o.id }) }; }) }; });
-    const n = p.qs.filter((q) => !!this.askAnswer(q, d)).length; const ready = n === p.qs.length;
+    const r = this.flowOf(sid).res[p.id]; const status = r && r.status; const stamp = status ? STAMPS[status] : ['', '']; const d = this.state.askDraft[p.id] || {};
     const rows = status === 'skipped' ? [{ h: 'Your call', a: 'You left it to the agent' }] : status === 'replied' ? [{ h: 'Your call', a: 'You answered in your own message' }] : p.qs.map((q) => ({ h: q.head, a: this.askAnswer(q, d) }));
-    return { title: p.title, qs, rows, count: n + ' of ' + p.qs.length + ' answered', open: !folded, folded, hasStamp: !!status, stamp: stamp[0], stampCls: stamp[1], cls: folded ? 'stub' : 'open', actCls: status ? 'settled' : '', sendCls: ready ? '' : 'off', notReady: !ready,
-      ref: !status ? ((el) => { if (el) this.promptEl = el; }) : (() => {}),
-      send: () => { if (!ready) return; const answers = {}; p.qs.forEach((q) => { answers[q.id] = this.askAnswer(q, d); }); this.settle(sid, p.id, { status: 'answered', answers }); },
-      skip: () => this.settle(sid, p.id, { status: 'skipped' }) };
+    return { folded: !!(r && r.folded), rows, stamp: stamp[0], stampCls: stamp[1] };
+  }
+  // while they wait: a card in the dock above the composer, and Answer opens a sheet with a tab per question
+  qdView(sid) {
+    const F = FLOWS[sid]; if (!F) return NO_QD;
+    const f = this.flowOf(sid); const stg = f.halt ? null : F.stages[f.at]; const p = stg && stg.ask; if (!p) return NO_QD;
+    const r = f.res[p.id]; if (r && r.folded) return NO_QD;
+    const st = this.state; const sess = this.sess(sid); const status = r && r.status;
+    const d = st.askDraft[p.id] || {}; const n = p.qs.length; const at = Math.min(st.qdTab || 0, n - 1); const q = p.qs[at]; const a = d[q.id] || {};
+    const done = p.qs.map((x) => !!this.askAnswer(x, d)); const left = done.filter((x) => !x).length;
+    const put = (v) => { const cur = this.state.askDraft[p.id] || {}; this.setState({ askDraft: { ...this.state.askDraft, [p.id]: { ...cur, [q.id]: { ...(cur[q.id] || {}), ...v } } } }); };
+    const focusTab = (i) => { const t = (this.qtabEls || [])[i]; if (t && t.isConnected) t.focus(); };
+    const go = (i) => this.setState({ qdTab: i });
+    const close = () => { this.setState({ qdOpen: false }); if (this.answerEl && this.answerEl.isConnected) this.answerEl.focus(); };
+    const nextOpen = (marks) => { for (let k = 1; k < n; k += 1) { const j = (at + k) % n; if (!marks[j]) return j; } return -1; };
+    const opts = q.opts.map((o) => { const on = q.multi ? !!(a.sel || {})[o.id] : a.sel === o.id;
+      return { name: o.name, desc: o.desc, rec: !!o.rec, on, cls: on ? 'on' : '', descId: 'qd-' + q.id + '-' + o.id,
+        pick: () => { if (status) return; if (q.multi) { put({ sel: { ...(a.sel || {}), [o.id]: !on } }); return; }
+          put({ sel: o.id });
+          // a first answer to a pick-one question moves on to the next one still open
+          if (!done[at]) { const marks = done.slice(); marks[at] = true; const j = nextOpen(marks); if (j >= 0) this.later(() => { if (this.state.qdOpen && (this.state.qdTab || 0) === at) this.setState({ qdTab: j }); }, 450); } } }; });
+    const word = (k) => k + (k === 1 ? ' question' : ' questions');
+    return { show: true, open: !!st.qdOpen, px: facePx(sess.role), who: String(sess.role || 'agent').toLowerCase() + '-agent', count: word(n), where: this.titleOf(sid, sess.t),
+      sub: left === n ? p.qs.map((x) => x.head).join(' · ') : left ? (n - left) + ' of ' + n + ' answered, ' + left + ' to go' : 'All answered, ready to submit',
+      answerRef: (el) => { if (el) this.answerEl = el; },
+      openDlg: () => { const j = done.indexOf(false); this.setState({ qdOpen: true, qdTab: j >= 0 ? j : 0 }); },
+      close,
+      dlgRef: (el) => { if (el && !el.dataset.ready) { el.dataset.ready = '1'; focusTab(this.state.qdTab || 0); } },
+      key: (e) => {
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const els = Array.from(e.currentTarget.querySelectorAll('.qdlg button')).filter((x) => x.getAttribute('tabindex') !== '-1');
+        if (!els.length) return; const first = els[0]; const last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      },
+      tabKey: (e) => { const k = e.key; const j = k === 'ArrowRight' ? (at + 1) % n : k === 'ArrowLeft' ? (at - 1 + n) % n : k === 'Home' ? 0 : k === 'End' ? n - 1 : -1; if (j < 0) return; e.preventDefault(); go(j); focusTab(j); },
+      tabs: p.qs.map((x, i) => ({ label: x.head, done: done[i], sel: i === at, tab: i === at ? 0 : -1, id: 'qt-' + x.id, cls: (i === at ? 'on ' : '') + (done[i] ? 'done' : ''), pick: () => go(i), ref: (el) => { (this.qtabEls = this.qtabEls || [])[i] = el; } })),
+      tabId: 'qt-' + q.id, problem: q.problem, question: q.text, hint: q.multi ? 'Pick any that apply' : 'Pick one', isOne: !q.multi, isMulti: !!q.multi, opts,
+      step: 'Question ' + (at + 1) + ' of ' + n, hasNext: at < n - 1, next: () => go(at + 1),
+      notReady: left > 0, submitCls: left ? 'off' : '', submitLabel: left ? 'Submit · ' + left + ' left' : 'Submit answers',
+      hasStamp: !!status, stamp: status ? STAMPS[status][0] : '', stampCls: status ? STAMPS[status][1] : '',
+      submit: () => { if (left || status) return; const answers = {}; p.qs.forEach((x) => { answers[x.id] = this.askAnswer(x, d); }); this.settle(sid, p.id, { status: 'answered', answers }); this.later(() => this.setState({ qdOpen: false }), 700); } };
   }
   flowThread(sid) {
     const F = FLOWS[sid]; const f = this.flowOf(sid); const out = F.seed.slice();
@@ -1429,7 +1521,7 @@ class Component extends DCLogic {
       gaugeCls, pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
       arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC, draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC, draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
       ctxAria: 'Context window: ' + Math.round(remaining * 100) + ' percent left, ' + kfmt(total - used) + ' of ' + kfmt(total) + ' tokens',
-      yolo: this.yoloOf(st.sid), toggleYolo: () => this.togglePromptYolo(),
+      yolo: this.yoloOf(st.sid), toggleYolo: () => this.togglePromptYolo(), qd: st.sid ? this.qdView(st.sid) : NO_QD,
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
       reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, unfolded: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: {}, activeOnly: false, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }

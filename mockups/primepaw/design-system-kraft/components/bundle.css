@@ -255,24 +255,55 @@
 .kr-btn.is-go{color:var(--white);background-color:color-mix(in srgb,var(--blue) var(--dye,100%),var(--desk));border-color:var(--blue-2);box-shadow:2px 3px 0 var(--blue-2),4px 6px 7px var(--amb)}
 .kr-btn.is-go:hover{box-shadow:3px 4px 0 var(--blue-2),5px 8px 9px var(--amb)}
 .kr-btn.is-go:active{box-shadow:0 0 0 var(--blue-2),1px 1px 2px var(--amb)}
-.kr-q{border:0;margin:0;padding:var(--space-10) 0 0}
-.kr-q+.kr-q{margin-top:var(--space-6);border-top:1px dashed var(--line)}
-.kr-q-h{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0 var(--space-12);margin:0 0 var(--space-4)}
-.kr-q-t{font-family:var(--font-serif);font-size:15px;font-weight:600;line-height:1.35}
-.kr-q-hint{font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1.2;color:var(--mute)}
-.kr-qo{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:flex-start;gap:var(--space-10);width:100%;padding:5px var(--space-6);border-radius:2px;font-size:14px;line-height:1.35}
-.kr-qo:hover{background-color:var(--hover);background-image:var(--face),var(--pulp-paper)}
-.kr-qo:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.kr-qo-box{flex:none;display:grid;place-items:center;box-sizing:border-box;width:18px;height:18px;margin-top:1px;border:2px solid var(--ink);border-radius:2px;background-color:var(--sheet);color:var(--white)}
-.kr-qo-box.is-round{border-radius:50%}
-.kr-qo-box svg{width:13px;height:13px;opacity:0}
-.kr-qo.is-on .kr-qo-box{border-color:transparent;background-color:var(--st-green);background-image:var(--gloss);transform:rotate(-4deg)}
-.kr-qo.is-on .kr-qo-box svg{opacity:1}
-.kr-qo b{font-weight:800}
-.kr-qo em{margin-left:var(--space-8);font-family:var(--font-hand);font-style:normal;font-size:15px;font-weight:600;background-image:linear-gradient(transparent 55%,var(--highlighter) 55%)}
-.kr-qo small{margin-left:var(--space-8);font-size:13px;color:var(--mute)}
-.kr-qo-in{all:unset;flex:1;min-width:0;box-sizing:border-box;height:24px;font-family:var(--font-hand);font-size:17px;line-height:24px;border-bottom:1.5px dashed var(--bar)}
-.kr-qo-in::placeholder{color:var(--mute);opacity:1}
+/* The agent's questions: a card in the dock above the composer, and a sheet with one folder tab per question. The inbox shows the same two pieces. */
+.kr-qdock{position:relative;padding:var(--space-6);background-color:color-mix(in srgb,var(--amber) 58%,var(--board));background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);border:1.5px solid color-mix(in srgb,var(--amber) 62%,var(--edge-2));border-radius:var(--radius-9);box-shadow:1.5px 2px 0 color-mix(in srgb,var(--amber) 62%,var(--edge-2)),4px 6px 7px var(--amb)}
+.kr-qdock-in{display:flex;align-items:center;gap:var(--space-14);padding:var(--space-10) var(--space-12) var(--space-10) var(--space-16);background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border-radius:var(--radius-4);box-shadow:var(--lift-paper-1)}
+.kr-qdock-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.kr-qdock-t b{font-size:15px;font-weight:800;line-height:1.3}
+.kr-qdock-t>span{font-family:var(--font-hand);font-size:17px;font-weight:500;line-height:1.15;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kr-qwho{font-family:var(--font-mono);font-size:12px;font-weight:700}
+.kr-qph{position:relative;flex:none;display:grid;place-items:center;width:42px;height:42px;box-sizing:border-box;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-paper-1);transform:rotate(-3deg)}
+.kr-qph::before{content:"";position:absolute;left:50%;top:-6px;width:26px;height:10px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg)}
+.kr-qph svg{width:32px;height:32px;display:block;shape-rendering:crispEdges}
+.kr-qph.is-s{width:36px;height:36px}
+.kr-qph.is-s svg{width:27px;height:27px}
+.kr-qph.is-s::before{width:22px;height:8px;top:-5px}
+.kr-qsheet{position:relative;display:flex;flex-direction:column;max-width:800px}
+.kr-qsheet>.kr-tabs{margin-bottom:-6px;z-index:1;padding:0 18px}
+.kr-qsheet .kr-tab.is-on{background-color:var(--sheet)}
+.kr-qtick{display:grid;place-items:center;box-sizing:border-box;width:17px;height:17px;flex:none;border:1.5px dashed var(--bar);border-radius:var(--radius-round);color:var(--white)}
+.kr-qtick svg{width:10px;height:10px;opacity:0}
+.kr-qtick.is-done{border:0;background-color:var(--st-green);background-image:linear-gradient(180deg,var(--gloss),rgba(255,255,255,0) 55%);box-shadow:var(--sticker-s);transform:rotate(-6deg)}
+.kr-qtick.is-done svg{opacity:1}
+.kr-qpaper{position:relative;z-index:2;padding:var(--space-16) 24px 18px;background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--sheet));border-radius:var(--radius-4);box-shadow:var(--lift-paper-2);color:var(--ink)}
+.kr-qhead{display:flex;align-items:center;gap:var(--space-14);padding-bottom:var(--space-12);margin-bottom:var(--space-16);border-bottom:2px dotted var(--line)}
+.kr-qhead h3{flex:1;min-width:0;margin:0;font-size:15px;font-weight:800;line-height:1.3}
+.kr-qhead small{display:block;font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1.15;color:var(--mute)}
+.kr-qprob{margin:0;max-width:68ch;font-size:14px;line-height:1.55}
+.kr-qq{margin:var(--space-16) 0 2px;font-family:var(--font-serif);font-size:20px;font-weight:600;line-height:1.25}
+.kr-qhint{display:block;margin:0 0 var(--space-16);font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1.2;color:var(--mute)}
+.kr-qopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-16) 18px;align-items:start;padding-top:var(--space-4)}
+.kr-qopt{position:relative;min-width:0}
+.kr-qopt>.kr-btn{width:100%;min-height:42px;height:auto;padding:6px var(--space-16);font-size:14px;text-align:center}
+.kr-qk{display:none;place-items:center;flex:none;width:18px;height:18px;border-radius:var(--radius-round);color:var(--white);background-color:var(--st-green);background-image:linear-gradient(180deg,var(--gloss),rgba(255,255,255,0) 55%);box-shadow:var(--sticker-s);transform:rotate(-6deg)}
+.kr-qk svg{width:11px;height:11px}
+.kr-btn.is-on .kr-qk{display:grid}
+.kr-qrec{position:absolute;top:-11px;right:-7px;z-index:2;display:inline-flex;align-items:center;height:18px;padding:0 8px;box-sizing:border-box;border-radius:var(--radius-pill);background-color:var(--st-green);background-image:linear-gradient(180deg,var(--gloss),rgba(255,255,255,0) 55%);color:var(--white);box-shadow:var(--sticker);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transform:rotate(5deg);pointer-events:none}
+.kr-qchk{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:var(--space-10);width:100%;min-height:42px;padding:6px var(--space-8);font-size:14px;font-weight:800;line-height:1.25;border-radius:var(--radius-3)}
+.kr-qchk:hover{background-color:var(--hover);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper)}
+.kr-qchk:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.kr-qdesc{margin:9px 2px 0;font-size:13px;line-height:1.45;color:var(--mute)}
+.kr-qchk~.kr-qdesc{margin-top:0;padding-left:36px}
+.kr-qfoot{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-8) var(--space-10);margin-top:22px;padding-top:var(--space-14);border-top:2px dotted var(--line)}
+.kr-qx{all:unset;cursor:pointer;flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:var(--radius-4);color:var(--mute)}
+.kr-qx:hover{background-color:var(--hover);color:var(--ink)}
+.kr-qx:focus-visible{outline:2px solid var(--blue)}
+.kr-qx svg{width:16px;height:16px;display:block}
+.kr-btn.is-go[aria-disabled="true"]{cursor:not-allowed;background-color:var(--paper-2);background-image:none;border-color:transparent;color:var(--faint);box-shadow:none;transform:none}
+.kr-qstep{margin-right:auto;font-family:var(--font-hand);font-size:15px;font-weight:500;color:var(--mute)}
+.kr-qdone{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr;gap:3px var(--space-12);margin:0;font-size:13px;line-height:1.4}
+.kr-qdone dt{font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1.3;color:var(--mute)}
+.kr-qdone dd{margin:0;font-weight:700;min-width:0}
 
 /* ---------- the knowledge base: a note page of blocks, and the graph on cork ---------- */
 .kr-ib.kr-book{--c:var(--book)}
