@@ -163,8 +163,9 @@ button{font:inherit}
 .leaf{flex:1;display:flex;flex-direction:column;margin:-5px -1px -1px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:4px 4px 10px 10px;position:relative;z-index:3;box-sizing:border-box;box-shadow:0 -2px 6px -2px rgba(0,0,0,.16),1px 2px 0 var(--edge-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2)}
 .content{flex:1;padding:24px 24px 14px;display:flex;flex-direction:column;gap:18px;position:relative;z-index:1}
 
-.note{align-self:flex-end;max-width:min(70%,62ch);position:relative;animation:drop .32s var(--ease) both}
-.note-in{position:relative;background-color:var(--kraft);color:var(--ink);padding:16px 18px 13px;font-size:14px;line-height:1.5;border:1px solid var(--kraft2);border-radius:3px;box-shadow:1px 1px 0 var(--kraft2),3px 5px 6px var(--amb);transform:rotate(-.5deg);white-space:pre-wrap;word-break:break-word;background-image:var(--face),var(--pulp)}
+.note{align-self:flex-end;max-width:min(70%,62ch);position:relative;animation:dropflat .28s var(--ease) both}
+@keyframes dropflat{from{transform:translateY(-12px);opacity:0}to{transform:none;opacity:1}}
+.note-in{position:relative;background-color:var(--kraft);color:var(--ink);padding:14px 18px;font-size:14px;line-height:1.5;border:1px solid var(--kraft2);border-radius:4px;box-shadow:0 2px 0 var(--kraft2),0 5px 8px -2px var(--amb);white-space:pre-wrap;word-break:break-word;background-image:var(--face),var(--pulp)}
 .note.folded .note-in{max-height:290px;overflow:hidden;border-bottom:1px dashed var(--mute)}
 .unfold{all:unset;cursor:pointer;display:block;width:max-content;margin:10px 6px 0 auto;font-family:var(--hand);font-size:17px;line-height:1;color:var(--red);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
 .unfold:hover{color:var(--red-2)}
@@ -718,7 +719,7 @@ button{font:inherit}
   <div class="content">
     <sc-if value="{{isChat}}" hint-placeholder-val="{{true}}">
       <sc-for list="{{thread}}" as="it" hint-placeholder-count="6">
-        <sc-if value="{{it.isUser}}" hint-placeholder-val="{{false}}"><div class="note {{it.foldCls}}"><span class="tape" aria-hidden="true"></span><div class="note-in">{{it.text}}</div><sc-if value="{{it.isLong}}" hint-placeholder-val="{{false}}"><button class="unfold" onClick="{{it.toggleFold}}">{{it.foldLabel}}</button></sc-if></div></sc-if>
+        <sc-if value="{{it.isUser}}" hint-placeholder-val="{{false}}"><div class="note {{it.foldCls}}"><div class="note-in">{{it.text}}</div><sc-if value="{{it.isLong}}" hint-placeholder-val="{{false}}"><button class="unfold" onClick="{{it.toggleFold}}">{{it.foldLabel}}</button></sc-if></div></sc-if>
         <sc-if value="{{it.isSaid}}" hint-placeholder-val="{{false}}"><p class="said">{{it.text}}</p></sc-if>
 <sc-if value="{{it.isSlip}}" hint-placeholder-val="{{false}}"><section class="slipw {{it.slip.cls}}" aria-label="Permission request" aria-live="polite" ref="{{it.slip.ref}}">
   <sc-if value="{{it.slip.open}}" hint-placeholder-val="{{true}}"><div class="slip"><span class="tape" aria-hidden="true"></span>
@@ -783,7 +784,7 @@ button{font:inherit}
       <sc-if value="{{hasSeedChits}}" hint-placeholder-val="{{true}}"><div class="chits"><sc-for list="{{seedChits}}" as="ch" hint-placeholder-count="3"><button class="chit {{ch.cls}}" onClick="{{ch.open}}" aria-label="Open {{ch.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ch.icon}}"></path></svg><span><b>{{ch.title}}</b><em>{{ch.meta}}</em></span></button></sc-for></div></sc-if>
 
       <sc-for list="{{msgs}}" as="m" hint-placeholder-count="0">
-        <div class="note {{m.foldCls}}"><span class="tape" aria-hidden="true"></span><div class="note-in">{{m.text}}</div><sc-if value="{{m.isLong}}" hint-placeholder-val="{{false}}"><button class="unfold" onClick="{{m.toggleFold}}">{{m.foldLabel}}</button></sc-if></div>
+        <div class="note {{m.foldCls}}"><div class="note-in">{{m.text}}</div><sc-if value="{{m.isLong}}" hint-placeholder-val="{{false}}"><button class="unfold" onClick="{{m.toggleFold}}">{{m.foldLabel}}</button></sc-if></div>
         <section class="deck {{m.cls}}" aria-label="Agent work for this turn">
           <button class="cap" onClick="{{m.toggle}}" aria-expanded="{{m.open}}">
             <span class="tb">{{m.time}}
