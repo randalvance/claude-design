@@ -1,0 +1,42 @@
+<!-- @dsCard group="Paper parts" height=760 subtitle="A note in the knowledge base: its fields, blocks with a grip, and a list item being nested" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft · NotePage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-height:100%}
+.wrap{padding:24px 30px 34px}
+.kr-pagestack{max-width:720px}
+.dots{width:15px;height:15px}
+</style>
+</head>
+<body class="kr-root">
+<div class="wrap">
+  <div class="kr-pagestack"><article class="kr-page">
+    <p class="kr-page-meta">runbooks/deploy-orbit-billing.md · edited 3 min ago</p>
+    <h1 class="kr-page-title">Deploy Orbit Billing</h1>
+    <dl class="kr-props">
+      <dt>type</dt><dd><button class="kr-btn is-sm">runbook</button></dd>
+      <dt>description</dt><dd>Ship Orbit Billing to production without dropping a checkout.</dd>
+      <dt>tags</dt><dd><span class="kr-tag">deploy</span><span class="kr-tag">orbit-billing</span><span class="kr-tag">on-call</span></dd>
+    </dl>
+    <div class="kr-blk is-shown"><div class="kr-blk-gut"><button class="kr-grip" aria-label="Add a block below"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><button class="kr-grip" aria-label="Move or change this heading"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></button></div><h2 class="kr-h2">Before you start</h2></div>
+    <div class="kr-blk is-drop-after"><p class="kr-p">Deploys go out from the <span class="kr-icode">release</span> branch. Check that <span class="kr-wiki">Sticky sessions on the load balancer</span> is on, so shoppers keep their carts.</p></div>
+    <div class="kr-blk"><div class="kr-outline">
+      <div class="kr-li" style="--d:0"><span class="kr-li-bul"></span><span>Green build on <span class="kr-icode">release</span></span></div>
+      <div class="kr-li" style="--d:1"><span class="kr-li-bul"></span><span>Unit and contract tests</span></div>
+      <div class="kr-li is-nest" style="--d:0"><span class="kr-li-bul"></span><span>Nobody else is deploying</span></div>
+      <div class="kr-li is-dragging" style="--d:0"><span class="kr-li-bul"></span><span>On-call knows the window</span></div>
+    </div></div>
+    <div class="kr-blk"><pre class="kr-codeblock"><small>bash</small>./scripts/deploy.sh orbit-billing --canary 5</pre></div>
+    <div class="kr-blk"><table class="kr-ptable"><thead><tr><th>Stage</th><th>Traffic</th><th>Wait</th></tr></thead><tbody><tr><td>Canary</td><td>5%</td><td>10 min</td></tr><tr><td>Everyone</td><td>100%</td><td>until the next deploy</td></tr></tbody></table></div>
+    <div class="kr-blk"><blockquote class="kr-quote">If checkout errors pass 0.5%, roll back first and ask questions later.</blockquote></div>
+    <div class="kr-blk"><p class="kr-p kr-writing">It keeps the migration, so read [[Rollback without losing data]] before you undo one.</p></div>
+    <div class="kr-blk"><p class="kr-p">Links to a note not written yet look like <span class="kr-wiki is-missing">Rollback without losing data</span>.</p></div>
+  </article></div>
+</div>
+</body>
+</html>

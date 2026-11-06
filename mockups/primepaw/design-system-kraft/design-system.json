@@ -158,6 +158,12 @@
           "name": "workspaces.svg",
           "size": 252,
           "type": "image/svg+xml"
+        },
+        "knowledge.svg": {
+          "blob": "85a9fd3ae8fb4e329efb70d3cca1007e",
+          "name": "knowledge.svg",
+          "size": 249,
+          "type": "image/svg+xml"
         }
       },
       "name": "Icons",
@@ -169,6 +175,7 @@
         "skills.svg",
         "workspaces.svg",
         "memory.svg",
+        "knowledge.svg",
         "mcps.svg",
         "workflows.svg",
         "kanban.svg",
@@ -208,9 +215,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-06T00:51:34Z",
+    "at": "2026-11-06T05:01:14Z",
     "via": "Claude Code",
-    "note": "A person’s message is a plain, level kraft card with no tape"
+    "note": "Knowledge base: the book on the rail, a note page with blocks you drag, and the graph on cork"
   },
   "layout": "files",
   "libraries": [],

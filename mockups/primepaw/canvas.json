@@ -315,6 +315,46 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaKnowledge.dc.html": {
+      "x": 0,
+      "y": 15000,
+      "w": 1440,
+      "h": 900,
+      "title": "Knowledge base, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaKnowledgeDark.dc.html": {
+      "x": 1540,
+      "y": 15000,
+      "w": 1440,
+      "h": 900,
+      "title": "Knowledge base, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaKnowledgeSetup.dc.html": {
+      "x": 0,
+      "y": 16000,
+      "w": 1440,
+      "h": 900,
+      "title": "Knowledge base, setting up, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaKnowledgeSetupDark.dc.html": {
+      "x": 1540,
+      "y": 16000,
+      "w": 1440,
+      "h": 900,
+      "title": "Knowledge base, setting up, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -347,7 +387,11 @@
     "DioramaApproval.dc.html",
     "DioramaApprovalDark.dc.html",
     "DioramaQuestion.dc.html",
-    "DioramaQuestionDark.dc.html"
+    "DioramaQuestionDark.dc.html",
+    "DioramaKnowledge.dc.html",
+    "DioramaKnowledgeDark.dc.html",
+    "DioramaKnowledgeSetup.dc.html",
+    "DioramaKnowledgeSetupDark.dc.html"
   ],
   "notes": {
     "p14": {
@@ -384,6 +428,13 @@
       "w": 320,
       "page": "diorama",
       "text": "When the agent needs you, the turn stops and a sheet on an amber mat lands in the thread. It holds still: the amber, the Needs you sticker and the badge on the session row are the signal. A tool approval is a permission slip with the command or diff, what it will do, and Allow once, Allow for this session or Deny. A question is one form with everything in view: pick one or pick any, a recommended choice, a line for something else, and You decide to leave it to the agent. Either way you can just write in the composer instead. Your choice is struck with a rubber stamp, then the sheet folds to a stub and the agent carries on. YOLO now belongs to the session, skips slips but not questions, and turning it on approves a waiting slip. Try it: these two boards are one flow in ORB-272, and with YOLO off any message you send stops at an edit slip."
+    },
+    "p19": {
+      "x": 3080,
+      "y": 15000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Knowledge base: the book on the rail. A notes board on the left, folders as tinted strips. The note is a sheet of paper: type, title, description and tags on top, then blocks you can drag by the grip to move. Drag a list bullet to move an item, or drop it onto another item to nest it. Parent, related, links and backlinks sit in the margin. Graph pins every note to cork with thread. The second pair starts on setting up: pick a folder or clone a repo."
     }
   },
   "designSystems": [
@@ -391,8 +442,8 @@
       "title": "Kraft",
       "namespace": "kraft",
       "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
-      "version": "1793926367-3f1c",
-      "copiedAt": "2026-11-06T00:52:55Z"
+      "version": "1793941424-2946",
+      "copiedAt": "2026-11-06T05:03:44Z"
     }
   ]
 }
