@@ -39,7 +39,7 @@ button{font:inherit}
 .rb:hover svg,.rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
 .rb:active svg,.rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
 .rb.on svg,.rb.on .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
-.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}
+.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}
 .rb:focus-visible svg,.rb:focus-visible .jface{outline:2px solid var(--blue);outline-offset:3px}
 .rb .nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .nb{background-color:var(--st-red);color:var(--white)}
@@ -592,6 +592,19 @@ button{font:inherit}
 .rb-jarvis svg,.rb-jarvis .jface{padding:5px;shape-rendering:crispEdges;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
+
+/* ---------- voice: a mic disc on the composer; while it listens the hint gives way to a sound trace in red pen and the time by hand ---------- */
+.mic{all:unset;position:relative;cursor:pointer;flex:none;width:30px;height:30px;border-radius:50%;background-color:var(--paper2);background-image:var(--face),var(--pulp);color:var(--mute);display:grid;place-items:center;box-shadow:2px 3px 0 var(--shadow);transition:transform .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease),box-shadow .15s var(--ease)}
+.mic svg{width:15px;height:15px}
+.mic:hover{color:var(--ink);transform:translate(-1px,-1px);box-shadow:3px 4px 0 var(--shadow)}
+.mic:active{transform:scale(.92)}
+.mic.on{background-color:var(--red);color:var(--white);box-shadow:0 1px 0 var(--red-2);transform:translate(1px,2px)}
+.mic.on:hover{color:var(--white);transform:translate(1px,2px)}
+.mic:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.listen{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.listen b{font-weight:600;color:var(--ink)}
+.trace{display:inline-flex;align-items:center;gap:2px;height:18px}
+.trace i{display:block;width:2px;border-radius:1px;background-color:var(--red);transition:height .1s linear}
 /* pet: Jarvis is a paper puppy. One sprite atlas (pet/dog.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/dog-face.png). */
 .pet{--pw:113px;--ph:96px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/dog.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
@@ -762,7 +775,7 @@ button{font:inherit}
             </button>
                 </div>
               </sc-if>
-              <span class="hint" aria-hidden="true">{{helloHint}}</span>
+              <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">{{helloHint}}</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
               <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="Start the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button>
             </div>
           </div>
@@ -968,7 +981,7 @@ button{font:inherit}
 
             <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{cur.ws}}</span>
           </div>
-          <span class="hint" aria-hidden="true">{{hint}}</span>
+          <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">{{hint}}</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
           <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
             <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1"></rect></svg></sc-if>
             <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></sc-if>
@@ -1031,6 +1044,7 @@ const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
 const TABS = ['Chat', 'Git', 'Todos', 'Tools', 'Terminal', 'Logs'];
 const TAB_ICONS = {"Chat": "M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z", "Git": "M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9", "Todos": "M10 6h10M10 12h10M10 18h10M4 6l1.2 1.2L7.5 4.8M4 12l1.2 1.2 2.3-2.4M4 18l1.2 1.2 2.3-2.4", "Tools": "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z", "Terminal": "M4 5h16v14H4zM8 9l3 3-3 3M13 15h3", "Logs": "M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7"};
 const NAV = [
+  { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
   { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
@@ -1439,9 +1453,11 @@ class Component extends DCLogic {
     const s = this.flowPending(sid); if (s && s.tool) this.settle(sid, s.tool.id, { status: 'yolo' });
     (st.msgs[sid] || []).forEach((m) => { if (!m.done && m.tool && !m.tool.status) this.settleMsg(sid, m.id, 'yolo'); });
   }
+  onDictated(el) { el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); }
   send() {
     const el = this.ta;
     if (this.busy() || !el || !el.value.trim()) return;
+    if (this.listening()) this.stopMic();
     if (this.state.sid) this.replyToPrompt(this.state.sid);
     const text = el.value.trim(); const id = Date.now(); let sid = this.state.sid; const patch = {};
     if (!sid) {
@@ -1536,7 +1552,7 @@ class Component extends DCLogic {
       hint: busy ? '⎋ stop · agent is working' : '↵ send · ⇧↵ newline',
       taRef: (el) => { if (el) this.ta = el; },
       onInput: (e) => { const el = e.currentTarget; this.ta = el; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); },
-      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (st.open) this.setState({ open: null }); else if (busy) this.stop(); } },
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (this.listening()) this.stopMic(); else if (st.open) this.setState({ open: null }); else if (busy) this.stop(); } },
       onFocus: () => this.setState({ focus: true }),
       onBlur: () => { clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ focus: false }), 120); },
       modelOpen: st.open === 'model', anyOpen: !!st.open, ctxOpen: st.open === 'ctx', toggleCtx: () => this.setState({ open: st.open === 'ctx' ? null : 'ctx' }), ...this.ctxCard(used, total),
@@ -1555,10 +1571,42 @@ class Component extends DCLogic {
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
       petCls: this.petMood(), petPoke: () => this.petPlay('greet', 1900),
+      ...this.voiceVals(),
       reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, unfolded: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: {}, activeOnly: false, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
     };
   }
 }
+
+// ---------- voice: press the mic and a made-up transcript lands in the box word by word. Nothing is recorded. ----------
+const DICTATION = 'Add CSV export to the reports page, same columns as the table, and open a PR once the tests pass.'.split(' ');
+function micBars(loud) { return Array.from({ length: 14 }, () => ({ h: Math.round(loud ? 4 + Math.random() * 12 : 3 + Math.random() * 3) + 'px' })); }
+function micTime(ticks) { const s = Math.floor(ticks * 0.12); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+const VOICE = {
+  listening() { const v = this.state.voice; return !!(v && v.on); },
+  toggleMic() { if (this.listening()) this.stopMic(); else this.startMic(); },
+  startMic() {
+    const el = this.ta; if (!el) return;
+    const pre = el.value && !/\s$/.test(el.value) ? el.value + ' ' : el.value;
+    this.setState({ voice: { on: true, i: 0, t: 0, bars: micBars(false) } });
+    el.focus();
+    const word = () => {
+      const v = this.state.voice; if (!v || !v.on || !el.isConnected || v.i >= DICTATION.length) return this.stopMic();
+      el.value = pre + DICTATION.slice(0, v.i + 1).join(' ');
+      this.onDictated(el);
+      this.setState((s) => ({ voice: s.voice && { ...s.voice, i: s.voice.i + 1 } }));
+      this.vt = setTimeout(word, 160 + Math.random() * 240);
+    };
+    this.vt = setTimeout(word, 800);
+    this.vm = setInterval(() => this.setState((s) => ({ voice: s.voice && { ...s.voice, t: s.voice.t + 1, bars: micBars(s.voice.i > 0 && s.voice.i < DICTATION.length) } })), 120);
+  },
+  stopMic() { clearTimeout(this.vt); clearInterval(this.vm); if (this.state.voice) this.setState({ voice: null }); if (this.ta && this.ta.isConnected) this.ta.focus(); },
+  voiceVals() {
+    const v = this.state.voice; const on = !!(v && v.on);
+    return { listening: on, notListening: !on, micCls: on ? 'on' : '', micLabel: on ? 'Stop listening' : 'Speak instead of typing',
+      toggleMic: () => this.toggleMic(), bars: on ? v.bars : [], listenTime: on ? micTime(v.t) : '' };
+  }
+};
+Object.assign(Component.prototype, VOICE);
 </script>
 </body>
 </html>

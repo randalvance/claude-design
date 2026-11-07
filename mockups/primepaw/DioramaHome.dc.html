@@ -39,7 +39,7 @@ button{font:inherit}
 .rb:hover svg,.rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
 .rb:active svg,.rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
 .rb.on svg,.rb.on .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
-.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}
+.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}
 .rb:focus-visible svg,.rb:focus-visible .jface{outline:2px solid var(--blue);outline-offset:3px}
 .rb .nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .nb{background-color:var(--st-red);color:var(--white)}
@@ -593,6 +593,19 @@ button{font:inherit}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
 
+/* ---------- voice: a mic disc on the composer; while it listens the hint gives way to a sound trace in red pen and the time by hand ---------- */
+.mic{all:unset;position:relative;cursor:pointer;flex:none;width:30px;height:30px;border-radius:50%;background-color:var(--paper2);background-image:var(--face),var(--pulp);color:var(--mute);display:grid;place-items:center;box-shadow:2px 3px 0 var(--shadow);transition:transform .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease),box-shadow .15s var(--ease)}
+.mic svg{width:15px;height:15px}
+.mic:hover{color:var(--ink);transform:translate(-1px,-1px);box-shadow:3px 4px 0 var(--shadow)}
+.mic:active{transform:scale(.92)}
+.mic.on{background-color:var(--red);color:var(--white);box-shadow:0 1px 0 var(--red-2);transform:translate(1px,2px)}
+.mic.on:hover{color:var(--white);transform:translate(1px,2px)}
+.mic:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.listen{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.listen b{font-weight:600;color:var(--ink)}
+.trace{display:inline-flex;align-items:center;gap:2px;height:18px}
+.trace i{display:block;width:2px;border-radius:1px;background-color:var(--red);transition:height .1s linear}
+
 /* ---------- Home: Jarvis, your main agent, and your threads with it ---------- */
 /* the threads board: paper strips with two lines, the title and the last thing said */
 .jhead{display:flex;align-items:center;gap:12px;padding:6px 4px 4px 6px}
@@ -716,6 +729,96 @@ button{font:inherit}
 .htoast button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 @media (max-width:1100px){.tpanel{width:260px}}
 @media (max-width:860px){.tpanel{position:static;width:auto;height:auto;margin:0 0 8px;max-height:46vh}.hsheet{margin:0}.report-t{padding-right:0}.report-in>.pstamp{position:static;display:inline-grid;margin-top:8px}}
+/* ---------- meet your main agent: the same form on the setup list and as the card on an empty home ---------- */
+.meet{position:relative;max-width:640px;display:flex;flex-direction:column;gap:12px}
+.meet.is-card{max-width:680px;box-sizing:border-box;padding:24px 26px 22px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:5px;box-shadow:var(--lift-2);animation:drop .36s var(--ease) .08s both}
+.meet-top{display:flex;align-items:flex-start;gap:20px}
+.qph.lg{width:86px;height:86px;margin:8px 0 0 2px;transform:rotate(-2deg)}
+.qph.lg .jface{width:66px;height:66px}
+.qph.lg::before{width:44px;height:14px;top:-9px;transform:translateX(-50%) rotate(-5deg)}
+.meet-name{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-top:6px}
+.mlbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.mfld{all:unset;box-sizing:border-box;width:100%;max-width:360px;padding:4px 2px 5px;font-family:var(--hand);font-size:38px;font-weight:600;line-height:1;color:var(--ink);border-bottom:2px solid var(--ink);transition:border-color .15s var(--ease)}
+.mfld::placeholder{color:var(--faint);opacity:1}
+.mfld:focus-visible{border-bottom-color:var(--blue)}
+.mfld.bad{border-bottom:2px dashed var(--red)}
+.merr{font-family:var(--hand);font-size:17px;line-height:1;color:var(--red);transform:rotate(-1.2deg);transform-origin:left;animation:dropflat .2s var(--ease) both}
+/* the portraits are photos taped on, each a little askew; the picked one is ringed in pen */
+.pstrip{display:flex;flex-wrap:wrap;gap:16px 18px;padding:10px 8px 8px}
+.pph{all:unset;cursor:pointer;position:relative;display:grid;place-items:center;width:48px;height:48px;box-sizing:border-box;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.1);box-shadow:var(--lift-1);transform:rotate(var(--tilt,0deg));transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.pph::before{content:"";position:absolute;left:50%;top:-6px;width:26px;height:10px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.pph .jface{width:36px;height:36px;display:block;shape-rendering:crispEdges}
+.pph:hover{transform:rotate(var(--tilt,0deg)) translateY(-2px);box-shadow:var(--lift-2)}
+.pph:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.pph.on{transform:rotate(0deg)}
+.pring{position:absolute;left:-9px;top:-9px;width:66px;height:66px;pointer-events:none;color:var(--ink);overflow:visible}
+.pring path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:penring .45s var(--ease) .04s forwards}
+.page.night .pring{color:var(--ink)}
+@keyframes penring{to{stroke-dashoffset:0}}
+/* the model: the global default unless the pull-tab says otherwise, then a provider and a model */
+.mmodel{display:flex;flex-direction:column;gap:12px}
+.mdef{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;color:var(--ink)}
+.mdef .hand{font-family:var(--hand);font-size:17px;font-weight:500;color:var(--mute)}
+.msels{display:flex;gap:12px;flex-wrap:wrap;transition:opacity .15s var(--ease)}
+.msels.dim{opacity:.5}
+.msels.dim .msel{pointer-events:none}
+.msel-w{position:relative;display:inline-flex}
+.msel{height:auto;padding:5px 10px 5px 12px;gap:12px;text-align:left}
+.msel .mk{display:flex;flex-direction:column;gap:1px;min-width:0}
+.msel small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.msel b{font-size:13px;font-weight:800;white-space:nowrap}
+.msel .chev{width:16px;height:16px;flex:none;color:var(--ink);transition:transform .19s var(--ease)}
+.msel[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.meet .pop{top:calc(100% + 12px);bottom:auto;width:280px;z-index:30;animation:dropflat .2s var(--ease) both}
+.meet .scrim{z-index:25}
+.meet .mrow{position:relative;z-index:1}
+.meet .mrow.on .box{background-color:var(--st-green);background-image:var(--gloss);border-color:var(--st-green);color:var(--white)}
+.meet .mrow.on .box svg{opacity:1;width:12px;height:12px}
+.meet .mrow .box svg{stroke:currentColor}
+.meet .mrow .mdesc{margin-left:auto;font-family:var(--hand);font-size:15px;font-weight:500;color:var(--mute);white-space:nowrap}
+.mline{margin:2px 0 0;max-width:52ch;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.4;color:var(--mute)}
+.mact{display:flex;align-items:center;gap:16px;margin-top:4px;flex-wrap:wrap}
+.mnote{font-family:var(--hand);font-size:15px;color:var(--mute)}
+.mstamp{position:absolute;right:26px;top:22px;height:40px;padding:0 12px;font-size:19px;letter-spacing:.16em;color:color-mix(in srgb,var(--red) 88%,var(--ink));transform:rotate(-9deg);animation:stamp .26s var(--ease-pop) both}
+.meet.stamped .abtn.go{opacity:.6;pointer-events:none}
+/* an empty taped frame and the tile for a main agent not met yet */
+.qph.empty{border:1.5px dashed color-mix(in srgb,var(--ink) 50%,transparent);background-color:transparent;background-image:none;box-shadow:none}
+.qph .jq{font-family:var(--hand);font-style:normal;font-size:26px;font-weight:600;line-height:1;color:var(--mute)}
+.qph.sm .jq{font-size:20px}
+.rb-nobody .jframe{position:static;width:44px;height:44px;box-sizing:border-box;display:grid;font-style:normal;place-items:center;border:2px dashed color-mix(in srgb,var(--ink) 50%,transparent);border-radius:10px;background-color:color-mix(in srgb,var(--sheet) 55%,transparent);font-family:var(--hand);font-size:26px;font-weight:600;color:var(--mute);transition:transform .15s var(--ease)}
+.rb-nobody:hover .jframe{transform:translate(-1px,-1px)}
+.rb.rb-jarvis .jface{animation:drop .32s var(--ease) both}
+/* home with no main agent yet: the form is the card in the middle of the sheet */
+.hmeet .hello-in{max-width:760px}
+.hmeet .hi{font-size:44px}
+.hmeet .meet.is-card{align-self:stretch}
+/* the setup checklist: six things on one sheet, the open one unfolded */
+.slead{margin:0 0 16px;max-width:640px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.45;color:var(--mute)}
+.ssheet .content{gap:0;padding-top:20px}
+.setlist{list-style:none;margin:0;padding:0;max-width:800px;display:flex;flex-direction:column;counter-reset:step}
+.sitem{border-top:1px dashed var(--line);padding:4px 0}
+.sitem:last-child{border-bottom:1px dashed var(--line)}
+.sitem-h{display:flex;align-items:center;gap:14px;min-height:54px;padding:5px 6px 5px 4px}
+.sbox{flex:none;display:grid;place-items:center;width:24px;height:24px;box-sizing:border-box;border:2px solid var(--ink);border-radius:3px;background-color:var(--sheet);color:var(--white);transition:background-color .2s var(--ease),border-color .2s var(--ease)}
+.sbox svg{width:17px;height:17px;overflow:visible;opacity:0;transform:scale(.4);transition:transform .26s var(--ease-pop),opacity .15s var(--ease)}
+.sbox.done{background-color:var(--st-green);background-image:var(--gloss);border-color:var(--st-green);box-shadow:var(--sticker-s)}
+.sbox.done svg{opacity:1;transform:scale(1)}
+.sitem-t{all:unset;cursor:pointer;flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:5px 8px;border-radius:4px;transition:background-color .12s var(--ease)}
+.sitem-t b{font-size:15px;font-weight:800;color:var(--ink)}
+.sitem-t small{font-size:12px;line-height:1.35;color:var(--mute)}
+.sitem-t:hover{background-color:color-mix(in srgb,var(--ink) 6%,transparent)}
+.sitem-t:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.sitem.done .sitem-t b{color:var(--mute);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:color-mix(in srgb,var(--ink) 55%,transparent)}
+.sitem-st{display:flex;align-items:center;gap:10px;font-family:var(--hand);font-size:17px;color:var(--mute);white-space:nowrap}
+.sitem-st .qph.sm{width:32px;height:32px;margin-right:2px}
+.sitem-st .qph.sm .jface{width:24px;height:24px}
+.sitem-st .lnk{font-size:17px}
+.sitem-b{padding:6px 8px 20px 46px;animation:dropflat .22s var(--ease) both}
+.sitem-p{margin:0 0 14px;max-width:560px;font-size:14px;line-height:1.5;color:var(--ink)}
+.sitem-act{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.htop .oph{font-family:var(--hand);font-size:17px;color:var(--mute);margin-right:4px}
+.abtn.off{opacity:.5;pointer-events:none}
+@media (max-width:860px){.sitem-b{padding-left:8px}.sitem-st{white-space:normal}.msels{flex-direction:column;align-items:flex-start}}
 /* pet: Jarvis is a paper puppy. One sprite atlas (pet/dog.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/dog-face.png). */
 .pet{--pw:113px;--ph:96px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/dog.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
@@ -761,7 +864,7 @@ button{font:inherit}
 
   <div class="railwrap board"><nav class="rail" aria-label="Primary">
     <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
-    <button class="rb rb-jarvis on" aria-current="page" title="Jarvis, your main agent"><span class="jface" aria-hidden="true"></span><span>Jarvis</span><sc-if value="{{hasJBadge}}" hint-placeholder-val="{{true}}"><span class="nb">{{jBadge}}</span></sc-if></button>
+    <sc-if value="{{hasAgent}}" hint-placeholder-val="{{true}}"><button class="rb rb-jarvis on" aria-current="page" title="{{agentName}}, your main agent"><span class="jface" aria-hidden="true"></span><span>{{agentName}}</span><sc-if value="{{hasJBadge}}" hint-placeholder-val="{{false}}"><span class="nb">{{jBadge}}</span></sc-if></button></sc-if><sc-if value="{{noAgent}}" hint-placeholder-val="{{false}}"><button class="rb rb-jarvis rb-nobody on" aria-current="page" title="Meet your main agent"><i class="jframe" aria-hidden="true">?</i><span>Main agent</span></button></sc-if>
     <sc-for list="{{nav}}" as="n" hint-placeholder-count="10">
       <button class="rb {{n.cls}} rb-{{n.id}}" onClick="{{n.pick}}" aria-current="{{n.cur}}" title="{{n.label}}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
@@ -776,11 +879,11 @@ button{font:inherit}
 
   <aside class="panel board tpanel" aria-label="Threads with Jarvis">
     <div class="ptop">
-      <div class="jhead"><span class="qph" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span><div><b>Jarvis</b><small>your main agent</small></div></div>
-      <div style="display: flex; gap: 8px">
+      <div class="jhead"><span class="qph {{jphCls}}" aria-hidden="true"><sc-if value="{{hasAgent}}" hint-placeholder-val="{{true}}"><span class="jface" aria-hidden="true"></span></sc-if><sc-if value="{{noAgent}}" hint-placeholder-val="{{false}}"><i class="jq">?</i></sc-if></span><div><b>{{agentName}}</b><small>{{agentSub}}</small></div></div>
+      <sc-if value="{{hasAgent}}" hint-placeholder-val="{{true}}"><div style="display: flex; gap: 8px">
         <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search threads…" aria-label="Search threads" onInput="{{onFind}}"></label>
         <button class="pbtn" onClick="{{newThread}}">New thread</button>
-      </div>
+      </div></sc-if>
     </div>
     <div class="list" onKeyDown="{{menuKey}}">
 <div class="trows" role="list"><sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if><sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><div class="trow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><sc-if value="{{t.renaming}}" hint-placeholder-val="{{false}}"><input class="tr-in" aria-label="Rename the thread" ref="{{t.renameRef}}" onKeyDown="{{t.renameKey}}" onBlur="{{t.renameCommit}}"></sc-if><sc-if value="{{t.notRenaming}}" hint-placeholder-val="{{true}}"><span class="tr-t">{{t.title}}</span></sc-if><span class="tr-tm">{{t.time}}</span><span class="tr-l">{{t.last}}</span><span class="tr-r"><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{t.badge}}</span></sc-if><button class="rowmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></span><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></div></sc-for><sc-if value="{{noThreads}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noThreadsText}}</p></sc-if></div>
@@ -790,16 +893,53 @@ button{font:inherit}
 <div class="sheet hsheet {{sheetCls}}">
   <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}"><header class="top htop">
     <div class="ttl"><h1>{{th.title}}</h1></div>
-    <div class="meta"><span>with Jarvis</span><span class="scount">{{sessCount}}</span></div>
+    <div class="meta"><span>with {{agentName}}</span><span class="scount">{{sessCount}}</span></div>
     <div class="top-r"><span class="ylbl" id="ylbl">Thread YOLO</span><button class="stampbtn" role="switch" aria-checked="{{yoloOn}}" aria-labelledby="ylbl" aria-describedby="{{yoloDesc}}" onClick="{{toggleYolo}}">YOLO</button></div>
   </header></sc-if>
+
+  <sc-if value="{{isMeet}}" hint-placeholder-val="{{false}}">
+    <section class="hello hmeet" aria-label="Meet your main agent">
+      <div class="hello-in">
+        <h1 class="hi">Meet your main agent</h1>
+        <p class="hi2">It’s the one you talk to on this page: it starts the sessions and reports back. Give it a name and a face.</p>
+        <section class="meet is-card {{m.cls}}" aria-label="Meet your main agent">
+  <div class="meet-top">
+    <span class="qph lg" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span>
+    <div class="meet-name">
+      <label class="mlbl" for="mname">Name</label>
+      <input id="mname" class="mfld {{m.fldCls}}" placeholder="Jarvis" autocomplete="off" spellcheck="false" ref="{{m.nameRef}}" onInput="{{m.onName}}" onKeyDown="{{m.nameKey}}" aria-invalid="{{m.hasErr}}" aria-describedby="mname-err">
+      <sc-if value="{{m.hasErr}}" hint-placeholder-val="{{false}}"><span class="merr" id="mname-err" role="alert">{{m.err}}</span></sc-if>
+    </div>
+  </div>
+  <div class="mlbl">Portrait</div>
+  <div class="pstrip" role="radiogroup" aria-label="Portrait">
+    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="6"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
+  </div>
+  <div class="mlbl">Model</div>
+  <div class="mmodel">
+    <div class="mdef"><button class="sw" role="switch" aria-checked="{{m.useDefault}}" onClick="{{m.toggleDefault}}" aria-label="Use the global default model"></button><span>Global default</span><span class="hand">{{m.defaultText}}</span></div>
+    <div class="msels {{m.selsCls}}">
+      <span class="msel-w"><button class="abtn msel" onClick="{{m.toggleProv}}" aria-expanded="{{m.provOpen}}" aria-haspopup="dialog" aria-disabled="{{m.useDefault}}"><span class="mk"><small>Provider</small><b>{{m.provName}}</b></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg></button>
+        <sc-if value="{{m.provOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{m.closePops}}" aria-label="Close"></button><div class="pop mpop" role="dialog" aria-label="Provider" onKeyDown="{{m.popKey}}"><div class="pop-h"><span>Provider</span></div><sc-for list="{{m.provs}}" as="o" hint-placeholder-count="4"><button class="mrow {{o.cls}}" onClick="{{o.pick}}" aria-pressed="{{o.on}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{o.name}}</span><span class="mdesc">{{o.desc}}</span></button></sc-for></div></sc-if></span>
+      <span class="msel-w"><button class="abtn msel" onClick="{{m.toggleModel}}" aria-expanded="{{m.modelOpen}}" aria-haspopup="dialog" aria-disabled="{{m.useDefault}}"><span class="mk"><small>Model</small><b>{{m.modelName}}</b></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg></button>
+        <sc-if value="{{m.modelOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{m.closePops}}" aria-label="Close"></button><div class="pop mpop" role="dialog" aria-label="Model" onKeyDown="{{m.popKey}}"><div class="pop-h"><span>Model</span><span class="mode">{{m.provName}}</span></div><sc-for list="{{m.models}}" as="o" hint-placeholder-count="3"><button class="mrow {{o.cls}}" onClick="{{o.pick}}" aria-pressed="{{o.on}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{o.name}}</span><span class="mdesc">{{o.desc}}</span></button></sc-for></div></sc-if></span>
+    </div>
+  </div>
+  <p class="mline">{{m.line}}</p>
+  <div class="mact"><button class="abtn go" onClick="{{m.create}}">Create</button><span class="hand mnote">{{m.note}}</span></div>
+  <sc-if value="{{m.stamped}}" hint-placeholder-val="{{false}}"><span class="pstamp ok mstamp" aria-hidden="true">WELCOME</span></sc-if>
+</section>
+
+      </div>
+    </section>
+  </sc-if>
 
   <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
     <section class="hello hhello" aria-label="Start a thread with Jarvis">
       <div class="hello-in">
-        <div class="hjar"><span class="qph" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span><span>Jarvis</span></div>
+        <div class="hjar"><span class="qph" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span><span>{{agentName}}</span></div>
         <h1 class="hi">What should we work on?</h1>
-        <p class="hi2">Say it the way you would to a colleague. Jarvis starts sessions in your workspaces and reports back here.</p>
+        <p class="hi2">{{hi2}}</p>
         <div class="foot-in" style="max-width: none">
           <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
           <div class="card">
@@ -807,7 +947,7 @@ button{font:inherit}
               <label class="sr" for="hta0">What should we work on?</label>
               <textarea id="hta0" class="ta" rows="3" placeholder="Describe the job, or paste a ticket…" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea>
             </div>
-            <div class="bar"><span class="hint" aria-hidden="true">↵ start a thread · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+            <div class="bar"><sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ start a thread · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
           </div>
         </div>
         <p class="orl">{{emptyWhere}}</p>
@@ -841,7 +981,7 @@ button{font:inherit}
       </div></section></div></sc-if>
       <sc-if value="{{it.isAskStub}}" hint-placeholder-val="{{false}}"><div class="jt"><section class="slipw stub" aria-label="Your answer to Jarvis"><div class="slip done"><dl class="qdone"><sc-for list="{{it.rows}}" as="r" hint-placeholder-count="1"><dt>{{r.h}}</dt><dd>{{r.a}}</dd></sc-for></dl><span class="pstamp ok">ANSWERED</span></div></section></div></sc-if>
     </sc-for>
-    <sc-if value="{{thinking}}" hint-placeholder-val="{{false}}"><div class="jt"><span class="qph sm" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span><p class="jsay jthink">Jarvis is thinking…</p></div></sc-if>
+    <sc-if value="{{thinking}}" hint-placeholder-val="{{false}}"><div class="jt"><span class="qph sm" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span><p class="jsay jthink">{{agentName}} is thinking…</p></div></sc-if>
   </div>
   <footer class="foot">
     <div class="foot-in">
@@ -853,10 +993,10 @@ button{font:inherit}
       <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
       <div class="card">
         <div class="ed">
-          <label class="sr" for="hta">Write to Jarvis</label>
+          <label class="sr" for="hta">Write to {{agentName}}</label>
           <textarea id="hta" class="ta" rows="2" placeholder="{{placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea>
         </div>
-        <div class="bar"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+        <div class="bar"><sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
       </div>
     </div>
   </footer>
@@ -867,8 +1007,9 @@ button{font:inherit}
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"open":{"editor":"enum","default":"t1","options":["new","t1","t2","t3","t4","t5","t6"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"open":{"editor":"enum","default":"t1","options":["new","t1","t2","t3","t4","t5","t6"]},"meet":{"editor":"enum","default":"none","options":["none","card","invalid","created"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
+  { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
   { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
@@ -882,6 +1023,93 @@ const NAV = [
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
 const JFACE_PX = [{"x":1,"y":0,"c":"#d9bc86"},{"x":10,"y":0,"c":"#d9bc86"},{"x":1,"y":1,"c":"#d9bc86"},{"x":2,"y":1,"c":"#d9bc86"},{"x":9,"y":1,"c":"#d9bc86"},{"x":10,"y":1,"c":"#d9bc86"},{"x":1,"y":2,"c":"#d9bc86"},{"x":2,"y":2,"c":"#e8a9a2"},{"x":3,"y":2,"c":"#d9bc86"},{"x":8,"y":2,"c":"#d9bc86"},{"x":9,"y":2,"c":"#e8a9a2"},{"x":10,"y":2,"c":"#d9bc86"},{"x":1,"y":3,"c":"#d9bc86"},{"x":2,"y":3,"c":"#f3e9d5"},{"x":3,"y":3,"c":"#f3e9d5"},{"x":4,"y":3,"c":"#d9bc86"},{"x":5,"y":3,"c":"#d9bc86"},{"x":6,"y":3,"c":"#d9bc86"},{"x":7,"y":3,"c":"#d9bc86"},{"x":8,"y":3,"c":"#f3e9d5"},{"x":9,"y":3,"c":"#f3e9d5"},{"x":10,"y":3,"c":"#d9bc86"},{"x":0,"y":4,"c":"#d9bc86"},{"x":1,"y":4,"c":"#f3e9d5"},{"x":2,"y":4,"c":"#f3e9d5"},{"x":3,"y":4,"c":"#f3e9d5"},{"x":4,"y":4,"c":"#f3e9d5"},{"x":5,"y":4,"c":"#f3e9d5"},{"x":6,"y":4,"c":"#f3e9d5"},{"x":7,"y":4,"c":"#f3e9d5"},{"x":8,"y":4,"c":"#f3e9d5"},{"x":9,"y":4,"c":"#f3e9d5"},{"x":10,"y":4,"c":"#f3e9d5"},{"x":11,"y":4,"c":"#d9bc86"},{"x":0,"y":5,"c":"#d9bc86"},{"x":1,"y":5,"c":"#f3e9d5"},{"x":2,"y":5,"c":"#2a2219"},{"x":3,"y":5,"c":"#2a2219"},{"x":4,"y":5,"c":"#f3e9d5"},{"x":5,"y":5,"c":"#f3e9d5"},{"x":6,"y":5,"c":"#f3e9d5"},{"x":7,"y":5,"c":"#f3e9d5"},{"x":8,"y":5,"c":"#2a2219"},{"x":9,"y":5,"c":"#2a2219"},{"x":10,"y":5,"c":"#f3e9d5"},{"x":11,"y":5,"c":"#d9bc86"},{"x":0,"y":6,"c":"#d9bc86"},{"x":1,"y":6,"c":"#f3e9d5"},{"x":2,"y":6,"c":"#2a2219"},{"x":3,"y":6,"c":"#fffdf7"},{"x":4,"y":6,"c":"#f3e9d5"},{"x":5,"y":6,"c":"#f3e9d5"},{"x":6,"y":6,"c":"#f3e9d5"},{"x":7,"y":6,"c":"#f3e9d5"},{"x":8,"y":6,"c":"#2a2219"},{"x":9,"y":6,"c":"#fffdf7"},{"x":10,"y":6,"c":"#f3e9d5"},{"x":11,"y":6,"c":"#d9bc86"},{"x":0,"y":7,"c":"#d9bc86"},{"x":1,"y":7,"c":"#f3e9d5"},{"x":2,"y":7,"c":"#f3e9d5"},{"x":3,"y":7,"c":"#f3e9d5"},{"x":4,"y":7,"c":"#f3e9d5"},{"x":5,"y":7,"c":"#e8a9a2"},{"x":6,"y":7,"c":"#e8a9a2"},{"x":7,"y":7,"c":"#f3e9d5"},{"x":8,"y":7,"c":"#f3e9d5"},{"x":9,"y":7,"c":"#f3e9d5"},{"x":10,"y":7,"c":"#f3e9d5"},{"x":11,"y":7,"c":"#d9bc86"},{"x":1,"y":8,"c":"#d9bc86"},{"x":2,"y":8,"c":"#d9bc86"},{"x":3,"y":8,"c":"#f3e9d5"},{"x":4,"y":8,"c":"#f3e9d5"},{"x":5,"y":8,"c":"#2a2219"},{"x":6,"y":8,"c":"#2a2219"},{"x":7,"y":8,"c":"#f3e9d5"},{"x":8,"y":8,"c":"#f3e9d5"},{"x":9,"y":8,"c":"#d9bc86"},{"x":10,"y":8,"c":"#d9bc86"},{"x":2,"y":9,"c":"#c8553d"},{"x":3,"y":9,"c":"#c8553d"},{"x":8,"y":9,"c":"#c8553d"},{"x":9,"y":9,"c":"#c8553d"},{"x":2,"y":10,"c":"#c8553d"},{"x":3,"y":10,"c":"#c8553d"},{"x":4,"y":10,"c":"#c8553d"},{"x":5,"y":10,"c":"#8f3a2a"},{"x":6,"y":10,"c":"#8f3a2a"},{"x":7,"y":10,"c":"#c8553d"},{"x":8,"y":10,"c":"#c8553d"},{"x":9,"y":10,"c":"#c8553d"},{"x":2,"y":11,"c":"#c8553d"},{"x":3,"y":11,"c":"#c8553d"},{"x":8,"y":11,"c":"#c8553d"},{"x":9,"y":11,"c":"#c8553d"}];
+const FACES = [{"id":"cat","name":"A cat in a bow tie","px":[{"x":1,"y":0,"c":"#d9bc86"},{"x":10,"y":0,"c":"#d9bc86"},{"x":1,"y":1,"c":"#d9bc86"},{"x":2,"y":1,"c":"#d9bc86"},{"x":9,"y":1,"c":"#d9bc86"},{"x":10,"y":1,"c":"#d9bc86"},{"x":1,"y":2,"c":"#d9bc86"},{"x":2,"y":2,"c":"#e8a9a2"},{"x":3,"y":2,"c":"#d9bc86"},{"x":8,"y":2,"c":"#d9bc86"},{"x":9,"y":2,"c":"#e8a9a2"},{"x":10,"y":2,"c":"#d9bc86"},{"x":1,"y":3,"c":"#d9bc86"},{"x":2,"y":3,"c":"#f3e9d5"},{"x":3,"y":3,"c":"#f3e9d5"},{"x":4,"y":3,"c":"#d9bc86"},{"x":5,"y":3,"c":"#d9bc86"},{"x":6,"y":3,"c":"#d9bc86"},{"x":7,"y":3,"c":"#d9bc86"},{"x":8,"y":3,"c":"#f3e9d5"},{"x":9,"y":3,"c":"#f3e9d5"},{"x":10,"y":3,"c":"#d9bc86"},{"x":0,"y":4,"c":"#d9bc86"},{"x":1,"y":4,"c":"#f3e9d5"},{"x":2,"y":4,"c":"#f3e9d5"},{"x":3,"y":4,"c":"#f3e9d5"},{"x":4,"y":4,"c":"#f3e9d5"},{"x":5,"y":4,"c":"#f3e9d5"},{"x":6,"y":4,"c":"#f3e9d5"},{"x":7,"y":4,"c":"#f3e9d5"},{"x":8,"y":4,"c":"#f3e9d5"},{"x":9,"y":4,"c":"#f3e9d5"},{"x":10,"y":4,"c":"#f3e9d5"},{"x":11,"y":4,"c":"#d9bc86"},{"x":0,"y":5,"c":"#d9bc86"},{"x":1,"y":5,"c":"#f3e9d5"},{"x":2,"y":5,"c":"#2a2219"},{"x":3,"y":5,"c":"#2a2219"},{"x":4,"y":5,"c":"#f3e9d5"},{"x":5,"y":5,"c":"#f3e9d5"},{"x":6,"y":5,"c":"#f3e9d5"},{"x":7,"y":5,"c":"#f3e9d5"},{"x":8,"y":5,"c":"#2a2219"},{"x":9,"y":5,"c":"#2a2219"},{"x":10,"y":5,"c":"#f3e9d5"},{"x":11,"y":5,"c":"#d9bc86"},{"x":0,"y":6,"c":"#d9bc86"},{"x":1,"y":6,"c":"#f3e9d5"},{"x":2,"y":6,"c":"#2a2219"},{"x":3,"y":6,"c":"#fffdf7"},{"x":4,"y":6,"c":"#f3e9d5"},{"x":5,"y":6,"c":"#f3e9d5"},{"x":6,"y":6,"c":"#f3e9d5"},{"x":7,"y":6,"c":"#f3e9d5"},{"x":8,"y":6,"c":"#2a2219"},{"x":9,"y":6,"c":"#fffdf7"},{"x":10,"y":6,"c":"#f3e9d5"},{"x":11,"y":6,"c":"#d9bc86"},{"x":0,"y":7,"c":"#d9bc86"},{"x":1,"y":7,"c":"#f3e9d5"},{"x":2,"y":7,"c":"#f3e9d5"},{"x":3,"y":7,"c":"#f3e9d5"},{"x":4,"y":7,"c":"#f3e9d5"},{"x":5,"y":7,"c":"#e8a9a2"},{"x":6,"y":7,"c":"#e8a9a2"},{"x":7,"y":7,"c":"#f3e9d5"},{"x":8,"y":7,"c":"#f3e9d5"},{"x":9,"y":7,"c":"#f3e9d5"},{"x":10,"y":7,"c":"#f3e9d5"},{"x":11,"y":7,"c":"#d9bc86"},{"x":1,"y":8,"c":"#d9bc86"},{"x":2,"y":8,"c":"#d9bc86"},{"x":3,"y":8,"c":"#f3e9d5"},{"x":4,"y":8,"c":"#f3e9d5"},{"x":5,"y":8,"c":"#2a2219"},{"x":6,"y":8,"c":"#2a2219"},{"x":7,"y":8,"c":"#f3e9d5"},{"x":8,"y":8,"c":"#f3e9d5"},{"x":9,"y":8,"c":"#d9bc86"},{"x":10,"y":8,"c":"#d9bc86"},{"x":2,"y":9,"c":"#c8553d"},{"x":3,"y":9,"c":"#c8553d"},{"x":8,"y":9,"c":"#c8553d"},{"x":9,"y":9,"c":"#c8553d"},{"x":2,"y":10,"c":"#c8553d"},{"x":3,"y":10,"c":"#c8553d"},{"x":4,"y":10,"c":"#c8553d"},{"x":5,"y":10,"c":"#8f3a2a"},{"x":6,"y":10,"c":"#8f3a2a"},{"x":7,"y":10,"c":"#c8553d"},{"x":8,"y":10,"c":"#c8553d"},{"x":9,"y":10,"c":"#c8553d"},{"x":2,"y":11,"c":"#c8553d"},{"x":3,"y":11,"c":"#c8553d"},{"x":8,"y":11,"c":"#c8553d"},{"x":9,"y":11,"c":"#c8553d"}]},{"id":"dog","name":"A dog","px":[{"x":1,"y":0,"c":"#6b4423"},{"x":2,"y":0,"c":"#6b4423"},{"x":9,"y":0,"c":"#6b4423"},{"x":10,"y":0,"c":"#6b4423"},{"x":1,"y":1,"c":"#6b4423"},{"x":2,"y":1,"c":"#6b4423"},{"x":3,"y":1,"c":"#6b4423"},{"x":8,"y":1,"c":"#6b4423"},{"x":9,"y":1,"c":"#6b4423"},{"x":10,"y":1,"c":"#6b4423"},{"x":1,"y":2,"c":"#6b4423"},{"x":2,"y":2,"c":"#6b4423"},{"x":3,"y":2,"c":"#a8743f"},{"x":4,"y":2,"c":"#a8743f"},{"x":5,"y":2,"c":"#a8743f"},{"x":6,"y":2,"c":"#a8743f"},{"x":7,"y":2,"c":"#a8743f"},{"x":8,"y":2,"c":"#a8743f"},{"x":9,"y":2,"c":"#6b4423"},{"x":10,"y":2,"c":"#6b4423"},{"x":1,"y":3,"c":"#6b4423"},{"x":2,"y":3,"c":"#6b4423"},{"x":3,"y":3,"c":"#a8743f"},{"x":4,"y":3,"c":"#a8743f"},{"x":5,"y":3,"c":"#a8743f"},{"x":6,"y":3,"c":"#a8743f"},{"x":7,"y":3,"c":"#a8743f"},{"x":8,"y":3,"c":"#a8743f"},{"x":9,"y":3,"c":"#6b4423"},{"x":10,"y":3,"c":"#6b4423"},{"x":1,"y":4,"c":"#6b4423"},{"x":2,"y":4,"c":"#a8743f"},{"x":3,"y":4,"c":"#a8743f"},{"x":4,"y":4,"c":"#a8743f"},{"x":5,"y":4,"c":"#a8743f"},{"x":6,"y":4,"c":"#a8743f"},{"x":7,"y":4,"c":"#a8743f"},{"x":8,"y":4,"c":"#a8743f"},{"x":9,"y":4,"c":"#a8743f"},{"x":10,"y":4,"c":"#6b4423"},{"x":1,"y":5,"c":"#6b4423"},{"x":2,"y":5,"c":"#a8743f"},{"x":3,"y":5,"c":"#2a2219"},{"x":4,"y":5,"c":"#2a2219"},{"x":5,"y":5,"c":"#a8743f"},{"x":6,"y":5,"c":"#a8743f"},{"x":7,"y":5,"c":"#2a2219"},{"x":8,"y":5,"c":"#2a2219"},{"x":9,"y":5,"c":"#a8743f"},{"x":10,"y":5,"c":"#6b4423"},{"x":1,"y":6,"c":"#6b4423"},{"x":2,"y":6,"c":"#a8743f"},{"x":3,"y":6,"c":"#2a2219"},{"x":4,"y":6,"c":"#fffdf7"},{"x":5,"y":6,"c":"#a8743f"},{"x":6,"y":6,"c":"#a8743f"},{"x":7,"y":6,"c":"#2a2219"},{"x":8,"y":6,"c":"#fffdf7"},{"x":9,"y":6,"c":"#a8743f"},{"x":10,"y":6,"c":"#6b4423"},{"x":2,"y":7,"c":"#a8743f"},{"x":3,"y":7,"c":"#a8743f"},{"x":4,"y":7,"c":"#a8743f"},{"x":5,"y":7,"c":"#a8743f"},{"x":6,"y":7,"c":"#a8743f"},{"x":7,"y":7,"c":"#a8743f"},{"x":8,"y":7,"c":"#a8743f"},{"x":9,"y":7,"c":"#a8743f"},{"x":2,"y":8,"c":"#a8743f"},{"x":3,"y":8,"c":"#a8743f"},{"x":4,"y":8,"c":"#fffdf7"},{"x":5,"y":8,"c":"#fffdf7"},{"x":6,"y":8,"c":"#fffdf7"},{"x":7,"y":8,"c":"#fffdf7"},{"x":8,"y":8,"c":"#a8743f"},{"x":9,"y":8,"c":"#a8743f"},{"x":2,"y":9,"c":"#a8743f"},{"x":3,"y":9,"c":"#fffdf7"},{"x":4,"y":9,"c":"#fffdf7"},{"x":5,"y":9,"c":"#2a2219"},{"x":6,"y":9,"c":"#2a2219"},{"x":7,"y":9,"c":"#fffdf7"},{"x":8,"y":9,"c":"#fffdf7"},{"x":9,"y":9,"c":"#a8743f"},{"x":3,"y":10,"c":"#a8743f"},{"x":4,"y":10,"c":"#fffdf7"},{"x":5,"y":10,"c":"#fffdf7"},{"x":6,"y":10,"c":"#fffdf7"},{"x":7,"y":10,"c":"#fffdf7"},{"x":8,"y":10,"c":"#a8743f"},{"x":4,"y":11,"c":"#a8743f"},{"x":5,"y":11,"c":"#a8743f"},{"x":6,"y":11,"c":"#a8743f"},{"x":7,"y":11,"c":"#a8743f"}]},{"id":"owl","name":"An owl","px":[{"x":1,"y":0,"c":"#8c6a4a"},{"x":10,"y":0,"c":"#8c6a4a"},{"x":1,"y":1,"c":"#8c6a4a"},{"x":2,"y":1,"c":"#8c6a4a"},{"x":9,"y":1,"c":"#8c6a4a"},{"x":10,"y":1,"c":"#8c6a4a"},{"x":1,"y":2,"c":"#8c6a4a"},{"x":2,"y":2,"c":"#8c6a4a"},{"x":3,"y":2,"c":"#8c6a4a"},{"x":4,"y":2,"c":"#8c6a4a"},{"x":5,"y":2,"c":"#8c6a4a"},{"x":6,"y":2,"c":"#8c6a4a"},{"x":7,"y":2,"c":"#8c6a4a"},{"x":8,"y":2,"c":"#8c6a4a"},{"x":9,"y":2,"c":"#8c6a4a"},{"x":10,"y":2,"c":"#8c6a4a"},{"x":0,"y":3,"c":"#8c6a4a"},{"x":1,"y":3,"c":"#8c6a4a"},{"x":2,"y":3,"c":"#e8d9b5"},{"x":3,"y":3,"c":"#e8d9b5"},{"x":4,"y":3,"c":"#e8d9b5"},{"x":5,"y":3,"c":"#8c6a4a"},{"x":6,"y":3,"c":"#8c6a4a"},{"x":7,"y":3,"c":"#e8d9b5"},{"x":8,"y":3,"c":"#e8d9b5"},{"x":9,"y":3,"c":"#e8d9b5"},{"x":10,"y":3,"c":"#8c6a4a"},{"x":11,"y":3,"c":"#8c6a4a"},{"x":0,"y":4,"c":"#8c6a4a"},{"x":1,"y":4,"c":"#8c6a4a"},{"x":2,"y":4,"c":"#e8d9b5"},{"x":3,"y":4,"c":"#2a2219"},{"x":4,"y":4,"c":"#e8d9b5"},{"x":5,"y":4,"c":"#8c6a4a"},{"x":6,"y":4,"c":"#8c6a4a"},{"x":7,"y":4,"c":"#e8d9b5"},{"x":8,"y":4,"c":"#2a2219"},{"x":9,"y":4,"c":"#e8d9b5"},{"x":10,"y":4,"c":"#8c6a4a"},{"x":11,"y":4,"c":"#8c6a4a"},{"x":0,"y":5,"c":"#8c6a4a"},{"x":1,"y":5,"c":"#8c6a4a"},{"x":2,"y":5,"c":"#e8d9b5"},{"x":3,"y":5,"c":"#e8d9b5"},{"x":4,"y":5,"c":"#e8d9b5"},{"x":5,"y":5,"c":"#8c6a4a"},{"x":6,"y":5,"c":"#8c6a4a"},{"x":7,"y":5,"c":"#e8d9b5"},{"x":8,"y":5,"c":"#e8d9b5"},{"x":9,"y":5,"c":"#e8d9b5"},{"x":10,"y":5,"c":"#8c6a4a"},{"x":11,"y":5,"c":"#8c6a4a"},{"x":0,"y":6,"c":"#8c6a4a"},{"x":1,"y":6,"c":"#8c6a4a"},{"x":2,"y":6,"c":"#8c6a4a"},{"x":3,"y":6,"c":"#8c6a4a"},{"x":4,"y":6,"c":"#8c6a4a"},{"x":5,"y":6,"c":"#e3b23c"},{"x":6,"y":6,"c":"#e3b23c"},{"x":7,"y":6,"c":"#8c6a4a"},{"x":8,"y":6,"c":"#8c6a4a"},{"x":9,"y":6,"c":"#8c6a4a"},{"x":10,"y":6,"c":"#8c6a4a"},{"x":11,"y":6,"c":"#8c6a4a"},{"x":1,"y":7,"c":"#8c6a4a"},{"x":2,"y":7,"c":"#8c6a4a"},{"x":3,"y":7,"c":"#8c6a4a"},{"x":4,"y":7,"c":"#8c6a4a"},{"x":5,"y":7,"c":"#8c6a4a"},{"x":6,"y":7,"c":"#8c6a4a"},{"x":7,"y":7,"c":"#8c6a4a"},{"x":8,"y":7,"c":"#8c6a4a"},{"x":9,"y":7,"c":"#8c6a4a"},{"x":10,"y":7,"c":"#8c6a4a"},{"x":1,"y":8,"c":"#8c6a4a"},{"x":2,"y":8,"c":"#8c6a4a"},{"x":3,"y":8,"c":"#e8d9b5"},{"x":4,"y":8,"c":"#e8d9b5"},{"x":5,"y":8,"c":"#e8d9b5"},{"x":6,"y":8,"c":"#e8d9b5"},{"x":7,"y":8,"c":"#e8d9b5"},{"x":8,"y":8,"c":"#e8d9b5"},{"x":9,"y":8,"c":"#8c6a4a"},{"x":10,"y":8,"c":"#8c6a4a"},{"x":1,"y":9,"c":"#8c6a4a"},{"x":2,"y":9,"c":"#8c6a4a"},{"x":3,"y":9,"c":"#e8d9b5"},{"x":4,"y":9,"c":"#e8d9b5"},{"x":5,"y":9,"c":"#e8d9b5"},{"x":6,"y":9,"c":"#e8d9b5"},{"x":7,"y":9,"c":"#e8d9b5"},{"x":8,"y":9,"c":"#e8d9b5"},{"x":9,"y":9,"c":"#8c6a4a"},{"x":10,"y":9,"c":"#8c6a4a"},{"x":2,"y":10,"c":"#8c6a4a"},{"x":3,"y":10,"c":"#8c6a4a"},{"x":4,"y":10,"c":"#8c6a4a"},{"x":5,"y":10,"c":"#8c6a4a"},{"x":6,"y":10,"c":"#8c6a4a"},{"x":7,"y":10,"c":"#8c6a4a"},{"x":8,"y":10,"c":"#8c6a4a"},{"x":9,"y":10,"c":"#8c6a4a"},{"x":3,"y":11,"c":"#e3b23c"},{"x":4,"y":11,"c":"#e3b23c"},{"x":7,"y":11,"c":"#e3b23c"},{"x":8,"y":11,"c":"#e3b23c"}]},{"id":"fox","name":"A fox","px":[{"x":1,"y":0,"c":"#a5521c"},{"x":10,"y":0,"c":"#a5521c"},{"x":1,"y":1,"c":"#a5521c"},{"x":2,"y":1,"c":"#a5521c"},{"x":9,"y":1,"c":"#a5521c"},{"x":10,"y":1,"c":"#a5521c"},{"x":1,"y":2,"c":"#a5521c"},{"x":2,"y":2,"c":"#d9742b"},{"x":3,"y":2,"c":"#a5521c"},{"x":8,"y":2,"c":"#a5521c"},{"x":9,"y":2,"c":"#d9742b"},{"x":10,"y":2,"c":"#a5521c"},{"x":1,"y":3,"c":"#a5521c"},{"x":2,"y":3,"c":"#d9742b"},{"x":3,"y":3,"c":"#d9742b"},{"x":4,"y":3,"c":"#a5521c"},{"x":5,"y":3,"c":"#a5521c"},{"x":6,"y":3,"c":"#a5521c"},{"x":7,"y":3,"c":"#a5521c"},{"x":8,"y":3,"c":"#d9742b"},{"x":9,"y":3,"c":"#d9742b"},{"x":10,"y":3,"c":"#a5521c"},{"x":0,"y":4,"c":"#a5521c"},{"x":1,"y":4,"c":"#d9742b"},{"x":2,"y":4,"c":"#d9742b"},{"x":3,"y":4,"c":"#d9742b"},{"x":4,"y":4,"c":"#d9742b"},{"x":5,"y":4,"c":"#d9742b"},{"x":6,"y":4,"c":"#d9742b"},{"x":7,"y":4,"c":"#d9742b"},{"x":8,"y":4,"c":"#d9742b"},{"x":9,"y":4,"c":"#d9742b"},{"x":10,"y":4,"c":"#d9742b"},{"x":11,"y":4,"c":"#a5521c"},{"x":0,"y":5,"c":"#a5521c"},{"x":1,"y":5,"c":"#d9742b"},{"x":2,"y":5,"c":"#2a2219"},{"x":3,"y":5,"c":"#2a2219"},{"x":4,"y":5,"c":"#d9742b"},{"x":5,"y":5,"c":"#d9742b"},{"x":6,"y":5,"c":"#d9742b"},{"x":7,"y":5,"c":"#d9742b"},{"x":8,"y":5,"c":"#2a2219"},{"x":9,"y":5,"c":"#2a2219"},{"x":10,"y":5,"c":"#d9742b"},{"x":11,"y":5,"c":"#a5521c"},{"x":0,"y":6,"c":"#a5521c"},{"x":1,"y":6,"c":"#d9742b"},{"x":2,"y":6,"c":"#2a2219"},{"x":3,"y":6,"c":"#fffdf7"},{"x":4,"y":6,"c":"#d9742b"},{"x":5,"y":6,"c":"#d9742b"},{"x":6,"y":6,"c":"#d9742b"},{"x":7,"y":6,"c":"#d9742b"},{"x":8,"y":6,"c":"#2a2219"},{"x":9,"y":6,"c":"#fffdf7"},{"x":10,"y":6,"c":"#d9742b"},{"x":11,"y":6,"c":"#a5521c"},{"x":0,"y":7,"c":"#a5521c"},{"x":1,"y":7,"c":"#d9742b"},{"x":2,"y":7,"c":"#d9742b"},{"x":3,"y":7,"c":"#fffdf7"},{"x":4,"y":7,"c":"#fffdf7"},{"x":5,"y":7,"c":"#fffdf7"},{"x":6,"y":7,"c":"#fffdf7"},{"x":7,"y":7,"c":"#fffdf7"},{"x":8,"y":7,"c":"#fffdf7"},{"x":9,"y":7,"c":"#d9742b"},{"x":10,"y":7,"c":"#d9742b"},{"x":11,"y":7,"c":"#a5521c"},{"x":1,"y":8,"c":"#a5521c"},{"x":2,"y":8,"c":"#d9742b"},{"x":3,"y":8,"c":"#fffdf7"},{"x":4,"y":8,"c":"#fffdf7"},{"x":5,"y":8,"c":"#2a2219"},{"x":6,"y":8,"c":"#2a2219"},{"x":7,"y":8,"c":"#fffdf7"},{"x":8,"y":8,"c":"#fffdf7"},{"x":9,"y":8,"c":"#d9742b"},{"x":10,"y":8,"c":"#a5521c"},{"x":2,"y":9,"c":"#a5521c"},{"x":3,"y":9,"c":"#fffdf7"},{"x":4,"y":9,"c":"#fffdf7"},{"x":5,"y":9,"c":"#fffdf7"},{"x":6,"y":9,"c":"#fffdf7"},{"x":7,"y":9,"c":"#fffdf7"},{"x":8,"y":9,"c":"#fffdf7"},{"x":9,"y":9,"c":"#a5521c"},{"x":3,"y":10,"c":"#a5521c"},{"x":4,"y":10,"c":"#fffdf7"},{"x":5,"y":10,"c":"#fffdf7"},{"x":6,"y":10,"c":"#fffdf7"},{"x":7,"y":10,"c":"#fffdf7"},{"x":8,"y":10,"c":"#a5521c"},{"x":4,"y":11,"c":"#a5521c"},{"x":5,"y":11,"c":"#a5521c"},{"x":6,"y":11,"c":"#a5521c"},{"x":7,"y":11,"c":"#a5521c"}]},{"id":"robot","name":"A robot","px":[{"x":5,"y":0,"c":"#c8553d"},{"x":5,"y":1,"c":"#5b6670"},{"x":1,"y":2,"c":"#5b6670"},{"x":2,"y":2,"c":"#5b6670"},{"x":3,"y":2,"c":"#5b6670"},{"x":4,"y":2,"c":"#5b6670"},{"x":5,"y":2,"c":"#5b6670"},{"x":6,"y":2,"c":"#5b6670"},{"x":7,"y":2,"c":"#5b6670"},{"x":8,"y":2,"c":"#5b6670"},{"x":9,"y":2,"c":"#5b6670"},{"x":10,"y":2,"c":"#5b6670"},{"x":1,"y":3,"c":"#5b6670"},{"x":2,"y":3,"c":"#a3adb8"},{"x":3,"y":3,"c":"#a3adb8"},{"x":4,"y":3,"c":"#a3adb8"},{"x":5,"y":3,"c":"#a3adb8"},{"x":6,"y":3,"c":"#a3adb8"},{"x":7,"y":3,"c":"#a3adb8"},{"x":8,"y":3,"c":"#a3adb8"},{"x":9,"y":3,"c":"#a3adb8"},{"x":10,"y":3,"c":"#5b6670"},{"x":1,"y":4,"c":"#5b6670"},{"x":2,"y":4,"c":"#a3adb8"},{"x":3,"y":4,"c":"#4a8f99"},{"x":4,"y":4,"c":"#4a8f99"},{"x":5,"y":4,"c":"#a3adb8"},{"x":6,"y":4,"c":"#a3adb8"},{"x":7,"y":4,"c":"#4a8f99"},{"x":8,"y":4,"c":"#4a8f99"},{"x":9,"y":4,"c":"#a3adb8"},{"x":10,"y":4,"c":"#5b6670"},{"x":1,"y":5,"c":"#5b6670"},{"x":2,"y":5,"c":"#a3adb8"},{"x":3,"y":5,"c":"#4a8f99"},{"x":4,"y":5,"c":"#4a8f99"},{"x":5,"y":5,"c":"#a3adb8"},{"x":6,"y":5,"c":"#a3adb8"},{"x":7,"y":5,"c":"#4a8f99"},{"x":8,"y":5,"c":"#4a8f99"},{"x":9,"y":5,"c":"#a3adb8"},{"x":10,"y":5,"c":"#5b6670"},{"x":1,"y":6,"c":"#5b6670"},{"x":2,"y":6,"c":"#a3adb8"},{"x":3,"y":6,"c":"#a3adb8"},{"x":4,"y":6,"c":"#a3adb8"},{"x":5,"y":6,"c":"#a3adb8"},{"x":6,"y":6,"c":"#a3adb8"},{"x":7,"y":6,"c":"#a3adb8"},{"x":8,"y":6,"c":"#a3adb8"},{"x":9,"y":6,"c":"#a3adb8"},{"x":10,"y":6,"c":"#5b6670"},{"x":1,"y":7,"c":"#5b6670"},{"x":2,"y":7,"c":"#a3adb8"},{"x":3,"y":7,"c":"#5b6670"},{"x":4,"y":7,"c":"#5b6670"},{"x":5,"y":7,"c":"#5b6670"},{"x":6,"y":7,"c":"#5b6670"},{"x":7,"y":7,"c":"#5b6670"},{"x":8,"y":7,"c":"#5b6670"},{"x":9,"y":7,"c":"#a3adb8"},{"x":10,"y":7,"c":"#5b6670"},{"x":1,"y":8,"c":"#5b6670"},{"x":2,"y":8,"c":"#a3adb8"},{"x":3,"y":8,"c":"#a3adb8"},{"x":4,"y":8,"c":"#a3adb8"},{"x":5,"y":8,"c":"#a3adb8"},{"x":6,"y":8,"c":"#a3adb8"},{"x":7,"y":8,"c":"#a3adb8"},{"x":8,"y":8,"c":"#a3adb8"},{"x":9,"y":8,"c":"#a3adb8"},{"x":10,"y":8,"c":"#5b6670"},{"x":1,"y":9,"c":"#5b6670"},{"x":2,"y":9,"c":"#5b6670"},{"x":3,"y":9,"c":"#5b6670"},{"x":4,"y":9,"c":"#5b6670"},{"x":5,"y":9,"c":"#5b6670"},{"x":6,"y":9,"c":"#5b6670"},{"x":7,"y":9,"c":"#5b6670"},{"x":8,"y":9,"c":"#5b6670"},{"x":9,"y":9,"c":"#5b6670"},{"x":10,"y":9,"c":"#5b6670"},{"x":3,"y":10,"c":"#5b6670"},{"x":4,"y":10,"c":"#5b6670"},{"x":7,"y":10,"c":"#5b6670"},{"x":8,"y":10,"c":"#5b6670"},{"x":3,"y":11,"c":"#5b6670"},{"x":4,"y":11,"c":"#5b6670"},{"x":7,"y":11,"c":"#5b6670"},{"x":8,"y":11,"c":"#5b6670"}]},{"id":"bear","name":"A bear","px":[{"x":1,"y":0,"c":"#7a4f2e"},{"x":2,"y":0,"c":"#7a4f2e"},{"x":9,"y":0,"c":"#7a4f2e"},{"x":10,"y":0,"c":"#7a4f2e"},{"x":0,"y":1,"c":"#7a4f2e"},{"x":1,"y":1,"c":"#e8a9a2"},{"x":2,"y":1,"c":"#7a4f2e"},{"x":3,"y":1,"c":"#7a4f2e"},{"x":8,"y":1,"c":"#7a4f2e"},{"x":9,"y":1,"c":"#7a4f2e"},{"x":10,"y":1,"c":"#e8a9a2"},{"x":11,"y":1,"c":"#7a4f2e"},{"x":1,"y":2,"c":"#7a4f2e"},{"x":2,"y":2,"c":"#7a4f2e"},{"x":3,"y":2,"c":"#7a4f2e"},{"x":4,"y":2,"c":"#7a4f2e"},{"x":5,"y":2,"c":"#7a4f2e"},{"x":6,"y":2,"c":"#7a4f2e"},{"x":7,"y":2,"c":"#7a4f2e"},{"x":8,"y":2,"c":"#7a4f2e"},{"x":9,"y":2,"c":"#7a4f2e"},{"x":10,"y":2,"c":"#7a4f2e"},{"x":0,"y":3,"c":"#7a4f2e"},{"x":1,"y":3,"c":"#7a4f2e"},{"x":2,"y":3,"c":"#7a4f2e"},{"x":3,"y":3,"c":"#7a4f2e"},{"x":4,"y":3,"c":"#7a4f2e"},{"x":5,"y":3,"c":"#7a4f2e"},{"x":6,"y":3,"c":"#7a4f2e"},{"x":7,"y":3,"c":"#7a4f2e"},{"x":8,"y":3,"c":"#7a4f2e"},{"x":9,"y":3,"c":"#7a4f2e"},{"x":10,"y":3,"c":"#7a4f2e"},{"x":11,"y":3,"c":"#7a4f2e"},{"x":0,"y":4,"c":"#7a4f2e"},{"x":1,"y":4,"c":"#7a4f2e"},{"x":2,"y":4,"c":"#2a2219"},{"x":3,"y":4,"c":"#2a2219"},{"x":4,"y":4,"c":"#7a4f2e"},{"x":5,"y":4,"c":"#7a4f2e"},{"x":6,"y":4,"c":"#7a4f2e"},{"x":7,"y":4,"c":"#7a4f2e"},{"x":8,"y":4,"c":"#2a2219"},{"x":9,"y":4,"c":"#2a2219"},{"x":10,"y":4,"c":"#7a4f2e"},{"x":11,"y":4,"c":"#7a4f2e"},{"x":0,"y":5,"c":"#7a4f2e"},{"x":1,"y":5,"c":"#7a4f2e"},{"x":2,"y":5,"c":"#2a2219"},{"x":3,"y":5,"c":"#fffdf7"},{"x":4,"y":5,"c":"#7a4f2e"},{"x":5,"y":5,"c":"#7a4f2e"},{"x":6,"y":5,"c":"#7a4f2e"},{"x":7,"y":5,"c":"#7a4f2e"},{"x":8,"y":5,"c":"#2a2219"},{"x":9,"y":5,"c":"#fffdf7"},{"x":10,"y":5,"c":"#7a4f2e"},{"x":11,"y":5,"c":"#7a4f2e"},{"x":0,"y":6,"c":"#7a4f2e"},{"x":1,"y":6,"c":"#7a4f2e"},{"x":2,"y":6,"c":"#7a4f2e"},{"x":3,"y":6,"c":"#7a4f2e"},{"x":4,"y":6,"c":"#7a4f2e"},{"x":5,"y":6,"c":"#c9a070"},{"x":6,"y":6,"c":"#c9a070"},{"x":7,"y":6,"c":"#7a4f2e"},{"x":8,"y":6,"c":"#7a4f2e"},{"x":9,"y":6,"c":"#7a4f2e"},{"x":10,"y":6,"c":"#7a4f2e"},{"x":11,"y":6,"c":"#7a4f2e"},{"x":0,"y":7,"c":"#7a4f2e"},{"x":1,"y":7,"c":"#7a4f2e"},{"x":2,"y":7,"c":"#7a4f2e"},{"x":3,"y":7,"c":"#7a4f2e"},{"x":4,"y":7,"c":"#c9a070"},{"x":5,"y":7,"c":"#c9a070"},{"x":6,"y":7,"c":"#c9a070"},{"x":7,"y":7,"c":"#c9a070"},{"x":8,"y":7,"c":"#7a4f2e"},{"x":9,"y":7,"c":"#7a4f2e"},{"x":10,"y":7,"c":"#7a4f2e"},{"x":11,"y":7,"c":"#7a4f2e"},{"x":1,"y":8,"c":"#7a4f2e"},{"x":2,"y":8,"c":"#7a4f2e"},{"x":3,"y":8,"c":"#7a4f2e"},{"x":4,"y":8,"c":"#c9a070"},{"x":5,"y":8,"c":"#2a2219"},{"x":6,"y":8,"c":"#2a2219"},{"x":7,"y":8,"c":"#c9a070"},{"x":8,"y":8,"c":"#7a4f2e"},{"x":9,"y":8,"c":"#7a4f2e"},{"x":10,"y":8,"c":"#7a4f2e"},{"x":1,"y":9,"c":"#7a4f2e"},{"x":2,"y":9,"c":"#7a4f2e"},{"x":3,"y":9,"c":"#7a4f2e"},{"x":4,"y":9,"c":"#c9a070"},{"x":5,"y":9,"c":"#c9a070"},{"x":6,"y":9,"c":"#c9a070"},{"x":7,"y":9,"c":"#c9a070"},{"x":8,"y":9,"c":"#7a4f2e"},{"x":9,"y":9,"c":"#7a4f2e"},{"x":10,"y":9,"c":"#7a4f2e"},{"x":2,"y":10,"c":"#7a4f2e"},{"x":3,"y":10,"c":"#7a4f2e"},{"x":4,"y":10,"c":"#7a4f2e"},{"x":5,"y":10,"c":"#7a4f2e"},{"x":6,"y":10,"c":"#7a4f2e"},{"x":7,"y":10,"c":"#7a4f2e"},{"x":8,"y":10,"c":"#7a4f2e"},{"x":9,"y":10,"c":"#7a4f2e"},{"x":4,"y":11,"c":"#7a4f2e"},{"x":5,"y":11,"c":"#7a4f2e"},{"x":6,"y":11,"c":"#7a4f2e"},{"x":7,"y":11,"c":"#7a4f2e"}]}];
+// ---------- meet your main agent: the form shared by the setup list and the home card. Everything here is made up. ----------
+const PROVIDERS = [
+  { id: 'anthropic', name: 'Anthropic', desc: 'Claude', models: [{ id: 'opus', name: 'Claude Opus 5.5', desc: 'the most capable' }, { id: 'sonnet', name: 'Claude Sonnet 5.5', desc: 'the global default' }, { id: 'haiku', name: 'Claude Haiku 5.5', desc: 'quick and cheap' }] },
+  { id: 'openai', name: 'OpenAI', desc: 'GPT', models: [{ id: 'gpt55', name: 'GPT-5.5', desc: '' }, { id: 'gpt55m', name: 'GPT-5.5 mini', desc: 'quick and cheap' }] },
+  { id: 'google', name: 'Google', desc: 'Gemini', models: [{ id: 'g3p', name: 'Gemini 3 Pro', desc: '' }, { id: 'g3f', name: 'Gemini 3 Flash', desc: 'quick and cheap' }] },
+  { id: 'local', name: 'Local', desc: 'Ollama on this Mac', models: [{ id: 'qwen', name: 'Qwen 3.5 32B', desc: 'runs on this Mac' }] }
+];
+const GLOBAL_DEFAULT = { provider: 'anthropic', model: 'sonnet' };
+const TILTS = ['-3deg', '2deg', '-1.5deg', '3deg', '-2deg', '1.5deg'];
+// Jarvis as a backup or a fresh install knows it: the cat, on the global default
+const JARVIS_AGENT = { name: 'Jarvis', face: 0, px: FACES[0].px, provider: 'Anthropic', model: 'Claude Sonnet 5.5' };
+const MEET = {
+  later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; },
+  meetInit(over) { return { name: '', face: 0, useDefault: true, provider: 'anthropic', model: 'sonnet', err: '', stamped: false, pop: null, ...(over || {}) }; },
+  meetState() { return this.state.meet || this.meetDefault(); },
+  meetPatch(p) { this.setState({ meet: { ...this.meetState(), ...p } }); },
+  meetAgent(m) {
+    const pid = m.useDefault ? GLOBAL_DEFAULT.provider : m.provider; const prov = PROVIDERS.find((p) => p.id === pid);
+    const mo = prov.models.find((x) => x.id === (m.useDefault ? GLOBAL_DEFAULT.model : m.model)) || prov.models[0];
+    return { name: m.name.trim(), face: m.face, px: FACES[m.face].px, provider: prov.name, model: mo.name };
+  },
+  // Create: an empty name is the one thing that stops it; then the stamp lands and the page carries on
+  meetCreate() {
+    const m = this.meetState(); if (m.stamped) return;
+    if (!m.name.trim()) { this.meetPatch({ err: 'It needs a name' }); if (this.mname && this.mname.isConnected) this.mname.focus(); return; }
+    this.meetPatch({ err: '', stamped: true, pop: null });
+    this.later(() => this.onCreated(this.meetAgent(m)), 950);
+  },
+  meetVals() {
+    const m = this.meetState(); const name = m.name.trim(); const who = name || 'Your main agent';
+    const prov = PROVIDERS.find((p) => p.id === m.provider); const mo = prov.models.find((x) => x.id === m.model) || prov.models[0];
+    const dp = PROVIDERS.find((p) => p.id === GLOBAL_DEFAULT.provider); const dm = dp.models.find((x) => x.id === GLOBAL_DEFAULT.model);
+    return {
+      cls: m.stamped ? 'stamped' : '',
+      nameRef: (el) => { this.mname = el; if (el && !el.dataset.ready) { el.dataset.ready = '1'; el.value = m.name; } },
+      onName: (e) => this.meetPatch({ name: e.target.value, err: '' }),
+      nameKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.meetCreate(); } },
+      hasErr: !!m.err, err: m.err, fldCls: m.err ? 'bad' : '',
+      px: FACES[m.face].px,
+      faces: FACES.map((f, i) => ({ name: f.name, px: f.px, on: i === m.face, cls: i === m.face ? 'on' : '', tilt: TILTS[i % TILTS.length], pick: () => this.meetPatch({ face: i }) })),
+      useDefault: m.useDefault, toggleDefault: () => this.meetPatch({ useDefault: !m.useDefault, pop: null }),
+      defaultText: dm.name + ' on ' + dp.name, selsCls: m.useDefault ? 'dim' : '',
+      provName: m.useDefault ? dp.name : prov.name, modelName: m.useDefault ? dm.name : mo.name,
+      provOpen: m.pop === 'prov', modelOpen: m.pop === 'model',
+      toggleProv: () => { if (!m.useDefault) this.meetPatch({ pop: m.pop === 'prov' ? null : 'prov' }); },
+      toggleModel: () => { if (!m.useDefault) this.meetPatch({ pop: m.pop === 'model' ? null : 'model' }); },
+      closePops: () => this.meetPatch({ pop: null }),
+      popKey: (e) => { if (e.key === 'Escape') { e.preventDefault(); this.meetPatch({ pop: null }); } },
+      provs: PROVIDERS.map((p) => ({ name: p.name, desc: p.desc, on: p.id === m.provider, cls: p.id === m.provider ? 'on' : '', pick: () => this.meetPatch({ provider: p.id, model: p.models[0].id, pop: null }) })),
+      models: prov.models.map((x) => ({ name: x.name, desc: x.desc, on: x.id === mo.id, cls: x.id === mo.id ? 'on' : '', pick: () => this.meetPatch({ model: x.id, pop: null }) })),
+      line: who + ' starts work for you and never edits code itself.',
+      create: () => this.meetCreate(), stamped: m.stamped,
+      note: m.stamped ? 'Pleased to meet you.' : 'All of this can change later in Settings.'
+    };
+  }
+};
+
+// ---------- voice: press the mic and a made-up transcript lands in the box word by word. Nothing is recorded. ----------
+const DICTATION = 'Add CSV export to the reports page, same columns as the table, and open a PR once the tests pass.'.split(' ');
+function micBars(loud) { return Array.from({ length: 14 }, () => ({ h: Math.round(loud ? 4 + Math.random() * 12 : 3 + Math.random() * 3) + 'px' })); }
+function micTime(ticks) { const s = Math.floor(ticks * 0.12); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+const VOICE = {
+  listening() { const v = this.state.voice; return !!(v && v.on); },
+  toggleMic() { if (this.listening()) this.stopMic(); else this.startMic(); },
+  startMic() {
+    const el = this.ta; if (!el) return;
+    const pre = el.value && !/\s$/.test(el.value) ? el.value + ' ' : el.value;
+    this.setState({ voice: { on: true, i: 0, t: 0, bars: micBars(false) } });
+    el.focus();
+    const word = () => {
+      const v = this.state.voice; if (!v || !v.on || !el.isConnected || v.i >= DICTATION.length) return this.stopMic();
+      el.value = pre + DICTATION.slice(0, v.i + 1).join(' ');
+      this.onDictated(el);
+      this.setState((s) => ({ voice: s.voice && { ...s.voice, i: s.voice.i + 1 } }));
+      this.vt = setTimeout(word, 160 + Math.random() * 240);
+    };
+    this.vt = setTimeout(word, 800);
+    this.vm = setInterval(() => this.setState((s) => ({ voice: s.voice && { ...s.voice, t: s.voice.t + 1, bars: micBars(s.voice.i > 0 && s.voice.i < DICTATION.length) } })), 120);
+  },
+  stopMic() { clearTimeout(this.vt); clearInterval(this.vm); if (this.state.voice) this.setState({ voice: null }); if (this.ta && this.ta.isConnected) this.ta.focus(); },
+  voiceVals() {
+    const v = this.state.voice; const on = !!(v && v.on);
+    return { listening: on, notListening: !on, micCls: on ? 'on' : '', micLabel: on ? 'Stop listening' : 'Speak instead of typing',
+      toggleMic: () => this.toggleMic(), bars: on ? v.bars : [], listenTime: on ? micTime(v.t) : '' };
+  }
+};
 // ---------- Home: one personal agent, Jarvis, and the threads you have with it. Everything here is made up. ----------
 const WSX = { primepaw: { name: 'primepaw', color: '#c8553d' }, gateway: { name: 'gateway', color: '#4a8f99' }, lighthouse: { name: 'Lighthouse Web', color: '#5b8c5a' }, orbit: { name: 'Orbit Billing', color: '#d06a8c' } };
 const STATUS = { working: { label: 'Working', cls: 'work' }, waiting: { label: 'Waiting on you', cls: 'needs' }, done: { label: 'Done', cls: 'done' }, failed: { label: 'Failed', cls: 'fail' } };
@@ -944,7 +1172,7 @@ function titleFrom(text) {
 const JARVIS = ['j', 'help', 'sess', 'dec', 'rep', 'ask'];
 
 class Component extends DCLogic {
-  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null };
+  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false };
   // Jarvis is the paper puppy over the composer: it rests in a mood read off the open thread (asking while something waits on you, dizzy while a session has failed, idle otherwise) and plays a short one when something happens: a hello when a thread opens or you poke it, a cheer when it has an answer, the dizzy spell once when you open a thread with a failure in it
   petMood() { const shot = this.state.petShot; if (shot) return shot.name; const t = this.list().find((x) => x.id === this.curId()); if (!t) return 'idle'; if (this.waitingIn(t) > 0) return 'ask'; if (t.items.some((x) => x.k === 'sess' && x.status === 'failed')) return 'error'; return 'idle'; }
   petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ petShot: { name, id } }); this.later(() => { const s = this.state.petShot; if (s && s.id === id) this.setState({ petShot: null }); }, ms); }
@@ -962,8 +1190,14 @@ class Component extends DCLogic {
   }
   // the threads as they stand and the open one
   // the threads live on the instance, so several changes in one click build on each other
-  list() { if (!this.ts) this.ts = THREADS.map((t) => ({ ...t, yolo: !!t.yolo, items: t.items.map((x) => ({ ...x })) })); return this.ts; }
+  list() { if (!this.ts) this.ts = this.meetMode() !== 'none' ? [] : THREADS.map((t) => ({ ...t, yolo: !!t.yolo, items: t.items.map((x) => ({ ...x })) })); return this.ts; }
   curId() { const st = this.state; if (st.cur !== undefined) return st.cur; const p = this.props.open ?? 't1'; return p === 'new' ? null : p; }
+  // the main agent: Jarvis, or nobody yet on a fresh install until the form below makes one
+  meetMode() { return this.props.meet ?? 'none'; }
+  agent() { if (this.state.agent !== undefined) return this.state.agent; const m = this.meetMode(); return m === 'card' || m === 'invalid' ? null : JARVIS_AGENT; }
+  justMet() { return this.state.justMet || this.meetMode() === 'created'; }
+  meetDefault() { return this.meetInit(this.meetMode() === 'invalid' ? { err: 'It needs a name' } : {}); }
+  onCreated(a) { this.setState({ agent: a, justMet: true, cur: null }); this.say(a.name + ' is ready.'); }
   setThreads(fn) { this.ts = fn(this.list()); this.setState({ threads: this.ts }); }
   patchThread(id, fn) { this.setThreads((ts) => ts.map((t) => t.id === id ? fn(t) : t)); }
   patchItem(tid, iid, patch) { this.patchThread(tid, (t) => ({ ...t, items: t.items.map((x) => x.id === iid ? { ...x, ...patch } : x) })); }
@@ -974,7 +1208,7 @@ class Component extends DCLogic {
     if (x.k === 'me') return 'You: ' + x.text;
     if (x.k === 'sess') return x.title + ': ' + plainOf(x.summary);
     if (x.k === 'help') return x.title + ': ' + x.peek;
-    if (x.k === 'ask') return x.folded ? 'You answered Jarvis' : 'Jarvis has a question for you';
+    if (x.k === 'ask') return x.folded ? 'You answered ' + this.agent().name : this.agent().name + ' has a question for you';
     return plainOf(x.text);
   }
   open(id) { this.setState({ cur: id, menu: null, qdOpen: false, qdTab: 0 }); this.petArrive(id); }
@@ -988,8 +1222,10 @@ class Component extends DCLogic {
   }
   undo() { const a = this.state.archived; if (!a) return; this.setThreads((ts) => { const n = ts.slice(); n.splice(a.at, 0, a.t); return n; }); clearTimeout(this.tt); this.setState({ archived: null, toast: null, cur: a.t.id }); }
   // sending: from the empty state it starts a thread, in a thread it is the next message
+  onDictated(el) { this.setState({ hasText: !!el.value.trim() }); }
   send() {
     const el = this.ta; const text = el ? el.value.trim() : ''; if (!text) return;
+    if (this.listening()) this.stopMic();
     el.value = ''; this.setState({ hasText: false });
     const cur = this.curId();
     if (!cur) {
@@ -1031,7 +1267,7 @@ class Component extends DCLogic {
       return { name: o.name, desc: o.desc, rec: !!o.rec, on, cls: on ? 'on' : '', descId: 'qd-' + q.id + '-' + o.id,
         pick: () => { if (status) return; put({ sel: q.multi ? { ...(a.sel || {}), [o.id]: !on } : o.id }); } }; });
     const word = (k) => k + (k === 1 ? ' question' : ' questions');
-    return { show: true, open: !!st.qdOpen, px: JFACE_PX, who: 'Jarvis', count: word(n), where: t.title,
+    return { show: true, open: !!st.qdOpen, px: this.agent().px, who: this.agent().name, count: word(n), where: t.title,
       sub: left ? p.qs.map((x) => x.head).join(' · ') : 'Answered, ready to submit',
       answerRef: (el) => { if (el) this.answerEl = el; },
       openDlg: () => { const j = done.indexOf(false); this.setState({ qdOpen: true, qdTab: j >= 0 ? j : 0 }); }, close,
@@ -1079,10 +1315,10 @@ class Component extends DCLogic {
     });
   }
   itemsVals(t) {
-    let prev = 'me';
+    let prev = 'me'; const a = this.agent();
     return t.items.filter((x) => !(x.k === 'ask' && !x.folded)).map((x) => {
       const face = JARVIS.includes(x.k) && !JARVIS.includes(prev) && x.k !== 'dec'; const turnCls = face ? 'first' : ''; prev = x.k;
-      const v = { isMe: x.k === 'me', isJ: x.k === 'j', isHelp: x.k === 'help', isSess: x.k === 'sess', isDec: x.k === 'dec', isRep: x.k === 'rep', isAskStub: x.k === 'ask', face, turnCls, text: x.text || '', segs: segs(x.text || '') };
+      const v = { isMe: x.k === 'me', isJ: x.k === 'j', isHelp: x.k === 'help', isSess: x.k === 'sess', isDec: x.k === 'dec', isRep: x.k === 'rep', isAskStub: x.k === 'ask', face, turnCls, text: x.text || '', segs: segs(x.text || ''), px: a.px };
       if (x.k === 'help') { const open = !!(this.state['help_' + x.id]); Object.assign(v, { title: x.title, peek: x.peek, open, closed: !open, openCls: open ? 'open' : '', body: x.body.map((b) => ({ t: b })), files: x.files.map((fl) => ({ t: fl })), toggle: () => this.setState({ ['help_' + x.id]: !open }) }); }
       if (x.k === 'sess') { const s = STATUS[x.status]; const ws = WSX[x.ws]; Object.assign(v, { title: x.title, wsName: ws.name, wsColor: ws.color, how: 'on a new worktree', branch: x.branch, model: x.model, stLabel: s.label, stCls: s.cls, isWorking: x.status === 'working', notWorking: x.status !== 'working', summary: plainOf(x.summary), openCls: x.status === 'waiting' ? 'go' : '', open: () => this.say('Opens ' + x.title + ' in Sessions') }); }
       if (x.k === 'dec') Object.assign(v, { time: x.time });
@@ -1094,32 +1330,38 @@ class Component extends DCLogic {
   renderVals() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
     const st = this.state; const ts = this.list(); const cur = this.curId(); const t = ts.find((x) => x.id === cur) || null;
-    const waiting = ts.filter((x) => this.waitingIn(x) > 0).length;
+    const waiting = ts.filter((x) => this.waitingIn(x) > 0).length; const a = this.agent(); const who = a ? a.name : 'Main agent';
     const qd = this.qdFor(t); const sess = t ? t.items.filter((x) => x.k === 'sess').length : 0; const rows = this.rowsVals(ts, cur);
     return {
       cls: 'home', sheetCls: t ? '' : 'empty',
       nav: NAV.map((n) => ({ ...n, cls: '', cur: false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
       hasJBadge: waiting > 0, jBadge: waiting,
-      threads: rows, noThreads: !rows.length, noThreadsText: st.find.trim() ? 'No thread mentions that.' : 'No threads yet. Start one on the right.',
+      hasAgent: !!a, noAgent: !a, agentName: who, agentSub: a ? 'your main agent' : 'not met yet', agentPx: a ? a.px : [], jphCls: a ? '' : 'empty',
+      isMeet: !a, m: this.meetVals(),
+      hi2: this.justMet() ? 'Hi, I’m ' + who + '. Say what you need the way you would to a colleague. I start sessions in your workspaces and report back here.' : 'Say it the way you would to a colleague. ' + who + ' starts sessions in your workspaces and reports back here.',
+      threads: rows, noThreads: !rows.length, noThreadsText: !a ? 'Threads start once you have a main agent.' : st.find.trim() ? 'No thread mentions that.' : 'No threads yet. Start one on the right.',
       newThread: () => this.newThread(),
       onFind: (e) => this.setState({ find: e.target.value }),
       anyMenu: !!st.menu, closeMenus: () => this.setState({ menu: null }),
       menuKey: (e) => { if (e.key === 'Escape' && st.menu) { e.preventDefault(); this.setState({ menu: null }); } },
-      isEmpty: !t, hasThread: !!t, emptyWhere: ts.length ? 'or pick up a thread on the left' : 'Jarvis keeps every thread, so you can come back to it',
+      isEmpty: !t && !!a, hasThread: !!t, emptyWhere: ts.length ? 'or pick up a thread on the left' : who + ' keeps every thread, so you can come back to it',
       th: t ? { title: t.title } : { title: 'New thread' },
       sessCount: sess === 0 ? 'no sessions yet' : sess === 1 ? '1 session started' : sess + ' sessions started',
       yoloOn: !!(t && t.yolo), yoloDesc: t && t.yolo ? 'yrisk' : '', toggleYolo: () => t && this.toggleYolo(t),
       items: t ? this.itemsVals(t) : [], thinking: !!t && st.thinking === t.id,
-      qd, placeholder: qd.show ? 'Or just write your answer…' : 'Write to Jarvis…',
+      qd, placeholder: qd.show ? 'Or just write your answer…' : 'Write to ' + who + '…',
       taRef: (el) => { this.ta = el; },
       onInput: (e) => { const v = !!e.target.value.trim(); if (v !== st.hasText) this.setState({ hasText: v }); },
-      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } },
-      sendCls: st.hasText ? 'ready' : '', sendLabel: t ? 'Send to Jarvis' : 'Start the thread', sendNow: () => this.send(),
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape' && this.listening()) this.stopMic(); },
+      ...this.voiceVals(), sendCls: st.hasText ? 'ready' : '', sendLabel: t ? 'Send to ' + who : 'Start the thread', sendNow: () => this.send(),
       petCls: this.petMood(), petPoke: () => this.petPlay('greet', 1900),
       hasToast: !!st.toast, toast: st.toast || '', toastUndo: !!(st.toastUndo && st.archived), undo: () => this.undo()
     };
   }
 }
+
+Object.assign(Component.prototype, MEET);
+Object.assign(Component.prototype, VOICE);
 </script>
 </body>
 </html>
