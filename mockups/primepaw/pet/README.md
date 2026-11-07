@@ -65,7 +65,8 @@ block), so leave `--frames` at 8 unless you change those with it; `build.py` war
 `build.py` keys the green out (the key colour is read off each sheet's border, edge pixels are
 un-mixed), finds the cells on a sheet by the bands of paper rather than trusting the grid the model was
 asked for (it draws 4 by 2, 4 by 3 or 3 by 3 as it likes), tightens each frame to its paper, scales
-every frame of a cut alike, and lays them out with the flat cut edge, or the feet, on one line. Needs
+every frame of a cut alike (the standee's four facings each to the same standing height, so it keeps its
+height as it turns), and lays them out with the flat cut edge, or the feet, on one line. Needs
 Pillow and numpy.
 
 ## The prompts

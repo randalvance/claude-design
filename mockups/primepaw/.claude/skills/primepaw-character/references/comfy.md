@@ -83,6 +83,8 @@ with a new seed when:
 - the motion is not there (a greet with no wave, a sad with no droop);
 - anything but green shows around the figure (grid lines, labels, a frame).
 
-Judge the walk strips as a set: all four need the same standing height, or the standee changes size
-when it turns. The avatar must be one round sticker filling the frame, and the body a full figure with
-its feet on the ground and nothing cropped.
+Judge the walk strips as a set: `build.py` scales each facing to the same standing height, so a strip
+drawn a little smaller is fine, but one drawn much smaller comes out soft. The figure must stay upright
+and square to the viewer in every cell; the back view is the one the model twists, so look at its
+walking cells closely. The avatar must be one round sticker filling the frame, and the body a full figure
+with its feet on the ground and nothing cropped.

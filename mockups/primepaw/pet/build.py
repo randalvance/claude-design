@@ -199,20 +199,24 @@ def build_walk(src, args):
     cw, ch = WALK_CELL
     pad = args.pad
     stand_h = rows['down'][0].size[1]
-    scale = (ch * WALK_STAND_H) / stand_h
+    # every facing stands the same height, the front row's: the puppy does not grow or shrink when it turns,
+    # however large the model drew each strip
+    scales = {facing: (ch * WALK_STAND_H) / fs[0].size[1] for facing, fs in rows.items()}
     # a pose taller or wider than its cell at that scale (a paw over the head) shrinks them all alike
-    for fs in rows.values():
+    shrink = 1.0
+    for facing, fs in rows.items():
         for f in fs:
-            scale = min(scale, (ch - 2 * pad) / f.size[1], (cw - 2 * pad) / f.size[0])
+            shrink = min(shrink, (ch - 2 * pad) / (f.size[1] * scales[facing]), (cw - 2 * pad) / (f.size[0] * scales[facing]))
+    scales = {facing: s * shrink for facing, s in scales.items()}
     sheet = Image.new('RGBA', (cw * len(WALK_COLUMNS), ch * len(WALK_FACINGS)), (0, 0, 0, 0))
     for r, facing in enumerate(WALK_FACINGS):
         for c, f in enumerate(rows[facing]):
-            g = f.resize((max(1, round(f.size[0] * scale)), max(1, round(f.size[1] * scale))), Image.LANCZOS)
+            g = f.resize((max(1, round(f.size[0] * scales[facing])), max(1, round(f.size[1] * scales[facing]))), Image.LANCZOS)
             x = c * cw + (cw - g.size[0]) // 2
             y = r * ch + ch - pad - g.size[1]
             sheet.alpha_composite(g, (x, y))
     sheet.save(os.path.join(HERE, args.name + '-walk.png'), optimize=True)
-    stand = stand_h * scale / ch  # the standing puppy's share of the cell
+    stand = stand_h * scales['down'] / ch  # the standing puppy's share of the cell
     manifest = {'layout': 'sheet', 'cols': len(WALK_COLUMNS), 'rows': len(WALK_FACINGS), 'cell': {'w': cw, 'h': ch},
                 'columns': WALK_COLUMNS, 'facings': WALK_FACINGS, 'sheet': {'w': sheet.size[0], 'h': sheet.size[1]},
                 'standing': round(stand, 3),

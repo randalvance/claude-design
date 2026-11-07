@@ -60,7 +60,7 @@ python3 mockups/primepaw/pet/build.py --name <id>
 It keys the green out, finds the cells on each sheet by the bands of paper (the model draws the grid
 it likes), tightens every frame to its paper, scales a cut's frames alike, and lays them out: the
 peeking atlas with the cut edge on one line, the face squared up, the walk sheet with the feet on the
-cell's ground line and the standing figure 86% of the cell. Read its printout: every mood sheet should
+cell's ground line, every facing at the same standing height and the standing figure 86% of the cell. Read its printout: every mood sheet should
 yield 8 frames of nearly the same size, every walk strip 6. A sheet that yields another count is
 resampled silently and will stutter; redraw it with a new seed rather than accept it. Needs Pillow and
 numpy on the host Python.
