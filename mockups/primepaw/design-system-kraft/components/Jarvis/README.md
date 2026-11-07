@@ -10,7 +10,7 @@ A round cream head with a kraft patch over his right ear and down that side, two
 
 - **Over the composer.** `kr-jarvis-peek`: 92px wide, 28px in from the right, leaning 4 degrees about his paws, which rest on the composer's frame. Below 860px he goes.
 - **Over the greeting.** The empty home's hello sheet has him at 84px, 12px in from the right.
-- **The portrait.** His 12 by 12 pixel picture is the same face in the same paper colours: the kraft patch over the right ear, bead eyes with a white catch, the red nose, the red bow with a darker knot. It is the cream `kr-ib kr-jarvis` tile that tops every rail, 32px with `shape-rendering: crispEdges`, and the first photo in the Meet your Main Agent strip. A main agent can be given another animal's portrait there, and then the tile shows that one; the cut-out over the composer stays Button.
+- **The portrait.** His face as a flat sticker (`assets/Characters/jarvis-face.svg`, a 64 by 64 box): the same drawing in the same paper colours, the kraft patch, bead eyes, the red nose and the red bow, with a white die-cut rim and no shadow. It is never pixel art. It is the cream `kr-ib kr-jarvis` tile that tops every rail, at 32px, and the first photo in the Meet your Main Agent strip. A main agent can be given another animal's portrait there, and then the tile shows that one; the cut-out over the composer stays Button.
 
 ## What he does not do
 

@@ -219,11 +219,18 @@
           "name": "jarvis.svg",
           "size": 1106,
           "type": "image/svg+xml"
+        },
+        "jarvis-face.svg": {
+          "blob": "c011013ce8e9e9857f04d88f6f962564",
+          "name": "jarvis-face.svg",
+          "size": 1743,
+          "type": "image/svg+xml"
         }
       },
       "name": "Characters",
       "order": [
-        "jarvis.svg"
+        "jarvis.svg",
+        "jarvis-face.svg"
       ],
       "tile": "s"
     }
@@ -245,9 +252,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-07T07:01:42Z",
+    "at": "2026-11-07T11:15:40Z",
     "via": "Claude Code",
-    "note": "Jarvis: the main agent is Button, a round cat in a bow tie, as the cut-out over the composer and as the pixel portrait on the rail tile; the cut-out is a Characters asset"
+    "note": "Jarvis: the main agent is Button, a round cat in a bow tie, as the cut-out over the composer and as the portrait sticker on the rail tile; the cut-out and the portrait are Characters assets"
   },
   "layout": "files",
   "libraries": [],

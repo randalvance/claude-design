@@ -2,7 +2,7 @@
 
 When the agent has to ask, the turn stops and its questions wait in the dock above the composer. The inbox shows the same two pieces, unchanged.
 
-`kr-qdock` is the collapsed card: a cream strip on an amber mat, the capsule's sibling. It holds the session's agent as its pixel portrait in a taped photo (`kr-qph`), the line `implementer-agent has 3 questions` with the agent's name in `Courier` 12 (`kr-qwho`), and one `kr-btn is-go` for Answer. Under the line, in `Caveat` 17, are the topics, or how many are answered once you have started. It holds still. The amber, the Needs you sticker and the badge on the session row are the signal, and nothing pulses.
+`kr-qdock` is the collapsed card: a cream strip on an amber mat, the capsule's sibling. It holds the session's agent as its portrait sticker in a taped photo (`kr-qph`), the line `implementer-agent has 3 questions` with the agent's name in `Courier` 12 (`kr-qwho`), and one `kr-btn is-go` for Answer. Under the line, in `Caveat` 17, are the topics, or how many are answered once you have started. It holds still. The amber, the Needs you sticker and the badge on the session row are the signal, and nothing pulses.
 
 Answer opens `kr-qsheet`, a dialog: one `kr-tab` per question above a `kr-qpaper` sheet. A tab's label is a short topic taken from its question, and `kr-qtick` beside it is a dashed ring that turns into a green sticker tick once the question has an answer. The sheet's header repeats the portrait and the line, with the session under it, and `kr-qx` closes it. Each tab then shows, in this order:
 
