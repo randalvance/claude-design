@@ -81,3 +81,9 @@ Every screen has a dark mode board, generated with its light one. The `theme` pr
 - Adaptive thinking: the slider is effort, not a thinking budget. Each model carries its own
   default effort (Fable 5.1 / Sonnet 5.5 High, Opus 5.5 / Haiku 5.5 Medium); switching models
   snaps to it until the user overrides. "Show reasoning summary" is the only visibility control.
+- `PRODUCT.md` is the product record Impeccable reads: who Primepaw is for, what it claims, what the boards prove and
+  what is still undecided. `DESIGN.md` records Kraft as the visual authority in the DESIGN.md format (frontmatter tokens
+  mirror `design-system-kraft/tokens.json`, Paper values), and `.impeccable/design.json` carries what its frontmatter
+  cannot: Night values, shadows, motion, tilt and self-contained component snippets. `.impeccable/config.json` records
+  the comp-first build path and `.impeccable/live/config.json` points live mode at the boards. Run Impeccable from this
+  folder so it resolves here rather than at the repo root.
