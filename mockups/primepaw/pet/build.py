@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
-"""Build Jarvis's three sprites from the sheets Comfy Cloud generated.
+"""Build a character's three cuts from the sheets Comfy Cloud generated.
 
-Inputs under pet/src/, all of the paper puppy on a flat chroma-key green background, as Qwen Image
-2.1 draws them from the prompts in pet/README.md:
+A character is one paper cut-out creature in three cuts; Jarvis's first is the puppy, `dog`. Inputs
+under pet/src/<name>/, all on a flat chroma-key green background, as Qwen Image 2.1 draws them from
+the prompts in pet/README.md and the primepaw-character skill:
   <mood>.png       one grid of frames per mood: idle, greet, celebrate, sad, error, ask (the peeking puppy)
   avatar.png       the puppy's head as one round sticker
   walk-<facing>.png  one strip of 6 poses per facing: down (toward the viewer), left, right, up (away)
 
-Outputs:
-  pet/dog.png        the peeking atlas: one row per mood, 8 frames across, every frame the same size,
-                     the puppy's flat cut edge on the frame's bottom
-  pet/dog.json       the frame size and the CSS numbers the boards use
-  pet/dog-face.png   the avatar, square, for the rail tile and the thread portraits
-  pet/dog-walk.png   the walker, in the Factory Overseer's pet sheet layout: 6 columns (stand, step,
-                     step, work, work, wave) by 4 rows (down, left, right, up) of 256 by 320 cells, feet
-                     on one ground line
-  pet/dog-walk.json  what each column and row holds, and the display height the factory should give it
+Outputs, named after the character (--name, `dog` by default):
+  pet/<name>.png        the peeking atlas: one row per mood, 8 frames across, every frame the same size,
+                        the flat cut edge on the frame's bottom
+  pet/<name>.json       the frame size and the CSS numbers the boards use
+  pet/<name>-face.png   the avatar, square, for the rail tile and the thread portraits
+  pet/<name>-walk.png   the walker, in the Factory Overseer's pet sheet layout: 6 columns (stand, step,
+                        step, work, work, wave) by 4 rows (down, left, right, up) of 256 by 320 cells, feet
+                        on one ground line
+  pet/<name>-walk.json  what each column and row holds, and the display height the factory should give it
 
-    python3 mockups/primepaw/pet/build.py                       # reads each sheet's grid, the puppy 92 CSS px wide
-    python3 mockups/primepaw/pet/build.py --width 92             # the idle puppy 92 CSS px wide
-    python3 mockups/primepaw/pet/build.py --cols 4 --rows 3      # force a grid
+    python3 mockups/primepaw/pet/build.py                       # the puppy, from src/dog/, 92 CSS px wide
+    python3 mockups/primepaw/pet/build.py --name cat             # another character, from src/cat/
+    python3 mockups/primepaw/pet/build.py --cols 4 --rows 3      # force a grid on the mood sheets
 
 The boards play 8 frames a row (steps(8) and an 8-column background-size in their /* pet */ block),
 so --frames stays 8 unless those change with it; the script warns otherwise.
@@ -133,11 +134,11 @@ def build_peek(src, args):
             x = i * fw + (fw - f.size[0]) // 2          # centred across
             y = r * fh + fh - args.pad - f.size[1]      # the flat cut edge sits on the frame's bottom
             atlas.alpha_composite(f, (x, y))
-    atlas.save(os.path.join(HERE, 'dog.png'), optimize=True)
+    atlas.save(os.path.join(HERE, args.name + '.png'), optimize=True)
 
     manifest = {'moods': MOODS, 'frames': args.frames, 'dpr': DPR, 'frame': {'w': fw, 'h': fh},
                 'css': {'w': fw / DPR, 'h': fh / DPR}, 'atlas': {'w': atlas.size[0], 'h': atlas.size[1]}}
-    with open(os.path.join(HERE, 'dog.json'), 'w') as fp:
+    with open(os.path.join(HERE, args.name + '.json'), 'w') as fp:
         json.dump(manifest, fp, indent=2)
     print(f'peek atlas {atlas.size[0]}x{atlas.size[1]}, frame {fw}x{fh} -> --pw:{fw / DPR}px; --ph:{fh / DPR}px')
     return scaled
@@ -166,7 +167,7 @@ def build_face(src, args, scaled):
         face = f0.crop((left, 0, left + side, min(side, f0.size[1])))
         sq = Image.new('RGBA', (side, side), (0, 0, 0, 0)); sq.alpha_composite(face, (0, 0))
         print(f'face cropped from the idle frame, {side}x{side} (no src/avatar.png)')
-    sq.save(os.path.join(HERE, 'dog-face.png'), optimize=True)
+    sq.save(os.path.join(HERE, args.name + '-face.png'), optimize=True)
 
 
 def build_walk(src, args):
@@ -207,20 +208,21 @@ def build_walk(src, args):
             x = c * cw + (cw - g.size[0]) // 2
             y = r * ch + ch - pad - g.size[1]
             sheet.alpha_composite(g, (x, y))
-    sheet.save(os.path.join(HERE, 'dog-walk.png'), optimize=True)
+    sheet.save(os.path.join(HERE, args.name + '-walk.png'), optimize=True)
     stand = stand_h * scale / ch  # the standing puppy's share of the cell
     manifest = {'layout': 'sheet', 'cols': len(WALK_COLUMNS), 'rows': len(WALK_FACINGS), 'cell': {'w': cw, 'h': ch},
                 'columns': WALK_COLUMNS, 'facings': WALK_FACINGS, 'sheet': {'w': sheet.size[0], 'h': sheet.size[1]},
                 'standing': round(stand, 3),
-                'factory': {'src': 'pet/dog-walk.png', 'layout': 'sheet', 'height': round(2.3 / stand, 2),
+                'factory': {'src': f'pet/{args.name}-walk.png', 'layout': 'sheet', 'height': round(2.3 / stand, 2),
                             'animations': {'working': {'frames': [3, 4], 'fps': 5.5}, 'attention': {'frames': [5, 0], 'fps': 3.2}}}}
-    with open(os.path.join(HERE, 'dog-walk.json'), 'w') as fp:
+    with open(os.path.join(HERE, args.name + '-walk.json'), 'w') as fp:
         json.dump(manifest, fp, indent=2)
     print(f'walk sheet {sheet.size[0]}x{sheet.size[1]}, the standing puppy {stand:.0%} of the cell -> factory height {2.3 / stand:.2f} tiles')
 
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--name', default='dog', help='the character: reads src/<name>/ and writes <name>.png, <name>.json, <name>-face.png, <name>-walk.png, <name>-walk.json')
     ap.add_argument('--cols', type=int, default=0, help='force a grid on the mood sheets instead of reading it off each sheet')
     ap.add_argument('--rows', type=int, default=0)
     ap.add_argument('--frames', type=int, default=8, help='frames per row in the peeking atlas; a sheet with more or fewer is resampled to it')
@@ -235,7 +237,9 @@ def main():
         print(f'warning: the boards play 8 frames a row (steps(8) and an 8-column background-size in their '
               f'/* pet */ block); an atlas with {args.frames} needs those changed with it', file=sys.stderr)
 
-    src = os.path.join(HERE, 'src')
+    src = os.path.join(HERE, 'src', args.name)
+    if not os.path.isdir(src):
+        sys.exit(f'no sources for {args.name!r}: expected the sheets under {src}')
     scaled = build_peek(src, args)
     build_face(src, args, scaled)
     build_walk(src, args)

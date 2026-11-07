@@ -913,7 +913,7 @@ button{font:inherit}
   </div>
   <div class="mlbl">Portrait</div>
   <div class="pstrip" role="radiogroup" aria-label="Portrait">
-    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="1"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
+    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="1"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface" style="background-image:url(pet/{{f.id}}-face.png)" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
   </div>
   <div class="mlbl">Model</div>
   <div class="mmodel">
@@ -1064,7 +1064,7 @@ const MEET = {
       nameKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.meetCreate(); } },
       hasErr: !!m.err, err: m.err, fldCls: m.err ? 'bad' : '',
       px: FACES[m.face].px,
-      faces: FACES.map((f, i) => ({ name: f.name, on: i === m.face, cls: i === m.face ? 'on' : '', tilt: TILTS[i % TILTS.length], pick: () => this.meetPatch({ face: i }) })),
+      faces: FACES.map((f, i) => ({ id: f.id, name: f.name, on: i === m.face, cls: i === m.face ? 'on' : '', tilt: TILTS[i % TILTS.length], pick: () => this.meetPatch({ face: i }) })),
       useDefault: m.useDefault, toggleDefault: () => this.meetPatch({ useDefault: !m.useDefault, pop: null }),
       defaultText: dm.name + ' on ' + dp.name, selsCls: m.useDefault ? 'dim' : '',
       provName: m.useDefault ? dp.name : prov.name, modelName: m.useDefault ? dm.name : mo.name,

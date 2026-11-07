@@ -11,7 +11,11 @@ Comfy Cloud (the open-weight templates, no partner credits) and sliced by `build
 | `dog.png`, `dog.json` | The peeking puppy: an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; the JSON holds the frame size and the CSS numbers | Over the composer on every board that has one, as `.pet`, see the `/* pet: */` block in a board's style |
 | `dog-face.png` | The avatar: the puppy's head as one round sticker, 176px square (88 CSS px at 2x) | The Jarvis tile on the rail, the thread portraits, any row or badge that needs the main agent's face, as `.jface` |
 | `dog-walk.png`, `dog-walk.json` | The standee: the Factory Overseer's pet sheet, 6 columns by 4 facings of 256 by 320 px cells | The factory floor; see below |
-| `src/` | The sheets as Comfy Cloud drew them, on chroma-key green, one per mood, the avatar, the body design and one walk strip per facing | Inputs to `build.py`; keep them so a cut can be rebuilt |
+| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green, one per mood, the avatar, the body design and one walk strip per facing | Inputs to `build.py`; keep them so a cut can be rebuilt |
+
+Every file is named after the character, `dog`; a second character is the same five files and a source
+folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
+building it and wiring it into the picker and the boards.
 
 See `DioramaPet.dc.html` for the three side by side, with every mood and the standee walking a round.
 
@@ -46,8 +50,9 @@ petAssets: { byAgent: { jarvis: { src: "pet/dog-walk.png", layout: "sheet", heig
 ## Rebuilding a cut
 
 ```bash
-python3 mockups/primepaw/pet/build.py            # all three, from src/
+python3 mockups/primepaw/pet/build.py            # all three, from src/dog/
 python3 mockups/primepaw/pet/build.py --width 92 # the peeking puppy 92 CSS px wide
+python3 mockups/primepaw/pet/build.py --name cat # another character, from src/cat/ to cat.png and friends
 ```
 
 The boards play 8 frames a row (`steps(8)` and an 8-column `background-size` in their `/* pet */`
