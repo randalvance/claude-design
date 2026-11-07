@@ -60,12 +60,14 @@ raising it makes the colours bleed. `resolution: 0` on the text encoder lets the
 Two stages, because the walk strips need the body:
 
 1. **From the base:** the six mood sheets, the avatar and the body, eight items in one batch.
-2. **From the body:** the four walk strips (down, left, right, up), four items in one batch.
+2. **From the body:** the four walk strips (down, left, right, up), four items in one batch, or, better,
+   the GPT Image route below.
 
-The back strip is the one Qwen gets wrong: seen from behind it splays the walking legs out sideways,
-however the prompt words it. The puppy's `walk-up.png` was redrawn with GPT Image 2.6 Sunburst, a
-paid partner model, and that is the route to take when a second seed does not fix a back strip. The
-graph is `LoadImage` (the body) → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`,
+The walk strips are where Qwen falls short: seen from behind it splays the walking legs out sideways,
+however the prompt words it, and in profile it turns the head toward the viewer. The puppy's four strips
+were redrawn with GPT Image 2.6 Sunburst, a paid partner model, which drew every one right on its first
+seed, so draw the strips with it when the credits are there and keep Qwen for the moods, the avatar and
+the body. The graph is `LoadImage` (the body) → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`,
 `model.size` `1536x1024`, `model.quality` `high`, the body on `model.images.image_1`) →
 `SaveImageAdvanced`, sent with `submit_workflow`, because the batch tool's bundled catalog can lag the
 live one and refuse the template by name. Ask for a grid of 3 columns and 2 rows at that size (the model

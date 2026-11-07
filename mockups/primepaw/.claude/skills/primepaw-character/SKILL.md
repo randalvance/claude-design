@@ -46,7 +46,8 @@ Show the user the slots before spending credits if the request left any of them 
 
 Follow `references/comfy.md`. In short: one text-to-image run for the base, judged hard; then every
 other sheet is an edit of the base (the six moods, the avatar, the body) or of the body (the four walk
-strips), submitted as batches of the graph in `assets/qwen21-edit.workflow.json`. The prompts come from
+strips), submitted as batches of the graph in `assets/qwen21-edit.workflow.json`; the walk strips come
+out right with GPT Image 2.6 where Qwen twists them, and `comfy.md` has that route too. The prompts come from
 `references/prompts.md`, slots filled. Save every downloaded sheet under `pet/src/<id>/` with the names
 `build.py` expects, and look at each one before building: the judging list in `comfy.md` says what
 sends a sheet back for a new seed.

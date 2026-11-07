@@ -67,7 +67,7 @@ order, in every facing. The facing clause is the only thing that changes between
 
 `{FACING}`, per strip:
 
-- `walk-down`: "straight from the front, facing the viewer"
-- `walk-left`: "from the side in profile, turned to face the left edge of the picture, so we see {SIDE}"
-- `walk-right`: "from the side in profile, turned to face the right edge of the picture, so we see {SIDE} mirrored, its snout pointing right and its tail at the left"
+- `walk-down`: "straight from the front, facing the viewer, its body square to the viewer in every cell; when it walks one leg lifts so its sole shows, the legs staying under its body"
+- `walk-left`: "from the side in strict profile, turned to face the left edge of the picture, so we see {SIDE}; its head stays in that profile in every cell, never turning toward the viewer, so only one eye ever shows"
+- `walk-right`: "from the side in strict profile, turned to face the right edge of the picture, so we see {SIDE} mirrored, its snout pointing right and its tail at the left; its head stays in that profile in every cell, never turning toward the viewer, so only one eye ever shows"
 - `walk-up`: "from directly behind, facing straight away from the viewer, so we see {BACK}; its body stays square to the viewer, never turning, and when it walks its legs stay under its body, one foot lifted so its sole shows, never spread sideways"
