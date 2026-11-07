@@ -95,8 +95,20 @@ as two items of one batch, is the cheap way to have a choice.
   the walk out: legs under the body, one foot lifted so its sole shows, never spread sideways, and
   from behind the lifted foot kicked up toward the viewer with its sole square on, the front's lifted
   foot seen from the other side, not a leg angled out sideways with a small oval at its end. A strip
-  with one pose wrong is an edit like the turnaround: the strip as `image_1`, the strip it has to
-  match (the front one, for the walking feet) as `image_2`, reproduced exactly with that one change.
+  with one pose wrong is an edit like the turnaround: the strip as `image_1`, reproduced exactly with
+  that one change, and on `image_2` something that shows the pose. For the walk from behind that is
+  not the front strip (with it the model pastes a front-view foot on the back) but two frames of a
+  video, below.
+- **The walk reference:** `run_template` `video_minimax_h3_i2v` (MiniMax H3, open weights, so Comfy's
+  own credits, about 3 minutes a clip) with the strip's standing cell set on green at 768 by 1024 on
+  `input_overrides` `{"114": {"image": <uploaded name>}}`, the walk prompt from `prompts.md` on
+  `{"105:104": {"prompt": ...}}` and a seed on `{"105:15": {"noise_seed": ...}}`; the slot addresses
+  `get_template_schema` lists (`105.prompt`) are refused, the flattened ids are what work. It returns a
+  5 second 640 by 640 mp4 that keeps the paper style and the green. `ffmpeg -i clip.mp4 f%03d.png`
+  pulls the frames; keep the two where the sole faces the camera fullest (count the pad's dark pixels
+  per frame, one peak per leg), lay them side by side on green as `pet/src/<id>/walk-up-ref.png`, and
+  edit the strip with that card on `image_2`. The video's tail wanders; the edit prompt pins it to
+  the strip's.
 
 It costs 5 to 29 credits an image and the spend is gated, so ask the user before submitting. It returns
 either a green sheet or a transparent PNG, the figure at alpha 250 to 254 with a faint halo below 30:
@@ -129,7 +141,7 @@ drawn a little smaller is fine, but one drawn much smaller comes out soft. The f
 and square to the viewer in every cell; the back view is the one that goes wrong, Qwen twisting the
 body or splaying the legs and any model making up a back it was never shown, so draw the turnaround
 first (above), check each strip against its figure there, and look at the back's walking cells closely
-(the lifted foot: its sole square to the viewer with the heel up, the front strip's lifted foot seen
-from behind, not a leg angled out to the side).
+(the lifted foot: its knee bent forward out of sight and its sole square to the viewer beside the hip,
+as the walk video shows it, not a leg angled out to the side and not a foot hanging straight down).
 The avatar must be one round sticker filling the frame, and the body a full figure with its feet on the
 ground and nothing cropped.

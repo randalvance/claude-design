@@ -195,19 +195,16 @@ head, seen from behind. Flat paper, no shadows, no gradients, like a paper puppe
 photographs."
 
 That strip walked with the wrong foot: from behind it bent the raised leg out to the side with a small
-oval at its end, where the front strip hangs the lifted foot straight down under the raised knee with
-its whole sole to the viewer. The same step seen from behind is that foot kicked up toward the viewer,
-heel up, sole square on. One edit of the strip put it there, the strip as the first reference and the
-front strip as the second: "...Reproduce the first reference image exactly... Change one thing only, in
-cells 2 and 3, the two walking cells: the lifted foot. In the front sheet the walking puppy raises one
-bent leg and the whole sole of its lifted foot faces the viewer square on, a big round cream paw pad
-with its toe beans, the foot hanging straight down under the raised knee. Seen from behind, that same
-step shows the lifted foot kicked up behind the puppy toward the viewer, heel up: the lower leg of the
-bent leg folds back toward the viewer and the whole sole of that foot faces the viewer square on, the
-same big round cream paw pad with its toe beans as in the front sheet, toes pointing down, the foot
-drawn at the height of the other leg's knee and directly below the puppy's hip, not a small oval at
-the end of a leg angled out to the side... Everything else in every cell stays exactly as in the first
-reference image." The skill's `walk-up` facing clause now says so from the start.
+oval at its end. Wording the fix did not land it either: an edit asking for the foot under the hip with
+its sole to the viewer hung the foot straight down, a front-view foot pasted on the back. What landed it
+was a video. MiniMax H3 image-to-video (`video_minimax_h3_i2v`, open weights, so Comfy's own credits)
+took the strip's standing cell set on green at 768 by 1024 and marched it on the spot for 5 seconds at
+640 by 640, camera locked; a video model knows how a walk looks from behind: the lifted leg's knee goes
+forward out of sight and its foot kicks up beside the hip, sole to the camera, pad and toes showing.
+ffmpeg pulls the frames, the two where the pad faces the camera fullest sit side by side in
+`src/dog/walk-up-ref.png`, and one edit of the strip copies them, the strip as the first reference and
+that card as the second. The video prompt: "A flat paper cut-out puppy sticker with a white die-cut border, seen from directly behind, facing away from the camera, marches on the spot in a slow stop-motion walk: it lifts its right foot high behind it, bending the knee so the sole of the raised foot swings up toward the camera and shows its paw pad, then plants it and lifts the left foot the same way, over and over, the arms swinging gently, the body staying upright, centred and the same size, the back of its head and its floppy ears toward the camera the whole time, never turning around. Static locked camera, no camera movement, no zoom. Solid flat bright green chroma-key background with nothing else in the frame, 2D paper cut-out stop-motion animation, flat colours, no shadows, no lighting changes." The edit: "The first reference image is a stop-motion sprite sheet of a paper cut-out friendly floppy-eared puppy seen from directly behind: a grid of 3 columns and 2 rows, 6 cells, on a solid flat bright green (#00FF00) background. The second reference image shows the same puppy from behind twice, mid-step, frozen from a walking animation: in the right-hand figure the leg on the right of the picture is lifted, in the left-hand figure the leg on the left is lifted. Reproduce the first reference image exactly: the same six cells in the same places at the same size, the same puppy from behind with the back of its head, the backs of its kraft brown floppy ears, the back of its red collar, its plain cream back, its short kraft brown tail starting at the centre of its rump and going out to the left with its tip curling up, its paws, the same pen-ink outlines, flat paper colours with a faint grain and the white die-cut sticker border, the same green background with no grid lines, no borders, no labels and no text. Change one thing only, in cells 2 and 3, the two walking cells: redraw both legs of the puppy exactly as the second reference image shows them. In cell 2 copy the legs of the right-hand figure of the second reference image: the leg on the right of the picture is lifted, its knee bent forward out of sight, its foot kicked up behind the puppy toward the viewer so the whole sole faces the viewer square on, a big round cream paw pad with four small toe beans above one large pad, drawn in the same style as the paw pad in the second reference image, the raised foot sitting beside the hip at about the height of the other leg's knee and a little out to the side; the leg on the left stands planted straight down with its foot on the ground line. In cell 3 copy the legs of the left-hand figure of the second reference image: the mirror of cell 2, the leg on the left lifted the same way with its sole to the viewer and the leg on the right planted. The tail in cells 2 and 3 stays exactly as in the first reference image, from the centre going left, and the arms stay as they are in the first reference image. Everything else in every cell stays exactly as in the first reference image."
+The character skill's `comfy.md` has the route and the knob names.
 
 **The other walk strips** (one per facing, from the body; GPT Image drew them as a grid of 3 columns and
 2 rows at 1536 by 1024, the Qwen runs before them as one row of 6 cells at 2048 by 512): "...draw a
