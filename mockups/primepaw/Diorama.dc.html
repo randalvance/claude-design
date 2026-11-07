@@ -34,13 +34,13 @@ button{font:inherit}
 .logo{width:54px;height:54px;display:grid;place-items:center;color:var(--red);margin-bottom:4px;transform:rotate(-8deg);filter:drop-shadow(1.5px 0 0 var(--stk)) drop-shadow(-1.5px 0 0 var(--stk)) drop-shadow(0 1.5px 0 var(--stk)) drop-shadow(0 -1.5px 0 var(--stk)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
 .logo svg{width:42px;height:42px}
 .rb{all:unset;cursor:pointer;position:relative;width:54px;padding:2px 0;display:flex;flex-direction:column;align-items:center;color:var(--ink);transition:transform .15s var(--ease)}
-.rb>span:not(.nb){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.rb svg{width:44px;height:44px;padding:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.18);border-radius:10px;box-shadow:2px 3px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),4px 6px 7px var(--amb);color:var(--white);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
-.rb:hover svg{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
-.rb:active svg{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
-.rb.on svg{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
+.rb>span:not(.nb):not(.jface){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.rb svg,.rb .jface{width:44px;height:44px;padding:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.18);border-radius:10px;box-shadow:2px 3px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),4px 6px 7px var(--amb);color:var(--white);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
+.rb:hover svg,.rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
+.rb:active svg,.rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
+.rb.on svg,.rb.on .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
 .rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}.rb-factory{--c:var(--green)}
-.rb:focus-visible svg{outline:2px solid var(--blue);outline-offset:3px}
+.rb:focus-visible svg,.rb:focus-visible .jface{outline:2px solid var(--blue);outline-offset:3px}
 .rb .nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .nb{background-color:var(--st-red);color:var(--white)}
 .rail .sp{flex:1}
@@ -102,9 +102,6 @@ button{font:inherit}
 .src{display:flex;gap:3px;color:var(--faint);flex:none}
 .src svg{width:12px;height:12px}
 .prop{position:absolute;pointer-events:none;filter:drop-shadow(1px 0 0 var(--stk)) drop-shadow(-1px 0 0 var(--stk)) drop-shadow(0 1px 0 var(--stk)) drop-shadow(0 -1px 0 var(--stk)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
-.prop svg{display:block;width:100%;height:auto}
-.prop.cat{right:28px;top:-64px;width:92px;transform:rotate(-4deg);transform-origin:50% 100%;z-index:2}
-.hello .prop.cat{width:84px;right:12px;top:-58px}
 
 /* ---------- chat sheet: a sheet of paper laid on the base at the same height as the sessions board ---------- */
 .sheet{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;margin:0 0 0 12px;background-color:var(--sheet-warm);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 45%,var(--sheet-warm));border-radius:10px;box-sizing:border-box;z-index:1;box-shadow:1px 2px 0 var(--edge-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2)}
@@ -356,7 +353,7 @@ button{font:inherit}
 @keyframes fly{0%{transform:translate(0,0)}40%{transform:translate(14px,-14px);opacity:0}41%{transform:translate(-10px,10px);opacity:0}100%{transform:none;opacity:1}}
 @keyframes flick{0%{transform:scaleY(1)}100%{transform:scaleY(.7)}}
 @media (max-width:1000px){.panel{width:250px}}
-@media (max-width:860px){.page{padding:3px}.app{flex-direction:column;min-height:calc(100vh - 6px)}.railwrap{position:static;height:auto;width:auto;margin:0 0 8px}.rail{height:auto;flex-direction:row;justify-content:center;padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{position:static;height:auto;width:auto;margin:0 0 8px;max-height:40vh}.sheet{margin:0}.note{max-width:min(92%,62ch)}.hint{display:none}.top{padding:16px 16px 0}.tabs,.content,.foot,.hello{padding-left:16px;padding-right:16px}.hi{font-size:40px}.pop{width:min(286px,calc(100vw - 40px))}.prop.cat{display:none}}
+@media (max-width:860px){.page{padding:3px}.app{flex-direction:column;min-height:calc(100vh - 6px)}.railwrap{position:static;height:auto;width:auto;margin:0 0 8px}.rail{height:auto;flex-direction:row;justify-content:center;padding:6px}.rail .sp{display:none}.logo{margin:0 6px 0 0}.panel{position:static;height:auto;width:auto;margin:0 0 8px;max-height:40vh}.sheet{margin:0}.note{max-width:min(92%,62ch)}.hint{display:none}.top{padding:16px 16px 0}.tabs,.content,.foot,.hello{padding-left:16px;padding-right:16px}.hi{font-size:40px}.pop{width:min(286px,calc(100vw - 40px))}.pet{display:none}}
 .page.night .wsh .cnt,.page.night .wsh .chev{mix-blend-mode:screen}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
@@ -608,6 +605,25 @@ button{font:inherit}
 .listen b{font-weight:600;color:var(--ink)}
 .trace{display:inline-flex;align-items:center;gap:2px;height:18px}
 .trace i{display:block;width:2px;border-radius:1px;background-color:var(--red);transition:height .1s linear}
+/* pet: Jarvis is a paper puppy. One sprite atlas (pet/dog.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/dog-face.png). */
+.pet{--pw:113px;--ph:96px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/dog.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+.pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
+.pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
+.pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
+.pet.error{background-position-y:calc(var(--ph) * -4);animation:pet-error .9s steps(8,jump-none) infinite}
+.pet.ask{background-position-y:calc(var(--ph) * -5);animation:pet-ask 1.2s steps(8,jump-none) infinite}
+.pet:active{transform:rotate(-4deg) scale(.96)}
+.hello .pet{--pw:101.7px;--ph:86.4px;right:12px}
+@keyframes pet-idle{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
+@keyframes pet-greet{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
+@keyframes pet-celebrate{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
+@keyframes pet-sad{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
+@keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
+@keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
+.jface{display:block;background-image:url(pet/dog-face.png);background-size:contain;background-repeat:no-repeat;background-position:center}
+.rb-jarvis .jface{background-image:url(pet/dog-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+@media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
+/* /pet */
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -634,7 +650,7 @@ button{font:inherit}
 
   <div class="railwrap board"><nav class="rail" aria-label="Primary">
     <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
-    <button class="rb rb-jarvis" title="Jarvis, your main agent"><svg class="jface" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="0" width="1" height="1" fill="#d9bc86"/><rect x="10" y="0" width="1" height="1" fill="#d9bc86"/><rect x="1" y="1" width="1" height="1" fill="#d9bc86"/><rect x="2" y="1" width="1" height="1" fill="#d9bc86"/><rect x="9" y="1" width="1" height="1" fill="#d9bc86"/><rect x="10" y="1" width="1" height="1" fill="#d9bc86"/><rect x="1" y="2" width="1" height="1" fill="#d9bc86"/><rect x="2" y="2" width="1" height="1" fill="#e8a9a2"/><rect x="3" y="2" width="1" height="1" fill="#d9bc86"/><rect x="8" y="2" width="1" height="1" fill="#d9bc86"/><rect x="9" y="2" width="1" height="1" fill="#e8a9a2"/><rect x="10" y="2" width="1" height="1" fill="#d9bc86"/><rect x="1" y="3" width="1" height="1" fill="#d9bc86"/><rect x="2" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="3" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="3" width="1" height="1" fill="#d9bc86"/><rect x="5" y="3" width="1" height="1" fill="#d9bc86"/><rect x="6" y="3" width="1" height="1" fill="#d9bc86"/><rect x="7" y="3" width="1" height="1" fill="#d9bc86"/><rect x="8" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="10" y="3" width="1" height="1" fill="#d9bc86"/><rect x="0" y="4" width="1" height="1" fill="#d9bc86"/><rect x="1" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="3" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="6" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="7" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="10" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="4" width="1" height="1" fill="#d9bc86"/><rect x="0" y="5" width="1" height="1" fill="#d9bc86"/><rect x="1" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="5" width="1" height="1" fill="#2a2219"/><rect x="3" y="5" width="1" height="1" fill="#2a2219"/><rect x="4" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="6" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="7" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="5" width="1" height="1" fill="#2a2219"/><rect x="9" y="5" width="1" height="1" fill="#2a2219"/><rect x="10" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="5" width="1" height="1" fill="#d9bc86"/><rect x="0" y="6" width="1" height="1" fill="#d9bc86"/><rect x="1" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="6" width="1" height="1" fill="#2a2219"/><rect x="3" y="6" width="1" height="1" fill="#fffdf7"/><rect x="4" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="6" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="7" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="6" width="1" height="1" fill="#2a2219"/><rect x="9" y="6" width="1" height="1" fill="#fffdf7"/><rect x="10" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="6" width="1" height="1" fill="#d9bc86"/><rect x="0" y="7" width="1" height="1" fill="#d9bc86"/><rect x="1" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="3" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="7" width="1" height="1" fill="#e8a9a2"/><rect x="6" y="7" width="1" height="1" fill="#e8a9a2"/><rect x="7" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="10" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="7" width="1" height="1" fill="#d9bc86"/><rect x="1" y="8" width="1" height="1" fill="#d9bc86"/><rect x="2" y="8" width="1" height="1" fill="#d9bc86"/><rect x="3" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="8" width="1" height="1" fill="#2a2219"/><rect x="6" y="8" width="1" height="1" fill="#2a2219"/><rect x="7" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="8" width="1" height="1" fill="#d9bc86"/><rect x="10" y="8" width="1" height="1" fill="#d9bc86"/><rect x="2" y="9" width="1" height="1" fill="#c8553d"/><rect x="3" y="9" width="1" height="1" fill="#c8553d"/><rect x="8" y="9" width="1" height="1" fill="#c8553d"/><rect x="9" y="9" width="1" height="1" fill="#c8553d"/><rect x="2" y="10" width="1" height="1" fill="#c8553d"/><rect x="3" y="10" width="1" height="1" fill="#c8553d"/><rect x="4" y="10" width="1" height="1" fill="#c8553d"/><rect x="5" y="10" width="1" height="1" fill="#8f3a2a"/><rect x="6" y="10" width="1" height="1" fill="#8f3a2a"/><rect x="7" y="10" width="1" height="1" fill="#c8553d"/><rect x="8" y="10" width="1" height="1" fill="#c8553d"/><rect x="9" y="10" width="1" height="1" fill="#c8553d"/><rect x="2" y="11" width="1" height="1" fill="#c8553d"/><rect x="3" y="11" width="1" height="1" fill="#c8553d"/><rect x="8" y="11" width="1" height="1" fill="#c8553d"/><rect x="9" y="11" width="1" height="1" fill="#c8553d"/></svg><span>Jarvis</span><span class="nb">2</span></button>
+    <button class="rb rb-jarvis" title="Jarvis, your main agent"><span class="jface" aria-hidden="true"></span><span>Jarvis</span><span class="nb">2</span></button>
     <sc-for list="{{nav}}" as="n" hint-placeholder-count="10">
       <button class="rb {{n.cls}} rb-{{n.id}}" onClick="{{n.pick}}" aria-current="{{n.cur}}" title="{{n.label}}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
@@ -696,7 +712,7 @@ button{font:inherit}
         <h1 class="hi">{{greeting}}</h1>
         <p class="hi2">{{greetSub}}</p>
         <div class="foot-in" style="max-width: none">
-          <span class="prop cat" aria-hidden="true"><svg viewBox="0 0 84 70" fill="none" stroke="#2a2219" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M14 30 18 6l12 12h24L66 6l4 24c0 16-12 26-28 26S14 46 14 30z" fill="#f3e9d5"></path><path d="M54 18 66 6l4 24c0 6-2 11-5 15-3-11-10-19-11-27z" fill="#d9bc86"></path><path d="M20 11l8 7M64 11l-8 7" stroke-width="1.2"></path><circle cx="33" cy="33" r="2.4" fill="#2a2219" stroke="none"></circle><circle cx="51" cy="33" r="2.4" fill="#2a2219" stroke="none"></circle><circle cx="26" cy="41" r="3.6" fill="#e8a9a2" stroke="none" opacity=".7"></circle><circle cx="58" cy="41" r="3.6" fill="#e8a9a2" stroke="none" opacity=".7"></circle><path d="M40 39h4l-2 3z" fill="#c8553d" stroke="none"></path><path d="M42 42c-1 3-4 4-6 2M42 42c1 3 4 4 6 2"></path><path d="M4 36l16 2M4 44l16-2M80 36l-16 2M80 44l-16-2" stroke-width="1.2"></path><path d="M18 70V59a8 8 0 0 1 16 0v11" fill="#f3e9d5"></path><path d="M50 70V59a8 8 0 0 1 16 0v11" fill="#f3e9d5"></path><path d="M24 64v5M29 64v5M56 64v5M61 64v5" stroke-width="1.2"></path></svg></span>
+          <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
           <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
           <div class="card">
             <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
@@ -915,7 +931,7 @@ button{font:inherit}
         <div class="qdock-t"><b><span class="qwho">{{qd.who}}</span> has {{qd.count}}</b><span>{{qd.sub}}</span></div>
         <button class="abtn go" onClick="{{qd.openDlg}}" aria-haspopup="dialog" ref="{{qd.answerRef}}">Answer</button>
       </div></section></sc-if>
-      <span class="prop cat" aria-hidden="true"><svg viewBox="0 0 84 70" fill="none" stroke="#2a2219" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M14 30 18 6l12 12h24L66 6l4 24c0 16-12 26-28 26S14 46 14 30z" fill="#f3e9d5"></path><path d="M54 18 66 6l4 24c0 6-2 11-5 15-3-11-10-19-11-27z" fill="#d9bc86"></path><path d="M20 11l8 7M64 11l-8 7" stroke-width="1.2"></path><circle cx="33" cy="33" r="2.4" fill="#2a2219" stroke="none"></circle><circle cx="51" cy="33" r="2.4" fill="#2a2219" stroke="none"></circle><circle cx="26" cy="41" r="3.6" fill="#e8a9a2" stroke="none" opacity=".7"></circle><circle cx="58" cy="41" r="3.6" fill="#e8a9a2" stroke="none" opacity=".7"></circle><path d="M40 39h4l-2 3z" fill="#c8553d" stroke="none"></path><path d="M42 42c-1 3-4 4-6 2M42 42c1 3 4 4 6 2"></path><path d="M4 36l16 2M4 44l16-2M80 36l-16 2M80 44l-16-2" stroke-width="1.2"></path><path d="M18 70V59a8 8 0 0 1 16 0v11" fill="#f3e9d5"></path><path d="M50 70V59a8 8 0 0 1 16 0v11" fill="#f3e9d5"></path><path d="M24 64v5M29 64v5M56 64v5M61 64v5" stroke-width="1.2"></path></svg></span>
+      <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
       <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
       <div class="card">
         <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
@@ -1203,6 +1219,10 @@ class Component extends DCLogic {
   titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
   state = { flow: {}, askDraft: {}, qdOpen: false, qdTab: 0, allow: {}, yoloBy: {}, artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
+  // Jarvis, the paper puppy over the composer: it rests in a mood read off the session (asking while the agent waits on you, idle otherwise) and plays a short one when something happens: a hello when a session opens or you poke it, a cheer when a turn lands, a droop when you stop the agent or deny it
+  petMood() { const shot = this.state.petShot; if (shot) return shot.name; const sid = this.state.sid; if (!sid) return 'idle'; const waiting = !!this.flowPending(sid) || this.curMsgs().some((m) => !m.done && m.tool && !m.tool.status); return waiting ? 'ask' : 'idle'; }
+  petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ petShot: { name, id } }); this.later(() => { const s = this.state.petShot; if (s && s.id === id) this.setState({ petShot: null }); }, ms); }
+  componentDidMount() { this.later(() => this.petPlay('greet', 1900), 400); }
   componentWillUnmount() { (this.tprompt || []).forEach(clearTimeout); clearTimeout(this.tbring); clearInterval(this.tflow); clearTimeout(this.tp); clearTimeout(this.tpe); clearTimeout(this.tpf); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); clearInterval(this.ticker); }
   total() { return (this.props.contextWindow ?? '200k') === '1M' ? 1000000 : 200000; }
   curMsgs() { return this.state.msgs[this.state.sid] || []; }
@@ -1217,6 +1237,7 @@ class Component extends DCLogic {
   usedOf(sid) { if (sid in this.state.used) return this.state.used[sid]; return typeof sid === 'string' && sid[0] === 'n' ? 1800 : BASE; }
   busy() { return this.curMsgs().some((m) => !m.done && !(m.tool && !m.tool.status)) || !!this.flowOf(this.state.sid).working; }
   stop() {
+    this.petPlay('sad', 3200);
     if (this.flowOf(this.state.sid).working) { this.stopFlow(); return; }
     clearInterval(this.ticker); clearTimeout(this.t3);
     const sid = this.state.sid;
@@ -1312,14 +1333,15 @@ class Component extends DCLogic {
     const f = this.flowOf(sid); const F = FLOWS[sid]; const s = F.stages[f.at];
     const p = { res: { ...f.res, [id]: { ...res } } };
     if (s.tool && (res.status === 'always')) this.setState({ allow: { ...this.state.allow, [sid]: { ...(this.state.allow[sid] || {}), [s.tool.kind]: true } } });
+    if (res.status === 'denied') this.petPlay('sad', 3200);
     this.setFlow(sid, p);
     this.later(() => { const g = this.flowOf(sid); this.setFlow(sid, { res: { ...g.res, [id]: { ...g.res[id], folded: true } } }); this.nextStage(sid); }, 750);
   }
   nextStage(sid) {
     const F = FLOWS[sid]; const f = this.flowOf(sid); const at = f.at + 1; const s = F.stages[at];
-    if (!s) { this.setFlow(sid, { at, working: false }); return; }
+    if (!s) { this.setFlow(sid, { at, working: false }); this.petPlay('celebrate', 2500); return; }
     if (s.work) { this.setFlow(sid, { at, working: true, start: Date.now() }); clearInterval(this.tflow); this.tflow = setInterval(() => this.setState({ tick: Date.now() }), 400);
-      this.tflowEnd = this.later(() => { clearInterval(this.tflow); const g = this.flowOf(sid); const nextAt = g.at + 1; const nx = F.stages[nextAt]; this.setFlow(sid, { at: nextAt, working: false }); if (nx) this.bringIn(); }, 1700); return; }
+      this.tflowEnd = this.later(() => { clearInterval(this.tflow); const g = this.flowOf(sid); const nextAt = g.at + 1; const nx = F.stages[nextAt]; this.setFlow(sid, { at: nextAt, working: false }); if (nx) this.bringIn(); else this.petPlay('celebrate', 2500); }, 1700); return; }
     this.setFlow(sid, { at, working: false }); this.bringIn();
   }
   stopFlow() { const sid = this.state.sid; clearInterval(this.tflow); clearTimeout(this.tflowEnd); this.setFlow(sid, { working: false, halt: true, stopped: true }); }
@@ -1331,10 +1353,11 @@ class Component extends DCLogic {
     if (ms.some((m) => !m.done && m.tool && !m.tool.status)) this.setState({ msgs: { ...this.state.msgs, [sid]: ms.map((m) => !m.done && m.tool && !m.tool.status ? { ...m, done: true, tool: { status: 'replied', folded: true } } : m) } });
   }
   pauseMsg(sid, id) { clearInterval(this.ticker); this.setState({ msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, tool: { status: null }, elapsed: fmtSec(Date.now() - m.start), pausedAt: Date.now() } : m) } }); this.bringIn(); }
-  finishMsg(sid, id) { clearInterval(this.ticker); this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } }); }
+  finishMsg(sid, id) { this.petPlay('celebrate', 2500); clearInterval(this.ticker); this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } }); }
   settleMsg(sid, id, status) {
     const patchMsg = (fn) => this.setState({ msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? fn(m) : m) } });
     if (status === 'always') this.setState({ allow: { ...this.state.allow, [sid]: { ...(this.state.allow[sid] || {}), edit: true } } });
+    if (status === 'denied') this.petPlay('sad', 3200);
     patchMsg((m) => ({ ...m, tool: { status }, start: m.start + (Date.now() - (m.pausedAt || Date.now())), ...(status === 'denied' ? { done: true } : {}) }));
     this.later(() => patchMsg((m) => ({ ...m, tool: { ...m.tool, folded: true } })), 750);
     if (status !== 'denied') { clearInterval(this.ticker); this.ticker = setInterval(() => this.setState({ tick: Date.now() }), 400); clearTimeout(this.t3); this.t3 = setTimeout(() => this.finishMsg(sid, id), 1500); }
@@ -1506,7 +1529,7 @@ class Component extends DCLogic {
           toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
           sessions: sessions.map((s0) => this.liveSess(s0)).map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
-            pick: () => this.setState({ sid: s.id, tab: 'Chat', open: null }) })) };
+            pick: () => { this.setState({ sid: s.id, tab: 'Chat', open: null }); this.petPlay('greet', 1900); } })) };
       }),
       ...this.sideVals(st, c, sessionBusy), hasSession: !!cur,
       sheetCls: cur ? 'inws' : '', sheetWc: cur ? ((WS.find((w) => w.name === c.ws) || {}).color || '') : '', noSession: !cur, closeSession: () => this.setState({ sid: null, open: null, draft: 0 }),
@@ -1548,6 +1571,7 @@ class Component extends DCLogic {
       yolo: this.yoloOf(st.sid), toggleYolo: () => this.togglePromptYolo(), qd: st.sid ? this.qdView(st.sid) : NO_QD,
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
+      petCls: this.petMood(), petPoke: () => this.petPlay('greet', 1900),
       ...this.voiceVals(),
       reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, unfolded: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: {}, activeOnly: false, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
     };

@@ -661,6 +661,26 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaPet.dc.html": {
+      "x": 0,
+      "y": 37300,
+      "w": 1440,
+      "h": 900,
+      "title": "Jarvis the paper puppy — peeking, sticker and standee, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaPetDark.dc.html": {
+      "x": 1540,
+      "y": 37300,
+      "w": 1440,
+      "h": 900,
+      "title": "Jarvis the paper puppy — peeking, sticker and standee, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "createdOnFiles": {
@@ -702,12 +722,14 @@
     "s7",
     "s8",
     "s9",
-    "s10"
+    "s10",
+    "p26",
+    "s11"
   ],
   "notes": {
     "p14": {
       "page": "diorama",
-      "text": "Paper diorama: the Primepaw shell built as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the cat peeking over the composer are stickers too. The composer has a mic disc beside the send disc: pressed, it latches flat and turns red, the hint gives way to a sound trace in red pen and the time by hand, and what you say lands in the box word by word; press it again or Esc to stop. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a thick-card pull-tab sliding in a slot cut into the paper, with on and off handwritten in the slot, YOLO is a rubber stamp, a faded black outline when off and red ink when on, and the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for Max, a green sticker check on a picked row. The white paper (the chat sheet, the leaf, the rows and fields) carries the paper texture of the Factory Overseer workshop walls with its colour kept; cardboard is a flecked board; the workspace headers are paper strips in their workspace’s colour with the rows’ texture, their count and caret written in pen ink, and the first session tucks under its header; an open session’s title bar and tab strip take the same paper colour as its workspace header, with unselected tabs a lighter cut of it; the prompt box stays plain. The rail icons, the Select button and every other button are cut-outs in their own colours carrying the same paper texture as the chat sheet and the session rows, not stickers. Sessions under a header stack like a deck of cards, hovering one shows a three-dot menu mark at its far right, and a working session carries a paper pinwheel: four coloured blades with folded tips on an ink pin, turning. Same live demo, same Night toggle.",
+      "text": "Paper diorama: the Primepaw shell built as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the puppy peeking over the composer are stickers too. The composer has a mic disc beside the send disc: pressed, it latches flat and turns red, the hint gives way to a sound trace in red pen and the time by hand, and what you say lands in the box word by word; press it again or Esc to stop. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a thick-card pull-tab sliding in a slot cut into the paper, with on and off handwritten in the slot, YOLO is a rubber stamp, a faded black outline when off and red ink when on, and the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for Max, a green sticker check on a picked row. The white paper (the chat sheet, the leaf, the rows and fields) carries the paper texture of the Factory Overseer workshop walls with its colour kept; cardboard is a flecked board; the workspace headers are paper strips in their workspace’s colour with the rows’ texture, their count and caret written in pen ink, and the first session tucks under its header; an open session’s title bar and tab strip take the same paper colour as its workspace header, with unselected tabs a lighter cut of it; the prompt box stays plain. The rail icons, the Select button and every other button are cut-outs in their own colours carrying the same paper texture as the chat sheet and the session rows, not stickers. Sessions under a header stack like a deck of cards, hovering one shows a three-dot menu mark at its far right, and a working session carries a paper pinwheel: four coloured blades with folded tips on an ink pin, turning. Same live demo, same Night toggle.",
       "w": 320,
       "x": 3080,
       "y": 300
@@ -749,7 +771,7 @@
     },
     "p20": {
       "page": "diorama",
-      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, a cat in a bow tie, badged with the threads waiting on you. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Thread YOLO makes. A job ends on a finish report on the sage mat. The header has the title, how many sessions the thread started, and the Thread YOLO stamp, off by default, which says what it risks when you strike it. Everything is fake.",
+      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, the paper puppy’s face, badged with the threads waiting on you. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Thread YOLO makes. A job ends on a finish report on the sage mat. The header has the title, how many sessions the thread started, and the Thread YOLO stamp, off by default, which says what it risks when you strike it. Everything is fake.",
       "w": 320,
       "x": 3080,
       "y": 7100
@@ -868,6 +890,21 @@
       "maxW": 2980,
       "page": "diorama",
       "text": "Background jobs"
+    },
+    "s11": {
+      "kind": "title1",
+      "x": 0,
+      "y": 37000,
+      "maxW": 2980,
+      "page": "diorama",
+      "text": "Jarvis, the pet"
+    },
+    "p26": {
+      "x": 3080,
+      "y": 37300,
+      "w": 320,
+      "page": "diorama",
+      "text": "Jarvis is a paper puppy, one character in three cuts. Peeking: over the composer, paws hooked on the frame, a sprite atlas with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the boards pick the mood from what the agent is doing, and a click says hello. The sticker: its head as one round sticker, the face on the Jarvis tile, the thread portraits and the rows. The standee: full body, cut to the Factory Overseer's pet sheet (6 columns by 4 facings) so the main agent can walk its floor. All three drawn by Qwen Image 2.1 on Comfy Cloud and sliced by pet/build.py; the prompts are in pet/README.md."
     }
   },
   "order": [
@@ -936,7 +973,9 @@
     "DioramaFactoryBlocked.dc.html",
     "DioramaFactoryBlockedDark.dc.html",
     "DioramaBackground.dc.html",
-    "DioramaBackgroundDark.dc.html"
+    "DioramaBackgroundDark.dc.html",
+    "DioramaPet.dc.html",
+    "DioramaPetDark.dc.html"
   ],
   "pages": [
     {
