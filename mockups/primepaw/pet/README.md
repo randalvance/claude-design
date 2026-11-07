@@ -24,6 +24,8 @@ agent is doing: idle while it works or rests, `ask` while a question or a tool a
 when a board opens, a session is picked or Jarvis says "On it", `celebrate` when a turn finishes or a
 report lands, `sad` when you stop the agent or deny a tool, `error` when Home opens a thread with a
 failed session. A click on the puppy says hello. Under `prefers-reduced-motion` it holds its first frame.
+The click is a mouse-only easter egg: the puppy is a decorative sticker, `aria-hidden` and outside the
+tab order, so nothing a keyboard or a screen reader needs lives on it.
 
 ## The standee on the factory floor
 
@@ -47,6 +49,9 @@ petAssets: { byAgent: { jarvis: { src: "pet/dog-walk.png", layout: "sheet", heig
 python3 mockups/primepaw/pet/build.py            # all three, from src/
 python3 mockups/primepaw/pet/build.py --width 92 # the peeking puppy 92 CSS px wide
 ```
+
+The boards play 8 frames a row (`steps(8)` and an 8-column `background-size` in their `/* pet */`
+block), so leave `--frames` at 8 unless you change those with it; `build.py` warns otherwise.
 
 `build.py` keys the green out (the key colour is read off each sheet's border, edge pixels are
 un-mixed), finds the cells on a sheet by the bands of paper rather than trusting the grid the model was

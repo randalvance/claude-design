@@ -239,7 +239,7 @@ button{font:inherit}
 .pp-logo svg{width:42px;height:42px}
 .pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:2px 0;display:flex;flex-direction:column;align-items:center;color:var(--ink);transition:transform .15s var(--ease)}
 .pp-rb:hover,.pp-rb.is-on{background:none;background-color:transparent;box-shadow:none;transform:none;color:var(--ink)}
-.pp-rb>span:not(.pp-nb){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.pp-rb>span:not(.pp-nb):not(.jface){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .pp-rb svg,.pp-rb .jface{width:44px;height:44px;padding:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.18);border-radius:10px;box-shadow:2px 3px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),4px 6px 7px var(--amb);color:var(--white);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
 .pp-rb:hover svg,.pp-rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
 .pp-rb:active svg,.pp-rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
@@ -394,7 +394,7 @@ button{font:inherit}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 .jface{display:block;background-image:url(pet/dog-face.png);background-size:contain;background-repeat:no-repeat;background-position:center}
 .rb-jarvis .jface{background-image:url(pet/dog-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-@media (prefers-reduced-motion:reduce){.pet{animation:none}}
+@media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
 </style>
 </helmet>

@@ -18,8 +18,11 @@ Outputs:
   pet/dog-walk.json  what each column and row holds, and the display height the factory should give it
 
     python3 mockups/primepaw/pet/build.py                       # reads each sheet's grid, the puppy 92 CSS px wide
-    python3 mockups/primepaw/pet/build.py --frames 12 --width 92 # 12 frames per row
+    python3 mockups/primepaw/pet/build.py --width 92             # the idle puppy 92 CSS px wide
     python3 mockups/primepaw/pet/build.py --cols 4 --rows 3      # force a grid
+
+The boards play 8 frames a row (steps(8) and an 8-column background-size in their /* pet */ block),
+so --frames stays 8 unless those change with it; the script warns otherwise.
 """
 import argparse, json, os, sys
 import numpy as np
@@ -148,6 +151,8 @@ def build_face(src, args, scaled):
     if os.path.exists(p):
         img, _ = key_out(Image.open(p))
         b = bbox(np.asarray(img)[..., 3])
+        if b is None:
+            sys.exit('no paper found in ' + p)
         head = img.crop(b)
         s = (side - 2 * args.pad) / max(head.size)
         head = head.resize((max(1, round(head.size[0] * s)), max(1, round(head.size[1] * s))), Image.LANCZOS)
@@ -182,6 +187,9 @@ def build_walk(src, args):
         print(f'walk-{facing:6s} key {tuple(int(v) for v in key)}  {len(frames)} frames  '
               + ' '.join(f'{f.size[0]}x{f.size[1]}' for f in frames))
         n = len(WALK_COLUMNS)
+        if len(frames) != n:
+            print(f'warning: walk-{facing} has {len(frames)} cells, not {n}; its poses are spread over the {n} '
+                  f'columns, so stand, step, work and wave may not land where the sheet layout expects', file=sys.stderr)
         rows[facing] = [frames[(i * len(frames)) // n] for i in range(n)] if len(frames) != n else frames
 
     cw, ch = WALK_CELL
@@ -221,6 +229,11 @@ def main():
     ap.add_argument('--walk-cols', type=int, default=0, help='force the number of cells on a walk strip')
     ap.add_argument('--pad', type=int, default=4, help='clear pixels around every frame, at atlas scale')
     args = ap.parse_args()
+    if args.frames < 1:
+        ap.error('--frames must be at least 1')
+    if args.frames != 8:
+        print(f'warning: the boards play 8 frames a row (steps(8) and an 8-column background-size in their '
+              f'/* pet */ block); an atlas with {args.frames} needs those changed with it', file=sys.stderr)
 
     src = os.path.join(HERE, 'src')
     scaled = build_peek(src, args)
