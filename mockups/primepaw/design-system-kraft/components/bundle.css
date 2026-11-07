@@ -521,3 +521,8 @@
 .kr-sitem-b{padding:6px 8px 20px 46px}
 .kr-sitem-b>p{margin:0 0 14px;max-width:560px;font-size:14px;line-height:1.5;color:var(--ink)}
 .kr-sitem-act{display:flex;align-items:center;gap:var(--space-16);flex-wrap:wrap}
+/* ---------- voice: the composer's mic is a small disc, red and latched while it listens; the hint gives way to a sound trace in red pen and the time by hand ---------- */
+.kr-listen{display:inline-flex;align-items:center;gap:var(--space-10);font-family:var(--font-hand);font-size:15px;color:var(--mute);white-space:nowrap}
+.kr-listen b{font-weight:600;color:var(--ink)}
+.kr-trace{display:inline-flex;align-items:center;gap:2px;height:18px}
+.kr-trace i{display:block;width:2px;border-radius:1px;background-color:var(--red)}

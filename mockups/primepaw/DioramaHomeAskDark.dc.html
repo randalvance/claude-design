@@ -596,6 +596,19 @@ button{font:inherit}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
 
+/* ---------- voice: a mic disc on the composer; while it listens the hint gives way to a sound trace in red pen and the time by hand ---------- */
+.mic{all:unset;position:relative;cursor:pointer;flex:none;width:30px;height:30px;border-radius:50%;background-color:var(--paper2);background-image:var(--face),var(--pulp);color:var(--mute);display:grid;place-items:center;box-shadow:2px 3px 0 var(--shadow);transition:transform .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease),box-shadow .15s var(--ease)}
+.mic svg{width:15px;height:15px}
+.mic:hover{color:var(--ink);transform:translate(-1px,-1px);box-shadow:3px 4px 0 var(--shadow)}
+.mic:active{transform:scale(.92)}
+.mic.on{background-color:var(--red);color:var(--white);box-shadow:0 1px 0 var(--red-2);transform:translate(1px,2px)}
+.mic.on:hover{color:var(--white);transform:translate(1px,2px)}
+.mic:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.listen{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.listen b{font-weight:600;color:var(--ink)}
+.trace{display:inline-flex;align-items:center;gap:2px;height:18px}
+.trace i{display:block;width:2px;border-radius:1px;background-color:var(--red);transition:height .1s linear}
+
 /* ---------- Home: Jarvis, your main agent, and your threads with it ---------- */
 /* the threads board: paper strips with two lines, the title and the last thing said */
 .jhead{display:flex;align-items:center;gap:12px;padding:6px 4px 4px 6px}
@@ -918,7 +931,7 @@ button{font:inherit}
               <label class="sr" for="hta0">What should we work on?</label>
               <textarea id="hta0" class="ta" rows="3" placeholder="Describe the job, or paste a ticket…" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea>
             </div>
-            <div class="bar"><span class="hint" aria-hidden="true">↵ start a thread · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+            <div class="bar"><sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ start a thread · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
           </div>
         </div>
         <p class="orl">{{emptyWhere}}</p>
@@ -967,7 +980,7 @@ button{font:inherit}
           <label class="sr" for="hta">Write to {{agentName}}</label>
           <textarea id="hta" class="ta" rows="2" placeholder="{{placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea>
         </div>
-        <div class="bar"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+        <div class="bar"><sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
       </div>
     </div>
   </footer>
@@ -1048,6 +1061,36 @@ const MEET = {
       create: () => this.meetCreate(), stamped: m.stamped,
       note: m.stamped ? 'Pleased to meet you.' : 'All of this can change later in Settings.'
     };
+  }
+};
+
+// ---------- voice: press the mic and a made-up transcript lands in the box word by word. Nothing is recorded. ----------
+const DICTATION = 'Add CSV export to the reports page, same columns as the table, and open a PR once the tests pass.'.split(' ');
+function micBars(loud) { return Array.from({ length: 14 }, () => ({ h: Math.round(loud ? 4 + Math.random() * 12 : 3 + Math.random() * 3) + 'px' })); }
+function micTime(ticks) { const s = Math.floor(ticks * 0.12); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+const VOICE = {
+  listening() { const v = this.state.voice; return !!(v && v.on); },
+  toggleMic() { if (this.listening()) this.stopMic(); else this.startMic(); },
+  startMic() {
+    const el = this.ta; if (!el) return;
+    const pre = el.value && !/\s$/.test(el.value) ? el.value + ' ' : el.value;
+    this.setState({ voice: { on: true, i: 0, t: 0, bars: micBars(false) } });
+    el.focus();
+    const word = () => {
+      const v = this.state.voice; if (!v || !v.on || !el.isConnected || v.i >= DICTATION.length) return this.stopMic();
+      el.value = pre + DICTATION.slice(0, v.i + 1).join(' ');
+      this.onDictated(el);
+      this.setState((s) => ({ voice: s.voice && { ...s.voice, i: s.voice.i + 1 } }));
+      this.vt = setTimeout(word, 160 + Math.random() * 240);
+    };
+    this.vt = setTimeout(word, 800);
+    this.vm = setInterval(() => this.setState((s) => ({ voice: s.voice && { ...s.voice, t: s.voice.t + 1, bars: micBars(s.voice.i > 0 && s.voice.i < DICTATION.length) } })), 120);
+  },
+  stopMic() { clearTimeout(this.vt); clearInterval(this.vm); if (this.state.voice) this.setState({ voice: null }); if (this.ta && this.ta.isConnected) this.ta.focus(); },
+  voiceVals() {
+    const v = this.state.voice; const on = !!(v && v.on);
+    return { listening: on, notListening: !on, micCls: on ? 'on' : '', micLabel: on ? 'Stop listening' : 'Speak instead of typing',
+      toggleMic: () => this.toggleMic(), bars: on ? v.bars : [], listenTime: on ? micTime(v.t) : '' };
   }
 };
 // ---------- Home: one personal agent, Jarvis, and the threads you have with it. Everything here is made up. ----------
@@ -1157,8 +1200,10 @@ class Component extends DCLogic {
   }
   undo() { const a = this.state.archived; if (!a) return; this.setThreads((ts) => { const n = ts.slice(); n.splice(a.at, 0, a.t); return n; }); clearTimeout(this.tt); this.setState({ archived: null, toast: null, cur: a.t.id }); }
   // sending: from the empty state it starts a thread, in a thread it is the next message
+  onDictated(el) { this.setState({ hasText: !!el.value.trim() }); }
   send() {
     const el = this.ta; const text = el ? el.value.trim() : ''; if (!text) return;
+    if (this.listening()) this.stopMic();
     el.value = ''; this.setState({ hasText: false });
     const cur = this.curId();
     if (!cur) {
@@ -1285,14 +1330,15 @@ class Component extends DCLogic {
       qd, placeholder: qd.show ? 'Or just write your answer…' : 'Write to ' + who + '…',
       taRef: (el) => { this.ta = el; },
       onInput: (e) => { const v = !!e.target.value.trim(); if (v !== st.hasText) this.setState({ hasText: v }); },
-      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } },
-      sendCls: st.hasText ? 'ready' : '', sendLabel: t ? 'Send to ' + who : 'Start the thread', sendNow: () => this.send(),
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape' && this.listening()) this.stopMic(); },
+      ...this.voiceVals(), sendCls: st.hasText ? 'ready' : '', sendLabel: t ? 'Send to ' + who : 'Start the thread', sendNow: () => this.send(),
       hasToast: !!st.toast, toast: st.toast || '', toastUndo: !!(st.toastUndo && st.archived), undo: () => this.undo()
     };
   }
 }
 
 Object.assign(Component.prototype, MEET);
+Object.assign(Component.prototype, VOICE);
 </script>
 </body>
 </html>

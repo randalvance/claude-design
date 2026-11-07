@@ -595,6 +595,19 @@ button{font:inherit}
 .rb-jarvis svg,.rb-jarvis .jface{padding:5px;shape-rendering:crispEdges;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
+
+/* ---------- voice: a mic disc on the composer; while it listens the hint gives way to a sound trace in red pen and the time by hand ---------- */
+.mic{all:unset;position:relative;cursor:pointer;flex:none;width:30px;height:30px;border-radius:50%;background-color:var(--paper2);background-image:var(--face),var(--pulp);color:var(--mute);display:grid;place-items:center;box-shadow:2px 3px 0 var(--shadow);transition:transform .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease),box-shadow .15s var(--ease)}
+.mic svg{width:15px;height:15px}
+.mic:hover{color:var(--ink);transform:translate(-1px,-1px);box-shadow:3px 4px 0 var(--shadow)}
+.mic:active{transform:scale(.92)}
+.mic.on{background-color:var(--red);color:var(--white);box-shadow:0 1px 0 var(--red-2);transform:translate(1px,2px)}
+.mic.on:hover{color:var(--white);transform:translate(1px,2px)}
+.mic:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.listen{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.listen b{font-weight:600;color:var(--ink)}
+.trace{display:inline-flex;align-items:center;gap:2px;height:18px}
+.trace i{display:block;width:2px;border-radius:1px;background-color:var(--red);transition:height .1s linear}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -746,7 +759,7 @@ button{font:inherit}
             </button>
                 </div>
               </sc-if>
-              <span class="hint" aria-hidden="true">{{helloHint}}</span>
+              <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">{{helloHint}}</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
               <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="Start the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button>
             </div>
           </div>
@@ -952,7 +965,7 @@ button{font:inherit}
 
             <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{cur.ws}}</span>
           </div>
-          <span class="hint" aria-hidden="true">{{hint}}</span>
+          <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">{{hint}}</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
           <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
             <sc-if value="{{busy}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1"></rect></svg></sc-if>
             <sc-if value="{{notBusy}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></sc-if>
@@ -1416,9 +1429,11 @@ class Component extends DCLogic {
     const s = this.flowPending(sid); if (s && s.tool) this.settle(sid, s.tool.id, { status: 'yolo' });
     (st.msgs[sid] || []).forEach((m) => { if (!m.done && m.tool && !m.tool.status) this.settleMsg(sid, m.id, 'yolo'); });
   }
+  onDictated(el) { el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); }
   send() {
     const el = this.ta;
     if (this.busy() || !el || !el.value.trim()) return;
+    if (this.listening()) this.stopMic();
     if (this.state.sid) this.replyToPrompt(this.state.sid);
     const text = el.value.trim(); const id = Date.now(); let sid = this.state.sid; const patch = {};
     if (!sid) {
@@ -1513,7 +1528,7 @@ class Component extends DCLogic {
       hint: busy ? '⎋ stop · agent is working' : '↵ send · ⇧↵ newline',
       taRef: (el) => { if (el) this.ta = el; },
       onInput: (e) => { const el = e.currentTarget; this.ta = el; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; this.setState({ draft: el.value.length }); },
-      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (st.open) this.setState({ open: null }); else if (busy) this.stop(); } },
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (this.listening()) this.stopMic(); else if (st.open) this.setState({ open: null }); else if (busy) this.stop(); } },
       onFocus: () => this.setState({ focus: true }),
       onBlur: () => { clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ focus: false }), 120); },
       modelOpen: st.open === 'model', anyOpen: !!st.open, ctxOpen: st.open === 'ctx', toggleCtx: () => this.setState({ open: st.open === 'ctx' ? null : 'ctx' }), ...this.ctxCard(used, total),
@@ -1531,10 +1546,42 @@ class Component extends DCLogic {
       yolo: this.yoloOf(st.sid), toggleYolo: () => this.togglePromptYolo(), qd: st.sid ? this.qdView(st.sid) : NO_QD,
       busy, notBusy: !busy, sendCls: busy ? 'stop' : (st.draft > 0 ? 'ready ' : '') + (st.fly ? 'fly' : ''), sendAria: busy ? 'Stop the agent' : 'Send message',
       sendOrStop: () => busy ? this.stop() : this.send(),
+      ...this.voiceVals(),
       reset: () => { if (this.ta) { this.ta.value = ''; this.ta.style.height = ''; } clearInterval(this.ticker); clearTimeout(this.t3); this.setState({ sid: null, tab: 'Chat', open: null, caps: {}, msgs: {}, unfolded: {}, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, used: {}, activeOnly: false, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false } }); }
     };
   }
 }
+
+// ---------- voice: press the mic and a made-up transcript lands in the box word by word. Nothing is recorded. ----------
+const DICTATION = 'Add CSV export to the reports page, same columns as the table, and open a PR once the tests pass.'.split(' ');
+function micBars(loud) { return Array.from({ length: 14 }, () => ({ h: Math.round(loud ? 4 + Math.random() * 12 : 3 + Math.random() * 3) + 'px' })); }
+function micTime(ticks) { const s = Math.floor(ticks * 0.12); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+const VOICE = {
+  listening() { const v = this.state.voice; return !!(v && v.on); },
+  toggleMic() { if (this.listening()) this.stopMic(); else this.startMic(); },
+  startMic() {
+    const el = this.ta; if (!el) return;
+    const pre = el.value && !/\s$/.test(el.value) ? el.value + ' ' : el.value;
+    this.setState({ voice: { on: true, i: 0, t: 0, bars: micBars(false) } });
+    el.focus();
+    const word = () => {
+      const v = this.state.voice; if (!v || !v.on || !el.isConnected || v.i >= DICTATION.length) return this.stopMic();
+      el.value = pre + DICTATION.slice(0, v.i + 1).join(' ');
+      this.onDictated(el);
+      this.setState((s) => ({ voice: s.voice && { ...s.voice, i: s.voice.i + 1 } }));
+      this.vt = setTimeout(word, 160 + Math.random() * 240);
+    };
+    this.vt = setTimeout(word, 800);
+    this.vm = setInterval(() => this.setState((s) => ({ voice: s.voice && { ...s.voice, t: s.voice.t + 1, bars: micBars(s.voice.i > 0 && s.voice.i < DICTATION.length) } })), 120);
+  },
+  stopMic() { clearTimeout(this.vt); clearInterval(this.vm); if (this.state.voice) this.setState({ voice: null }); if (this.ta && this.ta.isConnected) this.ta.focus(); },
+  voiceVals() {
+    const v = this.state.voice; const on = !!(v && v.on);
+    return { listening: on, notListening: !on, micCls: on ? 'on' : '', micLabel: on ? 'Stop listening' : 'Speak instead of typing',
+      toggleMic: () => this.toggleMic(), bars: on ? v.bars : [], listenTime: on ? micTime(v.t) : '' };
+  }
+};
+Object.assign(Component.prototype, VOICE);
 </script>
 </body>
 </html>
