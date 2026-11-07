@@ -82,8 +82,8 @@ as two items of one batch, is the cheap way to have a choice.
 - **The turnaround:** the body on `image_1`, the turnaround prompt from `prompts.md`. Judge it like the
   base: four figures of one height on one ground line, the back with no face and with every absence
   the `{BACK}` slot names (the puppy's plain back, no patch), every part the front shows sitting where
-  it should from behind (the puppy's tail at its left hip, curling up as the front shows it, not hanging
-  between the legs), the profiles with one eye, the same colours in every view. Save it as
+  it should from behind (the puppy's tail: just its curled tip at the centre of the rump, not a whole
+  tail at the hip and not a blob hanging between the legs), the profiles with one eye, the same colours in every view. Save it as
   `pet/src/<id>/turnaround.png`; it never ships, but every strip copies it. One figure wrong on a sheet
   that is otherwise right is an edit, not a redraw: send the sheet back as `image_1` with the body as
   `image_2` and ask for it reproduced exactly with that one change; the other figures stay in place to
