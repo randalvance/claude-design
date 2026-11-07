@@ -10,6 +10,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<script src="pet/puppet.js"></script>
 <style>
 body{margin:0;background:#ece4d3;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
 a{color:#3b5b9a}a:hover{color:#2a4070}
@@ -71,26 +72,22 @@ button{font:inherit}
 .rowp .jface{width:20px;height:20px}
 .badge{position:relative;width:19px;height:19px;border-radius:50%;background:var(--attn);box-shadow:var(--sticker);background-image:var(--gloss);display:grid;place-items:center;transform:rotate(8deg);font:800 11px/1 var(--font-sans);color:var(--on-attn)}
 .badge .jface{position:absolute;left:-14px;top:-2px;width:22px;height:22px}
-/* 3. the standee: the factory's pet sheet, 6 columns by 4 facings; the sprite is one cell of it */
-.standee{--cw:calc(256px * var(--s));--ch:calc(320px * var(--s));position:relative;width:var(--cw);height:var(--ch);background-image:url(pet/dog-walk.png);background-repeat:no-repeat;background-size:calc(var(--cw) * 6) calc(var(--ch) * 4);background-position:0 0;filter:drop-shadow(0 0 .5px rgba(0,0,0,.35))}
-.standee.r1{background-position:0 calc(var(--ch) * -1)}
-.standee.r2{background-position:0 calc(var(--ch) * -2)}
-.standee.r3{background-position:0 calc(var(--ch) * -3)}
+/* 3. the standee: a cut-out puppet. pet/dog-rig.png holds its pieces, pet/dog-rig.json where each sits, turns and stacks, and pet/puppet.js (loaded from the helmet) moves them in steps, 10 a second */
+.standee{position:relative;display:block;filter:drop-shadow(0 0 .5px rgba(0,0,0,.35))}
 .wide{grid-column:1 / -1}
 .cols{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start}
 .facings{display:flex;gap:16px;align-items:flex-end;padding:8px 2px 0}
 .facing{display:flex;flex-direction:column;align-items:center;gap:8px}
-.facing .standee{--s:.34}
+.facing .standee{min-height:94px}
 .facing .hand{white-space:nowrap}
 /* the floor: one tile of the factory's sage checkerboard, foreshortened the way its 38-degree camera sees it */
 .floor{--tw:56px;--th:44px;position:relative;height:320px;overflow:hidden;border-radius:4px;background-color:var(--mat-green);background-image:var(--face),repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--mat-green) 78%,var(--sheet)) 0 25%,var(--mat-green) 0 50%);background-size:auto,calc(var(--tw) * 2) calc(var(--th) * 2);border:1px solid var(--mat-green-2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),var(--lift-mat,2px 3px 0 var(--mat-green-2),5px 8px 10px var(--amb))}
 .floor::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,0) 40%);pointer-events:none}
 .floor .belt{position:absolute;left:0;right:0;top:46px;height:22px;background-color:color-mix(in srgb,var(--mat-green-2) 70%,var(--ink));background-image:repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.18) 22px 24px,transparent 24px 30px);box-shadow:0 2px 0 rgba(0,0,0,.25);opacity:.9}
 .floor .bench{position:absolute;width:88px;height:36px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid var(--kraft-2);border-radius:3px;box-shadow:2px 3px 0 var(--kraft-2),4px 6px 7px var(--amb)}
-.walker{position:absolute;left:0;top:0;--s:.42;--cw:calc(256px * var(--s));--ch:calc(320px * var(--s));width:var(--cw);height:var(--ch);will-change:transform}
+.walker{position:absolute;left:0;top:0;width:76px;height:116px;will-change:transform}
 .walker .shade{position:absolute;left:50%;bottom:-5px;width:58%;height:12px;border-radius:50%;background:var(--amb);filter:blur(2.5px);transform:translateX(-50%)}
-.walker .body{position:absolute;inset:0;transform-origin:50% 100%}
-.walker .body.standee{--s:.42}
+.walker .body{position:absolute;left:0;bottom:0;transform-origin:50% 100%}
 .walker .bub{display:none;position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);white-space:nowrap;padding:3px 8px;background:var(--card);border:1px solid var(--edge);border-radius:4px;box-shadow:var(--lift-1);font:600 11px/1 var(--font-sans);color:var(--ink)}
 .walker .bub::after{content:"";position:absolute;left:50%;top:100%;width:6px;height:6px;background:var(--card);border-right:1px solid var(--edge);border-bottom:1px solid var(--edge);transform:translate(-50%,-50%) rotate(45deg)}
 .states{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
@@ -123,7 +120,7 @@ button{font:inherit}
 <div class="hd">
   <div>
     <h1>Jarvis, the paper puppy</h1>
-    <p>One character, three cuts. The peeking puppy hooks its paws over the composer; the sticker is its face for the rail and the thread portraits; the standee walks the factory floor. All three are paper cut-outs with a white die-cut border, drawn by Qwen Image 2.1 on Comfy Cloud and sliced by <span class="hand sm">pet/build.py</span>.</p>
+    <p>One character, three cuts. The peeking puppy hooks its paws over the composer; the sticker is its face for the rail and the thread portraits; the standee walks the factory floor as a cut-out puppet. All three are paper cut-outs with a white die-cut border, drawn on Comfy Cloud and sliced by <span class="hand sm">pet/build.py</span>.</p>
   </div>
   <button class="kbtn lg" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}">{{themeWord}}</button>
 </div>
@@ -153,17 +150,17 @@ button{font:inherit}
     <p class="note">The same face at 88, 44, 42, 24 and 22px. It stays a sticker: a white cut, no shadow, stuck flat on the tile or the paper.</p>
   </section>
   <section class="sheet wide" aria-labelledby="h-walk">
-    <h2 id="h-walk">3. The standee, for the factory floor</h2>
-    <p class="lede"><span class="hand sm">pet/dog-walk.png</span> is cut to the Factory Overseer's pet sheet: 6 columns (stand, two steps of a walk, two beats of work, a wave) by 4 facings, in 256 by 320 cells with the feet on one ground line. The factory walks it with the cycle 0, 1, 2, 1 at 8 frames a second, works it on columns 3 and 4, and waves columns 5 and 0 when it needs you.</p>
+    <h2 id="h-walk">3. The standee, a cut-out puppet</h2>
+    <p class="lede"><span class="hand sm">pet/dog-rig.png</span> holds the puppy's pieces for each facing (head, ears, body, arms, legs, tail) and <span class="hand sm">pet/dog-rig.json</span> says where each sits, where it turns and which is in front. <span class="hand sm">pet/puppet.js</span> moves them the way a South Park character is animated: every piece its own layer pinned at a pivot, posed in steps, 10 a second. Walking, the legs scissor at the hip and the arms swing against them; working, the paws pump; asking, one paw waves over its head; idle, it breathes.</p>
     <div class="cols">
       <div>
         <div class="facings">
-          <div class="facing"><span class="standee" aria-hidden="true"></span><span class="hand">down</span></div>
-          <div class="facing"><span class="standee r1" aria-hidden="true"></span><span class="hand">left</span></div>
-          <div class="facing"><span class="standee r2" aria-hidden="true"></span><span class="hand">right</span></div>
-          <div class="facing"><span class="standee r3" aria-hidden="true"></span><span class="hand">up</span></div>
+          <div class="facing"><span class="standee" data-f="down" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">down</span></div>
+          <div class="facing"><span class="standee" data-f="left" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">left</span></div>
+          <div class="facing"><span class="standee" data-f="right" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">right</span></div>
+          <div class="facing"><span class="standee" data-f="up" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">up</span></div>
         </div>
-        <p class="note">Drop it in as a host pet:<br><code>petAssets.byAgent.jarvis = { src, layout: "sheet", height: 2.67 }</code><br>The standing puppy is 86% of its cell, so 2.67 tiles puts its head where the bundled pets' are. The factory puts no folded tab under it: the paws sit straight on the floor.</p>
+        <p class="note">A host draws it with<br><code>PetPuppet.mount(el, rig, { height })</code><br>and calls <code>facing()</code> and <code>pose(doing, t)</code> each frame; the rig and its atlas are all it needs. The factory puts no folded tab under it: the paws sit straight on the floor.</p>
       </div>
       <div>
         <div class="floor" aria-label="A corner of the factory floor, with Jarvis walking a round">
@@ -185,18 +182,17 @@ button{font:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
 // Jarvis, the paper puppy: the three cuts side by side. The peeking puppy and the sticker are CSS; the
-// standee is driven here the way the Factory Overseer drives a pet: a walk cycle of columns 0, 1, 2, 1 at
-// 8 frames a second facing the way it goes, the two work beats on columns 3 and 4 at 5.5, the wave on
-// 5 and 0 at 3.2, and a little body lift and roll on top of the frames.
+// standee is a cut-out puppet from pet/dog-rig.json, mounted and posed by pet/puppet.js (loaded from the
+// helmet), driven here the way a host floor would: a round of waypoints, facing the way it goes, idle,
+// walking, working or asking for attention at each.
 const MOODS = [
   { id: 'idle', t: 'Idle', loop: true }, { id: 'greet', t: 'Greet', ms: 1900 }, { id: 'celebrate', t: 'Celebrate', ms: 2500 },
   { id: 'sad', t: 'Sad', ms: 1500 }, { id: 'error', t: 'Error', loop: true }, { id: 'ask', t: 'Ask', loop: true }
 ];
 const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: 'attention', t: 'Ask' }, { id: 'idle', t: 'Stand' }];
-const ROW = { down: 0, left: 1, right: 2, up: 3 };
-const S = .42, CW = 256 * S, CH = 320 * S;
-const WALK = [0, 1, 2, 1], WALK_FPS = 8, WORK = [3, 4], WORK_FPS = 5.5, ATTN = [5, 0], ATTN_FPS = 3.2;
+const RIG = 'pet/dog-rig.json', STAND_H = 94, WALK_H = 116; // the puppet's height in the facings row and on the floor
 const SPEED = 92; // px per second
+const onPuppet = (fn) => window.PetPuppet ? fn(window.PetPuppet) : document.addEventListener('pet-puppet', () => fn(window.PetPuppet), { once: true });
 // the round: feet points on the floor, and what the puppy does when it gets to each corner
 const WAY = [
   { x: 104, y: 292, pause: 'idle', ms: 700 },
@@ -213,12 +209,21 @@ class Component extends DCLogic {
   componentDidMount() {
     this.later(() => this.petPlay('greet', 1900), 400);
     this.w = { seg: 0, x: WAY[0].x, y: WAY[0].y, facing: 'down', pause: 'idle', left: 900 };
+    this.stands = [];
+    onPuppet((PP) => PP.load(RIG).then((rig) => {
+      if (this.gone) return;
+      for (const el of Object.values(this.standEls || {})) this.stands.push(PP.mount(el, rig, { height: STAND_H, facing: el.dataset.f }));
+      if (this.body) {
+        this.puppet = PP.mount(this.body, rig, { height: WALK_H });
+        this.walker.style.width = this.puppet.width + 'px'; this.walker.style.height = this.puppet.height + 'px';
+      }
+    }).catch((e) => console.warn('the standee did not load:', e)));
     this.last = performance.now();
     const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const tick = (now) => { this.step(Math.min(.05, (now - this.last) / 1000), now / 1000, still); this.last = now; this.raf = requestAnimationFrame(tick); };
     this.raf = requestAnimationFrame(tick);
   }
-  componentWillUnmount() { cancelAnimationFrame(this.raf); (this.tq || []).forEach(clearTimeout); }
+  componentWillUnmount() { this.gone = true; cancelAnimationFrame(this.raf); (this.tq || []).forEach(clearTimeout); }
   petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ shot: { name, id } }); this.later(() => { const s = this.state.shot; if (s && s.id === id) this.setState({ shot: null }); }, ms); }
   // one step of the standee: where it is, which way it faces, what it is doing
   step(dt, t, still) {
@@ -238,15 +243,12 @@ class Component extends DCLogic {
       doing = w.pause || 'walking';
     } else if (mode !== 'roam') { w.facing = 'down'; }
     if (still && doing === 'walking') doing = 'idle';
-    let col = 0, lift = 0, roll = 0, sx = 1, sy = 1, ox = 0;
-    if (doing === 'walking') { col = WALK[Math.floor(t * WALK_FPS) % WALK.length]; lift = .07 * Math.abs(Math.sin(t * 10)); roll = .035 * Math.sin(t * 10); }
-    else if (doing === 'working') { const b = Math.sin(t * Math.PI * WORK_FPS); col = WORK[Math.floor(t * WORK_FPS) % 2]; lift = .035 * Math.abs(b); roll = .025 * b; sx = 1 + .025 * Math.abs(b); sy = 1 - .025 * Math.abs(b); ox = .025 * b; }
-    else if (doing === 'attention') { const wv = Math.sin(t * Math.PI * ATTN_FPS); col = ATTN[Math.floor(t * ATTN_FPS) % 2]; lift = .16 * Math.abs(Math.sin(t * Math.PI * 1.6)); roll = .065 * wv; sx = 1 - .025 * Math.abs(wv); sy = 1 + .035 * Math.abs(wv); ox = .045 * wv; }
-    if (still) { lift = roll = ox = 0; sx = sy = 1; }
-    const H = CH * .86; // the standing puppy, in px: the factory's units are tiles, the puppy stands 2.3 of them
-    this.walker.style.transform = `translate(${(w.x - CW / 2).toFixed(1)}px, ${(w.y - CH).toFixed(1)}px)`;
-    this.body.style.backgroundPosition = `${-col * CW}px ${-ROW[w.facing] * CH}px`;
-    this.body.style.transform = `translate(${(ox * H).toFixed(1)}px, ${(-lift * H).toFixed(1)}px) rotate(${roll.toFixed(3)}rad) scale(${sx.toFixed(3)}, ${sy.toFixed(3)})`;
+    const p = this.puppet;
+    if (p) {
+      this.walker.style.transform = `translate(${(w.x - p.width / 2).toFixed(1)}px, ${(w.y - p.height).toFixed(1)}px)`;
+      p.facing(w.facing); p.pose(doing, t, still);
+    }
+    for (const s of this.stands) s.pose('idle', t, still);
     const bub = BUBBLE[doing] || '';
     if (this.bub && this.bub.textContent !== bub) { this.bub.textContent = bub; this.bub.style.display = bub ? '' : 'none'; }
   }
@@ -261,8 +263,9 @@ class Component extends DCLogic {
       petPoke: () => this.petPlay('greet', 1900),
       moods: MOODS.map((m) => { const on = st.shot ? st.shot.name === m.id : st.mood === m.id; return { t: m.t, on, cls: (on ? 'on ' : '') + (m.loop ? 'loop' : ''), pick: () => m.loop ? this.setState({ mood: m.id, shot: null }) : this.petPlay(m.id, m.ms) }; }),
       states: STATES.map((s) => ({ t: s.t, on: st.walk === s.id, cls: st.walk === s.id ? 'on' : '', pick: () => this.setState({ walk: s.id }) })),
-      walkNote: st.walk === 'roam' ? 'walks a round: works at one bench, asks at the other' : st.walk === 'working' ? 'columns 3 and 4, 5.5 a second' : st.walk === 'attention' ? 'columns 5 and 0, 3.2 a second, with a hop' : 'column 0, facing you',
-      walkerRef: (el) => { if (el) this.walker = el; }, bodyRef: (el) => { if (el) this.body = el; }, bubRef: (el) => { if (el) this.bub = el; }
+      walkNote: st.walk === 'roam' ? 'walks a round: works at one bench, asks at the other' : st.walk === 'working' ? 'the paws pump, 2.2 beats a second' : st.walk === 'attention' ? 'one paw up and waving, with a hop' : 'standing, facing you, breathing',
+      walkerRef: (el) => { if (el) this.walker = el; }, bodyRef: (el) => { if (el) this.body = el; }, bubRef: (el) => { if (el) this.bub = el; },
+      standRef: (el) => { if (el) (this.standEls = this.standEls || {})[el.dataset.f] = el; }
     };
   }
 }

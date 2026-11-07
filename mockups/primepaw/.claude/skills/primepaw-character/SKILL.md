@@ -13,8 +13,8 @@ all read those cuts by name, so a new character is a new set of files under `pet
 | --- | --- | --- |
 | The peeking sprite | `pet/<id>.png`, an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; `pet/<id>.json` with the frame size | Over the composer on every board that has one, as `.pet`, stepped like paper stop-motion |
 | The face sticker | `pet/<id>-face.png`, the head as one round sticker, 176 px square | The Jarvis tile on the rail, the thread portraits, the picker, as `.jface` |
-| The standee | `pet/<id>-walk.png`, the Factory Overseer's pet sheet (6 columns by 4 facings of 256 by 320 cells); `pet/<id>-walk.json` with the factory contract | The factory floor, and the Pet board's mock of it |
-| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the walk strips copy), four `walk-*.png` and `walk-up-ref.png` (two frames of a walk video the back strip's steps copy), all on chroma-key green, plus `base.png`, the drawing the edits started from | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept, so its sheets stand in for it) |
+| The standee | `pet/<id>-rig.png`, the pieces of a cut-out puppet for each facing (head, ears, body, arms, legs, tail), and `pet/<id>-rig.json`, where each piece sits, where it turns and which is in front; `pet/puppet.js` poses them in steps the way a South Park character is animated | The factory floor, and the Pet board's mock of it, as `.standee` |
+| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the parts sheets copy) and four `parts-*.png` (each facing's figure taken apart into the puppet's pieces), all on chroma-key green, plus `base.png`, the drawing the edits started from | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept, so its sheets stand in for it) |
 
 Read `pet/README.md` once: it is the puppy's own account of the same system, and `DioramaPet.dc.html`
 shows the three cuts side by side with every mood and the standee walking.
@@ -50,8 +50,8 @@ moods, the avatar and the body as edits of the base, submitted as one batch of t
 `assets/qwen21-edit.workflow.json`; then a turnaround of the body (front, left side, back, right side in
 one row) with GPT Image 2.6, judged against the slots before anything is drawn from it, because a model
 invents whatever the body does not show it and the turnaround is where the back and the sides get
-settled; then the four walk strips from the turnaround and the body, GPT Image again, since Qwen twists
-them. The prompts come from `references/prompts.md`, slots filled. Save every downloaded sheet under
+settled; then one parts sheet per facing from the turnaround and the body, GPT Image again: the figure
+taken apart into the puppet's pieces, laid out in a grid in the order `build.py` names them. The prompts come from `references/prompts.md`, slots filled. Save every downloaded sheet under
 `pet/src/<id>/` with the names `build.py` expects, and look at each one before building: the judging
 list in `comfy.md` says what sends a sheet back for a new seed.
 
@@ -63,11 +63,14 @@ python3 mockups/primepaw/pet/build.py --name <id>
 
 It keys the green out, finds the cells on each sheet by the bands of paper (the model draws the grid
 it likes), tightens every frame to its paper, scales a cut's frames alike, and lays them out: the
-peeking atlas with the cut edge on one line, the face squared up, the walk sheet with the feet on the
-cell's ground line, every facing at the same standing height and the standing figure 86% of the cell. Read its printout: every mood sheet should
-yield 8 frames of nearly the same size, every walk strip 6. A sheet that yields another count is
-resampled silently and will stutter; redraw it with a new seed rather than accept it. Needs Pillow and
-numpy on the host Python.
+peeking atlas with the cut edge on one line, the face squared up, and the puppet's pieces fitted back
+into the turnaround's figures and packed into the rig atlas, their places, pivots and depths in the rig
+JSON, every facing at the same standing height. Read its printout: every mood sheet should yield 8
+frames of nearly the same size, every parts sheet 9 pieces (8 for a profile), and a piece's fit well
+under the others on its sheet is the one to look at. A mood sheet that yields another count is resampled
+silently and will stutter, and a parts sheet with another count stops the build; redraw either with a new
+seed rather than accept it. `--check <file>` writes the four puppets put together under the turnaround,
+which is how to judge the rig. Needs Pillow and numpy on the host Python.
 
 ### 4. Look at it
 
@@ -81,7 +84,7 @@ python3 mockups/primepaw/.claude/skills/primepaw-character/scripts/character.py 
 That copies the puppy's Pet boards (light and dark) with the new cuts and frame size, and lists them on
 the canvas under "Jarvis, the pet". The prose on the copies still describes the puppy; rewrite it for
 the new creature. Check each mood plays and returns to rest, the face reads on the rail tile mock, the
-standee keeps its height through the four facings and walks the floor mock without a tab under it.
+standee stands whole in all four facings (no piece adrift) and walks the floor mock without a tab under it.
 
 ### 5. Wire it in
 
@@ -99,14 +102,16 @@ look; a second character can just sit in the picker.
 
 Then the words: add the character to the table in `pet/README.md` with its prompts' slot values, give
 the canvas a note beside its Pet boards (`canvas.json`, like `p26`), and mention it in the Kraft design
-system's README under "The pet" if it changes what Jarvis is. The factory takes the standee by URL with
-the numbers from `pet/<id>-walk.json` (`petAssets.main`), so a host that should show it needs that
-entry, not a code change.
+system's README under "The pet" if it changes what Jarvis is. A host shows the standee through
+`pet/puppet.js`: `PetPuppet.load('pet/<id>-rig.json')`, `mount(el, rig, { height })`, then `facing()`
+and `pose(doing, t)` each frame, as the Pet board does; it needs those calls and the two rig files,
+not a sheet.
 
 ### 6. Done when
 
-- `pet/<id>.png`, `.json`, `-face.png`, `-walk.png`, `-walk.json` exist and `pet/src/<id>/` holds the
-  thirteen sources (the turnaround among them) and the base, so the character can be redrawn.
+- `pet/<id>.png`, `.json`, `-face.png`, `-rig.png`, `-rig.json` exist and `pet/src/<id>/` holds the
+  thirteen sources (the turnaround and the four parts sheets among them) and the base, so the character
+  can be redrawn.
 - The Pet board pair plays all six moods, shows the face and walks the standee in four facings.
 - The picker lists it; if it was meant to be worn, the shell, a Home board and a page board show it
   over the composer and on the rail tile in the browser, light and dark.

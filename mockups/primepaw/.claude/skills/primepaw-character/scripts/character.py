@@ -46,8 +46,8 @@ def manifest(cid):
     for f in (cid + '.png', cid + '-face.png'):
         if not os.path.exists(os.path.join(PET, f)):
             sys.exit(f'missing pet/{f}')
-    if not os.path.exists(os.path.join(PET, cid + '-walk.png')):
-        print(f'note: no pet/{cid}-walk.png yet, so the standee is missing; the boards do not need it')
+    if not os.path.exists(os.path.join(PET, cid + '-rig.json')):
+        print(f'note: no pet/{cid}-rig.json yet, so the standee is missing; the boards do not need it')
     return json.loads(read(p))
 
 
@@ -70,14 +70,14 @@ def worn_by(s):
 
 
 def cmd_list():
-    ids = sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(PET, '*.json')) if not p.endswith('-walk.json'))
+    ids = sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(PET, '*.json')) if not p.endswith('-rig.json'))
     shell = read(os.path.join(ROOT, 'Diorama.dc.html'))
     worn = worn_by(shell)
     _, listed = faces_of(read(os.path.join(ROOT, 'DioramaSetup.dc.html')))
     names = {f['id']: f['name'] for f in (listed or [])}
     for cid in ids:
         m = json.loads(read(os.path.join(PET, cid + '.json')))
-        walk = 'standee' if os.path.exists(os.path.join(PET, cid + '-walk.png')) else 'no standee'
+        walk = 'standee' if os.path.exists(os.path.join(PET, cid + '-rig.json')) else 'no standee'
         pet_boards = sorted(os.path.basename(p) for p in boards() if os.path.basename(p).startswith('DioramaPet') and f'pet/{cid}.png' in read(p))
         print(f"{cid:10s} {m['css']['w']:g}x{m['css']['h']:g} CSS px, {walk}; picker: {names.get(cid, 'not listed')!s}; "
               f"{'worn by the boards' if worn == cid else 'not worn'}; Pet boards: {', '.join(pet_boards) or 'none'}")
@@ -154,7 +154,7 @@ def cmd_board(cid, name):
         else:
             s = read(os.path.join(ROOT, src))
             cur = worn_by(s) or 'dog'
-            for suffix in ('.png', '-face.png', '-walk.png'):
+            for suffix in ('.png', '-face.png', '-rig.png', '-rig.json'):
                 s = s.replace(f'pet/{cur}{suffix}', f'pet/{cid}{suffix}')
             s = re.sub(r'(\.pet\{--pw:)[0-9.]+(px;--ph:)[0-9.]+(px;)', lambda g: f'{g.group(1)}{px(w)}{g.group(2)}{px(h)}{g.group(3)}', s, count=1)
             s = re.sub(r'<title>[^<]*</title>', f'<title>Jarvis as {lede}: peeking, sticker and standee</title>', s, count=1)

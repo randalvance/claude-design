@@ -47,9 +47,9 @@ that names the sheet:
 
 | Placeholder | Value |
 | --- | --- |
-| `__REFERENCE__` | the reference's filename from `use_previous_output`: the base for the moods, the avatar and the body; the body for a walk strip drawn with Qwen |
+| `__REFERENCE__` | the reference's filename from `use_previous_output`: the base for the moods, the avatar and the body |
 | `__PROMPT__` | the sheet's prompt from `prompts.md` |
-| `__WIDTH__`, `__HEIGHT__` | mood sheets 2048 by 1024; avatar 1024 by 1024; body 1024 by 1536; walk strips 2048 by 512 |
+| `__WIDTH__`, `__HEIGHT__` | mood sheets 2048 by 1024; avatar 1024 by 1024; body 1024 by 1536 |
 | `__SEED__` | any integer; a different seed per sheet, and a new one when a sheet needs redrawing |
 | `__PREFIX__` | `<id>_<sheet>`, so the downloads are easy to tell apart |
 
@@ -57,20 +57,18 @@ The width and height are numbers in the JSON, not strings: replace the quoted pl
 Keep the sampler as it is (25 steps, cfg 1, euler, simple): cfg 1 is what Qwen Image 2.1 wants, and
 raising it makes the colours bleed. `resolution: 0` on the text encoder lets the reference in at its own size.
 
-Three stages, because the turnaround needs the body and the walk strips need both:
+Three stages, because the turnaround needs the body and the parts sheets need both:
 
 1. **From the base:** the six mood sheets, the avatar and the body, eight items in one batch.
 2. **From the body:** the turnaround, one GPT Image run (below), judged against the slots before
    anything is drawn from it.
-3. **From the turnaround and the body:** the four walk strips (down, left, right, up), four items in one
-   batch, GPT Image again. Qwen can draw a strip from the body alone (2048 by 512, one row of 6 cells),
-   but read on before spending the seeds.
+3. **From the turnaround and the body:** the four parts sheets (down, left, right, up), the figure of
+   each facing taken apart into the puppet's pieces, four items in one batch (eight with two seeds
+   each), GPT Image again.
 
-The walk strips are where Qwen falls short: seen from behind it splays the walking legs out sideways,
-however the prompt words it, and in profile it turns the head toward the viewer. And any model invents
-the sides it has not been shown: drawn from the body alone, the puppy's back came back from GPT Image
-wearing the tummy patch, right walk and all. So the strips are drawn with GPT Image 2.6 Sunburst, a paid
-partner model, from a turnaround drawn first, and Qwen keeps the moods, the avatar and the body.
+Any model invents the sides it has not been shown: drawn from the body alone, the puppy's back came back
+from GPT Image wearing the tummy patch. So the turnaround is drawn first, with GPT Image 2.6 Sunburst, a
+paid partner model, the parts sheets copy it, and Qwen keeps the moods, the avatar and the body.
 
 The graph is `LoadImage` → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`, `model.size`
 `1536x1024`, `model.quality` `high`, a reference on `model.images.image_1` and a second one on
@@ -85,30 +83,20 @@ as two items of one batch, is the cheap way to have a choice.
   it should from behind (the puppy's tail: its base at the centre of the rump and the tail going out to the left
   across the back with its tip curling up, the front's tail seen from the other side; not a stub, not a
   whole tail at the hip, not a blob hanging between the legs), the profiles with one eye, the same colours in every view. Save it as
-  `pet/src/<id>/turnaround.png`; it never ships, but every strip copies it. One figure wrong on a sheet
+  `pet/src/<id>/turnaround.png`; it never ships, but every parts sheet copies it. One figure wrong on a sheet
   that is otherwise right is an edit, not a redraw: send the sheet back as `image_1` with the body as
   `image_2` and ask for it reproduced exactly with that one change; the other figures stay in place to
   the pixel.
-- **Each strip:** the turnaround on `image_1`, the body on `image_2`, the strip prompt, which points at
-  the turnaround's figure for that facing. Ask for a grid of 3 columns and 2 rows at that size (the model
-  draws 3:2, not a 4:1 strip, and `build.py` reads the six cells in reading order either way) and spell
-  the walk out: legs under the body, one foot lifted so its sole shows, never spread sideways, and
-  from behind the lifted foot kicked up toward the viewer with its sole square on, the front's lifted
-  foot seen from the other side, not a leg angled out sideways with a small oval at its end. A strip
-  with one pose wrong is an edit like the turnaround: the strip as `image_1`, reproduced exactly with
-  that one change, and on `image_2` something that shows the pose. For the walk from behind that is
-  not the front strip (with it the model pastes a front-view foot on the back) but two frames of a
-  video, below.
-- **The walk reference:** `run_template` `video_minimax_h3_i2v` (MiniMax H3, open weights, so Comfy's
-  own credits, about 3 minutes a clip) with the strip's standing cell set on green at 768 by 1024 on
-  `input_overrides` `{"114": {"image": <uploaded name>}}`, the walk prompt from `prompts.md` on
-  `{"105:104": {"prompt": ...}}` and a seed on `{"105:15": {"noise_seed": ...}}`; the slot addresses
-  `get_template_schema` lists (`105.prompt`) are refused, the flattened ids are what work. It returns a
-  5 second 640 by 640 mp4 that keeps the paper style and the green. `ffmpeg -i clip.mp4 f%03d.png`
-  pulls the frames; keep the two where the sole faces the camera fullest (count the pad's dark pixels
-  per frame, one peak per leg), lay them side by side on green as `pet/src/<id>/walk-up-ref.png`, and
-  edit the strip with that card on `image_2`. The video's tail wanders; the edit prompt pins it to
-  the strip's.
+- **Each parts sheet:** the turnaround on `image_1`, the body on `image_2`, the parts prompt from
+  `prompts.md`, which points at the turnaround's figure for that facing and lists the pieces in the
+  order `build.py` expects (nine for the front and the back, eight for a profile). Judge it by its
+  pieces: every one there, one per cell, none touching, each with its own outline and border, all at
+  one scale, the hidden parts drawn (a leg's top, an arm's top, an ear's root, the tail's base), no
+  figure put together anywhere, nothing but green around them. A piece drawn the wrong way round (the
+  puppy's back tail came as a hook on one seed and as the turnaround's bean on the other) is fixed by
+  pasting the better seed's cell into the sheet, not by redrawing the lot. Then `build.py --check`
+  shows the puppets put together under the turnaround; a piece that lands wrong there was drawn unlike
+  the turnaround's, so reword its line and draw that sheet again.
 
 It costs 5 to 29 credits an image and the spend is gated, so ask the user before submitting. It returns
 either a green sheet or a transparent PNG, the figure at alpha 250 to 254 with a faint halo below 30:
@@ -121,7 +109,7 @@ what one edit costs; tell the user the total for the eight edits before spending
 Wait with `get_batch_status` or `wait_for_batch`, then `get_batch_output` with `client_os`: it downloads
 every image and reports where each landed. Copy them into `pet/src/<id>/` under the names `build.py`
 expects: `idle.png`, `greet.png`, `celebrate.png`, `sad.png`, `error.png`, `ask.png`, `avatar.png`,
-`body.png`, `turnaround.png`, `walk-down.png`, `walk-left.png`, `walk-right.png`, `walk-up.png`.
+`body.png`, `turnaround.png`, `parts-down.png`, `parts-left.png`, `parts-right.png`, `parts-up.png`.
 
 ## 3. Judging a sheet
 
@@ -136,12 +124,11 @@ with a new seed when:
 - the motion is not there (a greet with no wave, a sad with no droop);
 - anything but green shows around the figure (grid lines, labels, a frame).
 
-Judge the walk strips as a set: `build.py` scales each facing to the same standing height, so a strip
-drawn a little smaller is fine, but one drawn much smaller comes out soft. The figure must stay upright
-and square to the viewer in every cell; the back view is the one that goes wrong, Qwen twisting the
-body or splaying the legs and any model making up a back it was never shown, so draw the turnaround
-first (above), check each strip against its figure there, and look at the back's walking cells closely
-(the lifted foot: its knee bent forward out of sight and its sole square to the viewer beside the hip,
-as the walk video shows it, not a leg angled out to the side and not a foot hanging straight down).
+Judge the parts sheets with `build.py --check <file>`, which draws the four puppets put together under
+the turnaround's figures: every piece should sit where the turnaround draws it, the figure whole with no
+piece adrift. The printout gives each piece's fit; one well under the others on its sheet is the one to
+look at. The back view is still the one that goes wrong, a model making up a back it was never shown, so
+draw the turnaround first (above) and check the back sheet's pieces against its third figure.
+
 The avatar must be one round sticker filling the frame, and the body a full figure with its feet on the
 ground and nothing cropped.
