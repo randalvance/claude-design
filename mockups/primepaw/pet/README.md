@@ -46,8 +46,8 @@ attention (3.2 a second), with a little lift and roll on top. The four walk stri
 were drawn with GPT Image 2.6 Sunburst rather than Qwen, which splays the legs when the puppy walks
 away and turns its head in profile. The back strip was drawn from `src/dog/turnaround.png`, the puppy
 from its four sides, because with only the front to go on the model made up a back and put the tummy
-patch there; the turnaround settles it as plain cream with the tail at the bottom. The character skill's
-`comfy.md` has that recipe. `dog-walk.png` is cut to that layout, the puppy's feet on the cell's ground
+patch there; the turnaround settles it as plain cream, the tail at its left hip curling up as the front
+shows it. The character skill's `comfy.md` has that recipe. `dog-walk.png` is cut to that layout, the puppy's feet on the cell's ground
 line and the standing puppy 86% of the cell's height, so the host hands it over as
 
 ```ts
@@ -149,20 +149,37 @@ all, its short tail at the bottom in the middle, its two paws at its sides and t
 at the left. All on a solid flat bright green (#00FF00) background, with no ground line drawn, no grid
 lines, no borders, no labels and no text. Flat paper, no shadows, no gradients, not 3D."
 
+That wording put the tail where it said, hanging in the middle, so the sheet was edited once, the
+turnaround as the first reference and the body as the second: "...Reproduce the turnaround sheet
+exactly as it is, every figure the same size and in the same place, with the same colours, the same
+pen-ink outlines, the same faint paper grain and the same white die-cut sticker border around each
+figure, changing only one thing: the tail of the third figure, the view from behind. In the front view
+the puppy's short kraft brown paper tail (#d9bc86) peeks out from behind its hip on one side, at the
+right of the picture, curving upward like a comma with its tip pointing up and outward. In the back
+view that same tail must show the same way, seen from the other side: it sticks out from the base of
+the puppy's back, low and to one side, at the left of the picture because the puppy has turned around,
+curving upward like a comma with its tip pointing up and outward, the same kraft brown paper with the
+same pen outline and the same size as in the front view. It must not hang down, must not point
+downward and must not sit in the middle between the legs. Nothing else about the back view changes..."
+The skill's `{BACK}` slot now carries the tail that way from the start.
+
 **The back strip** (1536 by 1024, GPT Image 2.6, the turnaround first and the body second): "The first
 reference image is a character turnaround of a paper cut-out friendly floppy-eared puppy: its front,
 its left side, its back and its right side. The second reference image is the same puppy from the
 front. Draw the puppy exactly as the turnaround's third figure shows it from behind: the back of its
 head with no face at all, the backs of both kraft brown floppy ears hanging at the sides of the head,
-the back of the red collar, a plain cream paper back with no patch, its short tail at the bottom in the
-middle, its two paws at its sides and the backs of its little feet, pen-ink outlines, flat paper colours
-with a faint grain, and the white die-cut sticker border. Draw it as a stop-motion sprite sheet: a grid
+the back of the red collar, a plain cream paper back with no patch, its short kraft brown tail sticking
+out from the base of its back, low and at the left of the picture, curving upward like a comma with
+its tip pointing up and outward, exactly as the turnaround's back view shows it and never hanging down
+between its legs, its two paws at its sides and the backs of its little feet, pen-ink outlines, flat
+paper colours with a faint grain, and the white die-cut sticker border. Draw it as a stop-motion sprite sheet: a grid
 of 3 columns and 2 rows, 6 cells of equal size, on a solid flat bright green (#00FF00) background, with
 no grid lines, no borders, no labels and no text. The 6 cells read left to right along the top row and
 then along the bottom row. In every cell the puppy is the same size as in the turnaround, seen from
 directly behind, facing straight away from the viewer, its body upright and square to the viewer in
-every cell, never turning, with its feet standing on the same ground line. The 6 cells: 1. standing
-still with both paws relaxed at its sides, both feet planted, exactly like the turnaround's back view;
+every cell, never turning, with its feet standing on the same ground line and its tail the same in
+every cell. The 6 cells: 1. standing still with both paws relaxed at its sides, both feet planted,
+exactly like the turnaround's back view;
 2. mid-step walking away from us: the left leg planted straight down under the body and the right leg
 bent back and lifted so we see the sole of its raised right foot, the legs staying under the body and
 never spreading sideways, the arms swinging; 3. the other step: the right leg planted straight down and
