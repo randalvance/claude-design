@@ -75,7 +75,7 @@ button{font:inherit}
 /* 3. the standee: a cut-out puppet. pet/dog-rig.png holds its pieces, pet/dog-rig.json where each sits, turns and stacks, and pet/puppet.js (loaded from the helmet) moves them in steps, 10 a second */
 .standee{position:relative;display:block;filter:drop-shadow(0 0 .5px rgba(0,0,0,.35))}
 .wide{grid-column:1 / -1}
-.cols{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start}
+.cols{display:grid;grid-template-columns:fit-content(380px) minmax(0,1fr);gap:26px;align-items:start}
 .facings{display:flex;gap:16px;align-items:flex-end;padding:8px 2px 0}
 .facing{display:flex;flex-direction:column;align-items:center;gap:8px}
 .facing .standee{min-height:94px}
@@ -165,8 +165,8 @@ button{font:inherit}
       <div>
         <div class="floor" aria-label="A corner of the factory floor, with Jarvis walking a round">
           <div class="belt" aria-hidden="true"></div>
-          <div class="bench" style="left:386px;top:78px" aria-hidden="true"></div>
-          <div class="bench" style="left:60px;top:78px" aria-hidden="true"></div>
+          <div class="bench" style="left:64%;top:78px" aria-hidden="true"></div>
+          <div class="bench" style="left:10%;top:78px" aria-hidden="true"></div>
           <div class="walker" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" ref="{{bodyRef}}"></span><span class="bub" ref="{{bubRef}}"></span></div>
         </div>
         <div class="states" role="group" aria-label="What Jarvis is doing">
@@ -193,12 +193,13 @@ const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: '
 const RIG = 'pet/dog-rig.json', STAND_H = 94, WALK_H = 116; // the puppet's height in the facings row and on the floor
 const SPEED = 92; // px per second
 const onPuppet = (fn) => window.PetPuppet ? fn(window.PetPuppet) : document.addEventListener('pet-puppet', () => fn(window.PetPuppet), { once: true });
-// the round: feet points on the floor, and what the puppy does when it gets to each corner
+// the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as
+// its column; y in px, since it is always 320 tall), and what the puppy does when it gets to each corner
 const WAY = [
-  { x: 104, y: 292, pause: 'idle', ms: 700 },
-  { x: 520, y: 292, pause: 'idle', ms: 500 },
-  { x: 430, y: 148, pause: 'working', ms: 2600 },
-  { x: 104, y: 148, pause: 'attention', ms: 2400 }
+  { x: .17, y: 292, pause: 'idle', ms: 700 },
+  { x: .87, y: 292, pause: 'idle', ms: 500 },
+  { x: .72, y: 148, pause: 'working', ms: 2600 },
+  { x: .17, y: 148, pause: 'attention', ms: 2400 }
 ];
 const FACING = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'right' : 'left') : (dy >= 0 ? 'down' : 'up');
 const BUBBLE = { working: 'Writing the parser', attention: 'Needs a staging token' };
@@ -208,7 +209,7 @@ class Component extends DCLogic {
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   componentDidMount() {
     this.later(() => this.petPlay('greet', 1900), 400);
-    this.w = { seg: 0, x: WAY[0].x, y: WAY[0].y, facing: 'down', pause: 'idle', left: 900 };
+    this.w = { seg: 0, x: WAY[0].x * this.floorW(), y: WAY[0].y, facing: 'down', pause: 'idle', left: 900 };
     this.stands = [];
     onPuppet((PP) => PP.load(RIG).then((rig) => {
       if (this.gone) return;
@@ -224,6 +225,7 @@ class Component extends DCLogic {
     this.raf = requestAnimationFrame(tick);
   }
   componentWillUnmount() { this.gone = true; cancelAnimationFrame(this.raf); (this.tq || []).forEach(clearTimeout); }
+  floorW() { const f = this.walker && this.walker.parentElement; return (f && f.clientWidth) || 600; }
   petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ shot: { name, id } }); this.later(() => { const s = this.state.shot; if (s && s.id === id) this.setState({ shot: null }); }, ms); }
   // one step of the standee: where it is, which way it faces, what it is doing
   step(dt, t, still) {
@@ -235,9 +237,11 @@ class Component extends DCLogic {
         w.left -= dt * 1000;
         if (w.left <= 0) { w.pause = null; w.seg = (w.seg + 1) % WAY.length; }
       } else {
-        const to = WAY[w.seg]; const dx = to.x - w.x, dy = to.y - w.y; const d = Math.hypot(dx, dy);
+        const to = WAY[w.seg], fw = this.floorW(), hw = this.puppet ? this.puppet.width / 2 : 38;
+        const tx = Math.min(Math.max(to.x * fw, hw), fw - hw); // the corner, kept on the floor however wide it is
+        const dx = tx - w.x, dy = to.y - w.y; const d = Math.hypot(dx, dy);
         const run = SPEED * dt;
-        if (d <= run) { w.x = to.x; w.y = to.y; w.pause = to.pause; w.left = to.ms; w.facing = 'down'; }
+        if (d <= run) { w.x = tx; w.y = to.y; w.pause = to.pause; w.left = to.ms; w.facing = 'down'; }
         else { w.x += dx / d * run; w.y += dy / d * run; w.facing = FACING(dx, dy); }
       }
       doing = w.pause || 'walking';
