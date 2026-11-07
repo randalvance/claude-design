@@ -2,7 +2,7 @@
 
 The home page is a thread with one personal agent, Jarvis, and Jarvis starts the sessions. These are the parts it is built from.
 
-`kr-ib kr-jarvis` is the main agent's tile at the top of the rail: a cream tile with its 12 by 12 pixel portrait instead of a glyph, `is-on` on the home page, and a `kr-nb` for the threads waiting on you.
+`kr-ib kr-jarvis` is the main agent's tile at the top of the rail: a cream tile with his portrait sticker instead of a glyph, `is-on` on the home page, and a `kr-nb` for the threads waiting on you.
 
 `kr-trow` is a thread in the list: a paper strip with the title in Nunito 14, the time in Caveat 15, and the last thing said clamped to two lines. The open thread is `is-on`, highlighter like a picked session row. A `kr-nb kr-red is-row` says something in it waits on you. Rename and archive live in each row's menu.
 

@@ -41,7 +41,7 @@ Four claims, all confirmed as core:
 
 Confirmed functionality, each with a light and a dark board in this folder (see README.md):
 
-- Home thread with the main agent; the threads board; empty, waiting, asking and Thread-YOLO states; Meet your Main Agent (name, pixel portrait, model) as a setup step and as the card on an empty home.
+- Home thread with the main agent; the threads board; empty, waiting, asking and Thread-YOLO states; Meet your Main Agent (name, portrait, model) as a setup step and as the card on an empty home.
 - Sessions: the workspace-grouped list with attention badges, busy and done states; an open session with tabs, capsules, composer, artifacts clipboard, side chat, and a title that can be rewritten or generated.
 - Approvals: permission slips (Allow once, Allow for this session, Deny), question sheets, the inbox, YOLO per session (skips slips, never questions) and Thread YOLO.
 - Agents list and edit page (description, system prompt, preferred model, MCP servers, skills).
@@ -62,7 +62,7 @@ Undecided or not recorded:
 
 ## Brand Commitments
 
-- Name: Primepaw. The paw is the app's mark. The main agent is a cat (Jarvis, a cat in a bow tie, in the prototype), and an agent's portrait is a 12 by 12 pixel picture.
+- Name: Primepaw. The paw is the app's mark. The main agent is a cat (Jarvis, a cat in a bow tie, in the prototype), and an agent's portrait is its face as a flat sticker: a drawing with a white die-cut rim and no shadow, never pixel art.
 - The paper diorama, built on the Kraft material system under `design-system-kraft/`, is the committed visual language (the prototype's history records "the paper diorama is the only design"). Recorded here as binding and not expanded: the system itself lives in `design-system-kraft/README.md` and belongs to DESIGN.md, not this file.
 - Voice, from the Kraft brand book: labels are sentence case and verb first ("New session", "Open folder"); hand-written copy is short and lower case where a person would write it; a sticker carries one word or a number, never a sentence; the agent speaks in the margin, in the first person.
 
