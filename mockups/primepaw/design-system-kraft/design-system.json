@@ -211,6 +211,21 @@
         "pinwheel.svg"
       ],
       "tile": "s"
+    },
+    "Characters": {
+      "files": {
+        "jarvis.svg": {
+          "blob": "a68a807ebc1716f85fe5c03b53490aad",
+          "name": "jarvis.svg",
+          "size": 1106,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Characters",
+      "order": [
+        "jarvis.svg"
+      ],
+      "tile": "s"
     }
   },
   "blobs": {},
@@ -225,13 +240,14 @@
     ]
   },
   "groups": [
-    "Icons"
+    "Icons",
+    "Characters"
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-07T06:14:44Z",
+    "at": "2026-11-07T07:01:42Z",
     "via": "Claude Code",
-    "note": "Factory: every factory at a glance, one card each with its state pill, five counts by hand and the steps strip; the pause-all line; the factory tile"
+    "note": "Jarvis: the main agent is Button, a round cat in a bow tie, as the cut-out over the composer and as the pixel portrait on the rail tile; the cut-out is a Characters asset"
   },
   "layout": "files",
   "libraries": [],

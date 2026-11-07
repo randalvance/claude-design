@@ -58,7 +58,7 @@ https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV and mirrored under `design-sys
   `kr-sticker`) and the parts cut from them: Button (every button is thick card with the paper texture:
   kraft, blue, sage for the confirm, terracotta for the destructive one, latched flat when on),
   IconButton (rail tiles and discs), Toggle (a paper pull-tab in a cut slot), Sheet, Board, Sticker, Tab,
-  Title, Stamp, Popup, Note, Cork, Capsule, Gauge, Clipboard, LegalPad, ArtifactChip, PermissionSlip, QuestionSheet, NotePage, FileTree, HomeThread, MeetAgent, Inbox and Factory, each with a `preview.html` and `README.md`, a Dark
+  Title, Stamp, Popup, Note, Cork, Capsule, Gauge, Clipboard, LegalPad, ArtifactChip, PermissionSlip, QuestionSheet, NotePage, FileTree, HomeThread, MeetAgent, Inbox, Factory and Jarvis, each with a `preview.html` and `README.md`, a Dark
   mode card, and the cover.
 - `assets/Icons/` — the 29 single-ink icons as SVG.
 
