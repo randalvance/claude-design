@@ -26,8 +26,8 @@ class per mood that picks the row: `idle`, `error` and `ask` loop; `greet`, `cel
 once and hold their last frame until the board clears the class. The boards set the class from what the
 agent is doing: idle while it works or rests, `ask` while a question or a tool approval waits, `greet`
 when a board opens, a session is picked or Jarvis says "On it", `celebrate` when a turn finishes or a
-report lands, `sad` when you stop the agent or deny a tool, `error` when Home opens a thread with a
-failed session. A click on the puppy says hello. Under `prefers-reduced-motion` it holds its first frame.
+report lands, `sad` when you stop the agent or deny a tool, `error` while the thread Home has open
+holds a failed session. A click on the puppy says hello. Under `prefers-reduced-motion` it holds its first frame.
 The click is a mouse-only easter egg: the puppy is a decorative sticker, `aria-hidden` and outside the
 tab order, so nothing a keyboard or a screen reader needs lives on it.
 

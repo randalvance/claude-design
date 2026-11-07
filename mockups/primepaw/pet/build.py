@@ -187,6 +187,9 @@ def build_walk(src, args):
             sys.exit('no frames found in ' + p)
         print(f'walk-{facing:6s} key {tuple(int(v) for v in key)}  {len(frames)} frames  '
               + ' '.join(f'{f.size[0]}x{f.size[1]}' for f in frames))
+        if args.walk_cols and len(frames) != args.walk_cols:
+            print(f'warning: walk-{facing} was cut as {args.walk_cols} cells but only {len(frames)} held paper, so the poses '
+                  f'after the empty cell have moved over by one', file=sys.stderr)
         n = len(WALK_COLUMNS)
         if len(frames) != n:
             print(f'warning: walk-{facing} has {len(frames)} cells, not {n}; its poses are spread over the {n} '

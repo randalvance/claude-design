@@ -1339,9 +1339,9 @@ class Component extends DCLogic {
   }
   nextStage(sid) {
     const F = FLOWS[sid]; const f = this.flowOf(sid); const at = f.at + 1; const s = F.stages[at];
-    if (!s) { this.setFlow(sid, { at, working: false }); this.petPlay('celebrate', 2500); return; }
+    if (!s) { this.setFlow(sid, { at, working: false }); if (sid === this.state.sid) this.petPlay('celebrate', 2500); return; }
     if (s.work) { this.setFlow(sid, { at, working: true, start: Date.now() }); clearInterval(this.tflow); this.tflow = setInterval(() => this.setState({ tick: Date.now() }), 400);
-      this.tflowEnd = this.later(() => { clearInterval(this.tflow); const g = this.flowOf(sid); const nextAt = g.at + 1; const nx = F.stages[nextAt]; this.setFlow(sid, { at: nextAt, working: false }); if (nx) this.bringIn(); else this.petPlay('celebrate', 2500); }, 1700); return; }
+      this.tflowEnd = this.later(() => { clearInterval(this.tflow); const g = this.flowOf(sid); const nextAt = g.at + 1; const nx = F.stages[nextAt]; this.setFlow(sid, { at: nextAt, working: false }); if (nx) this.bringIn(); else if (sid === this.state.sid) this.petPlay('celebrate', 2500); }, 1700); return; }
     this.setFlow(sid, { at, working: false }); this.bringIn();
   }
   stopFlow() { const sid = this.state.sid; clearInterval(this.tflow); clearTimeout(this.tflowEnd); this.setFlow(sid, { working: false, halt: true, stopped: true }); }
@@ -1353,7 +1353,7 @@ class Component extends DCLogic {
     if (ms.some((m) => !m.done && m.tool && !m.tool.status)) this.setState({ msgs: { ...this.state.msgs, [sid]: ms.map((m) => !m.done && m.tool && !m.tool.status ? { ...m, done: true, tool: { status: 'replied', folded: true } } : m) } });
   }
   pauseMsg(sid, id) { clearInterval(this.ticker); this.setState({ msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, tool: { status: null }, elapsed: fmtSec(Date.now() - m.start), pausedAt: Date.now() } : m) } }); this.bringIn(); }
-  finishMsg(sid, id) { this.petPlay('celebrate', 2500); clearInterval(this.ticker); this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } }); }
+  finishMsg(sid, id) { if (sid === this.state.sid) this.petPlay('celebrate', 2500); clearInterval(this.ticker); this.setState({ used: { ...this.state.used, [sid]: this.usedOf(sid) + 1500 }, msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? { ...m, done: true, elapsed: fmtSec(Date.now() - m.start) } : m) } }); }
   settleMsg(sid, id, status) {
     const patchMsg = (fn) => this.setState({ msgs: { ...this.state.msgs, [sid]: (this.state.msgs[sid] || []).map((m) => m.id === id ? fn(m) : m) } });
     if (status === 'always') this.setState({ allow: { ...this.state.allow, [sid]: { ...(this.state.allow[sid] || {}), edit: true } } });
