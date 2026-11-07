@@ -739,9 +739,8 @@ button{font:inherit}
 .ihead small{font-family:var(--hand);font-size:15px;font-weight:500;line-height:1;opacity:1;color:var(--mute)}
 /* the filters: four small card buttons, the pressed one flat, each with its count by hand */
 .filters{display:flex;flex-wrap:wrap;gap:4px}
-.fbtn{height:26px;padding:0 6px;font-size:11px;gap:3px}
+.fbtn{height:26px;padding:0 5px;font-size:11px}
 .fbtn.on,.fbtn.on:hover{transform:translate(2px,3px);box-shadow:var(--press-board);background-color:color-mix(in srgb,var(--board) 80%,var(--board-2))}
-.fbtn .fn{font-family:var(--hand);font-size:13px;font-weight:600;line-height:1;color:var(--ink);opacity:.8}
 /* a conversation row: the source on a small chip ahead of the title, the newest line under, the unread dot and the needs-answer sticker at the right */
 .irow{grid-template-columns:minmax(0,1fr) auto}
 .ir-top{grid-column:1;min-width:0;display:flex;align-items:center;gap:6px}
@@ -749,6 +748,7 @@ button{font:inherit}
 .ir-src{flex:none;padding:1px 5px;border-radius:2px;font-size:9.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;line-height:1.3;color:var(--ink);background-color:var(--paper-2)}
 .ir-src.factory{background-color:color-mix(in srgb,var(--amber) 38%,var(--paper-2))}
 .ir-src.session{background-color:color-mix(in srgb,var(--blue) 22%,var(--paper-2))}
+.ir-src.pr{background-color:color-mix(in srgb,var(--red-2) 20%,var(--paper-2))}
 .irow.unread .tr-t{font-weight:900}
 .irow .udot{display:block;width:9px;height:9px;border-radius:50%;background-color:var(--blue);box-shadow:var(--sticker-s)}
 .irow .tr-r{gap:5px}
@@ -810,6 +810,13 @@ button{font:inherit}
 /* blocked waits on you too, so it gets the amber mat; waiting on you is written in amber ink on a plain sheet */
 .fcard.needs{box-shadow:0 0 0 6px color-mix(in srgb,var(--amber) 58%,var(--board)),0 0 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),2px 3.5px 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),5px 9px 10px 7px var(--amb);margin:7px 0 4px 7px;max-width:626px}
 .fcard.blocked .fcard-p{color:color-mix(in srgb,var(--red) 78%,var(--ink))}
+/* a pull request that needs your review: the PR chip, the branch by hand, the size and checks, the first line of its description; Approve stamps it here */
+.prcard .prchip{flex:none}
+.pr-meta{margin:6px 0 0;font-size:13px;line-height:1.45;color:var(--mute)}
+.pr-meta .chk{font-size:12px}
+.chk.bad{color:color-mix(in srgb,var(--red) 85%,var(--ink))}
+.fcard-act.settled{visibility:hidden}
+.prcard>.pstamp{position:absolute;right:18px;bottom:14px;animation:stampdown .26s var(--ease-pop) both}
 /* nothing left: the hello sheet with one line by hand */
 .ihello .hello-in{max-width:640px;align-items:flex-start}
 .ihello .orl{text-align:left;margin-top:0}
@@ -838,7 +845,7 @@ button{font:inherit}
   <aside class="panel board tpanel ipanel" aria-label="Inbox">
     <div class="ptop">
       <div class="jhead ihead"><span class="ibig" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5"></path></svg></span><div><b>Inbox</b><small>{{countLine}}</small></div></div>
-      <div class="filters" role="group" aria-label="Show"><sc-for list="{{filters}}" as="f" hint-placeholder-count="4"><button class="abtn fbtn {{f.cls}}" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}<sc-if value="{{f.hasN}}" hint-placeholder-val="{{false}}"><span class="fn">{{f.n}}</span></sc-if></button></sc-for></div>
+      <div class="filters" role="group" aria-label="Show"><sc-for list="{{filters}}" as="f" hint-placeholder-count="4"><button class="abtn fbtn {{f.cls}}" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
     </div>
     <div class="list trows">
       <sc-for list="{{convs}}" as="c" hint-placeholder-count="5">
@@ -902,6 +909,11 @@ button{font:inherit}
 </section></sc-if>
         <sc-if value="{{it.isRep}}" hint-placeholder-val="{{false}}"><section class="report" aria-label="Finish report"><div class="report-in"><p class="report-t">{{it.text}}</p><div class="report-f"><span class="prchip">PR {{it.pr}}</span><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg>{{it.checks}}</span><button class="abtn" onClick="{{it.openPr}}">Open PR</button></div><span class="pstamp ok" aria-hidden="true">DONE</span></div></section></sc-if>
         <sc-if value="{{it.isFac}}" hint-placeholder-val="{{false}}"><section class="fcard {{it.fcls}}" aria-label="{{it.kindLabel}}"><div class="fcard-h"><span class="sticker {{it.stCls}}">{{it.status}}</span><b>{{it.task}}</b><small>{{it.col}}</small></div><p class="fcard-p">{{it.text}}</p><div class="fcard-act"><button class="abtn go" onClick="{{it.act}}">{{it.action}}</button><span class="fcard-or">{{it.or}}</span></div></section></sc-if>
+        <sc-if value="{{it.isPr}}" hint-placeholder-val="{{false}}">
+          <sc-if value="{{it.prOpen}}" hint-placeholder-val="{{true}}"><section class="fcard needs prcard" aria-label="Pull request"><div class="fcard-h"><span class="prchip">PR {{it.pr}}</span><b>{{it.title}}</b><small>{{it.where}}</small></div><p class="pr-meta">{{it.meta}} · <span class="chk {{it.chkCls}}"><sc-if value="{{it.chkOk}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{it.checks}}</span></p><p class="fcard-p">{{it.text}}</p><div class="fcard-act {{it.actCls}}"><button class="abtn go" onClick="{{it.openPr}}">Open the PR</button><button class="abtn" onClick="{{it.approve}}">Approve</button><span class="fcard-or">or request changes on GitHub</span></div><sc-if value="{{it.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp ok" role="status">APPROVED</span></sc-if></section></sc-if>
+          <sc-if value="{{it.prFolded}}" hint-placeholder-val="{{false}}"><section class="slipw stub" aria-label="Reviewed"><div class="slip done"><dl class="qdone"><dt>PR {{it.pr}}</dt><dd>{{it.title}}</dd></dl><span class="pstamp ok">APPROVED</span></div></section></sc-if>
+          <sc-if value="{{it.hasBy}}" hint-placeholder-val="{{false}}"><p class="iby">{{it.byVerb}} <b>{{it.byWho}}</b> · {{it.byAt}}</p></sc-if>
+        </sc-if>
         <sc-if value="{{it.isSlip}}" hint-placeholder-val="{{false}}"><sc-if value="{{it.hasBy}}" hint-placeholder-val="{{false}}"><p class="iby">{{it.byVerb}} <b>{{it.byWho}}</b> · {{it.byAt}}</p></sc-if></sc-if>
       </article>
     </sc-for>
@@ -918,7 +930,7 @@ button{font:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"scene":{"editor":"enum","default":"empty","options":["inbox","empty","resolved"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
-  { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 4 },
+  { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
   { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
@@ -933,11 +945,11 @@ const NAV = [
 ];
 const JFACE_PX = [{"x":1,"y":0,"c":"#d9bc86"},{"x":10,"y":0,"c":"#d9bc86"},{"x":1,"y":1,"c":"#d9bc86"},{"x":2,"y":1,"c":"#d9bc86"},{"x":9,"y":1,"c":"#d9bc86"},{"x":10,"y":1,"c":"#d9bc86"},{"x":1,"y":2,"c":"#d9bc86"},{"x":2,"y":2,"c":"#e8a9a2"},{"x":3,"y":2,"c":"#d9bc86"},{"x":8,"y":2,"c":"#d9bc86"},{"x":9,"y":2,"c":"#e8a9a2"},{"x":10,"y":2,"c":"#d9bc86"},{"x":1,"y":3,"c":"#d9bc86"},{"x":2,"y":3,"c":"#f3e9d5"},{"x":3,"y":3,"c":"#f3e9d5"},{"x":4,"y":3,"c":"#d9bc86"},{"x":5,"y":3,"c":"#d9bc86"},{"x":6,"y":3,"c":"#d9bc86"},{"x":7,"y":3,"c":"#d9bc86"},{"x":8,"y":3,"c":"#f3e9d5"},{"x":9,"y":3,"c":"#f3e9d5"},{"x":10,"y":3,"c":"#d9bc86"},{"x":0,"y":4,"c":"#d9bc86"},{"x":1,"y":4,"c":"#f3e9d5"},{"x":2,"y":4,"c":"#f3e9d5"},{"x":3,"y":4,"c":"#f3e9d5"},{"x":4,"y":4,"c":"#f3e9d5"},{"x":5,"y":4,"c":"#f3e9d5"},{"x":6,"y":4,"c":"#f3e9d5"},{"x":7,"y":4,"c":"#f3e9d5"},{"x":8,"y":4,"c":"#f3e9d5"},{"x":9,"y":4,"c":"#f3e9d5"},{"x":10,"y":4,"c":"#f3e9d5"},{"x":11,"y":4,"c":"#d9bc86"},{"x":0,"y":5,"c":"#d9bc86"},{"x":1,"y":5,"c":"#f3e9d5"},{"x":2,"y":5,"c":"#2a2219"},{"x":3,"y":5,"c":"#2a2219"},{"x":4,"y":5,"c":"#f3e9d5"},{"x":5,"y":5,"c":"#f3e9d5"},{"x":6,"y":5,"c":"#f3e9d5"},{"x":7,"y":5,"c":"#f3e9d5"},{"x":8,"y":5,"c":"#2a2219"},{"x":9,"y":5,"c":"#2a2219"},{"x":10,"y":5,"c":"#f3e9d5"},{"x":11,"y":5,"c":"#d9bc86"},{"x":0,"y":6,"c":"#d9bc86"},{"x":1,"y":6,"c":"#f3e9d5"},{"x":2,"y":6,"c":"#2a2219"},{"x":3,"y":6,"c":"#fffdf7"},{"x":4,"y":6,"c":"#f3e9d5"},{"x":5,"y":6,"c":"#f3e9d5"},{"x":6,"y":6,"c":"#f3e9d5"},{"x":7,"y":6,"c":"#f3e9d5"},{"x":8,"y":6,"c":"#2a2219"},{"x":9,"y":6,"c":"#fffdf7"},{"x":10,"y":6,"c":"#f3e9d5"},{"x":11,"y":6,"c":"#d9bc86"},{"x":0,"y":7,"c":"#d9bc86"},{"x":1,"y":7,"c":"#f3e9d5"},{"x":2,"y":7,"c":"#f3e9d5"},{"x":3,"y":7,"c":"#f3e9d5"},{"x":4,"y":7,"c":"#f3e9d5"},{"x":5,"y":7,"c":"#e8a9a2"},{"x":6,"y":7,"c":"#e8a9a2"},{"x":7,"y":7,"c":"#f3e9d5"},{"x":8,"y":7,"c":"#f3e9d5"},{"x":9,"y":7,"c":"#f3e9d5"},{"x":10,"y":7,"c":"#f3e9d5"},{"x":11,"y":7,"c":"#d9bc86"},{"x":1,"y":8,"c":"#d9bc86"},{"x":2,"y":8,"c":"#d9bc86"},{"x":3,"y":8,"c":"#f3e9d5"},{"x":4,"y":8,"c":"#f3e9d5"},{"x":5,"y":8,"c":"#2a2219"},{"x":6,"y":8,"c":"#2a2219"},{"x":7,"y":8,"c":"#f3e9d5"},{"x":8,"y":8,"c":"#f3e9d5"},{"x":9,"y":8,"c":"#d9bc86"},{"x":10,"y":8,"c":"#d9bc86"},{"x":2,"y":9,"c":"#c8553d"},{"x":3,"y":9,"c":"#c8553d"},{"x":8,"y":9,"c":"#c8553d"},{"x":9,"y":9,"c":"#c8553d"},{"x":2,"y":10,"c":"#c8553d"},{"x":3,"y":10,"c":"#c8553d"},{"x":4,"y":10,"c":"#c8553d"},{"x":5,"y":10,"c":"#8f3a2a"},{"x":6,"y":10,"c":"#8f3a2a"},{"x":7,"y":10,"c":"#c8553d"},{"x":8,"y":10,"c":"#c8553d"},{"x":9,"y":10,"c":"#c8553d"},{"x":2,"y":11,"c":"#c8553d"},{"x":3,"y":11,"c":"#c8553d"},{"x":8,"y":11,"c":"#c8553d"},{"x":9,"y":11,"c":"#c8553d"}];
 // ---------- Inbox: everything that needs you, grouped by the request it came from. Everything here is made up. ----------
-const KIND = { question: 'Question', approval: 'Approval', report: 'Report', factory_blocked: 'Factory · Blocked', factory_waiting: 'Factory · Waiting on you', plan_ready: 'Factory · Plan ready' };
-const STAMPS = { once: ['APPROVED', 'ok'], always: ['APPROVED FOR SESSION', 'ok'], denied: ['DENIED', 'no'], answered: ['ANSWERED', 'ok'] };
-const VERB = { once: 'Allowed by', always: 'Allowed for the session by', denied: 'Denied by', answered: 'Answered by' };
-const OPEN_SRC = { thread: 'Open the thread', factory: 'Open the task', session: 'Open the session' };
-const FILTERS = [['needs', 'Needs answer'], ['reports', 'Reports'], ['factory', 'Factory'], ['all', 'All']];
+const KIND = { question: 'Question', approval: 'Approval', report: 'Report', pull_request: 'Pull request', factory_blocked: 'Factory · Blocked', factory_waiting: 'Factory · Waiting on you', plan_ready: 'Factory · Plan ready' };
+const STAMPS = { once: ['APPROVED', 'ok'], always: ['APPROVED FOR SESSION', 'ok'], denied: ['DENIED', 'no'], answered: ['ANSWERED', 'ok'], approved: ['APPROVED', 'ok'] };
+const VERB = { once: 'Allowed by', always: 'Allowed for the session by', denied: 'Denied by', answered: 'Answered by', approved: 'Approved by' };
+const OPEN_SRC = { thread: 'Open the thread', factory: 'Open the task', session: 'Open the session', pr: 'Open in PRs' };
+const FILTERS = [['needs', 'Needs answer'], ['reports', 'Reports'], ['prs', 'PRs'], ['factory', 'Factory'], ['all', 'All']];
 const JARVIS_PX = JFACE_PX;
 const Q_WS = { head: 'Workspace', text: 'Which workspace should I start this in?',
   problem: 'The banner belongs in the web app, but the trial length comes from billing. Starting in the wrong one means a second session later, so it is worth a quick check.',
@@ -962,7 +974,9 @@ const CONVS = [
     { id: 'a4a', k: 'approval', from: 'auth-fix session', time: '9:05', unread: false, status: 'once', by: 'Jarvis (Thread YOLO)', at: '9:05', folded: true,
       tool: { kind: 'bash', ask: 'May I run the auth tests?', cmd: 'pnpm test auth', why: 'Runs the auth suite only. Nothing is written.', tags: ['read-only', 'about 40 s'] } },
     { id: 'a4b', k: 'approval', from: 'auth-fix session', time: '9:20', unread: true, status: 'once', by: 'Jarvis (Thread YOLO)', at: '9:20', folded: true,
-      tool: { kind: 'bash', ask: 'May I push this branch?', cmd: 'git push origin fix/token-refresh', why: 'Pushes the fix so the PR can open. Nothing on main changes.', tags: ['leaves the machine', 'a PR follows'] } } ] },
+      tool: { kind: 'bash', ask: 'May I push this branch?', cmd: 'git push origin fix/token-refresh', why: 'Pushes the fix so the PR can open. Nothing on main changes.', tags: ['leaves the machine', 'a PR follows'] } },
+    { id: 'p4', k: 'pull_request', from: 'auth-fix session', time: '9:24', unread: true, pr: '#921', title: 'Fix token refresh', repo: 'gateway', branch: 'fix/token-refresh', diff: '+48 −12', files: '4 files', checks: '14 checks pass', checksOk: true,
+      text: 'Refreshes the token on a 401 before the retry, so people stop getting logged out after an hour.' } ] },
   { id: 'c5', title: 'Bump Node to 22', src: 'thread', items: [
     { id: 'a5', k: 'approval', from: 'Node 22 for web session', time: '9:12', unread: false, status: 'once', by: 'You, through Jarvis', at: '9:12', folded: true,
       tool: { kind: 'bash', ask: 'May I rewrite the lockfile?', cmd: 'pnpm install', why: 'Node 22 needs the new lockfile. It touches pnpm-lock.yaml only.', tags: ['writes one file', 'about 1 min'] } } ] },
@@ -972,15 +986,19 @@ const CONVS = [
   { id: 'c7', title: 'GW-77 Rate limits per key', src: 'factory', items: [
     { id: 'f7', k: 'plan_ready', from: 'Factory', time: '8:40', unread: false, task: 'GW-77 Rate limits per key', col: 'Planning',
       text: 'A plan in 4 steps across 3 files is ready for your OK. Nothing has been written yet.', action: 'Open the Plan tab', or: 'it starts when you approve the plan' } ] },
+  { id: 'c10', title: 'Rate limit headers', src: 'pr', items: [
+    { id: 'p10', k: 'pull_request', from: 'Mina Okafor', time: '8:15', unread: true, pr: '#926', title: 'Rate limit headers', repo: 'gateway', branch: 'feat/rate-limit-headers', diff: '+131 −9', files: '7 files', checks: '2 of 14 checks fail', checksOk: false,
+      text: 'Adds X-RateLimit-Limit and X-RateLimit-Remaining to every API response, read from the key’s bucket.' } ] },
   { id: 'c8', title: 'Retry on 502s', src: 'session', items: [
     { id: 'q8', k: 'question', from: 'Retry on 502s', time: 'Yesterday', unread: false, q: Q_RETRY, asks: [], status: 'answered', answer: '3 tries, 2 s apart', by: 'You', at: 'Yesterday', folded: true } ] },
   { id: 'c9', title: 'Weekly digest wording', src: 'thread', items: [
     { id: 'r9', k: 'report', from: 'Jarvis', time: 'Yesterday', unread: false, text: 'Digest wording is done: PR #903 is merged.', pr: '#903', checks: '9 checks pass' } ] }
 ];
-function needsYou(x) { return (x.k === 'question' || x.k === 'approval') ? !x.status : x.k !== 'report'; }
+function needsYou(x) { return (x.k === 'question' || x.k === 'approval' || x.k === 'pull_request') ? !x.status : x.k !== 'report'; }
 function lineOf(x) {
   if (x.k === 'question') return x.status ? (x.by === 'You' ? 'You' : x.by) + ' answered: ' + x.answer : x.from + ' asks: ' + x.q.text;
   if (x.k === 'approval') return x.status ? (x.by || 'You') + (x.status === 'denied' ? ' denied ' : ' allowed ') + x.tool.cmd : 'Allow ' + x.tool.cmd + '?';
+  if (x.k === 'pull_request') return x.status ? (x.by || 'You') + ' approved PR ' + x.pr : 'Needs your review: PR ' + x.pr + ' ' + x.title;
   if (x.k === 'factory_blocked') return 'Blocked: ' + x.text;
   if (x.k === 'factory_waiting') return 'Waiting on you: ' + x.text;
   if (x.k === 'plan_ready') return 'Ready for you in Planning: ' + x.text;
@@ -1027,6 +1045,7 @@ class Component extends DCLogic {
   inFilter(c, f) {
     if (f === 'needs') return c.items.some(needsYou);
     if (f === 'reports') return c.items.some((x) => x.k === 'report');
+    if (f === 'prs') return c.items.some((x) => x.k === 'pull_request');
     if (f === 'factory') return c.src === 'factory';
     return true;
   }
@@ -1085,10 +1104,13 @@ class Component extends DCLogic {
       const v = { cls: [x.k, x.unread ? 'unread' : '', x.status || x.k === 'report' ? 'done' : ''].join(' '), aria: KIND[x.k] + ': ' + lineOf(x),
         readCls: x.unread ? 'unread' : '', unread: !!x.unread, readTitle: x.unread ? 'Mark as read' : 'Mark as unread', toggleRead: () => this.patchItem(c.id, x.id, { unread: !x.unread }),
         kindLabel: KIND[x.k], from: x.from, time: x.time, archive: () => this.archive(c, x),
-        isQ: x.k === 'question', isSlip: x.k === 'approval', isRep: x.k === 'report', isFac: x.k.startsWith('factory') || x.k === 'plan_ready', ...by };
+        isQ: x.k === 'question', isSlip: x.k === 'approval', isRep: x.k === 'report', isPr: x.k === 'pull_request', isFac: x.k.startsWith('factory') || x.k === 'plan_ready', ...by };
       if (x.k === 'question') v.q = this.qVals(c, x);
       if (x.k === 'approval') v.slip = this.slipVals(c, x);
       if (x.k === 'report') Object.assign(v, { text: x.text, pr: x.pr, checks: x.checks, openPr: () => this.say('Opens PR ' + x.pr + ' on GitHub') });
+      if (x.k === 'pull_request') Object.assign(v, { prOpen: !x.folded, prFolded: !!x.folded, pr: x.pr, title: x.title, where: x.repo + ' · ' + x.branch + ' → main', meta: 'Opened by ' + x.from + ' · ' + x.diff + ' in ' + x.files,
+        checks: x.checks, chkOk: !!x.checksOk, chkCls: x.checksOk ? '' : 'bad', text: x.text, actCls: x.status ? 'settled' : '', hasStamp: !!x.status, openPr: () => this.say('Opens PR ' + x.pr + ' on GitHub'),
+        approve: () => { if (x.status) return; this.patchItem(c.id, x.id, { status: 'approved', by: 'You', at: 'just now', unread: false }); this.later(() => this.patchItem(c.id, x.id, { folded: true }), 700); } });
       if (v.isFac) {
         const st = x.k === 'factory_blocked' ? ['Blocked', 'blocked', 'blocked needs'] : x.k === 'factory_waiting' ? ['Waiting on you', 'needs', 'needs'] : ['Ready for you', 'plan', 'plan'];
         Object.assign(v, { status: st[0], stCls: st[1], fcls: st[2], task: x.task, col: x.col, text: x.text, action: x.action, or: x.or,
@@ -1103,21 +1125,20 @@ class Component extends DCLogic {
     const c = vis.find((x) => x.id === cur) || null;
     const all = cs.filter((x) => x.items.length); const unread = all.reduce((n, x) => n + x.items.filter((y) => y.unread).length, 0);
     const needs = all.reduce((n, x) => n + x.items.filter(needsYou).length, 0);
-    const counts = { needs: this.visible(cs, 'needs').length, reports: this.visible(cs, 'reports').length, factory: this.visible(cs, 'factory').length, all: all.length };
     const label = FILTERS.find((x) => x[0] === f)[1]; const cneeds = c ? c.items.filter(needsYou).length : 0;
-    const heads = { needs: 'Nothing needs you.', reports: 'No reports yet.', factory: 'Nothing from the factory.', all: 'Nothing needs you.' };
+    const heads = { needs: 'Nothing needs you.', reports: 'No reports yet.', prs: 'No pull requests waiting.', factory: 'Nothing from the factory.', all: 'Nothing needs you.' };
     return {
       cls: 'home inbox', sheetCls: c ? '' : 'empty',
       nav: NAV.map((n) => { const on = n.id === 'inbox'; const b = on ? unread : n.badge; return { ...n, cls: on ? 'on' : '', cur: on ? 'page' : false, hasBadge: !!b, badge: b || '', pick: () => {} }; }),
       countLine: (unread ? unread + ' unread' : 'nothing unread') + ' · ' + (needs ? needs + ' need' + (needs === 1 ? 's' : '') + ' you' : 'nothing needs you'),
-      filters: FILTERS.map(([id, lab]) => ({ label: lab, n: counts[id], hasN: counts[id] > 0, on: id === f, cls: id === f ? 'on' : '', pick: () => this.setFilter(id) })),
+      filters: FILTERS.map(([id, lab]) => ({ label: lab, on: id === f, cls: id === f ? 'on' : '', pick: () => this.setFilter(id) })),
       convs: vis.map((x) => { const on = x.id === cur; const u = x.items.some((y) => y.unread); const k = x.items.filter(needsYou).length; const last = x.items[x.items.length - 1];
         return { title: x.title, src: x.src, time: last.time, line: lineOf(last), unread: u, needs: k > 0, needsN: k, needsAria: k + ' need' + (k === 1 ? 's' : '') + ' you', on, cur: on ? 'page' : false,
           cls: [on ? 'on' : '', u ? 'unread' : ''].join(' '), aria: x.title + ', ' + x.src + (u ? ', unread' : '') + (k ? ', ' + k + ' need' + (k === 1 ? 's' : '') + ' you' : ''), pick: () => this.open(x.id) }; }),
       noConvs: !vis.length, noneText: all.length ? 'Nothing under ' + label + '.' : 'Nothing here. Enjoy it.',
       hasConv: !!c, isEmpty: !c, convTitle: c ? c.title : '', openLabel: c ? OPEN_SRC[c.src] : '',
       convMeta: c ? (c.items.length === 1 ? '1 item' : c.items.length + ' items') + ' · ' + (cneeds ? cneeds + ' need' + (cneeds === 1 ? 's' : '') + ' you' : 'nothing needs you') : '',
-      openSource: () => c && this.say(c.src === 'thread' ? 'Opens “' + c.title + '” on Home' : c.src === 'factory' ? 'Opens ' + c.title + ' in Factory' : 'Opens ' + c.title + ' in Sessions'),
+      openSource: () => c && this.say(c.src === 'thread' ? 'Opens “' + c.title + '” on Home' : c.src === 'factory' ? 'Opens ' + c.title + ' in Factory' : c.src === 'pr' ? 'Opens ' + c.title + ' in PRs' : 'Opens ' + c.title + ' in Sessions'),
       items: c ? this.itemsVals(c) : [], noItems: !!c && !c.items.length, noItemsText: 'Nothing left here.',
       emptyHead: all.length ? heads[f] : 'Nothing needs you.',
       emptyLine: all.length ? 'Nothing under ' + label + ' right now.' : 'Questions, approvals and finish reports land here as they come, from Jarvis, the factory and your sessions.',
