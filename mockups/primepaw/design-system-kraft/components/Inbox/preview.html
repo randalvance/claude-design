@@ -1,0 +1,65 @@
+<!-- @dsCard group="Paper parts" height=1150 subtitle="Inbox: the tray tile, the filters, conversation rows with their source, and the items that need you" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft · Inbox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-height:100%}
+.wrap{display:flex;gap:32px;align-items:flex-start;padding:28px 24px}
+.col{display:flex;flex-direction:column;gap:22px;min-width:0;flex:1}
+.side{display:flex;flex-direction:column;gap:18px;flex:none}
+</style>
+</head>
+<body class="kr-root">
+<div class="wrap">
+  <div class="side">
+    <button class="kr-ib kr-amber is-on" aria-label="Inbox, 4 unread"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5"></path></svg><span class="kr-nb">4</span></button>
+    <div class="kr-filters" role="group" aria-label="Show"><button class="kr-btn is-sm is-on" aria-pressed="true">Needs answer<span class="kr-fn">5</span></button><button class="kr-btn is-sm" aria-pressed="false">Reports<span class="kr-fn">1</span></button><button class="kr-btn is-sm" aria-pressed="false">Factory<span class="kr-fn">3</span></button><button class="kr-btn is-sm" aria-pressed="false">All<span class="kr-fn">9</span></button></div>
+    <div>
+      <div class="kr-trow is-on"><span class="kr-trow-top"><span class="kr-trow-src">thread</span><span class="kr-trow-t">Onboarding banner</span></span><span class="kr-trow-tm">9:52</span><span class="kr-trow-l">Jarvis asks: Which workspace should I start this in?</span><span class="kr-trow-r"><span class="kr-nb kr-red is-row">1</span></span></div>
+      <div class="kr-trow is-unread"><span class="kr-trow-top"><span class="kr-trow-src">thread</span><span class="kr-trow-t">Add CSV export</span></span><span class="kr-trow-tm">9:41</span><span class="kr-trow-l">Allow git push origin feat/csv-export?</span><span class="kr-trow-r"><i class="kr-udot" aria-hidden="true"></i><span class="kr-nb kr-red is-row">1</span></span></div>
+      <div class="kr-trow is-unread"><span class="kr-trow-top"><span class="kr-trow-src is-factory">factory</span><span class="kr-trow-t">ORB-272 Browser events</span></span><span class="kr-trow-tm">9:35</span><span class="kr-trow-l">Blocked: The add_browser_events migration needs a database the factory runner cannot reach.</span><span class="kr-trow-r"><i class="kr-udot" aria-hidden="true"></i><span class="kr-nb kr-red is-row">1</span></span></div>
+      <div class="kr-trow"><span class="kr-trow-top"><span class="kr-trow-src is-session">session</span><span class="kr-trow-t">Retry on 502s</span></span><span class="kr-trow-tm">Yesterday</span><span class="kr-trow-l">You answered: 3 tries, 2 s apart</span></div>
+    </div>
+  </div>
+  <div class="col">
+    <article class="kr-iitem">
+      <div class="kr-ihd"><button class="kr-imark" aria-pressed="false" aria-label="Mark as unread"><i aria-hidden="true"></i></button><span class="kr-ikind">Question</span><span class="kr-iwho">Jarvis</span><time class="kr-itime">9:52</time><button class="kr-idone" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button></div>
+      <section class="kr-slip" aria-label="Question"><div class="kr-slip-in">
+        <div class="kr-slip-h"><h4 class="kr-slip-q">Jarvis asks</h4><span class="kr-slip-k">question</span></div>
+        <p class="kr-qprob">The banner belongs in the web app, but the trial length comes from billing. Starting in the wrong one means a second session later, so it is worth a quick check.</p>
+        <h4 class="kr-qq">Which workspace should I start this in?</h4>
+        <span class="kr-qhint">Pick one</span>
+        <div class="kr-qopts" role="radiogroup">
+          <div class="kr-qopt"><button class="kr-btn is-on" role="radio" aria-checked="true"><span class="kr-qk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>Lighthouse Web</button><span class="kr-qrec" aria-hidden="true">Suggested</span><p class="kr-qdesc">Where the onboarding page lives. It can read the trial end from the billing API as it is.</p></div>
+          <div class="kr-qopt"><button class="kr-btn" role="radio" aria-checked="false"><span class="kr-qk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>Orbit Billing</button><p class="kr-qdesc">Where trials are defined. Only if the billing API needs a new field first.</p></div>
+          <div class="kr-qopt"><button class="kr-btn" role="radio" aria-checked="false"><span class="kr-qk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>primepaw</button><p class="kr-qdesc">The shared shell. Only if the banner should show on every page, not just onboarding.</p></div>
+        </div>
+        <div class="kr-slip-act"><button class="kr-btn is-go">Answer</button><span class="kr-slip-or">or ask about it below</span></div>
+      </div></section>
+      <div class="kr-iask">
+        <div class="kr-iask-you"><div class="kr-note">simplify this</div></div>
+        <div class="kr-iask-j"><span class="kr-qph is-s" aria-hidden="true"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="#d9bc86" d="M1 0h1v1h-1zM10 0h1v1h-1zM1 1h1v1h-1zM2 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM1 2h1v1h-1zM3 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM4 3h1v1h-1zM5 3h1v1h-1zM6 3h1v1h-1zM7 3h1v1h-1zM10 3h1v1h-1zM0 4h1v1h-1zM11 4h1v1h-1zM0 5h1v1h-1zM11 5h1v1h-1zM0 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM11 7h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1z"/><path fill="#e8a9a2" d="M2 2h1v1h-1zM9 2h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1z"/><path fill="#f3e9d5" d="M2 3h1v1h-1zM3 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM1 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM10 5h1v1h-1zM1 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM2 7h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1z"/><path fill="#2a2219" d="M2 5h1v1h-1zM3 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM2 6h1v1h-1zM8 6h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1z"/><path fill="#fffdf7" d="M3 6h1v1h-1zM9 6h1v1h-1z"/><path fill="#c8553d" d="M2 9h1v1h-1zM3 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1z"/><path fill="#8f3a2a" d="M5 10h1v1h-1zM6 10h1v1h-1z"/></svg></span><p class="kr-jsay">Short version: the page lives in Lighthouse Web, the trial length lives in Orbit Billing. Pick Lighthouse Web unless the billing API needs a new field first.</p></div>
+        <div class="kr-iask-box"><input class="kr-iask-in" placeholder="Ask about this…" aria-label="Ask about this"><button class="kr-btn is-sm">Ask</button></div>
+      </div>
+    </article>
+    <article class="kr-iitem">
+      <div class="kr-ihd"><button class="kr-imark is-unread" aria-pressed="true" aria-label="Mark as read"><i aria-hidden="true"></i></button><span class="kr-ikind">Approval</span><span class="kr-iwho">auth-fix session</span><time class="kr-itime">9:20</time><button class="kr-idone" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button></div>
+      <section class="kr-slip is-stub"><div class="kr-slip-in"><code>git push origin fix/token-refresh</code><span class="kr-stamp is-green">APPROVED</span></div></section>
+      <p class="kr-iby">Allowed by <b>Jarvis (Thread YOLO)</b> · 9:20</p>
+    </article>
+    <article class="kr-iitem">
+      <div class="kr-ihd"><button class="kr-imark is-unread" aria-pressed="true" aria-label="Mark as read"><i aria-hidden="true"></i></button><span class="kr-ikind">Factory · Blocked</span><span class="kr-iwho">Factory</span><time class="kr-itime">9:35</time><button class="kr-idone" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button></div>
+      <section class="kr-fcard is-needs is-blocked"><div class="kr-fcard-h"><span class="kr-pill is-fail">Blocked</span><b>ORB-272 Browser events</b><small>In progress</small></div><p>The add_browser_events migration needs a database the factory runner cannot reach. Give the task a staging DATABASE_URL, or run the migration yourself and say so.</p><div class="kr-fcard-act"><button class="kr-btn is-go">Open the task</button><span class="kr-fcard-or">or mark it done once it is unblocked</span></div></section>
+    </article>
+    <article class="kr-iitem">
+      <div class="kr-ihd"><button class="kr-imark" aria-pressed="false" aria-label="Mark as unread"><i aria-hidden="true"></i></button><span class="kr-ikind">Factory · Plan ready</span><span class="kr-iwho">Factory</span><time class="kr-itime">8:40</time><button class="kr-idone" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button></div>
+      <section class="kr-fcard"><div class="kr-fcard-h"><span class="kr-pill is-work">Ready for you</span><b>GW-77 Rate limits per key</b><small>Planning</small></div><p>A plan in 4 steps across 3 files is ready for your OK. Nothing has been written yet.</p><div class="kr-fcard-act"><button class="kr-btn is-go">Open the Plan tab</button><span class="kr-fcard-or">it starts when you approve the plan</span></div></section>
+    </article>
+  </div>
+</div>
+</body>
+</html>

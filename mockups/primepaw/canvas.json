@@ -535,6 +535,66 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaInbox.dc.html": {
+      "x": 0,
+      "y": 26000,
+      "w": 1440,
+      "h": 900,
+      "title": "Inbox, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaInboxDark.dc.html": {
+      "x": 1540,
+      "y": 26000,
+      "w": 1440,
+      "h": 900,
+      "title": "Inbox, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaInboxEmpty.dc.html": {
+      "x": 0,
+      "y": 27000,
+      "w": 1440,
+      "h": 900,
+      "title": "Inbox, nothing needs you, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaInboxEmptyDark.dc.html": {
+      "x": 1540,
+      "y": 27000,
+      "w": 1440,
+      "h": 900,
+      "title": "Inbox, nothing needs you, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaInboxResolved.dc.html": {
+      "x": 0,
+      "y": 28000,
+      "w": 1440,
+      "h": 900,
+      "title": "Inbox, an item resolved elsewhere, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaInboxResolvedDark.dc.html": {
+      "x": 1540,
+      "y": 28000,
+      "w": 1440,
+      "h": 900,
+      "title": "Inbox, an item resolved elsewhere, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -589,7 +649,13 @@
     "DioramaSetup.dc.html",
     "DioramaSetupDark.dc.html",
     "DioramaSetupRestored.dc.html",
-    "DioramaSetupRestoredDark.dc.html"
+    "DioramaSetupRestoredDark.dc.html",
+    "DioramaInbox.dc.html",
+    "DioramaInboxDark.dc.html",
+    "DioramaInboxEmpty.dc.html",
+    "DioramaInboxEmptyDark.dc.html",
+    "DioramaInboxResolved.dc.html",
+    "DioramaInboxResolvedDark.dc.html"
   ],
   "notes": {
     "p14": {
@@ -661,6 +727,13 @@
       "w": 320,
       "page": "diorama",
       "text": "Setting up: the checklist a new install opens on, six steps on one sheet with a tick box each, the open one unfolded. Meet your Main Agent is the only step that has to be done before Open Primepaw works. It is a form on the paper: the name on a ruled line with Jarvis pencilled in as the placeholder, six 12 by 12 pixel portraits taped on like photos with the picked one ringed in pen, and the model, which is the global default until the pull-tab says otherwise and then a provider and a model from torn-paper pickers. One line says what the agent is for: it starts work for you and never edits code itself. Create with no name writes “It needs a name” in red pen; with one, a WELCOME stamp lands and the step folds to done. The second pair restored a backup, so the step is already ticked: Jarvis came with your backup. Choose a backup on the first pair does the same."
+    },
+    "p24": {
+      "x": 3080,
+      "y": 26000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Inbox: everything that needs you, on the tray tile right after Jarvis’s with the unread count as its sticker. The left board is conversations, one paper strip per request: a thread with Jarvis, else a factory task, else a session, with the source on a small chip, the newest line, the time, a blue dot while something is unread and a red sticker counting what needs an answer. Four small cards filter it: Needs answer, Reports, Factory, All. The sheet is the chosen conversation’s items in time order. A question sits on the amber mat with prompt 1’s options and is answered in place; under it, Ask about this is a short thread that stays attached to the question, your note on kraft and Jarvis’s answer in serif. An approval is the same slip as in the session. A finish report sits on the sage mat. A factory task is a card with its state as a sticker: Blocked in red with the reason, Waiting on you, or Ready for you in Planning with a button to the Plan tab. Answered items fold to a stub and say who answered by hand: You, Jarvis (Thread YOLO), or You, through Jarvis. Each item has a read mark and Done, which files it with an Undo. The second pair has nothing left in it. On the third, the push in Add CSV export gets allowed by Jarvis under Thread YOLO while you look: the stamp lands, the slip folds, the sticker and the rail count drop."
     }
   },
   "designSystems": [
@@ -668,8 +741,8 @@
       "title": "Kraft",
       "namespace": "kraft",
       "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
-      "version": "1794024397-06b7",
-      "copiedAt": "2026-11-07T04:06:54Z"
+      "version": "1794027521-357e",
+      "copiedAt": "2026-11-07T04:58:51Z"
     }
   ]
 }

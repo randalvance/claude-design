@@ -526,3 +526,61 @@
 .kr-listen b{font-weight:600;color:var(--ink)}
 .kr-trace{display:inline-flex;align-items:center;gap:2px;height:18px}
 .kr-trace i{display:block;width:2px;border-radius:1px;background-color:var(--red)}
+/* ---------- inbox: everything that needs you, as conversation rows with their source and filters, and the items on the sheet ---------- */
+/* the filters: four small cards in a row, the pressed one flat, each with its count by hand */
+.kr-filters{display:flex;flex-wrap:wrap;gap:var(--space-4);width:280px}
+.kr-filters .kr-btn{padding:0 6px;font-size:11px;gap:3px}
+.kr-fn{font-family:var(--font-hand);font-size:13px;font-weight:600;line-height:1;color:var(--ink);opacity:.8}
+/* a conversation row: the source on a small chip ahead of the title, a blue dot while unread, a red sticker counting what needs an answer */
+.kr-trow-top{grid-column:1;min-width:0;display:flex;align-items:center;gap:6px}
+.kr-trow-top .kr-trow-t{flex:1;min-width:0}
+.kr-trow-src{flex:none;padding:1px 5px;border-radius:var(--radius-2);font-size:9.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;line-height:1.3;color:var(--ink);background-color:var(--paper-2)}
+.kr-trow-src.is-factory{background-color:color-mix(in srgb,var(--amber) 38%,var(--paper-2))}
+.kr-trow-src.is-session{background-color:color-mix(in srgb,var(--blue) 22%,var(--paper-2))}
+.kr-trow.is-unread .kr-trow-t{font-weight:900}
+.kr-trow-r{grid-column:2;align-self:end;justify-self:end;display:flex;align-items:center;gap:5px}
+.kr-udot{display:block;width:9px;height:9px;border-radius:var(--radius-round);background-color:var(--blue);box-shadow:var(--sticker-s)}
+/* an item: a head line, then the thing itself */
+.kr-iitem{display:flex;flex-direction:column;gap:var(--space-6);max-width:800px}
+.kr-ihd{display:flex;align-items:center;gap:var(--space-10);min-height:26px;padding:0 2px}
+.kr-imark{all:unset;cursor:pointer;flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:var(--radius-round)}
+.kr-imark i{display:block;width:10px;height:10px;box-sizing:border-box;border-radius:var(--radius-round);border:1.5px solid var(--mute);transition:transform var(--dur-hover) var(--ease)}
+.kr-imark.is-unread i{border-color:transparent;background-color:var(--blue);box-shadow:var(--sticker-s)}
+.kr-imark:hover i{transform:scale(1.25)}
+.kr-imark:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.kr-ikind{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.kr-iwho,.kr-itime{font-family:var(--font-hand);font-size:15px;line-height:1;color:var(--mute);white-space:nowrap}
+.kr-iwho::before{content:"·";margin-right:var(--space-10)}
+.kr-itime{margin-left:auto}
+.kr-idone{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 var(--space-8);border-radius:var(--radius-3);font-size:12px;font-weight:800;color:var(--mute);transition:background-color var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease)}
+.kr-idone svg{width:12px;height:12px}
+.kr-idone:hover{color:var(--ink);background-color:color-mix(in srgb,var(--ink) 8%,transparent)}
+.kr-idone:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+/* a question sits on the slip's amber mat with the question sheet's options inside */
+.kr-slip .kr-qq{margin-top:var(--space-12)}
+.kr-slip .kr-qhint{margin-bottom:var(--space-14)}
+.kr-slip .kr-qopts{margin-right:20px}
+/* who answered, by hand under the folded item */
+.kr-iby{margin:-2px 0 0 var(--space-12);font-family:var(--font-hand);font-size:15px;line-height:1.2;color:var(--mute)}
+.kr-iby b{font-weight:600;color:var(--ink)}
+/* ask about this: a short thread under the question, your notes on kraft, the agent's answer in serif, then a small box */
+.kr-iask{display:flex;flex-direction:column;gap:var(--space-10);margin:2px 0 0 var(--space-12);padding-left:var(--space-14);border-left:2px dashed var(--line);max-width:620px}
+.kr-iask-you{display:flex;justify-content:flex-end}
+.kr-iask-you .kr-note{max-width:min(80%,52ch);padding:var(--space-8) var(--space-12);font-size:13px}
+.kr-iask-j{position:relative;padding-left:40px;min-height:30px}
+.kr-iask-j>.kr-qph{position:absolute;left:0;top:0}
+.kr-iask-j .kr-jsay{font-size:15px;line-height:1.5;padding-top:3px}
+.kr-iask-box{display:flex;align-items:center;gap:var(--space-8);max-width:440px}
+.kr-iask-in{all:unset;box-sizing:border-box;flex:1;min-width:0;height:30px;padding:0 2px;font-size:13px;font-weight:600;color:var(--ink);border-bottom:1.5px dashed var(--ink);transition:border-color var(--dur-hover) var(--ease)}
+.kr-iask-in::placeholder{font-family:var(--font-hand);font-size:16px;font-weight:500;color:var(--faint);opacity:1}
+.kr-iask-in:focus-visible{border-bottom-color:var(--blue);border-bottom-style:solid}
+/* a factory card: the task's state as a pill, the reason in words, one action; blocked and waiting sit on the amber mat */
+.kr-fcard{position:relative;max-width:640px;padding:var(--space-12) var(--space-16);background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-5);box-shadow:var(--lift-paper-2)}
+.kr-fcard-h{display:flex;align-items:center;gap:var(--space-10);flex-wrap:wrap}
+.kr-fcard-h b{font-size:15px;font-weight:800;line-height:1.3}
+.kr-fcard-h small{font-family:var(--font-hand);font-size:15px;color:var(--mute)}
+.kr-fcard p{margin:var(--space-8) 0 0;max-width:62ch;font-size:14px;line-height:1.5;color:var(--ink)}
+.kr-fcard-act{display:flex;align-items:center;gap:var(--space-12);flex-wrap:wrap;margin-top:var(--space-12)}
+.kr-fcard-or{font-family:var(--font-hand);font-size:15px;color:var(--mute)}
+.kr-fcard.is-needs{box-shadow:0 0 0 6px color-mix(in srgb,var(--amber) 58%,var(--board)),0 0 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),2px 3.5px 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),5px 9px 10px 7px var(--amb);margin:7px 0 4px 7px;max-width:626px}
+.kr-fcard.is-blocked p{color:color-mix(in srgb,var(--red) 78%,var(--ink))}

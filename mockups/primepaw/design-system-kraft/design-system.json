@@ -164,12 +164,19 @@
           "name": "knowledge.svg",
           "size": 249,
           "type": "image/svg+xml"
+        },
+        "inbox.svg": {
+          "blob": "8707b2887b17a6c0ccbb1140bc75e7e1",
+          "name": "inbox.svg",
+          "size": 246,
+          "type": "image/svg+xml"
         }
       },
       "name": "Icons",
       "order": [
         "mark.svg",
         "home.svg",
+        "inbox.svg",
         "agents.svg",
         "sessions.svg",
         "skills.svg",
@@ -215,9 +222,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-07T04:04:35Z",
+    "at": "2026-11-07T04:57:28Z",
     "via": "Claude Code",
-    "note": "Voice: the composer’s mic disc, latched red while it listens, with the sound trace and the time by hand"
+    "note": "Inbox: everything that needs you, conversation rows with their source and filters, items answered in place, who answered by hand; the inbox icon"
   },
   "layout": "files",
   "libraries": [],

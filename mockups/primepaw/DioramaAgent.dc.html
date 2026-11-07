@@ -167,7 +167,7 @@ button,input,textarea{font:inherit}
 .pp-rb:hover svg{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
 .pp-rb:active svg{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
 .pp-rb.is-on svg{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
-.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}
+.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}
 .pp-rb:focus-visible{outline:0}.pp-rb:focus-visible svg{outline:2px solid var(--blue);outline-offset:3px}
 .pp-rb .pp-nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .pp-nb{background-color:var(--st-red);color:var(--white)}
@@ -414,6 +414,7 @@ button,input,textarea{font:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
+  { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 4 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
   { id: 'skills', label: 'Skills', icon: 'M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z' },
