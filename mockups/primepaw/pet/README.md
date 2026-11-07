@@ -39,7 +39,7 @@ hands it over as
 petAssets: { byAgent: { jarvis: { src: "pet/dog-walk.png", layout: "sheet", height: 2.67 } } }
 ```
 
-`dog-walk.json` repeats those numbers. The factory adds the folded paper tab under its feet.
+`dog-walk.json` repeats those numbers. The factory puts no folded tab under it: the paws sit straight on the floor.
 
 ## Rebuilding a cut
 
