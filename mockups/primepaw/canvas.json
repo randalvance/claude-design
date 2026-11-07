@@ -355,6 +355,146 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaHome.dc.html": {
+      "x": 0,
+      "y": 17000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, a thread open, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeDark.dc.html": {
+      "x": 1540,
+      "y": 17000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, a thread open, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeEmpty.dc.html": {
+      "x": 0,
+      "y": 18000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, empty, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeEmptyDark.dc.html": {
+      "x": 1540,
+      "y": 18000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, empty, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeWaiting.dc.html": {
+      "x": 0,
+      "y": 19000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, a session waiting on you and one failed, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeWaitingDark.dc.html": {
+      "x": 1540,
+      "y": 19000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, a session waiting on you and one failed, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeAsk.dc.html": {
+      "x": 0,
+      "y": 20000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, asking which workspace, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeAskDark.dc.html": {
+      "x": 1540,
+      "y": 20000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, asking which workspace, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeYolo.dc.html": {
+      "x": 0,
+      "y": 21000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, Thread YOLO on, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeYoloDark.dc.html": {
+      "x": 1540,
+      "y": 21000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, Thread YOLO on, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeTabs.dc.html": {
+      "x": 0,
+      "y": 22000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, threads as tabs, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeTabsDark.dc.html": {
+      "x": 1540,
+      "y": 22000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, threads as tabs, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeSwitcher.dc.html": {
+      "x": 0,
+      "y": 23000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, threads in a switcher, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeSwitcherDark.dc.html": {
+      "x": 1540,
+      "y": 23000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with Jarvis, threads in a switcher, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -391,7 +531,21 @@
     "DioramaKnowledge.dc.html",
     "DioramaKnowledgeDark.dc.html",
     "DioramaKnowledgeSetup.dc.html",
-    "DioramaKnowledgeSetupDark.dc.html"
+    "DioramaKnowledgeSetupDark.dc.html",
+    "DioramaHome.dc.html",
+    "DioramaHomeDark.dc.html",
+    "DioramaHomeEmpty.dc.html",
+    "DioramaHomeEmptyDark.dc.html",
+    "DioramaHomeWaiting.dc.html",
+    "DioramaHomeWaitingDark.dc.html",
+    "DioramaHomeAsk.dc.html",
+    "DioramaHomeAskDark.dc.html",
+    "DioramaHomeYolo.dc.html",
+    "DioramaHomeYoloDark.dc.html",
+    "DioramaHomeTabs.dc.html",
+    "DioramaHomeTabsDark.dc.html",
+    "DioramaHomeSwitcher.dc.html",
+    "DioramaHomeSwitcherDark.dc.html"
   ],
   "notes": {
     "p14": {
@@ -435,6 +589,27 @@
       "w": 320,
       "page": "diorama",
       "text": "Knowledge base: the book on the rail. The notes board is a file tree on one sheet of paper: nested folders and .md files with their git state. The note is a sheet of paper: type, title, description and tags on top, then blocks you can drag by the grip to move. Drag a list bullet to move an item, or drop it onto another item to nest it. Parent, related, links and backlinks sit in the margin. Graph is react-force-graph on cork: index cards strung with thread that you drag, zoom and click open. The second pair starts on setting up: pick a folder or clone a repo."
+    },
+    "p20": {
+      "x": 3080,
+      "y": 17000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, a cat in a bow tie, badged with the threads waiting on you. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Thread YOLO makes. A job ends on a finish report on the sage mat. The header has the title, how many sessions the thread started, and the Thread YOLO stamp, off by default, which says what it risks when you strike it. Everything is fake."
+    },
+    "p21": {
+      "x": 3080,
+      "y": 18000,
+      "w": 320,
+      "page": "diorama",
+      "text": "The states: empty, a big prompt box where sending starts a thread; a session waiting on you, on the amber mat, next to one that failed; Jarvis asking which workspace with the same question card and sheet a session uses; and Thread YOLO on, which answers waiting prompts and writes each call down. Turn YOLO on in Bump Node to 22 to watch it answer the waiting session."
+    },
+    "p22": {
+      "x": 3080,
+      "y": 22000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Three ways to hold the threads. A left column (the boards above) keeps them all in view and suits many threads at once. Tabs, here, put the open few across the top like a session’s tabs, with the menu on the open tab; they get crowded past six or so. A switcher, next, gives the thread the whole sheet and drops the list from the title, with the waiting count on the button; it is the quietest, but hides what waits until you look."
     }
   },
   "designSystems": [
