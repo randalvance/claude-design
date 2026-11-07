@@ -66,7 +66,7 @@ The canvas records it in `designSystems` too and carries its tokens at `project/
 
 ## Notes
 
-- The canvas has one page, Paper diorama: the shell and every other screen stacked top to bottom, light on the left and dark on the right, with notes in a third column. The earlier Paper page, its 12 boards and the Paper Chat design system were removed; they live in git history before this commit. The Paper Chat artifact itself is still published at https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh.
+- The canvas has one page, Paper diorama, in ten titled sections, in the order the product meets you: the shell and a session; setting up; Home, your main agent; Inbox; agents and skills; workspaces; memory and knowledge; MCP servers; Kanban and the factory; background jobs. In each, the screens stack top to bottom, light on the left and dark on the right, with the notes in a third column beside their rows. The earlier Paper page, its 12 boards and the Paper Chat design system were removed; they live in git history before this commit. The Paper Chat artifact itself is still published at https://claude.ai/artifact/M426mkexTAeeJ552WsSWFh.
 
 Every screen has a dark mode board, generated with its light one. The `theme` prop sets which it opens in, and the rail button flips it.
 
