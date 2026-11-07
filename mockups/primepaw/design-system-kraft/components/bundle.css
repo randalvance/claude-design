@@ -450,77 +450,6 @@
 /* the risk Thread YOLO carries, written out when it is struck */
 .kr-yrisk{display:flex;align-items:flex-start;gap:var(--space-12);max-width:760px;padding:var(--space-10) var(--space-14);font-size:13px;line-height:1.5;background-color:color-mix(in srgb,var(--red) 8%,var(--card));border:1.5px dashed color-mix(in srgb,var(--red) 70%,var(--ink));border-radius:var(--radius-3)}
 .kr-yrisk b{color:color-mix(in srgb,var(--red) 78%,var(--ink))}
-/* ---------- meet the main agent: the form on the setup list and as a card on an empty home, the tile before there is one, and the setup checklist ---------- */
-/* the form: a name on a ruled line, portraits taped on like photos, then the model; on a card in the middle of an empty home */
-.kr-meet{position:relative;max-width:640px;display:flex;flex-direction:column;gap:var(--space-12)}
-.kr-meet.is-card{max-width:680px;box-sizing:border-box;padding:var(--space-24) 26px 22px;background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-5);box-shadow:var(--lift-paper-2)}
-.kr-meet-top{display:flex;align-items:flex-start;gap:var(--space-20)}
-.kr-qph.is-l{width:86px;height:86px;margin:8px 0 0 2px;transform:rotate(-2deg)}
-.kr-qph.is-l svg{width:66px;height:66px}
-.kr-qph.is-l::before{width:44px;height:14px;top:-9px;transform:translateX(-50%) rotate(-5deg)}
-.kr-meet-name{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-top:6px}
-.kr-lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-/* the name: written by hand on a ruled line, the placeholder pencilled in; a missing one makes the rule dashed red with the note under it in red pen */
-.kr-fld{all:unset;box-sizing:border-box;width:100%;max-width:360px;padding:4px 2px 5px;font-family:var(--font-hand);font-size:38px;font-weight:600;line-height:1;color:var(--ink);border-bottom:2px solid var(--ink);transition:border-color var(--dur-hover) var(--ease)}
-.kr-fld::placeholder{color:var(--faint);opacity:1}
-.kr-fld:focus-visible{border-bottom-color:var(--blue)}
-.kr-fld.is-bad{border-bottom:2px dashed var(--red)}
-.kr-ferr{font-family:var(--font-hand);font-size:17px;line-height:1;color:var(--red);transform:rotate(-1.2deg);transform-origin:left}
-/* the portraits: photos taped on, each a little askew by its own --tilt; the picked one sits straight and is ringed in pen */
-.kr-pstrip{display:flex;flex-wrap:wrap;gap:16px 18px;padding:10px 8px 8px}
-.kr-pph{all:unset;cursor:pointer;position:relative;display:grid;place-items:center;width:48px;height:48px;box-sizing:border-box;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.1);box-shadow:var(--lift-paper-1);transform:rotate(var(--tilt,0deg));transition:transform var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
-.kr-pph::before{content:"";position:absolute;left:50%;top:-6px;width:26px;height:10px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg)}
-.kr-pph svg{width:36px;height:36px;display:block;shape-rendering:crispEdges}
-.kr-pph:hover{transform:rotate(var(--tilt,0deg)) translateY(-2px);box-shadow:var(--lift-paper-2)}
-.kr-pph:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-.kr-pph.is-on{transform:rotate(0deg)}
-.kr-pph .kr-pring{position:absolute;left:-9px;top:-9px;width:66px;height:66px;pointer-events:none;color:var(--ink);overflow:visible}
-.kr-pring path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
-/* the model: the global default until the pull-tab says otherwise, then a provider and a model from two selects */
-.kr-mmodel{display:flex;flex-direction:column;gap:var(--space-12)}
-.kr-mdef{display:flex;align-items:center;gap:var(--space-10);font-size:13px;font-weight:800;color:var(--ink)}
-.kr-mdef small{font-family:var(--font-hand);font-size:17px;font-weight:500;color:var(--mute)}
-.kr-msels{display:flex;gap:var(--space-12);flex-wrap:wrap;transition:opacity var(--dur-hover) var(--ease)}
-.kr-msels.is-dim{opacity:.5;pointer-events:none}
-.kr-msel{height:auto;padding:5px 10px 5px 12px;gap:var(--space-12);text-align:left}
-.kr-msel>span{display:flex;flex-direction:column;gap:1px;min-width:0}
-.kr-msel small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.kr-msel b{font-size:13px;font-weight:800;white-space:nowrap}
-.kr-msel svg{width:16px;height:16px;flex:none;transition:transform var(--dur-hover) var(--ease)}
-.kr-msel[aria-expanded="true"] svg{transform:rotate(180deg)}
-.kr-mline{margin:2px 0 0;max-width:52ch;font-family:var(--font-serif);font-style:italic;font-size:17px;line-height:1.4;color:var(--mute)}
-.kr-mact{display:flex;align-items:center;gap:var(--space-16);flex-wrap:wrap;margin-top:4px}
-.kr-mact small{font-family:var(--font-hand);font-size:15px;color:var(--mute)}
-/* WELCOME: the stamp that lands on the form when Create goes through */
-.kr-meet>.kr-stamp{position:absolute;right:26px;top:22px;padding:5px 10px;font-size:12px;letter-spacing:.16em;transform:rotate(-9deg)}
-/* a link written by hand: Later, Start fresh, Say hello */
-.kr-hlink{all:unset;cursor:pointer;font-family:var(--font-hand);font-size:17px;font-weight:600;line-height:1;color:var(--blue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
-.kr-hlink:hover{color:var(--ink)}
-.kr-hlink:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
-/* before there is a main agent: an empty frame drawn in dashed pen, on the rail tile and in the small photo places */
-.kr-ib.kr-nobody{--c:var(--sheet);padding:0}
-.kr-ib.kr-nobody i{display:grid;place-items:center;width:44px;height:44px;box-sizing:border-box;border:2px dashed color-mix(in srgb,var(--ink) 50%,transparent);border-radius:var(--radius-10);font-family:var(--font-hand);font-style:normal;font-size:26px;font-weight:600;line-height:1;color:var(--mute)}
-.kr-qph.is-empty{border:1.5px dashed color-mix(in srgb,var(--ink) 50%,transparent);background:none;box-shadow:none}
-.kr-qph.is-empty i{font-family:var(--font-hand);font-style:normal;font-size:26px;font-weight:600;line-height:1;color:var(--mute)}
-.kr-qph.is-s.is-empty i{font-size:20px}
-/* the setup checklist: six things on one sheet, a tick box each, the state by hand on the right, the open one unfolded */
-.kr-setlist{list-style:none;margin:0;padding:0;max-width:800px}
-.kr-sitem{border-top:1px dashed var(--line);padding:4px 0}
-.kr-sitem:last-child{border-bottom:1px dashed var(--line)}
-.kr-sitem-h{display:flex;align-items:center;gap:var(--space-14);min-height:54px;padding:5px 6px 5px 4px}
-.kr-sitem-h .kr-check{width:24px;height:24px;border-color:var(--ink);pointer-events:none}
-.kr-sitem-h .kr-check svg{width:16px;height:16px}
-.kr-sitem-t{all:unset;cursor:pointer;flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:5px 8px;border-radius:var(--radius-4);transition:background-color var(--dur-hover) var(--ease)}
-.kr-sitem-t:hover{background-color:color-mix(in srgb,var(--ink) 6%,transparent)}
-.kr-sitem-t:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
-.kr-sitem-t b{font-size:15px;font-weight:800;color:var(--ink)}
-.kr-sitem-t small{font-size:12px;line-height:1.35;color:var(--mute)}
-.kr-sitem.is-done .kr-sitem-t b{color:var(--mute);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:color-mix(in srgb,var(--ink) 55%,transparent)}
-.kr-sitem-st{display:flex;align-items:center;gap:var(--space-10);font-family:var(--font-hand);font-size:17px;color:var(--mute);white-space:nowrap}
-.kr-sitem-st .kr-qph.is-s{margin-right:2px}
-.kr-sitem-b{padding:6px 8px 20px 46px}
-.kr-sitem-b>p{margin:0 0 14px;max-width:560px;font-size:14px;line-height:1.5;color:var(--ink)}
-.kr-sitem-act{display:flex;align-items:center;gap:var(--space-16);flex-wrap:wrap}
 /* ---------- voice: the composer's mic is a small disc, red and latched while it listens; the hint gives way to a sound trace in red pen and the time by hand ---------- */
 .kr-listen{display:inline-flex;align-items:center;gap:var(--space-10);font-family:var(--font-hand);font-size:15px;color:var(--mute);white-space:nowrap}
 .kr-listen b{font-weight:600;color:var(--ink)}
@@ -635,3 +564,83 @@
 .kr-step+.kr-step::before{content:"→";position:absolute;left:-14px;top:0;line-height:24px;font-family:var(--font-hand);font-size:16px;font-weight:600;color:var(--mute)}
 .kr-step.is-off{background-color:transparent;background-image:none;box-shadow:none;border:1.5px dashed var(--faint);color:var(--faint);padding:0 5px}
 .kr-step.is-off span{display:none}
+/* ---------- meet the main agent: the form on the setup list and as a card on an empty home, the tile before there is one, and the setup checklist ---------- */
+/* the form: a name on a ruled line, portraits taped on like photos, then the model; on a card in the middle of an empty home */
+.kr-meet{position:relative;max-width:640px;display:flex;flex-direction:column;gap:var(--space-12)}
+.kr-meet.is-card{max-width:680px;box-sizing:border-box;padding:var(--space-24) 26px 22px;background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-5);box-shadow:var(--lift-paper-2)}
+.kr-meet-top{display:flex;align-items:flex-start;gap:var(--space-20)}
+.kr-qph.is-l{width:86px;height:86px;margin:8px 0 0 2px;transform:rotate(-2deg)}
+.kr-qph.is-l svg{width:66px;height:66px}
+.kr-qph.is-l::before{width:44px;height:14px;top:-9px;transform:translateX(-50%) rotate(-5deg)}
+.kr-meet-name{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-top:6px}
+.kr-lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+/* the name: written by hand on a ruled line, the placeholder pencilled in; a missing one makes the rule dashed red with the note under it in red pen */
+.kr-fld{all:unset;box-sizing:border-box;width:100%;max-width:360px;padding:4px 2px 5px;font-family:var(--font-hand);font-size:38px;font-weight:600;line-height:1;color:var(--ink);border-bottom:2px solid var(--ink);transition:border-color var(--dur-hover) var(--ease)}
+.kr-fld::placeholder{color:var(--faint);opacity:1}
+.kr-fld:focus-visible{border-bottom-color:var(--blue)}
+.kr-fld.is-bad{border-bottom:2px dashed var(--red)}
+.kr-ferr{font-family:var(--font-hand);font-size:17px;line-height:1;color:var(--red);transform:rotate(-1.2deg);transform-origin:left}
+/* the portraits: photos taped on, each a little askew by its own --tilt; the picked one sits straight and is ringed in pen */
+.kr-pstrip{display:flex;flex-wrap:wrap;gap:16px 18px;padding:10px 8px 8px}
+.kr-pph{all:unset;cursor:pointer;position:relative;display:grid;place-items:center;width:48px;height:48px;box-sizing:border-box;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.1);box-shadow:var(--lift-paper-1);transform:rotate(var(--tilt,0deg));transition:transform var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
+.kr-pph::before{content:"";position:absolute;left:50%;top:-6px;width:26px;height:10px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg)}
+.kr-pph svg{width:36px;height:36px;display:block;shape-rendering:crispEdges}
+.kr-pph:hover{transform:rotate(var(--tilt,0deg)) translateY(-2px);box-shadow:var(--lift-paper-2)}
+.kr-pph:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.kr-pph.is-on{transform:rotate(0deg)}
+.kr-pph .kr-pring{position:absolute;left:-9px;top:-9px;width:66px;height:66px;pointer-events:none;color:var(--ink);overflow:visible}
+.kr-pring path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+/* the model: the global default until the pull-tab says otherwise, then a provider and a model from two selects */
+.kr-mmodel{display:flex;flex-direction:column;gap:var(--space-12)}
+.kr-mdef{display:flex;align-items:center;gap:var(--space-10);font-size:13px;font-weight:800;color:var(--ink)}
+.kr-mdef small{font-family:var(--font-hand);font-size:17px;font-weight:500;color:var(--mute)}
+.kr-msels{display:flex;gap:var(--space-12);flex-wrap:wrap;transition:opacity var(--dur-hover) var(--ease)}
+.kr-msels.is-dim{opacity:.5;pointer-events:none}
+.kr-msel{height:auto;padding:5px 10px 5px 12px;gap:var(--space-12);text-align:left}
+.kr-msel>span{display:flex;flex-direction:column;gap:1px;min-width:0}
+.kr-msel small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.kr-msel b{font-size:13px;font-weight:800;white-space:nowrap}
+.kr-msel svg{width:16px;height:16px;flex:none;transition:transform var(--dur-hover) var(--ease)}
+.kr-msel[aria-expanded="true"] svg{transform:rotate(180deg)}
+.kr-mline{margin:2px 0 0;max-width:52ch;font-family:var(--font-serif);font-style:italic;font-size:17px;line-height:1.4;color:var(--mute)}
+.kr-mact{display:flex;align-items:center;gap:var(--space-16);flex-wrap:wrap;margin-top:4px}
+.kr-mact small{font-family:var(--font-hand);font-size:15px;color:var(--mute)}
+/* WELCOME: the stamp that lands on the form when Create goes through */
+.kr-meet>.kr-stamp{position:absolute;right:26px;top:22px;padding:5px 10px;font-size:12px;letter-spacing:.16em;transform:rotate(-9deg)}
+/* a link written by hand: Later, Start fresh, Say hello */
+.kr-hlink{all:unset;cursor:pointer;font-family:var(--font-hand);font-size:17px;font-weight:600;line-height:1;color:var(--blue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.kr-hlink:hover{color:var(--ink)}
+.kr-hlink:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+/* before there is a main agent: an empty frame drawn in dashed pen, on the rail tile and in the small photo places */
+.kr-ib.kr-nobody{--c:var(--sheet);padding:0}
+.kr-ib.kr-nobody i{display:grid;place-items:center;width:44px;height:44px;box-sizing:border-box;border:2px dashed color-mix(in srgb,var(--ink) 50%,transparent);border-radius:var(--radius-10);font-family:var(--font-hand);font-style:normal;font-size:26px;font-weight:600;line-height:1;color:var(--mute)}
+.kr-qph.is-empty{border:1.5px dashed color-mix(in srgb,var(--ink) 50%,transparent);background:none;box-shadow:none}
+.kr-qph.is-empty i{font-family:var(--font-hand);font-style:normal;font-size:26px;font-weight:600;line-height:1;color:var(--mute)}
+.kr-qph.is-s.is-empty i{font-size:20px}
+/* the setup checklist: six things on one sheet, a tick box each, the state by hand on the right, the open one unfolded */
+.kr-setlist{list-style:none;margin:0;padding:0;max-width:800px}
+.kr-sitem{border-top:1px dashed var(--line);padding:4px 0}
+.kr-sitem:last-child{border-bottom:1px dashed var(--line)}
+.kr-sitem-h{display:flex;align-items:center;gap:var(--space-14);min-height:54px;padding:5px 6px 5px 4px}
+.kr-sitem-h .kr-check{width:24px;height:24px;border-color:var(--ink);pointer-events:none}
+.kr-sitem-h .kr-check svg{width:16px;height:16px}
+.kr-sitem-t{all:unset;cursor:pointer;flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:5px 8px;border-radius:var(--radius-4);transition:background-color var(--dur-hover) var(--ease)}
+.kr-sitem-t:hover{background-color:color-mix(in srgb,var(--ink) 6%,transparent)}
+.kr-sitem-t:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.kr-sitem-t b{font-size:15px;font-weight:800;color:var(--ink)}
+.kr-sitem-t small{font-size:12px;line-height:1.35;color:var(--mute)}
+.kr-sitem.is-done .kr-sitem-t b{color:var(--mute);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:color-mix(in srgb,var(--ink) 55%,transparent)}
+.kr-sitem-st{display:flex;align-items:center;gap:var(--space-10);font-family:var(--font-hand);font-size:17px;color:var(--mute);white-space:nowrap}
+.kr-sitem-st .kr-qph.is-s{margin-right:2px}
+.kr-sitem-b{padding:6px 8px 20px 46px}
+.kr-sitem-b>p{margin:0 0 14px;max-width:560px;font-size:14px;line-height:1.5;color:var(--ink)}
+.kr-sitem-act{display:flex;align-items:center;gap:var(--space-16);flex-wrap:wrap}
+/* ---------- jarvis: the main agent is Button, a cat cut from cream and kraft; the cut-out that peeks over the composer, and his pixel portrait ---------- */
+/* the cut: the paper's cut edge around the drawing, a light rim by day and a white one at night */
+.kr-jarvis-cut{display:inline-block;--cut:#d9cfb8;filter:drop-shadow(1px 0 0 var(--cut)) drop-shadow(-1px 0 0 var(--cut)) drop-shadow(0 1px 0 var(--cut)) drop-shadow(0 -1px 0 var(--cut)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
+[data-theme="night"] .kr-jarvis-cut{--cut:#fff}
+.kr-jarvis-cut svg{display:block;width:100%;height:auto}
+/* over the composer: 92px wide, in from the right, leaning on his paws; he holds still */
+.kr-jarvis-peek{position:absolute;right:28px;top:-64px;width:92px;transform:rotate(-4deg);transform-origin:50% 100%;pointer-events:none;z-index:2}
+/* the portrait big: 12 by 12 pixels, crisp */
+.kr-jarvis-big{width:96px;height:96px;shape-rendering:crispEdges}
