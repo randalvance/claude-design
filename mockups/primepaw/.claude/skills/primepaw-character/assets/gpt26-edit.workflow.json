@@ -1,0 +1,14 @@
+{
+  "ref1": {"_meta": {"title": "Reference 1"}, "class_type": "LoadImage",
+           "inputs": {"image": "__REFERENCE_1__"}},
+  "ref2": {"_meta": {"title": "Reference 2"}, "class_type": "LoadImage",
+           "inputs": {"image": "__REFERENCE_2__"}},
+  "gpt": {"_meta": {"title": "GPT Image 2.6 Sunburst"}, "class_type": "OpenAIGPTImageNodeV2",
+          "inputs": {"prompt": "__PROMPT__", "model": "gpt-image-2.6-sunburst",
+                     "model.size": "1536x1024", "model.custom_width": 1536, "model.custom_height": 1024,
+                     "model.background": "auto", "model.quality": "high", "model.complexity": "high",
+                     "n": 1, "seed": "__SEED__",
+                     "model.images.image_1": ["ref1", 0], "model.images.image_2": ["ref2", 0]}},
+  "save": {"_meta": {"title": "Save Image"}, "class_type": "SaveImageAdvanced",
+           "inputs": {"filename_prefix": "__PREFIX__", "format": "png", "format.bit_depth": "8-bit", "format.input_color_space": "sRGB", "images": ["gpt", 0]}}
+}

@@ -53,9 +53,12 @@ show it and the turnaround is where the back and the sides get settled; then, GP
 mood sheets from the base (the peeking pose) and the body, every one of the eight frames spelled out so
 the action is spread over them, and one parts sheet per facing from the turnaround and the body: the
 figure taken apart into the puppet's pieces, laid out in a grid in the order `build.py` names them. The
-prompts come from `references/prompts.md`, slots filled. Save every downloaded sheet under
-`pet/src/<id>/` with the names `build.py` expects, and look at each one before building: the judging
-list in `comfy.md` says what sends a sheet back for a new seed.
+GPT sheets go through the graph in `assets/gpt26-edit.workflow.json`, and the prompts come from
+`references/prompts.md`, slots filled. GPT Image is a paid partner model, so say what a batch will
+cost and get a yes before submitting it. Save every downloaded sheet under `pet/src/<id>/` with the
+names `build.py` expects (`scripts/green.py` lays a GPT download on the green the slicer keys out),
+and look at each one before building: the judging list in `comfy.md` says what sends a sheet back for
+a new seed.
 
 ### 3. Build the cuts
 
@@ -72,7 +75,9 @@ frames of nearly the same size, every parts sheet 9 pieces (8 for a profile), an
 under the others on its sheet is the one to look at. A mood sheet that yields another count is resampled
 silently and will stutter, and a parts sheet with another count stops the build; redraw either with a new
 seed rather than accept it. `--check <file>` writes the four puppets put together under the turnaround,
-which is how to judge the rig. Needs Pillow and numpy on the host Python.
+which is how to judge the rig. Needs Pillow and numpy on the host Python. The printout ends each cut
+with its frame size (`--pw` and `--ph`); that size lives in every board's pet block, so when a rebuild
+changes it for a character the boards already wear, run `use` again (step 5).
 
 ### 4. Look at it
 
@@ -99,8 +104,9 @@ python3 mockups/primepaw/.claude/skills/primepaw-character/scripts/character.py 
 `register` adds the character to the `FACES` list on the Setup and Home boards, where the portrait
 picker shows one option per character with its own face. `use` makes every board wear it: the pet
 atlas, the face sticker and the frame size in each board's `/* pet */` block, and the picker's selected
-entry. Both are safe to run again. Run `use` only when the user wants the new character to be Jarvis's
-look; a second character can just sit in the picker.
+entry; a Pet board keeps its own character and only takes the frame size. Both are safe to run again.
+Run `use` only when the user wants the new character to be Jarvis's look; a second character can just
+sit in the picker.
 
 Then the words: add the character to the table in `pet/README.md` with its prompts' slot values, give
 the canvas a note beside its Pet boards (`canvas.json`, like `p26`), and mention it in the Kraft design
@@ -123,6 +129,9 @@ not a sheet.
 
 - `references/prompts.md`: the puppy's prompts as templates, with the slot table and the puppy's values.
 - `references/comfy.md`: the Comfy Cloud calls, sizes, seeds and what to reject.
-- `assets/qwen21-edit.workflow.json`: the edit graph with placeholders.
+- `assets/qwen21-edit.workflow.json`: the Qwen edit graph with placeholders, for the avatar and the body.
+- `assets/gpt26-edit.workflow.json`: the GPT Image 2.6 graph with placeholders, two references in, for
+  the turnaround, the mood sheets and the parts sheets.
+- `scripts/green.py`: lays a GPT Image download on the chroma-key green before it is saved as a source.
 - `scripts/character.py`: `list`, `register`, `use`, `board`.
 - `../../../pet/build.py`: the slicer; `--name <id>` reads `src/<id>/` and writes the five output files.

@@ -37,8 +37,9 @@ Then `get_output` with `client_os` to look at it. Judge the base hard; every oth
 
 A base that is close but not right is cheaper to re-run with a new seed or a tightened prompt than to
 fix later. Once it is right, `use_previous_output` with its `prompt_id` gives the server-side filename
-(a hash plus `.png`) that the edits take as `__REFERENCE__`, and save the downloaded file as
-`pet/src/<id>/base.png` so the character can be redrawn.
+(a hash plus `.png`) that the edits take as their reference, and save the downloaded file as
+`pet/src/<id>/base.png` so the character can be redrawn. The base is also the first reference of every
+mood sheet, so its resting pose is the one the moods return to.
 
 ## 2. The edits: a raw graph, submitted as a batch
 
@@ -74,12 +75,20 @@ paid partner model, and the parts sheets copy it. The mood sheets go to GPT Imag
 the puppy changed size from cell to cell, its patch swapped eyes and a mood's whole action sat in one
 frame, so the peeking cut flickered rather than moved. Qwen keeps the base, the avatar and the body.
 
-The graph is `LoadImage` → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`, `model.size`
-`1536x1024`, `model.quality` `high`, a reference on `model.images.image_1` and a second one on
-`image_2`) → `SaveImageAdvanced`, sent with `submit_workflow`, because the batch tool's bundled catalog
-can lag the live one and refuse the template by name. A file from disk reaches `LoadImage` through
-`upload_file`: run the curl it prints and give `LoadImage` the name it answers with. Two seeds per sheet,
-as two items of one batch, is the cheap way to have a choice.
+The GPT Image sheets use the graph in `../assets/gpt26-edit.workflow.json`: two `LoadImage` nodes →
+`OpenAIGPTImageNodeV2` (`gpt-image-2.6-sunburst`, 1536 by 1024, quality high) → `SaveImageAdvanced`,
+sent as `submit_workflow` items of one `submit_batch`, because the batch tool's bundled catalog can lag
+the live one and refuse the template by name. Its placeholders:
+
+| Placeholder | Value |
+| --- | --- |
+| `__REFERENCE_1__`, `__REFERENCE_2__` | server-side filenames: from `use_previous_output` for a sheet Comfy drew, or from `upload_file` for a file on disk (run the curl it prints and take the `name` it answers with). The turnaround has one reference: drop the `ref2` node and the `model.images.image_2` line |
+| `__PROMPT__` | the sheet's prompt from `prompts.md`, slots filled |
+| `__SEED__` | any integer, the quoted placeholder replaced whole; a different seed per item |
+| `__PREFIX__` | `<id>_<sheet>`, with `_a` and `_b` when a sheet is drawn with two seeds |
+
+Two seeds per sheet, as two items of one batch, is the cheap way to have a choice. A batch of ten takes
+a few minutes; `wait_for_batch` with `max_wait_seconds: 300` covers it.
 
 - **The turnaround:** the body on `image_1`, the turnaround prompt from `prompts.md`. Judge it like the
   base: four figures of one height on one ground line, the back with no face and with every absence
@@ -109,17 +118,19 @@ as two items of one batch, is the cheap way to have a choice.
   shows the puppets put together under the turnaround; a piece that lands wrong there was drawn unlike
   the turnaround's, so reword its line and draw that sheet again.
 
-It costs 5 to 29 credits an image and the spend is gated, so ask the user before submitting. It returns
-either a green sheet or a transparent PNG, the figure at alpha 250 to 254 with a faint halo below 30:
-composite the transparent kind onto `#00FF00` with the alpha remapped (0 below 24, opaque from 250)
-before saving it as the source, so the slicer keys it like the others.
+It costs 5 to 29 credits an image, there is no estimate call for it, and the spend is gated, so ask the
+user before submitting; `get_batch_status` reports `billed` per job afterwards. It returns either the
+green sheet it was asked for or a transparent PNG, the figure at alpha 250 to 254 over a faint halo:
+run `scripts/green.py <download> pet/src/<id>/<sheet>.png` on every download, which lays the
+transparent kind on `#00FF00` with the halo removed and writes the green kind through, so the slicer
+keys them all alike.
 
 Before the first batch, `estimate_credits` with `template_name: image_qwen_image_2_1_image_edit` says
 what one edit costs; tell the user the total for the two edits before spending it.
 
 Wait with `get_batch_status` or `wait_for_batch`, then `get_batch_output` with `client_os`: it downloads
-every image and reports where each landed. Copy them into `pet/src/<id>/` under the names `build.py`
-expects: `idle.png`, `greet.png`, `celebrate.png`, `sad.png`, `error.png`, `ask.png`, `avatar.png`,
+every image and reports where each landed. Copy the Qwen sheets, and `green.py` the GPT ones, into
+`pet/src/<id>/` under the names `build.py` expects: `idle.png`, `greet.png`, `celebrate.png`, `sad.png`, `error.png`, `ask.png`, `avatar.png`,
 `body.png`, `turnaround.png`, `parts-down.png`, `parts-left.png`, `parts-right.png`, `parts-up.png`.
 
 ## 3. Judging a sheet

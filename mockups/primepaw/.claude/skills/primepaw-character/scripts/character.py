@@ -4,6 +4,7 @@
     character.py list                      the characters that exist, and which one the boards wear
     character.py register <id> "<Name>"    the portrait picker on the Setup and Home boards lists it
     character.py use <id>                  every board wears it: the pet atlas, the face sticker, the frame size
+                                           (its own Pet boards take the frame size too, after a rebuild)
     character.py board <id> "<Name>"       a Pet board pair for it, copied from the puppy's, listed on the canvas
 
 Every command is safe to run again; it reports what it changed. The script finds the Primepaw folder
@@ -116,9 +117,11 @@ def cmd_use(cid):
         name = os.path.basename(p)
         s = read(p)
         b = BLOCK.search(s)
-        if not b or name.startswith('DioramaPet'):
+        if not b:
             continue
         cur = worn_by(s)
+        if name.startswith('DioramaPet') and cur != cid:
+            continue   # a Pet board shows its own character; only its frame size follows a rebuild
         blk = b.group(0)
         if cur and cur != cid:
             blk = blk.replace(f'pet/{cur}.png', f'pet/{cid}.png').replace(f'pet/{cur}-face.png', f'pet/{cid}-face.png')

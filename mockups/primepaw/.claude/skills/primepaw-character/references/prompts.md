@@ -4,7 +4,8 @@ These are the puppy's prompts with the puppy taken out. Each has a handful of sl
 character brief and keep every sentence outside the slots, because those sentences are what make the
 sheets sliceable (the green key, the flat cut edge, the same size in every cell) and what keep the
 style on the Kraft design language (flat paper, die-cut border, pen ink, no shadow). After the base, every
-prompt opens with the recap so the model keeps the character it is shown.
+prompt names the character's pieces again (`{RECAP}`, or `{FEATURES}` on the mood sheets) so the model
+keeps the character it is shown.
 
 ## The slots
 
