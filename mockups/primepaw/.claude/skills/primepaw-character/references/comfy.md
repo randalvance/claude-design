@@ -2,7 +2,7 @@
 
 The puppy was drawn with Qwen Image 2.1, an open-weight model that runs on Comfy Cloud's own
 credits rather than a partner's. Everything after the base is an *edit* of the base: the model sees the
-previous cut as a reference image and keeps the character's identity, which is what makes eleven
+previous cut as a reference image and keeps the character's identity, which is what makes thirteen
 separate sheets look like one creature. Use the `comfy-cloud` plugin's tools; the names below are its
 tool names.
 
@@ -47,7 +47,7 @@ that names the sheet:
 
 | Placeholder | Value |
 | --- | --- |
-| `__REFERENCE__` | the reference's filename from `use_previous_output`: the base for the moods, the avatar and the body; the body for the walk strips |
+| `__REFERENCE__` | the reference's filename from `use_previous_output`: the base for the moods, the avatar and the body; the body for a walk strip drawn with Qwen |
 | `__PROMPT__` | the sheet's prompt from `prompts.md` |
 | `__WIDTH__`, `__HEIGHT__` | mood sheets 2048 by 1024; avatar 1024 by 1024; body 1024 by 1536; walk strips 2048 by 512 |
 | `__SEED__` | any integer; a different seed per sheet, and a new one when a sheet needs redrawing |
@@ -57,34 +57,49 @@ The width and height are numbers in the JSON, not strings: replace the quoted pl
 Keep the sampler as it is (25 steps, cfg 1, euler, simple): cfg 1 is what Qwen Image 2.1 wants, and
 raising it makes the colours bleed. `resolution: 0` on the text encoder lets the reference in at its own size.
 
-Two stages, because the walk strips need the body:
+Three stages, because the turnaround needs the body and the walk strips need both:
 
 1. **From the base:** the six mood sheets, the avatar and the body, eight items in one batch.
-2. **From the body:** the four walk strips (down, left, right, up), four items in one batch, or, better,
-   the GPT Image route below.
+2. **From the body:** the turnaround, one GPT Image run (below), judged against the slots before
+   anything is drawn from it.
+3. **From the turnaround and the body:** the four walk strips (down, left, right, up), four items in one
+   batch, GPT Image again. Qwen can draw a strip from the body alone (2048 by 512, one row of 6 cells),
+   but read on before spending the seeds.
 
 The walk strips are where Qwen falls short: seen from behind it splays the walking legs out sideways,
-however the prompt words it, and in profile it turns the head toward the viewer. The puppy's four strips
-were redrawn with GPT Image 2.6 Sunburst, a paid partner model, which drew every one right on its first
-seed, so draw the strips with it when the credits are there and keep Qwen for the moods, the avatar and
-the body. The graph is `LoadImage` (the body) → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`,
-`model.size` `1536x1024`, `model.quality` `high`, the body on `model.images.image_1`) →
-`SaveImageAdvanced`, sent with `submit_workflow`, because the batch tool's bundled catalog can lag the
-live one and refuse the template by name. Ask for a grid of 3 columns and 2 rows at that size (the model
-draws 3:2, not a 4:1 strip, and `build.py` reads the six cells in reading order either way) and spell the
-walk out: legs under the body, one foot lifted so its sole shows, never spread sideways. It costs 5 to
-29 credits an image and the spend is gated, so ask the user before submitting. It returns a transparent
-PNG rather than a green sheet, the figure at alpha 250 to 254 with a faint halo below 30: composite it
-onto `#00FF00` with the alpha remapped (0 below 24, opaque from 250) before saving it as the source, so
-the slicer keys it like the others.
+however the prompt words it, and in profile it turns the head toward the viewer. And any model invents
+the sides it has not been shown: drawn from the body alone, the puppy's back came back from GPT Image
+wearing the tummy patch, right walk and all. So the strips are drawn with GPT Image 2.6 Sunburst, a paid
+partner model, from a turnaround drawn first, and Qwen keeps the moods, the avatar and the body.
+
+The graph is `LoadImage` → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`, `model.size`
+`1536x1024`, `model.quality` `high`, a reference on `model.images.image_1` and a second one on
+`image_2`) → `SaveImageAdvanced`, sent with `submit_workflow`, because the batch tool's bundled catalog
+can lag the live one and refuse the template by name. A file from disk reaches `LoadImage` through
+`upload_file`: run the curl it prints and give `LoadImage` the name it answers with. Two seeds per sheet,
+as two items of one batch, is the cheap way to have a choice.
+
+- **The turnaround:** the body on `image_1`, the turnaround prompt from `prompts.md`. Judge it like the
+  base: four figures of one height on one ground line, the back with no face and with every absence
+  the `{BACK}` slot names (the puppy's plain back, no patch), the profiles with one eye, the same
+  colours in every view. Save it as `pet/src/<id>/turnaround.png`; it never ships, but every strip copies it.
+- **Each strip:** the turnaround on `image_1`, the body on `image_2`, the strip prompt, which points at
+  the turnaround's figure for that facing. Ask for a grid of 3 columns and 2 rows at that size (the model
+  draws 3:2, not a 4:1 strip, and `build.py` reads the six cells in reading order either way) and spell
+  the walk out: legs under the body, one foot lifted so its sole shows, never spread sideways.
+
+It costs 5 to 29 credits an image and the spend is gated, so ask the user before submitting. It returns
+either a green sheet or a transparent PNG, the figure at alpha 250 to 254 with a faint halo below 30:
+composite the transparent kind onto `#00FF00` with the alpha remapped (0 below 24, opaque from 250)
+before saving it as the source, so the slicer keys it like the others.
 
 Before the first batch, `estimate_credits` with `template_name: image_qwen_image_2_1_image_edit` says
-what one edit costs; tell the user the total for twelve before spending it.
+what one edit costs; tell the user the total for the eight edits before spending it.
 
 Wait with `get_batch_status` or `wait_for_batch`, then `get_batch_output` with `client_os`: it downloads
 every image and reports where each landed. Copy them into `pet/src/<id>/` under the names `build.py`
 expects: `idle.png`, `greet.png`, `celebrate.png`, `sad.png`, `error.png`, `ask.png`, `avatar.png`,
-`body.png`, `walk-down.png`, `walk-left.png`, `walk-right.png`, `walk-up.png`.
+`body.png`, `turnaround.png`, `walk-down.png`, `walk-left.png`, `walk-right.png`, `walk-up.png`.
 
 ## 3. Judging a sheet
 
@@ -101,7 +116,8 @@ with a new seed when:
 
 Judge the walk strips as a set: `build.py` scales each facing to the same standing height, so a strip
 drawn a little smaller is fine, but one drawn much smaller comes out soft. The figure must stay upright
-and square to the viewer in every cell; the back view is the one Qwen gets wrong, twisting the body
-or splaying the legs, so look at its walking cells closely and reach for GPT Image (above) if a second
-seed does not fix it. The avatar must be one round sticker filling the frame, and the body a full figure
-with its feet on the ground and nothing cropped.
+and square to the viewer in every cell; the back view is the one that goes wrong, Qwen twisting the
+body or splaying the legs and any model making up a back it was never shown, so draw the turnaround
+first (above), check each strip against its figure there, and look at the back's walking cells closely.
+The avatar must be one round sticker filling the frame, and the body a full figure with its feet on the
+ground and nothing cropped.

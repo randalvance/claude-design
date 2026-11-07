@@ -15,8 +15,8 @@ prompt opens with the recap so the model keeps the character it is shown.
 | `{RECAP}` | the same pieces in a short list, for the edits | the same cream paper face, kraft brown floppy ears and eye patch, red collar with its tag, pink cheeks, pen-ink features, the white die-cut sticker border |
 | `{HEAD}` | what the avatar shows: the head and whatever sits at the neck | the puppy's head with its ears and the top of its red collar |
 | `{BODY}` | the standing figure, head to toe | a short round cream paper body, a kraft brown paper patch on its tummy, its two front paws hanging relaxed at its sides, two short legs with little round feet planted on the ground, the tip of its tail showing at one side, the same red collar around its neck and the same friendly smiling face |
-| `{SIDE}` | what a profile view shows | one eye, one ear, its snout pointing left and its tail at the right |
-| `{BACK}` | what the view from behind shows | the back of its head with both floppy ears, the back of its collar, its back and its tail, and no face at all |
+| `{SIDE}` | what a profile view shows | one eye, one ear, the tummy patch showing as a sliver at its front, its snout pointing left and its tail at the right |
+| `{BACK}` | what the view from behind shows, absences included: the front never shows the back, so the model makes one up unless this slot settles it | the back of its head with no face, the backs of both floppy ears hanging at the sides, the back of the red collar, a plain cream back with no patch at all, its short tail at the bottom in the middle, its two paws at its sides and the backs of its feet |
 | `{PAWS}` | the word for its front limbs | paws |
 | `{EARS}` | the part that bounces, droops or perks (ears, antennae, feathers, a hat) | ears |
 
@@ -58,16 +58,34 @@ rest, feet on the ground, because the strips copy it.
 
 > Using the paper cut-out {CREATURE} from the reference image exactly as it is ({RECAP}), draw the whole character from head to toe: it stands upright on its two hind legs like a little mascot, seen straight from the front, with {BODY}. One flat paper cut-out with a clean white die-cut border all around it, centred, filling the height of the picture, on a solid flat bright green (#00FF00) background. No text, no shadow, nothing else in the picture.
 
-## The walk strips (edits of the body, 2048 by 512, one per facing)
+## The turnaround (edit of the body, 1536 by 1024, GPT Image 2.6)
+
+The character from its four sides in one row: front, left side, back, right side. Like the body it
+never ships; it is what the walk strips copy, and it is where the sides the front never shows get
+settled. Drawn from the body alone, every strip invents its own back (the puppy's came back wearing
+the tummy patch), so draw the turnaround before any strip and judge it against the slots.
+
+> A character turnaround sheet (model sheet) of the paper cut-out {CREATURE} from the reference image, exactly as it is: {RECAP}, {BODY}, pen-ink outlines, flat paper colours with a faint grain, and a white die-cut sticker border around each figure. The character stands upright in the same neutral pose in every view, both {PAWS} relaxed at its sides, both feet planted, the same size and proportions, feet on one ground line. Four views in one row, left to right, with a wide green gap between them: 1. from the front, facing the viewer, exactly like the reference; 2. from its left side in strict profile, facing the left edge of the picture, so we see {SIDE}; 3. from directly behind, facing away from the viewer, so we see {BACK}; 4. from its right side in strict profile, facing the right edge of the picture, so we see {SIDE} mirrored, its tail at the left. All on a solid flat bright green (#00FF00) background, with no ground line drawn, no grid lines, no borders, no labels and no text. Flat paper, no shadows, no gradients, not 3D.
+
+## The walk strips (edits of the turnaround and the body, 1536 by 1024, one per facing)
 
 The Factory Overseer reads the sheet by column, so the six cells have to hold these six poses in this
-order, in every facing. The facing clause is the only thing that changes between the four strips.
+order, in every facing. GPT Image 2.6 draws each strip from two reference images, the turnaround first
+and the body second (`comfy.md` has the graph), as a grid of 3 columns and 2 rows; `build.py` reads the
+six cells in reading order. The figure the prompt points at on the turnaround and the facing clause are
+the only things that change between the four strips.
 
-> Using the paper cut-out {CREATURE} from the reference image exactly as it is ({RECAP}, the same standing pose), draw a stop-motion sprite strip: one row of 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid lines, no borders, no labels and no text. In every cell the character is the same size, seen {FACING}, with its feet standing on the same ground line. The 6 cells, from left to right: 1. standing still with both {PAWS} relaxed at its sides; 2. mid-step walking, its left leg forward and right leg back, arms swinging; 3. mid-step walking, its right leg forward and left leg back, arms swinging the other way; 4. working, both {PAWS} raised up in front of its chest as if typing on a keyboard; 5. working, one {PAW} pushed forward as if pressing a button; 6. waving hello with one {PAW} raised high above its head. Like a paper puppet moved between photographs.
+> The first reference image is a character turnaround of the paper cut-out {CREATURE}: its front, its left side, its back and its right side. The second reference image is the same character from the front. Draw the character exactly as the turnaround's {VIEW} shows it ({RECAP}), as a stop-motion sprite sheet: a grid of 3 columns and 2 rows, 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid lines, no borders, no labels and no text. The 6 cells read left to right along the top row and then along the bottom row. In every cell the character is the same size as in the turnaround, seen {FACING}, with its feet standing on the same ground line. The 6 cells: 1. standing still with both {PAWS} relaxed at its sides, both feet planted, exactly like the turnaround's {VIEW}; 2. mid-step walking, its left leg planted straight down under the body and its right leg bent and lifted so the sole of its right foot shows, the legs staying under the body and never spreading sideways, the arms swinging; 3. the other step, its right leg planted and its left leg bent and lifted showing its sole, the arms swinging the other way; 4. working, both {PAWS} raised up in front of its chest as if typing on a keyboard; 5. working, one {PAW} pushed forward as if pressing a button; 6. waving hello with one {PAW} raised high above its head. Flat paper, no shadows, no gradients, like a paper puppet moved between photographs.
 
-`{FACING}`, per strip:
+`{VIEW}` and `{FACING}`, per strip:
 
-- `walk-down`: "straight from the front, facing the viewer, its body square to the viewer in every cell; when it walks one leg lifts so its sole shows, the legs staying under its body"
-- `walk-left`: "from the side in strict profile, turned to face the left edge of the picture, so we see {SIDE}; its head stays in that profile in every cell, never turning toward the viewer, so only one eye ever shows"
-- `walk-right`: "from the side in strict profile, turned to face the right edge of the picture, so we see {SIDE} mirrored, its snout pointing right and its tail at the left; its head stays in that profile in every cell, never turning toward the viewer, so only one eye ever shows"
-- `walk-up`: "from directly behind, facing straight away from the viewer, so we see {BACK}; its body stays square to the viewer, never turning, and when it walks its legs stay under its body, one foot lifted so its sole shows, never spread sideways"
+- `walk-down`: "first figure, the front"; "straight from the front, facing the viewer, its body upright and square to the viewer in every cell, never turning"
+- `walk-left`: "second figure, the left side"; "from the side in strict profile, turned to face the left edge of the picture, so we see {SIDE}; its head stays in that profile in every cell, never turning toward the viewer, so only one eye ever shows"
+- `walk-right`: "fourth figure, the right side"; "from the side in strict profile, turned to face the right edge of the picture, so we see {SIDE} mirrored, its tail at the left; its head stays in that profile in every cell, never turning toward the viewer, so only one eye ever shows"
+- `walk-up`: "third figure, the back"; "from directly behind, facing straight away from the viewer, so we see {BACK}; its body stays upright and square to the viewer, never turning; in cell 4 only its elbows show at its sides, and in cell 5 the pushed {PAW} is out of sight in front of it"
+
+Without GPT credits, Qwen draws a strip from the body alone, at 2048 by 512 as one row of 6 cells: open
+with the body prompt's recap ("Using the paper cut-out {CREATURE} from the reference image exactly as it
+is ({RECAP}, the same standing pose), draw a stop-motion sprite strip: one row of 6 cells of equal size,
+…"), then the same six cells and facing clause. Expect to redraw the back, and to check the profiles
+for a second eye.

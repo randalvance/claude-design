@@ -3,15 +3,16 @@
 The pet over the composer, the main agent's face, and the standee that walks the Factory Overseer's
 floor are one character, a paper cut-out puppy: cream paper face and body, kraft brown floppy ears,
 an eye patch and a tummy patch, a red collar with a tag, pink cheeks, pen-ink features, and the white
-die-cut border every Kraft sticker has. Three cuts of it ship here, all drawn with Qwen Image 2.1 on
-Comfy Cloud (the open-weight templates, no partner credits) and sliced by `build.py`.
+die-cut border every Kraft sticker has. Three cuts of it ship here, drawn on Comfy Cloud (Qwen Image 2.1,
+the open-weight template, for the peeking sheets, the avatar and the body; GPT Image 2.6 Sunburst for
+the turnaround and the walk strips) and sliced by `build.py`.
 
 | File | What it is | Where it goes |
 | --- | --- | --- |
 | `dog.png`, `dog.json` | The peeking puppy: an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; the JSON holds the frame size and the CSS numbers | Over the composer on every board that has one, as `.pet`, see the `/* pet: */` block in a board's style |
 | `dog-face.png` | The avatar: the puppy's head as one round sticker, 176px square (88 CSS px at 2x) | The Jarvis tile on the rail, the thread portraits, any row or badge that needs the main agent's face, as `.jface` |
 | `dog-walk.png`, `dog-walk.json` | The standee: the Factory Overseer's pet sheet, 6 columns by 4 facings of 256 by 320 px cells | The factory floor; see below |
-| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green, one per mood, the avatar, the body design and one walk strip per facing | Inputs to `build.py`; keep them so a cut can be rebuilt |
+| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green, one per mood, the avatar, the body design, the turnaround (the puppy from its four sides) and one walk strip per facing | Inputs to `build.py`; keep them so a cut can be rebuilt |
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
@@ -43,9 +44,11 @@ up). Column 0 stands, 1 and 2 are the two steps of a walk (it plays 0, 1, 2, 1 a
 facing the way it goes), 3 and 4 the two beats of working (5.5 a second), 5 and 0 the wave for
 attention (3.2 a second), with a little lift and roll on top. The four walk strips, `src/dog/walk-*.png`,
 were drawn with GPT Image 2.6 Sunburst rather than Qwen, which splays the legs when the puppy walks
-away and turns its head in profile; the character skill's `comfy.md` has that recipe. `dog-walk.png` is cut to that layout, the
-puppy's feet on the cell's ground line and the standing puppy 86% of the cell's height, so the host
-hands it over as
+away and turns its head in profile. The back strip was drawn from `src/dog/turnaround.png`, the puppy
+from its four sides, because with only the front to go on the model made up a back and put the tummy
+patch there; the turnaround settles it as plain cream with the tail at the bottom. The character skill's
+`comfy.md` has that recipe. `dog-walk.png` is cut to that layout, the puppy's feet on the cell's ground
+line and the standing puppy 86% of the cell's height, so the host hands it over as
 
 ```ts
 petAssets: { byAgent: { jarvis: { src: "pet/dog-walk.png", layout: "sheet", height: 2.67 } } }
@@ -73,10 +76,12 @@ Pillow and numpy.
 
 ## The prompts
 
-Every prompt went to the Qwen Image 2.1 edit graph with the previous cut as its reference image
-(`TextEncodeQwenImage21` with `images.image_1`, the wide latent switched on), 25 steps, cfg 1, euler
-simple. The base puppy came from the text-to-image template with the prompt below; everything else
-edits from it.
+The mood sheets, the avatar and the body went to the Qwen Image 2.1 edit graph with the previous cut
+as its reference image (`TextEncodeQwenImage21` with `images.image_1`, the wide latent switched on),
+25 steps, cfg 1, euler simple; the turnaround and the walk strips went to GPT Image 2.6 Sunburst with
+the body as the reference image, and the back strip with the turnaround as a first reference and the
+body as a second. The base puppy came from the text-to-image template with the prompt below; everything
+else edits from it.
 
 **The base** (1024 by 1024, the text-to-image template, seed 20261107): "Paper-craft cut-out character, the mascot of a paper diorama app: a friendly floppy-eared puppy, only its head and its two front paws showing, peeking over a straight horizontal edge as if looking over a wall, facing the viewer. Everything is made of layered flat paper cut-outs: a cream paper face (#f3e9d5), kraft brown paper floppy ears and one kraft brown patch over its left eye (#d9bc86), a terracotta red paper collar (#c8553d) with a small round tag, two round pink paper cheeks (#e8a9a2), a round ink-black nose, two small dot eyes and a little smiling mouth drawn with a dark pen (#2a2219), thin hand-drawn pen outlines on every piece of paper, and a narrow white die-cut sticker border around the whole figure. Flat colours with a faint paper grain, no gradients, not 3D, not a photo, no drop shadow. The figure is cut off flat along the straight edge where its paws hook over it, and nothing at all is drawn below that edge. Large and centred, isolated on a solid flat bright green chroma-key background (#00FF00). No text, no letters, no logo, no other objects."
 
@@ -126,8 +131,50 @@ paper cut-out with a clean white die-cut border all around it, centred, filling 
 picture, on a solid flat bright green (#00FF00) background. No text, no shadow, nothing else in the
 picture."
 
-**The walk strips** (2048 by 512, one per facing, from the body): "...draw a stop-motion sprite strip:
-one row of 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid
+**The turnaround** (1536 by 1024, GPT Image 2.6, from the body): "A character turnaround sheet (model
+sheet) of the paper cut-out friendly floppy-eared puppy from the reference image, exactly as it is: the
+same cream paper face with the kraft brown patch over its left eye, two small dot eyes, a round black
+nose and a little smile, pink cheeks, kraft brown floppy ears, the red collar with its round tag, a short
+round cream body with a kraft brown oval patch on its tummy, short legs with little round feet, a short
+tail, pen-ink outlines, flat paper colours with a faint grain, and a white die-cut sticker border around
+each figure. The puppy stands upright in the same neutral pose in every view, both paws relaxed at its
+sides, both feet planted, the same size and proportions, feet on one ground line. Four views in one
+row, left to right, with a wide green gap between them: 1. from the front, facing the viewer, exactly
+like the reference; 2. from its left side in strict profile, its snout pointing to the left edge of the
+picture, one eye, one ear, the tummy patch showing as a sliver at its front, its tail at the right;
+3. from directly behind, facing away from the viewer: the back of its head with no face, the backs of
+both floppy ears hanging at the sides, the back of the red collar, a plain cream back with no patch at
+all, its short tail at the bottom in the middle, its two paws at its sides and the backs of its feet;
+4. from its right side in strict profile, its snout pointing to the right edge of the picture, its tail
+at the left. All on a solid flat bright green (#00FF00) background, with no ground line drawn, no grid
+lines, no borders, no labels and no text. Flat paper, no shadows, no gradients, not 3D."
+
+**The back strip** (1536 by 1024, GPT Image 2.6, the turnaround first and the body second): "The first
+reference image is a character turnaround of a paper cut-out friendly floppy-eared puppy: its front,
+its left side, its back and its right side. The second reference image is the same puppy from the
+front. Draw the puppy exactly as the turnaround's third figure shows it from behind: the back of its
+head with no face at all, the backs of both kraft brown floppy ears hanging at the sides of the head,
+the back of the red collar, a plain cream paper back with no patch, its short tail at the bottom in the
+middle, its two paws at its sides and the backs of its little feet, pen-ink outlines, flat paper colours
+with a faint grain, and the white die-cut sticker border. Draw it as a stop-motion sprite sheet: a grid
+of 3 columns and 2 rows, 6 cells of equal size, on a solid flat bright green (#00FF00) background, with
+no grid lines, no borders, no labels and no text. The 6 cells read left to right along the top row and
+then along the bottom row. In every cell the puppy is the same size as in the turnaround, seen from
+directly behind, facing straight away from the viewer, its body upright and square to the viewer in
+every cell, never turning, with its feet standing on the same ground line. The 6 cells: 1. standing
+still with both paws relaxed at its sides, both feet planted, exactly like the turnaround's back view;
+2. mid-step walking away from us: the left leg planted straight down under the body and the right leg
+bent back and lifted so we see the sole of its raised right foot, the legs staying under the body and
+never spreading sideways, the arms swinging; 3. the other step: the right leg planted straight down and
+the left leg bent back and lifted showing its sole, the arms swinging the other way; 4. working, both
+paws raised up in front of its chest, so from behind only its elbows show at its sides; 5. working, one
+paw pushed forward out of sight in front of it; 6. waving hello with one paw raised high above its
+head, seen from behind. Flat paper, no shadows, no gradients, like a paper puppet moved between
+photographs."
+
+**The other walk strips** (one per facing, from the body; GPT Image drew them as a grid of 3 columns and
+2 rows at 1536 by 1024, the Qwen runs before them as one row of 6 cells at 2048 by 512): "...draw a
+stop-motion sprite strip: one row of 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid
 lines, no borders, no labels and no text. In every cell the puppy is the same size, seen [straight from
 the front, facing the viewer | from the side in profile, turned to face the left edge of the picture,
 so we see one eye, one ear, its snout pointing left and its tail at the right | ...the right edge... |

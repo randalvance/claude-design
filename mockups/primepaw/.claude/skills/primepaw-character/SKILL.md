@@ -14,7 +14,7 @@ all read those cuts by name, so a new character is a new set of files under `pet
 | The peeking sprite | `pet/<id>.png`, an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; `pet/<id>.json` with the frame size | Over the composer on every board that has one, as `.pet`, stepped like paper stop-motion |
 | The face sticker | `pet/<id>-face.png`, the head as one round sticker, 176 px square | The Jarvis tile on the rail, the thread portraits, the picker, as `.jface` |
 | The standee | `pet/<id>-walk.png`, the Factory Overseer's pet sheet (6 columns by 4 facings of 256 by 320 cells); `pet/<id>-walk.json` with the factory contract | The factory floor, and the Pet board's mock of it |
-| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png` and four `walk-*.png`, all on chroma-key green, plus `base.png`, the drawing the edits started from | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept, so its sheets stand in for it) |
+| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the walk strips copy) and four `walk-*.png`, all on chroma-key green, plus `base.png`, the drawing the edits started from | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept, so its sheets stand in for it) |
 
 Read `pet/README.md` once: it is the puppy's own account of the same system, and `DioramaPet.dc.html`
 shows the three cuts side by side with every mood and the standee walking.
@@ -38,19 +38,22 @@ antennae, a hat). Design for 92 CSS px over the composer and 44 px on the rail: 
 Pick an `<id>` (one lowercase word, used in every filename and CSS url) and a picker name (what the
 Setup form shows: "A paper puppy", "A paper owl"). Then write the brief as the slot values in
 `references/prompts.md`: the creature, its paper pieces with their colours, the head, the body, the
-side and back views, the words for its limbs and its ears. Writing the slots first keeps the twelve
+side and back views (the back spelled out, absences included, since nothing else shows the model what
+is there), the words for its limbs and its ears. Writing the slots first keeps the thirteen
 sheets describing the same creature; drifting prompts are the usual reason a character falls apart.
 Show the user the slots before spending credits if the request left any of them open.
 
 ### 2. Draw it on Comfy Cloud
 
-Follow `references/comfy.md`. In short: one text-to-image run for the base, judged hard; then every
-other sheet is an edit of the base (the six moods, the avatar, the body) or of the body (the four walk
-strips), submitted as batches of the graph in `assets/qwen21-edit.workflow.json`; the walk strips come
-out right with GPT Image 2.6 where Qwen twists them, and `comfy.md` has that route too. The prompts come from
-`references/prompts.md`, slots filled. Save every downloaded sheet under `pet/src/<id>/` with the names
-`build.py` expects, and look at each one before building: the judging list in `comfy.md` says what
-sends a sheet back for a new seed.
+Follow `references/comfy.md`. In short: one text-to-image run for the base, judged hard; then the six
+moods, the avatar and the body as edits of the base, submitted as one batch of the graph in
+`assets/qwen21-edit.workflow.json`; then a turnaround of the body (front, left side, back, right side in
+one row) with GPT Image 2.6, judged against the slots before anything is drawn from it, because a model
+invents whatever the body does not show it and the turnaround is where the back and the sides get
+settled; then the four walk strips from the turnaround and the body, GPT Image again, since Qwen twists
+them. The prompts come from `references/prompts.md`, slots filled. Save every downloaded sheet under
+`pet/src/<id>/` with the names `build.py` expects, and look at each one before building: the judging
+list in `comfy.md` says what sends a sheet back for a new seed.
 
 ### 3. Build the cuts
 
@@ -103,7 +106,7 @@ entry, not a code change.
 ### 6. Done when
 
 - `pet/<id>.png`, `.json`, `-face.png`, `-walk.png`, `-walk.json` exist and `pet/src/<id>/` holds the
-  twelve sources and the base, so the character can be redrawn.
+  thirteen sources (the turnaround among them) and the base, so the character can be redrawn.
 - The Pet board pair plays all six moods, shows the face and walks the standee in four facings.
 - The picker lists it; if it was meant to be worn, the shell, a Home board and a page board show it
   over the composer and on the rail tile in the browser, light and dark.
