@@ -43,7 +43,7 @@ Set page titles in `title` (`kr-title`), the title of an open session in `title-
 | 2 | mat | `mat-green-2`, 2px | `lift-mat` | capsule decks |
 | 3 | tall paper | `edge-2`, 2px | `lift-paper-3` | the leaf over the tabs |
 | 4 | frame | `mat-red-2`, 3px | `lift-frame`, card inside `recess` | the composer |
-| top | sticker | `sticker-cut` | none | icons, badges, pills, the paw, the cat |
+| top | sticker | `sticker-cut` | none | icons, badges, pills, the paw, the puppy |
 
 ## Iconography
 
@@ -76,5 +76,6 @@ Lay a multiply grain over the whole page at 40% (`kr-grain` in bundle.css) so ca
 - **Stamps.** One angle, `tilt-stamp`.
 - **When the agent needs you.** The turn stops. A tool approval is a `kr-slip` on an amber mat in the thread. Questions wait as a `kr-qdock` card on the same mat in the dock above the composer, the agent's portrait with `implementer-agent has 3 questions` and Answer, which opens a `kr-qsheet` with one folder tab per question; the inbox shows the same card and sheet. It holds still; only amber, the sticker and the row badge signal it. The composer stays open as the other way to answer. Your choice is struck with a `kr-stamp`, and the thread keeps a stub of it. YOLO belongs to the session, skips slips but not questions, and approves a slip that's already waiting.
 - **Home.** The page at / is a thread with one personal agent, the main agent, whose `kr-ib kr-jarvis` tile tops the rail. Threads are `kr-trow` strips. In a thread the agent's words are `kr-jsay` in Fraunces, and it leaves a `kr-scard` per session it starts, a folded `kr-helper` for read-only research, a `kr-dline` per Thread YOLO call and a `kr-report` when a job is done. See `HomeThread`.
+- **The pet.** Jarvis, the main agent, is a paper puppy: a sprite sticker that peeks over the composer with its paws hooked on the frame, tilted `tilt-cat`, stepped frame by frame like paper stop-motion, one row of its atlas per mood (idle, greet, celebrate, sad, error, ask), and never pulsing. Its head is the sticker on the `kr-jarvis` tile and the thread portraits, and its full body is a standee cut to the Factory Overseer's pet sheet. The cuts and the prompts live with the Primepaw mockup under `pet/`.
 - **Side panel.** What sits beside a conversation lives in one panel opened by tabs at the right of the strip: artifacts on a `kr-clipboard`, the side chat on a `kr-pad`. With both open they stack. An artifact also shows in the thread as a `kr-artchip`.
 - **Page or drawer.** Things you author (agents, skills, workspaces) open an edit page. Things that run or that you inspect in place (MCP servers, jobs, cards) open a drawer.

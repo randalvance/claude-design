@@ -455,6 +455,26 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaPet.dc.html": {
+      "x": 0,
+      "y": 22000,
+      "w": 1440,
+      "h": 900,
+      "title": "Jarvis the paper puppy — peeking, sticker and standee, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaPetDark.dc.html": {
+      "x": 1540,
+      "y": 22000,
+      "w": 1440,
+      "h": 900,
+      "title": "Jarvis the paper puppy — peeking, sticker and standee, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -501,7 +521,9 @@
     "DioramaHomeAsk.dc.html",
     "DioramaHomeAskDark.dc.html",
     "DioramaHomeYolo.dc.html",
-    "DioramaHomeYoloDark.dc.html"
+    "DioramaHomeYoloDark.dc.html",
+    "DioramaPet.dc.html",
+    "DioramaPetDark.dc.html"
   ],
   "notes": {
     "p14": {
@@ -559,6 +581,13 @@
       "w": 320,
       "page": "diorama",
       "text": "The states: empty, a big prompt box where sending starts a thread; a session waiting on you, on the amber mat, next to one that failed; Jarvis asking which workspace with the same question card and sheet a session uses; and Thread YOLO on, which answers waiting prompts and writes each call down. Turn YOLO on in Bump Node to 22 to watch it answer the waiting session."
+    },
+    "p22": {
+      "x": 3080,
+      "y": 22000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Jarvis is a paper puppy, one character in three cuts. Peeking: over the composer, paws hooked on the frame, a sprite atlas with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the boards pick the mood from what the agent is doing, and a click says hello. The sticker: its head as one round sticker, the face on the Jarvis tile, the thread portraits and the rows. The standee: full body, cut to the Factory Overseer's pet sheet (6 columns by 4 facings) so the main agent can walk its floor. All three drawn by Qwen Image 2.1 on Comfy Cloud and sliced by pet/build.py; the prompts are in pet/README.md."
     }
   },
   "designSystems": [
