@@ -27,7 +27,11 @@ once and hold their last frame until the board clears the class. The boards set 
 agent is doing: idle while it works or rests, `ask` while a question or a tool approval waits, `greet`
 when a board opens, a session is picked or Jarvis says "On it", `celebrate` when a turn finishes or a
 report lands, `sad` when you stop the agent or deny a tool, `error` while the thread Home has open
-holds a failed session. A click on the puppy says hello. Under `prefers-reduced-motion` it holds its first frame.
+holds a failed session. Two rules order them: a timed reaction (`greet`, `celebrate`, `sad`, or the
+dizzy spell Home plays on opening a thread with a failure in it) shows over the resting mood until its
+timer ends, and among the resting moods `ask` wins over `error`, so a thread that waits on you and also
+holds a failed session rests in `ask`, and the arrival spell is where its failure shows. A click on the
+puppy says hello. Under `prefers-reduced-motion` it holds its first frame.
 The click is a mouse-only easter egg: the puppy is a decorative sticker, `aria-hidden` and outside the
 tab order, so nothing a keyboard or a screen reader needs lives on it.
 
