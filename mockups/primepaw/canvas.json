@@ -476,29 +476,9 @@
       "expand": "fill",
       "is_interactive": true
     },
-    "DioramaHomeMeetInvalid.dc.html": {
-      "x": 0,
-      "y": 25000,
-      "w": 1440,
-      "h": 900,
-      "title": "Home, meeting the main agent, Create pressed with no name, paper diorama, live demo",
-      "page": "diorama",
-      "expand": "fill",
-      "is_interactive": true
-    },
-    "DioramaHomeMeetInvalidDark.dc.html": {
-      "x": 1540,
-      "y": 25000,
-      "w": 1440,
-      "h": 900,
-      "title": "Home, meeting the main agent, Create pressed with no name, paper diorama, dark mode, live demo",
-      "page": "diorama",
-      "expand": "fill",
-      "is_interactive": true
-    },
     "DioramaHomeMeetCreated.dc.html": {
       "x": 0,
-      "y": 26000,
+      "y": 25000,
       "w": 1440,
       "h": 900,
       "title": "Home right after meeting Jarvis, paper diorama, live demo",
@@ -508,7 +488,7 @@
     },
     "DioramaHomeMeetCreatedDark.dc.html": {
       "x": 1540,
-      "y": 26000,
+      "y": 25000,
       "w": 1440,
       "h": 900,
       "title": "Home right after meeting Jarvis, paper diorama, dark mode, live demo",
@@ -604,8 +584,6 @@
     "DioramaHomeYoloDark.dc.html",
     "DioramaHomeMeet.dc.html",
     "DioramaHomeMeetDark.dc.html",
-    "DioramaHomeMeetInvalid.dc.html",
-    "DioramaHomeMeetInvalidDark.dc.html",
     "DioramaHomeMeetCreated.dc.html",
     "DioramaHomeMeetCreatedDark.dc.html",
     "DioramaSetup.dc.html",
@@ -675,7 +653,7 @@
       "y": 24000,
       "w": 320,
       "page": "diorama",
-      "text": "Home before there is a main agent: the same form, as a card in the middle of the empty sheet, with the rail’s top tile an empty taped frame and the thread column waiting. Create with no name writes the error in red pen; with one, the WELCOME stamp lands, the portrait drops onto the rail tile, and the sheet turns into the empty home page where the agent says hello in its own words. The third pair is that moment."
+      "text": "Home before there is a main agent: the same form, as a card in the middle of the empty sheet, with the rail’s top tile an empty taped frame and the thread column waiting. Press Create with nothing typed and the rule under the name turns dashed red with “It needs a name” under it in red pen; with a name, the WELCOME stamp lands, the portrait drops onto the rail tile, and the sheet turns into the empty home page where the agent says hello in its own words. The second pair is that moment."
     },
     "p22": {
       "x": 3080,
