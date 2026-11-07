@@ -455,6 +455,106 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaHomeMeet.dc.html": {
+      "x": 0,
+      "y": 24000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with no main agent yet, meet it, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeMeetDark.dc.html": {
+      "x": 1540,
+      "y": 24000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home with no main agent yet, meet it, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeMeetInvalid.dc.html": {
+      "x": 0,
+      "y": 25000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home, meeting the main agent, Create pressed with no name, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeMeetInvalidDark.dc.html": {
+      "x": 1540,
+      "y": 25000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home, meeting the main agent, Create pressed with no name, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeMeetCreated.dc.html": {
+      "x": 0,
+      "y": 26000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home right after meeting Jarvis, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaHomeMeetCreatedDark.dc.html": {
+      "x": 1540,
+      "y": 26000,
+      "w": 1440,
+      "h": 900,
+      "title": "Home right after meeting Jarvis, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSetup.dc.html": {
+      "x": 0,
+      "y": 22000,
+      "w": 1440,
+      "h": 900,
+      "title": "Setting up Primepaw, meeting the main agent, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSetupDark.dc.html": {
+      "x": 1540,
+      "y": 22000,
+      "w": 1440,
+      "h": 900,
+      "title": "Setting up Primepaw, meeting the main agent, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSetupRestored.dc.html": {
+      "x": 0,
+      "y": 23000,
+      "w": 1440,
+      "h": 900,
+      "title": "Setting up Primepaw, the main agent came with the backup, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaSetupRestoredDark.dc.html": {
+      "x": 1540,
+      "y": 23000,
+      "w": 1440,
+      "h": 900,
+      "title": "Setting up Primepaw, the main agent came with the backup, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "order": [
@@ -501,7 +601,17 @@
     "DioramaHomeAsk.dc.html",
     "DioramaHomeAskDark.dc.html",
     "DioramaHomeYolo.dc.html",
-    "DioramaHomeYoloDark.dc.html"
+    "DioramaHomeYoloDark.dc.html",
+    "DioramaHomeMeet.dc.html",
+    "DioramaHomeMeetDark.dc.html",
+    "DioramaHomeMeetInvalid.dc.html",
+    "DioramaHomeMeetInvalidDark.dc.html",
+    "DioramaHomeMeetCreated.dc.html",
+    "DioramaHomeMeetCreatedDark.dc.html",
+    "DioramaSetup.dc.html",
+    "DioramaSetupDark.dc.html",
+    "DioramaSetupRestored.dc.html",
+    "DioramaSetupRestoredDark.dc.html"
   ],
   "notes": {
     "p14": {
@@ -559,6 +669,20 @@
       "w": 320,
       "page": "diorama",
       "text": "The states: empty, a big prompt box where sending starts a thread; a session waiting on you, on the amber mat, next to one that failed; Jarvis asking which workspace with the same question card and sheet a session uses; and Thread YOLO on, which answers waiting prompts and writes each call down. Turn YOLO on in Bump Node to 22 to watch it answer the waiting session."
+    },
+    "p23": {
+      "x": 3080,
+      "y": 24000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Home before there is a main agent: the same form, as a card in the middle of the empty sheet, with the rail’s top tile an empty taped frame and the thread column waiting. Create with no name writes the error in red pen; with one, the WELCOME stamp lands, the portrait drops onto the rail tile, and the sheet turns into the empty home page where the agent says hello in its own words. The third pair is that moment."
+    },
+    "p22": {
+      "x": 3080,
+      "y": 22000,
+      "w": 320,
+      "page": "diorama",
+      "text": "Setting up: the checklist a new install opens on, six steps on one sheet with a tick box each, the open one unfolded. Meet your Main Agent is the only step that has to be done before Open Primepaw works. It is a form on the paper: the name on a ruled line with Jarvis pencilled in as the placeholder, six 12 by 12 pixel portraits taped on like photos with the picked one ringed in pen, and the model, which is the global default until the pull-tab says otherwise and then a provider and a model from torn-paper pickers. One line says what the agent is for: it starts work for you and never edits code itself. Create with no name writes “It needs a name” in red pen; with one, a WELCOME stamp lands and the step folds to done. The second pair restored a backup, so the step is already ticked: Jarvis came with your backup. Choose a backup on the first pair does the same."
     }
   },
   "designSystems": [
@@ -566,8 +690,8 @@
       "title": "Kraft",
       "namespace": "kraft",
       "artifact": "https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV",
-      "version": "1794013036-b28c",
-      "copiedAt": "2026-11-07T00:57:45Z"
+      "version": "1794022939-73ba",
+      "copiedAt": "2026-11-07T03:42:31Z"
     }
   ]
 }
