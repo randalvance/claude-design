@@ -41,7 +41,9 @@ The Factory Overseer (the `Factory-Redesign` branch) draws each agent as a paper
 fixed 38-degree camera and reads a pet sheet by URL: 6 columns, one row per facing (down, left, right,
 up). Column 0 stands, 1 and 2 are the two steps of a walk (it plays 0, 1, 2, 1 at 8 frames a second,
 facing the way it goes), 3 and 4 the two beats of working (5.5 a second), 5 and 0 the wave for
-attention (3.2 a second), with a little lift and roll on top. `dog-walk.png` is cut to that layout, the
+attention (3.2 a second), with a little lift and roll on top. The back strip, `src/dog/walk-up.png`, was
+drawn with GPT Image 2.6 Sunburst rather than Qwen, which splays the legs when the puppy walks away;
+the character skill's `comfy.md` has that recipe. `dog-walk.png` is cut to that layout, the
 puppy's feet on the cell's ground line and the standing puppy 86% of the cell's height, so the host
 hands it over as
 

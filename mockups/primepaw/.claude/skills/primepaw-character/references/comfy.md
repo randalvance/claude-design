@@ -62,6 +62,20 @@ Two stages, because the walk strips need the body:
 1. **From the base:** the six mood sheets, the avatar and the body, eight items in one batch.
 2. **From the body:** the four walk strips (down, left, right, up), four items in one batch.
 
+The back strip is the one Qwen gets wrong: seen from behind it splays the walking legs out sideways,
+however the prompt words it. The puppy's `walk-up.png` was redrawn with GPT Image 2.6 Sunburst, a
+paid partner model, and that is the route to take when a second seed does not fix a back strip. The
+graph is `LoadImage` (the body) → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`,
+`model.size` `1536x1024`, `model.quality` `high`, the body on `model.images.image_1`) →
+`SaveImageAdvanced`, sent with `submit_workflow`, because the batch tool's bundled catalog can lag the
+live one and refuse the template by name. Ask for a grid of 3 columns and 2 rows at that size (the model
+draws 3:2, not a 4:1 strip, and `build.py` reads the six cells in reading order either way) and spell the
+walk out: legs under the body, one foot lifted so its sole shows, never spread sideways. It costs 5 to
+29 credits an image and the spend is gated, so ask the user before submitting. It returns a transparent
+PNG rather than a green sheet, the figure at alpha 250 to 254 with a faint halo below 30: composite it
+onto `#00FF00` with the alpha remapped (0 below 24, opaque from 250) before saving it as the source, so
+the slicer keys it like the others.
+
 Before the first batch, `estimate_credits` with `template_name: image_qwen_image_2_1_image_edit` says
 what one edit costs; tell the user the total for twelve before spending it.
 
@@ -85,6 +99,7 @@ with a new seed when:
 
 Judge the walk strips as a set: `build.py` scales each facing to the same standing height, so a strip
 drawn a little smaller is fine, but one drawn much smaller comes out soft. The figure must stay upright
-and square to the viewer in every cell; the back view is the one the model twists, so look at its
-walking cells closely. The avatar must be one round sticker filling the frame, and the body a full figure
+and square to the viewer in every cell; the back view is the one Qwen gets wrong, twisting the body
+or splaying the legs, so look at its walking cells closely and reach for GPT Image (above) if a second
+seed does not fix it. The avatar must be one round sticker filling the frame, and the body a full figure
 with its feet on the ground and nothing cropped.

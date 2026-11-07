@@ -70,4 +70,4 @@ order, in every facing. The facing clause is the only thing that changes between
 - `walk-down`: "straight from the front, facing the viewer"
 - `walk-left`: "from the side in profile, turned to face the left edge of the picture, so we see {SIDE}"
 - `walk-right`: "from the side in profile, turned to face the right edge of the picture, so we see {SIDE} mirrored, its snout pointing right and its tail at the left"
-- `walk-up`: "from behind, facing away from the viewer, so we see {BACK}"
+- `walk-up`: "from directly behind, facing straight away from the viewer, so we see {BACK}; its body stays square to the viewer, never turning, and when it walks its legs stay under its body, one foot lifted so its sole shows, never spread sideways"
