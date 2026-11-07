@@ -591,3 +591,47 @@
 .kr-chk svg{width:12px;height:12px}
 .kr-chk.is-bad{color:color-mix(in srgb,var(--red) 85%,var(--ink))}
 .kr-fcard>.kr-stamp{position:absolute;right:18px;bottom:14px;padding:5px 10px;font-size:12px;transform:rotate(var(--tilt-stamp))}
+/* ---------- factory: every factory at a glance, one card each with its state, its counts and its steps strip, and the pause-all line ---------- */
+/* pause all: the slot switch, its name, and what flipping it does, by hand */
+.kr-pauseline{display:flex;align-items:center;gap:var(--space-12);flex-wrap:wrap;max-width:860px;padding:var(--space-10) var(--space-14);background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.07);border-radius:var(--radius-3);box-shadow:var(--lift-paper-1)}
+.kr-pauseline.is-on{background-color:color-mix(in srgb,var(--amber) 16%,var(--sheet))}
+.kr-pauseline b{font-size:14px;font-weight:800;color:var(--ink)}
+.kr-pauseline span{font-family:var(--font-hand);font-size:17px;line-height:1.1;color:var(--mute)}
+.kr-pauseline.is-on span{color:var(--ink)}
+/* a factory card: the name by hand, the board as a dashed link, the state pill and the factory's own switch; on the amber mat while something waits on you */
+.kr-fac{position:relative;display:flex;flex-direction:column;gap:var(--space-14);max-width:640px;padding:var(--space-16) 18px;background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-5);box-shadow:var(--lift-paper-2)}
+.kr-fac.is-needs{box-shadow:0 0 0 6px color-mix(in srgb,var(--amber) 58%,var(--board)),0 0 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),2px 3.5px 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),5px 9px 10px 7px var(--amb);margin:7px 7px 4px 7px;max-width:626px}
+.kr-fac-h{display:flex;align-items:flex-start;gap:var(--space-12)}
+.kr-fac-nm{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.kr-fac-nm b{font-family:var(--font-hand);font-size:28px;font-weight:600;line-height:1;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kr-fac-b{all:unset;cursor:pointer;align-self:flex-start;font-size:12px;font-weight:800;color:var(--mute);text-decoration:underline;text-decoration-style:dashed;text-underline-offset:3px;transition:color var(--dur-hover) var(--ease)}
+.kr-fac-b:hover{color:var(--ink);text-decoration-style:wavy}
+.kr-fac-b:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--radius-2)}
+.kr-fac-h .kr-pill{margin-top:5px}
+.kr-fac-h .kr-switch{margin-top:2px}
+/* the state pills: Running green, Paused amber, Idle a plain paper label, Off a dashed ghost; nothing pulses */
+.kr-pill.is-paused{background-color:var(--st-amber)}
+.kr-pill.is-idle{background-color:var(--paper-2);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);color:var(--ink);box-shadow:var(--sticker-s)}
+.kr-pill.is-idle::before{background:var(--mute)}
+.kr-pill.is-off{background-color:transparent;background-image:none;color:var(--mute);box-shadow:none;border:1.5px dashed var(--mute)}
+.kr-pill.is-off::before{background:transparent;border:1.5px solid var(--mute);box-sizing:border-box}
+/* the counts: five numbers by hand with their words under; zeros faint, waiting on you amber, Blocked red */
+.kr-counts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-6) var(--space-10);margin:0}
+.kr-count{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kr-count dt{font-family:var(--font-hand);font-size:32px;font-weight:600;line-height:1;color:var(--ink)}
+.kr-count dd{margin:0;font-size:12px;font-weight:800;line-height:1.2;color:var(--ink)}
+.kr-count.is-zero dt,.kr-count.is-zero dd{color:var(--faint)}
+.kr-count.is-attn dt{color:color-mix(in srgb,var(--amber) 82%,var(--ink))}
+.kr-count.is-bad dt,.kr-count.is-bad dd{color:color-mix(in srgb,var(--red) 82%,var(--ink))}
+.kr-fac.is-off .kr-counts,.kr-fac.is-off .kr-steps{opacity:.5}
+/* a blocked task: the reason in red on a dashed slip, with the way to the task */
+.kr-fac-why{display:flex;align-items:center;gap:var(--space-10);flex-wrap:wrap;margin:-2px 0 0;padding:var(--space-8) var(--space-10);font-size:13px;line-height:1.45;color:color-mix(in srgb,var(--red) 78%,var(--ink));background-color:color-mix(in srgb,var(--red) 8%,var(--card));border:1.5px dashed color-mix(in srgb,var(--red) 70%,var(--ink));border-radius:var(--radius-3)}
+.kr-fac-why-t{flex:1;min-width:220px}
+/* the steps strip: the ones that are on as small chips joined by arrows by hand; an off step is a dashed ghost with only its icon */
+.kr-steps{display:flex;flex-wrap:wrap;align-items:center;row-gap:var(--space-6);padding-top:var(--space-12);border-top:1px dashed var(--line)}
+.kr-step{position:relative;display:inline-flex;align-items:center;gap:var(--space-4);height:24px;padding:0 var(--space-6);border-radius:var(--radius-3);background-color:var(--paper-2);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);box-shadow:var(--lift-paper-1);font-size:10.5px;font-weight:800;color:var(--ink);white-space:nowrap}
+.kr-step svg{width:14px;height:14px;flex:none}
+.kr-step+.kr-step{margin-left:15px}
+.kr-step+.kr-step::before{content:"→";position:absolute;left:-14px;top:0;line-height:24px;font-family:var(--font-hand);font-size:16px;font-weight:600;color:var(--mute)}
+.kr-step.is-off{background-color:transparent;background-image:none;box-shadow:none;border:1.5px dashed var(--faint);color:var(--faint);padding:0 5px}
+.kr-step.is-off span{display:none}
