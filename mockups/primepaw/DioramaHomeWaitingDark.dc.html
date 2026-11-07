@@ -623,13 +623,13 @@ button{font:inherit}
 .tr-l{grid-column:1;min-width:0;font-size:12px;line-height:1.4;color:var(--mute);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .trow.on .tr-l{color:var(--ink);opacity:.78}
 .tr-r{grid-column:2;align-self:end;justify-self:end;display:flex;align-items:center;gap:2px}
-.trow .nb,.ttab .nb,.tsw .nb{flex:none;width:17px;height:17px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);transform:rotate(-8deg)}
+.trow .nb{flex:none;width:17px;height:17px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);transform:rotate(-8deg)}
 .tr-in{all:unset;grid-column:1;pointer-events:auto;box-sizing:border-box;min-width:0;width:100%;font-size:14px;font-weight:800;line-height:1.3;border-bottom:1.5px dashed var(--ink)}
-.trow .rowmore,.tmore{all:unset;cursor:pointer;pointer-events:auto;box-sizing:border-box;width:22px;height:24px;display:grid;place-items:center;color:var(--ink);border-radius:3px;opacity:0;transition:opacity .12s var(--ease),background-color .12s var(--ease)}
-.trow .rowmore svg,.tmore svg{width:14px;height:14px;display:block}
+.trow .rowmore{all:unset;cursor:pointer;pointer-events:auto;box-sizing:border-box;width:22px;height:24px;display:grid;place-items:center;color:var(--ink);border-radius:3px;opacity:0;transition:opacity .12s var(--ease),background-color .12s var(--ease)}
+.trow .rowmore svg{width:14px;height:14px;display:block}
 .trow:hover .rowmore,.trow:has(:focus-visible) .rowmore,.trow.menu-open .rowmore{opacity:1}
-.trow .rowmore:hover,.tmore:hover{background-color:color-mix(in srgb,var(--ink) 12%,transparent)}
-.trow .rowmore:focus-visible,.tmore:focus-visible{opacity:1;outline:2px solid var(--blue);outline-offset:-2px}
+.trow .rowmore:hover{background-color:color-mix(in srgb,var(--ink) 12%,transparent)}
+.trow .rowmore:focus-visible{opacity:1;outline:2px solid var(--blue);outline-offset:-2px}
 .rmenu{position:absolute;right:4px;top:calc(100% - 4px);z-index:40;pointer-events:auto;display:flex;flex-direction:column;min-width:140px;padding:5px 0;background-color:var(--card);background-image:var(--face),var(--pulp);border-radius:3px;box-shadow:1px 1px 0 var(--edge),4px 7px 10px var(--amb),8px 14px 22px -8px var(--amb-2);animation:dropflat .16s var(--ease) both}
 .rmenu button{all:unset;cursor:pointer;padding:7px 14px;font-size:13px;font-weight:700;color:var(--ink)}
 .rmenu button:hover,.rmenu button:focus-visible{background-color:var(--hover);background-image:var(--face),var(--pulp)}
@@ -637,10 +637,9 @@ button{font:inherit}
 .rmenu button+button{border-top:1px dashed var(--line)}
 .tnone{margin:8px 4px;font-family:var(--hand);font-size:17px;color:var(--ink);opacity:.75}
 .tpanel .list{gap:0;padding-top:4px}
-.tpanel .list>.scrim,.tsww .scrim,.ttabs>.scrim{z-index:25}
+.tpanel .list>.scrim{z-index:25}
 /* ---------- the sheet ---------- */
 .hsheet .leaf{margin-top:16px}
-.lay-tabs .hsheet .leaf{margin-top:-5px}
 .hsheet .top{padding-top:20px}
 .hsheet .meta .scount{font-family:var(--hand);font-size:17px;color:var(--ink)}
 .ylbl{font-family:var(--hand);font-size:17px;line-height:1;color:var(--mute);align-self:center;margin-right:4px}
@@ -651,28 +650,6 @@ button{font:inherit}
 .ystamp,.ys{flex:none;display:inline-grid;place-items:center;box-sizing:border-box;padding:0 6px;border:2px solid currentColor;border-radius:3px;font-family:var(--mono);font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--red) 88%,var(--ink));transform:rotate(-4deg);filter:url(#inkstamp);mix-blend-mode:multiply}
 .ystamp{height:24px;font-size:11px;margin-top:1px}
 .page.night .ystamp,.page.night .ys{mix-blend-mode:normal}
-/* the switcher: the thread's title is the button, and the threads drop down on a taped sheet */
-.tsww{position:relative;min-width:0}
-.tsw{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-width:0;max-width:100%;padding:2px 8px 2px 2px;border-radius:4px;transition:background-color .12s var(--ease)}
-.tsw:hover{background-color:color-mix(in srgb,var(--ink) 7%,transparent)}
-.tsw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.tsw .chev{width:18px;height:18px;flex:none;color:var(--ink);transition:transform .19s var(--ease)}
-.tsw[aria-expanded="true"] .chev{transform:rotate(180deg)}
-.ttl .tsw h1{border-bottom:0}
-.tswpop{position:absolute;left:0;top:calc(100% + 12px);z-index:30;width:340px;max-height:min(560px,calc(100vh - 140px));display:flex;flex-direction:column;padding:16px 12px 6px;box-sizing:border-box;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:8px;box-shadow:2px 3px 0 var(--board-2),6px 10px 14px var(--amb),12px 22px 30px -8px var(--amb-2);animation:dropflat .2s var(--ease) both}
-.tswpop::before{content:"";position:absolute;left:40px;top:-9px;width:62px;height:18px;background-color:var(--tape);background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 5px,rgba(255,255,255,0) 5px 10px);transform:rotate(-2deg);clip-path:polygon(0 1px,100% 0,99% 100%,1% 95%)}
-.tswh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 10px}
-.tswh span{font-family:var(--hand);font-size:22px;font-weight:600;line-height:1}
-.tswpop .trows{overflow:auto;padding:4px 4px 12px}
-/* threads as tabs: one folder tab per thread, the open one with its menu */
-.ttab-w{position:relative;display:inline-flex;flex:none}
-.ttab .tl{max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ttab.on{padding-right:34px}
-.ttab-w .tmore{position:absolute;right:8px;top:7px;z-index:3;opacity:.8}
-.ttab-w .rmenu{top:calc(100% - 8px);right:0}
-.tnew{color:var(--ink);opacity:.86}
-.tnew svg{width:13px;height:13px}
-.lay-tabs .ttabs{margin-top:14px;overflow:visible;flex-wrap:wrap;row-gap:0}
 /* ---------- the thread ---------- */
 .hsheet .content{gap:16px}
 .jt{position:relative;padding-left:44px;max-width:780px;box-sizing:border-box}
@@ -740,8 +717,8 @@ button{font:inherit}
 .htoast{position:fixed;left:50%;bottom:22px;z-index:26;display:flex;align-items:center;gap:14px;padding:9px 14px;transform:translateX(-50%) rotate(-.6deg);background-color:var(--card);background-image:var(--face),var(--pulp);border-radius:3px;box-shadow:1px 1px 0 var(--edge),4px 7px 10px var(--amb);font-size:13px;font-weight:700;color:var(--ink);animation:dropflat .2s var(--ease) both}
 .htoast button{all:unset;cursor:pointer;font-weight:800;text-decoration:underline;text-decoration-style:wavy;text-underline-offset:3px}
 .htoast button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-@media (max-width:1100px){.lay-column .tpanel{width:260px}}
-@media (max-width:860px){.tpanel{position:static;width:auto;height:auto;margin:0 0 8px;max-height:46vh}.hsheet{margin:0}.tswpop{width:min(340px,calc(100vw - 40px))}.report-t{padding-right:0}.report-in>.pstamp{position:static;display:inline-grid;margin-top:8px}}
+@media (max-width:1100px){.tpanel{width:260px}}
+@media (max-width:860px){.tpanel{position:static;width:auto;height:auto;margin:0 0 8px;max-height:46vh}.hsheet{margin:0}.report-t{padding-right:0}.report-in>.pstamp{position:static;display:inline-grid;margin-top:8px}}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -781,7 +758,6 @@ button{font:inherit}
     <button class="rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
   </nav></div>
 
-  <sc-if value="{{isColumn}}" hint-placeholder-val="{{true}}">
   <aside class="panel board tpanel" aria-label="Threads with Jarvis">
     <div class="ptop">
       <div class="jhead"><span class="qph" aria-hidden="true"><svg class="jface" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="0" width="1" height="1" fill="#d9bc86"/><rect x="10" y="0" width="1" height="1" fill="#d9bc86"/><rect x="1" y="1" width="1" height="1" fill="#d9bc86"/><rect x="2" y="1" width="1" height="1" fill="#d9bc86"/><rect x="9" y="1" width="1" height="1" fill="#d9bc86"/><rect x="10" y="1" width="1" height="1" fill="#d9bc86"/><rect x="1" y="2" width="1" height="1" fill="#d9bc86"/><rect x="2" y="2" width="1" height="1" fill="#e8a9a2"/><rect x="3" y="2" width="1" height="1" fill="#d9bc86"/><rect x="8" y="2" width="1" height="1" fill="#d9bc86"/><rect x="9" y="2" width="1" height="1" fill="#e8a9a2"/><rect x="10" y="2" width="1" height="1" fill="#d9bc86"/><rect x="1" y="3" width="1" height="1" fill="#d9bc86"/><rect x="2" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="3" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="3" width="1" height="1" fill="#d9bc86"/><rect x="5" y="3" width="1" height="1" fill="#d9bc86"/><rect x="6" y="3" width="1" height="1" fill="#d9bc86"/><rect x="7" y="3" width="1" height="1" fill="#d9bc86"/><rect x="8" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="3" width="1" height="1" fill="#f3e9d5"/><rect x="10" y="3" width="1" height="1" fill="#d9bc86"/><rect x="0" y="4" width="1" height="1" fill="#d9bc86"/><rect x="1" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="3" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="6" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="7" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="10" y="4" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="4" width="1" height="1" fill="#d9bc86"/><rect x="0" y="5" width="1" height="1" fill="#d9bc86"/><rect x="1" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="5" width="1" height="1" fill="#2a2219"/><rect x="3" y="5" width="1" height="1" fill="#2a2219"/><rect x="4" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="6" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="7" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="5" width="1" height="1" fill="#2a2219"/><rect x="9" y="5" width="1" height="1" fill="#2a2219"/><rect x="10" y="5" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="5" width="1" height="1" fill="#d9bc86"/><rect x="0" y="6" width="1" height="1" fill="#d9bc86"/><rect x="1" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="6" width="1" height="1" fill="#2a2219"/><rect x="3" y="6" width="1" height="1" fill="#fffdf7"/><rect x="4" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="6" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="7" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="6" width="1" height="1" fill="#2a2219"/><rect x="9" y="6" width="1" height="1" fill="#fffdf7"/><rect x="10" y="6" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="6" width="1" height="1" fill="#d9bc86"/><rect x="0" y="7" width="1" height="1" fill="#d9bc86"/><rect x="1" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="2" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="3" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="7" width="1" height="1" fill="#e8a9a2"/><rect x="6" y="7" width="1" height="1" fill="#e8a9a2"/><rect x="7" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="10" y="7" width="1" height="1" fill="#f3e9d5"/><rect x="11" y="7" width="1" height="1" fill="#d9bc86"/><rect x="1" y="8" width="1" height="1" fill="#d9bc86"/><rect x="2" y="8" width="1" height="1" fill="#d9bc86"/><rect x="3" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="4" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="5" y="8" width="1" height="1" fill="#2a2219"/><rect x="6" y="8" width="1" height="1" fill="#2a2219"/><rect x="7" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="8" y="8" width="1" height="1" fill="#f3e9d5"/><rect x="9" y="8" width="1" height="1" fill="#d9bc86"/><rect x="10" y="8" width="1" height="1" fill="#d9bc86"/><rect x="2" y="9" width="1" height="1" fill="#c8553d"/><rect x="3" y="9" width="1" height="1" fill="#c8553d"/><rect x="8" y="9" width="1" height="1" fill="#c8553d"/><rect x="9" y="9" width="1" height="1" fill="#c8553d"/><rect x="2" y="10" width="1" height="1" fill="#c8553d"/><rect x="3" y="10" width="1" height="1" fill="#c8553d"/><rect x="4" y="10" width="1" height="1" fill="#c8553d"/><rect x="5" y="10" width="1" height="1" fill="#8f3a2a"/><rect x="6" y="10" width="1" height="1" fill="#8f3a2a"/><rect x="7" y="10" width="1" height="1" fill="#c8553d"/><rect x="8" y="10" width="1" height="1" fill="#c8553d"/><rect x="9" y="10" width="1" height="1" fill="#c8553d"/><rect x="2" y="11" width="1" height="1" fill="#c8553d"/><rect x="3" y="11" width="1" height="1" fill="#c8553d"/><rect x="8" y="11" width="1" height="1" fill="#c8553d"/><rect x="9" y="11" width="1" height="1" fill="#c8553d"/></svg></span><div><b>Jarvis</b><small>your main agent</small></div></div>
@@ -794,21 +770,13 @@ button{font:inherit}
 <div class="trows" role="list"><sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if><sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><div class="trow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><sc-if value="{{t.renaming}}" hint-placeholder-val="{{false}}"><input class="tr-in" aria-label="Rename the thread" ref="{{t.renameRef}}" onKeyDown="{{t.renameKey}}" onBlur="{{t.renameCommit}}"></sc-if><sc-if value="{{t.notRenaming}}" hint-placeholder-val="{{true}}"><span class="tr-t">{{t.title}}</span></sc-if><span class="tr-tm">{{t.time}}</span><span class="tr-l">{{t.last}}</span><span class="tr-r"><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{t.badge}}</span></sc-if><button class="rowmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></span><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></div></sc-for><sc-if value="{{noThreads}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noThreadsText}}</p></sc-if></div>
     </div>
   </aside>
-  </sc-if>
 
 <div class="sheet hsheet {{sheetCls}}">
-  <sc-if value="{{showHead}}" hint-placeholder-val="{{true}}"><header class="top htop">
-    <div class="ttl"><sc-if value="{{isSwitcher}}" hint-placeholder-val="{{false}}"><div class="tsww" onKeyDown="{{menuKey}}"><button class="tsw" onClick="{{toggleSw}}" aria-expanded="{{swOpen}}" aria-haspopup="dialog" aria-label="Switch thread, now {{th.title}}"><h1>{{th.title}}</h1><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg><sc-if value="{{hasWaiting}}" hint-placeholder-val="{{false}}"><span class="nb" title="Threads waiting on you">{{waitingCount}}</span></sc-if></button><sc-if value="{{swOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close the threads"></button><div class="tswpop" role="dialog" aria-label="Threads with Jarvis"><div class="tswh"><span>Threads with Jarvis</span><button class="pbtn" onClick="{{newThread}}">New thread</button></div><div class="trows" role="list"><sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if><sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><div class="trow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><sc-if value="{{t.renaming}}" hint-placeholder-val="{{false}}"><input class="tr-in" aria-label="Rename the thread" ref="{{t.renameRef}}" onKeyDown="{{t.renameKey}}" onBlur="{{t.renameCommit}}"></sc-if><sc-if value="{{t.notRenaming}}" hint-placeholder-val="{{true}}"><span class="tr-t">{{t.title}}</span></sc-if><span class="tr-tm">{{t.time}}</span><span class="tr-l">{{t.last}}</span><span class="tr-r"><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{t.badge}}</span></sc-if><button class="rowmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></span><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></div></sc-for><sc-if value="{{noThreads}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noThreadsText}}</p></sc-if></div></div></sc-if></div></sc-if><sc-if value="{{notSwitcher}}" hint-placeholder-val="{{true}}"><h1>{{th.title}}</h1></sc-if></div>
-    <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}"><div class="meta"><span>with Jarvis</span><span class="scount">{{sessCount}}</span></div>
-    <div class="top-r"><span class="ylbl" id="ylbl">Thread YOLO</span><button class="stampbtn" role="switch" aria-checked="{{yoloOn}}" aria-labelledby="ylbl" aria-describedby="{{yoloDesc}}" onClick="{{toggleYolo}}">YOLO</button></div></sc-if>
+  <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}"><header class="top htop">
+    <div class="ttl"><h1>{{th.title}}</h1></div>
+    <div class="meta"><span>with Jarvis</span><span class="scount">{{sessCount}}</span></div>
+    <div class="top-r"><span class="ylbl" id="ylbl">Thread YOLO</span><button class="stampbtn" role="switch" aria-checked="{{yoloOn}}" aria-labelledby="ylbl" aria-describedby="{{yoloDesc}}" onClick="{{toggleYolo}}">YOLO</button></div>
   </header></sc-if>
-  <sc-if value="{{isTabs}}" hint-placeholder-val="{{false}}">
-  <nav class="tabs ttabs" aria-label="Threads with Jarvis" onKeyDown="{{menuKey}}">
-    <sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if>
-    <sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><span class="ttab-w"><button class="tab ttab {{t.tabCls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}" title="{{t.title}}"><span class="tl">{{t.title}}</span><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-label="{{t.badgeLabel}}">{{t.badge}}</span></sc-if></button><sc-if value="{{t.on}}" hint-placeholder-val="{{false}}"><button class="tmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></sc-if><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></span></sc-for>
-    <button class="tab ttab tnew {{newTabCls}}" onClick="{{newThread}}" aria-current="{{newTabCur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New thread</button>
-  </nav>
-  </sc-if>
 
   <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
     <section class="hello hhello" aria-label="Start a thread with Jarvis">
@@ -883,7 +851,7 @@ button{font:inherit}
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"layout":{"editor":"enum","default":"column","options":["column","tabs","switcher"]},"open":{"editor":"enum","default":"t2","options":["new","t1","t2","t3","t4","t5","t6"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"open":{"editor":"enum","default":"t2","options":["new","t1","t2","t3","t4","t5","t6"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'agents', label: 'Agents', icon: 'M4 8h16v12H4zM12 8V4M8 14h.01M16 14h.01M2 12h2M20 12h2' },
@@ -960,7 +928,7 @@ function titleFrom(text) {
 const JARVIS = ['j', 'help', 'sess', 'dec', 'rep', 'ask'];
 
 class Component extends DCLogic {
-  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, swOpen: false, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null };
+  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -971,11 +939,10 @@ class Component extends DCLogic {
       themeIcon: night ? 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' : 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z',
       toggleTheme: () => this.setState({ night: !night }) };
   }
-  // the threads as they stand, the open one, and the layout
+  // the threads as they stand and the open one
   // the threads live on the instance, so several changes in one click build on each other
   list() { if (!this.ts) this.ts = THREADS.map((t) => ({ ...t, yolo: !!t.yolo, items: t.items.map((x) => ({ ...x })) })); return this.ts; }
   curId() { const st = this.state; if (st.cur !== undefined) return st.cur; const p = this.props.open ?? 't2'; return p === 'new' ? null : p; }
-  layout() { return this.props.layout ?? 'column'; }
   setThreads(fn) { this.ts = fn(this.list()); this.setState({ threads: this.ts }); }
   patchThread(id, fn) { this.setThreads((ts) => ts.map((t) => t.id === id ? fn(t) : t)); }
   patchItem(tid, iid, patch) { this.patchThread(tid, (t) => ({ ...t, items: t.items.map((x) => x.id === iid ? { ...x, ...patch } : x) })); }
@@ -989,8 +956,8 @@ class Component extends DCLogic {
     if (x.k === 'ask') return x.folded ? 'You answered Jarvis' : 'Jarvis has a question for you';
     return plainOf(x.text);
   }
-  open(id) { this.setState({ cur: id, menu: null, swOpen: false, qdOpen: false, qdTab: 0 }); }
-  newThread() { this.setState({ cur: null, menu: null, swOpen: false, qdOpen: false }); setTimeout(() => { if (this.ta && this.ta.isConnected) this.ta.focus(); }, 0); }
+  open(id) { this.setState({ cur: id, menu: null, qdOpen: false, qdTab: 0 }); }
+  newThread() { this.setState({ cur: null, menu: null, qdOpen: false }); setTimeout(() => { if (this.ta && this.ta.isConnected) this.ta.focus(); }, 0); }
   say(text) { this.setState({ toast: text, toastUndo: false }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
   archive(t) {
     const at = this.list().findIndex((x) => x.id === t.id); const cur = this.curId();
@@ -1079,7 +1046,7 @@ class Component extends DCLogic {
       const commit = (raw) => { if (this.state.renaming !== t.id) return; const v = String(raw).trim(); this.setState({ renaming: null }); if (v && v !== t.title) this.patchThread(t.id, (x) => ({ ...x, title: v })); };
       return { title: t.title, time: t.time, last: this.lastOf(t), hasBadge: w > 0, badge: w, badgeLabel: w + ' waiting on you', on,
         aria: t.title + (w ? ', ' + w + ' waiting on you' : ''), cur: on ? 'page' : false, menuOpen, renaming, notRenaming: !renaming,
-        cls: [on ? 'on' : '', menuOpen ? 'menu-open' : '', w ? 'waits' : ''].join(' '), tabCls: on ? 'on' : '',
+        cls: [on ? 'on' : '', menuOpen ? 'menu-open' : '', w ? 'waits' : ''].join(' '),
         pick: () => this.open(t.id),
         menu: () => this.setState({ menu: menuOpen ? null : t.id }),
         menuRef: (el) => { if (el && !el.dataset.ready) { el.dataset.ready = '1'; el.focus(); } },
@@ -1106,21 +1073,18 @@ class Component extends DCLogic {
   renderVals() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
     const st = this.state; const ts = this.list(); const cur = this.curId(); const t = ts.find((x) => x.id === cur) || null;
-    const lay = this.layout(); const waiting = ts.filter((x) => this.waitingIn(x) > 0).length;
+    const waiting = ts.filter((x) => this.waitingIn(x) > 0).length;
     const qd = this.qdFor(t); const sess = t ? t.items.filter((x) => x.k === 'sess').length : 0; const rows = this.rowsVals(ts, cur);
     return {
-      cls: 'home lay-' + lay, sheetCls: t ? '' : 'empty',
+      cls: 'home', sheetCls: t ? '' : 'empty',
       nav: NAV.map((n) => ({ ...n, cls: '', cur: false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
       hasJBadge: waiting > 0, jBadge: waiting,
-      isColumn: lay === 'column', isTabs: lay === 'tabs', isSwitcher: lay === 'switcher', notSwitcher: lay !== 'switcher',
-      showHead: !!t || lay === 'switcher',
       threads: rows, noThreads: !rows.length, noThreadsText: st.find.trim() ? 'No thread mentions that.' : 'No threads yet. Start one on the right.',
-      newThread: () => this.newThread(), newTabCls: t ? '' : 'on', newTabCur: t ? false : 'page',
+      newThread: () => this.newThread(),
       onFind: (e) => this.setState({ find: e.target.value }),
-      anyMenu: !!st.menu, closeMenus: () => this.setState({ menu: null, swOpen: false }),
-      menuKey: (e) => { if (e.key === 'Escape' && (st.menu || st.swOpen)) { e.preventDefault(); this.setState({ menu: null, swOpen: false }); } },
-      swOpen: !!st.swOpen, toggleSw: () => this.setState({ swOpen: !st.swOpen, menu: null }), waitingCount: waiting, hasWaiting: waiting > 0,
-      isEmpty: !t, hasThread: !!t, emptyWhere: ts.length ? 'or pick up a thread on the ' + (lay === 'column' ? 'left' : lay === 'tabs' ? 'tabs above' : 'switcher above') : 'Jarvis keeps every thread, so you can come back to it',
+      anyMenu: !!st.menu, closeMenus: () => this.setState({ menu: null }),
+      menuKey: (e) => { if (e.key === 'Escape' && st.menu) { e.preventDefault(); this.setState({ menu: null }); } },
+      isEmpty: !t, hasThread: !!t, emptyWhere: ts.length ? 'or pick up a thread on the left' : 'Jarvis keeps every thread, so you can come back to it',
       th: t ? { title: t.title } : { title: 'New thread' },
       sessCount: sess === 0 ? 'no sessions yet' : sess === 1 ? '1 session started' : sess + ' sessions started',
       yoloOn: !!(t && t.yolo), yoloDesc: t && t.yolo ? 'yrisk' : '', toggleYolo: () => t && this.toggleYolo(t),
