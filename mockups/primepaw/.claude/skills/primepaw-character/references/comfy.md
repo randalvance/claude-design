@@ -92,7 +92,11 @@ as two items of one batch, is the cheap way to have a choice.
 - **Each strip:** the turnaround on `image_1`, the body on `image_2`, the strip prompt, which points at
   the turnaround's figure for that facing. Ask for a grid of 3 columns and 2 rows at that size (the model
   draws 3:2, not a 4:1 strip, and `build.py` reads the six cells in reading order either way) and spell
-  the walk out: legs under the body, one foot lifted so its sole shows, never spread sideways.
+  the walk out: legs under the body, one foot lifted so its sole shows, never spread sideways, and
+  from behind the lifted foot kicked up toward the viewer with its sole square on, the front's lifted
+  foot seen from the other side, not a leg angled out sideways with a small oval at its end. A strip
+  with one pose wrong is an edit like the turnaround: the strip as `image_1`, the strip it has to
+  match (the front one, for the walking feet) as `image_2`, reproduced exactly with that one change.
 
 It costs 5 to 29 credits an image and the spend is gated, so ask the user before submitting. It returns
 either a green sheet or a transparent PNG, the figure at alpha 250 to 254 with a faint halo below 30:
@@ -124,6 +128,8 @@ Judge the walk strips as a set: `build.py` scales each facing to the same standi
 drawn a little smaller is fine, but one drawn much smaller comes out soft. The figure must stay upright
 and square to the viewer in every cell; the back view is the one that goes wrong, Qwen twisting the
 body or splaying the legs and any model making up a back it was never shown, so draw the turnaround
-first (above), check each strip against its figure there, and look at the back's walking cells closely.
+first (above), check each strip against its figure there, and look at the back's walking cells closely
+(the lifted foot: its sole square to the viewer with the heel up, the front strip's lifted foot seen
+from behind, not a leg angled out to the side).
 The avatar must be one round sticker filling the frame, and the body a full figure with its feet on the
 ground and nothing cropped.

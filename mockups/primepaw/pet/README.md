@@ -194,6 +194,21 @@ paw pushed forward out of sight in front of it; 6. waving hello with one paw rai
 head, seen from behind. Flat paper, no shadows, no gradients, like a paper puppet moved between
 photographs."
 
+That strip walked with the wrong foot: from behind it bent the raised leg out to the side with a small
+oval at its end, where the front strip hangs the lifted foot straight down under the raised knee with
+its whole sole to the viewer. The same step seen from behind is that foot kicked up toward the viewer,
+heel up, sole square on. One edit of the strip put it there, the strip as the first reference and the
+front strip as the second: "...Reproduce the first reference image exactly... Change one thing only, in
+cells 2 and 3, the two walking cells: the lifted foot. In the front sheet the walking puppy raises one
+bent leg and the whole sole of its lifted foot faces the viewer square on, a big round cream paw pad
+with its toe beans, the foot hanging straight down under the raised knee. Seen from behind, that same
+step shows the lifted foot kicked up behind the puppy toward the viewer, heel up: the lower leg of the
+bent leg folds back toward the viewer and the whole sole of that foot faces the viewer square on, the
+same big round cream paw pad with its toe beans as in the front sheet, toes pointing down, the foot
+drawn at the height of the other leg's knee and directly below the puppy's hip, not a small oval at
+the end of a leg angled out to the side... Everything else in every cell stays exactly as in the first
+reference image." The skill's `walk-up` facing clause now says so from the start.
+
 **The other walk strips** (one per facing, from the body; GPT Image drew them as a grid of 3 columns and
 2 rows at 1536 by 1024, the Qwen runs before them as one row of 6 cells at 2048 by 512): "...draw a
 stop-motion sprite strip: one row of 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid
