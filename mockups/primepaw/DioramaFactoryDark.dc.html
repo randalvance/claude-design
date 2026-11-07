@@ -799,14 +799,14 @@ button{font:inherit}
 .fhello .orl{text-align:left;margin:0 0 0 2px}
 @media (max-width:1100px){.facs{grid-template-columns:1fr}}
 /* pet: Jarvis is a paper puppy. One sprite atlas (pet/dog.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/dog-face.png). */
-.pet{--pw:113px;--ph:96px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/dog.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+.pet{--pw:101px;--ph:104px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/dog.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
 .pet.error{background-position-y:calc(var(--ph) * -4);animation:pet-error .9s steps(8,jump-none) infinite}
 .pet.ask{background-position-y:calc(var(--ph) * -5);animation:pet-ask 1.2s steps(8,jump-none) infinite}
 .pet:active{transform:rotate(-4deg) scale(.96)}
-.hello .pet{--pw:101.7px;--ph:86.4px;right:12px}
+.hello .pet{--pw:90.9px;--ph:93.6px;right:12px}
 @keyframes pet-idle{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-greet{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-celebrate{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}

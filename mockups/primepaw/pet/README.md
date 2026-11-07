@@ -3,16 +3,16 @@
 The pet over the composer, the main agent's face, and the standee that walks the Factory Overseer's
 floor are one character, a paper cut-out puppy: cream paper face and body, kraft brown floppy ears,
 an eye patch and a tummy patch, a red collar with a tag, pink cheeks, pen-ink features, and the white
-die-cut border every Kraft sticker has. Three cuts of it ship here, drawn on Comfy Cloud (Qwen Image 2.1,
-the open-weight template, for the peeking sheets, the avatar and the body; GPT Image 2.6 Sunburst for
-the turnaround and the puppet's parts sheets) and sliced by `build.py`.
+die-cut border every Kraft sticker has. Three cuts of it ship here, drawn on Comfy Cloud (GPT Image 2.6 Sunburst
+for the peeking sheets, the turnaround and the puppet's parts sheets; Qwen Image 2.1, the open-weight
+template, for the base they all descend from, the avatar and the body) and sliced by `build.py`.
 
 | File | What it is | Where it goes |
 | --- | --- | --- |
 | `dog.png`, `dog.json` | The peeking puppy: an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; the JSON holds the frame size and the CSS numbers | Over the composer on every board that has one, as `.pet`, see the `/* pet: */` block in a board's style |
 | `dog-face.png` | The avatar: the puppy's head as one round sticker, 176px square (88 CSS px at 2x) | The Jarvis tile on the rail, the thread portraits, any row or badge that needs the main agent's face, as `.jface` |
 | `dog-rig.png`, `dog-rig.json`, `puppet.js` | The standee as a cut-out puppet: the atlas of its pieces for each facing, the rig that says where each piece sits, where it turns and which is in front, and the driver that poses them in steps | The factory floor and the Pet board's mock of it, as `.standee`; see below |
-| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green, one per mood, the avatar, the body design, the turnaround (the puppy from its four sides) and one parts sheet per facing (the figure taken apart into the puppet's pieces) | Inputs to `build.py`; keep them so a cut can be rebuilt |
+| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green: one per mood, `peek.png` (the resting peeking puppy the mood sheets copy, one cell cut from the first idle sheet), the avatar, the body design, the turnaround (the puppy from its four sides) and one parts sheet per facing (the figure taken apart into the puppet's pieces) | Inputs to `build.py`; keep them so a cut can be rebuilt |
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
@@ -98,44 +98,80 @@ pieces back into the turnaround's figures (above). Needs Pillow and numpy.
 
 ## The prompts
 
-The mood sheets, the avatar and the body went to the Qwen Image 2.1 edit graph with the previous cut
-as its reference image (`TextEncodeQwenImage21` with `images.image_1`, the wide latent switched on),
-25 steps, cfg 1, euler simple; the turnaround went to GPT Image 2.6 Sunburst with the body as the
-reference image, and the parts sheets with the turnaround as a first reference and the body as a second. The base puppy came from the text-to-image template with the prompt below; everything
-else edits from it.
+The avatar and the body went to the Qwen Image 2.1 edit graph with the base as the reference image
+(`TextEncodeQwenImage21` with `images.image_1`, the wide latent switched on), 25 steps, cfg 1, euler
+simple. The mood sheets, the turnaround and the parts sheets went to GPT Image 2.6 Sunburst: the mood
+sheets with `src/dog/peek.png` as a first reference and the body as a second, the turnaround with the
+body, the parts sheets with the turnaround first and the body second. The mood sheets were Qwen edits
+of the base at first, and they flickered: from cell to cell the puppy changed size, its patch swapped
+eyes and a mood's whole action sat in one frame with the rest at rest. GPT Image holds the drawing
+still and does one beat per frame when every frame is spelled out. The base puppy came from the
+text-to-image template with the prompt below; everything else descends from it.
 
 **The base** (1024 by 1024, the text-to-image template, seed 20261107): "Paper-craft cut-out character, the mascot of a paper diorama app: a friendly floppy-eared puppy, only its head and its two front paws showing, peeking over a straight horizontal edge as if looking over a wall, facing the viewer. Everything is made of layered flat paper cut-outs: a cream paper face (#f3e9d5), kraft brown paper floppy ears and one kraft brown patch over its left eye (#d9bc86), a terracotta red paper collar (#c8553d) with a small round tag, two round pink paper cheeks (#e8a9a2), a round ink-black nose, two small dot eyes and a little smiling mouth drawn with a dark pen (#2a2219), thin hand-drawn pen outlines on every piece of paper, and a narrow white die-cut sticker border around the whole figure. Flat colours with a faint paper grain, no gradients, not 3D, not a photo, no drop shadow. The figure is cut off flat along the straight edge where its paws hook over it, and nothing at all is drawn below that edge. Large and centred, isolated on a solid flat bright green chroma-key background (#00FF00). No text, no letters, no logo, no other objects."
 
-**The mood sheets** (2048 by 1024, one per mood) open with: "Using the paper cut-out puppy from the
-reference image exactly as it is (the same cream paper face, kraft brown floppy ears and eye patch,
-red collar with its tag, pink cheeks, pen-ink features, the white die-cut sticker border, the same
-flat paper style and the same peeking-over-an-edge pose with both paws hooked on the edge), draw a
-stop-motion animation sprite sheet: a grid of 4 columns and 2 rows, 8 cells of equal size, on the same
-solid flat bright green (#00FF00) background, with no grid lines, no borders, no labels and no text.
-The 8 frames read left to right along the top row and then along the bottom row and loop back to the
-first. In every cell the puppy is the same size and in the same place, with the flat cut bottom edge
-of its paws at the same height, and each frame changes only a little from the one before it, like a
-paper puppet moved between photographs. The animation:" and then
+**The mood sheets** (1536 by 1024, one per mood, GPT Image 2.6, `peek.png` as the first reference
+and the body as the second) open with: "The first reference image is a paper cut-out friendly
+floppy-eared puppy peeking over a straight horizontal edge, only its head and its two front paws
+showing, both paws hooked over the edge, cut off flat along that edge with nothing drawn below it: a
+cream paper face, kraft brown floppy ears, one kraft brown patch over its left eye (the eye on the
+right of the picture), a red collar with a round tag, pink cheeks, a round black nose, two dot eyes
+and a little smiling mouth in pen ink, flat paper colours with a faint grain, and a narrow white
+die-cut sticker border around the whole figure. The second reference image is the same puppy
+standing, for its colours and proportions. Draw a stop-motion animation sprite sheet of that peeking
+puppy, exactly as it is in the first reference: a grid of 4 columns and 2 rows, 8 cells of equal
+size, on the solid flat bright green (#00FF00) background, with a clear green gap between the
+figures, no grid lines, no borders, no labels, no numbers and no text. The 8 frames read left to
+right along the top row and then along the bottom row. In every cell the puppy is the same drawing
+at the same size in the same place, its patch always over the same eye, both paws on the edge unless
+a frame says otherwise, and the flat cut bottom edge at the same height in every cell; each frame
+changes only a little from the one before it, like a paper puppet moved between photographs. Flat
+paper, no shadows, no gradients, not 3D. The eight frames, in order:" and then the eight beats of
+each mood, one a frame, because a model given one sentence for the lot puts the action in a frame or
+two and leaves the rest at rest, and the cut flickers instead of moving:
 
-- idle: "the puppy rests calmly with its chin and paws on the edge and breathes slowly, rising a touch
-  and settling back; it blinks once around the fifth and sixth frames, and one ear lifts slightly and
-  settles; a content, gentle smile throughout."
-- greet: "a happy hello: the puppy perks up, lifts its right paw off the edge and waves it from side to
-  side, its ears bounce and its mouth opens in a wide happy smile with a small pink paper tongue
-  showing; by the last frame the paw is back on the edge."
-- celebrate: "a cheer: the puppy throws both paws up in the air with joy, eyes closed in a big happy
-  grin, ears flying up, bouncing up and down, while a few small paper confetti pieces in red, blue,
-  green and amber pop up around its head and drift down; by the last frame both paws are back on the
-  edge."
-- sad: "a slow droop: the puppy's ears sink down, its eyebrows turn up with worry, its eyes look down,
-  its mouth turns down, it sinks a little lower behind the edge, and one small blue paper teardrop
-  forms by its eye and slides down its cheek; a slow, sorry motion."
-- error: "a dizzy spell: the puppy has bumped its head and wobbles from side to side, dazed, with
+- idle (a loop): "1. at rest, chin up over the edge, paws on the edge, eyes open, a content gentle
+  smile; 2. breathing in, risen a touch higher over the edge; 3. at its highest, its left ear (on
+  the right of the picture) lifted slightly; 4. settling back down, the ear settling; 5. at rest,
+  eyes half closed; 6. eyes closed in a blink; 7. eyes open again, at rest; 8. exactly like frame 1,
+  so the loop closes."
+- greet (one shot): "1. at rest, paws on the edge, smiling; 2. perking up: ears bounced up a little,
+  mouth opening, its right paw (on the left of the picture) starting to lift off the edge; 3. the
+  right paw raised up beside its head, its pad turned to the viewer, a wide happy open smile with a
+  small pink paper tongue; 4. the paw waving outward, away from its head; 5. the paw waving back in,
+  close beside its ear; 6. the paw waving outward again; 7. the paw coming back down toward the
+  edge, the smile softening to a closed smile; 8. the paw back on the edge, at rest, exactly like
+  frame 1."
+- celebrate (one shot): "1. at rest, paws on the edge, smiling; 2. perking up: ears rising, both
+  paws lifting off the edge, mouth opening; 3. both paws thrown up in the air, eyes closed in a big
+  happy grin, ears flying up, a few small paper confetti pieces in red, blue, green and amber
+  popping up around its head; 4. bounced up higher, paws spread wide, the confetti at its highest;
+  5. coming down a little, the confetti drifting down past its ears; 6. bounced up again with both
+  paws up, the confetti lower, around its cheeks; 7. the paws coming down to the edge, eyes opening,
+  the last confetti pieces down near the edge; 8. both paws back on the edge, at rest with a happy
+  smile and no confetti, exactly like frame 1."
+- sad (one shot, held): "1. at rest, paws on the edge, its smile fading to a straight mouth; 2. its
+  ears beginning to sink, its eyebrows turning up with worry; 3. ears down, eyes looking down, mouth
+  turned down; 4. sunk a little lower behind the edge; 5. a small blue paper teardrop forming at the
+  corner of its eye; 6. the teardrop sliding down its cheek; 7. the teardrop at the bottom of its
+  cheek, the puppy at its lowest; 8. holding that sorry pose: ears down, mouth down, the teardrop at
+  its cheek, paws still on the edge."
+- error (a loop): "1. dazed from a bump on the head, its head tilted to the left of the picture,
   little spiral swirl eyes, ears sticking out stiffly, a small red paper exclamation mark bursting
-  above its head, and three tiny paper stars circling over its head."
-- ask: "asking for attention: the puppy tilts its head curiously from one side to the other, one ear
-  raised, eyebrows up, eyes wide and shiny, a big orange paper question mark popping up above its
-  head, and it taps the edge with one paw."
+  above its head and three tiny paper stars circling over its head; 2. head tilting back toward
+  upright, the stars moved a step around its head; 3. head upright, the stars moved another step; 4.
+  head tilting to the right of the picture; 5. head tilted to the right, the stars moved on; 6. head
+  tilting back toward upright; 7. head upright; 8. head tilting to the left, the stars nearly back
+  where they started, so the loop closes on frame 1. The swirl eyes, the stiff ears, the exclamation
+  mark and the three stars are in every frame."
+- ask (a loop): "1. looking at the viewer with wide shiny eyes, eyebrows up, its left ear (on the
+  right of the picture) raised, a big orange paper question mark above its head, both paws on the
+  edge; 2. head tilting to the left of the picture; 3. head tilted to the left, its right paw (on
+  the left of the picture) lifted a little off the edge; 4. the paw tapping back down on the edge,
+  head still tilted left; 5. head coming back upright; 6. head tilting to the right of the picture;
+  7. head tilted to the right, the paw tapping the edge once more; 8. head coming back toward
+  upright, so the loop closes on frame 1. The raised ear, the wide shiny eyes and the question mark
+  above its head are in every frame."
 
 **The avatar** (1024 by 1024): "...draw one avatar portrait of it: just the puppy's head with its ears
 and the top of its red collar, seen straight from the front, looking at the viewer with a friendly

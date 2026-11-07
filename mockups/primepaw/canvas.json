@@ -904,7 +904,7 @@
       "y": 37300,
       "w": 320,
       "page": "diorama",
-      "text": "Jarvis is a paper puppy, one character in three cuts. Peeking: over the composer, paws hooked on the frame, a sprite atlas with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the boards pick the mood from what the agent is doing, and a click says hello. The sticker: its head as one round sticker, the face on the Jarvis tile, the thread portraits and the rows. The standee: full body, cut to the Factory Overseer's pet sheet (6 columns by 4 facings) so the main agent can walk its floor. All three drawn by Qwen Image 2.1 on Comfy Cloud and sliced by pet/build.py; the prompts are in pet/README.md."
+      "text": "Jarvis is a paper puppy, one character in three cuts. Peeking: over the composer, paws hooked on the frame, a sprite atlas with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the boards pick the mood from what the agent is doing, and a click says hello. The sticker: its head as one round sticker, the face on the Jarvis tile, the thread portraits and the rows. The standee: a cut-out puppet (pet/dog-rig.png, dog-rig.json and puppet.js), every piece of paper its own layer posed in steps the way a South Park character is, so the main agent can walk the Factory Overseer's floor. All three drawn on Comfy Cloud, Qwen Image 2.1 for the base, the face and the body and GPT Image 2.6 for the animated cuts, and sliced by pet/build.py; the prompts are in pet/README.md."
     }
   },
   "order": [

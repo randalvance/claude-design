@@ -1,10 +1,11 @@
 # Drawing a character on Comfy Cloud
 
-The puppy was drawn with Qwen Image 2.1, an open-weight model that runs on Comfy Cloud's own
-credits rather than a partner's. Everything after the base is an *edit* of the base: the model sees the
-previous cut as a reference image and keeps the character's identity, which is what makes thirteen
-separate sheets look like one creature. Use the `comfy-cloud` plugin's tools; the names below are its
-tool names.
+The puppy's base, avatar and body were drawn with Qwen Image 2.1, an open-weight model that runs on
+Comfy Cloud's own credits rather than a partner's; its mood sheets, turnaround and parts sheets with GPT
+Image 2.6 Sunburst, a paid partner model, which holds a character still from cell to cell where Qwen
+lets it drift. Everything after the base is an *edit*: the model sees an earlier cut as a reference
+image and keeps the character's identity, which is what makes thirteen separate sheets look like one
+creature. Use the `comfy-cloud` plugin's tools; the names below are its tool names.
 
 ## 1. The base: one text-to-image run
 
@@ -47,9 +48,9 @@ that names the sheet:
 
 | Placeholder | Value |
 | --- | --- |
-| `__REFERENCE__` | the reference's filename from `use_previous_output`: the base for the moods, the avatar and the body |
+| `__REFERENCE__` | the reference's filename from `use_previous_output`: the base, for the avatar and the body |
 | `__PROMPT__` | the sheet's prompt from `prompts.md` |
-| `__WIDTH__`, `__HEIGHT__` | mood sheets 2048 by 1024; avatar 1024 by 1024; body 1024 by 1536 |
+| `__WIDTH__`, `__HEIGHT__` | avatar 1024 by 1024; body 1024 by 1536 |
 | `__SEED__` | any integer; a different seed per sheet, and a new one when a sheet needs redrawing |
 | `__PREFIX__` | `<id>_<sheet>`, so the downloads are easy to tell apart |
 
@@ -59,16 +60,19 @@ raising it makes the colours bleed. `resolution: 0` on the text encoder lets the
 
 Three stages, because the turnaround needs the body and the parts sheets need both:
 
-1. **From the base:** the six mood sheets, the avatar and the body, eight items in one batch.
+1. **From the base:** the avatar and the body, two items in one Qwen batch.
 2. **From the body:** the turnaround, one GPT Image run (below), judged against the slots before
    anything is drawn from it.
-3. **From the turnaround and the body:** the four parts sheets (down, left, right, up), the figure of
-   each facing taken apart into the puppet's pieces, four items in one batch (eight with two seeds
-   each), GPT Image again.
+3. **From the base and the body, and from the turnaround and the body:** the six mood sheets (the
+   base, which is the peeking pose, first and the body second) and the four parts sheets (down, left,
+   right, up; the turnaround first and the body second), ten items in one GPT Image batch, or twenty
+   with two seeds each.
 
 Any model invents the sides it has not been shown: drawn from the body alone, the puppy's back came back
 from GPT Image wearing the tummy patch. So the turnaround is drawn first, with GPT Image 2.6 Sunburst, a
-paid partner model, the parts sheets copy it, and Qwen keeps the moods, the avatar and the body.
+paid partner model, and the parts sheets copy it. The mood sheets go to GPT Image too: as Qwen edits
+the puppy changed size from cell to cell, its patch swapped eyes and a mood's whole action sat in one
+frame, so the peeking cut flickered rather than moved. Qwen keeps the base, the avatar and the body.
 
 The graph is `LoadImage` → `OpenAIGPTImageNodeV2` (`model` `gpt-image-2.6-sunburst`, `model.size`
 `1536x1024`, `model.quality` `high`, a reference on `model.images.image_1` and a second one on
@@ -87,6 +91,13 @@ as two items of one batch, is the cheap way to have a choice.
   that is otherwise right is an edit, not a redraw: send the sheet back as `image_1` with the body as
   `image_2` and ask for it reproduced exactly with that one change; the other figures stay in place to
   the pixel.
+- **Each mood sheet:** the base on `image_1` (it is the peeking pose; the puppy, whose base was not
+  kept, uses `pet/src/dog/peek.png`, one cell of its first idle sheet), the body on `image_2`, the mood
+  prompt from `prompts.md`, which spells out all eight frames. Judge it by its frames: eight cells, the
+  figure the same size with its markings on the same side in every one, the action spread over the
+  frames rather than sitting in one, a loop's last frame leading into its first and a one-shot ending
+  with the paws back on the edge, nothing but green around the figures (confetti and marks are fine as
+  long as they do not reach into the next cell).
 - **Each parts sheet:** the turnaround on `image_1`, the body on `image_2`, the parts prompt from
   `prompts.md`, which points at the turnaround's figure for that facing and lists the pieces in the
   order `build.py` expects (nine for the front and the back, eight for a profile). Judge it by its
@@ -104,7 +115,7 @@ composite the transparent kind onto `#00FF00` with the alpha remapped (0 below 2
 before saving it as the source, so the slicer keys it like the others.
 
 Before the first batch, `estimate_credits` with `template_name: image_qwen_image_2_1_image_edit` says
-what one edit costs; tell the user the total for the eight edits before spending it.
+what one edit costs; tell the user the total for the two edits before spending it.
 
 Wait with `get_batch_status` or `wait_for_batch`, then `get_batch_output` with `client_os`: it downloads
 every image and reports where each landed. Copy them into `pet/src/<id>/` under the names `build.py`
@@ -122,6 +133,8 @@ with a new seed when:
 - the creature changes size or drifts across the cells (the frames would jitter);
 - the character drifts (a different collar, a lost patch, a new colour);
 - the motion is not there (a greet with no wave, a sad with no droop);
+- the markings swap sides between cells, or a mood's whole action sits in one or two cells with the
+  rest at rest, so the cut flickers instead of moving;
 - anything but green shows around the figure (grid lines, labels, a frame).
 
 Judge the parts sheets with `build.py --check <file>`, which draws the four puppets put together under

@@ -30,22 +30,65 @@ red and pink.
 
 > Paper-craft cut-out character, the mascot of a paper diorama app: {CREATURE}, only its head and its two front {PAWS} showing, peeking over a straight horizontal edge as if looking over a wall, facing the viewer. Everything is made of layered flat paper cut-outs: {FEATURES}, thin hand-drawn pen outlines on every piece of paper, and a narrow white die-cut sticker border around the whole figure. Flat colours with a faint paper grain, no gradients, not 3D, not a photo, no drop shadow. The figure is cut off flat along the straight edge where its {PAWS} hook over it, and nothing at all is drawn below that edge. Large and centred, isolated on a solid flat bright green chroma-key background (#00FF00). No text, no letters, no logo, no other objects.
 
-## The mood sheets (edits of the base, 2048 by 1024, one per mood)
+## The mood sheets (edits of the peeking cut and the body, 1536 by 1024, one per mood, GPT Image 2.6)
 
-Every mood sheet opens with:
+The first reference is the character's resting peeking cut, one figure on green: the base itself for
+a new character (the puppy's base was not kept, so `pet/src/dog/peek.png`, one cell of its first
+idle sheet, stands in for it). The second is the body. Every mood sheet opens with:
 
-> Using the paper cut-out {CREATURE} from the reference image exactly as it is ({RECAP}, the same flat paper style and the same peeking-over-an-edge pose with both {PAWS} hooked on the edge), draw a stop-motion animation sprite sheet: a grid of 4 columns and 2 rows, 8 cells of equal size, on the same solid flat bright green (#00FF00) background, with no grid lines, no borders, no labels and no text. The 8 frames read left to right along the top row and then along the bottom row and loop back to the first. In every cell the character is the same size and in the same place, with the flat cut bottom edge of its {PAWS} at the same height, and each frame changes only a little from the one before it, like a paper puppet moved between photographs. The animation:
+> The first reference image is a paper cut-out {CREATURE} peeking over a straight horizontal edge, only its head and its two front {PAWS} showing, both {PAWS} hooked over the edge, cut off flat along that edge with nothing drawn below it: {FEATURES}, flat paper colours with a faint grain, and a narrow white die-cut sticker border around the whole figure. The second reference image is the same {CREATURE} standing, for its colours and proportions. Draw a stop-motion animation sprite sheet of that peeking {CREATURE}, exactly as it is in the first reference: a grid of 4 columns and 2 rows, 8 cells of equal size, on the solid flat bright green (#00FF00) background, with a clear green gap between the figures, no grid lines, no borders, no labels, no numbers and no text. The 8 frames read left to right along the top row and then along the bottom row. In every cell the {CREATURE} is the same drawing at the same size in the same place, its markings always on the same side, both {PAWS} on the edge unless a frame says otherwise, and the flat cut bottom edge at the same height in every cell; each frame changes only a little from the one before it, like a paper puppet moved between photographs. Flat paper, no shadows, no gradients, not 3D. The eight frames, in order:
 
-and ends with the mood. The boards play `idle`, `error` and `ask` as loops and `greet`, `celebrate`
-and `sad` once, holding the last frame, so the loops must end where they start and the one-shots must
-end at rest with the {PAWS} back on the edge. Keep each beat; reword the body parts for the creature.
+and then the eight frames, one sentence each. Spell every frame out: given one sentence for the
+whole motion, a model puts the action in a frame or two and leaves the rest at rest, and the cut
+flickers instead of moving. The boards play `idle`, `error` and `ask` as loops and `greet`,
+`celebrate` and `sad` once, holding the last frame, so a loop's eighth frame leads back into its
+first and a one-shot ends with the {PAWS} back on the edge (`sad` ends held in its droop). Keep each
+beat; reword the body parts for the creature.
 
-- **idle**, a loop, the resting state the character spends most of its time in: "the character rests calmly with its chin and {PAWS} on the edge and breathes slowly, rising a touch and settling back; it blinks once around the fifth and sixth frames, and one of its {EARS} lifts slightly and settles; a content, gentle smile throughout."
-- **greet**, one shot, played when a session opens or you poke it: "a happy hello: the character perks up, lifts its right {PAW} off the edge and waves it from side to side, its {EARS} bounce and its mouth opens in a wide happy smile with a small pink paper tongue showing; by the last frame the {PAW} is back on the edge."
-- **celebrate**, one shot, a turn finished or a report landed: "a cheer: the character throws both {PAWS} up in the air with joy, eyes closed in a big happy grin, {EARS} flying up, bouncing up and down, while a few small paper confetti pieces in red, blue, green and amber pop up around its head and drift down; by the last frame both {PAWS} are back on the edge."
-- **sad**, one shot, the agent was stopped or a tool denied: "a slow droop: the character's {EARS} sink down, its eyebrows turn up with worry, its eyes look down, its mouth turns down, it sinks a little lower behind the edge, and one small blue paper teardrop forms by its eye and slides down its cheek; a slow, sorry motion."
-- **error**, a loop, a failed session in the open thread: "a dizzy spell: the character has bumped its head and wobbles from side to side, dazed, with little spiral swirl eyes, {EARS} sticking out stiffly, a small red paper exclamation mark bursting above its head, and three tiny paper stars circling over its head."
-- **ask**, a loop, a question or an approval waits on you: "asking for attention: the character tilts its head curiously from one side to the other, one of its {EARS} raised, eyebrows up, eyes wide and shiny, a big orange paper question mark popping up above its head, and it taps the edge with one {PAW}."
+- **idle**, a loop, the resting state the character spends most of its time in: "1. at rest, chin up
+  over the edge, {PAWS} on the edge, eyes open, a content gentle smile; 2. breathing in, risen a
+  touch higher over the edge; 3. at its highest, one of its {EARS} lifted slightly; 4. settling back
+  down, the {EAR} settling; 5. at rest, eyes half closed; 6. eyes closed in a blink; 7. eyes open
+  again, at rest; 8. exactly like frame 1, so the loop closes."
+- **greet**, one shot, played when a session opens or you poke it: "1. at rest, {PAWS} on the edge,
+  smiling; 2. perking up: {EARS} bounced up a little, mouth opening, its right {PAW} (on the left of
+  the picture) starting to lift off the edge; 3. the right {PAW} raised up beside its head, its pad
+  turned to the viewer, a wide happy open smile with a small pink paper tongue; 4. the {PAW} waving
+  outward, away from its head; 5. the {PAW} waving back in, close beside its {EAR}; 6. the {PAW}
+  waving outward again; 7. the {PAW} coming back down toward the edge, the smile softening to a
+  closed smile; 8. the {PAW} back on the edge, at rest, exactly like frame 1."
+- **celebrate**, one shot, a turn finished or a report landed: "1. at rest, {PAWS} on the edge,
+  smiling; 2. perking up: {EARS} rising, both {PAWS} lifting off the edge, mouth opening; 3. both
+  {PAWS} thrown up in the air, eyes closed in a big happy grin, {EARS} flying up, a few small paper
+  confetti pieces in red, blue, green and amber popping up around its head; 4. bounced up higher,
+  {PAWS} spread wide, the confetti at its highest; 5. coming down a little, the confetti drifting
+  down past its {EARS}; 6. bounced up again with both {PAWS} up, the confetti lower, around its
+  cheeks; 7. the {PAWS} coming down to the edge, eyes opening, the last confetti pieces down near
+  the edge; 8. both {PAWS} back on the edge, at rest with a happy smile and no confetti, exactly
+  like frame 1."
+- **sad**, one shot, held on its last frame, the agent was stopped or a tool denied: "1. at rest,
+  {PAWS} on the edge, its smile fading to a straight mouth; 2. its {EARS} beginning to sink, its
+  eyebrows turning up with worry; 3. {EARS} down, eyes looking down, mouth turned down; 4. sunk a
+  little lower behind the edge; 5. a small blue paper teardrop forming at the corner of its eye; 6.
+  the teardrop sliding down its cheek; 7. the teardrop at the bottom of its cheek, the character at
+  its lowest; 8. holding that sorry pose: {EARS} down, mouth down, the teardrop at its cheek, {PAWS}
+  still on the edge."
+- **error**, a loop, a failed session in the open thread: "1. dazed from a bump on the head, its
+  head tilted to the left of the picture, little spiral swirl eyes, {EARS} sticking out stiffly, a
+  small red paper exclamation mark bursting above its head and three tiny paper stars circling over
+  its head; 2. head tilting back toward upright, the stars moved a step around its head; 3. head
+  upright, the stars moved another step; 4. head tilting to the right of the picture; 5. head tilted
+  to the right, the stars moved on; 6. head tilting back toward upright; 7. head upright; 8. head
+  tilting to the left, the stars nearly back where they started, so the loop closes on frame 1. The
+  swirl eyes, the stiff {EARS}, the exclamation mark and the three stars are in every frame."
+- **ask**, a loop, a question or an approval waits on you: "1. looking at the viewer with wide shiny
+  eyes, eyebrows up, one of its {EARS} raised, a big orange paper question mark above its head, both
+  {PAWS} on the edge; 2. head tilting to the left of the picture; 3. head tilted to the left, its
+  right {PAW} (on the left of the picture) lifted a little off the edge; 4. the {PAW} tapping back
+  down on the edge, head still tilted left; 5. head coming back upright; 6. head tilting to the
+  right of the picture; 7. head tilted to the right, the {PAW} tapping the edge once more; 8. head
+  coming back toward upright, so the loop closes on frame 1. The raised {EAR}, the wide shiny eyes
+  and the question mark above its head are in every frame."
 
 ## The avatar (edit of the base, 1024 by 1024)
 

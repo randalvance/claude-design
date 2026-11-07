@@ -14,7 +14,7 @@ all read those cuts by name, so a new character is a new set of files under `pet
 | The peeking sprite | `pet/<id>.png`, an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; `pet/<id>.json` with the frame size | Over the composer on every board that has one, as `.pet`, stepped like paper stop-motion |
 | The face sticker | `pet/<id>-face.png`, the head as one round sticker, 176 px square | The Jarvis tile on the rail, the thread portraits, the picker, as `.jface` |
 | The standee | `pet/<id>-rig.png`, the pieces of a cut-out puppet for each facing (head, ears, body, arms, legs, tail), and `pet/<id>-rig.json`, where each piece sits, where it turns and which is in front; `pet/puppet.js` poses them in steps the way a South Park character is animated | The factory floor, and the Pet board's mock of it, as `.standee` |
-| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the parts sheets copy) and four `parts-*.png` (each facing's figure taken apart into the puppet's pieces), all on chroma-key green, plus `base.png`, the drawing the edits started from | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept, so its sheets stand in for it) |
+| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the parts sheets copy) and four `parts-*.png` (each facing's figure taken apart into the puppet's pieces), all on chroma-key green, plus `base.png`, the drawing the edits started from and the peeking pose the mood sheets copy | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept; `peek.png`, one cell of its first idle sheet, stands in for it) |
 
 Read `pet/README.md` once: it is the puppy's own account of the same system, and `DioramaPet.dc.html`
 shows the three cuts side by side with every mood and the standee walking.
@@ -45,13 +45,15 @@ Show the user the slots before spending credits if the request left any of them 
 
 ### 2. Draw it on Comfy Cloud
 
-Follow `references/comfy.md`. In short: one text-to-image run for the base, judged hard; then the six
-moods, the avatar and the body as edits of the base, submitted as one batch of the graph in
-`assets/qwen21-edit.workflow.json`; then a turnaround of the body (front, left side, back, right side in
-one row) with GPT Image 2.6, judged against the slots before anything is drawn from it, because a model
-invents whatever the body does not show it and the turnaround is where the back and the sides get
-settled; then one parts sheet per facing from the turnaround and the body, GPT Image again: the figure
-taken apart into the puppet's pieces, laid out in a grid in the order `build.py` names them. The prompts come from `references/prompts.md`, slots filled. Save every downloaded sheet under
+Follow `references/comfy.md`. In short: one text-to-image run for the base, judged hard; then the
+avatar and the body as edits of the base, one batch of the graph in `assets/qwen21-edit.workflow.json`;
+then a turnaround of the body (front, left side, back, right side in one row) with GPT Image 2.6, judged
+against the slots before anything is drawn from it, because a model invents whatever the body does not
+show it and the turnaround is where the back and the sides get settled; then, GPT Image again, the six
+mood sheets from the base (the peeking pose) and the body, every one of the eight frames spelled out so
+the action is spread over them, and one parts sheet per facing from the turnaround and the body: the
+figure taken apart into the puppet's pieces, laid out in a grid in the order `build.py` names them. The
+prompts come from `references/prompts.md`, slots filled. Save every downloaded sheet under
 `pet/src/<id>/` with the names `build.py` expects, and look at each one before building: the judging
 list in `comfy.md` says what sends a sheet back for a new seed.
 
