@@ -215,9 +215,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-07T00:31:34Z",
+    "at": "2026-11-07T00:57:14Z",
     "via": "Claude Code",
-    "note": "HomeThread: the main agent’s rail tile, thread rows, session and helper cards, decision lines and the finish report"
+    "note": "QuestionSheet: a dock card above the composer and a sheet with a tab per question; HomeThread: the main agent’s rail tile, thread rows, session and helper cards, decision lines and the finish report"
   },
   "layout": "files",
   "libraries": [],
