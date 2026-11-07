@@ -1,0 +1,1710 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T05:42:20Z",
+  "title": "Design System: Kraft",
+  "source": {
+    "tokens": "design-system-kraft/tokens.json",
+    "tokensVersion": 1,
+    "bundle": "design-system-kraft/components/bundle.css",
+    "themes": [
+      "paper",
+      "night"
+    ],
+    "frontmatterTheme": "paper"
+  },
+  "extensions": {
+    "colorMeta": {
+      "desk": {
+        "role": "neutral",
+        "displayName": "Cream Desk",
+        "canonical": "#f4eee2",
+        "night": "#1c1712",
+        "oklch": "oklch(95.1% 0.017 84.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 84.6)",
+          "oklch(26.4% 0.014 84.6)",
+          "oklch(37.9% 0.016 84.6)",
+          "oklch(49.3% 0.017 84.6)",
+          "oklch(60.7% 0.017 84.6)",
+          "oklch(72.1% 0.015 84.6)",
+          "oklch(83.6% 0.011 84.6)",
+          "oklch(95.0% 0.006 84.6)"
+        ],
+        "usage": "The cream sheet everything is laid on: the page background, lit from the centre. Ground for ink."
+      },
+      "desk-2": {
+        "role": "neutral",
+        "displayName": "Desk Rim",
+        "canonical": "#e4dac6",
+        "night": "#100d09",
+        "oklch": "oklch(89.1% 0.029 84.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.018 84.6)",
+          "oklch(26.4% 0.024 84.6)",
+          "oklch(37.9% 0.028 84.6)",
+          "oklch(49.3% 0.029 84.6)",
+          "oklch(60.7% 0.028 84.6)",
+          "oklch(72.1% 0.024 84.6)",
+          "oklch(83.6% 0.019 84.6)",
+          "oklch(95.0% 0.010 84.6)"
+        ],
+        "usage": "The sheet's darker rim, where the radial vignette behind desk ends."
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Plain Paper",
+        "canonical": "#fbf7ee",
+        "night": "#2d2720",
+        "oklch": "oklch(97.7% 0.013 86.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 86.8)",
+          "oklch(26.4% 0.010 86.8)",
+          "oklch(37.9% 0.012 86.8)",
+          "oklch(49.3% 0.013 86.8)",
+          "oklch(60.7% 0.012 86.8)",
+          "oklch(72.1% 0.011 86.8)",
+          "oklch(83.6% 0.008 86.8)",
+          "oklch(95.0% 0.004 86.8)"
+        ],
+        "usage": "Plain paper: session rows, search fields, filters, step lists, paper buttons. Ground for ink and mute."
+      },
+      "sheet-warm": {
+        "role": "neutral",
+        "displayName": "Warm Chat Sheet",
+        "canonical": "#f9f4e8",
+        "night": "#29231c",
+        "oklch": "oklch(96.8% 0.017 88.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 88.0)",
+          "oklch(26.4% 0.014 88.0)",
+          "oklch(37.9% 0.016 88.0)",
+          "oklch(49.3% 0.017 88.0)",
+          "oklch(60.7% 0.016 88.0)",
+          "oklch(72.1% 0.014 88.0)",
+          "oklch(83.6% 0.011 88.0)",
+          "oklch(95.0% 0.006 88.0)"
+        ],
+        "usage": "The chat sheet: the big paper behind the tab row and the thread."
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Whitest Card",
+        "canonical": "#fdfaf3",
+        "night": "#302a22",
+        "oklch": "oklch(98.5% 0.010 87.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 87.5)",
+          "oklch(26.4% 0.008 87.5)",
+          "oklch(37.9% 0.009 87.5)",
+          "oklch(49.3% 0.010 87.5)",
+          "oklch(60.7% 0.009 87.5)",
+          "oklch(72.1% 0.008 87.5)",
+          "oklch(83.6% 0.006 87.5)",
+          "oklch(95.0% 0.003 87.5)"
+        ],
+        "usage": "The whitest paper: the leaf laid over the tabs, the composer card, the selected chat tab."
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Inner Paper",
+        "canonical": "#f6f0e4",
+        "night": "#211c16",
+        "oklch": "oklch(95.7% 0.017 84.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 84.6)",
+          "oklch(26.4% 0.014 84.6)",
+          "oklch(37.9% 0.016 84.6)",
+          "oklch(49.3% 0.017 84.6)",
+          "oklch(60.7% 0.017 84.6)",
+          "oklch(72.1% 0.014 84.6)",
+          "oklch(83.6% 0.011 84.6)",
+          "oklch(95.0% 0.006 84.6)"
+        ],
+        "usage": "Inner paper inside a leaf: capsule bodies and popovers."
+      },
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Tinted Paper",
+        "canonical": "#efe7d6",
+        "night": "#2b251e",
+        "oklch": "oklch(93.0% 0.024 85.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 85.8)",
+          "oklch(26.4% 0.020 85.8)",
+          "oklch(37.9% 0.023 85.8)",
+          "oklch(49.3% 0.024 85.8)",
+          "oklch(60.7% 0.023 85.8)",
+          "oklch(72.1% 0.020 85.8)",
+          "oklch(83.6% 0.015 85.8)",
+          "oklch(95.0% 0.009 85.8)"
+        ],
+        "usage": "Tinted paper: code chips, key caps, the slot of a switch, a disabled control."
+      },
+      "hover": {
+        "role": "neutral",
+        "displayName": "Hover Tint",
+        "canonical": "#f1e9d8",
+        "night": "#3f362a",
+        "oklch": "oklch(93.6% 0.024 85.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 85.8)",
+          "oklch(26.4% 0.020 85.8)",
+          "oklch(37.9% 0.023 85.8)",
+          "oklch(49.3% 0.024 85.8)",
+          "oklch(60.7% 0.023 85.8)",
+          "oklch(72.1% 0.020 85.8)",
+          "oklch(83.6% 0.015 85.8)",
+          "oklch(95.0% 0.009 85.8)"
+        ],
+        "usage": "A hovered row or filter."
+      },
+      "board": {
+        "role": "primary",
+        "displayName": "Cardboard Face",
+        "canonical": "#cfae78",
+        "night": "#4a3a24",
+        "oklch": "oklch(76.8% 0.081 79.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.049 79.4)",
+          "oklch(26.4% 0.066 79.4)",
+          "oklch(37.9% 0.077 79.4)",
+          "oklch(49.3% 0.081 79.4)",
+          "oklch(60.7% 0.078 79.4)",
+          "oklch(72.1% 0.068 79.4)",
+          "oklch(83.6% 0.051 79.4)",
+          "oklch(95.0% 0.028 79.4)"
+        ],
+        "usage": "The cardboard face: the rail, the sessions board, and the colour of every button under its paper texture; a rail tile takes its identity colour instead."
+      },
+      "board-2": {
+        "role": "primary",
+        "displayName": "Cardboard Cut Edge",
+        "canonical": "#a3844f",
+        "night": "#1f170c",
+        "oklch": "oklch(63.1% 0.080 79.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.049 79.9)",
+          "oklch(26.4% 0.066 79.9)",
+          "oklch(37.9% 0.076 79.9)",
+          "oklch(49.3% 0.080 79.9)",
+          "oklch(60.7% 0.077 79.9)",
+          "oklch(72.1% 0.068 79.9)",
+          "oklch(83.6% 0.051 79.9)",
+          "oklch(95.0% 0.028 79.9)"
+        ],
+        "usage": "Cardboard's cut edge, 2 to 3px along the bottom and right, and the board's border."
+      },
+      "kraft": {
+        "role": "primary",
+        "displayName": "Kraft Paper",
+        "canonical": "#dcc08c",
+        "night": "#6f5530",
+        "oklch": "oklch(81.9% 0.075 82.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.046 82.6)",
+          "oklch(26.4% 0.062 82.6)",
+          "oklch(37.9% 0.072 82.6)",
+          "oklch(49.3% 0.075 82.6)",
+          "oklch(60.7% 0.072 82.6)",
+          "oklch(72.1% 0.063 82.6)",
+          "oklch(83.6% 0.048 82.6)",
+          "oklch(95.0% 0.026 82.6)"
+        ],
+        "usage": "Kraft paper, always under the paper texture: tabs, labels, notes, tags."
+      },
+      "kraft-2": {
+        "role": "primary",
+        "displayName": "Kraft Cut Edge",
+        "canonical": "#b3905a",
+        "night": "#4e3a1f",
+        "oklch": "oklch(67.4% 0.083 77.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.050 77.5)",
+          "oklch(26.4% 0.068 77.5)",
+          "oklch(37.9% 0.079 77.5)",
+          "oklch(49.3% 0.083 77.5)",
+          "oklch(60.7% 0.080 77.5)",
+          "oklch(72.1% 0.070 77.5)",
+          "oklch(83.6% 0.053 77.5)",
+          "oklch(95.0% 0.029 77.5)"
+        ],
+        "usage": "Kraft’s cut edge, and the face of an uncoloured sticker or rail tile (glyphs only in paper: white reads 2.9:1 on it)."
+      },
+      "mat-green": {
+        "role": "secondary",
+        "displayName": "Sage Mat",
+        "canonical": "#8fb08a",
+        "night": "#3f5c3e",
+        "oklch": "oklch(72.2% 0.065 141.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.040 141.4)",
+          "oklch(26.4% 0.053 141.4)",
+          "oklch(37.9% 0.062 141.4)",
+          "oklch(49.3% 0.065 141.4)",
+          "oklch(60.7% 0.063 141.4)",
+          "oklch(72.1% 0.055 141.4)",
+          "oklch(83.6% 0.042 141.4)",
+          "oklch(95.0% 0.023 141.4)"
+        ],
+        "usage": "The sage cardboard mat under a capsule deck, and the sage confirm button. Ground for ink (6.3:1)."
+      },
+      "mat-green-2": {
+        "role": "secondary",
+        "displayName": "Sage Cut Edge",
+        "canonical": "#5f8a5e",
+        "night": "#1f3320",
+        "oklch": "oklch(59.0% 0.081 143.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.049 143.9)",
+          "oklch(26.4% 0.067 143.9)",
+          "oklch(37.9% 0.077 143.9)",
+          "oklch(49.3% 0.081 143.9)",
+          "oklch(60.7% 0.078 143.9)",
+          "oklch(72.1% 0.068 143.9)",
+          "oklch(83.6% 0.052 143.9)",
+          "oklch(95.0% 0.029 143.9)"
+        ],
+        "usage": "The sage mat's cut edge and border."
+      },
+      "mat-red": {
+        "role": "secondary",
+        "displayName": "Terracotta Frame",
+        "canonical": "#cf6a52",
+        "night": "#8a3f2d",
+        "oklch": "oklch(63.7% 0.133 34.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.081 34.5)",
+          "oklch(26.4% 0.110 34.5)",
+          "oklch(37.9% 0.127 34.5)",
+          "oklch(49.3% 0.133 34.5)",
+          "oklch(60.7% 0.128 34.5)",
+          "oklch(72.1% 0.112 34.5)",
+          "oklch(83.6% 0.085 34.5)",
+          "oklch(95.0% 0.047 34.5)"
+        ],
+        "usage": "The terracotta cardboard frame around the composer. Never a text ground."
+      },
+      "mat-red-2": {
+        "role": "secondary",
+        "displayName": "Terracotta Cut Edge",
+        "canonical": "#9e4530",
+        "night": "#4f2217",
+        "oklch": "oklch(50.3% 0.124 34.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.075 34.6)",
+          "oklch(26.4% 0.102 34.6)",
+          "oklch(37.9% 0.118 34.6)",
+          "oklch(49.3% 0.124 34.6)",
+          "oklch(60.7% 0.119 34.6)",
+          "oklch(72.1% 0.104 34.6)",
+          "oklch(83.6% 0.079 34.6)",
+          "oklch(95.0% 0.044 34.6)"
+        ],
+        "usage": "The terracotta frame's cut edge, and the face of the destructive button: white reads 6.5:1 on it in paper, 12:1 in night."
+      },
+      "mat-red-3": {
+        "role": "secondary",
+        "displayName": "Terracotta Deep Edge",
+        "canonical": "#6b2a1c",
+        "night": "#2a110a",
+        "oklch": "oklch(37.6% 0.097 33.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.059 33.7)",
+          "oklch(26.4% 0.079 33.7)",
+          "oklch(37.9% 0.092 33.7)",
+          "oklch(49.3% 0.097 33.7)",
+          "oklch(60.7% 0.093 33.7)",
+          "oklch(72.1% 0.081 33.7)",
+          "oklch(83.6% 0.062 33.7)",
+          "oklch(95.0% 0.034 33.7)"
+        ],
+        "usage": "The destructive button's cut edge and border."
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Pen Ink",
+        "canonical": "#2a2219",
+        "night": "#efe6d3",
+        "oklch": "oklch(25.8% 0.020 70.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 70.0)",
+          "oklch(26.4% 0.017 70.0)",
+          "oklch(37.9% 0.019 70.0)",
+          "oklch(49.3% 0.020 70.0)",
+          "oklch(60.7% 0.019 70.0)",
+          "oklch(72.1% 0.017 70.0)",
+          "oklch(83.6% 0.013 70.0)",
+          "oklch(95.0% 0.007 70.0)"
+        ],
+        "usage": "Body copy, titles and labels on desk and every paper; the pencil focus ring."
+      },
+      "mute": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#6f6252",
+        "night": "#b4a68e",
+        "oklch": "oklch(50.4% 0.030 72.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.018 72.8)",
+          "oklch(26.4% 0.024 72.8)",
+          "oklch(37.9% 0.028 72.8)",
+          "oklch(49.3% 0.030 72.8)",
+          "oklch(60.7% 0.028 72.8)",
+          "oklch(72.1% 0.025 72.8)",
+          "oklch(83.6% 0.019 72.8)",
+          "oklch(95.0% 0.010 72.8)"
+        ],
+        "usage": "Secondary copy, hand-written counts and durations on sheet, sheet-warm and card (5.3:1 in paper, 6:1 in night)."
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Pencil Grey",
+        "canonical": "#72654f",
+        "night": "#a89a80",
+        "oklch": "oklch(51.3% 0.037 80.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.022 80.7)",
+          "oklch(26.4% 0.030 80.7)",
+          "oklch(37.9% 0.035 80.7)",
+          "oklch(49.3% 0.037 80.7)",
+          "oklch(60.7% 0.036 80.7)",
+          "oklch(72.1% 0.031 80.7)",
+          "oklch(83.6% 0.024 80.7)",
+          "oklch(95.0% 0.013 80.7)"
+        ],
+        "usage": "Placeholders, disabled text and quiet notes. Holds 4.5:1 on paper in both themes."
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Dashed Rule",
+        "canonical": "#d9ccb1",
+        "night": "#4a4034",
+        "oklch": "oklch(84.9% 0.039 85.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.024 85.3)",
+          "oklch(26.4% 0.032 85.3)",
+          "oklch(37.9% 0.037 85.3)",
+          "oklch(49.3% 0.039 85.3)",
+          "oklch(60.7% 0.038 85.3)",
+          "oklch(72.1% 0.033 85.3)",
+          "oklch(83.6% 0.025 85.3)",
+          "oklch(95.0% 0.014 85.3)"
+        ],
+        "usage": "Dashed rules and dividers printed on paper."
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Ruled Blue-Grey",
+        "canonical": "#dfe5ee",
+        "night": "#3b4350",
+        "oklch": "oklch(92.0% 0.014 258.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 258.3)",
+          "oklch(26.4% 0.011 258.3)",
+          "oklch(37.9% 0.013 258.3)",
+          "oklch(49.3% 0.014 258.3)",
+          "oklch(60.7% 0.013 258.3)",
+          "oklch(72.1% 0.012 258.3)",
+          "oklch(83.6% 0.009 258.3)",
+          "oklch(95.0% 0.005 258.3)"
+        ],
+        "usage": "The blue-grey ruled lines printed on a note."
+      },
+      "bar": {
+        "role": "neutral",
+        "displayName": "Idle Bar",
+        "canonical": "#b9a98a",
+        "night": "#5e5343",
+        "oklch": "oklch(74.0% 0.047 83.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.028 83.8)",
+          "oklch(26.4% 0.038 83.8)",
+          "oklch(37.9% 0.044 83.8)",
+          "oklch(49.3% 0.047 83.8)",
+          "oklch(60.7% 0.045 83.8)",
+          "oklch(72.1% 0.039 83.8)",
+          "oklch(83.6% 0.030 83.8)",
+          "oklch(95.0% 0.016 83.8)"
+        ],
+        "usage": "Idle effort bars and the outline of an unchecked box."
+      },
+      "white": {
+        "role": "tertiary",
+        "displayName": "Sticker White",
+        "canonical": "#ffffff",
+        "night": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0.0)",
+          "oklch(26.4% 0.000 0.0)",
+          "oklch(37.9% 0.000 0.0)",
+          "oklch(49.3% 0.000 0.0)",
+          "oklch(60.7% 0.000 0.0)",
+          "oklch(72.1% 0.000 0.0)",
+          "oklch(83.6% 0.000 0.0)",
+          "oklch(95.0% 0.000 0.0)"
+        ],
+        "usage": "Glyphs and labels printed on a coloured sticker. Never a surface."
+      },
+      "sticker-cut": {
+        "role": "neutral",
+        "displayName": "Die-cut White",
+        "canonical": "#ffffff",
+        "night": "#d9cfb8",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0.0)",
+          "oklch(26.4% 0.000 0.0)",
+          "oklch(37.9% 0.000 0.0)",
+          "oklch(49.3% 0.000 0.0)",
+          "oklch(60.7% 0.000 0.0)",
+          "oklch(72.1% 0.000 0.0)",
+          "oklch(83.6% 0.000 0.0)",
+          "oklch(95.0% 0.000 0.0)"
+        ],
+        "usage": "The die-cut border around every sticker, 1.5 to 2px. Always with no shadow. Never on a button."
+      },
+      "red": {
+        "role": "tertiary",
+        "displayName": "Paw Red",
+        "canonical": "#c8553d",
+        "night": "#d9654c",
+        "oklch": "oklch(59.3% 0.152 33.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.093 33.4)",
+          "oklch(26.4% 0.125 33.4)",
+          "oklch(37.9% 0.145 33.4)",
+          "oklch(49.3% 0.152 33.4)",
+          "oklch(60.7% 0.147 33.4)",
+          "oklch(72.1% 0.128 33.4)",
+          "oklch(83.6% 0.097 33.4)",
+          "oklch(95.0% 0.054 33.4)"
+        ],
+        "usage": "The paw mark, the memory sticker, number badges, the busy pill. White glyphs on it read 4.4:1 in paper and 3.3:1 in night, so keep it to glyphs and bold badges."
+      },
+      "red-2": {
+        "role": "tertiary",
+        "displayName": "Pull-request Oxblood",
+        "canonical": "#8f3a2a",
+        "night": "#a8432e",
+        "oklch": "oklch(46.2% 0.119 32.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.072 32.5)",
+          "oklch(26.4% 0.098 32.5)",
+          "oklch(37.9% 0.114 32.5)",
+          "oklch(49.3% 0.119 32.5)",
+          "oklch(60.7% 0.115 32.5)",
+          "oklch(72.1% 0.100 32.5)",
+          "oklch(83.6% 0.076 32.5)",
+          "oklch(95.0% 0.042 32.5)"
+        ],
+        "usage": "The pull-requests sticker; white reads 7.7:1 on it in paper, 5.8:1 in night."
+      },
+      "blue": {
+        "role": "tertiary",
+        "displayName": "Sessions Blue",
+        "canonical": "#3b5b9a",
+        "night": "#7d9bd8",
+        "oklch": "oklch(47.8% 0.109 262.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.066 262.7)",
+          "oklch(26.4% 0.089 262.7)",
+          "oklch(37.9% 0.104 262.7)",
+          "oklch(49.3% 0.109 262.7)",
+          "oklch(60.7% 0.105 262.7)",
+          "oklch(72.1% 0.092 262.7)",
+          "oklch(83.6% 0.070 262.7)",
+          "oklch(95.0% 0.038 262.7)"
+        ],
+        "usage": "The sessions sticker. Carries on-blue. The blue button (kr-btn kr-blue, Select)."
+      },
+      "blue-2": {
+        "role": "tertiary",
+        "displayName": "Agents Navy",
+        "canonical": "#2a4070",
+        "night": "#3d5a94",
+        "oklch": "oklch(37.9% 0.087 264.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.053 264.1)",
+          "oklch(26.4% 0.071 264.1)",
+          "oklch(37.9% 0.083 264.1)",
+          "oklch(49.3% 0.087 264.1)",
+          "oklch(60.7% 0.084 264.1)",
+          "oklch(72.1% 0.073 264.1)",
+          "oklch(83.6% 0.056 264.1)",
+          "oklch(95.0% 0.031 264.1)"
+        ],
+        "usage": "The agents tile and blue’s cut edge."
+      },
+      "on-blue": {
+        "role": "tertiary",
+        "displayName": "On Blue",
+        "canonical": "#ffffff",
+        "night": "#1c1712",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0.0)",
+          "oklch(26.4% 0.000 0.0)",
+          "oklch(37.9% 0.000 0.0)",
+          "oklch(49.3% 0.000 0.0)",
+          "oklch(60.7% 0.000 0.0)",
+          "oklch(72.1% 0.000 0.0)",
+          "oklch(83.6% 0.000 0.0)",
+          "oklch(95.0% 0.000 0.0)"
+        ],
+        "usage": "Glyph on a blue sticker: white in paper (6.7:1), ink in night (5.4:1)."
+      },
+      "green": {
+        "role": "tertiary",
+        "displayName": "MCP Green",
+        "canonical": "#5b8c5a",
+        "night": "#78a876",
+        "oklch": "oklch(59.2% 0.092 143.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.056 143.9)",
+          "oklch(26.4% 0.075 143.9)",
+          "oklch(37.9% 0.087 143.9)",
+          "oklch(49.3% 0.092 143.9)",
+          "oklch(60.7% 0.088 143.9)",
+          "oklch(72.1% 0.077 143.9)",
+          "oklch(83.6% 0.059 143.9)",
+          "oklch(95.0% 0.032 143.9)"
+        ],
+        "usage": "The MCPs sticker, the idle pill, the Done chip. White glyphs read 3.9:1 in paper: glyphs and hand-written chips only."
+      },
+      "amber": {
+        "role": "tertiary",
+        "displayName": "Skills Amber",
+        "canonical": "#b8792f",
+        "night": "#d6964a",
+        "oklch": "oklch(62.9% 0.118 66.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.072 66.6)",
+          "oklch(26.4% 0.097 66.6)",
+          "oklch(37.9% 0.112 66.6)",
+          "oklch(49.3% 0.118 66.6)",
+          "oklch(60.7% 0.113 66.6)",
+          "oklch(72.1% 0.099 66.6)",
+          "oklch(83.6% 0.075 66.6)",
+          "oklch(95.0% 0.041 66.6)"
+        ],
+        "usage": "The skills and background stickers, the pinwheel's fourth blade, busy durations. White glyphs read 3.5:1 in paper: glyphs only."
+      },
+      "max": {
+        "role": "tertiary",
+        "displayName": "Workspaces Tan",
+        "canonical": "#c7935a",
+        "night": "#8c6436",
+        "oklch": "oklch(70.1% 0.097 67.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.059 67.7)",
+          "oklch(26.4% 0.080 67.7)",
+          "oklch(37.9% 0.092 67.7)",
+          "oklch(49.3% 0.097 67.7)",
+          "oklch(60.7% 0.093 67.7)",
+          "oklch(72.1% 0.082 67.7)",
+          "oklch(83.6% 0.062 67.7)",
+          "oklch(95.0% 0.034 67.7)"
+        ],
+        "usage": "The workspaces sticker and the MAX stamp."
+      },
+      "max-2": {
+        "role": "tertiary",
+        "displayName": "MAX Stamp Paper",
+        "canonical": "#d9b48a",
+        "night": "#5f4425",
+        "oklch": "oklch(79.2% 0.070 70.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.043 70.1)",
+          "oklch(26.4% 0.058 70.1)",
+          "oklch(37.9% 0.067 70.1)",
+          "oklch(49.3% 0.070 70.1)",
+          "oklch(60.7% 0.068 70.1)",
+          "oklch(72.1% 0.059 70.1)",
+          "oklch(83.6% 0.045 70.1)",
+          "oklch(95.0% 0.025 70.1)"
+        ],
+        "usage": "The MAX stamp's paper."
+      },
+      "kind-think": {
+        "role": "tertiary",
+        "displayName": "Workflow Teal",
+        "canonical": "#4a8f99",
+        "night": "#5fa9b3",
+        "oklch": "oklch(60.9% 0.071 207.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.043 207.8)",
+          "oklch(26.4% 0.059 207.8)",
+          "oklch(37.9% 0.068 207.8)",
+          "oklch(49.3% 0.071 207.8)",
+          "oklch(60.7% 0.069 207.8)",
+          "oklch(72.1% 0.060 207.8)",
+          "oklch(83.6% 0.045 207.8)",
+          "oklch(95.0% 0.025 207.8)"
+        ],
+        "usage": "The workflows sticker and thinking kind dots."
+      },
+      "kind-sub": {
+        "role": "tertiary",
+        "displayName": "Kanban Violet",
+        "canonical": "#8b6bb3",
+        "night": "#a58ad0",
+        "oklch": "oklch(58.9% 0.112 303.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.068 303.6)",
+          "oklch(26.4% 0.092 303.6)",
+          "oklch(37.9% 0.107 303.6)",
+          "oklch(49.3% 0.112 303.6)",
+          "oklch(60.7% 0.108 303.6)",
+          "oklch(72.1% 0.095 303.6)",
+          "oklch(83.6% 0.072 303.6)",
+          "oklch(95.0% 0.039 303.6)"
+        ],
+        "usage": "The kanban sticker and subagent kind dots."
+      },
+      "book": {
+        "role": "tertiary",
+        "displayName": "Knowledge Plum",
+        "canonical": "#8d4f75",
+        "night": "#b77aa0",
+        "oklch": "oklch(51.3% 0.097 343.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.059 343.5)",
+          "oklch(26.4% 0.080 343.5)",
+          "oklch(37.9% 0.092 343.5)",
+          "oklch(49.3% 0.097 343.5)",
+          "oklch(60.7% 0.093 343.5)",
+          "oklch(72.1% 0.082 343.5)",
+          "oklch(83.6% 0.062 343.5)",
+          "oklch(95.0% 0.034 343.5)"
+        ],
+        "usage": "The knowledge base sticker: the book on the rail. White glyphs on it read 6.0:1 in paper and 6.3:1 in night, mixed through dye."
+      },
+      "attn": {
+        "role": "tertiary",
+        "displayName": "Attention Gold",
+        "canonical": "#f0c24a",
+        "night": "#e3b53a",
+        "oklch": "oklch(83.4% 0.144 87.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.087 87.5)",
+          "oklch(26.4% 0.118 87.5)",
+          "oklch(37.9% 0.137 87.5)",
+          "oklch(49.3% 0.143 87.5)",
+          "oklch(60.7% 0.138 87.5)",
+          "oklch(72.1% 0.121 87.5)",
+          "oklch(83.6% 0.092 87.5)",
+          "oklch(95.0% 0.051 87.5)"
+        ],
+        "usage": "The gold ring around a selected sticker (sticker-on), the attention badge, the needs-you button. Carries on-attn."
+      },
+      "on-attn": {
+        "role": "tertiary",
+        "displayName": "On Gold",
+        "canonical": "#2a2219",
+        "night": "#2a2219",
+        "oklch": "oklch(25.8% 0.020 70.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 70.0)",
+          "oklch(26.4% 0.017 70.0)",
+          "oklch(37.9% 0.019 70.0)",
+          "oklch(49.3% 0.020 70.0)",
+          "oklch(60.7% 0.019 70.0)",
+          "oklch(72.1% 0.017 70.0)",
+          "oklch(83.6% 0.013 70.0)",
+          "oklch(95.0% 0.007 70.0)"
+        ],
+        "usage": "Ink on an attn sticker (9:1)."
+      },
+      "highlighter": {
+        "role": "neutral",
+        "displayName": "Raw Highlighter",
+        "canonical": "#fff0a0",
+        "night": "#5c4f14",
+        "oklch": "oklch(94.9% 0.101 98.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.061 98.9)",
+          "oklch(26.4% 0.083 98.9)",
+          "oklch(37.9% 0.096 98.9)",
+          "oklch(49.3% 0.101 98.9)",
+          "oklch(60.7% 0.097 98.9)",
+          "oklch(72.1% 0.085 98.9)",
+          "oklch(83.6% 0.065 98.9)",
+          "oklch(95.0% 0.036 98.9)"
+        ],
+        "usage": "The raw highlighter colour. Paint with marker, not this."
+      },
+      "highlighter-2": {
+        "role": "neutral",
+        "displayName": "Highlighter Edge",
+        "canonical": "#d9b84a",
+        "night": "#a88f2e",
+        "oklch": "oklch(79.1% 0.132 92.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.080 92.3)",
+          "oklch(26.4% 0.109 92.3)",
+          "oklch(37.9% 0.126 92.3)",
+          "oklch(49.3% 0.132 92.3)",
+          "oklch(60.7% 0.127 92.3)",
+          "oklch(72.1% 0.112 92.3)",
+          "oklch(83.6% 0.085 92.3)",
+          "oklch(95.0% 0.047 92.3)"
+        ],
+        "usage": "The highlighted paper's cut edge."
+      },
+      "tape": {
+        "role": "neutral",
+        "displayName": "Masking Tape",
+        "canonical": "#f1e3a6b8",
+        "night": "#ffec9640",
+        "oklch": "oklch(91.3% 0.080 96.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.048 96.7)",
+          "oklch(26.4% 0.065 96.7)",
+          "oklch(37.9% 0.076 96.7)",
+          "oklch(49.3% 0.080 96.7)",
+          "oklch(60.7% 0.077 96.7)",
+          "oklch(72.1% 0.067 96.7)",
+          "oklch(83.6% 0.051 96.7)",
+          "oklch(95.0% 0.028 96.7)"
+        ],
+        "usage": "Tape strips pinning a note to the sheet."
+      },
+      "edge": {
+        "role": "neutral",
+        "displayName": "Paper Cut Edge",
+        "canonical": "#cbbc9a",
+        "night": "#0f0b07",
+        "oklch": "oklch(79.9% 0.049 87.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.030 87.0)",
+          "oklch(26.4% 0.040 87.0)",
+          "oklch(37.9% 0.047 87.0)",
+          "oklch(49.3% 0.049 87.0)",
+          "oklch(60.7% 0.047 87.0)",
+          "oklch(72.1% 0.041 87.0)",
+          "oklch(83.6% 0.031 87.0)",
+          "oklch(95.0% 0.017 87.0)"
+        ],
+        "usage": "Paper's cut edge: the 1px solid offset under rows, filters, fields and paper buttons."
+      },
+      "edge-2": {
+        "role": "neutral",
+        "displayName": "Tall Paper Edge",
+        "canonical": "#a89570",
+        "night": "#070503",
+        "oklch": "oklch(67.7% 0.056 83.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.034 83.8)",
+          "oklch(26.4% 0.046 83.8)",
+          "oklch(37.9% 0.053 83.8)",
+          "oklch(49.3% 0.056 83.8)",
+          "oklch(60.7% 0.054 83.8)",
+          "oklch(72.1% 0.047 83.8)",
+          "oklch(83.6% 0.036 83.8)",
+          "oklch(95.0% 0.020 83.8)"
+        ],
+        "usage": "A thicker paper's cut edge, 2px: the chat sheet, the leaf, the composer card."
+      },
+      "amb": {
+        "role": "neutral",
+        "displayName": "Cast Shadow",
+        "canonical": "rgba(60,40,15,0.36)",
+        "night": "rgba(0,0,0,0.62)",
+        "oklch": "oklch(29.5% 0.048 70.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.029 70.0)",
+          "oklch(26.4% 0.040 70.0)",
+          "oklch(37.9% 0.046 70.0)",
+          "oklch(49.3% 0.048 70.0)",
+          "oklch(60.7% 0.047 70.0)",
+          "oklch(72.1% 0.041 70.0)",
+          "oklch(83.6% 0.031 70.0)",
+          "oklch(95.0% 0.017 70.0)"
+        ],
+        "usage": "The cast shadow under cardboard and paper, down and to the right. Never under a sticker."
+      },
+      "amb-2": {
+        "role": "neutral",
+        "displayName": "Far Shadow",
+        "canonical": "rgba(60,40,15,0.22)",
+        "night": "rgba(0,0,0,0.42)",
+        "oklch": "oklch(29.5% 0.048 70.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.029 70.0)",
+          "oklch(26.4% 0.040 70.0)",
+          "oklch(37.9% 0.046 70.0)",
+          "oklch(49.3% 0.048 70.0)",
+          "oklch(60.7% 0.047 70.0)",
+          "oklch(72.1% 0.041 70.0)",
+          "oklch(83.6% 0.031 70.0)",
+          "oklch(95.0% 0.017 70.0)"
+        ],
+        "usage": "The far, soft shadow under the tallest pieces: boards, the leaf, the composer frame."
+      },
+      "face": {
+        "role": "neutral",
+        "displayName": "Top-left Light",
+        "canonical": "rgba(255,255,255,0.16)",
+        "night": "rgba(255,255,255,0.05)",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0.0)",
+          "oklch(26.4% 0.000 0.0)",
+          "oklch(37.9% 0.000 0.0)",
+          "oklch(49.3% 0.000 0.0)",
+          "oklch(60.7% 0.000 0.0)",
+          "oklch(72.1% 0.000 0.0)",
+          "oklch(83.6% 0.000 0.0)",
+          "oklch(95.0% 0.000 0.0)"
+        ],
+        "usage": "Top of the face gradient on every cut piece, fading to clear at 55%: the light from the top left."
+      },
+      "gloss": {
+        "role": "neutral",
+        "displayName": "Sticker Gloss",
+        "canonical": "rgba(255,255,255,0.30)",
+        "night": "rgba(255,255,255,0.22)",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0.0)",
+          "oklch(26.4% 0.000 0.0)",
+          "oklch(37.9% 0.000 0.0)",
+          "oklch(49.3% 0.000 0.0)",
+          "oklch(60.7% 0.000 0.0)",
+          "oklch(72.1% 0.000 0.0)",
+          "oklch(83.6% 0.000 0.0)",
+          "oklch(95.0% 0.000 0.0)"
+        ],
+        "usage": "Top of the gloss on a sticker, fading to clear at 55%."
+      },
+      "veil": {
+        "role": "neutral",
+        "displayName": "Popover Scrim",
+        "canonical": "#2a221959",
+        "night": "#000000a6",
+        "oklch": "oklch(25.8% 0.020 70.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 70.0)",
+          "oklch(26.4% 0.017 70.0)",
+          "oklch(37.9% 0.019 70.0)",
+          "oklch(49.3% 0.020 70.0)",
+          "oklch(60.7% 0.019 70.0)",
+          "oklch(72.1% 0.017 70.0)",
+          "oklch(83.6% 0.013 70.0)",
+          "oklch(95.0% 0.007 70.0)"
+        ],
+        "usage": "The scrim behind a popover."
+      },
+      "marker": {
+        "role": "neutral",
+        "displayName": "Marker Ink",
+        "canonical": "#ffe775",
+        "night": "#5c4f14",
+        "oklch": "oklch(92.5% 0.137 97.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.083 97.6)",
+          "oklch(26.4% 0.112 97.6)",
+          "oklch(37.9% 0.130 97.6)",
+          "oklch(49.3% 0.136 97.6)",
+          "oklch(60.7% 0.131 97.6)",
+          "oklch(72.1% 0.115 97.6)",
+          "oklch(83.6% 0.087 97.6)",
+          "oklch(95.0% 0.048 97.6)"
+        ],
+        "usage": "Highlighter ink: selected rows, active filters, the on slot of a switch. Always with its strokes and the paper texture."
+      },
+      "st-green": {
+        "role": "tertiary",
+        "displayName": "Done Sticker",
+        "canonical": "#497048",
+        "night": "#557150",
+        "oklch": "oklch(50.5% 0.076 143.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.046 143.8)",
+          "oklch(26.4% 0.063 143.8)",
+          "oklch(37.9% 0.073 143.8)",
+          "oklch(49.3% 0.076 143.8)",
+          "oklch(60.7% 0.073 143.8)",
+          "oklch(72.1% 0.064 143.8)",
+          "oklch(83.6% 0.049 143.8)",
+          "oklch(95.0% 0.027 143.8)"
+        ],
+        "usage": "Status stickers with white text (Done, Connected). Holds 4.5:1."
+      },
+      "st-amber": {
+        "role": "tertiary",
+        "displayName": "Running Sticker",
+        "canonical": "#936126",
+        "night": "#8f6635",
+        "oklch": "oklch(53.6% 0.098 67.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.060 67.0)",
+          "oklch(26.4% 0.081 67.0)",
+          "oklch(37.9% 0.094 67.0)",
+          "oklch(49.3% 0.098 67.0)",
+          "oklch(60.7% 0.095 67.0)",
+          "oklch(72.1% 0.083 67.0)",
+          "oklch(83.6% 0.063 67.0)",
+          "oklch(95.0% 0.035 67.0)"
+        ],
+        "usage": "Status stickers with white text (Running, Connecting). Holds 4.5:1."
+      },
+      "st-red": {
+        "role": "tertiary",
+        "displayName": "Failed Sticker",
+        "canonical": "#a04431",
+        "night": "#914736",
+        "oklch": "oklch(50.5% 0.127 33.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.077 33.3)",
+          "oklch(26.4% 0.104 33.3)",
+          "oklch(37.9% 0.121 33.3)",
+          "oklch(49.3% 0.127 33.3)",
+          "oklch(60.7% 0.122 33.3)",
+          "oklch(72.1% 0.107 33.3)",
+          "oklch(83.6% 0.081 33.3)",
+          "oklch(95.0% 0.045 33.3)"
+        ],
+        "usage": "Status stickers and number badges with white text (Failed, Busy). Holds 4.5:1."
+      },
+      "deck-1": {
+        "role": "neutral",
+        "displayName": "Capsule Step",
+        "canonical": "#ede4d2",
+        "night": "#27221b",
+        "oklch": "oklch(92.1% 0.026 84.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.016 84.6)",
+          "oklch(26.4% 0.021 84.6)",
+          "oklch(37.9% 0.025 84.6)",
+          "oklch(49.3% 0.026 84.6)",
+          "oklch(60.7% 0.025 84.6)",
+          "oklch(72.1% 0.022 84.6)",
+          "oklch(83.6% 0.017 84.6)",
+          "oklch(95.0% 0.009 84.6)"
+        ],
+        "usage": "The steps inside an open capsule."
+      },
+      "deck-2": {
+        "role": "neutral",
+        "displayName": "Capsule Step Alternate",
+        "canonical": "#e6dcc8",
+        "night": "#221d17",
+        "oklch": "oklch(89.7% 0.029 84.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.018 84.6)",
+          "oklch(26.4% 0.024 84.6)",
+          "oklch(37.9% 0.028 84.6)",
+          "oklch(49.3% 0.029 84.6)",
+          "oklch(60.7% 0.028 84.6)",
+          "oklch(72.1% 0.024 84.6)",
+          "oklch(83.6% 0.018 84.6)",
+          "oklch(95.0% 0.010 84.6)"
+        ],
+        "usage": "Alternate steps inside an open capsule."
+      },
+      "shadow": {
+        "role": "neutral",
+        "displayName": "Pressed Edge",
+        "canonical": "#cdbf9f",
+        "night": "#0c0a07",
+        "oklch": "oklch(80.8% 0.046 87.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.028 87.2)",
+          "oklch(26.4% 0.038 87.2)",
+          "oklch(37.9% 0.044 87.2)",
+          "oklch(49.3% 0.046 87.2)",
+          "oklch(60.7% 0.044 87.2)",
+          "oklch(72.1% 0.039 87.2)",
+          "oklch(83.6% 0.029 87.2)",
+          "oklch(95.0% 0.016 87.2)"
+        ],
+        "usage": "The edge of a pressed, disabled-looking button."
+      },
+      "blush": {
+        "role": "neutral",
+        "displayName": "Warning Wash",
+        "canonical": "#e8a9a2",
+        "night": "#7a3d36",
+        "oklch": "oklch(79.2% 0.076 26.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.046 26.0)",
+          "oklch(26.4% 0.062 26.0)",
+          "oklch(37.9% 0.072 26.0)",
+          "oklch(49.3% 0.076 26.0)",
+          "oklch(60.7% 0.073 26.0)",
+          "oklch(72.1% 0.064 26.0)",
+          "oklch(83.6% 0.048 26.0)",
+          "oklch(95.0% 0.027 26.0)"
+        ],
+        "usage": "The soft red wash behind a warning."
+      },
+      "cork": {
+        "role": "neutral",
+        "displayName": "Cork Face",
+        "canonical": "#b98c5e",
+        "night": "#5a4028",
+        "oklch": "oklch(67.3% 0.083 66.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.050 66.3)",
+          "oklch(26.4% 0.068 66.3)",
+          "oklch(37.9% 0.079 66.3)",
+          "oklch(49.3% 0.083 66.3)",
+          "oklch(60.7% 0.080 66.3)",
+          "oklch(72.1% 0.070 66.3)",
+          "oklch(83.6% 0.053 66.3)",
+          "oklch(95.0% 0.029 66.3)"
+        ],
+        "usage": "The cork board face."
+      },
+      "cork-2": {
+        "role": "neutral",
+        "displayName": "Cork Frame",
+        "canonical": "#7a5634",
+        "night": "#3a2816",
+        "oklch": "oklch(48.4% 0.068 63.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.042 63.4)",
+          "oklch(26.4% 0.056 63.4)",
+          "oklch(37.9% 0.065 63.4)",
+          "oklch(49.3% 0.068 63.4)",
+          "oklch(60.7% 0.066 63.4)",
+          "oklch(72.1% 0.058 63.4)",
+          "oklch(83.6% 0.044 63.4)",
+          "oklch(95.0% 0.024 63.4)"
+        ],
+        "usage": "The cork board frame."
+      },
+      "stamp-ground": {
+        "role": "neutral",
+        "displayName": "Stamp Ground",
+        "canonical": "#fffdf8cc",
+        "night": "#211c16cc",
+        "oklch": "oklch(99.4% 0.007 88.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 88.6)",
+          "oklch(26.4% 0.006 88.6)",
+          "oklch(37.9% 0.007 88.6)",
+          "oklch(49.3% 0.007 88.6)",
+          "oklch(60.7% 0.007 88.6)",
+          "oklch(72.1% 0.006 88.6)",
+          "oklch(83.6% 0.004 88.6)",
+          "oklch(95.0% 0.002 88.6)"
+        ],
+        "usage": "The paper showing inside a rubber stamp."
+      },
+      "stamp-ground-soft": {
+        "role": "neutral",
+        "displayName": "Soft Stamp Ground",
+        "canonical": "#fffdf88c",
+        "night": "#211c168c",
+        "oklch": "oklch(99.4% 0.007 88.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 88.6)",
+          "oklch(26.4% 0.006 88.6)",
+          "oklch(37.9% 0.007 88.6)",
+          "oklch(49.3% 0.007 88.6)",
+          "oklch(60.7% 0.007 88.6)",
+          "oklch(72.1% 0.006 88.6)",
+          "oklch(83.6% 0.004 88.6)",
+          "oklch(95.0% 0.002 88.6)"
+        ],
+        "usage": "A stamp struck over a row."
+      },
+      "knob": {
+        "role": "neutral",
+        "displayName": "Knob Outline",
+        "canonical": "#ffffff",
+        "night": "#efe6d3",
+        "oklch": "oklch(100.0% 0.000 0.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0.0)",
+          "oklch(26.4% 0.000 0.0)",
+          "oklch(37.9% 0.000 0.0)",
+          "oklch(49.3% 0.000 0.0)",
+          "oklch(60.7% 0.000 0.0)",
+          "oklch(72.1% 0.000 0.0)",
+          "oklch(83.6% 0.000 0.0)",
+          "oklch(95.0% 0.000 0.0)"
+        ],
+        "usage": "Outlines drawn over a dark ground."
+      },
+      "glass": {
+        "role": "neutral",
+        "displayName": "Glass Chip",
+        "canonical": "#fffdf780",
+        "night": "#2d272014",
+        "oklch": "oklch(99.4% 0.008 91.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 91.5)",
+          "oklch(26.4% 0.007 91.5)",
+          "oklch(37.9% 0.008 91.5)",
+          "oklch(49.3% 0.008 91.5)",
+          "oklch(60.7% 0.008 91.5)",
+          "oklch(72.1% 0.007 91.5)",
+          "oklch(83.6% 0.005 91.5)",
+          "oklch(95.0% 0.003 91.5)"
+        ],
+        "usage": "A translucent chip over kraft."
+      }
+    },
+    "typographyMeta": {
+      "heading-lg": {
+        "displayName": "heading-lg",
+        "group": "Display",
+        "purpose": "Drawer titles."
+      },
+      "heading": {
+        "displayName": "heading",
+        "group": "Display",
+        "purpose": "Section and card headings."
+      },
+      "heading-sm": {
+        "displayName": "heading-sm",
+        "group": "Display",
+        "purpose": "Subheadings inside a section."
+      },
+      "said": {
+        "displayName": "said",
+        "group": "Display",
+        "purpose": "The agent's narration written in the margin of the sheet.",
+        "fontStyle": "italic"
+      },
+      "cover": {
+        "displayName": "cover",
+        "group": "Display",
+        "purpose": "The system's name on the cover only.",
+        "opticalSize": 144
+      },
+      "body": {
+        "displayName": "body",
+        "group": "Set",
+        "purpose": "Body copy on paper."
+      },
+      "label": {
+        "displayName": "label",
+        "group": "Set",
+        "purpose": "Buttons, rows, filters, tab names: anything set in a strip of paper or on a sticker."
+      },
+      "label-sm": {
+        "displayName": "label-sm",
+        "group": "Set",
+        "purpose": "Small buttons, step lists, kbd hints."
+      },
+      "badge": {
+        "displayName": "badge",
+        "group": "Set",
+        "purpose": "Number badges and the busy pill (uppercase, 0.06em tracking).",
+        "textTransform": "uppercase"
+      },
+      "greeting": {
+        "displayName": "greeting",
+        "group": "Written",
+        "purpose": "The home greeting. Inked into the paper (kr-title is-greeting)."
+      },
+      "title": {
+        "displayName": "title",
+        "group": "Written",
+        "purpose": "Every page title. Inked into the paper (kr-title)."
+      },
+      "title-session": {
+        "displayName": "title-session",
+        "group": "Written",
+        "purpose": "The title of an open session, which shares its bar and runs long. Inked into the paper (kr-title is-session)."
+      },
+      "hand": {
+        "displayName": "hand",
+        "group": "Written",
+        "purpose": "Notes and sublines written on the paper. 15px for small notes, 20px for sticky notes."
+      },
+      "chip": {
+        "displayName": "chip",
+        "group": "Written",
+        "purpose": "The Done chip and any hand-written sticker."
+      },
+      "code": {
+        "displayName": "code",
+        "group": "Typed",
+        "purpose": "Code chips and key caps on paper-2."
+      }
+    },
+    "fonts": {
+      "families": {
+        "serif": "\"Fraunces\", Georgia, serif",
+        "sans": "\"Nunito\", system-ui, sans-serif",
+        "hand": "\"Caveat\", cursive",
+        "mono": "\"Courier New\", Courier, ui-monospace, monospace"
+      },
+      "googleFonts": "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600&display=swap"
+    },
+    "shadows": [
+      {
+        "name": "lift-paper-1",
+        "purpose": "A strip of paper on the desk or on a board: rows, filters, fields, paper buttons, step lists.",
+        "value": "0 1px 0 #cbbc9a, 2px 3px 3px rgba(60,40,15,0.36)",
+        "night": "0 1px 0 #0f0b07, 2px 3px 3px rgba(0,0,0,0.62)"
+      },
+      {
+        "name": "lift-paper-2",
+        "purpose": "Paper lifted a step: a hovered row, a hovered paper button, the selected row.",
+        "value": "1px 1px 0 #cbbc9a, 3px 5px 6px rgba(60,40,15,0.36)",
+        "night": "1px 1px 0 #0f0b07, 3px 5px 6px rgba(0,0,0,0.62)"
+      },
+      {
+        "name": "lift-paper-3",
+        "purpose": "The tallest paper: the chat sheet and the leaf laid over the tabs.",
+        "value": "1px 2px 0 #a89570, 5px 8px 10px rgba(60,40,15,0.36), 10px 18px 26px -8px rgba(60,40,15,0.22)",
+        "night": "1px 2px 0 #070503, 5px 8px 10px rgba(0,0,0,0.62), 10px 18px 26px -8px rgba(0,0,0,0.42)"
+      },
+      {
+        "name": "lift-board",
+        "purpose": "Cardboard: the rail and the sessions board.",
+        "value": "2px 3px 0 #a3844f, 5px 8px 10px rgba(60,40,15,0.36), 10px 18px 26px -8px rgba(60,40,15,0.22)",
+        "night": "2px 3px 0 #1f170c, 5px 8px 10px rgba(0,0,0,0.62), 10px 18px 26px -8px rgba(0,0,0,0.42)"
+      },
+      {
+        "name": "lift-board-sm",
+        "purpose": "A button at rest: a 2px by 3px board-2 cut edge and a short cast shadow.",
+        "value": "2px 3px 0 #a3844f, 4px 6px 7px rgba(60,40,15,0.36)",
+        "night": "2px 3px 0 #1f170c, 4px 6px 7px rgba(0,0,0,0.62)"
+      },
+      {
+        "name": "lift-board-up",
+        "purpose": "A hovered button: lifted 1px up and left, so its edge grows by a pixel.",
+        "value": "3px 4px 0 #a3844f, 6px 9px 10px rgba(60,40,15,0.36)",
+        "night": "3px 4px 0 #1f170c, 6px 9px 10px rgba(0,0,0,0.62)"
+      },
+      {
+        "name": "lift-mat",
+        "purpose": "The sage mat under a capsule deck and the sage confirm button.",
+        "value": "1.5px 2px 0 #5f8a5e, 4px 6px 7px rgba(60,40,15,0.36), 8px 14px 20px -8px rgba(60,40,15,0.22)",
+        "night": "1.5px 2px 0 #1f3320, 4px 6px 7px rgba(0,0,0,0.62), 8px 14px 20px -8px rgba(0,0,0,0.42)"
+      },
+      {
+        "name": "lift-frame",
+        "purpose": "The terracotta frame around the composer.",
+        "value": "1.5px 3px 0 #9e4530, 5px 9px 10px rgba(60,40,15,0.36), 12px 22px 30px -6px rgba(60,40,15,0.22)",
+        "night": "1.5px 3px 0 #4f2217, 5px 9px 10px rgba(0,0,0,0.62), 12px 22px 30px -6px rgba(0,0,0,0.42)"
+      },
+      {
+        "name": "press-paper",
+        "purpose": "A clicked row: the paper sits down on the desk.",
+        "value": "0 0 0 #cbbc9a, 1px 1px 1px rgba(60,40,15,0.36)",
+        "night": "0 0 0 #0f0b07, 1px 1px 1px rgba(0,0,0,0.62)"
+      },
+      {
+        "name": "press-board",
+        "purpose": "A pressed button, after travelling 2px right and 3px down: the edge is gone. A latched button (is-on) stays here.",
+        "value": "0 0 0 #a3844f, 1px 1px 2px rgba(60,40,15,0.36)",
+        "night": "0 0 0 #1f170c, 1px 1px 2px rgba(0,0,0,0.62)"
+      },
+      {
+        "name": "sticker",
+        "purpose": "The die-cut border of a sticker 30px and up: the pill, a kr-sticker. No cast shadow.",
+        "value": "0 0 0 2px #ffffff, 0 0 0 2.6px rgba(0,0,0,0.16)",
+        "night": "0 0 0 2px #d9cfb8, 0 0 0 2.6px rgba(0,0,0,0.16)"
+      },
+      {
+        "name": "sticker-s",
+        "purpose": "The die-cut border of a small sticker: badges, chips, dots, small icon buttons.",
+        "value": "0 0 0 1.5px #ffffff, 0 0 0 2px rgba(0,0,0,0.16)",
+        "night": "0 0 0 1.5px #d9cfb8, 0 0 0 2px rgba(0,0,0,0.16)"
+      },
+      {
+        "name": "sticker-on",
+        "purpose": "A selected sticker: the white cut, then a gold ring. An on sticker toggle.",
+        "value": "0 0 0 2px #ffffff, 0 0 0 4.5px #f0c24a, 0 0 0 5px rgba(0,0,0,0.16)",
+        "night": "0 0 0 2px #d9cfb8, 0 0 0 4.5px #e3b53a, 0 0 0 5px rgba(0,0,0,0.16)"
+      },
+      {
+        "name": "recess",
+        "purpose": "A piece set into another: the composer card inside its frame, the slot of a switch.",
+        "value": "inset 1px 1px 3px rgba(0,0,0,0.14)",
+        "night": "inset 1px 1px 3px rgba(0,0,0,0.45)"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "purpose": "Anything that moves or appears: lifts, presses, drops, opening and closing.",
+        "value": "cubic-bezier(0.2,0.7,0.2,1)"
+      },
+      {
+        "name": "ease-pop",
+        "purpose": "Anything that lands: a sticker being stuck on, a stamp.",
+        "value": "cubic-bezier(0.34,1.5,0.64,1)"
+      },
+      {
+        "name": "ease-io",
+        "purpose": "The gentle loops while the agent works, always with alternate.",
+        "value": "cubic-bezier(0.45,0,0.55,1)"
+      },
+      {
+        "name": "dur-hover",
+        "purpose": "Hover lifts, presses, tints.",
+        "value": "150ms"
+      },
+      {
+        "name": "dur-enter",
+        "purpose": "Pieces dropping in, popovers.",
+        "value": "240ms"
+      },
+      {
+        "name": "dur-land",
+        "purpose": "Stickers and stamps landing.",
+        "value": "260ms"
+      },
+      {
+        "name": "dur-loop",
+        "purpose": "The pinwheel's turn and the working loops.",
+        "value": "1.2s"
+      }
+    ],
+    "tilt": [
+      {
+        "name": "tilt-logo",
+        "purpose": "The paw mark at the top of the rail.",
+        "value": "-8deg"
+      },
+      {
+        "name": "tilt-sticker-on",
+        "purpose": "A selected sticker toggle (kr-sticker is-on, with scale 1.08).",
+        "value": "-4deg"
+      },
+      {
+        "name": "tilt-hover",
+        "purpose": "A hovered sticker toggle. The rail tiles no longer tilt; they lift like buttons.",
+        "value": "-2deg"
+      },
+      {
+        "name": "tilt-badge",
+        "purpose": "Number badges on rail stickers.",
+        "value": "8deg"
+      },
+      {
+        "name": "tilt-badge-row",
+        "purpose": "Number badges on session rows.",
+        "value": "-8deg"
+      },
+      {
+        "name": "tilt-chip",
+        "purpose": "The Done chip.",
+        "value": "-4deg"
+      },
+      {
+        "name": "tilt-row-on",
+        "purpose": "The selected session row (highlighted paper).",
+        "value": "-0.5deg"
+      },
+      {
+        "name": "tilt-cat",
+        "purpose": "The cat peeking over the composer.",
+        "value": "-4deg"
+      },
+      {
+        "name": "tilt-stamp",
+        "purpose": "Every rubber stamp, on every screen.",
+        "value": "-4deg"
+      }
+    ],
+    "stroke": [
+      {
+        "name": "stroke-hair",
+        "purpose": "Paper borders (rgba black at 7%), dashed rules in line.",
+        "value": "1px"
+      },
+      {
+        "name": "stroke-mat",
+        "purpose": "Mat and frame borders; the outline of an unchecked box.",
+        "value": "1.5px"
+      },
+      {
+        "name": "stroke-cut-s",
+        "purpose": "The die-cut border of a small sticker.",
+        "value": "1.5px"
+      },
+      {
+        "name": "stroke-cut",
+        "purpose": "The die-cut border of a sticker; the pencil focus ring in ink.",
+        "value": "2px"
+      },
+      {
+        "name": "stroke-ring",
+        "purpose": "The gold ring outside the cut of a selected sticker.",
+        "value": "2.5px"
+      },
+      {
+        "name": "stroke-tab",
+        "purpose": "The red top edge of the selected chat tab.",
+        "value": "3px"
+      },
+      {
+        "name": "stroke-frame",
+        "purpose": "The terracotta frame's width around the composer card.",
+        "value": "7px"
+      }
+    ],
+    "texture": [
+      {
+        "name": "pulp-paper",
+        "purpose": "White paper (sheet, card, sheet-warm, paper, highlighter): the paper texture of the Factory Overseer workshop walls, ported texel for texel, soft pulp clouds and short fibers lit from the top left. On the chat sheet, the leaf, rows, fields and cards; not on the composer card. On the workspace strips (is-strip), tinted with their workspace colour and written on in pen (kr-pen). Every button takes it too: kr-btn, kr-ib and the discs, over their own colour.",
+        "value": "256px"
+      },
+      {
+        "name": "pulp-board",
+        "purpose": "Cardboard: a flecked, unfluted board, fine mottle with sparse dark and pale flecks. On boards, mats and frames; buttons carry pulp-paper.",
+        "value": "128px"
+      }
+    ],
+    "night": {
+      "desk": "#1c1712",
+      "desk-2": "#100d09",
+      "sheet": "#2d2720",
+      "sheet-warm": "#29231c",
+      "card": "#302a22",
+      "paper": "#211c16",
+      "paper-2": "#2b251e",
+      "hover": "#3f362a",
+      "board": "#4a3a24",
+      "board-2": "#1f170c",
+      "kraft": "#6f5530",
+      "kraft-2": "#4e3a1f",
+      "mat-green": "#3f5c3e",
+      "mat-green-2": "#1f3320",
+      "mat-red": "#8a3f2d",
+      "mat-red-2": "#4f2217",
+      "mat-red-3": "#2a110a",
+      "ink": "#efe6d3",
+      "mute": "#b4a68e",
+      "faint": "#a89a80",
+      "line": "#4a4034",
+      "rule": "#3b4350",
+      "bar": "#5e5343",
+      "white": "#ffffff",
+      "sticker-cut": "#d9cfb8",
+      "red": "#d9654c",
+      "red-2": "#a8432e",
+      "blue": "#7d9bd8",
+      "blue-2": "#3d5a94",
+      "on-blue": "#1c1712",
+      "green": "#78a876",
+      "amber": "#d6964a",
+      "max": "#8c6436",
+      "max-2": "#5f4425",
+      "kind-think": "#5fa9b3",
+      "kind-sub": "#a58ad0",
+      "book": "#b77aa0",
+      "attn": "#e3b53a",
+      "on-attn": "#2a2219",
+      "highlighter": "#5c4f14",
+      "highlighter-2": "#a88f2e",
+      "tape": "#ffec9640",
+      "edge": "#0f0b07",
+      "edge-2": "#070503",
+      "amb": "rgba(0,0,0,0.62)",
+      "amb-2": "rgba(0,0,0,0.42)",
+      "face": "rgba(255,255,255,0.05)",
+      "gloss": "rgba(255,255,255,0.22)",
+      "veil": "#000000a6",
+      "marker": "#5c4f14",
+      "st-green": "#557150",
+      "st-amber": "#8f6635",
+      "st-red": "#914736",
+      "deck-1": "#27221b",
+      "deck-2": "#221d17",
+      "shadow": "#0c0a07",
+      "blush": "#7a3d36",
+      "cork": "#5a4028",
+      "cork-2": "#3a2816",
+      "stamp-ground": "#211c16cc",
+      "stamp-ground-soft": "#211c168c",
+      "knob": "#efe6d3",
+      "glass": "#2d272014"
+    }
+  },
+  "components": [
+    {
+      "name": "Kraft Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Every button is thick card: the cardboard face, a cut edge 2px right and 3px down, one short cast shadow. It lifts 1px on hover, travels into the desk when pressed, and stays pressed when latched. The pulp-paper texture tile is omitted here.",
+      "html": "<button class=\"ds-btn\">Open folder</button> <button class=\"ds-btn\" aria-pressed=\"true\">Mine</button> <button class=\"ds-btn\" disabled>Cancel</button>",
+      "css": ".ds-btn{all:unset;cursor:pointer;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-sizing:border-box;height:32px;padding:0 14px;background-color:#cfae78;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid color-mix(in srgb,#a3844f 60%,#cfae78);border-radius:4px;box-shadow:2px 3px 0 #a3844f,4px 6px 7px rgba(60,40,15,0.36);font-family:Nunito,system-ui,sans-serif;font-size:13px;font-weight:800;line-height:1;color:#2a2219;white-space:nowrap;user-select:none;transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1),background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 #a3844f,6px 9px 10px rgba(60,40,15,0.36)}.ds-btn:active,.ds-btn[aria-pressed=\"true\"]{transform:translate(2px,3px);box-shadow:0 0 0 #a3844f,1px 1px 2px rgba(60,40,15,0.36)}.ds-btn[aria-pressed=\"true\"]{background-color:color-mix(in srgb,#cfae78 82%,#a3844f)}.ds-btn:focus-visible{outline:2px solid #2a2219;outline-offset:3px}.ds-btn:disabled{cursor:not-allowed;background-color:#efe7d6;background-image:none;border-color:transparent;color:#72654f;box-shadow:none;transform:none}"
+    },
+    {
+      "name": "Sage Confirm Button",
+      "kind": "button",
+      "refersTo": "button-confirm",
+      "description": "The one committing action on a sheet (Merge, Run, Save): sage cardboard on its own darker edge, ink label. At most one per sheet.",
+      "html": "<button class=\"ds-btn-confirm\">Run on main</button>",
+      "css": ".ds-btn-confirm{all:unset;cursor:pointer;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-sizing:border-box;height:32px;padding:0 14px;background-color:#8fb08a;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid #5f8a5e;border-radius:4px;box-shadow:2px 3px 0 #5f8a5e,4px 6px 7px rgba(60,40,15,0.36);font-family:Nunito,system-ui,sans-serif;font-size:13px;font-weight:800;line-height:1;color:#2a2219;white-space:nowrap;user-select:none;transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1),background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-btn-confirm:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 #5f8a5e,6px 9px 10px rgba(60,40,15,0.36)}.ds-btn-confirm:active,.ds-btn-confirm[aria-pressed=\"true\"]{transform:translate(2px,3px);box-shadow:0 0 0 #5f8a5e,1px 1px 2px rgba(60,40,15,0.36)}.ds-btn-confirm[aria-pressed=\"true\"]{background-color:color-mix(in srgb,#8fb08a 82%,#5f8a5e)}.ds-btn-confirm:focus-visible{outline:2px solid #2a2219;outline-offset:3px}.ds-btn-confirm:disabled{cursor:not-allowed;background-color:#efe7d6;background-image:none;border-color:transparent;color:#72654f;box-shadow:none;transform:none}"
+    },
+    {
+      "name": "Terracotta Destructive Button",
+      "kind": "button",
+      "refersTo": "button-destructive",
+      "description": "Delete, Stop, Discard: terracotta cardboard with a white label. Never beside the sage button without a kraft button between them.",
+      "html": "<button class=\"ds-btn-danger\">Delete session</button>",
+      "css": ".ds-btn-danger{all:unset;cursor:pointer;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-sizing:border-box;height:32px;padding:0 14px;background-color:#9e4530;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid #6b2a1c;border-radius:4px;box-shadow:2px 3px 0 #6b2a1c,4px 6px 7px rgba(60,40,15,0.36);font-family:Nunito,system-ui,sans-serif;font-size:13px;font-weight:800;line-height:1;color:#ffffff;white-space:nowrap;user-select:none;transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1),background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-btn-danger:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 #6b2a1c,6px 9px 10px rgba(60,40,15,0.36)}.ds-btn-danger:active,.ds-btn-danger[aria-pressed=\"true\"]{transform:translate(2px,3px);box-shadow:0 0 0 #6b2a1c,1px 1px 2px rgba(60,40,15,0.36)}.ds-btn-danger[aria-pressed=\"true\"]{background-color:color-mix(in srgb,#9e4530 82%,#6b2a1c)}.ds-btn-danger:focus-visible{outline:2px solid #2a2219;outline-offset:3px}.ds-btn-danger:disabled{cursor:not-allowed;background-color:#efe7d6;background-image:none;border-color:transparent;color:#72654f;box-shadow:none;transform:none}"
+    },
+    {
+      "name": "Rail Tile",
+      "kind": "nav",
+      "refersTo": "icon-button-rail",
+      "description": "A 44px cardboard tile in the identity colour of what it opens (here sessions blue), white glyph, cut edge in a darker shade of its own colour, a gold number badge stuck on its corner. The current tile stays pressed flat.",
+      "html": "<nav class=\"ds-rail\"><button class=\"ds-tile\" aria-label=\"Sessions\" aria-current=\"page\"><svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z\"/></svg><span class=\"ds-tile-badge\">3</span></button><button class=\"ds-tile ds-tile-amber\" aria-label=\"Skills\"><svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z\"/></svg></button><button class=\"ds-tile ds-tile-kraft\" aria-label=\"Settings\"><svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z\"/></svg></button></nav>",
+      "css": ".ds-rail{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 0 8px;width:72px;box-sizing:border-box}.ds-tile{all:unset;cursor:pointer;position:relative;display:inline-grid;place-items:center;box-sizing:border-box;width:44px;height:44px;padding:9px;--c:#3b5b9a;border-radius:10px;background-color:var(--c);background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid rgba(0,0,0,.18);color:#fff;box-shadow:2px 3px 0 color-mix(in srgb,var(--c) 55%,#a89570),4px 6px 7px rgba(60,40,15,0.36);transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-tile svg{display:block;width:24px;height:24px}.ds-tile-amber{--c:#b8792f}.ds-tile-kraft{--c:#b3905a}.ds-tile:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c) 55%,#a89570),6px 9px 10px rgba(60,40,15,0.36)}.ds-tile:active,.ds-tile[aria-current]{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c) 55%,#a89570),1px 1px 2px rgba(60,40,15,0.36)}.ds-tile[aria-current]{background-color:color-mix(in srgb,var(--c) 82%,#a89570)}.ds-tile:focus-visible{outline:2px solid #2a2219;outline-offset:4px}.ds-tile-badge{position:absolute;top:-4px;right:-1px;display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;box-sizing:border-box;border-radius:50%;background-color:#f0c24a;background-image:linear-gradient(180deg,rgba(255,255,255,0.30),rgba(255,255,255,0) 55%);color:#2a2219;font-family:Nunito,system-ui,sans-serif;font-size:11px;font-weight:900;line-height:1;box-shadow:0 0 0 1.5px #ffffff,0 0 0 2px rgba(0,0,0,0.16);transform:rotate(8deg)}"
+    },
+    {
+      "name": "Cardboard Disc",
+      "kind": "button",
+      "refersTo": "icon-button-disc",
+      "description": "A 26px round cardboard disc for an action on a row, a card or the composer: copy, share, send, delete. Sage for send and done, terracotta for delete and stop.",
+      "html": "<button class=\"ds-disc\" aria-label=\"Copy\"><svg width=\"16\" height=\"16\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"11\" height=\"11\" rx=\"2\"/><path d=\"M5 15V5a2 2 0 0 1 2-2h10\"/></svg></button> <button class=\"ds-disc ds-disc-green\" aria-label=\"Send\"><svg width=\"16\" height=\"16\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 19V5M5 12l7-7 7 7\"/></svg></button> <button class=\"ds-disc ds-disc-red\" aria-label=\"Delete\"><svg width=\"16\" height=\"16\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6\"/></svg></button>",
+      "css": ".ds-disc{all:unset;cursor:pointer;display:inline-grid;place-items:center;box-sizing:border-box;width:26px;height:26px;padding:6px;border-radius:50%;background-color:#cfae78;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);color:#2a2219;border:1px solid color-mix(in srgb,#a3844f 60%,#cfae78);box-shadow:2px 3px 0 #a3844f,4px 6px 7px rgba(60,40,15,0.36);transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-disc svg{display:block;width:16px;height:16px}.ds-disc:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 #a3844f,6px 9px 10px rgba(60,40,15,0.36)}.ds-disc:active{transform:translate(2px,3px);box-shadow:0 0 0 #a3844f,1px 1px 2px rgba(60,40,15,0.36)}.ds-disc:focus-visible{outline:2px solid #2a2219;outline-offset:3px}.ds-disc-green{background-color:#8fb08a;border-color:#5f8a5e;box-shadow:2px 3px 0 #5f8a5e,4px 6px 7px rgba(60,40,15,0.36)}.ds-disc-green:hover{box-shadow:3px 4px 0 #5f8a5e,6px 9px 10px rgba(60,40,15,0.36)}.ds-disc-green:active{box-shadow:0 0 0 #5f8a5e,1px 1px 2px rgba(60,40,15,0.36)}.ds-disc-red{background-color:#9e4530;color:#fff;border-color:#6b2a1c;box-shadow:2px 3px 0 #6b2a1c,4px 6px 7px rgba(60,40,15,0.36)}.ds-disc-red:hover{box-shadow:3px 4px 0 #6b2a1c,6px 9px 10px rgba(60,40,15,0.36)}.ds-disc-red:active{box-shadow:0 0 0 #6b2a1c,1px 1px 2px rgba(60,40,15,0.36)}"
+    },
+    {
+      "name": "Pull-tab Switch",
+      "kind": "input",
+      "refersTo": "switch",
+      "description": "A slot cut into the paper with a tab of thick card sliding in it, three pen grip lines on its face. Off reads \"off\" by hand; on slides the tab right and the slot turns marker yellow and reads \"on\".",
+      "html": "<button class=\"ds-switch\" role=\"switch\" aria-checked=\"false\" aria-label=\"Advanced options\"></button> <button class=\"ds-switch\" role=\"switch\" aria-checked=\"true\" aria-label=\"Show reasoning summary\"></button>",
+      "css": ".ds-switch{all:unset;cursor:pointer;position:relative;display:inline-block;vertical-align:middle;width:52px;height:24px;box-sizing:border-box;border-radius:2px;background-color:#efe7d6;box-shadow:inset 1px 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(0,0,0,.14),0 1px 0 rgba(255,255,255,.55);font-family:Caveat,cursive;font-size:15px;font-weight:600;line-height:22px;color:#6f6252;transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-switch::before{content:\"off\";position:absolute;top:1px;right:6px}.ds-switch::after{content:\"\";position:absolute;top:2px;left:2px;width:24px;height:18px;box-sizing:border-box;background-color:#cfae78;background-image:linear-gradient(90deg,transparent 8px,color-mix(in srgb,#2a2219 55%,transparent) 8px 9px,transparent 9px 11px,color-mix(in srgb,#2a2219 55%,transparent) 11px 12px,transparent 12px 14px,color-mix(in srgb,#2a2219 55%,transparent) 14px 15px,transparent 15px),linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid color-mix(in srgb,#a3844f 60%,#cfae78);border-radius:2px;box-shadow:1px 2px 0 #a3844f,2px 3px 4px rgba(60,40,15,0.36);transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-switch:hover::after{box-shadow:2px 3px 0 #a3844f,3px 5px 6px rgba(60,40,15,0.36)}.ds-switch:active::after{box-shadow:0 1px 0 #a3844f,1px 1px 2px rgba(60,40,15,0.36)}.ds-switch[aria-checked=\"true\"]{background-color:#ffe775;color:#2a2219}.ds-switch[aria-checked=\"true\"]::before{content:\"on\";right:auto;left:7px}.ds-switch[aria-checked=\"true\"]::after{transform:translateX(24px)}.ds-switch:focus-visible{outline:2px solid #2a2219;outline-offset:3px}"
+    },
+    {
+      "name": "Tabs and the Leaf",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "Kraft paper tabs with rounded top corners standing behind the leaf, the card paper laid over them. The selected tab is cut from card with a red top edge and sits lower so it meets the leaf.",
+      "html": "<div class=\"ds-tabwrap\"><div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\">Chat</button><button class=\"ds-tab\" role=\"tab\">Branch</button><button class=\"ds-tab\" role=\"tab\">Log</button></div><div class=\"ds-leaf\" role=\"tabpanel\">The leaf: the whitest paper, laid over the tabs.</div></div>",
+      "css": ".ds-tabwrap{font-family:Nunito,system-ui,sans-serif;color:#2a2219}.ds-tabs{display:flex;align-items:flex-end;gap:6px;padding:0 10px;position:relative;z-index:2}.ds-tab{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-sizing:border-box;padding:8px 14px 15px;background-color:#dcc08c;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border-radius:7px 7px 0 0;font-family:Nunito,system-ui,sans-serif;font-size:12px;font-weight:700;line-height:1.2;color:#2a2219;transform:translateY(1px);box-shadow:1px 1px 0 #b3905a,3px 3px 4px rgba(60,40,15,0.36);transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-tab:hover{transform:translateY(-1px)}.ds-tab[aria-selected=\"true\"]{background-color:#fdfaf3;transform:translateY(1.5px);box-shadow:1px 1px 0 #cbbc9a,3px 4px 5px rgba(60,40,15,0.36);border-top:3px solid #c8553d}.ds-tab:focus-visible{outline:2px solid #2a2219;outline-offset:-3px}.ds-leaf{position:relative;z-index:3;box-sizing:border-box;margin-top:-5px;padding:24px;background-color:#fdfaf3;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid color-mix(in srgb,#a89570 40%,#fdfaf3);border-radius:4px 4px 10px 10px;box-shadow:0 -2px 6px -2px rgba(0,0,0,.16),1px 2px 0 #a89570,5px 8px 10px rgba(60,40,15,0.36),10px 18px 26px -8px rgba(60,40,15,0.22);font-size:14px;line-height:1.5}"
+    },
+    {
+      "name": "Paper Row",
+      "kind": "card",
+      "refersTo": "row",
+      "description": "A strip of plain paper on the board: a 1px hairline, 3px corners, the paper-at-rest cut edge and shadow, with its time written by hand. Hover tints and lifts it; the selected row is real highlighter with the paper showing through.",
+      "html": "<div class=\"ds-rows\"><div class=\"ds-row\" tabindex=\"0\">ORB-272 · fix the flaky test<span class=\"ds-hand\">2h ago</span></div><div class=\"ds-row is-marked\" tabindex=\"0\">kiln/pipelines · nightly build<span class=\"ds-hand\">12m</span></div><div class=\"ds-row\" tabindex=\"0\">fleet/infra · rotate the certs<span class=\"ds-hand\">yesterday</span></div></div>",
+      "css": ".ds-rows{display:flex;flex-direction:column;gap:6px;width:300px;font-family:Nunito,system-ui,sans-serif}.ds-row{position:relative;display:flex;align-items:center;gap:8px;box-sizing:border-box;padding:8px 10px;background-color:#fbf7ee;background-image:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);border:1px solid rgba(0,0,0,.07);border-radius:3px;box-shadow:0 1px 0 #cbbc9a,2px 3px 3px rgba(60,40,15,0.36);font-size:13px;font-weight:800;line-height:1.2;color:#2a2219;cursor:pointer;transition:transform 150ms cubic-bezier(0.2,0.7,0.2,1),box-shadow 150ms cubic-bezier(0.2,0.7,0.2,1),background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-row:hover{background-color:#f1e9d8;transform:translateY(-1px);box-shadow:1px 1px 0 #cbbc9a,3px 5px 6px rgba(60,40,15,0.36)}.ds-row:active{transform:translateY(1px);box-shadow:0 0 0 #cbbc9a,1px 1px 1px rgba(60,40,15,0.36)}.ds-row:focus-visible{outline:2px solid #2a2219;outline-offset:3px}.ds-row.is-marked{background-color:#ffe775;background-image:repeating-linear-gradient(178.6deg,rgba(0,0,0,.05) 0 3px,rgba(255,255,255,.14) 3px 5px,rgba(0,0,0,0) 5px 13px),linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 55%);box-shadow:1px 1px 0 #d9b84a,3px 5px 6px rgba(60,40,15,0.36);transform:rotate(-0.5deg)}.ds-hand{margin-left:auto;font-family:Caveat,cursive;font-size:17px;font-weight:500;line-height:1;color:#6f6252}"
+    },
+    {
+      "name": "Stickers",
+      "kind": "chip",
+      "refersTo": "sticker",
+      "description": "Marks stuck flat onto cardboard or paper: an identity-coloured sticker with a white glyph, a gold number badge, status pills, the handwritten Done chip. Gloss on top, a white die-cut, no shadow, ever.",
+      "html": "<span class=\"ds-stickers\"><span class=\"ds-sticker\" aria-label=\"Sessions\"><svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z\"/></svg></span><span class=\"ds-sticker ds-sticker-red\" aria-label=\"Memory\"><svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18ZM12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18ZM15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4M17.599 6.5a3 3 0 0 0 .399-1.375M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M19.938 10.5a4 4 0 0 1 .585.396M6 18a4 4 0 0 1-1.967-.516M19.967 17.484A4 4 0 0 1 18 18\"/></svg></span><span class=\"ds-badge\">3</span><span class=\"ds-pill\">Done</span><span class=\"ds-pill is-busy\">Busy</span><span class=\"ds-pill is-attn\">Needs you</span><span class=\"ds-chip\">done</span></span>",
+      "css": ".ds-stickers{display:inline-flex;align-items:center;gap:14px;font-family:Nunito,system-ui,sans-serif}.ds-sticker{display:inline-grid;place-items:center;box-sizing:border-box;width:44px;height:44px;padding:10px;background-color:#3b5b9a;background-image:linear-gradient(180deg,rgba(255,255,255,0.30),rgba(255,255,255,0) 55%);color:#fff;border-radius:10px;box-shadow:0 0 0 2px #ffffff,0 0 0 2.6px rgba(0,0,0,0.16)}.ds-sticker svg{display:block;width:24px;height:24px}.ds-sticker-red{background-color:#c8553d}.ds-badge{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;box-sizing:border-box;border-radius:50%;background-color:#f0c24a;background-image:linear-gradient(180deg,rgba(255,255,255,0.30),rgba(255,255,255,0) 55%);color:#2a2219;font-size:11px;font-weight:900;line-height:1;box-shadow:0 0 0 1.5px #ffffff,0 0 0 2px rgba(0,0,0,0.16);transform:rotate(8deg)}.ds-pill{display:inline-flex;align-items:center;gap:5px;height:18px;padding:0 8px;box-sizing:border-box;border-radius:999px;background-color:#497048;background-image:linear-gradient(180deg,rgba(255,255,255,0.30),rgba(255,255,255,0) 55%);color:#fff;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;line-height:1;box-shadow:0 0 0 1.5px #ffffff,0 0 0 2px rgba(0,0,0,0.16)}.ds-pill::before{content:\"\";width:6px;height:6px;border-radius:50%;background:currentColor}.ds-pill.is-busy{background-color:#a04431}.ds-pill.is-attn{background-color:#f0c24a;color:#2a2219}.ds-chip{display:inline-block;font-family:Caveat,cursive;font-size:15px;font-weight:600;line-height:16px;padding:0 7px;border-radius:999px;background-color:#497048;background-image:linear-gradient(180deg,rgba(255,255,255,0.30),rgba(255,255,255,0) 55%);color:#fff;box-shadow:0 0 0 1.5px #ffffff,0 0 0 2px rgba(0,0,0,0.16);transform:rotate(-4deg)}"
+    },
+    {
+      "name": "Rubber Stamp",
+      "kind": "custom",
+      "refersTo": "stamp",
+      "description": "Ink struck on the paper at one angle: Courier capitals in a border of the same ink, multiplied into the sheet. The YOLO stamp is a toggle: a faded outline when off, red ink when on.",
+      "html": "<span class=\"ds-stampline\"><span class=\"ds-stamp\">jira · ORB</span><span class=\"ds-stamp is-blue\">workflow</span><button class=\"ds-stamp-toggle\" role=\"switch\" aria-checked=\"false\">YOLO</button><button class=\"ds-stamp-toggle\" role=\"switch\" aria-checked=\"true\">YOLO</button></span>",
+      "css": ".ds-stampline{display:inline-flex;align-items:center;gap:18px;padding:8px;background:#fbf7ee}.ds-stamp{display:inline-block;padding:3px 7px;border:2px solid currentColor;border-radius:3px;font-family:\"Courier New\",Courier,ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6f6252;background:#fffdf8cc;opacity:.85;transform:rotate(-4deg);mix-blend-mode:multiply}.ds-stamp.is-blue{color:#3b5b9a}.ds-stamp-toggle{all:unset;cursor:pointer;display:inline-grid;place-items:center;box-sizing:border-box;height:26px;min-width:48px;padding:0 8px;border:2px solid currentColor;border-radius:3px;font-family:\"Courier New\",Courier,ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2a2219;opacity:.5;transform:rotate(-4deg);mix-blend-mode:multiply;transition:opacity 150ms cubic-bezier(0.2,0.7,0.2,1)}.ds-stamp-toggle:hover{opacity:.72}.ds-stamp-toggle:active{transform:rotate(-4deg) scale(.94)}.ds-stamp-toggle:focus-visible{outline:2px solid #2a2219;outline-offset:3px}.ds-stamp-toggle[aria-checked=\"true\"]{color:color-mix(in srgb,#c8553d 88%,#2a2219);opacity:.95}"
+    },
+    {
+      "name": "Inked Title",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "A page title written by hand in Caveat and inked into the paper; the session title is the smaller cut, the heading beneath it is the Fraunces voice.",
+      "html": "<div class=\"ds-titles\"><h1 class=\"ds-title\">Sessions</h1><h2 class=\"ds-title is-session\">Fix the flaky test on main</h2><h3 class=\"ds-heading\">Waiting on you</h3></div>",
+      "css": ".ds-titles{padding:8px 12px;background:#f9f4e8}.ds-title{margin:0;padding-bottom:3px;font-family:Caveat,cursive;font-size:38px;font-weight:600;line-height:1.05;color:#2a2219;mix-blend-mode:multiply}.ds-title.is-session{font-size:26px}.ds-heading{margin:6px 0 0;font-family:Fraunces,Georgia,serif;font-size:17px;font-weight:600;line-height:1.25;color:#2a2219}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Desk of Cut-outs",
+    "overview": "Everything in Primepaw is a piece laid on one cream desk: cardboard that holds things, paper that carries words, stickers that mark things. Nothing is drawn as a box with a border; it is cut out, given a thickness, and set down where it belongs. Depth is height. A board sits on the desk, paper sits on the board, the leaf sits over the tabs, the composer frame sits highest, and a sticker is stuck flat to whichever piece it lives on. The light comes from the top left and never moves, so every piece has one lit face, one cut edge along its bottom and right, and one shadow down and to the right.\n\nThe mood is tactile, calm and playful. Tactile: a button is thick card that lifts under the pointer and travels down into the desk when pressed; a row sits down a pixel when clicked; a toggle is a pull-tab sliding in a slot cut into the paper. Calm: nothing pulses, nothing glows, and the only things that keep moving are a working session's pinwheel and the Max effort ring. Playful: the paw, the cat peeking over the composer, rubber stamps, a highlighter that lets the paper show through, and a pinwheel on whatever is busy, each doing a job rather than decorating.\n\nThe diorama is explicitly not flat SaaS chrome (one sans for everything, thin grey borders, blur-only shadows, cards nested in cards), not glossy skeuomorphism (glassy bevels, photoreal leather or wood, heavy gradients), and not dark-mode neon (glowing accents, purple-to-blue gradients, cyan on black). Night is the same desk after dark, not a different system.",
+    "keyCharacteristics": [
+      "Three materials, nothing else: cardboard, paper, stickers. Anything that is none of these is printed or written on the paper.",
+      "One light, one shadow: a face gradient fading out at 55%, a solid cut edge, one cast shadow in `amb`, always down and to the right.",
+      "Depth is stacking, and the stack carries the hierarchy; colour names what a thing is.",
+      "Three voices: Caveat written by hand, Fraunces for headings and the agent, Nunito for everything set in type, Courier for code and stamps.",
+      "Textures live in the material: paper carries a pulp tile, cardboard a flecked board, and one 40% grain lies over the whole page.",
+      "Quick and smooth: 150ms lifts and presses, 260ms landings on a pop ease, loops only while the agent works."
+    ],
+    "rules": [
+      {
+        "name": "The Three Materials Rule",
+        "body": "Every surface is cardboard, paper or a sticker. Cardboard is never white and never carries body copy; paper carries words; a sticker carries one word or a number, never a sentence, and only the gold `attn` sticker carries words at all.",
+        "section": "colors"
+      },
+      {
+        "name": "The Own-Edge Rule",
+        "body": "A piece's cut edge and border are a darker shade of its own colour (`board-2` under `board`, `kraft-2` under `kraft`, `mat-green-2` under `mat-green`). Never cast a cardboard shadow in another colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Night Twin Rule",
+        "body": "Every token has a Night value and nothing is hard-coded. At night boards go dark brown, paper to warm charcoal, the sticker cut to parchment, shadows to black, and identity colours on buttons mix down to 62% into the desk so white glyphs keep 4.5:1.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Scale Rule",
+        "body": "Nunito 11, 12, 13, 14, 15. Caveat 15, 17, 20, 26, 38, 50. Courier 10, 11, 12. Fraunces 15, 17, 20, and 36 for one big figure or initial. Nothing in between.",
+        "section": "typography"
+      },
+      {
+        "name": "The Written-by-Hand Rule",
+        "body": "Anything a person would jot (a count, a duration, a placeholder, a show-all link, the word in a switch's slot) is Caveat in ink or faded ink, multiplied into the paper. It is never a badge.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence-Case Rule",
+        "body": "Labels are sentence case and verb first (\"New session\", \"Open folder\"); hand-written copy is short and lower case (\"12 open\", \"2h ago\"); only badges and stamps are uppercase.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Light Rule",
+        "body": "Light comes from the top left and never moves: one lit face, one cut edge on the bottom and right, one shadow down and to the right. A shadow never changes direction.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Flat Sticker Rule",
+        "body": "A sticker has a die-cut border, gloss across its top and no shadow. It is stuck to one piece and never straddles two.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Depth-Is-Stacking Rule",
+        "body": "Hierarchy is how high a piece sits, not how bright it is. Nothing floats, nothing is blur-only, and no border where a cut edge will do.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Cut-Edge Rule",
+        "body": "A piece is bounded by its cut edge and the material's own hairline, never by a drawn border or an outline.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Round-Cardboard, Square-Paper Rule",
+        "body": "10px on cardboard, 3 to 4px on paper, pills and rounds only on stickers.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do build every surface as one of three materials: cardboard holds and is pressed, paper carries words, stickers mark things.",
+      "Do give every cut piece a face gradient from the top left, a solid cut edge on its bottom and right in a darker shade of its own colour, and one cast shadow in `amb` down and to the right.",
+      "Do cut every button, disc and rail tile from thick card with the paper texture over its own colour, 4px corners on buttons, and let it lift 1px on hover and travel 2px right and 3px down when pressed.",
+      "Do keep stickers flat: a 2px white die-cut, gloss on top, no shadow, stuck to one piece.",
+      "Do carry hierarchy by stacking (desk, board, paper, leaf, frame, sticker) and let colour name what a thing is.",
+      "Do use the type scale and nothing in between: Nunito 11 to 15, Caveat 15 to 50, Courier 10 to 12, Fraunces 15, 17, 20 and 36.",
+      "Do write counts, durations, placeholders, chips and link buttons by hand in Caveat, ink or faded ink, multiplied into the paper.",
+      "Do mark the selected row with real highlighter, the paper showing through, and the selected tab by cutting it from card with a red top edge.",
+      "Do use the one sage button for the one committing action on a sheet, the terracotta one for a destructive action, and put a kraft button between them.",
+      "Do give every colour a Night value and swap textures to their night tiles; at night mix identity colours on buttons down to 62% so white glyphs hold 4.5:1.",
+      "Do respect `prefers-reduced-motion`, keep loops to the pinwheel and Max, and keep labels sentence case and verb first."
+    ],
+    "donts": [
+      "Don't draw a border where a cut edge will do, and never a blur-only shadow or a shadow in another piece's colour.",
+      "Don't let anything float, pulse, glow or bounce; nothing moves unless the agent is working or the user touched it.",
+      "Don't put body copy on cardboard, make paper or a sticker pressable, or let a sticker carry a sentence or straddle two pieces.",
+      "Don't tilt, scale or rotate cardboard, buttons or paper laid flat; only stickers, stamps and taped or pinned paper lean.",
+      "Don't grain a single piece or texture a piece twice: the tile sits in the material and the one page grain lies over everything.",
+      "Don't hard-code a colour, paint with the raw highlighter instead of marker, or use a sticker for a live state a stamp or pill already shows.",
+      "Don't reach for flat SaaS chrome: no single sans for everything, no thin grey borders, no cards nested in cards.",
+      "Don't reach for glossy skeuomorphism: no glassy bevels, no photoreal leather or wood, no heavy gradients beyond the 55% face.",
+      "Don't reach for dark-mode neon: no glowing accents, no purple-to-blue gradients, no cyan on black; Night is the same desk after dark.",
+      "Don't put more than one sage button on a sheet, place terracotta beside sage, or make a large 40px button anything but a lone call to action."
+    ]
+  }
+}
