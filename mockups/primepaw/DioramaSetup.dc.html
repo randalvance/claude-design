@@ -593,8 +593,8 @@ button{font:inherit}
 .rb-jarvis svg,.rb-jarvis .jface{padding:9px;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
-/* pet: Jarvis is a paper robot dog, the character in use; the others stay in the picker. One sprite atlas (pet/robot.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/robot-face.png). */
-.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/robot.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+/* pet: Jarvis is a paper robot dog, the character in use; the others stay in the picker. One sprite atlas (pet/robot.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/robot-face.png). The pictures are the canvas's uploads of those files. */
+.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(/_blob/f7824c7f9aac093a02c70a17f4b16938);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -608,8 +608,11 @@ button{font:inherit}
 @keyframes pet-sad{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-span.jface{display:block;background-image:url(pet/robot-face.png);background-size:contain;background-repeat:no-repeat;background-position:center}
-.rb-jarvis span.jface{background-image:url(pet/robot-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+span.jface{display:block;background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9);background-size:contain;background-repeat:no-repeat;background-position:center}
+span.jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9)}
+span.jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
+span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
+.rb-jarvis span.jface{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
 
@@ -886,7 +889,7 @@ span.jface{display:block;background-image:url(pet/robot-face.png);background-siz
   </div>
   <div class="mlbl">Portrait</div>
   <div class="pstrip" role="radiogroup" aria-label="Portrait">
-    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="3"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface" style="background-image:url(pet/{{f.id}}-face.png)" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
+    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="3"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface {{f.id}}" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
   </div>
   <div class="mlbl">Model</div>
   <div class="mmodel">
