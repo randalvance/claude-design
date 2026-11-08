@@ -10,7 +10,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<script src="pet/puppet.js"></script>
+<script src="pet/standee.js"></script>
 <style>
 body{margin:0;background:#ece4d3;font-family:"Nunito",system-ui,sans-serif;color:#2a2219}
 a{color:#3b5b9a}a:hover{color:#2a4070}
@@ -72,7 +72,7 @@ button{font:inherit}
 .rowp .jface{width:20px;height:20px}
 .badge{position:relative;width:19px;height:19px;border-radius:50%;background:var(--attn);box-shadow:var(--sticker);background-image:var(--gloss);display:grid;place-items:center;transform:rotate(8deg);font:800 11px/1 var(--font-sans);color:var(--on-attn)}
 .badge .jface{position:absolute;left:-14px;top:-2px;width:22px;height:22px}
-/* 3. the standee: a cut-out puppet. pet/cat-rig.png holds its pieces, pet/cat-rig.json where each sits, turns and stacks, and pet/puppet.js (loaded from the helmet) moves them in steps, 10 a second */
+/* 3. the standee: a sprite sheet. pet/cat-walk.png is the factory's pet sheet, 6 columns by 4 facings, and pet/standee.js (loaded from the helmet) shows one cell of it and steps through the columns */
 .standee{position:relative;display:block;filter:drop-shadow(0 0 .5px rgba(0,0,0,.35))}
 .wide{grid-column:1 / -1}
 .cols{display:grid;grid-template-columns:fit-content(380px) minmax(0,1fr);gap:26px;align-items:start}
@@ -120,7 +120,7 @@ button{font:inherit}
 <div class="hd">
   <div>
     <h1>Jarvis, the paper cat</h1>
-    <p>One character, three cuts. The peeking cat hooks its paws over the composer; the sticker is its face for the rail and the thread portraits; the standee walks the factory floor as a cut-out puppet. All three are paper cut-outs with a white die-cut border, drawn on Comfy Cloud and sliced by <span class="hand sm">pet/build.py</span>. The cat is the second character, drawn with the puppy's prompts with their slots refilled (a round-faced tabby, pointed ears, a blue collar), and it sits beside the puppy in the portrait picker.</p>
+    <p>One character, three cuts. The peeking cat hooks its paws over the composer; the sticker is its face for the rail and the thread portraits; the standee walks the factory floor as a sprite sheet, one drawing a frame. All three are paper cut-outs with a white die-cut border, drawn on Comfy Cloud and sliced by <span class="hand sm">pet/build.py</span>. The cat is the second character, drawn with the puppy's prompts with their slots refilled (a round-faced tabby, pointed ears, a blue collar), and it sits beside the puppy in the portrait picker.</p>
   </div>
   <button class="kbtn lg" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}">{{themeWord}}</button>
 </div>
@@ -150,8 +150,8 @@ button{font:inherit}
     <p class="note">The same face at 88, 44, 42, 24 and 22px. It stays a sticker: a white cut, no shadow, stuck flat on the tile or the paper.</p>
   </section>
   <section class="sheet wide" aria-labelledby="h-walk">
-    <h2 id="h-walk">3. The standee, a cut-out puppet</h2>
-    <p class="lede"><span class="hand sm">pet/cat-rig.png</span> holds the cat's pieces for each facing (head, ears, body, arms, legs, tail) and <span class="hand sm">pet/cat-rig.json</span> says where each sits, where it turns and which is in front. <span class="hand sm">pet/puppet.js</span> moves them the way a South Park character is animated: every piece its own layer pinned at a pivot, posed in steps, 10 a second. Walking, the legs scissor at the hip and the arms swing against them; working, the paws pump; asking, one paw waves over its head; idle, it breathes.</p>
+    <h2 id="h-walk">3. The standee, a sprite sheet</h2>
+    <p class="lede"><span class="hand sm">pet/cat-walk.png</span> is cut to the Factory Overseer's pet sheet: 6 columns (standing, the two stomps of a walk, two beats of work, a wave) by 4 facings, in 256 by 320 cells with the feet on one ground line, and <span class="hand sm">pet/cat-walk.json</span> says what each holds. <span class="hand sm">pet/standee.js</span> plays it the way the factory does: walking, columns 1, 0, 2, 0 at 8 frames a second, a foot lifted flat and set down again, with a little bob; working, columns 3 and 4 at 5.5; asking, columns 5 and 0 at 3.2 with a hop; idle, column 0, breathing. Every frame is one drawing of the whole cat, so nothing comes apart at the joints.</p>
     <div class="cols">
       <div>
         <div class="facings">
@@ -160,7 +160,7 @@ button{font:inherit}
           <div class="facing"><span class="standee" data-f="right" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">right</span></div>
           <div class="facing"><span class="standee" data-f="up" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">up</span></div>
         </div>
-        <p class="note">A host draws it with<br><code>PetPuppet.mount(el, rig, { height })</code><br>and calls <code>facing()</code> and <code>pose(doing, t)</code> each frame; the rig and its atlas are all it needs. The factory puts no folded tab under it: the paws sit straight on the floor.</p>
+        <p class="note">A host draws it with<br><code>PetStandee.mount(el, sheet, { height })</code><br>and calls <code>facing()</code> and <code>pose(doing, t)</code> each frame, or hands the factory the sheet as <code>{ src, layout: "sheet", height }</code>. The factory puts no folded tab under it: the paws sit straight on the floor.</p>
       </div>
       <div>
         <div class="floor" aria-label="A corner of the factory floor, with Jarvis walking a round">
@@ -182,7 +182,7 @@ button{font:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
 // Jarvis, the paper cat: the three cuts side by side. The peeking cat and the sticker are CSS; the
-// standee is a cut-out puppet from pet/cat-rig.json, mounted and posed by pet/puppet.js (loaded from the
+// standee is a sprite sheet, pet/cat-walk.json, mounted and posed by pet/standee.js (loaded from the
 // helmet), driven here the way a host floor would: a round of waypoints, facing the way it goes, idle,
 // walking, working or asking for attention at each.
 const MOODS = [
@@ -190,9 +190,9 @@ const MOODS = [
   { id: 'sad', t: 'Sad', ms: 1500 }, { id: 'error', t: 'Error', loop: true }, { id: 'ask', t: 'Ask', loop: true }
 ];
 const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: 'attention', t: 'Ask' }, { id: 'idle', t: 'Stand' }];
-const RIG = 'pet/cat-rig.json', STAND_H = 94, WALK_H = 116; // the puppet's height in the facings row and on the floor
+const SHEET = 'pet/cat-walk.json', STAND_H = 94, WALK_H = 116; // the standing figure's height in the facings row and on the floor
 const SPEED = 92; // px per second
-const onPuppet = (fn) => window.PetPuppet ? fn(window.PetPuppet) : document.addEventListener('pet-puppet', () => fn(window.PetPuppet), { once: true });
+const onStandee = (fn) => window.PetStandee ? fn(window.PetStandee) : document.addEventListener('pet-standee', () => fn(window.PetStandee), { once: true });
 // the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as
 // its column; y in px, since it is always 320 tall), and what the cat does when it gets to each corner
 const WAY = [
@@ -211,12 +211,12 @@ class Component extends DCLogic {
     this.later(() => this.petPlay('greet', 1900), 400);
     this.w = { seg: 0, x: WAY[0].x * this.floorW(), y: WAY[0].y, facing: 'down', pause: 'idle', left: 900 };
     this.stands = [];
-    onPuppet((PP) => PP.load(RIG).then((rig) => {
+    onStandee((PS) => PS.load(SHEET).then((sheet) => {
       if (this.gone) return;
-      for (const el of Object.values(this.standEls || {})) this.stands.push(PP.mount(el, rig, { height: STAND_H, facing: el.dataset.f }));
+      for (const el of Object.values(this.standEls || {})) this.stands.push(PS.mount(el, sheet, { height: STAND_H, facing: el.dataset.f }));
       if (this.body) {
-        this.puppet = PP.mount(this.body, rig, { height: WALK_H });
-        this.walker.style.width = this.puppet.width + 'px'; this.walker.style.height = this.puppet.height + 'px';
+        this.standee = PS.mount(this.body, sheet, { height: WALK_H });
+        this.walker.style.width = this.standee.width + 'px'; this.walker.style.height = this.standee.height + 'px';
       }
     }).catch((e) => console.warn('the standee did not load:', e)));
     this.last = performance.now();
@@ -237,7 +237,7 @@ class Component extends DCLogic {
         w.left -= dt * 1000;
         if (w.left <= 0) { w.pause = null; w.seg = (w.seg + 1) % WAY.length; }
       } else {
-        const to = WAY[w.seg], fw = this.floorW(), hw = this.puppet ? this.puppet.width / 2 : 38;
+        const to = WAY[w.seg], fw = this.floorW(), hw = this.standee ? this.standee.width / 2 : 38;
         const tx = Math.min(Math.max(to.x * fw, hw), fw - hw); // the corner, kept on the floor however wide it is
         const dx = tx - w.x, dy = to.y - w.y; const d = Math.hypot(dx, dy);
         const run = SPEED * dt;
@@ -247,7 +247,7 @@ class Component extends DCLogic {
       doing = w.pause || 'walking';
     } else if (mode !== 'roam') { w.facing = 'down'; }
     if (still && doing === 'walking') doing = 'idle';
-    const p = this.puppet;
+    const p = this.standee;
     if (p) {
       this.walker.style.transform = `translate(${(w.x - p.width / 2).toFixed(1)}px, ${(w.y - p.height).toFixed(1)}px)`;
       p.facing(w.facing); p.pose(doing, t, still);
@@ -267,7 +267,7 @@ class Component extends DCLogic {
       petPoke: () => this.petPlay('greet', 1900),
       moods: MOODS.map((m) => { const on = st.shot ? st.shot.name === m.id : st.mood === m.id; return { t: m.t, on, cls: (on ? 'on ' : '') + (m.loop ? 'loop' : ''), pick: () => m.loop ? this.setState({ mood: m.id, shot: null }) : this.petPlay(m.id, m.ms) }; }),
       states: STATES.map((s) => ({ t: s.t, on: st.walk === s.id, cls: st.walk === s.id ? 'on' : '', pick: () => this.setState({ walk: s.id }) })),
-      walkNote: st.walk === 'roam' ? 'walks a round: works at one bench, asks at the other' : st.walk === 'working' ? 'the paws pump, 2.2 beats a second' : st.walk === 'attention' ? 'one paw up and waving, with a hop' : 'standing, facing you, breathing',
+      walkNote: st.walk === 'roam' ? 'walks a round: works at one bench, asks at the other' : st.walk === 'working' ? 'columns 3 and 4, 5.5 a second' : st.walk === 'attention' ? 'columns 5 and 0, 3.2 a second, with a hop' : 'column 0, facing you, breathing',
       walkerRef: (el) => { if (el) this.walker = el; }, bodyRef: (el) => { if (el) this.body = el; }, bubRef: (el) => { if (el) this.bub = el; },
       standRef: (el) => { if (el) (this.standEls = this.standEls || {})[el.dataset.f] = el; }
     };

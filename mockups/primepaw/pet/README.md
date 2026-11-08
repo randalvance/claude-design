@@ -4,15 +4,15 @@ The pet over the composer, the main agent's face, and the standee that walks the
 floor are one character, a paper cut-out puppy: cream paper face and body, kraft brown floppy ears,
 an eye patch and a tummy patch, a red collar with a tag, pink cheeks, pen-ink features, and the white
 die-cut border every Kraft sticker has. Three cuts of it ship here, drawn on Comfy Cloud (GPT Image 2.6 Sunburst
-for the peeking sheets, the turnaround and the puppet's parts sheets; Qwen Image 2.1, the open-weight
+for the peeking sheets, the turnaround and the standee's walk sheets; Qwen Image 2.1, the open-weight
 template, for the base they all descend from, the avatar and the body) and sliced by `build.py`.
 
 | File | What it is | Where it goes |
 | --- | --- | --- |
 | `dog.png`, `dog.json` | The peeking puppy: an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; the JSON holds the frame size and the CSS numbers | Over the composer on every board that has one, as `.pet`, see the `/* pet: */` block in a board's style |
 | `dog-face.png` | The avatar: the puppy's head as one round sticker, 176px square (88 CSS px at 2x) | The Jarvis tile on the rail, the thread portraits, any row or badge that needs the main agent's face, as `.jface` |
-| `dog-rig.png`, `dog-rig.json`, `puppet.js` | The standee as a cut-out puppet: the atlas of its pieces for each facing, the rig that says where each piece sits, where it turns and which is in front, and the driver that poses them in steps | The factory floor and the Pet board's mock of it, as `.standee`; see below |
-| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green: one per mood, `peek.png` (the resting peeking puppy the mood sheets copy, one cell cut from the first idle sheet), the avatar, the body design, the turnaround (the puppy from its four sides) and one parts sheet per facing (the figure taken apart into the puppet's pieces) | Inputs to `build.py`; keep them so a cut can be rebuilt |
+| `dog-walk.png`, `dog-walk.json`, `standee.js` | The standee as a sprite sheet: the Factory Overseer's pet sheet layout, 6 columns by 4 facings of 256 by 320 cells, every cell one drawing of the whole puppy; the JSON says what each column and row holds and how tall the standing puppy is; the driver plays it one cell at a time | The factory floor and the Pet board's mock of it, as `.standee`; see below |
+| `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green: one per mood, `peek.png` (the resting peeking puppy the mood sheets copy, one cell cut from the first idle sheet), the avatar, the body design, the turnaround (the puppy from its four sides) and one walk sheet per facing (the standee's six poses) | Inputs to `build.py`; keep them so a cut can be rebuilt |
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
@@ -37,49 +37,35 @@ puppy says hello. Under `prefers-reduced-motion` it holds its first frame.
 The click is a mouse-only easter egg: the puppy is a decorative sticker, `aria-hidden` and outside the
 tab order, so nothing a keyboard or a screen reader needs lives on it.
 
-## The standee, a cut-out puppet
+## The standee on the factory floor
 
-The standee is animated the way a South Park character is: not a sprite sheet of drawn poses but a
-puppet of separate paper pieces, each its own layer pinned at a pivot, posed by code in steps of a
-tenth of a second so it reads as stop-motion. For each facing (down, toward the viewer; left; right;
-up, away) the puppy comes apart into a head, its ears, a body, two arms, two legs and a tail; a profile
-has one ear and a near and a far arm and leg. `dog-rig.png` packs every piece and `dog-rig.json` says
-for each where it sits in the standing figure, where it turns (a leg and an arm at the top, the head at
-the neck, an ear and the tail where they grow from the head and the body, the body at its base) and
-its depth (the legs and the far limbs behind the body, the head and the near arm in front, the ears
-behind the head from the front and over it from behind and in profile, the back view's tail lying over
-the rump), all at a figure height of 448 px, about four times its size on screen.
+The Factory Overseer (the `Factory-Redesign` branch) draws each agent as a paper pet standee on a
+fixed 38-degree camera and reads a pet sheet by URL: 6 columns, one row per facing (down, left, right,
+up). Column 0 stands, 1 and 2 are the two stomps of a walk, 3 and 4 the two beats of working, 5 and 0
+the wave for attention. `dog-walk.png` is cut to that layout, every cell one drawing of the whole puppy,
+the feet on the cell's ground line and the standing puppy 86% of the cell's height, so the host hands it
+over as
 
-`puppet.js` mounts a puppet on an element from the rig (`PetPuppet.load(url)`, then
-`PetPuppet.mount(el, rig, { height })`) and poses it with `facing(f)` and `pose(doing, t, still)`:
-idle breathes, with the ears and tail just alive; walking scissors the legs at the hip and swings the
-arms against them in profile, and from the front or back lifts each foot in turn, with the body
-rolling a little and the whole figure bobbing twice a stride; working pumps the paws; attention
-raises one paw over the head and waves it, with a hop. Under `prefers-reduced-motion` nothing moves.
-The Pet board walks it round a mock of the factory floor, and a host does the same with those three
-calls. The factory puts no folded tab under it: the paws sit straight on the floor.
+```ts
+petAssets: { byAgent: { jarvis: { src: "pet/dog-walk.png", layout: "sheet", height: 2.67 } } }
+```
 
-The pieces are drawn by GPT Image 2.6 Sunburst from `src/dog/turnaround.png`, the puppy from its four
-sides, as one parts sheet per facing (`src/dog/parts-*.png`): the figure taken apart into its pieces,
-laid out in a grid in reading order, every piece complete including what hides under another when the
-puppet is together. `build.py` cuts the pieces off the sheet by the bands of paper, then fits each one
-back into the turnaround's figure to find where it sits: the body first, over a range of scales, by a
-normalised cross-correlation of its colours, which sets the sheet's scale against the turnaround (the
-head sets it instead when it correlates better, as it does for a plain body like the cat's back, which
-matches the figure at any size; and a head with a clear match of its own keeps that scale for itself
-and its ears, since the model draws a sheet's head and body at sizes a little apart); then
-every piece at that scale by how well its pen-ink outline lies on the figure's outlines (both blurred,
-so the fit sees it from a few pixels off) plus a little colour agreement, a score that forgives the
-hidden part of a piece and does not let a cream leg settle inside the cream body, which a plain colour
-match did. The white border counts for little in it: the figure has one only around its silhouette,
-and a border that weighed much dragged every piece to the figure's edge. A tail is tried mirrored too,
-since the model draws it either way round. `--check <file>` writes the four puppets put together under
-the turnaround's figures, the way to judge a build before shipping it.
+`dog-walk.json` repeats those numbers and the frame lists. `standee.js` plays the sheet the same way for
+the Pet board and any host without the factory (`PetStandee.load(url)`, then
+`PetStandee.mount(el, sheet, { height })`, and `facing(f)` and `pose(doing, t, still)` each frame):
+walking is columns 1, 0, 2, 0 at 8 frames a second, a foot lifted and set down, then the other, with a
+little bob and roll on top; working columns 3 and 4 at 5.5; attention 5 and 0 at 3.2 with a hop; idle
+holds column 0 and breathes. Under `prefers-reduced-motion` nothing moves. The factory puts no folded
+tab under it: the paws sit straight on the floor.
 
-Before the puppet the standee was a sprite sheet, six drawn poses per facing in the Factory Overseer's
-cell layout. The walk from behind never came right from words, even with two frames of a MiniMax walk
-video as the reference, and a drawn pose can only ever be the pose that was drawn; the puppet moves any
-way the code says. The sheet, its strips and that recipe went with it.
+The walk is a stomp on purpose. The first sheets kicked the lifted foot up to show its sole, and from
+behind that pose never came right from words, even with two frames of a MiniMax walk video as the
+reference; a cut-out puppet of separate pieces, tried next, moved any way the code said but came apart
+at the joints on screen. A foot lifted flat a little off the ground is a pose every model draws alike
+from every side, and the whole figure drawn in each cell stays one piece of paper. The four sheets,
+`src/dog/walk-*.png`, are drawn by GPT Image 2.6 Sunburst from `src/dog/turnaround.png`, the puppy
+from its four sides, and the body; the character skill's `comfy.md` has the recipe and the prompts are
+below.
 
 ## Rebuilding a cut
 
@@ -87,7 +73,7 @@ way the code says. The sheet, its strips and that recipe went with it.
 python3 mockups/primepaw/pet/build.py            # all three, from src/dog/
 python3 mockups/primepaw/pet/build.py --width 92 # the peeking puppy 92 CSS px wide
 python3 mockups/primepaw/pet/build.py --name cat # another character, from src/cat/ to cat.png and friends
-python3 mockups/primepaw/pet/build.py --check /tmp/rig.png  # and the four puppets put together under the turnaround, to judge the fit
+python3 mockups/primepaw/pet/build.py --walk-cols 6  # read each walk sheet as one strip of six cells instead of finding them
 ```
 
 The boards play 8 frames a row (`steps(8)` and an 8-column `background-size` in their `/* pet */`
@@ -96,9 +82,8 @@ block), so leave `--frames` at 8 unless you change those with it; `build.py` war
 `build.py` keys the green out (the key colour is read off each sheet's border, edge pixels are
 un-mixed), finds the cells on a sheet by the bands of paper rather than trusting the grid the model was
 asked for (it draws 4 by 2, 4 by 3 or 3 by 3 as it likes), tightens each frame to its paper, scales
-every frame of a cut alike (the puppet's four facings each to the same standing height, so it keeps its
-height as it turns), lays them out with the flat cut edge, or the feet, on one line, and fits the puppet's
-pieces back into the turnaround's figures (above). Needs Pillow and numpy.
+every frame of a cut alike (the standee's four facings each to the same standing height, so it keeps its
+height as it turns), and lays them out with the flat cut edge, or the feet, on one line. Needs Pillow and numpy.
 
 ## The characters
 
@@ -125,19 +110,15 @@ Where the cat's drawing went differently from the puppy's: its base came from a 
 text-to-image graph (the prompt wired straight into the encoder, 1024 square, seed 20261109), since the
 template now rewrites the prompt and returned grey noise; the wall line it drew across the whole picture
 was painted green outside the figure, or the slicer would have joined the mood cells. The turnaround's
-first seed was taken. The parts sheets were drawn with two seeds each: the right side ships the second
-(the first drew its body narrow under the head), the other three the first; both seeds drew the back's
-tail mirrored against the turnaround, which the fitter's mirrored try takes. The back sheet's plain
-body correlates with the figure at any size (47% at x0.50), so the head sets that sheet's scale (56% at
-x0.75), the rule described under the standee.
+first seed was taken, and its walk sheets were drawn like the puppy's, from that turnaround and its body.
 
 ## The prompts
 
 The avatar and the body went to the Qwen Image 2.1 edit graph with the base as the reference image
 (`TextEncodeQwenImage21` with `images.image_1`, the wide latent switched on), 25 steps, cfg 1, euler
-simple. The mood sheets, the turnaround and the parts sheets went to GPT Image 2.6 Sunburst: the mood
+simple. The mood sheets, the turnaround and the walk sheets went to GPT Image 2.6 Sunburst: the mood
 sheets with `src/dog/peek.png` as a first reference and the body as a second, the turnaround with the
-body, the parts sheets with the turnaround first and the body second. The mood sheets were Qwen edits
+body, the walk sheets with the turnaround first and the body second. The mood sheets were Qwen edits
 of the base at first, and they flickered: from cell to cell the puppy changed size, its patch swapped
 eyes and a mood's whole action sat in one frame with the rest at rest. GPT Image holds the drawing
 still and does one beat per frame when every frame is spelled out. The base puppy came from the
@@ -258,20 +239,19 @@ down and does not start at the side of the body: it starts at the centre and goe
 else about the back view changes..." The skill's `{BACK}` slot now carries the tail that way from the
 start.
 
-**The parts sheets** (1536 by 1024, GPT Image 2.6, the turnaround first and the body second, one per
-facing, two seeds each; the puppy ships the first seed's sheets, with the second seed's tail pasted into
-the back sheet, since the first drew it as a hook). The front: "The first reference image is a character turnaround of a paper cut-out friendly floppy-eared puppy: its front, its left side, its back and its right side. The second reference image is the same puppy from the front. Draw the turnaround's first figure, the front view, taken apart into the separate paper pieces of a cut-out puppet, the way a South Park character's pieces are laid out for animation: a grid of 3 columns and 3 rows on the solid flat bright green (#00FF00) background, one piece per cell, with wide green gaps between the pieces, no grid lines, no labels, no text and no numbers. Every piece is drawn complete, at exactly the same scale as the figure in the turnaround, including the part of it that is hidden behind another piece when the puppet is put together: the top of each leg reaches up under the body, the top of each arm reaches in under the body's shoulder, the root of each ear reaches under the head, the base of the tail reaches under the body. Each piece is a flat paper cut-out with its own pen-ink outline and its own narrow white die-cut sticker border all the way around it, the same cream, kraft brown, red and pink paper colours with a faint grain as the turnaround. Flat paper, no shadows, no gradients, not 3D, nothing assembled, no whole figure anywhere in the picture. The nine pieces, in reading order: 1. the head alone, the cream face with the kraft brown patch over its left eye, the two dot eyes, the round black nose, the pink cheeks and the little smiling mouth, without the ears; 2. its left ear, the kraft brown floppy ear that hangs on the left of the picture, hanging straight down; 3. its right ear; 4. the body alone, the short round cream torso with the red collar and its round tag at the top and the kraft brown tummy patch, with no arms, no legs and no head; 5. its left arm, the cream paw that hangs on the left of the picture, straight down, complete up to the shoulder; 6. its right arm; 7. its left leg with its round foot, hanging straight down, complete up to the hip; 8. its right leg; 9. the short kraft brown tail."
+**The walk sheets** (1536 by 1024, GPT Image 2.6, the turnaround first and the body second, one per
+facing; seeds 20261108 to 20261111 for the puppy and 20261112 to 20261115 for the cat, down, left, right,
+up, every first seed kept). The front: "The first reference image is a character turnaround of the paper cut-out a friendly floppy-eared puppy: its front, its left side, its back and its right side. The second reference image is the same character from the front. Draw the character exactly as the turnaround's first figure, the front shows it (the same cream paper face, kraft brown floppy ears and eye patch, red collar with its tag, pink cheeks, pen-ink features, the white die-cut sticker border), as a stop-motion sprite sheet: a grid of 3 columns and 2 rows, 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid lines, no borders, no labels and no text. The 6 cells read left to right along the top row and then along the bottom row. In every cell the character is the same drawing at the same size as in the turnaround, seen straight from the front, facing the viewer, its body upright and square to the viewer in every cell, never turning, its feet on the same ground line, its head, body, ears and tail exactly alike from cell to cell, so that the six cells play as one animation of one figure. The 6 cells: 1. standing still with both paws relaxed at its sides, both feet planted, exactly like the turnaround's first figure, the front; 2. marching on the spot, a stomp: its right foot stays planted flat on the ground and its left foot is lifted a little way straight up off the ground, the foot kept flat and level exactly as it is when standing, the leg a little shorter and bent only a little at the knee, staying directly under the body, the sole never showing, the body a touch higher, the arms swinging, the left paw a little forward and the right a little back; 3. the other stomp: its left foot planted flat and its right foot lifted flat the same way, the arms swinging the other way; 4. working, both paws raised up in front of its chest as if typing on a keyboard; 5. working, one paw pushed forward as if pressing a button; 6. waving hello with one paw raised high above its head. Flat paper, no shadows, no gradients, like a paper puppet moved between photographs."
 
-The other three change the figure the prompt points at, the grid and the list of pieces. The back
-("third figure, the view from directly behind", 3 by 3): the back of the head alone, plain cream with no
-face and no ears; the left and right ears from behind; the body from behind, the plain cream back with
-the back of the red collar and no patch; the left and right arms seen from behind; the left and right
-legs with the backs of their feet; "the whole short kraft brown tail as the turnaround's back view
-shows it, curving with its tip up". The profiles ("second figure, the left side view in strict
-profile" and "fourth figure, the right side view in strict profile", a grid of 4 columns and 2 rows,
-eight pieces): the head in profile with its snout pointing left (right), one dot eye, the black nose,
-one pink cheek and the smile, without the ear; the one floppy ear that shows in profile; the body in
-profile with the red collar at the top and the sliver of the tummy patch at its front, with no arms,
-no legs, no head and no tail; the near arm, the paw on the side toward the viewer, complete up to the
-shoulder; the far arm; the near leg with its round foot, complete up to the hip; the far leg; the tail
-that sticks out at the right (left), complete to its base.
+The other three change the figure the prompt points at and the facing clause: the left side ("second
+figure, the left side"; "from the side in strict profile, turned to face the left edge of the picture, so
+we see one eye, one ear, the tummy patch showing as a sliver at its front, its snout pointing left and its
+tail at the right; its head stays in that profile in every cell, never turning toward the viewer, so only
+one eye ever shows; in cells 2 and 3 the lifted foot is raised flat and level a little off the ground with
+its toes pointing the way it faces, directly under the body"), the right side ("fourth figure, the right
+side", the same mirrored, "its tail at the left") and the back ("third figure, the back"; "from directly
+behind, facing straight away from the viewer, so we see" the `{BACK}` slot's back, "its body stays upright
+and square to the viewer, never turning; in cell 4 only its elbows show at its sides, and in cell 5 the
+pushed paw is out of sight in front of it; in cells 2 and 3 the lifted foot is simply raised flat a little
+off the ground directly under the body, the back of its heel toward the viewer, its sole never showing,
+never a leg angled out to the side").

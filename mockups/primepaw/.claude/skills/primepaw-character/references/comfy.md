@@ -1,7 +1,7 @@
 # Drawing a character on Comfy Cloud
 
 The puppy's base, avatar and body were drawn with Qwen Image 2.1, an open-weight model that runs on
-Comfy Cloud's own credits rather than a partner's; its mood sheets, turnaround and parts sheets with GPT
+Comfy Cloud's own credits rather than a partner's; its mood sheets, turnaround and walk sheets with GPT
 Image 2.6 Sunburst, a paid partner model, which holds a character still from cell to cell where Qwen
 lets it drift. Everything after the base is an *edit*: the model sees an earlier cut as a reference
 image and keeps the character's identity, which is what makes thirteen separate sheets look like one
@@ -59,19 +59,19 @@ The width and height are numbers in the JSON, not strings: replace the quoted pl
 Keep the sampler as it is (25 steps, cfg 1, euler, simple): cfg 1 is what Qwen Image 2.1 wants, and
 raising it makes the colours bleed. `resolution: 0` on the text encoder lets the reference in at its own size.
 
-Three stages, because the turnaround needs the body and the parts sheets need both:
+Three stages, because the turnaround needs the body and the walk sheets need both:
 
 1. **From the base:** the avatar and the body, two items in one Qwen batch.
 2. **From the body:** the turnaround, one GPT Image run (below), judged against the slots before
    anything is drawn from it.
 3. **From the base and the body, and from the turnaround and the body:** the six mood sheets (the
-   base, which is the peeking pose, first and the body second) and the four parts sheets (down, left,
+   base, which is the peeking pose, first and the body second) and the four walk sheets (down, left,
    right, up; the turnaround first and the body second), ten items in one GPT Image batch, or twenty
    with two seeds each.
 
 Any model invents the sides it has not been shown: drawn from the body alone, the puppy's back came back
 from GPT Image wearing the tummy patch. So the turnaround is drawn first, with GPT Image 2.6 Sunburst, a
-paid partner model, and the parts sheets copy it. The mood sheets go to GPT Image too: as Qwen edits
+paid partner model, and the walk sheets copy it. The mood sheets go to GPT Image too: as Qwen edits
 the puppy changed size from cell to cell, its patch swapped eyes and a mood's whole action sat in one
 frame, so the peeking cut flickered rather than moved. Qwen keeps the base, the avatar and the body.
 
@@ -96,7 +96,7 @@ a few minutes; `wait_for_batch` with `max_wait_seconds: 300` covers it.
   it should from behind (the puppy's tail: its base at the centre of the rump and the tail going out to the left
   across the back with its tip curling up, the front's tail seen from the other side; not a stub, not a
   whole tail at the hip, not a blob hanging between the legs), the profiles with one eye, the same colours in every view. Save it as
-  `pet/src/<id>/turnaround.png`; it never ships, but every parts sheet copies it. One figure wrong on a sheet
+  `pet/src/<id>/turnaround.png`; it never ships, but every walk sheet copies it. One figure wrong on a sheet
   that is otherwise right is an edit, not a redraw: send the sheet back as `image_1` with the body as
   `image_2` and ask for it reproduced exactly with that one change; the other figures stay in place to
   the pixel.
@@ -107,16 +107,15 @@ a few minutes; `wait_for_batch` with `max_wait_seconds: 300` covers it.
   frames rather than sitting in one, a loop's last frame leading into its first and a one-shot ending
   with the paws back on the edge, nothing but green around the figures (confetti and marks are fine as
   long as they do not reach into the next cell).
-- **Each parts sheet:** the turnaround on `image_1`, the body on `image_2`, the parts prompt from
-  `prompts.md`, which points at the turnaround's figure for that facing and lists the pieces in the
-  order `build.py` expects (nine for the front and the back, eight for a profile). Judge it by its
-  pieces: every one there, one per cell, none touching, each with its own outline and border, all at
-  one scale, the hidden parts drawn (a leg's top, an arm's top, an ear's root, the tail's base), no
-  figure put together anywhere, nothing but green around them. A piece drawn the wrong way round (the
-  puppy's back tail came as a hook on one seed and as the turnaround's bean on the other) is fixed by
-  pasting the better seed's cell into the sheet, not by redrawing the lot. Then `build.py --check`
-  shows the puppets put together under the turnaround; a piece that lands wrong there was drawn unlike
-  the turnaround's, so reword its line and draw that sheet again.
+- **Each walk sheet:** the turnaround on `image_1`, the body on `image_2`, the walk prompt from
+  `prompts.md`, which points at the turnaround's figure for that facing and spells out the six poses:
+  standing, the two stomps, two beats of work, the wave. Judge it by its cells: six, the figure the
+  same drawing at the same size in every one with its feet on one ground line, the two stomps with a
+  foot lifted flat a little off the ground directly under the body (no sole showing, no leg out to the
+  side, no kicked-up foot: the stomp was chosen because the kicked step from behind never came right),
+  the profiles keeping one eye, the back keeping every absence the `{BACK}` slot names, nothing but
+  green around the figures. A cell wrong on a sheet otherwise right is an edit like the turnaround's:
+  the sheet as `image_1`, reproduced exactly with that one cell changed.
 
 It costs 5 to 29 credits an image, there is no estimate call for it, and the spend is gated, so ask the
 user before submitting; `get_batch_status` reports `billed` per job afterwards. It returns either the
@@ -131,7 +130,7 @@ what one edit costs; tell the user the total for the two edits before spending i
 Wait with `get_batch_status` or `wait_for_batch`, then `get_batch_output` with `client_os`: it downloads
 every image and reports where each landed. Copy the Qwen sheets, and `green.py` the GPT ones, into
 `pet/src/<id>/` under the names `build.py` expects: `idle.png`, `greet.png`, `celebrate.png`, `sad.png`, `error.png`, `ask.png`, `avatar.png`,
-`body.png`, `turnaround.png`, `parts-down.png`, `parts-left.png`, `parts-right.png`, `parts-up.png`.
+`body.png`, `turnaround.png`, `walk-down.png`, `walk-left.png`, `walk-right.png`, `walk-up.png`.
 
 ## 3. Judging a sheet
 
@@ -148,11 +147,12 @@ with a new seed when:
   rest at rest, so the cut flickers instead of moving;
 - anything but green shows around the figure (grid lines, labels, a frame).
 
-Judge the parts sheets with `build.py --check <file>`, which draws the four puppets put together under
-the turnaround's figures: every piece should sit where the turnaround draws it, the figure whole with no
-piece adrift. The printout gives each piece's fit; one well under the others on its sheet is the one to
-look at. The back view is still the one that goes wrong, a model making up a back it was never shown, so
-draw the turnaround first (above) and check the back sheet's pieces against its third figure.
+Judge the walk sheets as a set: `build.py` scales each facing to the same standing height, so a sheet
+drawn a little smaller is fine, but one drawn much smaller comes out soft. The figure must stay upright
+and square to the viewer in every cell, the same drawing at the same size on one ground line; the two
+stomps lift a foot flat with no sole showing and no leg out to the side; the profiles keep one eye; the
+back keeps every absence the `{BACK}` slot names. The back view is the one that goes wrong, so draw the
+turnaround first (above) and check the back sheet's cells against its third figure.
 
 The avatar must be one round sticker filling the frame, and the body a full figure with its feet on the
 ground and nothing cropped.

@@ -13,8 +13,8 @@ all read those cuts by name, so a new character is a new set of files under `pet
 | --- | --- | --- |
 | The peeking sprite | `pet/<id>.png`, an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; `pet/<id>.json` with the frame size | Over the composer on every board that has one, as `.pet`, stepped like paper stop-motion |
 | The face sticker | `pet/<id>-face.png`, the head as one round sticker, 176 px square | The Jarvis tile on the rail, the thread portraits, the picker, as `.jface` |
-| The standee | `pet/<id>-rig.png`, the pieces of a cut-out puppet for each facing (head, ears, body, arms, legs, tail), and `pet/<id>-rig.json`, where each piece sits, where it turns and which is in front; `pet/puppet.js` poses them in steps the way a South Park character is animated | The factory floor, and the Pet board's mock of it, as `.standee` |
-| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the parts sheets copy) and four `parts-*.png` (each facing's figure taken apart into the puppet's pieces), all on chroma-key green, plus `base.png`, the drawing the edits started from and the peeking pose the mood sheets copy | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept; `peek.png`, one cell of its first idle sheet, stands in for it) |
+| The standee | `pet/<id>-walk.png`, the Factory Overseer's pet sheet: 6 columns (standing, the two stomps of a walk, two beats of work, a wave) by 4 facings, every cell one drawing of the whole figure; `pet/<id>-walk.json`, what each holds; `pet/standee.js` plays it one cell at a time | The factory floor, and the Pet board's mock of it, as `.standee` |
+| The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the walk sheets copy) and four `walk-*.png` (each facing's six poses of the standee), all on chroma-key green, plus `base.png`, the drawing the edits started from and the peeking pose the mood sheets copy | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept; `peek.png`, one cell of its first idle sheet, stands in for it) |
 
 Read `pet/README.md` once: it is the puppy's own account of the same system, and `DioramaPet.dc.html`
 shows the three cuts side by side with every mood and the standee walking.
@@ -51,8 +51,9 @@ then a turnaround of the body (front, left side, back, right side in one row) wi
 against the slots before anything is drawn from it, because a model invents whatever the body does not
 show it and the turnaround is where the back and the sides get settled; then, GPT Image again, the six
 mood sheets from the base (the peeking pose) and the body, every one of the eight frames spelled out so
-the action is spread over them, and one parts sheet per facing from the turnaround and the body: the
-figure taken apart into the puppet's pieces, laid out in a grid in the order `build.py` names them. The
+the action is spread over them, and one walk sheet per facing from the turnaround and the body: the
+standee's six poses in a grid, the walk a stomp (a foot lifted flat, then the other), which every model
+draws alike from every side where a kicked-up foot never came right. The
 GPT sheets go through the graph in `assets/gpt26-edit.workflow.json`, and the prompts come from
 `references/prompts.md`, slots filled. GPT Image is a paid partner model, so say what a batch will
 cost and get a yes before submitting it. Save every downloaded sheet under `pet/src/<id>/` with the
@@ -68,14 +69,12 @@ python3 mockups/primepaw/pet/build.py --name <id>
 
 It keys the green out, finds the cells on each sheet by the bands of paper (the model draws the grid
 it likes), tightens every frame to its paper, scales a cut's frames alike, and lays them out: the
-peeking atlas with the cut edge on one line, the face squared up, and the puppet's pieces fitted back
-into the turnaround's figures and packed into the rig atlas, their places, pivots and depths in the rig
-JSON, every facing at the same standing height. Read its printout: every mood sheet should yield 8
-frames of nearly the same size, every parts sheet 9 pieces (8 for a profile), and a piece's fit well
-under the others on its sheet is the one to look at. A mood sheet that yields another count is resampled
-silently and will stutter, and a parts sheet with another count stops the build; redraw either with a new
-seed rather than accept it. `--check <file>` writes the four puppets put together under the turnaround,
-which is how to judge the rig. Needs Pillow and numpy on the host Python. The printout ends each cut
+peeking atlas with the cut edge on one line, the face squared up, and the walk sheets laid into the
+Factory Overseer's cell layout, every facing at the same standing height with the feet on the cell's
+ground line. Read its printout: every mood sheet should yield 8 frames of nearly the same size and
+every walk sheet 6 cells of one figure height. A sheet that yields another count is resampled silently
+and will stutter, or land its poses in the wrong columns; redraw it with a new seed rather than accept
+it. Needs Pillow and numpy on the host Python. The printout ends each cut
 with its frame size (`--pw` and `--ph`); that size lives in every board's pet block, so when a rebuild
 changes it for a character the boards already wear, run `use` again (step 5).
 
@@ -91,7 +90,7 @@ python3 mockups/primepaw/.claude/skills/primepaw-character/scripts/character.py 
 That copies the puppy's Pet boards (light and dark) with the new cuts and frame size, and lists them on
 the canvas under "Jarvis, the pet". The prose on the copies still describes the puppy; rewrite it for
 the new creature. Check each mood plays and returns to rest, the face reads on the rail tile mock, the
-standee stands whole in all four facings (no piece adrift) and walks the floor mock without a tab under it.
+standee stands in all four facings and stomps round the floor mock without a tab under it, every pose one figure.
 
 ### 5. Wire it in
 
@@ -111,14 +110,14 @@ sit in the picker.
 Then the words: add the character to the table in `pet/README.md` with its prompts' slot values, give
 the canvas a note beside its Pet boards (`canvas.json`, like `p26`), and mention it in the Kraft design
 system's README under "The pet" if it changes what Jarvis is. A host shows the standee through
-`pet/puppet.js`: `PetPuppet.load('pet/<id>-rig.json')`, `mount(el, rig, { height })`, then `facing()`
-and `pose(doing, t)` each frame, as the Pet board does; it needs those calls and the two rig files,
-not a sheet.
+`pet/standee.js`: `PetStandee.load('pet/<id>-walk.json')`, `mount(el, sheet, { height })`, then `facing()`
+and `pose(doing, t)` each frame, as the Pet board does; the Factory Overseer takes the sheet itself as
+`{ src, layout: "sheet", height }`, the numbers in the JSON.
 
 ### 6. Done when
 
-- `pet/<id>.png`, `.json`, `-face.png`, `-rig.png`, `-rig.json` exist and `pet/src/<id>/` holds the
-  thirteen sources (the turnaround and the four parts sheets among them) and the base, so the character
+- `pet/<id>.png`, `.json`, `-face.png`, `-walk.png`, `-walk.json` exist and `pet/src/<id>/` holds the
+  thirteen sources (the turnaround and the four walk sheets among them) and the base, so the character
   can be redrawn.
 - The Pet board pair plays all six moods, shows the face and walks the standee in four facings.
 - The picker lists it; if it was meant to be worn, the shell, a Home board and a page board show it
@@ -131,7 +130,7 @@ not a sheet.
 - `references/comfy.md`: the Comfy Cloud calls, sizes, seeds and what to reject.
 - `assets/qwen21-edit.workflow.json`: the Qwen edit graph with placeholders, for the avatar and the body.
 - `assets/gpt26-edit.workflow.json`: the GPT Image 2.6 graph with placeholders, two references in, for
-  the turnaround, the mood sheets and the parts sheets.
+  the turnaround, the mood sheets and the walk sheets.
 - `scripts/green.py`: lays a GPT Image download on the chroma-key green before it is saved as a source.
 - `scripts/character.py`: `list`, `register`, `use`, `board`.
 - `../../../pet/build.py`: the slicer; `--name <id>` reads `src/<id>/` and writes the five output files.
