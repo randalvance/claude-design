@@ -9,31 +9,33 @@ creature. Use the `comfy-cloud` plugin's tools; the names below are its tool nam
 
 ## 1. The base: one text-to-image run
 
-Run the text-to-image template once with the base prompt from `prompts.md`, 1024 by 1024:
+Run the graph in `../assets/qwen21-t2i.workflow.json` once with the base prompt from `prompts.md`, as a
+`submit_workflow` (or two items of one `submit_batch`, for a second seed to choose from):
 
-```
-run_template
-  name: image_qwen_image_2_1_t2i
-  client_os: darwin
-  wait_for_output: true
-  input_overrides:
-    "459:474": { "on_false": "<the base prompt>" }
-    "459:458": { "seed": <any integer; the puppy used 20261107> }
-```
+| Placeholder | Value |
+| --- | --- |
+| `__PROMPT__` | the base prompt, slots filled |
+| `__SEED__` | any integer, the quoted placeholder replaced whole; the puppy's base used 20261107, the cat's 20261109 |
+| `__PREFIX__` | `<id>_base` |
 
-The template's prompt lives on a switch node, so the override goes to `459:474.on_false`, not to a
-field called `prompt`. If the output plainly ignores the prompt, the template has changed: call
-`get_job_status` with `include_workflow: "knobs"` on that job, find where the prompt now lives, and
-resubmit with `submit_workflow` and `from_prompt_id` plus the right `input_overrides`.
+It is Qwen Image 2.1 text to image at 1024 by 1024, 25 steps, cfg 1, euler simple, the prompt wired
+straight into the encoder. The text-to-image template (`image_qwen_image_2_1_t2i`) drew the puppy's
+base, but it has since taken to rewriting the prompt on its way in and answered the cat's with grey
+noise, so the raw graph is the path now. It runs on Comfy Cloud's own credits, for about what the
+template costs (`estimate_credits` with `template_name: image_qwen_image_2_1_t2i`).
 
 Then `get_output` with `client_os` to look at it. Judge the base hard; every other sheet inherits it:
 
-- The creature reads at 92 CSS px wide (the composer) and at 44 px (the rail tile). Big simple shapes,
-  few small details. If a detail would vanish at 44 px, take it out of the prompt.
+- The peeking creature reads at 92 CSS px wide over the composer, and its face at 24 px as the rail
+  tile's glyph and 16 px on a row (the face sits on the icon scale: 64, 32, 24, 16). Big simple shapes,
+  few small details. If a detail would vanish at 24 px, take it out of the prompt.
 - It is one flat paper cut-out with a white die-cut border, pen-ink features, flat colours, no shadow,
   no 3D, on a clean flat green. Any gradient, shading or shadow leaks into every sheet.
 - The peeking pose: head and two front paws (or hands) over a straight edge, nothing below the edge.
   The cut edge is what the boards hook on the composer frame.
+- Nothing but green around the figure. The cat's base drew its wall as a line across the whole picture;
+  it had to be painted green outside the figure before it went on as a reference, or the slicer would
+  have joined the mood cells that copied it.
 
 A base that is close but not right is cheaper to re-run with a new seed or a tightened prompt than to
 fix later. Once it is right, `use_previous_output` with its `prompt_id` gives the server-side filename
@@ -88,7 +90,9 @@ the live one and refuse the template by name. Its placeholders:
 | `__PREFIX__` | `<id>_<sheet>`, with `_a` and `_b` when a sheet is drawn with two seeds |
 
 Two seeds per sheet, as two items of one batch, is the cheap way to have a choice. A batch of ten takes
-a few minutes; `wait_for_batch` with `max_wait_seconds: 300` covers it.
+a few minutes; `wait_for_batch` with `max_wait_seconds: 300` covers it. It can go on reporting every
+job pending after they have finished: when it does, `get_job_status` on one job tells the truth, and
+`get_batch_output` with `client_os` downloads whatever is done (`get_output` for a job it misses).
 
 - **The turnaround:** the body on `image_1`, the turnaround prompt from `prompts.md`. Judge it like the
   base: four figures of one height on one ground line, the back with no face and with every absence
@@ -115,11 +119,14 @@ a few minutes; `wait_for_batch` with `max_wait_seconds: 300` covers it.
   side, no kicked-up foot: the stomp was chosen because the kicked step from behind never came right),
   the profiles keeping one eye, the back keeping every absence the `{BACK}` slot names, nothing but
   green around the figures. A cell wrong on a sheet otherwise right is an edit like the turnaround's:
-  the sheet as `image_1`, reproduced exactly with that one cell changed.
+  the sheet as `image_1`, reproduced exactly with that one cell changed. The puppy's four were drawn
+  with seeds 20261108 to 20261111 and the cat's with 20261112 to 20261115 (down, left, right, up),
+  every first seed kept; a redraw takes a new seed.
 
 It costs 5 to 29 credits an image, there is no estimate call for it, and the spend is gated, so ask the
 user before submitting; `get_batch_status` reports `billed` per job afterwards. It returns either the
-green sheet it was asked for or a transparent PNG, the figure at alpha 250 to 254 over a faint halo:
+green sheet it was asked for or, as every walk sheet did, a transparent PNG, the figure at alpha 250 to
+254 over a faint halo:
 run `scripts/green.py <download> pet/src/<id>/<sheet>.png` on every download, which lays the
 transparent kind on `#00FF00` with the halo removed and writes the green kind through, so the slicer
 keys them all alike.
@@ -134,10 +141,11 @@ every image and reports where each landed. Copy the Qwen sheets, and `green.py` 
 
 ## 3. Judging a sheet
 
-Look at every sheet before building. The model is asked for a 4 by 2 grid of 8 cells, but it draws
-the grid it likes (4 by 2, 4 by 3, 3 by 3); `build.py` finds the cells by the bands of paper, so an odd
-grid is fine as long as the cells are separate and the creature is the same size in each. Redraw a sheet
-with a new seed when:
+Look at every sheet before building. The model is asked for a 4 by 2 grid of 8 cells on a mood sheet
+and a 3 by 2 grid of 6 on a walk sheet, but it draws the grid it likes (4 by 2, 4 by 3, 3 by 3);
+`build.py` finds the cells by the bands of paper, so an odd grid is fine as long as the cells are
+separate and the creature is the same size in each (`--walk-cols 6` forces six equal cells on a walk
+sheet whose bands cannot be told apart). Redraw a sheet with a new seed when:
 
 - cells touch or overlap, so the bands cannot be told apart;
 - the creature changes size or drifts across the cells (the frames would jitter);

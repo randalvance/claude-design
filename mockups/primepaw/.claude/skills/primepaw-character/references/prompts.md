@@ -22,13 +22,16 @@ keeps the character it is shown.
 | `{PAW}` | one of them | paw |
 | `{EARS}` | the part that bounces, droops or perks (ears, antennae, feathers, a hat) | ears |
 
+The cat, the second character, has its values in `pet/README.md` beside the puppy's, a second worked
+example of the same slots.
+
 Colours come from the Kraft tokens so the character sits on the boards like every other sticker. The
 light-theme values: paper cream `#f3e9d5`, sheet white `#fbf7ee`, kraft `#d9bc86`, kraft dark `#b3905a`,
 terracotta red `#c8553d`, blue `#3b5b9a`, green `#5b8c5a`, amber `#b8792f`, gold `#e3b53a`, pink `#e8a9a2`,
 ink `#2a2219`. Two or three paper colours plus ink and one accent is plenty; the puppy is cream, kraft,
 red and pink.
 
-## The base (text to image, 1024 by 1024)
+## The base (text to image, 1024 by 1024, the graph in `../assets/qwen21-t2i.workflow.json`)
 
 > Paper-craft cut-out character, the mascot of a paper diorama app: {CREATURE}, only its head and its two front {PAWS} showing, peeking over a straight horizontal edge as if looking over a wall, facing the viewer. Everything is made of layered flat paper cut-outs: {FEATURES}, thin hand-drawn pen outlines on every piece of paper, and a narrow white die-cut sticker border around the whole figure. Flat colours with a faint paper grain, no gradients, not 3D, not a photo, no drop shadow. The figure is cut off flat along the straight edge where its {PAWS} hook over it, and nothing at all is drawn below that edge. Large and centred, isolated on a solid flat bright green chroma-key background (#00FF00). No text, no letters, no logo, no other objects.
 

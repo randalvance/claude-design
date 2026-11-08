@@ -25,11 +25,13 @@ The character is a sticker in the Kraft design language, and the boards treat it
 cut-out with a narrow white die-cut border, pen-ink features, flat Kraft colours with a faint grain, no
 gradient, no shadow, no 3D. The peeking cut is cut off flat along the edge its paws hook over, because
 that edge is what sits on the composer frame. Keep these in every prompt; a character that breaks
-them looks pasted on rather than stuck on, and the breakage multiplies across 68 boards.
+them looks pasted on rather than stuck on, and the breakage multiplies across 70 boards.
 
 What a new character changes is the creature and its pieces: the species, two or three paper colours
 from the Kraft palette, one accent (the puppy's red collar), the thing that moves in the moods (ears,
-antennae, a hat). Design for 92 CSS px over the composer and 44 px on the rail: big shapes, few details.
+antennae, a hat). Design for 92 CSS px over the composer, and the face for 24 px, the glyph of the 44 px rail
+tile (the face sits on the icon scale wherever it shows: 64 as the sticker, 32 in a portrait, 24 in a tile,
+16 on a row): big shapes, few details.
 
 ## The workflow
 
@@ -45,7 +47,8 @@ Show the user the slots before spending credits if the request left any of them 
 
 ### 2. Draw it on Comfy Cloud
 
-Follow `references/comfy.md`. In short: one text-to-image run for the base, judged hard; then the
+Follow `references/comfy.md`. In short: the base from the Qwen text-to-image graph in
+`assets/qwen21-t2i.workflow.json` (the template rewrites prompts now), judged hard; then the
 avatar and the body as edits of the base, one batch of the graph in `assets/qwen21-edit.workflow.json`;
 then a turnaround of the body (front, left side, back, right side in one row) with GPT Image 2.6, judged
 against the slots before anything is drawn from it, because a model invents whatever the body does not
@@ -57,7 +60,8 @@ draws alike from every side where a kicked-up foot never came right. The
 GPT sheets go through the graph in `assets/gpt26-edit.workflow.json`, and the prompts come from
 `references/prompts.md`, slots filled. GPT Image is a paid partner model, so say what a batch will
 cost and get a yes before submitting it. Save every downloaded sheet under `pet/src/<id>/` with the
-names `build.py` expects (`scripts/green.py` lays a GPT download on the green the slicer keys out),
+names `build.py` expects (GPT Image hands back transparent PNGs; `scripts/green.py` lays every GPT
+download on the green the slicer keys out),
 and look at each one before building: the judging list in `comfy.md` says what sends a sheet back for
 a new seed.
 
@@ -74,7 +78,8 @@ Factory Overseer's cell layout, every facing at the same standing height with th
 ground line. Read its printout: every mood sheet should yield 8 frames of nearly the same size and
 every walk sheet 6 cells of one figure height. A sheet that yields another count is resampled silently
 and will stutter, or land its poses in the wrong columns; redraw it with a new seed rather than accept
-it. Needs Pillow and numpy on the host Python. The printout ends each cut
+it (`--walk-cols 6` forces six equal cells on a walk sheet whose bands cannot be told apart). Needs
+Pillow and numpy on the host Python. The printout ends each cut
 with its frame size (`--pw` and `--ph`); that size lives in every board's pet block, so when a rebuild
 changes it for a character the boards already wear, run `use` again (step 5).
 
@@ -89,8 +94,9 @@ python3 mockups/primepaw/.claude/skills/primepaw-character/scripts/character.py 
 
 That copies the puppy's Pet boards (light and dark) with the new cuts and frame size, and lists them on
 the canvas under "Jarvis, the pet". The prose on the copies still describes the puppy; rewrite it for
-the new creature. Check each mood plays and returns to rest, the face reads on the rail tile mock, the
-standee stands in all four facings and stomps round the floor mock without a tab under it, every pose one figure.
+the new creature. Check each mood plays and returns to rest, the face reads at every step of the icon
+scale in the sticker section (64, 32, 24 on the rail tile mock, 16 on a row), the standee stands in all
+four facings and stomps round the floor mock without a tab under it, every pose one figure.
 
 ### 5. Wire it in
 
@@ -119,7 +125,8 @@ and `pose(doing, t)` each frame, as the Pet board does; the Factory Overseer tak
 - `pet/<id>.png`, `.json`, `-face.png`, `-walk.png`, `-walk.json` exist and `pet/src/<id>/` holds the
   thirteen sources (the turnaround and the four walk sheets among them) and the base, so the character
   can be redrawn.
-- The Pet board pair plays all six moods, shows the face and walks the standee in four facings.
+- The Pet board pair plays all six moods, shows the face at 64, 32, 24 and 16 and walks the standee in
+  four facings.
 - The picker lists it; if it was meant to be worn, the shell, a Home board and a page board show it
   over the composer and on the rail tile in the browser, light and dark.
 - `pet/README.md` and the canvas note describe it, and the commit names the character.
@@ -128,6 +135,7 @@ and `pose(doing, t)` each frame, as the Pet board does; the Factory Overseer tak
 
 - `references/prompts.md`: the puppy's prompts as templates, with the slot table and the puppy's values.
 - `references/comfy.md`: the Comfy Cloud calls, sizes, seeds and what to reject.
+- `assets/qwen21-t2i.workflow.json`: the Qwen text-to-image graph with placeholders, for the base.
 - `assets/qwen21-edit.workflow.json`: the Qwen edit graph with placeholders, for the avatar and the body.
 - `assets/gpt26-edit.workflow.json`: the GPT Image 2.6 graph with placeholders, two references in, for
   the turnaround, the mood sheets and the walk sheets.
