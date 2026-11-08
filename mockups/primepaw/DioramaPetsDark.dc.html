@@ -91,11 +91,11 @@ button{font:inherit}
 .states .hand{flex-basis:100%;margin-top:2px}
 @media (prefers-reduced-motion:reduce){.walker .body{transform:none !important}}
 
-/* pet: Jarvis is one of three paper characters, the robot dog (the one every board wears), the puppy and the cat. Each has a sprite atlas (pet/<id>.png) with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion, peeking over a composer frame with its paws hooked on; a sticker like the cut-out was: a white cut, no shadow, tilted tilt-cat. Its face (pet/<id>-face.png) is the round sticker the rail tile and the portraits show. */
+/* pet: Jarvis is one of three paper characters, the robot dog (the one every board wears), the puppy and the cat. Each has a sprite atlas (pet/<id>.png) with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion, peeking over a composer frame with its paws hooked on; a sticker like the cut-out was: a white cut, no shadow, tilted tilt-cat. Its face (pet/<id>-face.png) is the round sticker the rail tile and the portraits show. The pictures are the canvas's uploads of those files. */
 .pet{--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
-.pet.robot{--pw:111px;--ph:135px;background-image:url(pet/robot.png)}
-.pet.dog{--pw:101px;--ph:104px;background-image:url(pet/dog.png)}
-.pet.cat{--pw:104px;--ph:114px;background-image:url(pet/cat.png)}
+.pet.robot{--pw:111px;--ph:135px;background-image:url(/_blob/f7824c7f9aac093a02c70a17f4b16938)}
+.pet.dog{--pw:101px;--ph:104px;background-image:url(/_blob/aa865b54704c6c655ac32e0b9f408edd)}
+.pet.cat{--pw:104px;--ph:114px;background-image:url(/_blob/de463a60232188f0d9ab58d74b22409c)}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -109,12 +109,12 @@ button{font:inherit}
 @keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 .jface{display:block;background-size:contain;background-repeat:no-repeat;background-position:center}
-.jface.robot{background-image:url(pet/robot-face.png)}
-.jface.dog{background-image:url(pet/dog-face.png)}
-.jface.cat{background-image:url(pet/cat-face.png)}
-.rbt.jarvis .jface.robot{background-image:url(pet/robot-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.rbt.jarvis .jface.dog{background-image:url(pet/dog-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.rbt.jarvis .jface.cat{background-image:url(pet/cat-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9)}
+.jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
+.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
+.rbt.jarvis .jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .hd p{max-width:none}
 .peekgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0 26px;align-items:end}.peekgrid .moods{margin-top:10px}.peekgrid .legend{flex-wrap:wrap;gap:6px 14px}
 .peeks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 22px}
@@ -187,7 +187,8 @@ button{font:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
 // Jarvis, the pet: the three characters side by side. Each peeking sprite and sticker is CSS; each standee is a sprite
-// sheet, pet/<id>-walk.json, mounted and posed by pet/standee.js (loaded from the helmet), the three driven the way a
+// sheet (pet/<id>-walk.png, its layout from pet/<id>-walk.json written into SHEETS, the picture the canvas's upload of the
+// sheet), mounted and posed by pet/standee.js (loaded from the helmet), the three driven the way a
 // host floor would drive them: one round of waypoints, facing the way they go, idle, walking, working or asking for
 // attention at each, and waiting their turn when the next corner is taken.
 const PETS = ['robot', 'dog', 'cat'];
@@ -199,7 +200,7 @@ const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: '
 const onStandee = (fn) => window.PetStandee ? fn(window.PetStandee) : document.addEventListener('pet-standee', () => fn(window.PetStandee), { once: true });
 const FACING = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'right' : 'left') : (dy >= 0 ? 'down' : 'up');
 const BUBBLE = { working: 'Writing the parser', attention: 'Needs a staging token' };
-const SHEETS = { robot: 'pet/robot-walk.json', dog: 'pet/dog-walk.json', cat: 'pet/cat-walk.json' }, WALK_H = 104; // the standing figure's height on the floor
+const SHEETS = {"robot":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/43c1df8444edb3984554c9dc2cd4e435"},"dog":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/bd60c38b84f66616f8224e74bdf4d2cf"},"cat":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/eea99f7a9ab642aecf06ca931c83d617"}}, WALK_H = 104; // the standing figure's height on the floor
 const SPEED = 92; // px per second
 // the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as its column;
 // y in px, since it is always 260 tall), what a walker does when it gets to each corner, and the corner each starts at
@@ -218,12 +219,11 @@ class Component extends DCLogic {
     PETS.forEach((id, i) => this.later(() => this.petPlay(id, 'greet', 1900), 400 + i * 260));
     this.w = {}; this.standee = {};
     for (const id of PETS) { const s = START[id]; this.w[id] = { seg: s, x: WAY[s].x * this.floorW(), y: WAY[s].y, facing: 'down', pause: WAY[s].pause, left: 900 + s * 500 }; }
-    onStandee((PS) => { for (const id of PETS) PS.load(SHEETS[id]).then((sheet) => {
-      if (this.gone) return;
-      const body = this.bodies && this.bodies[id], walker = this.walkers && this.walkers[id]; if (!body || !walker) return;
-      const st = PS.mount(body, sheet, { height: WALK_H }); this.standee[id] = st;
+    onStandee((PS) => { if (this.gone) return; for (const id of PETS) {
+      const body = this.bodies && this.bodies[id], walker = this.walkers && this.walkers[id]; if (!body || !walker) continue;
+      const st = PS.mount(body, SHEETS[id], { height: WALK_H }); this.standee[id] = st;
       walker.style.width = st.width + 'px'; walker.style.height = st.height + 'px';
-    }).catch((e) => console.warn('the standee did not load:', e)); });
+    } });
     this.last = performance.now();
     const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const tick = (now) => { const dt = Math.min(.05, (now - this.last) / 1000); for (const id of PETS) this.step(id, dt, now / 1000, still); this.last = now; this.raf = requestAnimationFrame(tick); };
