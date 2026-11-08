@@ -701,6 +701,26 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaPetRobot.dc.html": {
+      "x": 0,
+      "y": 40100,
+      "w": 1440,
+      "h": 900,
+      "title": "Jarvis as a paper robot dog — peeking, sticker and standee, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaPetRobotDark.dc.html": {
+      "x": 1540,
+      "y": 40100,
+      "w": 1440,
+      "h": 900,
+      "title": "Jarvis as a paper robot dog — peeking, sticker and standee, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "createdOnFiles": {
@@ -745,6 +765,7 @@
     "s10",
     "p26",
     "p27",
+    "p28",
     "s11"
   ],
   "notes": {
@@ -925,14 +946,21 @@
       "y": 37300,
       "w": 320,
       "page": "diorama",
-      "text": "Jarvis is a paper puppy, one character in three cuts. Peeking: over the composer, paws hooked on the frame, a sprite atlas with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the boards pick the mood from what the agent is doing, and a click says hello. The sticker: its head as one round sticker, the face on the Jarvis tile, the thread portraits and the rows. The standee: a cut-out puppet (pet/dog-rig.png, dog-rig.json and puppet.js), every piece of paper its own layer posed in steps the way a South Park character is, so the main agent can walk the Factory Overseer's floor. All three drawn on Comfy Cloud, Qwen Image 2.1 for the base, the face and the body and GPT Image 2.6 for the animated cuts, and sliced by pet/build.py; the prompts are in pet/README.md."
+      "text": "Jarvis is a paper puppy, one character in three cuts. Peeking: over the composer, paws hooked on the frame, a sprite atlas with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the boards pick the mood from what the agent is doing, and a click says hello. The sticker: its head as one round sticker, the face on the Jarvis tile, the thread portraits and the rows. The standee: a sprite sheet (pet/dog-walk.png, dog-walk.json and standee.js), six poses by four facings, every cell one drawing of the whole puppy played one cell at a time, so the main agent can walk the Factory Overseer's floor. All three drawn on Comfy Cloud, Qwen Image 2.1 for the base, the face and the body and GPT Image 2.6 for the animated cuts, and sliced by pet/build.py; the prompts are in pet/README.md."
     },
     "p27": {
       "x": 3080,
       "y": 38700,
       "w": 320,
       "page": "diorama",
-      "text": "Jarvis as a paper cat, the second character: a round-faced tabby, pointed ears with pink insides, three stripes on its forehead, a blue collar with a gold tag, in the same three cuts as the puppy (the peeking sprite with a row per mood, the round face sticker, and the cut-out standee in pet/cat-rig.png, cat-rig.json and puppet.js). Drawn by the primepaw-character skill in .claude/skills/ from the puppy's prompts with their slots refilled: Qwen Image 2.1 for the base, the face and the body, GPT Image 2.6 for the moods, the turnaround and the parts sheets, sliced by pet/build.py. It sits in the portrait picker beside the puppy and the boards do not wear it; pet/README.md lists its slot values."
+      "text": "Jarvis as a paper cat, the second character: a round-faced tabby, pointed ears with pink insides, three stripes on its forehead, a blue collar with a gold tag, in the same three cuts as the puppy (the peeking sprite with a row per mood, the round face sticker, and the standee sprite sheet in pet/cat-walk.png, cat-walk.json and standee.js). Drawn by the primepaw-character skill in .claude/skills/ from the puppy's prompts with their slots refilled: Qwen Image 2.1 for the base, the face and the body, GPT Image 2.6 for the moods, the turnaround and the walk sheets, sliced by pet/build.py. It sits in the portrait picker beside the puppy and the boards do not wear it; pet/README.md lists its slot values."
+    },
+    "p28": {
+      "x": 3080,
+      "y": 40100,
+      "w": 320,
+      "page": "diorama",
+      "text": "Jarvis as a paper robot dog, the third character: an angular sheet-white hound with pen-drawn panel lines, a kraft brown snout and chest plate, tall ears with blue tips, gold-ringed eyes and a red collar with a gold tag, in the same three cuts as the puppy (the peeking sprite with a row per mood, the face sticker, and the standee sprite sheet in pet/robot-walk.png, robot-walk.json and standee.js). The first character through the primepaw-character skill's options step: the base drawn five ways in one Qwen Image 2.1 batch and laid side by side for the pick (E's shape in B's colours), then the face and the body on Qwen, and the turnaround, the six moods and the four walk sheets on GPT Image 2.6, sliced by pet/build.py. It sits in the portrait picker beside the puppy and the cat and the boards do not wear it; pet/README.md lists its slot values and seeds."
     }
   },
   "order": [
@@ -1005,7 +1033,9 @@
     "DioramaPet.dc.html",
     "DioramaPetDark.dc.html",
     "DioramaPetCat.dc.html",
-    "DioramaPetCatDark.dc.html"
+    "DioramaPetCatDark.dc.html",
+    "DioramaPetRobot.dc.html",
+    "DioramaPetRobotDark.dc.html"
   ],
   "pages": [
     {

@@ -106,7 +106,9 @@ job pending after they have finished: when it does, `get_job_status` on one job 
   `pet/src/<id>/turnaround.png`; it never ships, but every walk sheet copies it. One figure wrong on a sheet
   that is otherwise right is an edit, not a redraw: send the sheet back as `image_1` with the body as
   `image_2` and ask for it reproduced exactly with that one change; the other figures stay in place to
-  the pixel.
+  the pixel. An edit moves a detail only a little, though: the robot dog's tail, asked to lie across the
+  back, came back a touch higher and still hanging. When the detail is the point, a new seed of the
+  turnaround is the surer fix.
 - **Each mood sheet:** the base on `image_1` (it is the peeking pose; the puppy, whose base was not
   kept, uses `pet/src/dog/peek.png`, one cell of its first idle sheet), the body on `image_2`, the mood
   prompt from `prompts.md`, which spells out all eight frames. Judge it by its frames: eight cells, the
@@ -165,5 +167,7 @@ stomps lift a foot flat with no sole showing and no leg out to the side; the pro
 back keeps every absence the `{BACK}` slot names. The back view is the one that goes wrong, so draw the
 turnaround first (above) and check the back sheet's cells against its third figure.
 
-The avatar must be one round sticker filling the frame, and the body a full figure with its feet on the
-ground and nothing cropped.
+The avatar must be one sticker in the shape of the head, filling the frame: asked for as "one round
+sticker", the robot dog's came back twice as the head inside a thin ring, a badge, and the prompt now
+asks for the sticker cut along the head's outline with no ring. The body must be a full figure with its
+feet on the ground and nothing cropped.

@@ -16,8 +16,8 @@ template, for the base they all descend from, the avatar and the body) and slice
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
-building it and wiring it into the picker and the boards. The cat (`cat`) is the second one, drawn with
-that skill from the puppy's prompts with their slots refilled; "The characters" below has its values.
+building it and wiring it into the picker and the boards. The cat (`cat`) is the second one and the robot dog (`robot`) the third, drawn with that skill from the
+puppy's prompts with their slots refilled; "The characters" below has their values.
 
 See `DioramaPet.dc.html` for the three side by side, with every mood and the standee walking a round.
 
@@ -91,6 +91,7 @@ height as it turns), and lays them out with the flat cut edge, or the feet, on o
 | --- | --- | --- | --- | --- |
 | `dog` | A paper puppy | 101x104 CSS px | worn by every board; `DioramaPet.dc.html` | by hand; the prompts below |
 | `cat` | A paper cat | 104x114 CSS px | the picker only, not worn; `DioramaPetCat.dc.html` | by the `primepaw-character` skill; the puppy's prompts with the slots below |
+| `robot` | A paper robot dog | 111x135 CSS px | the picker only, not worn; `DioramaPetRobot.dc.html` | by the `primepaw-character` skill, the first through its options step; the puppy's prompts with the slots below |
 
 The cat's slot values, as the skill's templates in `references/prompts.md` took them:
 
@@ -111,6 +112,33 @@ text-to-image graph (the prompt wired straight into the encoder, 1024 square, se
 template now rewrites the prompt and returned grey noise; the wall line it drew across the whole picture
 was painted green outside the figure, or the slicer would have joined the mood cells. The turnaround's
 first seed was taken, and its walk sheets were drawn like the puppy's, from that turnaround and its body.
+
+The robot dog's slot values:
+
+| Slot | Value |
+| --- | --- |
+| `CREATURE` | a friendly angular robot hound |
+| `FEATURES` | a wedge-shaped sheet-white paper head (#fbf7ee) with pen-drawn panel lines, a kraft brown paper snout (#d9bc86) with a small square ink-black nose, two round ink-black eyes each ringed with a thin gold paper ring (#e3b53a), two tall pointed kraft brown paper ears standing up with blue paper tips (#3b5b9a), a terracotta red paper collar (#c8553d) with a small round gold paper tag (#e3b53a), two angular sheet-white paper paws with pen-drawn seam lines |
+| `RECAP` | the same wedge-shaped sheet-white paper head with its pen-drawn panel lines, kraft brown snout with the small square black nose, round black eyes with thin gold rings, tall pointed kraft brown ears with blue tips, red collar with its gold tag, pen-ink features, the white die-cut sticker border |
+| `HEAD` | the robot hound's wedge-shaped head with its pointed ears and the top of its red collar |
+| `BODY` | a short angular sheet-white paper body made of flat panels with pen-drawn panel lines, a kraft brown paper chest plate on its front, its two angular front paws hanging relaxed at its sides, two short blocky legs with angular white feet planted on the ground, a short pointed kraft brown paper tail with a blue tip showing at one side, the same red collar with its gold tag around its neck and the same friendly face |
+| `SIDE` | one eye with its gold ring, one pointed ear with its blue tip, the kraft brown snout pointing left, the kraft brown chest plate showing as a sliver at its front, and its short pointed tail with its blue tip at the right |
+| `BACK` | the back of its wedge-shaped white head with no face, the backs of both tall pointed ears standing up at the top with their blue tips, the back of the red collar, a plain sheet-white back of flat panels with pen-drawn panel lines and no chest plate at all, its short pointed kraft brown tail with its blue tip starting at the centre of its rump, in the middle of the bottom of its back where the two legs meet the body, and sticking out sideways to the left of the picture across its back with its tip up near the left edge of its body, the whole tail visible, never pointing straight up and never hanging down between its legs, its two paws at its sides and the backs of its feet |
+| `PAWS`, `PAW` | paws, paw |
+| `EARS`, `EAR` | ears, ear |
+
+Where the robot dog's drawing went differently: it was the first character through the skill's options
+step. The base was drawn five ways in one Qwen batch (seeds 20261116 to 20261120, five takes on the brief
+that differed in the head, the ears, the face and the accent) and laid side by side by `scripts/options.py`
+for the pick; the pick was E's angular hound in B's colours, redrawn twice with the slots merged (seeds
+20261121 and 20261122) and the first kept as the base, its wall line painted green outside the figure
+like the cat's. The avatar, asked for as one round sticker, came back twice as the head inside a thin
+ring, a badge (seeds 20261123 and 20261125); the third asked for the sticker cut along the head's outline
+with no ring (seed 20261126) and was kept. The body is seed 20261124. The turnaround (seed 20261127) drew
+the back's tail hanging down from the rump; an edit (seed 20261134) raised it only a little, and that
+version is the source. The six moods (seeds 20261128 to 20261133, idle to ask) and the four walk sheets
+(20261135 to 20261138) were all first seeds. Its peeking frame is the tallest of the three characters
+because the ears stand up and the error and ask marks sit above them.
 
 ## The prompts
 
@@ -240,7 +268,7 @@ else about the back view changes..." The skill's `{BACK}` slot now carries the t
 start.
 
 **The walk sheets** (1536 by 1024, GPT Image 2.6, the turnaround first and the body second, one per
-facing; seeds 20261108 to 20261111 for the puppy and 20261112 to 20261115 for the cat, down, left, right,
+facing; seeds 20261108 to 20261111 for the puppy, 20261112 to 20261115 for the cat and 20261135 to 20261138 for the robot dog, down, left, right,
 up, every first seed kept). The front: "The first reference image is a character turnaround of the paper cut-out a friendly floppy-eared puppy: its front, its left side, its back and its right side. The second reference image is the same character from the front. Draw the character exactly as the turnaround's first figure, the front shows it (the same cream paper face, kraft brown floppy ears and eye patch, red collar with its tag, pink cheeks, pen-ink features, the white die-cut sticker border), as a stop-motion sprite sheet: a grid of 3 columns and 2 rows, 6 cells of equal size, on a solid flat bright green (#00FF00) background, with no grid lines, no borders, no labels and no text. The 6 cells read left to right along the top row and then along the bottom row. In every cell the character is the same drawing at the same size as in the turnaround, seen straight from the front, facing the viewer, its body upright and square to the viewer in every cell, never turning, its feet on the same ground line, its head, body, ears and tail exactly alike from cell to cell, so that the six cells play as one animation of one figure. The 6 cells: 1. standing still with both paws relaxed at its sides, both feet planted, exactly like the turnaround's first figure, the front; 2. marching on the spot, a stomp: its right foot stays planted flat on the ground and its left foot is lifted a little way straight up off the ground, the foot kept flat and level exactly as it is when standing, the leg a little shorter and bent only a little at the knee, staying directly under the body, the sole never showing, the body a touch higher, the arms swinging, the left paw a little forward and the right a little back; 3. the other stomp: its left foot planted flat and its right foot lifted flat the same way, the arms swinging the other way; 4. working, both paws raised up in front of its chest as if typing on a keyboard; 5. working, one paw pushed forward as if pressing a button; 6. waving hello with one paw raised high above its head. Flat paper, no shadows, no gradients, like a paper puppet moved between photographs."
 
 The other three change the figure the prompt points at and the facing clause: the left side ("second

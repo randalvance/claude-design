@@ -98,7 +98,7 @@ beat; reword the body parts for the creature.
 
 ## The avatar (edit of the base, 1024 by 1024)
 
-> Using the paper cut-out {CREATURE} from the reference image exactly as it is ({RECAP}), draw one avatar portrait of it: just {HEAD}, seen straight from the front, looking at the viewer with a friendly closed-mouth smile, centred and filling the picture, cut out as one round paper sticker with a clean white die-cut border all around it, on a solid flat bright green (#00FF00) background. No text, no shadow, nothing else in the picture.
+> Using the paper cut-out {CREATURE} from the reference image exactly as it is ({RECAP}), draw one avatar portrait of it: just {HEAD}, seen straight from the front, looking at the viewer with a friendly closed-mouth smile, centred and filling the picture, cut out as one paper sticker with a clean white die-cut border that follows the outline of its head and {EARS}, with no circle, ring, badge or frame around it, on a solid flat bright green (#00FF00) background. No text, no shadow, nothing else in the picture.
 
 ## The body (edit of the base, 1024 by 1536)
 
