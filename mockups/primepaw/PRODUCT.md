@@ -62,7 +62,7 @@ Undecided or not recorded:
 
 ## Brand Commitments
 
-- Name: Primepaw. The paw is the app's mark. The main agent is a cat (Jarvis, a cat in a bow tie, in the prototype), and an agent's portrait is its face as a flat sticker: a drawing with a white die-cut rim and no shadow, never pixel art.
+- Name: Primepaw. The paw is the app's mark. The main agent is a paper creature (Jarvis, a paper robot dog in the prototype, with a puppy and a cat to pick from), and an agent's portrait is its face as a flat sticker: a drawing with a white die-cut rim and no shadow, never pixel art.
 - The paper diorama, built on the Kraft material system under `design-system-kraft/`, is the committed visual language (the prototype's history records "the paper diorama is the only design"). Recorded here as binding and not expanded: the system itself lives in `design-system-kraft/README.md` and belongs to DESIGN.md, not this file.
 - Voice, from the Kraft brand book: labels are sentence case and verb first ("New session", "Open folder"); hand-written copy is short and lower case where a person would write it; a sticker carries one word or a number, never a sentence; the agent speaks in the margin, in the first person.
 
