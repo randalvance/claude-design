@@ -476,6 +476,84 @@ button{font:inherit}
 @media (max-width:1180px){.side{width:min(460px,100%);margin-left:calc(-1 * min(460px,100%));height:calc(100vh - 186px);min-height:420px;padding-left:14px;z-index:6}.side-grip{display:none}}
 @media (prefers-reduced-motion:reduce){.side,.chit{animation:none}}
 
+/* Session top: one strip. The harness mark with its status dot, the title and its two pen marks at the left; the view tabs as icons (the open one named), the module tabs with their counts, the Done box and close at the right. The meta row is gone: the branch tag rides in the composer bar, the status is the dot and the send button */
+.top.strip{align-items:center;gap:10px;height:50px;padding:0 12px 0 22px;box-sizing:border-box;flex-wrap:nowrap;position:relative;z-index:3}
+.top.strip .ttl{flex:1 1 auto;min-width:0;gap:10px}
+.top.strip .ttl > *{flex:none}
+.top.strip .ttl h1{flex:0 1 auto;min-width:60px;max-width:none;font-size:22px}
+.top.strip .ttli{font-size:22px;width:min(420px,34vw)}
+.top.strip .tabs{margin:0;padding:0;align-self:flex-end;flex:none;overflow:visible}
+.top.strip .tab{display:inline-flex;align-items:center;gap:6px;padding:6px 10px 7px;font-size:12.5px}
+.top.strip .tab svg{width:15px;height:15px}
+.top.strip .tab .tl{display:none}
+.top.strip .tab.on{padding:4px 12px 7px 10px}
+.top.strip .tab.on .tl{display:inline}
+.top.strip .top-r{margin-left:0;padding:0;gap:2px;flex:none}
+.harness{position:relative;display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background-color:var(--card);background-image:var(--face),var(--pulp);box-shadow:1px 1px 0 var(--edge),2px 3px 3px var(--amb);color:var(--ink);transform:rotate(-3deg)}
+.harness svg{width:22px;height:22px;overflow:visible}
+.harness .dot{position:absolute;right:-3px;bottom:-2px;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--card),1px 1px 0 2px rgba(0,0,0,.12);animation:none}
+.harness .dot.busy{background:var(--red)}
+.harness .dot.attn{background:var(--amber)}
+.harness .drawn,.vdone .drawn{mix-blend-mode:multiply;transform:rotate(-4deg)}
+.harness .drawn .again,.vdone .drawn .again{stroke-width:1;opacity:.55}
+.page.night .harness .drawn,.page.night .vdone .drawn{mix-blend-mode:screen}
+.vsep{width:1px;height:26px;background:var(--line);margin:0 2px;flex:none}
+.mods{display:flex;align-items:center;gap:4px;flex:none}
+.mtab{all:unset;cursor:pointer;position:relative;width:32px;height:30px;display:grid;place-items:center;border-radius:7px;color:var(--ink);transition:background .12s var(--ease),transform .15s var(--ease)}
+.mtab svg{width:17px;height:17px}
+.mtab:hover{background-color:var(--hover);background-image:var(--face),var(--pulp);transform:translateY(-1px)}
+.mtab.on{background-color:var(--sheet-warm);box-shadow:inset 0 3px 0 var(--red),0 1px 0 var(--line)}
+.mtab:focus-visible,.vdone:focus-visible,.prcard:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mtab .n{position:absolute;top:-5px;right:-4px;display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 5px;box-sizing:border-box;border-radius:999px;background:var(--red);color:var(--white);font-size:10.5px;font-weight:900;line-height:1;box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(6deg)}
+.vdone{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 6px;border-radius:15px;font-family:var(--hand);font-size:18px;font-weight:600;color:var(--ink);flex:none;transition:background .12s var(--ease),transform .15s var(--ease)}
+.vdone svg{width:22px;height:22px;overflow:visible}
+.vdone:hover{background-color:var(--hover);background-image:var(--face),var(--pulp);transform:translateY(-1px)}
+.vdone .tick{display:none;stroke:var(--green);stroke-width:2.3}
+.vdone.on .tick{display:block;animation:popd .2s var(--ease-pop) both}
+.vdone.on{color:var(--green)}
+.sheet.isdone .ttlb{color:var(--mute);text-decoration:line-through;text-decoration-color:var(--green);text-decoration-thickness:2px}
+.bar .brtag{flex:none}
+@container (max-width:680px){.maincol .dirn{display:none}}
+/* the strip is 60px shorter than the old header and tab strip, so the side panel grows by as much */
+.side{height:calc(100vh - 72px)}
+@media (max-width:1180px){.side{height:calc(100vh - 124px)}}
+/* module sheets in the side panel: pull requests, files, git changes and background tasks on cream card stock; artifacts keep their clipboard, the side chat its pad */
+.modsec{position:relative;flex:1 1 58%;min-height:0;display:flex;flex-direction:column;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:3px;box-shadow:var(--lift-2)}
+.modsec-h{flex:none;display:flex;align-items:center;justify-content:space-between;padding:7px 8px 7px 14px;border-bottom:1px dashed var(--bar)}
+.modsec-h h2{margin:0;font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink)}
+.modsec-h .ib{color:var(--ink)}
+.modsec-h .ib svg{width:14px;height:14px}
+.modsec-b{flex:1;min-height:0;overflow:auto;padding:10px 14px 14px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink)}
+.mod-none{margin:auto;padding:24px 18px;text-align:center;font-family:var(--hand);font-size:20px;line-height:1.2;color:var(--ink)}
+.mod-sub{margin:0;font-family:var(--hand);font-size:18px;color:var(--mute)}
+.modsec-b .lrow{padding:7px 0;font-size:13px}
+.modsec-b .lrow:first-of-type{border-top:0}
+.prcard{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;padding:7px 10px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:4px;box-shadow:1px 2px 0 var(--shadow);font-size:13px;font-weight:700;color:var(--ink);transition:transform .15s var(--ease)}
+.prcard:hover{transform:translateY(-1px)}
+.prcard.merged{border-left-color:var(--kind-think)}
+.prcard.draft{border-left-color:var(--bar)}
+.prn{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--mute);flex:none}
+.prt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prst{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green);flex:none}
+.prcard.draft .prst{color:var(--mute)}
+.prcard.merged .prst{color:var(--kind-think)}
+.cc{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:900;color:var(--blue);flex:none}
+.cc .bub{width:13px;height:13px}
+.ext{width:12px;height:12px;color:var(--mute);flex:none}
+.ftree{display:flex;flex-direction:column;font-family:var(--mono);font-size:12.5px}
+.frow{display:flex;align-items:center;gap:7px;padding:4px 0 4px calc(var(--d,0) * 16px);border-top:1px dashed var(--line)}
+.frow:first-child{border-top:0}
+.frow svg{width:14px;height:14px;color:var(--mute);flex:none}
+.frow.dir span{font-weight:800}
+.fdot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:1px 1px 0 rgba(0,0,0,.18);margin-left:auto;flex:none}
+.trow{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px dashed var(--line)}
+.trow:first-child{border-top:0}
+.trow .dot{animation:none}
+.trow .tt{flex:1;min-width:0;display:flex;flex-direction:column}
+.trow b{font-weight:800;font-size:13px}
+.trow em{font-style:normal;font-size:11.5px;color:var(--mute)}
+.trow .tdur{font-family:var(--hand);font-size:15px;color:var(--mute);white-space:nowrap}
+
 /* The agent needs you: a sheet on an amber mat, the capsule's sibling. It holds still, nothing pulses; the amber and the sticker are the signal. Once settled it folds to a stub with the stamp on it. */
 .slipw{position:relative;max-width:760px;margin:4px 0 4px 14px;animation:drop .28s var(--ease) both}
 .slipw.open{padding:7px;background-color:color-mix(in srgb,var(--amber) 58%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid color-mix(in srgb,var(--amber) 62%,var(--edge-2));border-radius:9px;box-shadow:1.5px 2px 0 color-mix(in srgb,var(--amber) 62%,var(--edge-2)),4px 6px 7px var(--amb),8px 14px 20px -8px var(--amb-2)}

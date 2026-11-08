@@ -476,6 +476,84 @@ button{font:inherit}
 @media (max-width:1180px){.side{width:min(460px,100%);margin-left:calc(-1 * min(460px,100%));height:calc(100vh - 186px);min-height:420px;padding-left:14px;z-index:6}.side-grip{display:none}}
 @media (prefers-reduced-motion:reduce){.side,.chit{animation:none}}
 
+/* Session top: one strip. The harness mark with its status dot, the title and its two pen marks at the left; the view tabs as icons (the open one named), the module tabs with their counts, the Done box and close at the right. The meta row is gone: the branch tag rides in the composer bar, the status is the dot and the send button */
+.top.strip{align-items:center;gap:10px;height:50px;padding:0 12px 0 22px;box-sizing:border-box;flex-wrap:nowrap;position:relative;z-index:3}
+.top.strip .ttl{flex:1 1 auto;min-width:0;gap:10px}
+.top.strip .ttl > *{flex:none}
+.top.strip .ttl h1{flex:0 1 auto;min-width:60px;max-width:none;font-size:22px}
+.top.strip .ttli{font-size:22px;width:min(420px,34vw)}
+.top.strip .tabs{margin:0;padding:0;align-self:flex-end;flex:none;overflow:visible}
+.top.strip .tab{display:inline-flex;align-items:center;gap:6px;padding:6px 10px 7px;font-size:12.5px}
+.top.strip .tab svg{width:15px;height:15px}
+.top.strip .tab .tl{display:none}
+.top.strip .tab.on{padding:4px 12px 7px 10px}
+.top.strip .tab.on .tl{display:inline}
+.top.strip .top-r{margin-left:0;padding:0;gap:2px;flex:none}
+.harness{position:relative;display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background-color:var(--card);background-image:var(--face),var(--pulp);box-shadow:1px 1px 0 var(--edge),2px 3px 3px var(--amb);color:var(--ink);transform:rotate(-3deg)}
+.harness svg{width:22px;height:22px;overflow:visible}
+.harness .dot{position:absolute;right:-3px;bottom:-2px;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--card),1px 1px 0 2px rgba(0,0,0,.12);animation:none}
+.harness .dot.busy{background:var(--red)}
+.harness .dot.attn{background:var(--amber)}
+.harness .drawn,.vdone .drawn{mix-blend-mode:multiply;transform:rotate(-4deg)}
+.harness .drawn .again,.vdone .drawn .again{stroke-width:1;opacity:.55}
+.page.night .harness .drawn,.page.night .vdone .drawn{mix-blend-mode:screen}
+.vsep{width:1px;height:26px;background:var(--line);margin:0 2px;flex:none}
+.mods{display:flex;align-items:center;gap:4px;flex:none}
+.mtab{all:unset;cursor:pointer;position:relative;width:32px;height:30px;display:grid;place-items:center;border-radius:7px;color:var(--ink);transition:background .12s var(--ease),transform .15s var(--ease)}
+.mtab svg{width:17px;height:17px}
+.mtab:hover{background-color:var(--hover);background-image:var(--face),var(--pulp);transform:translateY(-1px)}
+.mtab.on{background-color:var(--sheet-warm);box-shadow:inset 0 3px 0 var(--red),0 1px 0 var(--line)}
+.mtab:focus-visible,.vdone:focus-visible,.prcard:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mtab .n{position:absolute;top:-5px;right:-4px;display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 5px;box-sizing:border-box;border-radius:999px;background:var(--red);color:var(--white);font-size:10.5px;font-weight:900;line-height:1;box-shadow:1px 1px 0 rgba(0,0,0,.18);transform:rotate(6deg)}
+.vdone{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 6px;border-radius:15px;font-family:var(--hand);font-size:18px;font-weight:600;color:var(--ink);flex:none;transition:background .12s var(--ease),transform .15s var(--ease)}
+.vdone svg{width:22px;height:22px;overflow:visible}
+.vdone:hover{background-color:var(--hover);background-image:var(--face),var(--pulp);transform:translateY(-1px)}
+.vdone .tick{display:none;stroke:var(--green);stroke-width:2.3}
+.vdone.on .tick{display:block;animation:popd .2s var(--ease-pop) both}
+.vdone.on{color:var(--green)}
+.sheet.isdone .ttlb{color:var(--mute);text-decoration:line-through;text-decoration-color:var(--green);text-decoration-thickness:2px}
+.bar .brtag{flex:none}
+@container (max-width:680px){.maincol .dirn{display:none}}
+/* the strip is 60px shorter than the old header and tab strip, so the side panel grows by as much */
+.side{height:calc(100vh - 72px)}
+@media (max-width:1180px){.side{height:calc(100vh - 124px)}}
+/* module sheets in the side panel: pull requests, files, git changes and background tasks on cream card stock; artifacts keep their clipboard, the side chat its pad */
+.modsec{position:relative;flex:1 1 58%;min-height:0;display:flex;flex-direction:column;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:3px;box-shadow:var(--lift-2)}
+.modsec-h{flex:none;display:flex;align-items:center;justify-content:space-between;padding:7px 8px 7px 14px;border-bottom:1px dashed var(--bar)}
+.modsec-h h2{margin:0;font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink)}
+.modsec-h .ib{color:var(--ink)}
+.modsec-h .ib svg{width:14px;height:14px}
+.modsec-b{flex:1;min-height:0;overflow:auto;padding:10px 14px 14px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink)}
+.mod-none{margin:auto;padding:24px 18px;text-align:center;font-family:var(--hand);font-size:20px;line-height:1.2;color:var(--ink)}
+.mod-sub{margin:0;font-family:var(--hand);font-size:18px;color:var(--mute)}
+.modsec-b .lrow{padding:7px 0;font-size:13px}
+.modsec-b .lrow:first-of-type{border-top:0}
+.prcard{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;padding:7px 10px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:4px;box-shadow:1px 2px 0 var(--shadow);font-size:13px;font-weight:700;color:var(--ink);transition:transform .15s var(--ease)}
+.prcard:hover{transform:translateY(-1px)}
+.prcard.merged{border-left-color:var(--kind-think)}
+.prcard.draft{border-left-color:var(--bar)}
+.prn{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--mute);flex:none}
+.prt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prst{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green);flex:none}
+.prcard.draft .prst{color:var(--mute)}
+.prcard.merged .prst{color:var(--kind-think)}
+.cc{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:900;color:var(--blue);flex:none}
+.cc .bub{width:13px;height:13px}
+.ext{width:12px;height:12px;color:var(--mute);flex:none}
+.ftree{display:flex;flex-direction:column;font-family:var(--mono);font-size:12.5px}
+.frow{display:flex;align-items:center;gap:7px;padding:4px 0 4px calc(var(--d,0) * 16px);border-top:1px dashed var(--line)}
+.frow:first-child{border-top:0}
+.frow svg{width:14px;height:14px;color:var(--mute);flex:none}
+.frow.dir span{font-weight:800}
+.fdot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:1px 1px 0 rgba(0,0,0,.18);margin-left:auto;flex:none}
+.trow{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px dashed var(--line)}
+.trow:first-child{border-top:0}
+.trow .dot{animation:none}
+.trow .tt{flex:1;min-width:0;display:flex;flex-direction:column}
+.trow b{font-weight:800;font-size:13px}
+.trow em{font-style:normal;font-size:11.5px;color:var(--mute)}
+.trow .tdur{font-family:var(--hand);font-size:15px;color:var(--mute);white-space:nowrap}
+
 /* The agent needs you: a sheet on an amber mat, the capsule's sibling. It holds still, nothing pulses; the amber and the sticker are the signal. Once settled it folds to a stub with the stamp on it. */
 .slipw{position:relative;max-width:760px;margin:4px 0 4px 14px;animation:drop .28s var(--ease) both}
 .slipw.open{padding:7px;background-color:color-mix(in srgb,var(--amber) 58%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid color-mix(in srgb,var(--amber) 62%,var(--edge-2));border-radius:9px;box-shadow:1.5px 2px 0 color-mix(in srgb,var(--amber) 62%,var(--edge-2)),4px 6px 7px var(--amb),8px 14px 20px -8px var(--amb-2)}
@@ -793,22 +871,19 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
     </section>
   </sc-if>
   <sc-if value="{{hasSession}}" hint-placeholder-val="{{false}}">
-  <header class="top">
+  <header class="top strip">
     <div class="ttl">
-      <sc-if value="{{titleEditing}}" hint-placeholder-val="{{false}}"><input class="ttli" aria-label="Session title" ref="{{titleRef}}" onKeyDown="{{titleKey}}" onBlur="{{titleCommit}}"></sc-if><sc-if value="{{titleShown}}" hint-placeholder-val="{{true}}"><h1><span class="ttlb" role="button" tabindex="0" onClick="{{titleEdit}}" onKeyDown="{{titleOpenKey}}" title="Click to rename">{{cur.t}}</span></h1></sc-if><button class="aigen {{titleCls}}" onClick="{{titleGen}}" aria-label="{{titleGenLabel}}" title="{{titleGenLabel}}" aria-busy="{{titleBusy}}"><sc-if value="{{titleBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{titleIdle}}" hint-placeholder-val="{{true}}"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2.6c.3 3.8 1.9 6 6.6 7.1"></path><path d="M17.9 9.4c-4.7 1.2-6.4 3.4-7 7.9"></path><path d="M11 17.9c-.5-4.5-2.4-6.8-7.3-7.9"></path><path d="M3.4 10.3c4.9-1 6.9-3.2 7.8-7.9"></path><path d="M18.8 14.4c.1 1.9-.1 4.2.1 6.3"></path><path d="M16 17.6c1.9-.2 3.9.1 5.7-.1"></path><path d="M18.6 3.4l.5 2.5"></path><path d="M21.5 5.2l-2 1"></path><path class="again" d="M8.2 11.3l2.9-2.9"></path><path class="again" d="M9 13.2l3.6-3.6"></path><path class="again" d="M10.4 14.3l2.4-2.4"></path></svg></sc-if></button>
-      <span class="tagw"><span class="tagb">{{cur.branch}}</span></span>
+      <span class="harness" title="{{harnessTitle}}"><sc-if value="{{hzClaude}}" hint-placeholder-val="{{true}}"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2c.2 2.6-.1 5.3.1 8"></path><path d="M12.1 12.8c-.1 2.7.2 5.5-.1 8.1"></path><path d="M3.4 12c2.7-.2 5.4.1 8.1-.1"></path><path d="M12.8 12c2.8.1 5.5-.2 8.2.1"></path><path d="M5.9 5.8c1.8 1.9 3.7 3.7 5.5 5.5"></path><path d="M12.6 12.7c1.9 1.8 3.7 3.7 5.5 5.5"></path><path d="M18.2 5.9c-1.9 1.8-3.7 3.7-5.6 5.5"></path><path d="M11.5 12.7c-1.8 1.9-3.6 3.8-5.5 5.6"></path><path class="again" d="M9.7 9.9l4.6 4.3"></path><path class="again" d="M9.9 14.3l4.3-4.6"></path></svg></sc-if><sc-if value="{{hzCodex}}" hint-placeholder-val="{{false}}"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4c2.5 1.3 4.9 2.8 7.3 4.3"></path><path d="M19.3 7.7c0 2.8.1 5.7-.1 8.5"></path><path d="M19.2 16.2c-2.4 1.5-4.8 2.9-7.3 4.2"></path><path d="M11.9 20.4c-2.4-1.4-4.9-2.7-7.2-4.3"></path><path d="M4.7 16.1c-.1-2.8 0-5.6 0-8.5"></path><path d="M4.7 7.6c2.4-1.5 4.8-2.9 7.3-4.2"></path><path d="M12 8.2c1.1.6 2.2 1.3 3.3 1.9c0 1.3.1 2.5 0 3.8c-1.1.6-2.2 1.3-3.3 1.9c-1.1-.6-2.2-1.3-3.3-1.9c0-1.3 0-2.5 0-3.8c1.1-.7 2.2-1.3 3.3-1.9"></path><path class="again" d="M12 3.6v4.6"></path><path class="again" d="M19.2 7.9l-3.9 2.3"></path><path class="again" d="M4.8 16l3.9-2.2"></path><path class="again" d="M12 20.2v-4.4"></path></svg></sc-if><sc-if value="{{hzPi}}" hint-placeholder-val="{{false}}"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 7.4c4.9-.3 9.9-.2 14.8-.1"></path><path d="M8.3 7.7c.1 4.1-.3 8-1.9 11.1"></path><path d="M15.6 7.6c-.2 3.9-.4 7.8.3 11.4c.2.9.8 1.2 1.6.7"></path><path class="again" d="M5.4 7.2c1.2-.9 2.5-1.3 3.9-1.5"></path><path class="again" d="M16.3 18.6c.4.4 1 .6 1.6.4"></path></svg></sc-if><i class="dot {{stCls}}" aria-hidden="true"></i></span>
+      <sc-if value="{{titleEditing}}" hint-placeholder-val="{{false}}"><input class="ttli" aria-label="Session title" ref="{{titleRef}}" onKeyDown="{{titleKey}}" onBlur="{{titleCommit}}"></sc-if><sc-if value="{{titleShown}}" hint-placeholder-val="{{true}}"><h1><span class="ttlb" role="button" tabindex="0" onClick="{{titleEdit}}" onKeyDown="{{titleOpenKey}}" title="Click to rename">{{cur.t}}</span></h1></sc-if><button class="aigen {{titleCls}}" onClick="{{titleGen}}" aria-label="{{titleGenLabel}}" title="{{titleGenLabel}}" aria-busy="{{titleBusy}}"><sc-if value="{{titleBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{titleIdle}}" hint-placeholder-val="{{true}}"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2.6c.3 3.8 1.9 6 6.6 7.1"></path><path d="M17.9 9.4c-4.7 1.2-6.4 3.4-7 7.9"></path><path d="M11 17.9c-.5-4.5-2.4-6.8-7.3-7.9"></path><path d="M3.4 10.3c4.9-1 6.9-3.2 7.8-7.9"></path><path d="M18.8 14.4c.1 1.9-.1 4.2.1 6.3"></path><path d="M16 17.6c1.9-.2 3.9.1 5.7-.1"></path><path d="M18.6 3.4l.5 2.5"></path><path d="M21.5 5.2l-2 1"></path><path class="again" d="M8.2 11.3l2.9-2.9"></path><path class="again" d="M9 13.2l3.6-3.6"></path><path class="again" d="M10.4 14.3l2.4-2.4"></path></svg></sc-if></button><button class="aigen" aria-label="Open in VS Code" title="Open in VS Code"><svg class="drawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.6 3.3c1.3.3 2.4 1.1 2.7 2.2c.1 4.4.1 8.8 0 13.2c-.3 1.1-1.4 1.9-2.7 2.2"></path><path d="M17.6 3.3C13.5 6.9 9.4 10.4 5.3 14"></path><path d="M5.3 14c-.7-.5-1.4-1-2.1-1.6"></path><path d="M17.6 20.7C13.5 17.1 9.4 13.6 5.3 10"></path><path d="M5.3 10c-.7.5-1.4 1-2.1 1.6"></path><path class="again" d="M18.9 7.2c.1 3.2.1 6.4 0 9.6"></path><path class="again" d="M8.4 12.8l1.6-1.4"></path></svg></button>
     </div>
-    <div class="meta"><span>{{cur.role}} · {{cur.ws}}</span><span class="sticker {{stCls}}"><i aria-hidden="true"></i>{{stLabel}}</span></div>
-    <div class="top-r">
-      <button class="ib" aria-label="Open in editor"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg></button>
-      <button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
-      <button class="ib" onClick="{{closeSession}}" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-    </div>
+    <nav class="tabs icons" aria-label="Session views"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab {{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}" title="{{t.label}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg><span class="tl">{{t.label}}</span></button></sc-for></nav>
+    <span class="vsep" aria-hidden="true"></span>
+    <div class="mods" role="group" aria-label="Modules"><sc-for list="{{mods}}" as="md" hint-placeholder-count="6"><button class="mtab {{md.cls}}" onClick="{{md.pick}}" aria-pressed="{{md.on}}" title="{{md.label}}" aria-label="{{md.label}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{md.icon}}"></path></svg><sc-if value="{{md.hasN}}" hint-placeholder-val="{{false}}"><span class="n">{{md.n}}</span></sc-if></button></sc-for></div>
+    <button class="vdone {{doneCls}}" onClick="{{toggleDone}}" aria-pressed="{{isDone}}" title="{{doneLabel}}"><svg class="drawn box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.4 4.8c5-.3 10-.1 15.1-.2c.2 5 .2 10 .1 15c-5 .2-10.1.1-15.1.1c-.2-5-.3-10 0-14.9z"></path><path class="again" d="M5.6 6.1c4.3-.2 8.6-.1 12.9-.1"></path><path class="tick" d="M6.6 12.6c1.7 1.3 3 2.9 4.1 4.6c2.3-4.3 5.1-7.8 8.8-10.8"></path></svg><span>Done</span></button>
+    <div class="top-r"><button class="ib" aria-label="Delete session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"></path></svg></button>
+      <button class="ib" onClick="{{closeSession}}" aria-label="Close session"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
   </header>
 
-  <nav class="tabs" aria-label="Session views">
-    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab {{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.cur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg>{{t.label}}</button></sc-for><span class="tabs-r"><button class="tab {{artsTabCls}}" onClick="{{toggleArts}}" aria-pressed="{{artsOpen}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8v4H8zM8 5H5v16h14V5h-3M9 12h6M9 16h6"></path></svg>Artifacts<sc-if value="{{hasArts}}" hint-placeholder-val="{{true}}"><span class="tabn">{{artCount}}</span></sc-if></button><button class="tab {{padTabCls}}" onClick="{{togglePad}}" aria-pressed="{{padOpen}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h13v9H9l-4 3v-3H3zM19 8h2v9h-1v3l-3-3h-5"></path></svg>Side chat</button></span>
-  </nav>
 
   <div class="leaf"><div class="maincol">
   <div class="content">
@@ -904,15 +979,6 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
       </sc-for>
     </sc-if>
 
-    <sc-if value="{{isGit}}" hint-placeholder-val="{{false}}">
-      <div class="ledger">
-        <h3>Working tree · {{cur.branch}}</h3>
-        <div class="lrow"><span class="dot edit" style="animation: none" aria-hidden="true"></span><code>src/cards/card-detail.tsx</code><span class="plus">+38</span><span class="minus">−12</span></div>
-        <div class="lrow"><span class="dot edit" style="animation: none" aria-hidden="true"></span><code>src/ui/markdown-view.tsx</code><span class="plus">+6</span><span class="minus">−1</span></div>
-        <div class="lrow"><span class="dot bash" style="animation: none" aria-hidden="true"></span><code>src/lib/safe-link.ts</code><span class="plus">+41</span><span class="minus">−0</span></div>
-        <div class="lrow"><span class="dot edit" style="animation: none" aria-hidden="true"></span><code>tests/card-detail.test.tsx</code><span class="plus">+57</span><span class="minus">−3</span></div>
-      </div>
-    </sc-if>
 
     <sc-if value="{{isTodos}}" hint-placeholder-val="{{false}}">
       <div class="ledger">
@@ -983,7 +1049,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
               YOLO
             </button>
 
-            <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{cur.ws}}</span>
+            <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="dirn">{{cur.ws}}</span></span><span class="tagw brtag"><span class="tagb">{{cur.branch}}</span></span>
           </div>
           <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">{{hint}}</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
           <button class="send {{sendCls}}" onClick="{{sendOrStop}}" aria-label="{{sendAria}}">
@@ -995,7 +1061,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
     </div>
   </footer>
   </div>
-    <sc-if value="{{sideShown}}" hint-placeholder-val="{{false}}"><aside class="side" style="--sidew: {{sideWidth}}" aria-label="Artifacts and side chat">
+    <sc-if value="{{sideShown}}" hint-placeholder-val="{{false}}"><aside class="side" style="--sidew: {{sideWidth}}" aria-label="Session modules">
       <div class="side-grip" role="separator" aria-orientation="vertical" aria-label="Resize this panel" tabindex="0" onPointerDown="{{gripDown}}" onKeyDown="{{gripKey}}"></div>
       <sc-if value="{{artsOpen}}" hint-placeholder-val="{{false}}"><section class="clipb" aria-label="Artifacts">
         <span class="clipb-clip" aria-hidden="true"><svg viewBox="0 0 92 30"><path class="wire" d="M32 12V8a14 6 0 0 1 28 0v4"></path><path class="jaw" d="M12 11h68l10 17H2z"></path><path class="crease" d="M12 15h68"></path></svg></span>
@@ -1016,6 +1082,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
         </sc-if>
         <sc-if value="{{noArts}}" hint-placeholder-val="{{false}}"><div class="art art-e"><p class="art-none">Nothing on the clipboard yet. Anything the agent makes in this session lands here.</p></div></sc-if>
       </section></sc-if>
+      <sc-if value="{{prsOpen}}" hint-placeholder-val="{{false}}"><section class="modsec" aria-label="Pull requests"><header class="modsec-h"><h2>Pull requests</h2><button class="ib" onClick="{{closeMod}}" aria-label="Close pull requests"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header><div class="modsec-b"><sc-if value="{{hasPrs}}" hint-placeholder-val="{{true}}"><sc-for list="{{prs}}" as="p" hint-placeholder-count="2"><button class="prcard {{p.cls}}" title="Opens on GitHub"><span class="prn">#{{p.n}}</span><span class="prt">{{p.t}}</span><span class="prst">{{p.st}}</span><sc-if value="{{p.hasC}}" hint-placeholder-val="{{true}}"><span class="cc" title="Inline comments"><svg class="bub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"></path></svg>{{p.c}}</span></sc-if><svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button></sc-for></sc-if><sc-if value="{{noPrs}}" hint-placeholder-val="{{false}}"><p class="mod-none">No pull request yet. The agent opens one when the branch is ready, and it lands here.</p></sc-if></div></section></sc-if><sc-if value="{{filesOpen}}" hint-placeholder-val="{{false}}"><section class="modsec" aria-label="Files"><header class="modsec-h"><h2>Files</h2><button class="ib" onClick="{{closeMod}}" aria-label="Close files"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header><div class="modsec-b"><p class="mod-sub">{{cur.ws}} · {{cur.branch}}</p><div class="ftree"><sc-for list="{{files}}" as="f" hint-placeholder-count="8"><div class="frow {{f.cls}}" style="--d: {{f.d}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{f.icon}}"></path></svg><span>{{f.name}}</span><sc-if value="{{f.changed}}" hint-placeholder-val="{{false}}"><i class="fdot" title="Changed in this session" aria-label="Changed"></i></sc-if></div></sc-for></div></div></section></sc-if><sc-if value="{{gitOpen}}" hint-placeholder-val="{{false}}"><section class="modsec" aria-label="Git changes"><header class="modsec-h"><h2>Git changes</h2><button class="ib" onClick="{{closeMod}}" aria-label="Close git changes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header><div class="modsec-b"><p class="mod-sub">Working tree · {{cur.branch}}</p><sc-for list="{{gitRows}}" as="g" hint-placeholder-count="4"><div class="lrow"><span class="dot {{g.k}}" style="animation: none" aria-hidden="true"></span><code>{{g.f}}</code><span class="plus">+{{g.a}}</span><span class="minus">−{{g.d}}</span></div></sc-for></div></section></sc-if><sc-if value="{{tasksOpen}}" hint-placeholder-val="{{false}}"><section class="modsec" aria-label="Background tasks"><header class="modsec-h"><h2>Background tasks</h2><button class="ib" onClick="{{closeMod}}" aria-label="Close background tasks"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header><div class="modsec-b"><sc-if value="{{hasTasks}}" hint-placeholder-val="{{true}}"><sc-for list="{{tasks}}" as="k" hint-placeholder-count="2"><div class="trow"><span class="dot {{k.dot}}" aria-hidden="true"></span><span class="tt"><b>{{k.t}}</b><em>{{k.who}} · {{k.st}}</em></span><span class="tdur">{{k.dur}}</span></div></sc-for></sc-if><sc-if value="{{noTasks}}" hint-placeholder-val="{{false}}"><p class="mod-none">Nothing in the background. Sub agents this session starts show up here while they run.</p></sc-if></div></section></sc-if>
       <sc-if value="{{padOpen}}" hint-placeholder-val="{{false}}"><section class="pad" aria-label="Side chat">
         <header class="pad-h"><h2>Side chat</h2><button class="ib" onClick="{{togglePad}}" aria-label="Close side chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
         <div class="pad-b" ref="{{padRef}}" aria-live="polite">
@@ -1045,7 +1112,7 @@ const MODELS = [
 const EFFORT = ['Low', 'Med', 'High', 'X-high', 'Max'];
 const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
 const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
-const TABS = ['Chat', 'Git', 'Todos', 'Tools', 'Terminal', 'Logs'];
+const TABS = ['Chat', 'Todos', 'Terminal'];
 const TAB_ICONS = {"Chat": "M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z", "Git": "M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9", "Todos": "M10 6h10M10 12h10M10 18h10M4 6l1.2 1.2L7.5 4.8M4 12l1.2 1.2 2.3-2.4M4 18l1.2 1.2 2.3-2.4", "Tools": "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z", "Terminal": "M4 5h16v14H4zM8 9l3 3-3 3M13 15h3", "Logs": "M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7"};
 const NAV = [
   { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
@@ -1065,28 +1132,28 @@ const NAV = [
 const ROLES = [['Orchestrator', 'plans, delegates, reports back'], ['Implementer', 'writes the code itself'], ['Curator', 'reads, summarises, drafts'], ['Reviewer', 'reads diffs, leaves comments'], ['Triage', 'sorts and labels']];
 const WS = [
   { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', sessions: [
-    { id: 's1', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22:21', role: 'Orchestrator', branch: 'feat/curator-digest' },
-    { id: 's2', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4:55', role: 'Implementer', branch: 'feat/LH-281' },
-    { id: 's3', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
+    { id: 's1', harness: 'claude', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22:21', role: 'Orchestrator', branch: 'feat/curator-digest' },
+    { id: 's2', harness: 'codex', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4:55', role: 'Implementer', branch: 'feat/LH-281' },
+    { id: 's3', harness: 'claude', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
   { id: 'orbit', name: 'Orbit Billing', color: '#d06a8c', attn: true, sessions: [
-    { id: 's4', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
-    { id: 's5', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Implementer', branch: 'feat/ORB-272-telemetry' },
-    { id: 's6', t: 'Ticket triage', st: 'idle', dur: '1:40', jira: true, role: 'Implementer', branch: 'main' },
-    { id: 's7', t: 'Generate app icon', st: 'idle', dur: '2:50', role: 'Implementer', branch: 'main' },
-    { id: 's8', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1:02', role: 'Implementer', branch: 'main' },
-    { id: 's9', t: 'Move worker pool to private subnets', st: 'done', dur: '0:34', role: 'Orchestrator', branch: 'feat/private-workers' },
-    { id: 's10', t: 'Fill in access-request roles', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
-    { id: 's11', t: 'Onboarding form autofill', st: 'idle', dur: '45:40', jira: true, role: 'Implementer', branch: 'main' },
-    { id: 's12', t: 'Cross-tenant access audit', st: 'idle', dur: '46:18', role: 'Orchestrator', branch: 'fix/ORB-266' },
-    { id: 's13', t: 'Find recent ORB-prefixed pull requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
-    { id: 's14', t: 'Guardrails check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
-    { id: 's15', t: 'Is stale PR ORB-205 still relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
-    { id: 's16', t: 'Support answers draft', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
+    { id: 's4', harness: 'claude', t: 'Sticky checkout sessions', st: 'busy', dur: '2h 33m', role: 'Orchestrator', branch: 'feat/sticky-checkout' },
+    { id: 's5', harness: 'codex', t: 'ORB-272 - Browser telemetry', st: 'busy', attn: 1, dur: '1h 53m', jira: true, role: 'Implementer', branch: 'feat/ORB-272-telemetry' },
+    { id: 's6', harness: 'pi', t: 'Ticket triage', st: 'idle', dur: '1:40', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's7', harness: 'claude', t: 'Generate app icon', st: 'idle', dur: '2:50', role: 'Implementer', branch: 'main' },
+    { id: 's8', harness: 'pi', t: 'Filter invoices by date and correlate with refunds', st: 'idle', dur: '1:02', role: 'Implementer', branch: 'main' },
+    { id: 's9', harness: 'claude', t: 'Move worker pool to private subnets', st: 'done', dur: '0:34', role: 'Orchestrator', branch: 'feat/private-workers' },
+    { id: 's10', harness: 'codex', t: 'Fill in access-request roles', st: 'idle', dur: '2h 56m', jira: true, role: 'Orchestrator', branch: 'main' },
+    { id: 's11', harness: 'claude', t: 'Onboarding form autofill', st: 'idle', dur: '45:40', jira: true, role: 'Implementer', branch: 'main' },
+    { id: 's12', harness: 'claude', t: 'Cross-tenant access audit', st: 'idle', dur: '46:18', role: 'Orchestrator', branch: 'fix/ORB-266' },
+    { id: 's13', harness: 'claude', t: 'Find recent ORB-prefixed pull requests', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's14', harness: 'pi', t: 'Guardrails check', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's15', harness: 'codex', t: 'Is stale PR ORB-205 still relevant', st: 'new', dur: '—', role: 'Implementer', branch: 'main' },
+    { id: 's16', harness: 'claude', t: 'Support answers draft', st: 'new', dur: '—', role: 'Implementer', branch: 'main' } ] },
   { id: 'fleet', name: 'Fleet Infra Deploy', color: '#c8884a', sessions: [
-    { id: 's17', t: 'Update image digest', st: 'idle', dur: '29:03', role: 'Implementer', branch: 'main' },
-    { id: 's18', t: 'Find and move preprod images', st: 'busy', dur: '31:15', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
+    { id: 's17', harness: 'codex', t: 'Update image digest', st: 'idle', dur: '29:03', role: 'Implementer', branch: 'main' },
+    { id: 's18', harness: 'claude', t: 'Find and move preprod images', st: 'busy', dur: '31:15', role: 'Orchestrator', branch: 'chore/preprod-images' } ] },
   { id: 'tf', name: 'Fleet Infra Terraform', color: '#9a8c74', sessions: [
-    { id: 's19', t: 'Plan private endpoint module', st: 'idle', dur: '12:08', role: 'Orchestrator', branch: 'main' } ] }
+    { id: 's19', harness: 'pi', t: 'Plan private endpoint module', st: 'idle', dur: '12:08', role: 'Orchestrator', branch: 'main' } ] }
 ];
 const THREADS = {
   s3: [
@@ -1173,6 +1240,26 @@ const PAD_ANSWERS = [
 ];
 
 
+const HARNESS = { claude: 'Claude', codex: 'Codex', pi: 'Pi' };
+const MODS = [['prs', 'Pull requests'], ['arts', 'Artifacts'], ['files', 'Files'], ['git', 'Git changes'], ['tasks', 'Background tasks'], ['pad', 'Side chat']];
+const MOD_ICONS = {"prs": "M6 3a2 2 0 1 0 0 4a2 2 0 0 0 0-4zM6 7v14M18 17a2 2 0 1 0 0 4a2 2 0 0 0 0-4zM18 17V9a3 3 0 0 0-3-3h-4M13 3L10 6l3 3", "arts": "M8 3h8v4H8zM8 5H5v16h14V5h-3M9 12h6M9 16h6", "files": "M3 7h6l2 2h10v11H3z", "git": "M8 4v8M4 8h8M13 17h7", "tasks": "M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16zM12 8v4l3 2", "pad": "M3 4h13v9H9l-4 3v-3H3zM19 8h2v9h-1v3l-3-3h-5"};
+const PRS = {
+  s4: [{ n: 412, t: 'Sticky checkout rollout plan', c: 3, st: 'Open' }, { n: 418, t: 'Cookie TTL guard', c: 1, st: 'Draft' }],
+  s5: [{ n: 377, t: 'Browser telemetry: event batching', c: 5, st: 'Open' }],
+  s1: [{ n: 402, t: 'Curator digest template', c: 2, st: 'Open' }],
+  s9: [{ n: 390, t: 'Private subnets for the worker pool', c: 0, st: 'Merged' }],
+  s3: [{ n: 388, t: 'Issue 218: render synced card descriptions', c: 4, st: 'Open' }]
+};
+const TASKS = {
+  s3: [{ t: 'Issue 218 draft', who: 'Implementer', st: 'running', dur: '4:12' }, { t: 'Label sweep', who: 'Triage', st: 'done', dur: '0:58' }],
+  s4: [{ t: 'e2e suite', who: 'Implementer', st: 'running', dur: '12:40' }],
+  s5: [{ t: 'Telemetry docs', who: 'Curator', st: 'waiting on you', dur: '—' }]
+};
+const GIT_ROWS = [{ k: 'edit', f: 'src/cards/card-detail.tsx', a: 38, d: 12 }, { k: 'edit', f: 'src/ui/markdown-view.tsx', a: 6, d: 1 }, { k: 'bash', f: 'src/lib/safe-link.ts', a: 41, d: 0 }, { k: 'edit', f: 'tests/card-detail.test.tsx', a: 57, d: 3 }];
+const FILE_I = { dir: 'M3 7h6l2 2h10v11H3z', file: 'M6 3h9l4 4v14H6zM14 3v5h5' };
+const FILES = [['src', 0, 1], ['cards', 1, 1], ['card-detail.tsx', 2, 0, 1], ['lib', 1, 1], ['safe-link.ts', 2, 0, 1], ['ui', 1, 1], ['markdown-view.tsx', 2, 0, 1], ['tests', 0, 1], ['card-detail.test.tsx', 1, 0, 1], ['package.json', 0, 0], ['README.md', 0, 0]];
+
+
 // the session's agent's face, a flat sticker by role (faces.py); px is its list of parts
 const QFACES = {"cat":[{"d":"M6 28 10 7l10 10h24L54 7l4 21c0 14-11 23-26 23S6 42 6 28z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M24 47l8 3.5 8-3.5v9l-8-3.5-8 3.5z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M2 33l12 2M2 40l12-2M62 33l-12 2M62 40l-12-2","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M6 28 10 7l10 10h24L54 7l4 21c0 14-11 23-26 23S6 42 6 28z","f":"#f3e9d5","s":"#2a2219","w":2.2,"o":1},{"d":"M44 17 54 7l4 21c0 5-2 10-5 13-3-10-9-17-9-24z","f":"#d9bc86","s":"#2a2219","w":2.2,"o":1},{"d":"M12 12l7 6M52 12l-7 6","f":"none","s":"#2a2219","w":1.4,"o":1},{"d":"M20.6 30a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M38.6 30a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M13.8 37a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0z","f":"#e8a9a2","s":"none","w":0,"o":0.7},{"d":"M43.8 37a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0z","f":"#e8a9a2","s":"none","w":0,"o":0.7},{"d":"M30 36h4l-2 3z","f":"#c8553d","s":"none","w":0,"o":1},{"d":"M32 39c-1 3-4 3-5 1M32 39c1 3 4 3 5 1","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M2 33l12 2M2 40l12-2M62 33l-12 2M62 40l-12-2","f":"none","s":"#2a2219","w":1.4,"o":1},{"d":"M24 47l8 3.5 8-3.5v9l-8-3.5-8 3.5z","f":"#c8553d","s":"#2a2219","w":2.2,"o":1},{"d":"M29.5 48.5h5v6h-5z","f":"#c8553d","s":"#2a2219","w":2.2,"o":1}],"dog":[{"d":"M10 32a22 22 0 1 0 44 0a22 22 0 1 0 -44 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M13 20c-7 2-9 14-4 24 4 2 8-2 9-6zM51 20c7 2 9 14 4 24-4 2-8-2-9-6z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M10 32a22 22 0 1 0 44 0a22 22 0 1 0 -44 0z","f":"#a8743f","s":"#2a2219","w":2.2,"o":1},{"d":"M13 20c-7 2-9 14-4 24 4 2 8-2 9-6zM51 20c7 2 9 14 4 24-4 2-8-2-9-6z","f":"#6b4423","s":"#2a2219","w":2.2,"o":1},{"d":"M21 39a11 8 0 1 0 22 0a11 8 0 1 0 -22 0z","f":"#e8d9b5","s":"#2a2219","w":2.2,"o":1},{"d":"M21.6 27a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M37.6 27a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M29 36a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M32 39v3M32 42c-1 2-4 3-6 1M32 42c1 2 4 3 6 1","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M13.2 33a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0z","f":"#e8a9a2","s":"none","w":0,"o":0.7},{"d":"M45.2 33a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0z","f":"#e8a9a2","s":"none","w":0,"o":0.7}],"owl":[{"d":"M12 24c0-12 9-18 20-18s20 6 20 18v14c0 12-9 20-20 20S12 50 12 38z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M14 20l-4-10 10 6zM50 20l4-10-10 6z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M12 24c0-12 9-18 20-18s20 6 20 18v14c0 12-9 20-20 20S12 50 12 38z","f":"#8c6a4a","s":"#2a2219","w":2.2,"o":1},{"d":"M14 20l-4-10 10 6zM50 20l4-10-10 6z","f":"#8c6a4a","s":"#2a2219","w":2.2,"o":1},{"d":"M22 48a10 8 0 1 0 20 0a10 8 0 1 0 -20 0z","f":"#e8d9b5","s":"none","w":0,"o":0.85},{"d":"M27 46l2 3M32 45l2 3M37 46l2 3","f":"none","s":"#2a2219","w":1.4,"o":1},{"d":"M15 30a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z","f":"#e8d9b5","s":"#2a2219","w":2.2,"o":1},{"d":"M33 30a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z","f":"#e8d9b5","s":"#2a2219","w":2.2,"o":1},{"d":"M20 30a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M38 30a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M32 36l-4 0 4 6 4-6z","f":"#e3b23c","s":"#2a2219","w":2.2,"o":1}],"fox":[{"d":"M8 24 12 6l12 12h16L52 6l4 18c0 14-8 24-24 24S8 38 8 24z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M8 24 12 6l12 12h16L52 6l4 18c0 14-8 24-24 24S8 38 8 24z","f":"#d9742b","s":"#2a2219","w":2.2,"o":1},{"d":"M14 12l6 7M50 12l-6 7","f":"#a5521c","s":"#2a2219","w":1.4,"o":1},{"d":"M12 34c6 10 14 14 20 14s14-4 20-14c-6 2-12 3-20 3s-14-1-20-3z","f":"#fffdf7","s":"#2a2219","w":2.2,"o":1},{"d":"M19.8 29a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M39.8 29a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M18 26l6 2M46 26l-6 2","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M29.4 37a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M32 40c-1 2-3 3-5 1M32 40c1 2 3 3 5 1","f":"none","s":"#2a2219","w":2.2,"o":1}],"robot":[{"d":"M14 12h36v34a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M32 4v8","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M32 6v6","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M29.4 5a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#c8553d","s":"#2a2219","w":2.2,"o":1},{"d":"M14 12h36v34a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6z","f":"#a8a39a","s":"#2a2219","w":2.2,"o":1},{"d":"M20 20h24v12H20z","f":"#5b6670","s":"#2a2219","w":2.2,"o":1},{"d":"M24 26a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z","f":"#4a8f99","s":"none","w":0,"o":1},{"d":"M34 26a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z","f":"#4a8f99","s":"none","w":0,"o":1},{"d":"M24 40h16","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M28 38v4M32 38v4M36 38v4","f":"none","s":"#2a2219","w":1.4,"o":1},{"d":"M14.4 30a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M46.4 30a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0z","f":"#2a2219","s":"none","w":0,"o":1}],"bear":[{"d":"M8 16a8 8 0 1 0 16 0a8 8 0 1 0 -16 0zM40 16a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M10 34a22 22 0 1 0 44 0a22 22 0 1 0 -44 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M8 16a8 8 0 1 0 16 0a8 8 0 1 0 -16 0zM40 16a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z","f":"#7a4f2e","s":"#2a2219","w":2.2,"o":1},{"d":"M12 16a4 4 0 1 0 8 0a4 4 0 1 0 -8 0zM44 16a4 4 0 1 0 8 0a4 4 0 1 0 -8 0z","f":"#c9a070","s":"none","w":0,"o":1},{"d":"M10 34a22 22 0 1 0 44 0a22 22 0 1 0 -44 0z","f":"#7a4f2e","s":"#2a2219","w":2.2,"o":1},{"d":"M22 41a10 8 0 1 0 20 0a10 8 0 1 0 -20 0z","f":"#c9a070","s":"#2a2219","w":2.2,"o":1},{"d":"M21.6 29a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M37.6 29a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M28.6 38a3.4 2.6 0 1 0 6.8 0a3.4 2.6 0 1 0 -6.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M32 41v2M32 43c-1 2-4 3-6 1M32 43c1 2 4 3 6 1","f":"none","s":"#2a2219","w":2.2,"o":1}],"curator":[{"d":"M14 30c-6-4-4-12 3-13-1-7 7-10 12-6 3-6 12-6 15 0 6-3 13 1 11 8 7 2 8 10 2 14 2 7-4 12-10 10-2 6-10 7-14 3-5 5-13 2-14-4-7 2-11-5-5-12z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M19 31c-6-1-9 3-7 7 3 0 6-3 7-7zM45 31c6-1 9 3 7 7-3 0-6-3-7-7z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M14 30c-6-4-4-12 3-13-1-7 7-10 12-6 3-6 12-6 15 0 6-3 13 1 11 8 7 2 8 10 2 14 2 7-4 12-10 10-2 6-10 7-14 3-5 5-13 2-14-4-7 2-11-5-5-12z","f":"#f3e9d5","s":"#2a2219","w":2.2,"o":1},{"d":"M19 31c-6-1-9 3-7 7 3 0 6-3 7-7zM45 31c6-1 9 3 7 7-3 0-6-3-7-7z","f":"#cfae72","s":"#2a2219","w":2.2,"o":1},{"d":"M21 35a11 9 0 1 0 22 0a11 9 0 1 0 -22 0z","f":"#cfae72","s":"#2a2219","w":2.2,"o":1},{"d":"M24.8 33a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M34.8 33a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M30 38h4l-2 3z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M18 30h8a3 3 0 0 0 0-6h-2M46 30h-8a3 3 0 0 1 0-6h2","f":"none","s":"#2a2219","w":1.4,"o":0}],"implementer":[{"d":"M18 10h28a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V16a6 6 0 0 1 6-6z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M22 46v6M42 46v6","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M16 52h12M36 52h12","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M18 10h28a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V16a6 6 0 0 1 6-6z","f":"#5b8c5a","s":"#2a2219","w":2.2,"o":1},{"d":"M18 18h28v14H18z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M23.2 25a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0z","f":"#fffdf7","s":"none","w":0,"o":1},{"d":"M35.2 25a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0z","f":"#fffdf7","s":"none","w":0,"o":1},{"d":"M24 38h16v3H24z","f":"#e2c48c","s":"none","w":0,"o":1},{"d":"M22 46v6M42 46v6","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M16 52h12M36 52h12","f":"none","s":"#2a2219","w":2.2,"o":1}],"issue":[{"d":"M32 4 14 30h36z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M20 38a12 9 0 1 0 24 0a12 9 0 1 0 -24 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M18 42c2 8 8 14 14 16 6-2 12-8 14-16-4 3-9 4-14 4s-10-1-14-4z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M20 38a12 9 0 1 0 24 0a12 9 0 1 0 -24 0z","f":"#e2c48c","s":"#2a2219","w":2.2,"o":1},{"d":"M18 42c2 8 8 14 14 16 6-2 12-8 14-16-4 3-9 4-14 4s-10-1-14-4z","f":"#fffdf7","s":"#2a2219","w":2.2,"o":1},{"d":"M32 4 14 30h36z","f":"#c8553d","s":"#2a2219","w":2.2,"o":1},{"d":"M14 30h36v4H14z","f":"#8f3a2a","s":"#2a2219","w":2.2,"o":1},{"d":"M24.8 36a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M34.8 36a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M29.4 41a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#e8a9a2","s":"none","w":0,"o":1}],"reviewer":[{"d":"M12 28a16 16 0 1 0 32 0a16 16 0 1 0 -32 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M40 40l13 13","f":"none","s":"#fffdf7","w":11,"o":1},{"d":"M40 40l13 13","f":"none","s":"#2a2219","w":7,"o":1},{"d":"M40 40l13 13","f":"none","s":"#e2c48c","w":3.5,"o":1},{"d":"M12 28a16 16 0 1 0 32 0a16 16 0 1 0 -32 0z","f":"#fffdf7","s":"#2a2219","w":2.2,"o":1},{"d":"M16 28a12 12 0 1 0 24 0a12 12 0 1 0 -24 0z","f":"#3b5b9a","s":"none","w":0,"o":0.85},{"d":"M20 22c2-3 6-5 10-5","f":"none","s":"#fffdf7","w":2,"o":0.8},{"d":"M24 29a4 4 0 1 0 8 0a4 4 0 1 0 -8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M28.1 27.5a1.4 1.4 0 1 0 2.8 0a1.4 1.4 0 1 0 -2.8 0z","f":"#fffdf7","s":"none","w":0,"o":1}],"triage":[{"d":"M14 34a18 18 0 1 0 36 0a18 18 0 1 0 -36 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M10 34c-8-6-6-16 2-14 4 2 4 8 0 14zM54 34c8-6 6-16-2-14-4 2-4 8 0 14z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M22 18l-6-10M42 18l6-10","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M10 34c-8-6-6-16 2-14 4 2 4 8 0 14zM54 34c8-6 6-16-2-14-4 2-4 8 0 14z","f":"#fffdf7","s":"#2a2219","w":1.6,"o":0.9},{"d":"M22 18l-6-10M42 18l6-10","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M13.6 8a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M45.6 8a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M14 34a18 18 0 1 0 36 0a18 18 0 1 0 -36 0z","f":"#e3b23c","s":"#2a2219","w":2.2,"o":1},{"d":"M15 42h34M19 48h26","f":"none","s":"#2a2219","w":3,"o":1},{"d":"M22.4 30a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M36.4 30a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M27 36c2 3 8 3 10 0","f":"none","s":"#2a2219","w":2.2,"o":1}],"release":[{"d":"M32 4c10 8 12 22 10 36H22C20 26 22 12 32 4z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M22 30l-8 12h8zM42 30l8 12h-8z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M26 42c0 8 3 12 6 16 3-4 6-8 6-16z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M26 42c0 8 3 12 6 16 3-4 6-8 6-16z","f":"#b8792f","s":"#2a2219","w":2.2,"o":1},{"d":"M29 42c0 5 1 8 3 11 2-3 3-6 3-11z","f":"#e3b23c","s":"none","w":0,"o":1},{"d":"M22 30l-8 12h8zM42 30l8 12h-8z","f":"#c8553d","s":"#2a2219","w":2.2,"o":1},{"d":"M32 4c10 8 12 22 10 36H22C20 26 22 12 32 4z","f":"#fffdf7","s":"#2a2219","w":2.2,"o":1},{"d":"M32 4c4 3 7 8 8 13H24c1-5 4-10 8-13z","f":"#c8553d","s":"#2a2219","w":2.2,"o":1},{"d":"M27 25a5 5 0 1 0 10 0a5 5 0 1 0 -10 0z","f":"#3b5b9a","s":"#2a2219","w":2.2,"o":1}],"support":[{"d":"M14 33a18 18 0 1 0 36 0a18 18 0 1 0 -36 0z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M10 29a2 2 0 0 1 2-2h4v12h-4a2 2 0 0 1-2-2zM48 27h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M14 30c0-12 8-18 18-18s18 6 18 18","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M51 38c0 8-7 13-15 13","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M14 33a18 18 0 1 0 36 0a18 18 0 1 0 -36 0z","f":"#e2c48c","s":"#2a2219","w":2.2,"o":1},{"d":"M14 30c0-12 8-18 18-18s18 6 18 18","f":"none","s":"#4a8f99","w":4,"o":1},{"d":"M10 29a2 2 0 0 1 2-2h4v12h-4a2 2 0 0 1-2-2zM48 27h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z","f":"#4a8f99","s":"#2a2219","w":2.2,"o":1},{"d":"M51 38c0 8-7 13-15 13","f":"none","s":"#4a8f99","w":2.5,"o":1},{"d":"M33.4 51a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#4a8f99","s":"#2a2219","w":2.2,"o":1},{"d":"M23.6 31a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M35.6 31a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M27 38c2 3 8 3 10 0","f":"none","s":"#2a2219","w":2.2,"o":1},{"d":"M17.4 37a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#e8a9a2","s":"none","w":0,"o":0.7},{"d":"M41.4 37a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#e8a9a2","s":"none","w":0,"o":0.7}],"planner":[{"d":"M10 12h44a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M26 48h12v4H26zM19 52h26","f":"#fffdf7","s":"#fffdf7","w":6,"o":1},{"d":"M10 12h44a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z","f":"#8b6bb3","s":"#2a2219","w":2.2,"o":1},{"d":"M12 18h40v22H12z","f":"#2a2219","s":"none","w":0,"o":1},{"d":"M21.4 27a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#fffdf7","s":"none","w":0,"o":1},{"d":"M37.4 27a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0z","f":"#fffdf7","s":"none","w":0,"o":1},{"d":"M26 34c2 3 10 3 12 0","f":"none","s":"#fffdf7","w":2,"o":1},{"d":"M26 48h12v4H26z","f":"#3b5b9a","s":"#2a2219","w":2.2,"o":1},{"d":"M19 52h26","f":"none","s":"#2a2219","w":2.2,"o":1}]};
 function facePx(role) { return QFACES[String(role || '').toLowerCase()] || QFACES.implementer; }
@@ -1220,7 +1307,7 @@ const FLOWS = { s5: {
 class Component extends DCLogic {
   ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
   titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
-  state = { flow: { s5: { at: 0, res: {} } }, askDraft: {}, qdOpen: false, qdTab: 0, allow: {}, yoloBy: {}, artsOpen: false, padOpen: false, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: 's5', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
+  state = { flow: { s5: { at: 0, res: {} } }, askDraft: {}, qdOpen: false, qdTab: 0, allow: {}, yoloBy: {}, mod: null, padOpen: false, done: {}, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: 's5', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
   // Jarvis, the paper pet over the composer: it rests in a mood read off the session (asking while the agent waits on you, idle otherwise) and plays a short one when something happens: a hello when a session opens or you poke it, a cheer when a turn lands, a droop when you stop the agent or deny it
   petMood() { const shot = this.state.petShot; if (shot) return shot.name; const sid = this.state.sid; if (!sid) return 'idle'; const waiting = !!this.flowPending(sid) || this.curMsgs().some((m) => !m.done && m.tool && !m.tool.status); return waiting ? 'ask' : 'idle'; }
@@ -1252,8 +1339,8 @@ class Component extends DCLogic {
     return seed.concat(turns);
   }
   artSelOf(sid, arts) { return arts.find((a) => a.id === (this.state.artSel || {})[sid]) || arts[0] || null; }
-  openArt(id) { const sid = this.state.sid; this.setState({ artsOpen: true, artSel: { ...this.state.artSel, [sid]: id } }); }
-  chitView(a, sid, arts) { const sel = this.artSelOf(sid, arts); return { title: a.title, meta: a.meta + (a.versions.length > 1 ? ' · v' + a.versions.length : ''), icon: ART_ICON[a.kind], cls: this.state.artsOpen && sel && sel.id === a.id ? 'on' : '', open: () => this.openArt(a.id) }; }
+  openArt(id) { const sid = this.state.sid; this.setState({ mod: 'arts', artSel: { ...this.state.artSel, [sid]: id } }); }
+  chitView(a, sid, arts) { const sel = this.artSelOf(sid, arts); return { title: a.title, meta: a.meta + (a.versions.length > 1 ? ' · v' + a.versions.length : ''), icon: ART_ICON[a.kind], cls: this.state.mod === 'arts' && sel && sel.id === a.id ? 'on' : '', open: () => this.openArt(a.id) }; }
   padOf(sid) { return (this.state.pad || {})[sid] || PAD_SEED[sid] || []; }
   padSendNow(c, ctxTitle) {
     const el = this.padTa; const sid = this.state.sid;
@@ -1288,10 +1375,10 @@ class Component extends DCLogic {
     const putInChat = (text) => { const el = this.ta; if (!el) return; el.value = (el.value ? el.value + '\n' : '') + text; el.style.height = 'auto'; el.style.height = Math.min(196, el.scrollHeight) + 'px'; el.focus(); this.setState({ draft: el.value.length, tab: 'Chat' }); };
     const setW = (w) => this.setState({ sideW: w });
     return {
-      sideShown: !!sid && (st.artsOpen || st.padOpen), artsOpen: !!st.artsOpen, padOpen: !!st.padOpen,
-      sideWidth: (st.sideW || (st.artsOpen ? 460 : 360)) + 'px',
-      artsTabCls: st.artsOpen ? 'on' : '', padTabCls: st.padOpen ? 'on' : '',
-      toggleArts: () => this.setState({ artsOpen: !st.artsOpen }), togglePad: () => { this.setState({ padOpen: !st.padOpen }); this.padEnd(); },
+      sideShown: !!sid && (!!st.mod || st.padOpen), artsOpen: st.mod === 'arts', padOpen: !!st.padOpen,
+      sideWidth: (st.sideW || (st.mod ? 460 : 360)) + 'px',
+      artsTabCls: st.mod === 'arts' ? 'on' : '', padTabCls: st.padOpen ? 'on' : '',
+      toggleArts: () => this.setState({ mod: st.mod === 'arts' ? null : 'arts' }), togglePad: () => { this.setState({ padOpen: !st.padOpen }); this.padEnd(); },
       hasArts: arts.length > 0, noArts: arts.length === 0, artCount: String(arts.length),
       arts: arts.map((a) => ({ short: a.short, icon: ART_ICON[a.kind], cls: sel && sel.id === a.id ? 'on' : '', cur: sel && sel.id === a.id ? 'page' : false, pick: () => this.openArt(a.id) })),
       artv,
@@ -1310,6 +1397,27 @@ class Component extends DCLogic {
       padSend: () => this.padSendNow(c, ctxArt && ctxArt.title), padSendCls: st.padDraft ? 'ready' : '',
       gripDown: (e) => { e.preventDefault(); const side = e.currentTarget.parentElement; const leaf = side.parentElement; const x0 = e.clientX; const w0 = side.offsetWidth; const max = leaf.offsetWidth - 440; let w = w0; const mv = (ev) => { w = Math.max(320, Math.min(max, w0 + x0 - ev.clientX)); side.style.setProperty('--sidew', w + 'px'); }; const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); setW(w); }; window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up); },
       gripKey: (e) => { if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; e.preventDefault(); const side = e.currentTarget.parentElement; const max = side.parentElement.offsetWidth - 440; setW(Math.max(320, Math.min(max, side.offsetWidth + (e.key === 'ArrowLeft' ? 24 : -24)))); }
+    };
+  }
+  doneOf(s) { if (!s) return false; const d = (this.state.done || {})[s.id]; return d == null ? s.st === 'done' : d; }
+  topVals(st, c, sessionBusy) {
+    const sid = st.sid; const cur = sid ? c : null; const hz = (cur && cur.harness) || 'claude';
+    const arts = sid ? this.artsOf(sid, c) : []; const prs = (sid && PRS[sid]) || []; const tasks = (sid && TASKS[sid]) || [];
+    const counts = { prs: prs.length, arts: arts.length, files: 0, git: GIT_ROWS.length, tasks: tasks.filter((k) => k.st !== 'done').length, pad: 0 };
+    const isOn = (k) => k === 'pad' ? !!st.padOpen : st.mod === k;
+    const pick = (k) => { if (k === 'pad') { this.setState({ padOpen: !st.padOpen }); this.padEnd(); } else this.setState({ mod: st.mod === k ? null : k }); };
+    const done = this.doneOf(cur);
+    return {
+      hzClaude: hz === 'claude', hzCodex: hz === 'codex', hzPi: hz === 'pi',
+      harnessTitle: 'Runs on ' + HARNESS[hz] + ' · ' + (sessionBusy ? 'Busy' : c.attn ? 'Needs attention' : 'Idle'),
+      mods: MODS.map(([k, label]) => ({ icon: MOD_ICONS[k], label, on: isOn(k), cls: isOn(k) ? 'on' : '', hasN: counts[k] > 0, n: String(counts[k]), pick: () => pick(k) })),
+      isDone: done, doneCls: done ? 'on' : '', doneLabel: done ? 'Marked done. Click to undo' : 'Mark this session done',
+      toggleDone: () => { if (sid) this.setState({ done: { ...st.done, [sid]: !done } }); },
+      prsOpen: st.mod === 'prs', filesOpen: st.mod === 'files', gitOpen: st.mod === 'git', tasksOpen: st.mod === 'tasks', closeMod: () => this.setState({ mod: null }),
+      prs: prs.map((p) => ({ n: String(p.n), t: p.t, st: p.st, cls: p.st.toLowerCase(), hasC: p.c > 0, c: String(p.c) })), hasPrs: prs.length > 0, noPrs: prs.length === 0,
+      files: FILES.map(([name, d, dir, changed]) => ({ name, d: String(d), icon: dir ? FILE_I.dir : FILE_I.file, cls: dir ? 'dir' : '', changed: !!changed })),
+      gitRows: GIT_ROWS.map((g) => ({ ...g, a: String(g.a), d: String(g.d) })),
+      tasks: tasks.map((k) => ({ ...k, dot: k.st === 'running' ? 'sub run' : k.st === 'done' ? 'edit' : 'ask' })), hasTasks: tasks.length > 0, noTasks: tasks.length === 0
     };
   }
   yoloOf(sid) { const st = this.state; if (!sid) return st.yolo; const b = st.yoloBy[sid]; return b !== undefined ? b : FLOWS[sid] ? false : st.yolo; }
@@ -1530,12 +1638,12 @@ class Component extends DCLogic {
         const sessions = st.newSessions.filter((n) => n.wsId === w.id).map((n) => this.sess(n.id)).concat(w.sessions).filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
         return { name: w.name, color: w.color, attn: sessions.some((s) => this.liveSess(s).attn), count: sessions.length, open, cls: open ? '' : 'closed',
           toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
-          sessions: sessions.map((s0) => this.liveSess(s0)).map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: s.st === 'done', hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+          sessions: sessions.map((s0) => this.liveSess(s0)).map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: this.doneOf(s), hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
             pick: () => { this.setState({ sid: s.id, tab: 'Chat', open: null }); this.petPlay('greet', 1900); } })) };
       }),
-      ...this.sideVals(st, c, sessionBusy), hasSession: !!cur,
-      sheetCls: cur ? 'inws' : '', sheetWc: cur ? ((WS.find((w) => w.name === c.ws) || {}).color || '') : '', noSession: !cur, closeSession: () => this.setState({ sid: null, open: null, draft: 0 }),
+      ...this.sideVals(st, c, sessionBusy), ...this.topVals(st, c, sessionBusy), hasSession: !!cur,
+      sheetCls: cur ? 'inws' + (this.doneOf(cur) ? ' isdone' : '') : '', sheetWc: cur ? ((WS.find((w) => w.name === c.ws) || {}).color || '') : '', noSession: !cur, closeSession: () => this.setState({ sid: null, open: null, draft: 0 }),
       greeting, greetSub: 'What are we working on? One line is enough; the agent asks when it needs more.',
       helloPlaceholder: isMax ? 'Max effort. Give it the hard one…' : 'Describe the job, or paste a ticket…',
       helloHint: '↵ start · ⇧↵ newline',
@@ -1548,7 +1656,7 @@ class Component extends DCLogic {
       cur: { t: this.titleOf(st.sid, c.t), role: c.role, ws: c.ws, branch: c.branch, reply: GENERIC_REPLY[st.sid] || 'Caught up. The working tree is clean and the last reply is still accurate. What should I do next?' },
       stCls: c.attn ? 'needs' : sessionBusy ? 'busy' : '', stLabel: c.attn ? 'Needs you' : sessionBusy ? 'Busy' : 'Idle',
       tabs: TABS.map((t) => ({ label: t, icon: TAB_ICONS[t], cls: t === st.tab ? 'on' : '', cur: t === st.tab ? 'page' : false, pick: () => this.setState({ tab: t }) })),
-      isChat: st.tab === 'Chat', isGit: st.tab === 'Git', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Git', 'Todos'].includes(st.tab), tabName: st.tab,
+      isChat: st.tab === 'Chat', isTodos: st.tab === 'Todos', isOther: !['Chat', 'Todos'].includes(st.tab), tabName: st.tab,
       thread: (c.isNew ? [] : FLOWS[st.sid] ? this.flowThread(st.sid) : (THREADS[st.sid] || GENERIC)).map((it, i) => it.view ? it.view : it.k === 'cap' ? this.capView(it, st.sid) : { isUser: it.k === 'user', isSaid: it.k === 'said', text: it.text, ...this.foldView(it.text, 't' + st.sid + '-' + i) }),
       isIssue: st.sid === 's3', isGeneric: !c.isNew && !THREADS[st.sid] && !FLOWS[st.sid],
       msgs, todos, todoDone: todos.filter((t) => t.done).length, todoTotal: todos.length,
