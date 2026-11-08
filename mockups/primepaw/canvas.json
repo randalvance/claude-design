@@ -707,7 +707,7 @@
       "y": 2300,
       "w": 1440,
       "h": 900,
-      "title": "Session top: three variations",
+      "title": "Session top: three compact variations",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -717,7 +717,7 @@
       "y": 2300,
       "w": 1440,
       "h": 900,
-      "title": "Session top: three variations, dark mode",
+      "title": "Session top: three compact variations, dark mode",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -953,7 +953,7 @@
       "y": 2300,
       "w": 320,
       "page": "diorama",
-      "text": "Session top, three variations, asked for in a comment on the session board. The same facts each time: a pen mark for the harness that runs the session (Claude, Codex or Pi, picked at creation), the title with its sparkle and a VS Code mark drawn the same way, status, branch, workspace, YOLO, a Done mark, the pull requests with their comment counts (a click opens GitHub), and the modules at the right: Pull requests, Artifacts, Files, Git changes, Background tasks (the sub agents). Logs is gone; the main tabs are Chat, Todos, Terminal. A: tags on a line, modules at the right end of the tab strip. B: a ticket header, status and Done as rubber stamps, modules as index tabs on the sheet’s edge. C: one line and a cardboard dock of module tiles (names as tooltips) with the Done sticker. Click a Done control to toggle it."
+      "text": "Session top, three compact variations, asked for in a comment on the session board and then asked to be shorter (the first round, A to C, is canvas version 124). The same facts each time: a pen mark for the harness that runs the session (Claude, Codex or Pi, picked at creation) with the status dot on its corner (red busy, amber needs attention, green idle), the title with its sparkle and a VS Code mark drawn the same way, a Done toggle, the pull requests with their comment counts (a click opens GitHub), and the modules: Pull requests, Artifacts, Files, Git changes, Background tasks (the sub agents). The composer bar keeps the working folder and YOLO and gains the branch tag. Logs is gone; the main tabs are Chat, Todos, Terminal. D: one strip, title and tabs on one 48px line, the PR titles on a slip under the PR tab. E: two thin lines, a small DONE stamp, the PR numbers as chips in the composer. F: one line with the PR as a kraft tag, the modules and the Done sticker on a spine at the sheet’s edge. Click a Done control to toggle it."
     },
     "p22": {
       "x": 3080,
