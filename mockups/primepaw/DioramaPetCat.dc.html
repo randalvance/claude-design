@@ -57,21 +57,19 @@ button{font:inherit}
 .legend{display:flex;gap:14px;margin-top:10px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:8px;height:8px;border-radius:50%;box-shadow:var(--sticker-s)}
-/* 2. the avatar: the sticker, then where it goes: the rail tile, a thread portrait, a row portrait, a badge */
+/* 2. the avatar: the sticker, then where it goes, at the icon scale: the rail tile (24), a thread portrait (32), a row (16) */
 .faces{display:flex;align-items:flex-end;gap:26px;margin-top:10px}
 .face{display:flex;flex-direction:column;align-items:center;gap:10px}
 .face .hand{text-align:center;white-space:nowrap}
-.big{width:88px;height:88px}
+.big{width:64px;height:64px}
 .rbt .jface{width:44px;height:44px;padding:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.18);border-radius:10px;box-shadow:2px 3px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),4px 6px 7px var(--amb);color:var(--white);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
-.rbt.jarvis .jface{padding:5px;shape-rendering:crispEdges;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
+.rbt.jarvis .jface{padding:9px;shape-rendering:crispEdges;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
 .rbt{position:relative;display:block}
 .rbt.jarvis{--c:var(--sheet)}
 .rbt.jarvis .jface{background-image:url(pet/cat-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.qph{position:relative;flex:none;display:grid;place-items:center;width:42px;height:42px;box-sizing:border-box;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-1);transform:rotate(-3deg)}.qph::before{content:"";position:absolute;left:50%;top:-6px;width:26px;height:10px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}.qph .jface{width:32px;height:32px;display:block;shape-rendering:crispEdges}
+.qph{position:relative;flex:none;display:grid;place-items:center;width:36px;height:36px;box-sizing:border-box;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-1);transform:rotate(-3deg)}.qph::before{content:"";position:absolute;left:50%;top:-5px;width:22px;height:8px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}.qph .jface{width:32px;height:32px;display:block;shape-rendering:crispEdges}
 .rowp{width:24px;height:24px;border-radius:4px;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-1);display:grid;place-items:center}
-.rowp .jface{width:20px;height:20px}
-.badge{position:relative;width:19px;height:19px;border-radius:50%;background:var(--attn);box-shadow:var(--sticker);background-image:var(--gloss);display:grid;place-items:center;transform:rotate(8deg);font:800 11px/1 var(--font-sans);color:var(--on-attn)}
-.badge .jface{position:absolute;left:-14px;top:-2px;width:22px;height:22px}
+.rowp .jface{width:16px;height:16px}
 /* 3. the standee: a sprite sheet. pet/cat-walk.png is the factory's pet sheet, 6 columns by 4 facings, and pet/standee.js (loaded from the helmet) shows one cell of it and steps through the columns */
 .standee{position:relative;display:block;filter:drop-shadow(0 0 .5px rgba(0,0,0,.35))}
 .wide{grid-column:1 / -1}
@@ -145,9 +143,8 @@ button{font:inherit}
       <div class="face"><span class="rbt jarvis"><span class="jface" role="img" aria-label="Jarvis"></span></span><span class="hand">rail tile</span></div>
       <div class="face"><span class="qph"><span class="jface" aria-hidden="true"></span></span><span class="hand">thread portrait</span></div>
       <div class="face"><span class="rowp"><span class="jface" aria-hidden="true"></span></span><span class="hand">row</span></div>
-      <div class="face"><span class="badge"><span class="jface" aria-hidden="true"></span>2</span><span class="hand">badge</span></div>
     </div>
-    <p class="note">The same face at 88, 44, 42, 24 and 22px. It stays a sticker: a white cut, no shadow, stuck flat on the tile or the paper.</p>
+    <p class="note">The same face at 64, 32, 24 and 16px, the icon sizes the boards use: the sticker itself, a thread portrait, the glyph of a 44px rail tile like every other tile’s, and a row. It stays a sticker: a white cut, no shadow, stuck flat on the tile or the paper.</p>
   </section>
   <section class="sheet wide" aria-labelledby="h-walk">
     <h2 id="h-walk">3. The standee, a sprite sheet</h2>

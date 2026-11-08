@@ -12,7 +12,7 @@ all read those cuts by name, so a new character is a new set of files under `pet
 | Cut | Files | Where it shows |
 | --- | --- | --- |
 | The peeking sprite | `pet/<id>.png`, an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; `pet/<id>.json` with the frame size | Over the composer on every board that has one, as `.pet`, stepped like paper stop-motion |
-| The face sticker | `pet/<id>-face.png`, the head as one round sticker, 176 px square | The Jarvis tile on the rail, the thread portraits, the picker, as `.jface` |
+| The face sticker | `pet/<id>-face.png`, the head as one round sticker, 128 px square (64 CSS px at 2x; the boards show it at 64, 32, 24 and 16) | The Jarvis tile on the rail, the thread portraits, the picker, as `.jface` |
 | The standee | `pet/<id>-walk.png`, the Factory Overseer's pet sheet: 6 columns (standing, the two stomps of a walk, two beats of work, a wave) by 4 facings, every cell one drawing of the whole figure; `pet/<id>-walk.json`, what each holds; `pet/standee.js` plays it one cell at a time | The factory floor, and the Pet board's mock of it, as `.standee` |
 | The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the walk sheets copy) and four `walk-*.png` (each facing's six poses of the standee), all on chroma-key green, plus `base.png`, the drawing the edits started from and the peeking pose the mood sheets copy | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept; `peek.png`, one cell of its first idle sheet, stands in for it) |
 

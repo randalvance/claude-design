@@ -240,7 +240,7 @@ def main():
     ap.add_argument('--rows', type=int, default=0)
     ap.add_argument('--frames', type=int, default=8, help='frames per row in the peeking atlas; a sheet with more or fewer is resampled to it')
     ap.add_argument('--width', type=int, default=92, help='how wide the idle peeking puppy is on screen, in CSS px')
-    ap.add_argument('--face', type=int, default=88, help='the avatar\'s side, in CSS px')
+    ap.add_argument('--face', type=int, default=64, help='the avatar\'s side, in CSS px (64: the icon scale\'s largest step, 128 px at 2x)')
     ap.add_argument('--walk-cols', type=int, default=0, help='force the number of cells on a walk sheet')
     ap.add_argument('--pad', type=int, default=4, help='clear pixels around every frame, at atlas scale')
     args = ap.parse_args()
