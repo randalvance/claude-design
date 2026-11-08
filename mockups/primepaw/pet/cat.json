@@ -1,0 +1,24 @@
+{
+  "moods": [
+    "idle",
+    "greet",
+    "celebrate",
+    "sad",
+    "error",
+    "ask"
+  ],
+  "frames": 8,
+  "dpr": 2,
+  "frame": {
+    "w": 208,
+    "h": 228
+  },
+  "css": {
+    "w": 104.0,
+    "h": 114.0
+  },
+  "atlas": {
+    "w": 1664,
+    "h": 1368
+  }
+}

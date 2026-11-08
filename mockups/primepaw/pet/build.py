@@ -368,14 +368,22 @@ def build_rig(src, args):
             sys.exit(f'parts-{facing}.png holds {len(cut)} pieces, not the {len(spec)} the rig expects ({", ".join(r for r, *_ in spec)}); redraw it')
         fig = figs[facing]
         fitter = Fitter(fig)
-        # the body sets the sheet's scale against the turnaround; every piece is then fitted at that scale
-        body = cut[[r for r, *_ in spec].index('body')]
-        bwin = [w for r, w, *_ in spec if r == 'body'][0]
-        s0, _, _, bsc = fitter.scale(body, bwin, (.5, .55, .6, .65, .7, .75, .8, .9, 1.0, 1.15, 1.3))
-        print(f'  scale x{s0:.2f} (the body correlates {bsc:.0%})')
+        # the body sets the sheet's scale against the turnaround and every piece is fitted at that scale,
+        # unless the head correlates better: a plain body (the cat's back, all one kraft) matches the figure
+        # at any size and the search drifts small, where a head's eyes and stripes pin the size down. A head
+        # with a clear match of its own keeps its scale for itself and its ears, since a model draws the head
+        # and the body of one sheet at sizes a little apart and the ears root in the head
+        roles = [r for r, *_ in spec]
+        scales = (.5, .55, .6, .65, .7, .75, .8, .9, 1.0, 1.15, 1.3)
+        sb, _, _, bsc = fitter.scale(cut[roles.index('body')], spec[roles.index('body')][1], scales)
+        sh, _, _, hsc = fitter.scale(cut[roles.index('head')], spec[roles.index('head')][1], scales)
+        s0 = sb if bsc >= hsc else sh
+        s_head = sh if hsc >= .6 else s0
+        print(f'  scale x{s0:.2f} (the body correlates {bsc:.0%} at x{sb:.2f}, the head {hsc:.0%} at x{sh:.2f})'
+              + (f'; the head and the ears at x{s_head:.2f}' if s_head != s0 else ''))
         placed, anchors = {}, {}
         for (role, window, rule, z), piece in zip(spec, cut):
-            piece = _resize(piece, s0)
+            piece = _resize(piece, s_head if role.startswith(('head', 'ear')) else s0)
             x, y, sc = fitter.fit(piece, window)
             note = ''
             if role == 'tail':  # the model draws a tail either way round; keep the way that fits

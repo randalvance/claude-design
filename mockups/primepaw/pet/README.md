@@ -16,7 +16,8 @@ template, for the base they all descend from, the avatar and the body) and slice
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
-building it and wiring it into the picker and the boards.
+building it and wiring it into the picker and the boards. The cat (`cat`) is the second one, drawn with
+that skill from the puppy's prompts with their slots refilled; "The characters" below has its values.
 
 See `DioramaPet.dc.html` for the three side by side, with every mood and the standee walking a round.
 
@@ -63,7 +64,10 @@ sides, as one parts sheet per facing (`src/dog/parts-*.png`): the figure taken a
 laid out in a grid in reading order, every piece complete including what hides under another when the
 puppet is together. `build.py` cuts the pieces off the sheet by the bands of paper, then fits each one
 back into the turnaround's figure to find where it sits: the body first, over a range of scales, by a
-normalised cross-correlation of its colours, which sets the sheet's scale against the turnaround; then
+normalised cross-correlation of its colours, which sets the sheet's scale against the turnaround (the
+head sets it instead when it correlates better, as it does for a plain body like the cat's back, which
+matches the figure at any size; and a head with a clear match of its own keeps that scale for itself
+and its ears, since the model draws a sheet's head and body at sizes a little apart); then
 every piece at that scale by how well its pen-ink outline lies on the figure's outlines (both blurred,
 so the fit sees it from a few pixels off) plus a little colour agreement, a score that forgives the
 hidden part of a piece and does not let a cream leg settle inside the cream body, which a plain colour
@@ -95,6 +99,37 @@ asked for (it draws 4 by 2, 4 by 3 or 3 by 3 as it likes), tightens each frame t
 every frame of a cut alike (the puppet's four facings each to the same standing height, so it keeps its
 height as it turns), lays them out with the flat cut edge, or the feet, on one line, and fits the puppet's
 pieces back into the turnaround's figures (above). Needs Pillow and numpy.
+
+## The characters
+
+| Id | Picker | Peeking frame | Where | Drawn |
+| --- | --- | --- | --- | --- |
+| `dog` | A paper puppy | 101x104 CSS px | worn by every board; `DioramaPet.dc.html` | by hand; the prompts below |
+| `cat` | A paper cat | 104x114 CSS px | the picker only, not worn; `DioramaPetCat.dc.html` | by the `primepaw-character` skill; the puppy's prompts with the slots below |
+
+The cat's slot values, as the skill's templates in `references/prompts.md` took them:
+
+| Slot | Value |
+| --- | --- |
+| `CREATURE` | a friendly round-faced tabby cat with pointed ears |
+| `FEATURES` | a kraft brown paper face (#d9bc86) with a sheet-white paper muzzle (#fbf7ee), two pointed kraft brown paper ears with pink paper inner ears (#e8a9a2), three short dark kraft paper stripes (#b3905a) on its forehead, a blue paper collar (#3b5b9a) with a small round gold tag (#e3b53a), two round pink paper cheeks (#e8a9a2), a small pink triangle paper nose, two small dot eyes and a little w-shaped cat mouth drawn with a dark pen (#2a2219) |
+| `RECAP` | the same kraft brown paper face with its white muzzle, pointed ears with pink insides, three dark stripes on its forehead, blue collar with its gold tag, pink cheeks, pen-ink features, the white die-cut sticker border |
+| `HEAD` | the cat's head with its pointed ears and the top of its blue collar |
+| `BODY` | a short round kraft brown paper body with a sheet-white paper chest patch, its two front paws hanging relaxed at its sides, two short legs with little round feet planted on the ground, a long kraft brown tail with three dark stripe rings curling up at one side, the same blue collar around its neck and the same friendly face |
+| `SIDE` | one eye, one pointed ear, the white muzzle and the white chest showing as a sliver at its front, its nose pointing left and its long striped tail curling up behind it at the right |
+| `BACK` | the back of its head with no face, the backs of both pointed ears standing up at the top, the back of the blue collar, a plain kraft brown back with no white patch at all, its long striped tail starting at the centre of its rump, in the middle of the bottom of its back where the two legs meet the body, and curling up to the left of the picture across its back with its tip near its left shoulder, the whole tail visible, never pointing straight up and never hanging down between its legs, its two paws at its sides and the backs of its feet |
+| `PAWS`, `PAW` | paws, paw |
+| `EARS`, `EAR` | ears, ear |
+
+Where the cat's drawing went differently from the puppy's: its base came from a plain Qwen Image 2.1
+text-to-image graph (the prompt wired straight into the encoder, 1024 square, seed 20261109), since the
+template now rewrites the prompt and returned grey noise; the wall line it drew across the whole picture
+was painted green outside the figure, or the slicer would have joined the mood cells. The turnaround's
+first seed was taken. The parts sheets were drawn with two seeds each: the right side ships the second
+(the first drew its body narrow under the head), the other three the first; both seeds drew the back's
+tail mirrored against the turnaround, which the fitter's mirrored try takes. The back sheet's plain
+body correlates with the figure at any size (47% at x0.50), so the head sets that sheet's scale (56% at
+x0.75), the rule described under the standee.
 
 ## The prompts
 
