@@ -16,7 +16,7 @@ all read those cuts by name, so a new character is a new set of files under `pet
 | The standee | `pet/<id>-walk.png`, the Factory Overseer's pet sheet: 6 columns (standing, the two stomps of a walk, two beats of work, a wave) by 4 facings, every cell one drawing of the whole figure; `pet/<id>-walk.json`, what each holds; `pet/standee.js` plays it one cell at a time | The factory floor, and the Pet board's mock of it, as `.standee` |
 | The sources | `pet/src/<id>/`: the six mood sheets, `avatar.png`, `body.png`, `turnaround.png` (the character from its four sides, which the walk sheets copy) and four `walk-*.png` (each facing's six poses of the standee), all on chroma-key green, plus `base.png`, the drawing the edits started from and the peeking pose the mood sheets copy | Inputs to `build.py`; kept so any cut can be re-sliced or redrawn from the same base (the puppy's base was not kept; `peek.png`, one cell of its first idle sheet, stands in for it) |
 
-Read `pet/README.md` once: it is the puppy's own account of the same system, and `DioramaPet.dc.html`
+Read `pet/README.md` once: it is the puppy's own account of the same system, and `DioramaPets.dc.html`
 shows the three cuts side by side with every mood and the standee walking.
 
 ## The style that does not change
