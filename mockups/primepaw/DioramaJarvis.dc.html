@@ -476,18 +476,12 @@ button{font:inherit}
 @media (max-width:1180px){.side{width:min(460px,100%);margin-left:calc(-1 * min(460px,100%));height:calc(100vh - 186px);min-height:420px;padding-left:14px;z-index:6}.side-grip{display:none}}
 @media (prefers-reduced-motion:reduce){.side,.chit{animation:none}}
 
-/* Session top: one strip. The harness mark with its status dot, the title and its two pen marks at the left; the view tabs as icons (the open one named), the module tabs with their counts, the Done box and close at the right. The meta row is gone: the branch tag rides in the composer bar, the status is the dot and the send button */
+/* Session top: one strip. The harness mark with its status dot, the title and its two pen marks at the left; one row of icon tabs with their counts (todos, terminal and the modules, each a sheet in the side panel), the Done box and close at the right. The meta row is gone: the branch tag rides in the composer bar, the status is the dot and the send button */
 .top.strip{align-items:center;gap:10px;height:50px;padding:0 12px 0 22px;box-sizing:border-box;flex-wrap:nowrap;position:relative;z-index:3}
 .top.strip .ttl{flex:1 1 auto;min-width:0;gap:10px}
 .top.strip .ttl > *{flex:none}
 .top.strip .ttl h1{flex:0 1 auto;min-width:60px;max-width:none;font-size:22px}
 .top.strip .ttli{font-size:22px;width:min(420px,34vw)}
-.top.strip .tabs{margin:0;padding:0;align-self:flex-end;flex:none;overflow:visible}
-.top.strip .tab{display:inline-flex;align-items:center;gap:6px;padding:6px 10px 7px;font-size:12.5px}
-.top.strip .tab svg{width:15px;height:15px}
-.top.strip .tab .tl{display:none}
-.top.strip .tab.on{padding:4px 12px 7px 10px}
-.top.strip .tab.on .tl{display:inline}
 .top.strip .top-r{margin-left:0;padding:0;gap:2px;flex:none}
 .harness{position:relative;display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background-color:var(--card);background-image:var(--face),var(--pulp);box-shadow:1px 1px 0 var(--edge),2px 3px 3px var(--amb);color:var(--ink);transform:rotate(-3deg)}
 .harness svg{width:22px;height:22px;overflow:visible}
@@ -497,7 +491,6 @@ button{font:inherit}
 .harness .drawn,.vdone .drawn{mix-blend-mode:multiply;transform:rotate(-4deg)}
 .harness .drawn .again,.vdone .drawn .again{stroke-width:1;opacity:.55}
 .page.night .harness .drawn,.page.night .vdone .drawn{mix-blend-mode:screen}
-.vsep{width:1px;height:26px;background:var(--line);margin:0 2px;flex:none}
 .mods{display:flex;align-items:center;gap:4px;flex:none}
 .mtab{all:unset;cursor:pointer;position:relative;width:32px;height:30px;display:grid;place-items:center;border-radius:7px;color:var(--ink);transition:background .12s var(--ease),transform .15s var(--ease)}
 .mtab svg{width:17px;height:17px}
@@ -553,6 +546,17 @@ button{font:inherit}
 .trow b{font-weight:800;font-size:13px}
 .trow em{font-style:normal;font-size:11.5px;color:var(--mute)}
 .trow .tdur{font-family:var(--hand);font-size:15px;color:var(--mute);white-space:nowrap}
+.modsec-b .todo{padding:8px 0;font-size:13.5px}
+.modsec-b .todo:first-of-type{border-top:0}
+/* the terminal: a dark printout taped to the sheet, the last line the prompt */
+.termc{position:relative;margin:4px 2px 2px;padding:12px 14px 10px;background:#1f1b16;color:#e8dfcf;font-family:var(--mono);font-size:12px;line-height:20px;border-radius:3px;box-shadow:var(--lift-2);white-space:pre-wrap;overflow-wrap:anywhere}
+.termc .tape{top:-11px;width:64px;height:20px}
+.termc .ln{display:block;min-height:20px}
+.termc .ok{color:#9ccf8f}
+.termc .dim{color:#9c927f}
+.termc .cmd{color:#f0c24a}
+.termc .cur{display:inline-block;width:7px;height:14px;vertical-align:-2px;background:#e8dfcf;margin-left:2px}
+.page.night .termc{background:#120f0b;box-shadow:var(--lift-2)}
 
 /* The agent needs you: a sheet on an amber mat, the capsule's sibling. It holds still, nothing pulses; the amber and the sticker are the signal. Once settled it folds to a stub with the stamp on it. */
 .slipw{position:relative;max-width:760px;margin:4px 0 4px 14px;animation:drop .28s var(--ease) both}
