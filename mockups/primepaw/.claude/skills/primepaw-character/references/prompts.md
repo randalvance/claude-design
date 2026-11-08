@@ -23,7 +23,8 @@ keeps the character it is shown.
 | `{EARS}` | the part that bounces, droops or perks (ears, antennae, feathers, a hat) | ears |
 
 The cat, the second character, has its values in `pet/README.md` beside the puppy's, a second worked
-example of the same slots.
+example of the same slots. For the options step, write `{CREATURE}` and `{FEATURES}` five ways, one per
+take on the brief; the other slots are written for the take the user picks.
 
 Colours come from the Kraft tokens so the character sits on the boards like every other sticker. The
 light-theme values: paper cream `#f3e9d5`, sheet white `#fbf7ee`, kraft `#d9bc86`, kraft dark `#b3905a`,

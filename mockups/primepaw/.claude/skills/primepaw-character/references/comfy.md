@@ -7,16 +7,17 @@ lets it drift. Everything after the base is an *edit*: the model sees an earlier
 image and keeps the character's identity, which is what makes thirteen separate sheets look like one
 creature. Use the `comfy-cloud` plugin's tools; the names below are its tool names.
 
-## 1. The base: one text-to-image run
+## 1. The base: five options in one batch
 
-Run the graph in `../assets/qwen21-t2i.workflow.json` once with the base prompt from `prompts.md`, as a
-`submit_workflow` (or two items of one `submit_batch`, for a second seed to choose from):
+Run the graph in `../assets/qwen21-t2i.workflow.json` five times as one `submit_batch`, each item the
+base prompt from `prompts.md` with a different take on the brief in its `{CREATURE}` and `{FEATURES}`
+and its own seed (the robot dog's options took 20261116 to 20261120), `description` naming the option:
 
 | Placeholder | Value |
 | --- | --- |
 | `__PROMPT__` | the base prompt, slots filled |
 | `__SEED__` | any integer, the quoted placeholder replaced whole; the puppy's base used 20261107, the cat's 20261109 |
-| `__PREFIX__` | `<id>_base` |
+| `__PREFIX__` | `<id>_option_<letter>`, and `<id>_base` for a redraw of the pick |
 
 It is Qwen Image 2.1 text to image at 1024 by 1024, 25 steps, cfg 1, euler simple, the prompt wired
 straight into the encoder. The text-to-image template (`image_qwen_image_2_1_t2i`) drew the puppy's
@@ -24,7 +25,9 @@ base, but it has since taken to rewriting the prompt on its way in and answered 
 noise, so the raw graph is the path now. It runs on Comfy Cloud's own credits, for about what the
 template costs (`estimate_credits` with `template_name: image_qwen_image_2_1_t2i`).
 
-Then `get_output` with `client_os` to look at it. Judge the base hard; every other sheet inherits it:
+Then `get_batch_output` with `client_os` to download the five, `scripts/options.py` to lay them side by
+side keyed off the green, and the user picks (SKILL.md, step 2). Judge the pick hard; every other sheet
+inherits it:
 
 - The peeking creature reads at 92 CSS px wide over the composer, and its face at 24 px as the rail
   tile's glyph and 16 px on a row (the face sits on the icon scale: 64, 32, 24, 16). Big simple shapes,

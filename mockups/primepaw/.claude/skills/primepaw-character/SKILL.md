@@ -1,6 +1,6 @@
 ---
 name: primepaw-character
-description: Make a new Primepaw character for Jarvis, the main agent, in the paper cut-out style of the puppy, in its three cuts (the sprite that peeks over the composer with a row per mood, the round face sticker for the rail tile and the thread portraits, and the standee that walks the Factory Overseer's floor), drawn on Comfy Cloud, sliced by pet/build.py, shown on its own Pet board and wired into the portrait picker and the boards. Use it whenever the user asks for a new pet, mascot, character, avatar, portrait or look for Jarvis or for the Primepaw prototype (a cat, an owl, a fox, a robot, a bear…), wants a mood, a cut or a sheet of an existing character redrawn, wants to rebuild the sprites from the sources, or wants the boards to wear another character, even when they do not say "character" or "sprite".
+description: Make a new Primepaw character for Jarvis, the main agent, in the paper cut-out style of the puppy, in its three cuts (the sprite that peeks over the composer with a row per mood, the round face sticker for the rail tile and the thread portraits, and the standee that walks the Factory Overseer's floor), drawn on Comfy Cloud (five options of the base first, laid side by side for the user to pick from), sliced by pet/build.py, shown on its own Pet board and wired into the portrait picker and the boards. Use it whenever the user asks for a new pet, mascot, character, avatar, portrait or look for Jarvis or for the Primepaw prototype (a cat, an owl, a fox, a robot, a bear…), wants a mood, a cut or a sheet of an existing character redrawn, wants to rebuild the sprites from the sources, or wants the boards to wear another character, even when they do not say "character" or "sprite".
 ---
 
 # A Primepaw character
@@ -45,10 +45,29 @@ is there), the words for its limbs and its ears. Writing the slots first keeps t
 sheets describing the same creature; drifting prompts are the usual reason a character falls apart.
 Show the user the slots before spending credits if the request left any of them open.
 
-### 2. Draw it on Comfy Cloud
+### 2. Draw five options and let the user choose
 
-Follow `references/comfy.md`. In short: the base from the Qwen text-to-image graph in
-`assets/qwen21-t2i.workflow.json` (the template rewrites prompts now), judged hard; then the
+Before anything is edited, draw the base five ways. Write five takes on the brief that differ in the
+pieces the creature is made of (the shape of the head, the ears, how the face is drawn, the accent),
+each with its own `{CREATURE}` and `{FEATURES}` and its own seed, and send them as five items of one
+`submit_batch` of the text-to-image graph (`references/comfy.md`, step 1); Qwen runs on Comfy Cloud's
+own credits, so the five cost little. Lay the downloads out with
+
+```bash
+python3 mockups/primepaw/.claude/skills/primepaw-character/scripts/options.py <sheet.png> A=<a.png> B=<b.png> C=<c.png> D=<d.png> E=<e.png>
+```
+
+which keys the green out and puts the five on the desk colour, big and at the size they will have over
+the composer, under their letters. Send the sheet to the user with a line on each option and wait for
+the pick; a pick with a change ("B with C's ears") is one more run of the graph with the slots merged.
+The chosen drawing is the base, saved as `pet/src/<id>/base.png`, and its slot values are the brief
+for everything after. Keep the other four in the scratchpad until the character is done, in case the
+user comes back to one.
+
+### 3. Draw the rest on Comfy Cloud
+
+Follow `references/comfy.md`. In short: the chosen option is the base, judged hard against the list in
+`comfy.md` and redrawn with a tightened prompt if it fails (a wall line across the picture, a shadow); then the
 avatar and the body as edits of the base, one batch of the graph in `assets/qwen21-edit.workflow.json`;
 then a turnaround of the body (front, left side, back, right side in one row) with GPT Image 2.6, judged
 against the slots before anything is drawn from it, because a model invents whatever the body does not
@@ -65,7 +84,7 @@ download on the green the slicer keys out),
 and look at each one before building: the judging list in `comfy.md` says what sends a sheet back for
 a new seed.
 
-### 3. Build the cuts
+### 4. Build the cuts
 
 ```bash
 python3 mockups/primepaw/pet/build.py --name <id>
@@ -81,9 +100,9 @@ and will stutter, or land its poses in the wrong columns; redraw it with a new s
 it (`--walk-cols 6` forces six equal cells on a walk sheet whose bands cannot be told apart). Needs
 Pillow and numpy on the host Python. The printout ends each cut
 with its frame size (`--pw` and `--ph`); that size lives in every board's pet block, so when a rebuild
-changes it for a character the boards already wear, run `use` again (step 5).
+changes it for a character the boards already wear, run `use` again (step 6).
 
-### 4. Look at it
+### 5. Look at it
 
 Give the character its own Pet board pair and open it in the browser (`preview_start`, then
 `DioramaPet<Id>.dc.html`; add a query string on a reload, since the preview caches a board it has seen):
@@ -98,7 +117,7 @@ the new creature. Check each mood plays and returns to rest, the face reads at e
 scale in the sticker section (64, 32, 24 on the rail tile mock, 16 on a row), the standee stands in all
 four facings and stomps round the floor mock without a tab under it, every pose one figure.
 
-### 5. Wire it in
+### 6. Wire it in
 
 ```bash
 python3 mockups/primepaw/.claude/skills/primepaw-character/scripts/character.py register <id> "<Name>"   # the portrait picker lists it
@@ -120,7 +139,7 @@ system's README under "The pet" if it changes what Jarvis is. A host shows the s
 and `pose(doing, t)` each frame, as the Pet board does; the Factory Overseer takes the sheet itself as
 `{ src, layout: "sheet", height }`, the numbers in the JSON.
 
-### 6. Done when
+### 7. Done when
 
 - `pet/<id>.png`, `.json`, `-face.png`, `-walk.png`, `-walk.json` exist and `pet/src/<id>/` holds the
   thirteen sources (the turnaround and the four walk sheets among them) and the base, so the character
@@ -139,6 +158,7 @@ and `pose(doing, t)` each frame, as the Pet board does; the Factory Overseer tak
 - `assets/qwen21-edit.workflow.json`: the Qwen edit graph with placeholders, for the avatar and the body.
 - `assets/gpt26-edit.workflow.json`: the GPT Image 2.6 graph with placeholders, two references in, for
   the turnaround, the mood sheets and the walk sheets.
+- `scripts/options.py`: lays the five options of a base side by side on the desk colour, for the pick.
 - `scripts/green.py`: lays a GPT Image download on the chroma-key green before it is saved as a source.
 - `scripts/character.py`: `list`, `register`, `use`, `board`.
 - `../../../pet/build.py`: the slicer; `--name <id>` reads `src/<id>/` and writes the five output files.
