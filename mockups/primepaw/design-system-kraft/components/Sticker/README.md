@@ -1,6 +1,6 @@
 # Sticker
 
-A mark stuck onto cardboard or paper: the paw, number badges, status pills, the Done chip, workspace dots, the puppy over the composer. A sticker is one solid identity colour with `gloss` across its top, a `sticker-cut` die-cut border and no shadow, ever.
+A mark stuck onto cardboard or paper: the paw, number badges, status pills, the Done chip, workspace dots, the cat. A sticker is one solid identity colour with `gloss` across its top, a `sticker-cut` die-cut border and no shadow, ever.
 
 - `kr-sticker` is the base: `kraft-2`, `radius-10`, a `sticker` cut, `white` glyph. Size it with width and height. `is-round` and `is-pill` change the cut; `is-s` uses the thinner `sticker-s` cut; `is-on` adds the gold `sticker-on` ring and `tilt-sticker-on`. Colour with `kr-blue`, `kr-blue-2`, `kr-red`, `kr-red-2`, `kr-green`, `kr-amber`, `kr-max`, `kr-teal`, `kr-violet`, `kr-attn`.
 - `kr-mark` is the paw: the mark in `red` with the cut drawn as a `sticker-cut` outline, tilted `tilt-logo`, 54px in the rail.

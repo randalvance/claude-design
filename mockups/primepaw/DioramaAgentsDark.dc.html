@@ -103,13 +103,13 @@ button{font:inherit}
 .pp-logo svg{width:42px;height:42px}
 .pp-rb{all:unset;cursor:pointer;position:relative;width:54px;padding:2px 0;display:flex;flex-direction:column;align-items:center;color:var(--ink);transition:transform .15s var(--ease)}
 .pp-rb:hover,.pp-rb.is-on{background:none;background-color:transparent;box-shadow:none;transform:none;color:var(--ink)}
-.pp-rb>span:not(.pp-nb):not(.jface){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.pp-rb svg,.pp-rb .jface{width:44px;height:44px;padding:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.18);border-radius:10px;box-shadow:2px 3px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),4px 6px 7px var(--amb);color:var(--white);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
-.pp-rb:hover svg,.pp-rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
-.pp-rb:active svg,.pp-rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
-.pp-rb.is-on svg,.pp-rb.is-on .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
+.pp-rb>span:not(.pp-nb){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.pp-rb svg{width:44px;height:44px;padding:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk));background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.18);border-radius:10px;box-shadow:2px 3px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),4px 6px 7px var(--amb);color:var(--white);transition:transform .15s var(--ease),box-shadow .15s var(--ease),background-color .15s var(--ease)}
+.pp-rb:hover svg{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
+.pp-rb:active svg{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
+.pp-rb.is-on svg{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
 .rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}.rb-factory{--c:var(--green)}
-.pp-rb:focus-visible{outline:0}.pp-rb:focus-visible svg,.pp-rb:focus-visible .jface{outline:2px solid var(--blue);outline-offset:3px}
+.pp-rb:focus-visible{outline:0}.pp-rb:focus-visible svg{outline:2px solid var(--blue);outline-offset:3px}
 .pp-rb .pp-nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .pp-nb{background-color:var(--st-red);color:var(--white)}
 .pp-nb{background-image:var(--gloss);box-shadow:var(--sticker-s);background-color:var(--st-red)}
@@ -241,25 +241,6 @@ button{font:inherit}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-/* pet: Jarvis is a paper robot dog, the third character; the puppy and the cat stay in the picker. One sprite atlas (pet/robot.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/robot-face.png). */
-.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/robot.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
-.pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
-.pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
-.pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
-.pet.error{background-position-y:calc(var(--ph) * -4);animation:pet-error .9s steps(8,jump-none) infinite}
-.pet.ask{background-position-y:calc(var(--ph) * -5);animation:pet-ask 1.2s steps(8,jump-none) infinite}
-.pet:active{transform:rotate(-4deg) scale(.96)}
-.hello .pet{--pw:99.9px;--ph:121.5px;right:12px}
-@keyframes pet-idle{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-@keyframes pet-greet{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-@keyframes pet-celebrate{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-@keyframes pet-sad{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-@keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-@keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-.jface{display:block;background-image:url(pet/robot-face.png);background-size:contain;background-repeat:no-repeat;background-position:center}
-.rb-jarvis .jface{background-image:url(pet/robot-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-@media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
-/* /pet */
 </style>
 </helmet>
 <div class="page {{themeCls}}">
