@@ -225,12 +225,33 @@
           "name": "jarvis-face.svg",
           "size": 1743,
           "type": "image/svg+xml"
+        },
+        "robot-face.png": {
+          "blob": "02ee446888ce83442bb26385981977d0",
+          "name": "robot-face.png",
+          "size": 19851,
+          "type": "image/png"
+        },
+        "dog-face.png": {
+          "blob": "236ea8a65dbed6e9ceb5ccd6680edbd5",
+          "name": "dog-face.png",
+          "size": 17106,
+          "type": "image/png"
+        },
+        "cat-face.png": {
+          "blob": "8f67e4277b5903b2e12d5708794ad94c",
+          "name": "cat-face.png",
+          "size": 23728,
+          "type": "image/png"
         }
       },
       "name": "Characters",
       "order": [
         "jarvis.svg",
-        "jarvis-face.svg"
+        "jarvis-face.svg",
+        "robot-face.png",
+        "dog-face.png",
+        "cat-face.png"
       ],
       "tile": "s"
     }
@@ -252,9 +273,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-08T05:15:12Z",
+    "at": "2026-11-08T06:03:53Z",
     "via": "Claude Code",
-    "note": "Jarvis is the pet: every board wears the paper robot dog, its face on the kr-jarvis tile and the thread portraits, with the puppy and the cat in the picker; Button, the cut-out cat, stays in the Jarvis component as the try before it"
+    "note": "The pet’s three faces are Characters assets, the pictures on the MeetAgent strip and the Jarvis tile; Button, the cut-out cat, stays in the Jarvis component as the try before the pet"
   },
   "layout": "files",
   "libraries": [],

@@ -10,7 +10,7 @@ A round cream head with a kraft patch over his right ear and down that side, two
 
 - **Over the composer.** `kr-jarvis-peek`: 92px wide, 28px in from the right, leaning 4 degrees about his paws, which rest on the composer's frame. Below 860px he goes. The pet peeks from the same corner at the same tilt, `tilt-cat`.
 - **Over the greeting.** The empty home's hello sheet had him at 84px, 12px in from the right.
-- **The portrait.** His face as a flat sticker (`assets/Characters/jarvis-face.svg`, a 64 by 64 box): the same drawing in the same paper colours, the kraft patch, bead eyes, the red nose and the red bow, with a white die-cut rim and no shadow. It is never pixel art. It sat on the cream `kr-ib kr-jarvis` tile that tops every rail, at 32px, and first in the Meet your Main Agent strip; the tile and the strip show the pet's faces now, and the other agents' portraits (`Agents`) keep this drawn style.
+- **The portrait.** His face as a flat sticker (`assets/Characters/jarvis-face.svg`, a 64 by 64 box): the same drawing in the same paper colours, the kraft patch, bead eyes, the red nose and the red bow, with a white die-cut rim and no shadow. It is never pixel art. It sat on the cream `kr-ib kr-jarvis` tile that tops every rail, at 32px, and first in the Meet your Main Agent strip; the tile and the strip show the pet's faces now, Characters assets beside his (`robot-face.png`, `dog-face.png`, `cat-face.png`, shown by `kr-pface`), and the other agents' portraits (`Agents`) keep this drawn style.
 
 ## What he does not do
 

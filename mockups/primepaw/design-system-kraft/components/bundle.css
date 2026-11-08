@@ -564,6 +564,15 @@
 .kr-chk svg{width:12px;height:12px}
 .kr-chk.is-bad{color:color-mix(in srgb,var(--red) 85%,var(--ink))}
 .kr-fcard>.kr-stamp{position:absolute;right:18px;bottom:14px;padding:5px 10px;font-size:12px;transform:rotate(var(--tilt-stamp))}
+/* ---------- jarvis: Button, the cut-out cat that was the main agent before the pet; the cut-out that peeked over the composer, and his portrait sticker ---------- */
+/* the cut: the paper's cut edge around the drawing, a light rim by day and a white one at night */
+.kr-jarvis-cut{display:inline-block;--cut:#d9cfb8;filter:drop-shadow(1px 0 0 var(--cut)) drop-shadow(-1px 0 0 var(--cut)) drop-shadow(0 1px 0 var(--cut)) drop-shadow(0 -1px 0 var(--cut)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
+[data-theme="night"] .kr-jarvis-cut{--cut:#fff}
+.kr-jarvis-cut svg{display:block;width:100%;height:auto}
+/* over the composer: 92px wide, in from the right, leaning on his paws; he holds still */
+.kr-jarvis-peek{position:absolute;right:28px;top:-64px;width:92px;transform:rotate(-4deg);transform-origin:50% 100%;pointer-events:none;z-index:2}
+/* the portrait big: the sticker at 96px, flat, its white rim in the drawing */
+.kr-jarvis-big{width:96px;height:96px}
 /* ---------- meet the main agent: the form on the setup list and as a card on an empty home, the tile before there is one, and the setup checklist ---------- */
 /* the form: a name on a ruled line, portraits taped on like photos, then the model; on a card in the middle of an empty home */
 .kr-meet{position:relative;max-width:640px;display:flex;flex-direction:column;gap:var(--space-12)}
@@ -588,6 +597,9 @@
 .kr-pph:hover{transform:rotate(var(--tilt,0deg)) translateY(-2px);box-shadow:var(--lift-paper-2)}
 .kr-pph:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .kr-pph.is-on{transform:rotate(0deg)}
+/* a face that is a picture, the pet’s: kr-pface fills the sticker’s place at each size */
+.kr-pface{display:block;background-size:contain;background-repeat:no-repeat;background-position:center}
+.kr-pph .kr-pface{width:32px;height:32px}.kr-qph .kr-pface{width:32px;height:32px}.kr-qph.is-l .kr-pface{width:64px;height:64px}.kr-qph.is-s .kr-pface{width:24px;height:24px}.kr-ib.kr-jarvis .kr-pface{width:26px;height:26px}
 .kr-pph .kr-pring{position:absolute;left:-9px;top:-9px;width:66px;height:66px;pointer-events:none;color:var(--ink);overflow:visible}
 .kr-pring path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
 /* the model: the global default until the pull-tab says otherwise, then a provider and a model from two selects */
@@ -635,12 +647,3 @@
 .kr-sitem-b{padding:6px 8px 20px 46px}
 .kr-sitem-b>p{margin:0 0 14px;max-width:560px;font-size:14px;line-height:1.5;color:var(--ink)}
 .kr-sitem-act{display:flex;align-items:center;gap:var(--space-16);flex-wrap:wrap}
-/* ---------- jarvis: Button, the cut-out cat that was the main agent before the pet; the cut-out that peeked over the composer, and his portrait sticker ---------- */
-/* the cut: the paper's cut edge around the drawing, a light rim by day and a white one at night */
-.kr-jarvis-cut{display:inline-block;--cut:#d9cfb8;filter:drop-shadow(1px 0 0 var(--cut)) drop-shadow(-1px 0 0 var(--cut)) drop-shadow(0 1px 0 var(--cut)) drop-shadow(0 -1px 0 var(--cut)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
-[data-theme="night"] .kr-jarvis-cut{--cut:#fff}
-.kr-jarvis-cut svg{display:block;width:100%;height:auto}
-/* over the composer: 92px wide, in from the right, leaning on his paws; he holds still */
-.kr-jarvis-peek{position:absolute;right:28px;top:-64px;width:92px;transform:rotate(-4deg);transform-origin:50% 100%;pointer-events:none;z-index:2}
-/* the portrait big: the sticker at 96px, flat, its white rim in the drawing */
-.kr-jarvis-big{width:96px;height:96px}

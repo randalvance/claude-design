@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Jarvis as a paper robot dog: peeking, sticker and standee</title>
+<title>Jarvis, the pet: the robot dog, the puppy and the cat, each in three cuts, dark mode</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -38,7 +38,7 @@ button{font:inherit}
 .kbtn.lg{height:32px;padding:0 14px;font-size:13px}
 .btns{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:14px}
 /* paper sheets laid on the desk, lit from the top left */
-.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:22px;margin-bottom:0}
 .sheet{position:relative;box-sizing:border-box;padding:18px 22px 20px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid var(--edge);border-radius:6px;box-shadow:var(--lift-3)}
 .sheet h2{margin:0 0 4px;font:600 20px/1.2 var(--font-serif);color:var(--ink)}
 .sheet .lede{margin:0 0 14px;font:400 13px/1.5 var(--font-sans);color:var(--mute)}
@@ -46,9 +46,9 @@ button{font:inherit}
 .hand.sm{font-size:15px}
 .note{margin:14px 0 0;font:500 15px/1.35 var(--font-hand);color:var(--mute)}
 .note code{font:600 11px/1 var(--font-mono);color:var(--ink);background:var(--paper-2);padding:2px 5px;border-radius:3px}
-/* 1. peeking: a stand-in for the composer, the mat-red frame with its card inside, and the robot dog hooked over its top edge */
-.frame{position:relative;margin:70px 24px 0 0;padding:10px;background-color:var(--mat-red);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--mat-red-2) 60%,var(--mat-red));border-radius:14px;box-shadow:3px 4px 0 var(--mat-red-2),6px 9px 10px var(--amb),12px 20px 28px -8px var(--amb-2)}
-.frame .card{position:relative;min-height:112px;padding:14px 16px 34px;box-sizing:border-box;background:var(--card);border-radius:8px;box-shadow:var(--recess);font:500 17px/1.3 var(--font-hand);color:var(--faint)}
+/* 1. peeking: three stand-ins for the composer, the mat-red frame with its card inside, one character hooked over each top edge */
+.frame{position:relative;margin:104px 0 0;padding:10px;background-color:var(--mat-red);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--mat-red-2) 60%,var(--mat-red));border-radius:14px;box-shadow:3px 4px 0 var(--mat-red-2),6px 9px 10px var(--amb),12px 20px 28px -8px var(--amb-2)}
+.frame .card{position:relative;min-height:96px;padding:14px 16px 34px;box-sizing:border-box;background:var(--card);border-radius:8px;box-shadow:var(--recess);font:500 17px/1.3 var(--font-hand);color:var(--faint)}
 .frame .hint{position:absolute;right:16px;bottom:14px;font:500 15px/1 var(--font-hand);color:var(--mute)}
 .prop{position:absolute;pointer-events:none;filter:drop-shadow(1px 0 0 var(--stk)) drop-shadow(-1px 0 0 var(--stk)) drop-shadow(0 1px 0 var(--stk)) drop-shadow(0 -1px 0 var(--stk)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
 .moods{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:16px}
@@ -57,8 +57,8 @@ button{font:inherit}
 .legend{display:flex;gap:14px;margin-top:10px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:8px;height:8px;border-radius:50%;box-shadow:var(--sticker-s)}
-/* 2. the avatar: the sticker, then where it goes, at the icon scale: the rail tile (24), a thread portrait (32), a row (16) */
-.faces{display:flex;align-items:flex-end;gap:26px;margin-top:10px}
+/* 2. the sticker: each face, then where it goes, at the icon scale: the rail tile (26), a thread portrait (32), a row (16) */
+.faces{display:flex;align-items:flex-end;gap:18px;margin-top:10px}
 .face{display:flex;flex-direction:column;align-items:center;gap:10px}
 .face .hand{text-align:center;white-space:nowrap}
 .big{width:64px;height:64px}
@@ -66,11 +66,10 @@ button{font:inherit}
 .rbt.jarvis .jface{padding:9px;shape-rendering:crispEdges;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
 .rbt{position:relative;display:block}
 .rbt.jarvis{--c:var(--sheet)}
-.rbt.jarvis .jface{background-image:url(pet/robot-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .qph{position:relative;flex:none;display:grid;place-items:center;width:36px;height:36px;box-sizing:border-box;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-1);transform:rotate(-3deg)}.qph::before{content:"";position:absolute;left:50%;top:-5px;width:22px;height:8px;background-color:var(--tape);transform:translateX(-50%) rotate(-4deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}.qph .jface{width:32px;height:32px;display:block;shape-rendering:crispEdges}
 .rowp{width:24px;height:24px;border-radius:4px;background-color:var(--paper-2);border:1px solid var(--line);box-shadow:var(--lift-1);display:grid;place-items:center}
 .rowp .jface{width:16px;height:16px}
-/* 3. the standee: a sprite sheet. pet/robot-walk.png is the factory's pet sheet, 6 columns by 4 facings, and pet/standee.js (loaded from the helmet) shows one cell of it and steps through the columns */
+/* 3. the standee: a sprite sheet each. pet/<id>-walk.png is the factory's pet sheet, 6 columns by 4 facings, and pet/standee.js (loaded from the helmet) shows one cell of it and steps through the columns */
 .standee{position:relative;display:block;filter:drop-shadow(0 0 .5px rgba(0,0,0,.35))}
 .wide{grid-column:1 / -1}
 .cols{display:grid;grid-template-columns:fit-content(380px) minmax(0,1fr);gap:26px;align-items:start}
@@ -79,7 +78,7 @@ button{font:inherit}
 .facing .standee{min-height:94px}
 .facing .hand{white-space:nowrap}
 /* the floor: one tile of the factory's sage checkerboard, foreshortened the way its 38-degree camera sees it */
-.floor{--tw:56px;--th:44px;position:relative;height:320px;overflow:hidden;border-radius:4px;background-color:var(--mat-green);background-image:var(--face),repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--mat-green) 78%,var(--sheet)) 0 25%,var(--mat-green) 0 50%);background-size:auto,calc(var(--tw) * 2) calc(var(--th) * 2);border:1px solid var(--mat-green-2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),var(--lift-mat,2px 3px 0 var(--mat-green-2),5px 8px 10px var(--amb))}
+.floor{--tw:56px;--th:44px;position:relative;height:260px;overflow:hidden;border-radius:4px;background-color:var(--mat-green);background-image:var(--face),repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--mat-green) 78%,var(--sheet)) 0 25%,var(--mat-green) 0 50%);background-size:auto,calc(var(--tw) * 2) calc(var(--th) * 2);border:1px solid var(--mat-green-2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),var(--lift-mat,2px 3px 0 var(--mat-green-2),5px 8px 10px var(--amb))}
 .floor::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,0) 40%);pointer-events:none}
 .floor .belt{position:absolute;left:0;right:0;top:46px;height:22px;background-color:color-mix(in srgb,var(--mat-green-2) 70%,var(--ink));background-image:repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.18) 22px 24px,transparent 24px 30px);box-shadow:0 2px 0 rgba(0,0,0,.25);opacity:.9}
 .floor .bench{position:absolute;width:88px;height:36px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid var(--kraft-2);border-radius:3px;box-shadow:2px 3px 0 var(--kraft-2),4px 6px 7px var(--amb)}
@@ -92,8 +91,11 @@ button{font:inherit}
 .states .hand{flex-basis:100%;margin-top:2px}
 @media (prefers-reduced-motion:reduce){.walker .body{transform:none !important}}
 
-/* pet: Jarvis is a paper robot dog on this board. One sprite atlas (pet/robot.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the puppy: a white cut, no shadow. The rail tile and the thread portraits show its face (pet/robot-face.png). */
-.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(pet/robot.png);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+/* pet: Jarvis is one of three paper characters, the robot dog (the one every board wears), the puppy and the cat. Each has a sprite atlas (pet/<id>.png) with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion, peeking over a composer frame with its paws hooked on; a sticker like the cut-out was: a white cut, no shadow, tilted tilt-cat. Its face (pet/<id>-face.png) is the round sticker the rail tile and the portraits show. */
+.pet{--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+.pet.robot{--pw:111px;--ph:135px;background-image:url(pet/robot.png)}
+.pet.dog{--pw:101px;--ph:104px;background-image:url(pet/dog.png)}
+.pet.cat{--pw:104px;--ph:114px;background-image:url(pet/cat.png)}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -106,8 +108,20 @@ button{font:inherit}
 @keyframes pet-sad{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-.jface{display:block;background-image:url(pet/robot-face.png);background-size:contain;background-repeat:no-repeat;background-position:center}
-.rb-jarvis .jface{background-image:url(pet/robot-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.jface{display:block;background-size:contain;background-repeat:no-repeat;background-position:center}
+.jface.robot{background-image:url(pet/robot-face.png)}
+.jface.dog{background-image:url(pet/dog-face.png)}
+.jface.cat{background-image:url(pet/cat-face.png)}
+.rbt.jarvis .jface.robot{background-image:url(pet/robot-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.dog{background-image:url(pet/dog-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.cat{background-image:url(pet/cat-face.png),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.hd p{max-width:none}
+.peekgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0 26px;align-items:end}.peekgrid .moods{margin-top:10px}.peekgrid .legend{flex-wrap:wrap;gap:6px 14px}
+.peeks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 22px}
+.peek-l{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:8px 4px 0}
+.faces3{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.faces3 .faces{margin-top:0}.faces3 .who{min-width:96px;text-align:left}.faces3 .face{width:64px;gap:0}
+.faces3 .fhead .face .hand{font-size:14px}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
 </style>
@@ -117,124 +131,124 @@ button{font:inherit}
 <svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
 <div class="hd">
   <div>
-    <h1>Jarvis, the paper robot dog</h1>
-    <p>One character, three cuts. The peeking robot dog hooks its paws over the composer; the sticker is its face for the rail and the thread portraits; the standee walks the factory floor as a sprite sheet, one drawing a frame. All three are paper cut-outs with a white die-cut border, drawn on Comfy Cloud and sliced by <span class="hand sm">pet/build.py</span>. The robot dog is the third character and the first to go through the skill's options step: the base drawn five ways and laid side by side, one picked and recoloured after another, an angular sheet-white hound with pen-drawn panel lines, tall ears with blue tips, gold-ringed eyes and a red collar. It sits beside the puppy and the cat in the portrait picker.</p>
+    <h1>Jarvis, the pet</h1>
+    <p>Three paper creatures in three cuts each. The robot dog is the one every board wears; the puppy and the cat wait in the portrait picker.</p>
   </div>
   <button class="kbtn lg" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}">{{themeWord}}</button>
 </div>
-<div class="grid">
-  <section class="sheet" aria-labelledby="h-peek">
-    <h2 id="h-peek">1. Peeking over the composer</h2>
-    <p class="lede">One atlas, <span class="hand sm">pet/robot.png</span>: a row per mood and 8 frames across, stepped like paper stop-motion. The boards pick the row from what the agent is doing.</p>
-    <div class="frame">
-      <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
-      <div class="card">Describe the job, or paste a ticket…<span class="hint">click the robot dog to say hello</span></div>
-    </div>
-    <div class="moods" role="group" aria-label="Moods">
+<section class="sheet" aria-labelledby="h-peek" style="margin-bottom:22px">
+  <div class="peekgrid">
+    <div>
+      <h2 id="h-peek">1. Peeking over the composer</h2>
+      <p class="lede">One atlas per character, <span class="hand sm">pet/&lt;id&gt;.png</span>: a row per mood and 8 frames across, stepped like paper stop-motion. The buttons set all three; a click on one says hello.</p>
+      <div class="moods" role="group" aria-label="Moods">
       <sc-for list="{{moods}}" as="m" hint-placeholder-count="6"><button class="kbtn {{m.cls}}" aria-pressed="{{m.on}}" onClick="{{m.pick}}"><i class="dot"></i>{{m.t}}</button></sc-for>
     </div>
-    <div class="legend hand sm"><span><i style="background:var(--blue)"></i>loops while it lasts</span><span><i style="background:var(--green)"></i>plays once, then back to idle</span></div>
-  </section>
+      <div class="legend hand sm"><span><i style="background:var(--blue)"></i>loops while it lasts</span><span><i style="background:var(--green)"></i>plays once, then back to idle</span></div>
+    </div>
+    <div class="peeks">
+      <div class="peek"><div class="frame"><span class="prop pet robot {{petCls_robot}}" onClick="{{petPoke_robot}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the robot dog to say hello</span></div></div><div class="peek-l"><span class="hand">the robot dog</span><span class="hand sm">pet/robot.png</span></div></div>
+      <div class="peek"><div class="frame"><span class="prop pet dog {{petCls_dog}}" onClick="{{petPoke_dog}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the puppy to say hello</span></div></div><div class="peek-l"><span class="hand">the puppy</span><span class="hand sm">pet/dog.png</span></div></div>
+      <div class="peek"><div class="frame"><span class="prop pet cat {{petCls_cat}}" onClick="{{petPoke_cat}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the cat to say hello</span></div></div><div class="peek-l"><span class="hand">the cat</span><span class="hand sm">pet/cat.png</span></div></div>
+    </div>
+  </div>
+</section>
+<div class="grid">
   <section class="sheet" aria-labelledby="h-face">
     <h2 id="h-face">2. The sticker</h2>
-    <p class="lede"><span class="hand sm">pet/robot-face.png</span>, one round sticker, used wherever the main agent needs a face.</p>
-    <div class="faces">
-      <div class="face"><span class="jface big" role="img" aria-label="Jarvis"></span><span class="hand">the sticker</span></div>
-      <div class="face"><span class="rbt jarvis"><span class="jface" role="img" aria-label="Jarvis"></span></span><span class="hand">rail tile</span></div>
-      <div class="face"><span class="qph"><span class="jface" aria-hidden="true"></span></span><span class="hand">thread portrait</span></div>
-      <div class="face"><span class="rowp"><span class="jface" aria-hidden="true"></span></span><span class="hand">row</span></div>
+    <p class="lede"><span class="hand sm">pet/&lt;id&gt;-face.png</span>, one round sticker each, at the sizes the boards use.</p>
+    <div class="faces3">
+      <div class="faces fhead" aria-hidden="true"><span class="who"></span><div class="face"><span class="hand">the sticker</span></div><div class="face"><span class="hand">rail tile</span></div><div class="face"><span class="hand">portrait</span></div><div class="face"><span class="hand">row</span></div></div>
+      <div class="faces"><span class="hand who">the robot dog</span><div class="face"><span class="jface big robot" role="img" aria-label="the robot dog"></span></div><div class="face"><span class="rbt jarvis"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface robot" aria-hidden="true"></span></span></div></div>
+      <div class="faces"><span class="hand who">the puppy</span><div class="face"><span class="jface big dog" role="img" aria-label="the puppy"></span></div><div class="face"><span class="rbt jarvis"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface dog" aria-hidden="true"></span></span></div></div>
+      <div class="faces"><span class="hand who">the cat</span><div class="face"><span class="jface big cat" role="img" aria-label="the cat"></span></div><div class="face"><span class="rbt jarvis"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface cat" aria-hidden="true"></span></span></div></div>
     </div>
-    <p class="note">The same face at 64, 32, 24 and 16px, the icon sizes the boards use: the sticker itself, a thread portrait, the glyph of a 44px rail tile like every other tile’s, and a row. It stays a sticker: a white cut, no shadow, stuck flat on the tile or the paper.</p>
+    <p class="note">64px as the sticker, 26px on the 44px rail tile, 32px as a thread portrait, 16px on a row: a white cut, no shadow, stuck flat. All three drawn on Comfy Cloud and sliced by <code>pet/build.py</code>; <code>pet/README.md</code> has the prompts.</p>
   </section>
-  <section class="sheet wide" aria-labelledby="h-walk">
-    <h2 id="h-walk">3. The standee, a sprite sheet</h2>
-    <p class="lede"><span class="hand sm">pet/robot-walk.png</span> is cut to the Factory Overseer's pet sheet: 6 columns (standing, the two stomps of a walk, two beats of work, a wave) by 4 facings, in 256 by 320 cells with the feet on one ground line, and <span class="hand sm">pet/robot-walk.json</span> says what each holds. <span class="hand sm">pet/standee.js</span> plays it the way the factory does: walking, columns 1, 0, 2, 0 at 8 frames a second, a foot lifted flat and set down again, with a little bob; working, columns 3 and 4 at 5.5; asking, columns 5 and 0 at 3.2 with a hop; idle, column 0, breathing. Every frame is one drawing of the whole robot dog, so nothing comes apart at the joints.</p>
-    <div class="cols">
-      <div>
-        <div class="facings">
-          <div class="facing"><span class="standee" data-f="down" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">down</span></div>
-          <div class="facing"><span class="standee" data-f="left" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">left</span></div>
-          <div class="facing"><span class="standee" data-f="right" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">right</span></div>
-          <div class="facing"><span class="standee" data-f="up" ref="{{standRef}}" aria-hidden="true"></span><span class="hand">up</span></div>
-        </div>
-        <p class="note">A host draws it with<br><code>PetStandee.mount(el, sheet, { height })</code><br>and calls <code>facing()</code> and <code>pose(doing, t)</code> each frame, or hands the factory the sheet as <code>{ src, layout: "sheet", height }</code>. The factory puts no folded tab under it: the paws sit straight on the floor.</p>
-      </div>
-      <div>
-        <div class="floor" aria-label="A corner of the factory floor, with Jarvis walking a round">
-          <div class="belt" aria-hidden="true"></div>
-          <div class="bench" style="left:64%;top:78px" aria-hidden="true"></div>
-          <div class="bench" style="left:10%;top:78px" aria-hidden="true"></div>
-          <div class="walker" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" ref="{{bodyRef}}"></span><span class="bub" ref="{{bubRef}}"></span></div>
-        </div>
-        <div class="states" role="group" aria-label="What Jarvis is doing">
+  <section class="sheet" aria-labelledby="h-walk">
+    <h2 id="h-walk">3. The standee, a sprite sheet each</h2>
+    <p class="lede"><span class="hand sm">pet/&lt;id&gt;-walk.png</span>, cut to the Factory Overseer's pet sheet, 6 columns by 4 facings, played by <span class="hand sm">pet/standee.js</span>: the three walk one round of the floor and take turns at the benches.</p>
+    <div class="floor" ref="{{floorRef}}" aria-label="A corner of the factory floor, with the three walking a round">
+      <div class="belt" aria-hidden="true"></div>
+      <div class="bench" style="left:64%;top:63px" aria-hidden="true"></div>
+      <div class="bench" style="left:10%;top:63px" aria-hidden="true"></div>
+      <div class="walker" data-id="robot" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="robot" ref="{{bodyRef}}"></span><span class="bub" data-id="robot" ref="{{bubRef}}"></span></div>
+      <div class="walker" data-id="dog" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="dog" ref="{{bodyRef}}"></span><span class="bub" data-id="dog" ref="{{bubRef}}"></span></div>
+      <div class="walker" data-id="cat" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="cat" ref="{{bodyRef}}"></span><span class="bub" data-id="cat" ref="{{bubRef}}"></span></div>
+    </div>
+    <div class="states" role="group" aria-label="What the three are doing">
           <sc-for list="{{states}}" as="s" hint-placeholder-count="4"><button class="kbtn {{s.cls}}" aria-pressed="{{s.on}}" onClick="{{s.pick}}">{{s.t}}</button></sc-for>
           <span class="hand sm">{{walkNote}}</span>
         </div>
-      </div>
-    </div>
   </section>
 </div>
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
-// Jarvis, the paper robot dog: the three cuts side by side. The peeking robot dog and the sticker are CSS; the
-// standee is a sprite sheet, pet/robot-walk.json, mounted and posed by pet/standee.js (loaded from the
-// helmet), driven here the way a host floor would: a round of waypoints, facing the way it goes, idle,
-// walking, working or asking for attention at each.
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
+// Jarvis, the pet: the three characters side by side. Each peeking sprite and sticker is CSS; each standee is a sprite
+// sheet, pet/<id>-walk.json, mounted and posed by pet/standee.js (loaded from the helmet), the three driven the way a
+// host floor would drive them: one round of waypoints, facing the way they go, idle, walking, working or asking for
+// attention at each, and waiting their turn when the next corner is taken.
+const PETS = ['robot', 'dog', 'cat'];
 const MOODS = [
   { id: 'idle', t: 'Idle', loop: true }, { id: 'greet', t: 'Greet', ms: 1900 }, { id: 'celebrate', t: 'Celebrate', ms: 2500 },
   { id: 'sad', t: 'Sad', ms: 1500 }, { id: 'error', t: 'Error', loop: true }, { id: 'ask', t: 'Ask', loop: true }
 ];
 const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: 'attention', t: 'Ask' }, { id: 'idle', t: 'Stand' }];
-const SHEET = 'pet/robot-walk.json', STAND_H = 94, WALK_H = 116; // the standing figure's height in the facings row and on the floor
-const SPEED = 92; // px per second
 const onStandee = (fn) => window.PetStandee ? fn(window.PetStandee) : document.addEventListener('pet-standee', () => fn(window.PetStandee), { once: true });
-// the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as
-// its column; y in px, since it is always 320 tall), and what the robot dog does when it gets to each corner
-const WAY = [
-  { x: .17, y: 292, pause: 'idle', ms: 700 },
-  { x: .87, y: 292, pause: 'idle', ms: 500 },
-  { x: .72, y: 148, pause: 'working', ms: 2600 },
-  { x: .17, y: 148, pause: 'attention', ms: 2400 }
-];
 const FACING = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'right' : 'left') : (dy >= 0 ? 'down' : 'up');
 const BUBBLE = { working: 'Writing the parser', attention: 'Needs a staging token' };
+const SHEETS = { robot: 'pet/robot-walk.json', dog: 'pet/dog-walk.json', cat: 'pet/cat-walk.json' }, WALK_H = 104; // the standing figure's height on the floor
+const SPEED = 92; // px per second
+// the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as its column;
+// y in px, since it is always 260 tall), what a walker does when it gets to each corner, and the corner each starts at
+const WAY = [
+  { x: .15, y: 234, pause: 'idle', ms: 700 },
+  { x: .85, y: 234, pause: 'idle', ms: 500 },
+  { x: .72, y: 118, pause: 'working', ms: 2600 },
+  { x: .17, y: 118, pause: 'attention', ms: 2400 }
+];
+const START = { robot: 0, dog: 2, cat: 3 };
 
 class Component extends DCLogic {
-  state = { mood: 'idle', shot: null, walk: 'roam' };
+  state = { mood: 'idle', shots: {}, walk: 'roam' };
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   componentDidMount() {
-    this.later(() => this.petPlay('greet', 1900), 400);
-    this.w = { seg: 0, x: WAY[0].x * this.floorW(), y: WAY[0].y, facing: 'down', pause: 'idle', left: 900 };
-    this.stands = [];
-    onStandee((PS) => PS.load(SHEET).then((sheet) => {
+    PETS.forEach((id, i) => this.later(() => this.petPlay(id, 'greet', 1900), 400 + i * 260));
+    this.w = {}; this.standee = {};
+    for (const id of PETS) { const s = START[id]; this.w[id] = { seg: s, x: WAY[s].x * this.floorW(), y: WAY[s].y, facing: 'down', pause: WAY[s].pause, left: 900 + s * 500 }; }
+    onStandee((PS) => { for (const id of PETS) PS.load(SHEETS[id]).then((sheet) => {
       if (this.gone) return;
-      for (const el of Object.values(this.standEls || {})) this.stands.push(PS.mount(el, sheet, { height: STAND_H, facing: el.dataset.f }));
-      if (this.body) {
-        this.standee = PS.mount(this.body, sheet, { height: WALK_H });
-        this.walker.style.width = this.standee.width + 'px'; this.walker.style.height = this.standee.height + 'px';
-      }
-    }).catch((e) => console.warn('the standee did not load:', e)));
+      const body = this.bodies && this.bodies[id], walker = this.walkers && this.walkers[id]; if (!body || !walker) return;
+      const st = PS.mount(body, sheet, { height: WALK_H }); this.standee[id] = st;
+      walker.style.width = st.width + 'px'; walker.style.height = st.height + 'px';
+    }).catch((e) => console.warn('the standee did not load:', e)); });
     this.last = performance.now();
     const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const tick = (now) => { this.step(Math.min(.05, (now - this.last) / 1000), now / 1000, still); this.last = now; this.raf = requestAnimationFrame(tick); };
+    const tick = (now) => { const dt = Math.min(.05, (now - this.last) / 1000); for (const id of PETS) this.step(id, dt, now / 1000, still); this.last = now; this.raf = requestAnimationFrame(tick); };
     this.raf = requestAnimationFrame(tick);
   }
   componentWillUnmount() { this.gone = true; cancelAnimationFrame(this.raf); (this.tq || []).forEach(clearTimeout); }
-  floorW() { const f = this.walker && this.walker.parentElement; return (f && f.clientWidth) || 600; }
-  petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ shot: { name, id } }); this.later(() => { const s = this.state.shot; if (s && s.id === id) this.setState({ shot: null }); }, ms); }
-  // one step of the standee: where it is, which way it faces, what it is doing
-  step(dt, t, still) {
-    const w = this.w; if (!w || !this.walker) return;
+  floorW() { const f = this.floor; return (f && f.clientWidth) || 600; }
+  // a mood played once by one pet (a poke) or by all three (a button), then back to the resting mood
+  petPlay(id, name, ms) { this.petPlayAll(name, ms, [id]); }
+  petPlayAll(name, ms, ids = PETS) {
+    const sid = Date.now() + Math.random(); const shots = { ...this.state.shots }; ids.forEach((id) => { shots[id] = { name, sid }; }); this.setState({ shots });
+    this.later(() => { const cur = this.state.shots, next = { ...cur }; let changed = false; ids.forEach((id) => { if (cur[id] && cur[id].sid === sid) { next[id] = null; changed = true; } }); if (changed) this.setState({ shots: next }); }, ms);
+  }
+  taken(seg, me) { return PETS.some((o) => o !== me && this.w[o] && this.w[o].seg === seg); } // a corner another is at, or walking to
+  // one step of one standee: where it is, which way it faces, what it is doing
+  step(id, dt, t, still) {
+    const w = this.w[id], walker = this.walkers && this.walkers[id]; if (!w || !walker) return;
     const mode = this.state.walk;
     let doing = mode === 'roam' ? (w.pause || 'walking') : mode;
     if (mode === 'roam' && !still) {
       if (w.pause) {
         w.left -= dt * 1000;
-        if (w.left <= 0) { w.pause = null; w.seg = (w.seg + 1) % WAY.length; }
+        if (w.left <= 0) { const next = (w.seg + 1) % WAY.length; if (this.taken(next, id)) { w.pause = 'idle'; w.left = 150; } else { w.pause = null; w.seg = next; } }
       } else {
-        const to = WAY[w.seg], fw = this.floorW(), hw = this.standee ? this.standee.width / 2 : 38;
+        const to = WAY[w.seg], fw = this.floorW(), hw = this.standee[id] ? this.standee[id].width / 2 : 38;
         const tx = Math.min(Math.max(to.x * fw, hw), fw - hw); // the corner, kept on the floor however wide it is
         const dx = tx - w.x, dy = to.y - w.y; const d = Math.hypot(dx, dy);
         const run = SPEED * dt;
@@ -244,30 +258,32 @@ class Component extends DCLogic {
       doing = w.pause || 'walking';
     } else if (mode !== 'roam') { w.facing = 'down'; }
     if (still && doing === 'walking') doing = 'idle';
-    const p = this.standee;
+    const p = this.standee[id];
     if (p) {
-      this.walker.style.transform = `translate(${(w.x - p.width / 2).toFixed(1)}px, ${(w.y - p.height).toFixed(1)}px)`;
+      walker.style.transform = `translate(${(w.x - p.width / 2).toFixed(1)}px, ${(w.y - p.height).toFixed(1)}px)`;
       p.facing(w.facing); p.pose(doing, t, still);
     }
-    for (const s of this.stands) s.pose('idle', t, still);
-    const bub = BUBBLE[doing] || '';
-    if (this.bub && this.bub.textContent !== bub) { this.bub.textContent = bub; this.bub.style.display = bub ? '' : 'none'; }
+    const bub = BUBBLE[doing] || '', el = this.bubs && this.bubs[id];
+    if (el && el.textContent !== bub) { el.textContent = bub; el.style.display = bub ? '' : 'none'; }
   }
   themeVals() {
-    const night = this.state.night ?? ((this.props.theme ?? 'paper') === 'night');
+    const night = this.state.night ?? ((this.props.theme ?? 'night') === 'night');
     return { themeCls: night ? 'night' : '', themeWord: night ? 'Day' : 'Night', themeLabel: night ? 'Switch to the paper theme' : 'Switch to the night theme', toggleTheme: () => this.setState({ night: !night }) };
   }
   renderVals() {
-    const st = this.state;
-    return { ...this.themeVals(),
-      petCls: st.shot ? st.shot.name : st.mood,
-      petPoke: () => this.petPlay('greet', 1900),
-      moods: MOODS.map((m) => { const on = st.shot ? st.shot.name === m.id : st.mood === m.id; return { t: m.t, on, cls: (on ? 'on ' : '') + (m.loop ? 'loop' : ''), pick: () => m.loop ? this.setState({ mood: m.id, shot: null }) : this.petPlay(m.id, m.ms) }; }),
+    const st = this.state; const shot = (id) => st.shots[id];
+    const v = { ...this.themeVals(),
+      moods: MOODS.map((m) => { const on = m.loop ? st.mood === m.id && !PETS.some((id) => shot(id)) : PETS.some((id) => shot(id) && shot(id).name === m.id);
+        return { t: m.t, on, cls: (on ? 'on ' : '') + (m.loop ? 'loop' : ''), pick: () => m.loop ? this.setState({ mood: m.id, shots: {} }) : this.petPlayAll(m.id, m.ms) }; }),
       states: STATES.map((s) => ({ t: s.t, on: st.walk === s.id, cls: st.walk === s.id ? 'on' : '', pick: () => this.setState({ walk: s.id }) })),
-      walkNote: st.walk === 'roam' ? 'walks a round: works at one bench, asks at the other' : st.walk === 'working' ? 'columns 3 and 4, 5.5 a second' : st.walk === 'attention' ? 'columns 5 and 0, 3.2 a second, with a hop' : 'column 0, facing you, breathing',
-      walkerRef: (el) => { if (el) this.walker = el; }, bodyRef: (el) => { if (el) this.body = el; }, bubRef: (el) => { if (el) this.bub = el; },
-      standRef: (el) => { if (el) (this.standEls = this.standEls || {})[el.dataset.f] = el; }
+      walkNote: st.walk === 'roam' ? 'one round each: works at one bench, asks at the other, waits when the next corner is taken' : st.walk === 'working' ? 'columns 3 and 4, 5.5 a second' : st.walk === 'attention' ? 'columns 5 and 0, 3.2 a second, with a hop' : 'column 0, facing you, breathing',
+      floorRef: (el) => { if (el) this.floor = el; },
+      walkerRef: (el) => { if (el) (this.walkers = this.walkers || {})[el.dataset.id] = el; },
+      bodyRef: (el) => { if (el) (this.bodies = this.bodies || {})[el.dataset.id] = el; },
+      bubRef: (el) => { if (el) (this.bubs = this.bubs || {})[el.dataset.id] = el; }
     };
+    for (const id of PETS) { v['petCls_' + id] = shot(id) ? shot(id).name : st.mood; v['petPoke_' + id] = () => this.petPlay(id, 'greet', 1900); }
+    return v;
   }
 }
 </script>
