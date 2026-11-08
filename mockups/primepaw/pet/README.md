@@ -89,9 +89,9 @@ height as it turns), and lays them out with the flat cut edge, or the feet, on o
 
 | Id | Picker | Peeking frame | Where | Drawn |
 | --- | --- | --- | --- | --- |
-| `dog` | A paper puppy | 101x104 CSS px | worn by every board; `DioramaPet.dc.html` | by hand; the prompts below |
+| `dog` | A paper puppy | 101x104 CSS px | the picker; worn by every board until the robot dog; `DioramaPet.dc.html` | by hand; the prompts below |
 | `cat` | A paper cat | 104x114 CSS px | the picker only, not worn; `DioramaPetCat.dc.html` | by the `primepaw-character` skill; the puppy's prompts with the slots below |
-| `robot` | A paper robot dog | 111x135 CSS px | the picker only, not worn; `DioramaPetRobot.dc.html` | by the `primepaw-character` skill, the first through its options step; the puppy's prompts with the slots below |
+| `robot` | A paper robot dog | 111x135 CSS px | worn by every board; `DioramaPetRobot.dc.html` | by the `primepaw-character` skill, the first through its options step; the puppy's prompts with the slots below |
 
 The cat's slot values, as the skill's templates in `references/prompts.md` took them:
 
