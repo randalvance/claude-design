@@ -28,15 +28,11 @@
 [data-theme="night"] .kr-pen{mix-blend-mode:screen}
 .kr-rule{border:0;border-top:1px dashed var(--line);margin:0}
 .kr-sheet.is-strip{position:relative;z-index:22;background-color:color-mix(in srgb,var(--wc,var(--green)) 62%,var(--sheet));border:1px solid rgba(0,0,0,.1);border-radius:var(--radius-5);box-shadow:1px 1px 0 color-mix(in srgb,var(--wc,var(--green)) 55%,var(--edge-2)),3px 4px 5px var(--amb)}
-.kr-sheet.is-strip+.kr-stack{margin-top:-3px}
-/* a deck: sheets stacked, each 3px under the one above with a tiny lean, two card edges showing under the last */
-.kr-stack{display:flex;flex-direction:column;padding-bottom:8px}
-.kr-stack>.kr-sheet{position:relative;transform:translate(var(--dx,0),0) rotate(var(--rot,0deg))}
-.kr-stack>.kr-sheet+.kr-sheet{margin-top:-3px}
-.kr-stack>.kr-sheet:nth-child(even){--dx:1px;--rot:.25deg}.kr-stack>.kr-sheet:nth-child(3n){--dx:-1px;--rot:-.2deg}
-.kr-stack>.kr-sheet:nth-child(1){z-index:12}.kr-stack>.kr-sheet:nth-child(2){z-index:11}.kr-stack>.kr-sheet:nth-child(3){z-index:10}.kr-stack>.kr-sheet:nth-child(4){z-index:9}.kr-stack>.kr-sheet:nth-child(5){z-index:8}.kr-stack>.kr-sheet:nth-child(6){z-index:7}.kr-stack>.kr-sheet:nth-child(7){z-index:6}.kr-stack>.kr-sheet:nth-child(8){z-index:5}.kr-stack>.kr-sheet:nth-child(9){z-index:4}.kr-stack>.kr-sheet:nth-child(10){z-index:3}.kr-stack>.kr-sheet:nth-child(11){z-index:2}.kr-stack>.kr-sheet:nth-child(12){z-index:1}
-.kr-stack>.kr-sheet:hover{z-index:20}
-.kr-stack::after{content:"";display:block;margin:0 4px 0 3px;height:4px;margin-top:-2px;background:linear-gradient(180deg,var(--edge) 0 1px,var(--sheet) 1px 3px,var(--edge) 3px 4px);border-radius:0 0 2px 2px}
+.kr-sheet.is-strip+.kr-stack{margin-top:4px}
+/* a list: sheets laid straight and square, one under the other, 4px apart, none overlapping */
+.kr-stack{display:flex;flex-direction:column;gap:4px;padding-bottom:8px}
+.kr-stack>.kr-sheet{position:relative}
+.kr-stack>.kr-sheet:hover{z-index:2}
 
 /* ---------- stickers ---------- */
 .kr-sticker{position:relative;display:inline-grid;place-items:center;box-sizing:border-box;background-color:var(--kraft-2);background-image:linear-gradient(180deg,var(--gloss),rgba(255,255,255,0) 55%);color:var(--white);border-radius:var(--radius-10);box-shadow:var(--sticker);font-weight:900;line-height:1}

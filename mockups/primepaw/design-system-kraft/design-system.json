@@ -273,9 +273,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-08T06:03:53Z",
+    "at": "2026-11-09T11:39:13Z",
     "via": "Claude Code",
-    "note": "The pet’s three faces are Characters assets, the pictures on the MeetAgent strip and the Jarvis tile; Button, the cut-out cat, stays in the Jarvis component as the try before the pet"
+    "note": "Sessions under a workspace strip are a plain list now (kr-stack): straight sheets 4px apart, none overlapping; the selected row lies straight too, so tilt-row-on is gone"
   },
   "layout": "files",
   "libraries": [],

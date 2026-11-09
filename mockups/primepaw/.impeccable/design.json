@@ -1393,11 +1393,6 @@
         "value": "-4deg"
       },
       {
-        "name": "tilt-row-on",
-        "purpose": "The selected session row (highlighted paper).",
-        "value": "-0.5deg"
-      },
-      {
         "name": "tilt-cat",
         "purpose": "The cat peeking over the composer.",
         "value": "-4deg"
