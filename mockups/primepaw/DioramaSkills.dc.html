@@ -128,7 +128,7 @@ button{font:inherit}
 .pp-rb:hover svg,.pp-rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
 .pp-rb:active svg,.pp-rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
 .pp-rb.is-on svg,.pp-rb.is-on .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
-.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}.rb-factory{--c:var(--green)}
+.rb-sessions{--c:var(--blue)}.rb-agents{--c:var(--blue-2)}.rb-skills{--c:var(--amber)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-mcps{--c:var(--green)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}.rb-factory{--c:var(--green)}.rb-ideas{--c:var(--attn)}.pp-rb.rb-ideas svg{color:var(--on-attn)}
 .pp-rb:focus-visible{outline:0}.pp-rb:focus-visible svg,.pp-rb:focus-visible .jface{outline:2px solid var(--blue);outline-offset:3px}
 .pp-rb .pp-nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .pp-nb{background-color:var(--st-red);color:var(--white)}
@@ -400,6 +400,7 @@ const NAV = [
   { id: 'kb', label: 'Knowledge base', icon: 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20M9 6h7M9 10h5' },
   { id: 'mcps', label: 'MCPs', icon: 'M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4' },
   { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+  { id: 'ideas', label: 'Idea board', icon: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
   { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
   { id: 'factory', label: 'Factory', icon: 'M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1' },
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },

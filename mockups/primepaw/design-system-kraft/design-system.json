@@ -176,6 +176,12 @@
           "name": "factory.svg",
           "size": 234,
           "type": "image/svg+xml"
+        },
+        "ideas.svg": {
+          "blob": "3a5995dcd4216d7da65022b229bcaecc",
+          "name": "ideas.svg",
+          "size": 288,
+          "type": "image/svg+xml"
         }
       },
       "name": "Icons",
@@ -192,6 +198,7 @@
         "knowledge.svg",
         "mcps.svg",
         "workflows.svg",
+        "ideas.svg",
         "kanban.svg",
         "pull-requests.svg",
         "background.svg",
@@ -273,9 +280,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-09T11:39:13Z",
+    "at": "2026-11-09T12:30:00Z",
     "via": "Claude Code",
-    "note": "Sessions under a workspace strip are a plain list now (kr-stack): straight sheets 4px apart, none overlapping; the selected row lies straight too, so tilt-row-on is gone"
+    "note": "Idea board: the bulb tile (kr-ib kr-attn, now with an on-attn ink glyph; ideas.svg) and a cork with no columns, sticky notes pinned anywhere and written in markdown"
   },
   "layout": "files",
   "libraries": [],

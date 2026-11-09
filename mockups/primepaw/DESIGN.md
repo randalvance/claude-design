@@ -411,7 +411,7 @@ Identity colours, printed only on stickers and button faces, each tied to one th
 - **MCP Green** (`green`, #5b8c5a): MCPs, the idle pill, the checked box. **Skills Amber** (`amber`, #b8792f): skills, background jobs, busy durations, the pinwheel's fourth blade, and mixed into cardboard for the mat under a permission slip or question card.
 - **Workspaces Tan** (`max`, #c7935a) and **MAX Stamp Paper** (`max-2`, #d9b48a): the workspaces sticker and the MAX stamp.
 - **Workflow Teal** (`kind-think`, #4a8f99), **Kanban Violet** (`kind-sub`, #8b6bb3), **Knowledge Plum** (`book`, #8d4f75): one sticker each on the rail and the matching kind dots.
-- **Attention Gold** (`attn`, #f0c24a) with **On Gold** ink (`on-attn`, #2a2219): the ring around a selected sticker, the attention badge, the needs-you button. The only sticker that carries words.
+- **Attention Gold** (`attn`, #f0c24a) with **On Gold** ink (`on-attn`, #2a2219): the ring around a selected sticker, the attention badge, the needs-you button, and the idea board’s rail tile, whose bulb is the one rail glyph in ink. The only sticker that carries words.
 - **Status stickers** (`st-green` #497048, `st-amber` #936126, `st-red` #a04431): Done, Running, Failed and the busy badge, each holding 4.5:1 under white text in both themes.
 - **Sticker White** (`white`, #ffffff) and **On Blue** (`on-blue`, #ffffff): glyphs on stickers. Never a surface.
 
@@ -520,7 +520,7 @@ Every button is thick card with the paper texture: there is no other button mate
 - **Bare marks:** dismiss, edit, pin, generate and a row's three-dot menu are the only presses that are not card: small pen marks on the paper, 26px to the touch, tinting on hover. Generate is a sparkle drawn in loose pen strokes, never a clean icon.
 
 ### Icon Buttons
-- **Rail tile (`kr-ib`):** a 44px cardboard tile, 10px radius, 9px padding, the glyph in white at 24px; its colour is the identity colour of what it opens (sessions blue, agents navy, skills and background amber, workspaces tan, memory red, knowledge plum, MCPs green, workflows teal, kanban violet, pull requests oxblood; uncoloured is `kraft-2`), with a cut edge in a darker shade of that colour. The current tile stays pressed flat with its face a shade darker. It lifts and presses like any button and never tilts.
+- **Rail tile (`kr-ib`):** a 44px cardboard tile, 10px radius, 9px padding, the glyph in white at 24px; its colour is the identity colour of what it opens (sessions blue, agents navy, skills and background amber, workspaces tan, memory red, knowledge plum, MCPs green, workflows teal, the idea board gold with its glyph in ink, kanban violet, pull requests oxblood; uncoloured is `kraft-2`), with a cut edge in a darker shade of that colour. The current tile stays pressed flat with its face a shade darker. It lifts and presses like any button and never tilts.
 - **Disc (`kr-ib is-sm`):** a 26px round cardboard disc (`board` on `board-2`, glyph in ink at 16px) for copy, share, search, send, delete; sage for send and done, terracotta for delete and stop. The composer's send disc is 42px, and the mic disc latches flat and turns red while listening.
 
 ### Toggles
