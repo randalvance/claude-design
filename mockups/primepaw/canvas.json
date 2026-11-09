@@ -74,7 +74,7 @@
     },
     "DioramaBackground.dc.html": {
       "x": 0,
-      "y": 36900,
+      "y": 41900,
       "w": 1440,
       "h": 900,
       "title": "Background jobs, paper diorama, live demo",
@@ -84,7 +84,7 @@
     },
     "DioramaBackgroundDark.dc.html": {
       "x": 1540,
-      "y": 36900,
+      "y": 41900,
       "w": 1440,
       "h": 900,
       "title": "Background jobs, paper diorama, dark mode, live demo",
@@ -664,7 +664,7 @@
     },
     "DioramaJarvis.dc.html": {
       "x": 0,
-      "y": 39300,
+      "y": 44300,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, live demo",
@@ -674,7 +674,7 @@
     },
     "DioramaJarvisDark.dc.html": {
       "x": 1540,
-      "y": 39300,
+      "y": 44300,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, dark mode, live demo",
@@ -684,7 +684,7 @@
     },
     "DioramaPets.dc.html": {
       "x": 0,
-      "y": 38300,
+      "y": 43300,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy and the cat, each in three cuts, live demo",
@@ -694,7 +694,7 @@
     },
     "DioramaPetsDark.dc.html": {
       "x": 1540,
-      "y": 38300,
+      "y": 43300,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy and the cat, each in three cuts, dark mode, live demo",
@@ -718,6 +718,106 @@
       "w": 1440,
       "h": 900,
       "title": "Session top: three compact variations, dark mode",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryPage.dc.html": {
+      "x": 0,
+      "y": 36500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Overview, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryPageDark.dc.html": {
+      "x": 1540,
+      "y": 36500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Overview, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryFloor.dc.html": {
+      "x": 0,
+      "y": 37500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Factory view, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryFloorDark.dc.html": {
+      "x": 1540,
+      "y": 37500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Factory view, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryPlan.dc.html": {
+      "x": 0,
+      "y": 38500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Plan view, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryPlanDark.dc.html": {
+      "x": 1540,
+      "y": 38500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Plan view, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryKanban.dc.html": {
+      "x": 0,
+      "y": 39500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Kanban view, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryKanbanDark.dc.html": {
+      "x": 1540,
+      "y": 39500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Kanban view, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactorySettings.dc.html": {
+      "x": 0,
+      "y": 40500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Settings, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactorySettingsDark.dc.html": {
+      "x": 1540,
+      "y": 40500,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Settings, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -766,7 +866,8 @@
     "p26",
     "p27",
     "s11",
-    "p28"
+    "p28",
+    "p30"
   ],
   "notes": {
     "p14": {
@@ -816,7 +917,7 @@
       "y": 8100,
       "w": 320,
       "page": "diorama",
-      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, the paper robot dog’s face, badged with the threads waiting on you. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Thread YOLO makes. A job ends on a finish report on the sage mat. The header has the title, how many sessions the thread started, and the Thread YOLO stamp, off by default, which says what it risks when you strike it. Everything is fake."
+      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, the paper robot dog’s face, badged with the threads waiting on you. Above the threads, the factories that are on: one strip each with the factory icon, the name, its state sticker, in flight over its cap by hand and a red badge for what waits on you; press one and it opens the factory’s page. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Thread YOLO makes. A job ends on a finish report on the sage mat. The header has the title, how many sessions the thread started, and the Thread YOLO stamp, off by default, which says what it risks when you strike it. Everything is fake."
     },
     "p21": {
       "x": 3080,
@@ -921,14 +1022,14 @@
     "s10": {
       "kind": "title1",
       "x": 0,
-      "y": 36600,
+      "y": 41600,
       "maxW": 2980,
       "page": "diorama",
       "text": "Background jobs"
     },
     "p26": {
       "x": 3080,
-      "y": 39300,
+      "y": 44300,
       "w": 320,
       "page": "diorama",
       "text": "Button, the cut-out cat in a bow tie: Jarvis’s first character, picked from five cuts, cut from cream and kraft in 1.6px ink, and the try before the pet. Every board wore him until the paper creatures; the boards wear the robot dog now, and the other agents’ portraits stay drawn stickers in his style. This sheet lays out every piece he is cut into. The cut: the kraft patch over his right ear, bead eyes, blush, a red nose, the red bow, two paws to hold an edge, with the paper’s cut edge around him (a light rim by day, white at night). The portrait: the same face as a flat sticker with a white die-cut rim and no shadow, never pixel art, on the cream tile that topped every rail, as the first Meet your Main Agent photo, and at the head of the threads board. Over the composer he was 92px wide, in from the right, leaning 4 degrees on his paws; over the empty home’s greeting 84px. He is a cut-out, not an animation: he never blinks, bounces, pulses, changes face with a session’s state, or does anything when clicked, which is what the pet does instead. The drawing is Kraft’s Characters asset, jarvis.svg."
@@ -938,12 +1039,12 @@
       "page": "diorama",
       "text": "Jarvis, the pet: three paper creatures drawn on Comfy Cloud, side by side, each in three cuts. The robot dog is the one every board wears: an angular sheet-white hound with pen-drawn panel lines, a kraft snout and chest plate, blue ear tips, gold-ringed eyes and a red collar, the first character through the primepaw-character skill’s options step. The puppy was the first character, and the cat, a round-faced tabby with a blue collar, the second; both wait in the portrait picker. Peeking: over the composer, paws hooked on the frame, a sprite atlas per character with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the buttons set all three and a click on one says hello. The sticker: each head as one round sticker at the sizes the boards use (the sticker, the rail tile, a thread portrait, a row). The standee: a sprite sheet each (pet/<id>-walk.png, <id>-walk.json and standee.js), six poses by four facings, every cell one drawing of the whole creature, the three walking one round of a factory floor and taking turns at the benches. The pictures are the canvas’s uploads of the pet/ files: a board cannot show a picture over 2 MiB that it names by a path, and the atlases are 2 to 3 MiB each. Qwen Image 2.1 drew the bases, faces and bodies and GPT Image 2.6 the moods, turnarounds and walks, through the primepaw-character skill in mockups/primepaw/.claude/skills/; pet/build.py slices them and pet/README.md lists every prompt, slot value and seed.",
       "x": 3080,
-      "y": 38300
+      "y": 43300
     },
     "s11": {
       "kind": "title1",
       "x": 0,
-      "y": 38000,
+      "y": 43000,
       "maxW": 2980,
       "page": "diorama",
       "text": "Jarvis, the pet"
@@ -954,6 +1055,13 @@
       "w": 320,
       "page": "diorama",
       "text": "Session top, three compact variations, asked for in a comment on the session board and then asked to be shorter (the first round, A to C, is canvas version 124). The same facts each time: the agent’s portrait with the status dot on its corner (red busy, amber needs attention, green idle), the real logo of the harness that runs the session (Claude, Codex or Pi, picked at creation) on a sticker beside it, the title with its sparkle and the VS Code icon, a Done toggle, the pull requests with their comment counts (a click opens GitHub), and the modules: Pull requests, Artifacts, Files, Git changes, Background tasks (the sub agents). The composer bar keeps the working folder and YOLO and gains the branch tag; the kanban task the session is linked to hangs after the title as a kraft tag with the board glyph and the task key. Logs is gone. D: one strip, the title and one row of icon tabs on a 48px line (Todos and Terminal among the modules, no view tabs), the PR titles on a slip under the PR tab. E: two thin lines, a small DONE stamp, the PR numbers as chips in the composer. F: one line with the PR as a kraft tag, the modules and the Done sticker on a spine at the sheet’s edge. Click a Done control to toggle it. D was chosen and is the session board’s header now (top.py)."
+    },
+    "p30": {
+      "x": 3080,
+      "y": 36500,
+      "w": 320,
+      "page": "diorama",
+      "text": "The factory page: one factory, reached from the factories list on Home or a card on the Factory list, in five views on one row of card buttons under the head: Overview, Factory view, Plan view, Kanban view, Settings. The head has Factory as a crumb, the name by hand, the state sticker, the board as a dashed link, the curator’s line, and the factory’s own switch. Overview: four count cards, in flight over the cap with one paper slot per place (green taken, amber waiting), waiting on you, Blocked and merged; press waiting on you and the row becomes the inbox’s strips on a board with the ticket’s session beside them, the same strip, notes, capsules and composer a session has, only the tickets that need you; press Blocked and the inbox’s own Blocked items appear, with Done once it is unblocked; press merged and the list of merged tickets with their PR chips. Under the cards the Factory ledger, every event with its day, a kind on a chip (Curator woke, Curator decision, Gate refused, Daily digest sent), the words and a dashed link to the session, with a filter by kind; and the Tasks, every task in the factory with its key on a kraft tag, agent and step, a state sticker, filtered by state and paged six at a time. Factory view: the tickets under To do on a board at the left and the floor at the right, a placeholder for the animated one: a paper room per step with a kraft roof, the agents’ faces at work holding their ticket on a tag, a Blocked ticket parked with its red sticker, the belt in and out with the queued crates, on grass, sand or snow. Plan view: the tickets to plan on the left, the planner’s session on the right with Planning done, Planning done implement later, and Close task above the composer. Kanban view: the Board page’s cork and sticky notes with two places to drop a note above it, Into the factory and To planning; a dropped note is queued or sent to planning and says so by hand on its corner. Settings: the Agent page’s sheets. Name, Description, Main goal, the curator agent as radio rows with New curator agent beside them, Ticket sizing guidance, the Ready label with its tag; the six steps each with a switch, an icon to pick, a label on a dashed line, Kanban status, agent, least and most instances, room and floor; Biome; Trust profile; and the three numbers, fix rounds before Blocked, new tasks per wake, the factory’s cap. Save settings in the head. Everything is fake and nothing pulses."
     },
     "p22": {
       "x": 3080,
@@ -1030,6 +1138,16 @@
     "DioramaFactoryPausedDark.dc.html",
     "DioramaFactoryBlocked.dc.html",
     "DioramaFactoryBlockedDark.dc.html",
+    "DioramaFactoryPage.dc.html",
+    "DioramaFactoryPageDark.dc.html",
+    "DioramaFactoryFloor.dc.html",
+    "DioramaFactoryFloorDark.dc.html",
+    "DioramaFactoryPlan.dc.html",
+    "DioramaFactoryPlanDark.dc.html",
+    "DioramaFactoryKanban.dc.html",
+    "DioramaFactoryKanbanDark.dc.html",
+    "DioramaFactorySettings.dc.html",
+    "DioramaFactorySettingsDark.dc.html",
     "DioramaBackground.dc.html",
     "DioramaBackgroundDark.dc.html",
     "DioramaPets.dc.html",

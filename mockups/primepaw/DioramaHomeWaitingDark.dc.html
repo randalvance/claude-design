@@ -760,6 +760,21 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .rmenu button+button{border-top:1px dashed var(--line)}
 .tnone{margin:8px 4px;font-family:var(--hand);font-size:17px;color:var(--ink);opacity:.75}
 .tpanel .list{gap:0;padding-top:4px}
+/* the factories that are on, above the threads: one strip each with the factory icon, the state sticker, in flight over the cap and what waits on you; press one and it opens the factory's page */
+.hfacs{padding:0 10px}
+.hfacs-h{display:flex;align-items:baseline;gap:8px;padding:6px 4px 6px}
+.hfacs-h b{font-family:var(--hand);font-size:20px;font-weight:600;color:var(--ink)}
+.hfacs-h small{font-size:11.5px;font-weight:700;color:var(--mute)}
+.hfacs-h.thr{padding-top:12px;margin-bottom:-6px}
+.hfacs .trows{padding-bottom:0}
+.frow2 .ir-top{grid-column:1;min-width:0;display:flex;align-items:center;gap:7px}
+.frow2 .ir-top .tr-t{flex:0 1 auto;min-width:0}
+.frow2 .fdot{display:grid;place-items:center;width:20px;height:20px;flex:none;color:var(--ink)}
+.frow2 .fdot svg{width:16px;height:16px}
+.frow2 .sticker{flex:none;font-size:9.5px;padding:2px 7px;transform:rotate(-2deg)}
+.frow2 .tr-tm{font-size:14px;white-space:nowrap}
+.frow2 .tr-tm::after{content:" in flight";font-size:12px}
+.frow2 .tr-l{-webkit-line-clamp:1}
 .tpanel .list>.scrim{z-index:25}
 /* ---------- the sheet ---------- */
 .hsheet .leaf{margin-top:16px}
@@ -842,6 +857,13 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .htoast button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 @media (max-width:1100px){.tpanel{width:260px}}
 @media (max-width:860px){.tpanel{position:static;width:auto;height:auto;margin:0 0 8px;max-height:46vh}.hsheet{margin:0}.report-t{padding-right:0}.report-in>.pstamp{position:static;display:inline-grid;margin-top:8px}}
+.sticker.run{background-color:var(--st-green)}
+.sticker.paused{background-color:var(--st-amber)}
+.sticker.idle{background-color:var(--paper-2);background-image:var(--face),var(--pulp);color:var(--ink);box-shadow:var(--sticker-s)}
+.sticker.idle i{background-color:var(--mute)}
+.sticker.off{background-color:transparent;background-image:none;color:var(--mute);box-shadow:none;border:1.5px dashed var(--mute);padding:1.5px 8.5px}
+.sticker.off i{background-color:transparent;border:1.5px solid var(--mute);box-sizing:border-box}
+.sticker.blocked{background-color:var(--st-red)}
 /* ---------- meet your main agent: the same form on the setup list and as the card on an empty home ---------- */
 .meet{position:relative;max-width:640px;display:flex;flex-direction:column;gap:12px}
 .meet.is-card{max-width:680px;box-sizing:border-box;padding:24px 26px 22px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:5px;box-shadow:var(--lift-2);animation:drop .36s var(--ease) .08s both}
@@ -979,6 +1001,16 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
         <button class="pbtn" onClick="{{newThread}}">New thread</button>
       </div></sc-if>
     </div>
+    <sc-if value="{{hasFacs}}" hint-placeholder-val="{{true}}"><div class="hfacs" aria-label="Factories running">
+      <div class="hfacs-h"><b>Factories</b><small>{{facsSub}}</small></div>
+      <div class="trows" role="list"><sc-for list="{{facs}}" as="f" hint-placeholder-count="2"><div class="trow frow2 {{f.cls}}" role="listitem">
+        <button class="rowhit" onClick="{{f.pick}}" aria-label="{{f.aria}}"></button>
+        <span class="ir-top"><span class="fdot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><span class="tr-t">{{f.name}}</span><span class="sticker {{f.stCls}}"><i aria-hidden="true"></i>{{f.state}}</span></span>
+        <span class="tr-tm">{{f.flight}}</span><span class="tr-l">{{f.line}}</span>
+        <span class="tr-r"><sc-if value="{{f.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{f.badge}}</span></sc-if></span>
+      </div></sc-for></div>
+      <div class="hfacs-h thr"><b>Threads</b><small>{{threadsSub}}</small></div>
+    </div></sc-if>
     <div class="list" onKeyDown="{{menuKey}}">
 <div class="trows" role="list"><sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if><sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><div class="trow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><sc-if value="{{t.renaming}}" hint-placeholder-val="{{false}}"><input class="tr-in" aria-label="Rename the thread" ref="{{t.renameRef}}" onKeyDown="{{t.renameKey}}" onBlur="{{t.renameCommit}}"></sc-if><sc-if value="{{t.notRenaming}}" hint-placeholder-val="{{true}}"><span class="tr-t">{{t.title}}</span></sc-if><span class="tr-tm">{{t.time}}</span><span class="tr-l">{{t.last}}</span><span class="tr-r"><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{t.badge}}</span></sc-if><button class="rowmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></span><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></div></sc-for><sc-if value="{{noThreads}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noThreadsText}}</p></sc-if></div>
     </div>
@@ -1263,6 +1295,9 @@ function titleFrom(text) {
   const t = w.join(' ').replace(/[,;:]+$/, ''); return t ? t.charAt(0).toUpperCase() + t.slice(1) : 'New thread';
 }
 const JARVIS = ['j', 'help', 'sess', 'dec', 'rep', 'ask'];
+// the factories that are on, as the Factory page counts them: in flight over the cap, and what waits on you
+const FACS = [{ id: 'primepaw', name: 'PrimePaw', inflight: 3, cap: 6, waiting: 1, blocked: 1, line: 'PP-138 in Implementation · PP-129 in Code review · PP-118 waits on you' },
+  { id: 'cerebro', name: 'Cerebro', inflight: 0, cap: 4, waiting: 0, blocked: 0, line: 'Nothing ready. The curator wakes on the hour.' }];
 
 class Component extends DCLogic {
   state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false };
@@ -1433,6 +1468,10 @@ class Component extends DCLogic {
       hasAgent: !!a, noAgent: !a, agentName: who, agentSub: a ? 'your main agent' : 'not met yet', jphCls: a ? '' : 'empty',
       isMeet: !a, m: this.meetVals(),
       hi2: this.justMet() ? 'Hi, I’m ' + who + '. Say what you need the way you would to a colleague. I start sessions in your workspaces and report back here.' : 'Say it the way you would to a colleague. ' + who + ' starts sessions in your workspaces and reports back here.',
+      hasFacs: !!a, facsSub: FACS.length + ' on', threadsSub: rows.length ? rows.length + ' with ' + who : '',
+      facs: FACS.map((f) => { const run = f.inflight > 0; const needs = f.waiting + f.blocked; return { name: f.name, state: run ? 'Running' : 'Idle', stCls: run ? 'run' : 'idle', flight: f.inflight + ' of ' + f.cap, line: f.line,
+        hasBadge: needs > 0, badge: needs, cls: needs ? 'waits' : '', aria: f.name + ', ' + (run ? 'running' : 'idle') + ', ' + f.inflight + ' of ' + f.cap + ' in flight' + (needs ? ', ' + needs + ' waiting on you' : '') + '. Opens the factory',
+        pick: () => this.say('Opens the ' + f.name + ' factory') }; }),
       threads: rows, noThreads: !rows.length, noThreadsText: !a ? 'Threads start once you have a main agent.' : st.find.trim() ? 'No thread mentions that.' : 'No threads yet. Start one on the right.',
       newThread: () => this.newThread(),
       onFind: (e) => this.setState({ find: e.target.value }),

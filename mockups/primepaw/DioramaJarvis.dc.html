@@ -760,6 +760,21 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .rmenu button+button{border-top:1px dashed var(--line)}
 .tnone{margin:8px 4px;font-family:var(--hand);font-size:17px;color:var(--ink);opacity:.75}
 .tpanel .list{gap:0;padding-top:4px}
+/* the factories that are on, above the threads: one strip each with the factory icon, the state sticker, in flight over the cap and what waits on you; press one and it opens the factory's page */
+.hfacs{padding:0 10px}
+.hfacs-h{display:flex;align-items:baseline;gap:8px;padding:6px 4px 6px}
+.hfacs-h b{font-family:var(--hand);font-size:20px;font-weight:600;color:var(--ink)}
+.hfacs-h small{font-size:11.5px;font-weight:700;color:var(--mute)}
+.hfacs-h.thr{padding-top:12px;margin-bottom:-6px}
+.hfacs .trows{padding-bottom:0}
+.frow2 .ir-top{grid-column:1;min-width:0;display:flex;align-items:center;gap:7px}
+.frow2 .ir-top .tr-t{flex:0 1 auto;min-width:0}
+.frow2 .fdot{display:grid;place-items:center;width:20px;height:20px;flex:none;color:var(--ink)}
+.frow2 .fdot svg{width:16px;height:16px}
+.frow2 .sticker{flex:none;font-size:9.5px;padding:2px 7px;transform:rotate(-2deg)}
+.frow2 .tr-tm{font-size:14px;white-space:nowrap}
+.frow2 .tr-tm::after{content:" in flight";font-size:12px}
+.frow2 .tr-l{-webkit-line-clamp:1}
 .tpanel .list>.scrim{z-index:25}
 /* ---------- the sheet ---------- */
 .hsheet .leaf{margin-top:16px}
@@ -842,6 +857,13 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .htoast button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 @media (max-width:1100px){.tpanel{width:260px}}
 @media (max-width:860px){.tpanel{position:static;width:auto;height:auto;margin:0 0 8px;max-height:46vh}.hsheet{margin:0}.report-t{padding-right:0}.report-in>.pstamp{position:static;display:inline-grid;margin-top:8px}}
+.sticker.run{background-color:var(--st-green)}
+.sticker.paused{background-color:var(--st-amber)}
+.sticker.idle{background-color:var(--paper-2);background-image:var(--face),var(--pulp);color:var(--ink);box-shadow:var(--sticker-s)}
+.sticker.idle i{background-color:var(--mute)}
+.sticker.off{background-color:transparent;background-image:none;color:var(--mute);box-shadow:none;border:1.5px dashed var(--mute);padding:1.5px 8.5px}
+.sticker.off i{background-color:transparent;border:1.5px solid var(--mute);box-sizing:border-box}
+.sticker.blocked{background-color:var(--st-red)}
 /* ---------- meet your main agent: the same form on the setup list and as the card on an empty home ---------- */
 .meet{position:relative;max-width:640px;display:flex;flex-direction:column;gap:12px}
 .meet.is-card{max-width:680px;box-sizing:border-box;padding:24px 26px 22px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:5px;box-shadow:var(--lift-2);animation:drop .36s var(--ease) .08s both}
