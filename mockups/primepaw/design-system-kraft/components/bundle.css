@@ -33,6 +33,15 @@
 .kr-stack{display:flex;flex-direction:column;gap:4px;padding-bottom:8px}
 .kr-stack>.kr-sheet{position:relative}
 .kr-stack>.kr-sheet:hover{z-index:2}
+/* a factory task: a kraft folder holding the sessions it went through; the tab is the factory sticker, the key, the title, the count in pen and a caret that folds it */
+.kr-task{position:relative;padding:0 5px;background-color:var(--kraft);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid color-mix(in srgb,var(--kraft-2) 60%,var(--kraft));border-radius:var(--radius-4);box-shadow:1px 1px 0 var(--kraft-2),3px 4px 5px var(--amb)}
+.kr-task-h{display:flex;align-items:center;gap:6px;padding:6px 3px 6px 1px;font-size:12px;font-weight:800;color:var(--ink)}
+.kr-task-h .kr-key{flex:none;font-family:var(--font-mono);font-size:11px;font-weight:700;color:color-mix(in srgb,var(--ink) 78%,transparent)}
+.kr-sticker.kr-task-fac{width:20px;height:20px;border-radius:5px;flex:none}.kr-sticker.kr-task-fac svg{width:13px;height:13px;display:block}
+.kr-task>.kr-stack{padding:0 0 5px}
+/* a session's stage in a factory task: an 18px paper chip with the factory's step glyph in ink */
+.kr-stage{width:18px;height:18px;flex:none;box-sizing:border-box;display:inline-grid;place-items:center;border-radius:var(--radius-3);background-color:var(--paper-2);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);box-shadow:var(--lift-paper-1);color:var(--ink)}
+.kr-stage svg{width:12px;height:12px;display:block}
 
 /* ---------- stickers ---------- */
 .kr-sticker{position:relative;display:inline-grid;place-items:center;box-sizing:border-box;background-color:var(--kraft-2);background-image:linear-gradient(180deg,var(--gloss),rgba(255,255,255,0) 55%);color:var(--white);border-radius:var(--radius-10);box-shadow:var(--sticker);font-weight:900;line-height:1}

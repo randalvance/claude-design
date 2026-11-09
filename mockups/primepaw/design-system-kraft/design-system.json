@@ -280,9 +280,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-09T12:30:00Z",
+    "at": "2026-11-09T13:20:00Z",
     "via": "Claude Code",
-    "note": "Idea board: the bulb tile (kr-ib kr-attn, now with an on-attn ink glyph; ideas.svg) and a cork with no columns, sticky notes pinned anywhere and written in markdown"
+    "note": "Factory tasks in the session list: kr-task, a kraft folder of a task's sessions with the factory sticker, key and title on its tab, and kr-stage, a paper chip with the step glyph on each session; the pinwheel takes the robot's place while a session works"
   },
   "layout": "files",
   "libraries": [],

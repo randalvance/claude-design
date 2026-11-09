@@ -672,6 +672,33 @@ button{font:inherit}
 .maincol:has(.slip-or) .slip-or{min-width:0}
 @container (max-width:680px){.slip-or{margin-left:0;width:100%;text-align:left}.slip>.pstamp{bottom:auto;top:14px;right:14px}}
 
+/* ---------- factory tasks in the sessions list ---------- */
+/* the pinwheel takes the robot's place while a session works: one 16px slot at the left of every row */
+.row .src{width:16px;height:16px;align-items:center;justify-content:center}
+.row .src .pin{width:16px;height:16px}
+/* a session's stage in a factory task: a small paper chip with the factory's step glyph, like an icon-only step chip on the factory list */
+.stg{width:18px;height:18px;flex:none;box-sizing:border-box;display:grid;place-items:center;border-radius:3px;background-color:var(--paper-2);background-image:var(--face),var(--pulp);box-shadow:var(--lift-1);color:var(--ink)}
+.stg svg{width:12px;height:12px}
+.row .stg{position:relative;z-index:1;pointer-events:none}
+/* a factory task: a kraft folder holding the sessions it went through, its tab the factory sticker, the key and the title */
+.task{position:relative;padding:0 5px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--kraft-2) 60%,var(--kraft));border-radius:4px;box-shadow:1px 1px 0 var(--kraft-2),3px 4px 5px var(--amb)}
+.taskh{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;width:100%;box-sizing:border-box;padding:6px 3px 6px 1px;font-size:12px;font-weight:800;color:var(--ink)}
+.taskh:focus-visible{outline:2px solid var(--blue);outline-offset:1px;border-radius:3px}
+.tfac{width:20px;height:20px;flex:none;box-sizing:border-box;display:grid;place-items:center;border-radius:5px;background-color:color-mix(in srgb,var(--green) var(--dye,100%),var(--desk));background-image:var(--gloss);box-shadow:var(--sticker-s);color:var(--white)}
+.tfac svg{width:13px;height:13px}
+.tkey{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:color-mix(in srgb,var(--ink) 78%,transparent)}
+.taskh .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.taskh .pin{width:16px;height:16px}
+.taskh .nb{flex:none;transform:rotate(-8deg);width:16px;height:16px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s)}
+.tcnt{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--ink)}
+.tchev{width:12px;height:12px;flex:none;transition:transform .2s var(--ease)}
+.task.closed .tchev{transform:rotate(-90deg)}
+.taskb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .26s var(--ease)}
+.task.closed .taskb{grid-template-rows:0fr}
+.taski{min-height:0;overflow:hidden}
+.trows{display:flex;flex-direction:column;gap:4px;padding:0 0 5px}
+.page.night .tcnt{mix-blend-mode:screen}
+
 /* Jarvis, the main agent, tops the rail: a cream tile with the pet's face sticker, and it opens the home page */
 .rb-jarvis{--c:var(--sheet)}
 .rb-jarvis svg,.rb-jarvis .jface{padding:9px;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
@@ -774,17 +801,28 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
           </button>
           <div class="wsb"><div class="wsi">
             <div class="rows">
-              <sc-for list="{{w.sessions}}" as="s" hint-placeholder-count="3">
-                <div class="row {{s.cls}}"><button class="rowhit" onClick="{{s.pick}}" aria-current="{{s.cur}}" aria-label="{{s.t}}"></button>
+              <sc-for list="{{w.items}}" as="g" hint-placeholder-count="4">
+                <sc-for list="{{g.solo}}" as="s" hint-placeholder-count="1">
+                <div class="row {{s.cls}}"><button class="rowhit" onClick="{{s.pick}}" aria-current="{{s.cur}}" aria-label="{{s.aria}}"></button>
                   <sc-if value="{{s.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{s.attn}}</span></sc-if>
-                  <span class="src" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg>
-                  </span>
+                  <span class="src" aria-hidden="true"><sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{s.idle}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if></span><sc-if value="{{s.hasStage}}" hint-placeholder-val="{{false}}"><span class="stg" title="{{s.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.stageIcon}}"></path></svg></span></sc-if>
                   <sc-if value="{{s.isDone}}" hint-placeholder-val="{{false}}"><span class="donechip">Done</span></sc-if>
                   <span class="t">{{s.t}}</span>
                   <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}"><span class="subn" title="Subagents">{{s.sub}}</span></sc-if>
-                  <sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if>
                   <span class="dur">{{s.dur}}</span><button class="rowmore" aria-label="More for {{s.t}}" title="More"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></div>
+                </sc-for>
+                <sc-if value="{{g.isTask}}" hint-placeholder-val="{{false}}"><div class="task {{g.cls}}">
+                  <button class="taskh" onClick="{{g.toggle}}" aria-expanded="{{g.open}}" title="{{g.title}}"><span class="tfac" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><span class="tkey">{{g.key}}</span><span class="tt">{{g.t}}</span><sc-if value="{{g.showNow}}" hint-placeholder-val="{{false}}"><span class="stg" title="{{g.nowStage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.nowIcon}}"></path></svg></span></sc-if><sc-if value="{{g.nowBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{g.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{g.attn}}</span></sc-if><span class="tcnt">{{g.count}}</span><svg class="tchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg></button>
+                  <div class="taskb"><div class="taski"><div class="trows"><sc-for list="{{g.sessions}}" as="s" hint-placeholder-count="3">
+                <div class="row {{s.cls}}"><button class="rowhit" onClick="{{s.pick}}" aria-current="{{s.cur}}" aria-label="{{s.aria}}"></button>
+                  <sc-if value="{{s.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb">{{s.attn}}</span></sc-if>
+                  <span class="src" aria-hidden="true"><sc-if value="{{s.isBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{s.idle}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if></span><sc-if value="{{s.hasStage}}" hint-placeholder-val="{{false}}"><span class="stg" title="{{s.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.stageIcon}}"></path></svg></span></sc-if>
+                  <sc-if value="{{s.isDone}}" hint-placeholder-val="{{false}}"><span class="donechip">Done</span></sc-if>
+                  <span class="t">{{s.t}}</span>
+                  <sc-if value="{{s.hasSub}}" hint-placeholder-val="{{false}}"><span class="subn" title="Subagents">{{s.sub}}</span></sc-if>
+                  <span class="dur">{{s.dur}}</span><button class="rowmore" aria-label="More for {{s.t}}" title="More"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></div>
+                  </sc-for></div></div></div>
+                </div></sc-if>
               </sc-for>
             </div>
           </div></div>
@@ -1124,8 +1162,21 @@ const NAV = [
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
 const ROLES = [['Orchestrator', 'plans, delegates, reports back'], ['Implementer', 'writes the code itself'], ['Curator', 'reads, summarises, drafts'], ['Reviewer', 'reads diffs, leaves comments'], ['Triage', 'sorts and labels']];
+const STAGE = { planning: ['Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'], plan_review: ['Plan review', 'M12 5C7 5 3.6 9 2.5 12c1.1 3 4.5 7 9.5 7s8.4-4 9.5-7c-1.1-3-4.5-7-9.5-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'], implementation: ['Implementation', 'M8 6l-5 6 5 6M16 6l5 6-5 6'], testing: ['Testing', 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3'], code_review: ['Code review', 'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L21 21M7.5 10.5l2 2 4-4'] };
+const STAGE_ORDER = ['planning', 'plan_review', 'implementation', 'testing', 'code_review'];
+const FTASKS = { 'LH-284': { t: 'Search the docs from the header' }, 'LH-276': { t: 'Image CDN fallback' }, 'LH-279': { t: 'Cookie banner, consent per region', closed: true } };
 const WS = [
   { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', sessions: [
+    { id: 's20', harness: 'claude', agent: 'planner', t: 'Plan header search', st: 'idle', dur: '6:12', role: 'Orchestrator', branch: 'feat/LH-284-search', task: 'LH-284', stage: 'planning' },
+    { id: 's21', harness: 'codex', agent: 'reviewer', t: 'Review the search plan', st: 'idle', dur: '1:40', role: 'Implementer', branch: 'feat/LH-284-search', task: 'LH-284', stage: 'plan_review' },
+    { id: 's22', harness: 'claude', agent: 'implementer', t: 'Build header search', st: 'busy', dur: '18:04', role: 'Implementer', branch: 'feat/LH-284-search', task: 'LH-284', stage: 'implementation' },
+    { id: 's23', harness: 'pi', agent: 'planner', t: 'Plan the CDN fallback', st: 'idle', dur: '4:30', role: 'Orchestrator', branch: 'feat/LH-276-cdn', task: 'LH-276', stage: 'planning' },
+    { id: 's24', harness: 'claude', agent: 'reviewer', t: 'Review the fallback plan', st: 'idle', dur: '2:15', role: 'Implementer', branch: 'feat/LH-276-cdn', task: 'LH-276', stage: 'plan_review', attn: 1 },
+    { id: 's25', harness: 'claude', agent: 'planner', t: 'Plan per-region consent', st: 'idle', dur: '5:48', role: 'Orchestrator', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'planning' },
+    { id: 's26', harness: 'codex', agent: 'reviewer', t: 'Review the consent plan', st: 'idle', dur: '1:12', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'plan_review' },
+    { id: 's27', harness: 'claude', agent: 'implementer', t: 'Build the consent banner', st: 'idle', dur: '24:30', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'implementation' },
+    { id: 's28', harness: 'pi', agent: 'implementer', t: 'Test consent in three regions', st: 'idle', dur: '9:05', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'testing' },
+    { id: 's29', harness: 'claude', agent: 'reviewer', t: 'Review PR #318', st: 'busy', dur: '3:22', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'code_review' },
     { id: 's1', harness: 'claude', agent: 'curator', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22:21', role: 'Orchestrator', branch: 'feat/curator-digest' },
     { id: 's2', harness: 'codex', agent: 'implementer', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4:55', role: 'Implementer', branch: 'feat/LH-281' },
     { id: 's3', harness: 'claude', agent: 'issue', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
@@ -1397,7 +1448,7 @@ class Component extends DCLogic {
   }
   doneOf(s) { if (!s) return false; const d = (this.state.done || {})[s.id]; return d == null ? s.st === 'done' : d; }
   topVals(st, c, sessionBusy) {
-    const sid = st.sid; const cur = sid ? c : null; const hz = (cur && cur.harness) || 'claude'; const ag = (cur && cur.agent) || 'implementer'; const stWord = sessionBusy ? 'Busy' : c.attn ? 'Needs attention' : 'Idle'; const task = (sid && TASK_OF[sid]) || null;
+    const sid = st.sid; const cur = sid ? c : null; const hz = (cur && cur.harness) || 'claude'; const ag = (cur && cur.agent) || 'implementer'; const stWord = sessionBusy ? 'Busy' : c.attn ? 'Needs attention' : 'Idle'; const task = (sid && (TASK_OF[sid] || (c && FTASKS[c.task] && [c.task, FTASKS[c.task].t]))) || null;
     const arts = sid ? this.artsOf(sid, c) : []; const prs = (sid && PRS[sid]) || []; const tasks = (sid && TASKS[sid]) || [];
     const todoList = (sid && st.todos[sid]) || DEFAULT_TODOS;
     const counts = { todos: todoList.filter((t) => !t.d).length, term: 0, prs: prs.length, arts: arts.length, files: 0, git: GIT_ROWS.length, tasks: tasks.filter((k) => k.st !== 'done').length, pad: 0 };
@@ -1635,9 +1686,23 @@ class Component extends DCLogic {
         const sessions = st.newSessions.filter((n) => n.wsId === w.id).map((n) => this.sess(n.id)).concat(w.sessions).filter((s) => !st.activeOnly || s.st === 'busy' || s.id === st.sid);
         return { name: w.name, color: w.color, attn: sessions.some((s) => this.liveSess(s).attn), count: sessions.length, open, cls: open ? '' : 'closed',
           toggle: () => this.setState({ openWs: { ...st.openWs, [w.id]: !open } }),
-          sessions: sessions.map((s0) => this.liveSess(s0)).map((s) => ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: this.doneOf(s), hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
+          items: (() => {
+          const row = (s0) => { const s = this.liveSess(s0); const stg = s.stage && STAGE[s.stage]; return ({ t: this.titleOf(s.id, s.t), dur: s.dur, jira: !!s.jira, isBusy: s.st === 'busy', isDone: this.doneOf(s), hasAttn: !!s.attn, attn: s.attn || '', hasSub: !!s.sub, sub: s.sub || '',
             cls: (s.id === st.sid ? 'on ' : '') + (s.st === 'busy' ? 'busy ' : '') + (s.attn ? 'attn' : ''), cur: s.id === st.sid ? 'true' : false,
-            pick: () => { this.setState({ sid: s.id, tab: 'Chat', open: null }); this.petPlay('greet', 1900); } })) };
+            pick: () => { this.setState({ sid: s.id, tab: 'Chat', open: null }); this.petPlay('greet', 1900); } , idle: s.st !== 'busy', hasStage: !!stg, stage: stg ? stg[0] : '', stageIcon: stg ? stg[1] : '', aria: this.titleOf(s.id, s.t) + (stg ? ', ' + stg[0] + ' for ' + s.task : '') }); };
+          const items = [], byTask = {};
+          sessions.forEach((s) => { if (!s.task || !FTASKS[s.task]) { items.push({ solo: [s] }); return; } if (byTask[s.task]) { byTask[s.task].list.push(s); return; } byTask[s.task] = { task: s.task, list: [s] }; items.push(byTask[s.task]); });
+          return items.map((g) => {
+            if (!g.task) return { solo: g.solo.map(row), isTask: false };
+            const k = g.task, T = FTASKS[k], open = (st.openTask || {})[k] ?? !T.closed;
+            const list = g.list.slice().sort((a, b) => STAGE_ORDER.indexOf(a.stage) - STAGE_ORDER.indexOf(b.stage)), lv = list.map((x) => this.liveSess(x)), now = STAGE[list[list.length - 1].stage];
+            const busy = lv.some((x) => x.st === 'busy'), attn = lv.reduce((n, x) => n + (x.attn || 0), 0);
+            return { solo: [], isTask: true, key: k, t: T.t, open, cls: open ? '' : 'closed', sessions: list.map(row), count: list.length,
+              showNow: !open, nowStage: 'Now in ' + now[0], nowIcon: now[1], nowBusy: !open && busy, hasAttn: !open && attn > 0, attn: attn || '',
+              title: 'Factory task ' + k + ' · ' + T.t + ' · ' + list.length + (list.length === 1 ? ' session' : ' sessions') + ', now in ' + now[0],
+              toggle: () => this.setState((s) => { const o = s.openTask || {}; return { openTask: { ...o, [k]: !(o[k] ?? !T.closed) } }; }) };
+          });
+        })() };
       }),
       ...this.sideVals(st, c, sessionBusy), ...this.topVals(st, c, sessionBusy), hasSession: !!cur,
       sheetCls: cur ? 'inws' + (this.doneOf(cur) ? ' isdone' : '') : '', sheetWc: cur ? ((WS.find((w) => w.name === c.ws) || {}).color || '') : '', noSession: !cur, closeSession: () => this.setState({ sid: null, open: null, draft: 0 }),

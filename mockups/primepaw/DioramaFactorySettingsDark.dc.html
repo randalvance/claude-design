@@ -672,6 +672,33 @@ button{font:inherit}
 .maincol:has(.slip-or) .slip-or{min-width:0}
 @container (max-width:680px){.slip-or{margin-left:0;width:100%;text-align:left}.slip>.pstamp{bottom:auto;top:14px;right:14px}}
 
+/* ---------- factory tasks in the sessions list ---------- */
+/* the pinwheel takes the robot's place while a session works: one 16px slot at the left of every row */
+.row .src{width:16px;height:16px;align-items:center;justify-content:center}
+.row .src .pin{width:16px;height:16px}
+/* a session's stage in a factory task: a small paper chip with the factory's step glyph, like an icon-only step chip on the factory list */
+.stg{width:18px;height:18px;flex:none;box-sizing:border-box;display:grid;place-items:center;border-radius:3px;background-color:var(--paper-2);background-image:var(--face),var(--pulp);box-shadow:var(--lift-1);color:var(--ink)}
+.stg svg{width:12px;height:12px}
+.row .stg{position:relative;z-index:1;pointer-events:none}
+/* a factory task: a kraft folder holding the sessions it went through, its tab the factory sticker, the key and the title */
+.task{position:relative;padding:0 5px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--kraft-2) 60%,var(--kraft));border-radius:4px;box-shadow:1px 1px 0 var(--kraft-2),3px 4px 5px var(--amb)}
+.taskh{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;width:100%;box-sizing:border-box;padding:6px 3px 6px 1px;font-size:12px;font-weight:800;color:var(--ink)}
+.taskh:focus-visible{outline:2px solid var(--blue);outline-offset:1px;border-radius:3px}
+.tfac{width:20px;height:20px;flex:none;box-sizing:border-box;display:grid;place-items:center;border-radius:5px;background-color:color-mix(in srgb,var(--green) var(--dye,100%),var(--desk));background-image:var(--gloss);box-shadow:var(--sticker-s);color:var(--white)}
+.tfac svg{width:13px;height:13px}
+.tkey{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:color-mix(in srgb,var(--ink) 78%,transparent)}
+.taskh .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.taskh .pin{width:16px;height:16px}
+.taskh .nb{flex:none;transform:rotate(-8deg);width:16px;height:16px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s)}
+.tcnt{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--ink)}
+.tchev{width:12px;height:12px;flex:none;transition:transform .2s var(--ease)}
+.task.closed .tchev{transform:rotate(-90deg)}
+.taskb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .26s var(--ease)}
+.task.closed .taskb{grid-template-rows:0fr}
+.taski{min-height:0;overflow:hidden}
+.trows{display:flex;flex-direction:column;gap:4px;padding:0 0 5px}
+.page.night .tcnt{mix-blend-mode:screen}
+
 /* Jarvis, the main agent, tops the rail: a cream tile with the pet's face sticker, and it opens the home page */
 .rb-jarvis{--c:var(--sheet)}
 .rb-jarvis svg,.rb-jarvis .jface{padding:9px;border-color:color-mix(in srgb,var(--edge-2) 45%,transparent)}
