@@ -954,51 +954,6 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .htop .oph{font-family:var(--hand);font-size:17px;color:var(--mute);margin-right:4px}
 .abtn.off{opacity:.5;pointer-events:none}
 @media (max-width:860px){.sitem-b{padding-left:8px}.sitem-st{white-space:normal}.msels{flex-direction:column;align-items:flex-start}}
-/* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
-   and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
-.app .prop.pet{display:none}
-.buddy{position:fixed;bottom:12px;z-index:25;width:132px;display:flex;flex-direction:column;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
-.buddy .pet{--pw:91px;--ph:110.7px;position:relative;right:auto;top:auto;z-index:2;margin-bottom:-8px;pointer-events:auto;cursor:pointer;border:0;padding:0;outline:none;background-color:transparent;-webkit-appearance:none;appearance:none;font:inherit;color:inherit}
-.buddy .pet:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:12px}
-.buddy.dragging,.buddy.dragging *{cursor:grabbing!important}
-.bd-ped{position:relative;z-index:1;width:112px;height:30px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:6px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid var(--kraft2);border-radius:2px 2px 3px 3px;box-shadow:0 2px 0 var(--kraft2),3px 8px 10px -4px var(--amb);cursor:grab;color:var(--ink)}
-.bd-ped::before{content:"";position:absolute;left:-7px;right:-7px;top:-9px;height:10px;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 2px 0 var(--board-2)}
-.bd-ped::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-7px;height:6px;background-color:var(--board-2);border-radius:0 0 3px 3px;opacity:.85}
-.bd-ped:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
-.bd-name{font-family:var(--hand);font-size:19px;font-weight:700;line-height:1;transform:rotate(-2deg) translateY(2px)}
-.bd-chev{width:11px;height:11px;opacity:.55;transform:translateY(2px)}
-/* the prompt card above its head: the composer's card, small, on the side away from the edge, with a paper tail down to the pet */
-.bd-ask{position:absolute;bottom:calc(100% + 6px);width:312px;display:none;z-index:3}
-.bd-ask.on{display:block;animation:bdin .27s steps(3,jump-end) both}
-.bd-ask.r,.bd-slip.r{right:-6px}
-.bd-ask.l,.bd-slip.l{left:-6px}
-@keyframes bdin{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
-.bd-card{position:relative;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:6px;box-shadow:var(--lift-2)}
-.bd-h{display:flex;align-items:center;gap:8px;padding:9px 8px 0 12px}
-.bd-h .jface{width:24px;height:24px;flex:none}
-.bd-h b{font-family:var(--hand);font-size:20px;font-weight:700;line-height:1}
-.bd-h small{font-size:11.5px;color:var(--mute);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bd-x{all:unset;cursor:pointer;width:24px;height:24px;display:grid;place-items:center;border-radius:5px;color:var(--mute)}
-.bd-x:hover{background:var(--hover);color:var(--ink)}
-.bd-x:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
-.bd-x svg{width:13px;height:13px}
-.bd-ta{display:block;box-sizing:border-box;width:100%;min-height:58px;max-height:140px;resize:none;margin:0;padding:8px 14px 4px;border:0;outline:none;background:transparent;font:inherit;font-size:14.5px;line-height:1.45;color:var(--ink)}
-.bd-ta::placeholder{color:var(--faint);opacity:.75}
-.bd-bar{display:flex;align-items:center;gap:8px;padding:2px 8px 8px 14px}
-.bd-hint{margin-right:auto;font-family:var(--hand);font-size:15.5px;color:var(--mute);white-space:nowrap}
-.bd-tail{position:absolute;top:calc(100% - 1px);width:18px;height:12px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 1px 0 var(--line))}
-.bd-ask.r .bd-tail,.bd-slip.r .bd-tail{right:52px}
-.bd-ask.l .bd-tail,.bd-slip.l .bd-tail{left:52px}
-/* the slip that says the session started: taped above its head for a few seconds */
-.bd-slip{position:absolute;bottom:calc(100% + 8px);width:268px;z-index:3;animation:bdin .27s steps(3,jump-end) both}
-.bd-slip .bd-card{padding:12px 34px 11px 14px;transform:rotate(-1.2deg)}
-.bd-slip .bd-card::before{content:"";position:absolute;left:50%;top:-8px;width:46px;height:14px;transform:translateX(-50%) rotate(-4deg);background:var(--tape);box-shadow:0 1px 1px rgba(0,0,0,.08)}
-.bd-slip b{display:block;font-size:13px;font-weight:800;color:var(--ink)}
-.bd-slip q{display:block;margin-top:3px;font-family:var(--hand);font-size:18px;line-height:1.15;color:var(--ink)}
-.bd-slip small{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--green)}
-.bd-slip .bd-x{position:absolute;right:6px;top:6px}
-@media (prefers-reduced-motion:reduce){.bd-ask.on,.bd-slip{animation:none}}
-/* /buddy */
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -1176,7 +1131,6 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
   <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="htoast" role="status"><span>{{toast}}</span><sc-if value="{{toastUndo}}" hint-placeholder-val="{{false}}"><button onClick="{{undo}}">Undo</button></sc-if></div></sc-if>
 </div>
 </div>
-<div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"open":{"editor":"enum","default":"t1","options":["new","t1","t2","t3","t4","t5","t6"]},"meet":{"editor":"enum","default":"none","options":["none","card","invalid","created"]},"$preview":{"width":1440,"height":900}}'>
@@ -1345,67 +1299,7 @@ const JARVIS = ['j', 'help', 'sess', 'dec', 'rep', 'ask'];
 const FACS = [{ id: 'primepaw', name: 'PrimePaw', inflight: 3, cap: 6, waiting: 1, blocked: 1, line: 'PP-138 in Implementation · PP-129 in Code review · PP-118 waits on you' },
   { id: 'cerebro', name: 'Cerebro', inflight: 0, cap: 4, waiting: 0, blocked: 0, line: 'Nothing ready. The curator wakes on the hour.' }];
 
-/* buddy */ const BD0 = { right: 22, open: false, text: '', made: null, shot: null, leftHalf: false, dragging: false }; const BD_MIN = 10, BD_LEFT = 92; /* /buddy */
 class Component extends DCLogic {
-  /* buddy: Jarvis on the plinth. The board's own values come from renderValsBoard; these ride on top. The mood is a timed reaction if one plays,
-     else the board's own (asking, dizzy, a hello), else idle. A drag moves it along the bottom (the pointer is captured by the pet or the plinth,
-     no global handler); a click without a drag opens the card. Send starts a session with Jarvis, the main agent, and tapes a slip above its head. */
-  renderVals() { const v = this.renderValsBoard() || {}; return { ...v, ...this.bdVals(v) }; }
-  bd() { return this.state.bd || BD0; }
-  bdSet(p) { this.setState((s) => ({ bd: { ...(s.bd || BD0), ...p } })); }
-  bdShot(name, ms) { clearTimeout(this.bdT); this.bdSet({ shot: name }); this.bdT = setTimeout(() => this.bdSet({ shot: null }), ms); }
-  bdBox(el) { const page = el.closest('.page') || document.body, buddy = el.closest('.buddy'); return { w: page.offsetWidth || 1440, bw: buddy ? buddy.offsetWidth : 132, k: (page.getBoundingClientRect().width / (page.offsetWidth || 1)) || 1 }; }
-  bdPlace(right, w, bw) { const r = Math.round(Math.max(BD_MIN, Math.min(w - bw - BD_LEFT, right))); return { right: r, leftHalf: w - r - bw / 2 < w / 2 }; }
-  bdDown(e) {
-    if (e.button !== undefined && e.button !== 0) return;
-    const el = e.currentTarget, box = this.bdBox(el);
-    this.bdDrag = { id: e.pointerId, x0: e.clientX, r0: this.bd().right, moved: false, ...box };
-    try { el.setPointerCapture(e.pointerId); } catch (_) {}
-  }
-  bdMove(e) {
-    const d = this.bdDrag; if (!d || d.id !== e.pointerId) return;
-    const dx = (e.clientX - d.x0) / d.k;
-    if (!d.moved && Math.abs(dx) < 4) return;
-    d.moved = true; this.bdSet({ ...this.bdPlace(d.r0 - dx, d.w, d.bw), dragging: true });
-  }
-  bdUp(e) { const d = this.bdDrag; if (!d) return; this.bdDrag = null; if (d.moved) { this.bdNoClick = true; this.bdSet({ dragging: false }); } }
-  bdToggle() {
-    if (this.bdNoClick) { this.bdNoClick = false; return; }
-    if (this.bd().open) { this.bdClose(); return; }
-    this.bdSet({ open: true, made: null }); this.bdShot('greet', 1900);
-    setTimeout(() => { if (this.bdTa) this.bdTa.focus(); }, 40);
-  }
-  bdClose() { if (this.bd().text.trim()) this.bdShot('sad', 1500); this.bdSet({ open: false }); }
-  bdSend() {
-    const t = this.bd().text.trim(); if (!t) { if (this.bdTa) this.bdTa.focus(); return; }
-    const title = t.length > 60 ? t.slice(0, 58).trimEnd() + '…' : t;
-    if (this.bdTa) this.bdTa.value = '';
-    if (typeof this.startThread === 'function' && !this.bdNoThread()) this.startThread(t);   // Home opens it as a thread at once
-    this.bdSet({ open: false, text: '', made: title }); this.bdShot('celebrate', 2600);
-    clearTimeout(this.bdMadeT); this.bdMadeT = setTimeout(() => this.bdSet({ made: null }), 6500);
-  }
-  bdNoThread() { const v = this.renderValsBoard() || {}; return v.noAgent === true; }
-  bdKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.bdSend(); }
-    else if (e.key === 'Escape') { e.preventDefault(); this.bdClose(); }
-  }
-  bdNudge(e) {
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    e.preventDefault(); const box = this.bdBox(e.currentTarget);
-    this.bdSet(this.bdPlace(this.bd().right + (e.key === 'ArrowLeft' ? 48 : -48), box.w, box.bw));
-  }
-  bdVals(v) {
-    const b = this.bd(), mood = b.shot || (typeof v.petCls === 'string' && v.petCls.trim()) || 'idle';
-    return {
-      bdCls: (b.open ? 'open ' : '') + (b.dragging ? 'dragging' : ''), bdRight: b.right, bdSide: b.leftHalf ? 'l' : 'r', bdPetCls: mood,
-      bdOpen: b.open ? 'true' : 'false', bdAskCls: b.open ? 'on' : '', bdMade: !!b.made, bdTitle: b.made || '', bdSendCls: b.text.trim() ? 'ready' : '',
-      bdDown: (e) => this.bdDown(e), bdMove: (e) => this.bdMove(e), bdUp: (e) => this.bdUp(e), bdToggle: () => this.bdToggle(), bdClose: () => this.bdClose(),
-      bdInput: (e) => this.bdSet({ text: e.target.value }), bdKey: (e) => this.bdKey(e), bdSend: () => this.bdSend(), bdNudge: (e) => this.bdNudge(e),
-      bdRef: (el) => { this.bdTa = el; }, bdUnmade: () => this.bdSet({ made: null }),
-    };
-  }
-  /* /buddy */
-
   state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
@@ -1457,19 +1351,18 @@ class Component extends DCLogic {
   undo() { const a = this.state.archived; if (!a) return; this.setThreads((ts) => { const n = ts.slice(); n.splice(a.at, 0, a.t); return n; }); clearTimeout(this.tt); this.setState({ archived: null, toast: null, cur: a.t.id }); }
   // sending: from the empty state it starts a thread, in a thread it is the next message
   onDictated(el) { this.setState({ hasText: !!el.value.trim() }); }
-  // a new thread with Jarvis from the empty state's composer, or from Jarvis on the plinth (buddy.py calls it when the board has it), opened at once
-  startThread(text) {
-    const id = 'n' + Date.now(); const title = titleFrom(text);
-    this.setThreads((ts) => [{ id, title, time: 'now', yolo: false, items: [{ k: 'me', text }] }, ...ts]); this.setState({ cur: id, thinking: id });
-    this.later(() => { this.setState({ thinking: null }); this.petPlay('greet', 1900); this.push(id, { k: 'j', text: 'On it. Nothing here says which workspace, and this sounds like primepaw, so I started there. Tell me if it belongs somewhere else.' },
-      { k: 'sess', id: 's' + id, title, ws: 'primepaw', branch: 'feat/' + slug(title), model: 'Sonnet 5.5', status: 'working', summary: 'Reading the code and planning the change.' }); }, 1100);
-  }
   send() {
     const el = this.ta; const text = el ? el.value.trim() : ''; if (!text) return;
     if (this.listening()) this.stopMic();
     el.value = ''; this.setState({ hasText: false });
     const cur = this.curId();
-    if (!cur) { this.startThread(text); return; }
+    if (!cur) {
+      const id = 'n' + Date.now(); const title = titleFrom(text);
+      this.setThreads((ts) => [{ id, title, time: 'now', yolo: false, items: [{ k: 'me', text }] }, ...ts]); this.setState({ cur: id, thinking: id });
+      this.later(() => { this.setState({ thinking: null }); this.petPlay('greet', 1900); this.push(id, { k: 'j', text: 'On it. Nothing here says which workspace, and this sounds like primepaw, so I started there. Tell me if it belongs somewhere else.' },
+        { k: 'sess', id: 's' + id, title, ws: 'primepaw', branch: 'feat/' + slug(title), model: 'Sonnet 5.5', status: 'working', summary: 'Reading the code and planning the change.' }); }, 1100);
+      return;
+    }
     this.push(cur, { k: 'me', text }); this.setState({ thinking: cur });
     // writing to Jarvis while it waits on a question sets the question aside
     const t = this.list().find((x) => x.id === cur); const ask = t && t.items.find((x) => x.k === 'ask' && !x.status && !x.folded);
@@ -1562,7 +1455,7 @@ class Component extends DCLogic {
       return v;
     });
   }
-  renderValsBoard() { return { ...this.themeVals(), ...this.renderVals0() }; }
+  renderVals() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
     const st = this.state; const ts = this.list(); const cur = this.curId(); const t = ts.find((x) => x.id === cur) || null;
     const waiting = ts.filter((x) => this.waitingIn(x) > 0).length; const a = this.agent(); const who = a ? a.name : 'Main agent';

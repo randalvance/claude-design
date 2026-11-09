@@ -1,6 +1,6 @@
 # Jarvis, the paper puppy
 
-The pet on its plinth at the lower right of every board, the main agent's face, and the standee that walks the Factory Overseer's
+The pet over the composer (or on its plinth where a board has no composer), the main agent's face, and the standee that walks the Factory Overseer's
 floor are one character, a paper cut-out puppy: cream paper face and body, kraft brown floppy ears,
 an eye patch and a tummy patch, a red collar with a tag, pink cheeks, pen-ink features, and the white
 die-cut border every Kraft sticker has. Three cuts of it ship here, drawn on Comfy Cloud (GPT Image 2.6 Sunburst
@@ -9,7 +9,7 @@ template, for the base they all descend from, the avatar and the body) and slice
 
 | File | What it is | Where it goes |
 | --- | --- | --- |
-| `dog.png`, `dog.json` | The peeking puppy: an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; the JSON holds the frame size and the CSS numbers | On its kraft plinth at the lower right of every board, as `.buddy .pet` (the composer's own `.pet` is hidden, so a board has one Jarvis); see the `/* pet: */` and `/* buddy: */` blocks in a board's style |
+| `dog.png`, `dog.json` | The peeking puppy: an atlas with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, drawn at 2x; the JSON holds the frame size and the CSS numbers | Over the composer on every board that has one, as `.pet`; on every other board on a kraft plinth at the lower right, as `.buddy .pet`; see the `/* pet: */` and `/* buddy: */` blocks in a board's style |
 | `dog-face.png` | The avatar: the puppy's head as one round sticker, 128px square (64 CSS px at 2x, the icon scale's largest step) | The Jarvis tile on the rail, the thread portraits, any row that needs the main agent's face, as `.jface`, at the boards' icon sizes: 64 as the sticker itself, 32 in a thread portrait, 24 in a rail tile (the glyph size of every 44px tile) or a small portrait, 16 on a row |
 | `dog-walk.png`, `dog-walk.json`, `standee.js` | The standee as a sprite sheet: the Factory Overseer's pet sheet layout, 6 columns by 4 facings of 256 by 320 cells, every cell one drawing of the whole puppy; the JSON says what each column and row holds and how tall the standing puppy is; the driver plays it one cell at a time | The factory floor and the Pet board's mock of it, as `.standee`; see below |
 | `src/dog/` | The sheets as Comfy Cloud drew them, on chroma-key green: one per mood, `peek.png` (the resting peeking puppy the mood sheets copy, one cell cut from the first idle sheet), the avatar, the body design, the turnaround (the puppy from its four sides) and one walk sheet per facing (the standee's six poses) | Inputs to `build.py`; keep them so a cut can be rebuilt |
@@ -32,11 +32,12 @@ report lands, `sad` when you stop the agent or deny a tool, `error` while the th
 holds a failed session. Two rules order them: a timed reaction (`greet`, `celebrate`, `sad`, or the
 dizzy spell Home plays on opening a thread with a failure in it) shows over the resting mood until its
 timer ends, and among the resting moods `ask` wins over `error`, so a thread that waits on you and also
-holds a failed session rests in `ask`, and the arrival spell is where its failure shows. Under
-`prefers-reduced-motion` it holds its first frame.
+holds a failed session rests in `ask`, and the arrival spell is where its failure shows. A click on the
+pet over the composer says hello. Under `prefers-reduced-motion` it holds its first frame.
 
-It stands on a kraft plinth at the lower right of the board, the plinth's top edge the line its paws
-hook over (the cut it was drawn for), so every row plays as it did over the composer. It is a button:
+On a board with no composer (Inbox, Agents, the factory, Memory and the rest) it stands on a kraft
+plinth at the lower right, the plinth's top edge the line its paws hook over (the cut it was drawn for),
+so every row plays as it does over the composer. There it is a button:
 a click (or Enter) opens a prompt card above its head, and Send starts a session with Jarvis, the main
 agent, with a hello as the card opens, a cheer on Send and a droop if you close the card on a draft.
 Drag the pet or the plinth to move it left or right along the bottom; from the plinth the left and right
