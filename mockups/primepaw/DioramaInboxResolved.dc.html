@@ -968,6 +968,76 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .ihello .orl{text-align:left;margin-top:0}
 .inone{margin:4px 0}
 @media (max-width:860px){.fcard.needs{margin-left:0}}
+
+/* the finish report: the task that was done, a paper report on the sage mat that done things sit on. The head (the factory sticker or Jarvis, the key,
+   the title, the DONE stamp), the facts (when, how long in all, the tracker and the board as hand-written links, the PR), the time every session took
+   as the factory's step chips joined by arrows, what was done, the questions asked on the way with the options given and who answered, the retro on
+   three sticky notes, and Dismiss */
+.rpt{position:relative;max-width:800px;padding:6px;background-color:color-mix(in srgb,var(--mat-green) 72%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid var(--mat-green-2);border-radius:9px;box-shadow:1.5px 2px 0 var(--mat-green-2),4px 6px 7px var(--amb),8px 14px 20px -8px var(--amb-2)}
+.rpt-in{position:relative;display:flex;flex-direction:column;gap:14px;padding:16px 20px 14px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border-radius:4px;box-shadow:var(--lift-1)}
+.rpt-h{display:flex;align-items:flex-start;gap:10px;padding-right:96px}
+.rpt-h .tfac{width:28px;height:28px;margin-top:2px}
+.rpt-h .tfac svg{width:17px;height:17px}
+.rpt-h .jface{width:30px;height:30px;flex:none;margin-top:1px}
+.rpt-key{display:block;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--mute)}
+.rpt-t{margin:1px 0 0;font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.2}
+.rpt-in>.rpt-h>.pstamp{position:absolute;right:18px;top:18px}
+.rpt-facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 18px;align-items:center}
+.rpt-facts dt{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.rpt-facts dd{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:14px;font-weight:700}
+.rpt-facts small{margin-left:-8px;font-family:var(--hand);font-size:17px;font-weight:600;color:var(--mute)}
+.rpt-a{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-family:var(--hand);font-size:17px;font-weight:600;line-height:1.15;color:var(--blue);border-bottom:1.5px dashed color-mix(in srgb,var(--blue) 55%,transparent)}
+.rpt-a:hover{color:var(--blue-2);border-bottom-style:solid}
+.rpt-a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.rpt-a svg{width:13px;height:13px;flex:none}
+.rpt-steps{display:flex;flex-wrap:wrap;align-items:center;row-gap:8px}
+.rpt-step{position:relative;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 8px 0 6px;border-radius:3px;background-color:var(--paper-2);background-image:var(--face),var(--pulp);box-shadow:var(--lift-1);font-size:12px;font-weight:800;white-space:nowrap}
+.rpt-step svg{width:13px;height:13px;flex:none}
+.rpt-step i{font-style:normal;font-family:var(--hand);font-size:17px;font-weight:600;color:var(--mute)}
+.rpt-step+.rpt-step{margin-left:18px}
+.rpt-step+.rpt-step::before{content:"→";position:absolute;left:-15px;top:0;line-height:26px;font-family:var(--hand);font-size:17px;font-weight:600;color:var(--mute)}
+.rpt-sec{padding-top:12px;border-top:1px dashed var(--line)}
+.rpt-sec h4{margin:0 0 8px;display:flex;align-items:baseline;gap:10px;font-family:var(--serif);font-size:15px;font-weight:600}
+.rpt-sec h4 small{font-family:var(--hand);font-size:15px;font-weight:600;color:var(--mute)}
+.rpt-p{margin:0;font-size:14px;line-height:1.55}
+.rpt-ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.55;color:var(--mute)}
+.rpt-qs{display:flex;flex-direction:column;gap:8px}
+.rpt-q{padding:10px 12px;background-color:var(--paper);background-image:var(--face),var(--pulp);border-radius:3px;box-shadow:var(--lift-1)}
+.rpt-qh{display:flex;align-items:center;gap:8px}
+.rpt-qh b{flex:1;min-width:0;font-size:13.5px;font-weight:800;line-height:1.35}
+.rpt-qh small{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--mute);white-space:nowrap}
+.rpt-opts{list-style:none;margin:8px 0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.rpt-o{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;box-sizing:border-box;border:1.5px dashed var(--bar);border-radius:3px;font-size:12px;font-weight:700;color:var(--mute)}
+.rpt-o.on{border:1px solid color-mix(in srgb,var(--highlighter-2) 70%,transparent);background-color:var(--marker);background-image:var(--strokes);color:var(--ink)}
+.rpt-o svg{width:11px;height:11px;flex:none}
+.rpt-ans{margin:8px 0 0 26px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:13px}
+.rpt-by{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px 0 7px;box-sizing:border-box;border-radius:999px;font-size:11.5px;font-weight:800}
+.rpt-by svg{width:12px;height:12px;flex:none}
+.rpt-by.you{background-color:color-mix(in srgb,var(--blue) var(--dye,100%),var(--desk));background-image:var(--gloss);box-shadow:var(--sticker-s);color:var(--white)}
+.rpt-by.agent{background-color:var(--kraft);background-image:var(--face),var(--pulp);box-shadow:1px 1px 0 var(--kraft-2);color:var(--ink)}
+.rpt-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start;padding:2px 2px 4px}
+.rpt-col{--ink:#2a2219;--mute:#5d5142;position:relative;padding:15px 12px 12px;background-color:var(--nc);background-image:var(--face),var(--pulp);box-shadow:2px 3px 0 rgba(0,0,0,.14),0 10px 12px -9px rgba(0,0,0,.4);transform:rotate(var(--r));color:var(--ink)}
+.rpt-col::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background-color:rgba(0,0,0,.05)}
+.rpt-col.good{--nc:#cdf0b9;--r:-.8deg}
+.rpt-col.bad{--nc:#ffc9d2;--r:.6deg}
+.rpt-col.act{--nc:#fff39b;--r:-.4deg}
+.rpt-col h5{margin:0 0 7px;font-family:var(--hand);font-size:20px;font-weight:700;line-height:1}
+.rpt-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.rpt-col li{display:flex;align-items:flex-start;gap:6px;font-family:var(--hand);font-size:17px;font-weight:500;line-height:1.12}
+.rpt-col.good li::before,.rpt-col.bad li::before{flex:none;width:9px;font-weight:700;color:var(--mute)}
+.rpt-col.good li::before{content:"+"}
+.rpt-col.bad li::before{content:"–"}
+.rpt-col li small{display:block;margin-top:1px;font-size:15px;color:var(--mute)}
+.rpt-col li.is-done .ax{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--mute)}
+.rpt-box{all:unset;cursor:pointer;flex:none;width:14px;height:14px;margin-top:2px;box-sizing:border-box;display:grid;place-items:center;border:1.5px solid rgba(42,34,25,.7);border-radius:2px;background-color:rgba(255,255,255,.45);color:var(--ink);transform:rotate(-3deg)}
+.rpt-box svg{width:12px;height:12px;opacity:0}
+.rpt-box.on svg{opacity:1}
+.rpt-box:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.rpt-f{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px dashed var(--line)}
+.rpt-fn{margin-right:auto;font-family:var(--hand);font-size:15px;color:var(--mute)}
+.rpt-f .abtn{height:30px;padding:0 14px;font-size:13px}
+.page.night .rpt-col{filter:brightness(.84) saturate(.9)}
+@media (max-width:860px){.rpt-cols{grid-template-columns:1fr}.rpt-h{padding-right:0}.rpt-in>.rpt-h>.pstamp{position:static}}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
 .buddy{position:fixed;bottom:12px;z-index:25;width:132px;display:flex;flex-direction:column;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -1064,7 +1134,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
         <div class="ihd">
           <button class="imark {{it.readCls}}" onClick="{{it.toggleRead}}" aria-pressed="{{it.unread}}" title="{{it.readTitle}}" aria-label="{{it.readTitle}}"><i aria-hidden="true"></i></button>
           <span class="ikind">{{it.kindLabel}}</span><span class="iwho">{{it.from}}</span><time class="itime">{{it.time}}</time>
-          <button class="idone" onClick="{{it.archive}}" title="Done, archive it" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button>
+          <sc-if value="{{it.notRep}}" hint-placeholder-val="{{true}}"><button class="idone" onClick="{{it.archive}}" title="Done, archive it" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button></sc-if>
         </div>
         <sc-if value="{{it.isQ}}" hint-placeholder-val="{{true}}">
           <section class="slipw qinl {{it.q.cls}}" aria-label="Question" aria-live="polite">
@@ -1097,10 +1167,18 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
   </div></sc-if>
   <sc-if value="{{it.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{it.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{it.slip.cmd}}</code><span class="pstamp {{it.slip.stampCls}}">{{it.slip.stamp}}</span></div></sc-if>
 </section></sc-if>
-        <sc-if value="{{it.isRep}}" hint-placeholder-val="{{false}}"><section class="report" aria-label="Finish report"><div class="report-in"><p class="report-t">{{it.text}}</p><div class="report-f"><span class="prchip">PR {{it.pr}}</span><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg>{{it.checks}}</span><button class="abtn" onClick="{{it.openPr}}">Open PR</button></div><span class="pstamp ok" aria-hidden="true">DONE</span></div></section></sc-if>
+        <sc-if value="{{it.isRep}}" hint-placeholder-val="{{false}}"><section class="rpt" aria-label="Finish report, {{it.r.key}} {{it.r.title}}"><div class="rpt-in">
+          <header class="rpt-h"><sc-if value="{{it.r.isFac}}" hint-placeholder-val="{{true}}"><span class="tfac" title="Factory task"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span></sc-if><sc-if value="{{it.r.isJ}}" hint-placeholder-val="{{false}}"><span class="jface" title="Jarvis"></span></sc-if><div class="rpt-ht"><span class="rpt-key">{{it.r.key}}</span><h3 class="rpt-t">{{it.r.title}}</h3></div><span class="pstamp ok" aria-hidden="true">DONE</span></header>
+          <dl class="rpt-facts"><dt>Completed</dt><dd>{{it.r.done}}</dd><dt>Took</dt><dd>{{it.r.total}}<small>{{it.r.across}}</small></dd><dt>Links</dt><dd><button class="rpt-a" onClick="{{it.r.openTracker}}" title="Open the issue in the tracker">{{it.r.tracker}}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button><button class="rpt-a" onClick="{{it.r.openBoard}}" title="Open the task on its board"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{it.r.board}}</button><span class="prchip">{{it.r.prLine}}</span></dd></dl>
+          <div class="rpt-steps" aria-label="Time by session"><sc-for list="{{it.r.steps}}" as="s" hint-placeholder-count="5"><span class="rpt-step" title="{{s.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"></path></svg>{{s.label}}<i>{{s.time}}</i></span></sc-for></div>
+          <section class="rpt-sec"><h4>What was done</h4><p class="rpt-p">{{it.r.summary}}</p><ul class="rpt-ul"><sc-for list="{{it.r.points}}" as="p" hint-placeholder-count="3"><li>{{p.t}}</li></sc-for></ul></section>
+          <section class="rpt-sec"><h4>Questions along the way<small>{{it.r.qLine}}</small></h4><div class="rpt-qs"><sc-for list="{{it.r.qs}}" as="q" hint-placeholder-count="3"><div class="rpt-q"><div class="rpt-qh"><span class="stg" title="{{q.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{q.icon}}"></path></svg></span><b>{{q.text}}</b><small>{{q.asked}}</small></div><ul class="rpt-opts" aria-label="Options given"><sc-for list="{{q.opts}}" as="o" hint-placeholder-count="3"><li class="rpt-o {{o.cls}}"><sc-if value="{{o.on}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{o.name}}</li></sc-for></ul><p class="rpt-ans">Answer: <b>{{q.answer}}</b><span class="rpt-by {{q.byCls}}" title="{{q.byTitle}}"><sc-if value="{{q.isAgent}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if><sc-if value="{{q.isYou}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 21a7.5 7.5 0 0 1 15 0"></path></svg></sc-if>{{q.by}}</span></p></div></sc-for></div></section>
+          <section class="rpt-sec"><h4>Retro</h4><div class="rpt-cols"><div class="rpt-col good"><h5>Went well</h5><ul><sc-for list="{{it.r.well}}" as="w" hint-placeholder-count="3"><li>{{w.t}}</li></sc-for></ul></div><div class="rpt-col bad"><h5>Went wrong</h5><ul><sc-for list="{{it.r.wrong}}" as="w" hint-placeholder-count="2"><li>{{w.t}}</li></sc-for></ul></div><div class="rpt-col act"><h5>Action items</h5><ul><sc-for list="{{it.r.actions}}" as="a" hint-placeholder-count="3"><li class="{{a.cls}}"><button class="rpt-box {{a.boxCls}}" role="checkbox" aria-checked="{{a.done}}" aria-label="{{a.t}}" onClick="{{a.toggle}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></button><span><span class="ax">{{a.t}}</span><small>{{a.owner}}</small></span></li></sc-for></ul></div></div></section>
+          <footer class="rpt-f"><span class="rpt-fn">{{it.r.foot}}</span><button class="abtn" onClick="{{it.archive}}">Dismiss</button></footer>
+        </div></section></sc-if>
         <sc-if value="{{it.isFac}}" hint-placeholder-val="{{false}}"><section class="fcard {{it.fcls}}" aria-label="{{it.kindLabel}}"><div class="fcard-h"><span class="sticker {{it.stCls}}">{{it.status}}</span><b>{{it.task}}</b><small>{{it.col}}</small></div><p class="fcard-p">{{it.text}}</p><div class="fcard-act"><button class="abtn go" onClick="{{it.act}}">{{it.action}}</button><span class="fcard-or">{{it.or}}</span></div></section></sc-if>
         <sc-if value="{{it.isPr}}" hint-placeholder-val="{{false}}">
-          <sc-if value="{{it.prOpen}}" hint-placeholder-val="{{true}}"><section class="fcard needs prcard" aria-label="Pull request"><div class="fcard-h"><span class="prchip">PR {{it.pr}}</span><b>{{it.title}}</b><small>{{it.where}}</small></div><p class="pr-meta">{{it.meta}} · <span class="chk {{it.chkCls}}"><sc-if value="{{it.chkOk}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{it.checks}}</span></p><p class="fcard-p">{{it.text}}</p><div class="fcard-act {{it.actCls}}"><button class="abtn go" onClick="{{it.openPr}}">Open the PR</button><button class="abtn" onClick="{{it.approve}}">Approve</button><span class="fcard-or">or request changes on GitHub</span></div><sc-if value="{{it.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp ok" role="status">APPROVED</span></sc-if></section></sc-if>
+          <sc-if value="{{it.prOpen}}" hint-placeholder-val="{{true}}"><section class="fcard needs prcard" aria-label="Pull request"><div class="fcard-h"><span class="prchip">{{it.prLabel}}</span><b>{{it.title}}</b><small>{{it.where}}</small></div><p class="pr-meta">{{it.meta}} · <span class="chk {{it.chkCls}}"><sc-if value="{{it.chkOk}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{it.checks}}</span></p><p class="fcard-p">{{it.text}}</p><div class="fcard-act {{it.actCls}}"><button class="abtn go" onClick="{{it.openPr}}">Open the PR</button><button class="abtn" onClick="{{it.approve}}">Approve</button><span class="fcard-or">or request changes on GitHub</span></div><sc-if value="{{it.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp ok" role="status">APPROVED</span></sc-if></section></sc-if>
           <sc-if value="{{it.prFolded}}" hint-placeholder-val="{{false}}"><section class="slipw stub" aria-label="Reviewed"><div class="slip done"><dl class="qdone"><dt>PR {{it.pr}}</dt><dd>{{it.title}}</dd></dl><span class="pstamp ok">APPROVED</span></div></section></sc-if>
           <sc-if value="{{it.hasBy}}" hint-placeholder-val="{{false}}"><p class="iby">{{it.byVerb}} <b>{{it.byWho}}</b> · {{it.byAt}}</p></sc-if>
         </sc-if>
@@ -1119,7 +1197,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 <div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"scene":{"editor":"enum","default":"resolved","options":["inbox","empty","resolved"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"scene":{"editor":"enum","default":"resolved","options":["inbox","empty","resolved","report"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
   { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
@@ -1182,9 +1260,32 @@ const CONVS = [
       text: 'Adds X-RateLimit-Limit and X-RateLimit-Remaining to every API response, read from the key’s bucket.' } ] },
   { id: 'c8', title: 'Retry on 502s', src: 'session', items: [
     { id: 'q8', k: 'question', from: 'Retry on 502s', time: 'Yesterday', unread: false, q: Q_RETRY, asks: [], status: 'answered', answer: '3 tries, 2 s apart', by: 'You', at: 'Yesterday', folded: true } ] },
-  { id: 'c9', title: 'Weekly digest wording', src: 'thread', items: [
-    { id: 'r9', k: 'report', from: 'Jarvis', time: 'Yesterday', unread: false, text: 'Digest wording is done: PR #903 is merged.', pr: '#903', checks: '9 checks pass' } ] }
+  { id: 'c9', title: 'LH-268 Saved searches', src: 'factory', items: [
+    { id: 'r9', k: 'report', from: 'Factory', time: 'Mon', unread: true, r: {
+      key: 'LH-268', title: 'Saved searches', done: 'Mon 9 Nov, 16:42', tracker: 'LH-268 in Jira', board: 'Lighthouse issues · Done', pr: '#309', prState: 'merged',
+      sessions: [['planning', 12], ['plan_review', 4], ['implementation', 91], ['testing', 21], ['code_review', 12], ['implementation', 27, 'round 2']],
+      summary: 'Saved searches are in. Save the search you are on from the results header, give it a name, and it waits under Saved in the search menu. They are kept per workspace through the preferences API, so the server did not change.',
+      points: ['9 files, +412 −38, 31 new tests', 'Names over 64 characters are cut with an ellipsis', 'At most 20 a workspace; the 21st asks you to remove one first'],
+      qs: [
+        { stage: 'planning', asker: 'Planner', when: 'Mon 9:14', text: 'Where should saved searches live?', opts: ['Per workspace', 'Per person, across workspaces', 'Both, with a toggle'], pick: 0, by: 'You', agent: false },
+        { stage: 'plan_review', asker: 'Reviewer', when: 'Mon 10:02', text: 'Cap how many a workspace can keep?', opts: ['No cap', '20 a workspace', '50 a workspace'], pick: 1, by: 'Curator', agent: true },
+        { stage: 'implementation', asker: 'Implementer', when: 'Mon 13:40', text: 'The preferences API refuses keys over 64 characters. What happens to a longer name?', opts: ['Cut it with an ellipsis', 'Refuse it and ask for a shorter one'], pick: 0, by: 'Jarvis (Thread YOLO)', agent: true } ],
+      well: ['The plan held: the build followed it step for step.', 'Reusing the preferences API meant no server change.', 'Testing caught the empty-name case before review did.'],
+      wrong: ['Code review sent it back once: the Save button could not be reached with the keyboard.', 'Testing waited 18 min on a flaky search index rebuild.'],
+      actions: [['Add a keyboard check to the implementer’s list', 'Curator', false], ['Pin the search index fixture so tests skip the rebuild', 'LH-290, a new task', false], ['Note saved searches in the docs', 'done in PR #309', true]] } } ] },
+  { id: 'c11', title: 'Weekly digest wording', src: 'thread', items: [
+    { id: 'r11', k: 'report', from: 'Jarvis', time: 'Yesterday', unread: false, r: {
+      key: 'PP-133', title: 'Weekly digest wording', done: 'Sun 8 Nov, 18:05', tracker: 'PP-133 in Jira', board: 'PrimePaw issues · Done', pr: '#903', prState: 'merged',
+      sessions: [['planning', 6], ['implementation', 38], ['code_review', 9]],
+      summary: 'The Friday digest reads like a person wrote it: one line for each merged PR, then what got stuck and why, then what is next.',
+      points: ['2 files, +86 −41', 'Weeks with nothing merged send no digest'],
+      qs: [{ stage: 'planning', asker: 'Jarvis', when: 'Sun 16:20', text: 'Sign it from Jarvis or from the team?', opts: ['From Jarvis', 'From the team'], pick: 0, by: 'You, through Jarvis', agent: false }],
+      well: ['One short session did most of it.'], wrong: ['The first draft listed every commit, not every PR.'],
+      actions: [['Group by PR in the curator’s digest skill', 'Curator', false]] } } ] }
 ];
+const STAGE = { planning: ['Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'], plan_review: ['Plan review', 'M12 5C7 5 3.6 9 2.5 12c1.1 3 4.5 7 9.5 7s8.4-4 9.5-7c-1.1-3-4.5-7-9.5-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'], implementation: ['Implementation', 'M8 6l-5 6 5 6M16 6l5 6-5 6'], testing: ['Testing', 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3'], code_review: ['Code review', 'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L21 21M7.5 10.5l2 2 4-4'] };
+const mins = (m) => (m >= 60 ? Math.floor(m / 60) + ' h ' + (m % 60 ? (m % 60) + ' min' : '') : m + ' min').trim();
+const totalOf = (r) => r.sessions.reduce((n, x) => n + x[1], 0);
 function needsYou(x) { return (x.k === 'question' || x.k === 'approval' || x.k === 'pull_request') ? !x.status : x.k !== 'report'; }
 function lineOf(x) {
   if (x.k === 'question') return x.status ? (x.by === 'You' ? 'You' : x.by) + ' answered: ' + x.answer : x.from + ' asks: ' + x.q.text;
@@ -1193,6 +1294,7 @@ function lineOf(x) {
   if (x.k === 'factory_blocked') return 'Blocked: ' + x.text;
   if (x.k === 'factory_waiting') return 'Waiting on you: ' + x.text;
   if (x.k === 'plan_ready') return 'Ready for you in Planning: ' + x.text;
+  if (x.k === 'report') return 'Done: ' + x.r.key + ' ' + x.r.title + ' · ' + mins(totalOf(x.r));
   return x.text;
 }
 function jarvisReply(text) {
@@ -1260,7 +1362,7 @@ class Component extends DCLogic {
   }
   /* /buddy */
 
-  state = { convs: null, cur: undefined, filter: 'all', toast: null, archived: null, picks: {} };
+  state = { convs: null, cur: undefined, filter: null, toast: null, archived: null, picks: {} };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); clearTimeout(this.tt); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -1273,6 +1375,7 @@ class Component extends DCLogic {
   }
   // the scene: the inbox as it stands, nothing left in it, or an item that gets resolved elsewhere while you look
   scene() { return this.props.scene ?? 'resolved'; }
+  filt() { return this.state.filter || (this.scene() === 'report' ? 'reports' : 'all'); }
   list() {
     if (!this.cs) {
       this.cs = this.scene() === 'empty' ? [] : CONVS.map((c) => ({ ...c, items: c.items.map((x) => ({ ...x, asks: (x.asks || []).slice() })) }));
@@ -1281,7 +1384,7 @@ class Component extends DCLogic {
     }
     return this.cs;
   }
-  curId() { const st = this.state; if (st.cur !== undefined) return st.cur; return this.scene() === 'resolved' ? 'c2' : 'c1'; }
+  curId() { const st = this.state; if (st.cur !== undefined) return st.cur; return this.scene() === 'resolved' ? 'c2' : this.scene() === 'report' ? 'c9' : 'c1'; }
   setConvs(fn) { this.cs = fn(this.list()); this.setState({ convs: this.cs }); }
   patchItem(cid, iid, patch) { this.setConvs((cs) => cs.map((c) => c.id === cid ? { ...c, items: c.items.map((x) => x.id === iid ? { ...x, ...(typeof patch === 'function' ? patch(x) : patch) } : x) } : c)); }
   // the git push in Add CSV export gets allowed by Jarvis under Thread YOLO while you look, so it closes here on its own
@@ -1309,8 +1412,8 @@ class Component extends DCLogic {
   archive(c, x) {
     const at = c.items.findIndex((y) => y.id === x.id); const left = c.items.filter((y) => y.id !== x.id);
     this.setConvs((cs) => cs.map((y) => y.id === c.id ? { ...y, items: left } : y));
-    if (!left.length) { const vis = this.visible(this.list(), this.state.filter).filter((y) => y.id !== c.id); if (this.curId() === c.id) this.setState({ cur: vis[0] ? vis[0].id : null }); }
-    this.setState({ archived: { cid: c.id, item: x, at } }); this.say('Done: ' + lineOf(x), true);
+    if (!left.length) { const vis = this.visible(this.list(), this.filt()).filter((y) => y.id !== c.id); if (this.curId() === c.id) this.setState({ cur: vis[0] ? vis[0].id : null }); }
+    this.setState({ archived: { cid: c.id, item: x, at } }); this.say(x.k === 'report' ? 'Dismissed the report on ' + x.r.key + ' ' + x.r.title : 'Done: ' + lineOf(x), true);
   }
   undo() {
     const a = this.state.archived; if (!a) return;
@@ -1347,17 +1450,34 @@ class Component extends DCLogic {
       tags: p.tags.map((t) => ({ t })), actCls: x.status ? 'settled' : '', allow: () => settle('once'), always: () => settle('always'), deny: () => settle('denied'),
       hasStamp: !!x.status, stamp: stamp[0], stampCls: stamp[1] };
   }
+  // a finish report: the task, when it was done, the time every session took, the links, what was done, the questions on the way and who answered, the retro
+  repVals(c, x) {
+    const r = x.r, n = r.sessions.length, ticks = (this.state.ticks || {})[x.id] || {};
+    return { key: r.key, title: r.title, isFac: c.src === 'factory', isJ: c.src !== 'factory', done: r.done, total: mins(totalOf(r)), across: 'across ' + n + (n === 1 ? ' session' : ' sessions'),
+      tracker: r.tracker, board: r.board, prLine: 'PR ' + r.pr + ' ' + r.prState,
+      openTracker: () => this.say('Opens ' + r.key + ' in Jira'), openBoard: () => this.say('Opens ' + r.key + ' on ' + r.board.split(' · ')[0]),
+      steps: r.sessions.map(([k, m, note]) => ({ icon: STAGE[k][1], label: STAGE[k][0] + (note ? ', ' + note : ''), time: mins(m), title: STAGE[k][0] + (note ? ', ' + note : '') + ' · ' + mins(m) })),
+      summary: r.summary, points: r.points.map((t) => ({ t })),
+      qLine: r.qs.length + (r.qs.length === 1 ? ' question' : ' questions') + ' · ' + r.qs.filter((q) => !q.agent).length + ' answered by you',
+      qs: r.qs.map((q) => ({ stage: 'Asked in ' + STAGE[q.stage][0], icon: STAGE[q.stage][1], text: q.text, asked: q.asker + ' asked · ' + q.when,
+        opts: q.opts.map((o, i) => ({ name: o, on: i === q.pick, cls: i === q.pick ? 'on' : '' })), answer: q.opts[q.pick],
+        by: q.by, isAgent: !!q.agent, isYou: !q.agent, byCls: q.agent ? 'agent' : 'you', byTitle: q.agent ? 'Answered by an agent' : 'Answered by you' })),
+      well: r.well.map((t) => ({ t })), wrong: r.wrong.map((t) => ({ t })),
+      actions: r.actions.map(([t, owner, done0], i) => { const done = ticks[i] ?? done0; return { t, owner, done, cls: done ? 'is-done' : '', boxCls: done ? 'on' : '',
+        toggle: () => this.setState((s) => ({ ticks: { ...(s.ticks || {}), [x.id]: { ...((s.ticks || {})[x.id] || {}), [i]: !done } } })) }; }),
+      foot: c.src === 'factory' ? 'Filed by the factory when ' + r.key + ' merged' : 'Filed by Jarvis when the work was done' };
+  }
   itemsVals(c) {
     return c.items.map((x) => {
       const by = x.status ? { hasBy: true, byVerb: VERB[x.status], byWho: x.by, byAt: x.at } : { hasBy: false, byVerb: '', byWho: '', byAt: '' };
-      const v = { cls: [x.k, x.unread ? 'unread' : '', x.status || x.k === 'report' ? 'done' : ''].join(' '), aria: KIND[x.k] + ': ' + lineOf(x),
+      const v = { cls: [x.k, x.unread ? 'unread' : '', x.status ? 'done' : ''].join(' '), aria: KIND[x.k] + ': ' + lineOf(x),
         readCls: x.unread ? 'unread' : '', unread: !!x.unread, readTitle: x.unread ? 'Mark as read' : 'Mark as unread', toggleRead: () => this.patchItem(c.id, x.id, { unread: !x.unread }),
         kindLabel: KIND[x.k], from: x.from, time: x.time, archive: () => this.archive(c, x),
-        isQ: x.k === 'question', isSlip: x.k === 'approval', isRep: x.k === 'report', isPr: x.k === 'pull_request', isFac: x.k.startsWith('factory') || x.k === 'plan_ready', ...by };
+        notRep: x.k !== 'report', isQ: x.k === 'question', isSlip: x.k === 'approval', isRep: x.k === 'report', isPr: x.k === 'pull_request', isFac: x.k.startsWith('factory') || x.k === 'plan_ready', ...by };
       if (x.k === 'question') v.q = this.qVals(c, x);
       if (x.k === 'approval') v.slip = this.slipVals(c, x);
-      if (x.k === 'report') Object.assign(v, { text: x.text, pr: x.pr, checks: x.checks, openPr: () => this.say('Opens PR ' + x.pr + ' on GitHub') });
-      if (x.k === 'pull_request') Object.assign(v, { prOpen: !x.folded, prFolded: !!x.folded, pr: x.pr, title: x.title, where: x.repo + ' · ' + x.branch + ' → main', meta: 'Opened by ' + x.from + ' · ' + x.diff + ' in ' + x.files,
+      if (x.k === 'report') v.r = this.repVals(c, x);
+      if (x.k === 'pull_request') Object.assign(v, { prOpen: !x.folded, prFolded: !!x.folded, pr: x.pr, prLabel: 'PR ' + x.pr, title: x.title, where: x.repo + ' · ' + x.branch + ' → main', meta: 'Opened by ' + x.from + ' · ' + x.diff + ' in ' + x.files,
         checks: x.checks, chkOk: !!x.checksOk, chkCls: x.checksOk ? '' : 'bad', text: x.text, actCls: x.status ? 'settled' : '', hasStamp: !!x.status, openPr: () => this.say('Opens PR ' + x.pr + ' on GitHub'),
         approve: () => { if (x.status) return; this.patchItem(c.id, x.id, { status: 'approved', by: 'You', at: 'just now', unread: false }); this.later(() => this.patchItem(c.id, x.id, { folded: true }), 700); } });
       if (v.isFac) {
@@ -1370,7 +1490,7 @@ class Component extends DCLogic {
   }
   renderValsBoard() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
-    const st = this.state; const cs = this.list(); const f = st.filter; const vis = this.visible(cs, f); const cur = this.curId();
+    const st = this.state; const cs = this.list(); const f = this.filt(); const vis = this.visible(cs, f); const cur = this.curId();
     const c = vis.find((x) => x.id === cur) || null;
     const all = cs.filter((x) => x.items.length); const unread = all.reduce((n, x) => n + x.items.filter((y) => y.unread).length, 0);
     const needs = all.reduce((n, x) => n + x.items.filter(needsYou).length, 0);

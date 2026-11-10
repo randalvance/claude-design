@@ -48,6 +48,7 @@ Confirmed functionality, each with a light and a dark board in this folder (see 
 - Skills list and edit page (slash command, trigger phrases, instructions, files, who it is on for, usage).
 - Workspaces list and edit page. Memory with Global, Workspaces and Agents tabs and a 4 KB budget. MCP servers on one timetable with a tools drawer.
 - Idea board: sticky notes pinned anywhere on a cork, written in markdown (headings, lists, todos, quotes, bold, italic, strike, code, links), dragged freely, in five colours, with Undo for a thrown-away note.
+- Finish reports in the inbox: the task, when it was done, the time all its sessions took, tracker and board links, a summary, the questions asked with their options and who answered, and a retro (went well, went wrong, action items), with Dismiss.
 - Kanban boards list; one board as pinned notes with a dependencies view and a card drawer. Background jobs and workflows with run history.
 - Knowledge base: git-backed markdown notes as a file tree with git marks, a block editor with drag and nesting, `[[links]]`, tags, backlinks and a force graph; set up by picking a folder or cloning a repo and choosing a commit-and-push cadence.
 
