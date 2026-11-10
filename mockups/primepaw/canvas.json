@@ -887,7 +887,7 @@
       "y": 26300,
       "w": 1440,
       "h": 900,
-      "title": "Workspaces, loading: three variations, live demo",
+      "title": "Loading: Jarvis fetches, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -897,7 +897,7 @@
       "y": 26300,
       "w": 1440,
       "h": 900,
-      "title": "Workspaces, loading: three variations, dark mode, live demo",
+      "title": "Loading: Jarvis fetches, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -1182,7 +1182,7 @@
       "y": 26300,
       "w": 320,
       "page": "diorama",
-      "text": "Loading, three ways: what the Workspaces page shows while it fetches the list. The one picked becomes the loading state of every other page, with only the noun changed. Each is a cut of the sheet, one column of the grid at its true size, resting in its loading state; Let it load lands the list and Load again goes back. In all three the rail, the title, Find and New workspace are there from the first frame, the line says Fetching your workspaces in pen with dots that step, and when the list lands the cards come a frame apart from the top and the count takes its place under the title. 1, Blanks: blank cards hold the places, the same card stock with a plain kraft spine, a pair of pencil guides for the name, a rule per folder and one for the summary, and the button’s outline as a cut line; the small pinwheel sits in the count’s place. It lays as many blanks as the list held last time, six on a first visit, and nothing jumps when the words are inked in. 2, The pinwheel: the one toy at 96px on a stick, taped to the empty sheet and turning as it does on a working session, with the line under it. One piece, the same on every page. 3, Jarvis fetches: he leaves his plinth, a small card on it saying out fetching, and goes through a kraft file box labelled with the page’s name, the workspaces’ colours on the index tabs; the bubble says what he is fetching. When it lands he is back on the plinth, cheering, and says Got them. Only the pinwheel’s turn and stepped frames move, nothing pulses, and under reduced motion each is a still."
+      "text": "Loading: Jarvis fetches, the one picked from three ways (the blank cards ruled in pencil and the one big pinwheel were dropped). It is what the Workspaces page shows while it fetches its list, and every other page takes the same state. The rail, the title, Find and New workspace are there from the first frame and the sheet under them is empty but for Jarvis: he is off his plinth, where a small card says out fetching, and at a kraft file box on a ledge. His standing cut steps between two frames of work, the index cards in the box lift one at a time, and a scissor-cut paper bubble says Fetching your workspaces in pen, its dots stepping. The box wears the page’s name on its label; that label and the noun in the bubble are all that change from page to page. When the list lands the scene goes in a frame, the cards come a frame apart from the top, the count takes its place under the title, and Jarvis is back on the plinth, cheering, with Got them in a small bubble. This board rests in the loading state so it can be looked at: Let it load lands the list and Load again goes back. The Workspaces board above plays it once when it opens. Only stepped frames move, nothing pulses, and under reduced motion it is a still."
     },
     "p22": {
       "x": 3080,

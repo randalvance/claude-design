@@ -40,7 +40,7 @@ button,input{font:inherit}
 .top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
 .ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
 .ttl h1{margin:0;font-family:var(--font-serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
-.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute);min-height:1.35em}
 .top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pp-search{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background-color:var(--sheet);border:1px solid var(--line);box-shadow:var(--lift-1);color:var(--mute);box-sizing:border-box;width:260px;max-width:100%}
 .pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
@@ -265,6 +265,28 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .rb-jarvis span.jface{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
+/* fetch: the loading state every page shares. Jarvis is away from his plinth and at a kraft file box on a ledge in the middle of the empty sheet:
+   his standing cut steps between two frames of work, the index cards lift one at a time, and a paper bubble says what he is fetching. He stands as
+   tall here as he sits on the plinth; the type is on the scale (Caveat 26, Courier 12) */
+.fx{grid-column:1/-1;display:flex;justify-content:center;padding-top:clamp(20px,7vh,72px);pointer-events:none}
+.fx-scene{position:relative;flex:none;width:370px;height:316px}
+.fx-say{position:absolute;left:8px;top:0;z-index:6;transform:rotate(-3deg);filter:drop-shadow(1.2px 0 0 var(--stk)) drop-shadow(-1.2px 0 0 var(--stk)) drop-shadow(0 1.2px 0 var(--stk)) drop-shadow(0 -1.2px 0 var(--stk)) drop-shadow(2px 3px 0 var(--shadow))}
+.fx-say-in{position:relative;z-index:1;padding:11px 17px 12px 18px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(2% 14%,9% 3%,30% 0,58% 3%,84% 0,95% 7%,100% 32%,98% 74%,93% 96%,68% 100%,40% 96%,12% 100%,3% 88%,0 52%);white-space:nowrap}
+.fx-say-t{display:block;font-family:var(--hand);font-size:26px;font-weight:700;line-height:1;color:var(--ink)}
+.fx-dots{display:inline-block;width:.9em;text-align:left}
+.fx-say-tail{position:absolute;top:calc(100% - 3px);left:78px;width:21px;height:18px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(0 0,100% 0,30% 100%)}
+.fx-jw{position:absolute;left:40px;bottom:10px;z-index:2;width:180px;height:225px;background:url(/_blob/21d0915356dadf4fbcb2992c973934bc) -540px -450px/1080px 900px no-repeat;filter:drop-shadow(1px 2px 1px var(--amb));animation:fx-work .38s step-end infinite}
+@keyframes fx-work{0%{background-position-x:-540px}50%{background-position-x:-720px}100%{background-position-x:-540px}}
+.fx-box{position:absolute;right:25px;bottom:11px;z-index:3;width:170px;height:78px;box-sizing:border-box;display:grid;place-items:center;padding-top:10px;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 3px 0 var(--board-2),3px 8px 10px -4px var(--amb)}
+.fx-box::before{content:"";position:absolute;left:50%;top:-1px;width:34px;height:15px;transform:translateX(-50%);border-radius:0 0 17px 17px;background:var(--board-2);opacity:.6}
+.fx-label{padding:3px 10px 2px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:2px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink);transform:rotate(-1.5deg);box-shadow:1px 1px 0 var(--shadow)}
+.fx-card{position:absolute;z-index:1;width:130px;height:75px;box-sizing:border-box;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:3px 3px 0 0}
+.fx-card::before{content:"";position:absolute;left:var(--tx);bottom:100%;width:32px;height:11px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c) var(--dye,100%),var(--card));border:1px solid rgba(0,0,0,.16);border-bottom:0;border-radius:3px 3px 0 0}
+.fx-card.up{transform:translateY(-14px) rotate(-2deg)}
+.fx-ledge{position:absolute;left:15px;right:15px;bottom:0;height:11px;box-sizing:border-box;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 2px 0 var(--board-2),3px 7px 8px -4px var(--amb)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.fx-jw{animation:none}}
+/* /fetch */
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
@@ -309,6 +331,16 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .bd-slip small{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--green)}
 .bd-slip .bd-x{position:absolute;right:6px;top:6px}
 @media (prefers-reduced-motion:reduce){.bd-ask.on,.bd-slip{animation:none}}
+/* away: while the page fetches, the pet is at the file box and a small card stands on the plinth in its place; back on it, it says a word */
+.bd-out{position:relative;z-index:2;margin-bottom:8px;padding:1px 8px 2px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:2px;font-family:var(--hand);font-size:15px;font-weight:600;line-height:1.1;color:var(--mute);white-space:nowrap;transform:rotate(-4deg);box-shadow:1px 1px 0 var(--shadow)}
+.fx-say.bd-say{left:auto;top:auto;right:20px;bottom:calc(100% + 2px);pointer-events:none;animation:bdsay .27s steps(3,jump-end) both}
+.fx-say.bd-say.l{right:auto;left:20px}
+.bd-say .fx-say-in{padding:8px 13px 9px 14px}
+.bd-say .fx-say-t{font-size:20px}
+.bd-say .fx-say-tail{left:auto;right:30px;clip-path:polygon(0 0,100% 0,70% 100%)}
+.bd-say.l .fx-say-tail{right:auto;left:30px;clip-path:polygon(0 0,100% 0,30% 100%)}
+@keyframes bdsay{from{scale:.5}to{scale:1}}
+@media (prefers-reduced-motion:reduce){.fx-say.bd-say{animation:none}}
 /* /buddy */
 </style>
 </helmet>
@@ -340,7 +372,8 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
       </div>
     </header>
 
-    <section class="grid" aria-label="Workspaces">
+    <section class="grid" aria-label="Workspaces" aria-busy="{{busy}}">
+      <sc-if value="{{fetching}}" hint-placeholder-val="{{false}}"><div class="fx" aria-hidden="true"><div class="fx-scene"><div class="fx-say"><div class="fx-say-in"><span class="fx-say-t">Fetching your workspaces<span class="fx-dots">{{fxDots}}</span></span></div><i class="fx-say-tail"></i></div><sc-for list="{{fxFiles}}" as="f" hint-placeholder-count="4"><i class="fx-card {{f.cls}}" style="--c: {{f.c}}; --tx: {{f.tx}}px; right: {{f.r}}px; bottom: {{f.b}}px"></i></sc-for><span class="fx-jw"></span><div class="fx-box"><span class="fx-label">Workspaces</span></div><i class="fx-ledge"></i></div></div></sc-if>
       <sc-for list="{{items}}" as="w" hint-placeholder-count="6">
         <article class="ws {{w.cls}}" style="--c: {{w.color}}">
           <button class="hit" onClick="{{w.pick}}" aria-pressed="{{w.on}}">
@@ -354,9 +387,11 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
       <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">Nothing called “{{q}}” here</div></sc-if>
       <sc-if value="{{showNew}}" hint-placeholder-val="{{true}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if>
     </section>
+
+    <span class="sr" role="status">{{status}}</span>
   </main>
 </div>
-<div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
+<div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><sc-if value="{{bdSaying}}" hint-placeholder-val="{{false}}"><div class="fx-say bd-say {{bdSide}}" aria-hidden="true"><div class="fx-say-in"><span class="fx-say-t">{{bdSay}}</span></div><i class="fx-say-tail"></i></div></sc-if><sc-if value="{{bdHome}}" hint-placeholder-val="{{true}}"><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button></sc-if><sc-if value="{{bdAway}}" hint-placeholder-val="{{false}}"><span class="bd-out" aria-hidden="true">out fetching</span></sc-if><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
@@ -376,6 +411,8 @@ const NAV = [
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
+/* fetch */ const FX_FILES = [['var(--blue)', 85, 45, 45], ['var(--amber)', 59, 40, 39], ['var(--red)', 32, 35, 32], ['var(--green)', 6, 30, 26]]; const fxVals = (t, still) => ({ fxDots: still ? '…' : '.'.repeat((t % 3) + 1), fxFiles: FX_FILES.map(([c, tx, r, b], i) => ({ c, tx, r, b, cls: !still && t % 4 === i ? 'up' : '' })) }); /* /fetch */
+const FETCH_MS = 1900;   // how long the fetch takes in this demo
 const WS = [
   { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', dirs: ['~/dev/lighthouse/web', '~/dev/lighthouse/design-tokens'], agents: 4, facts: 5, board: 'Lighthouse Q4', active: 2 },
   { id: 'orbit', name: 'Orbit Billing', color: '#c8553d', dirs: ['~/dev/orbit/api', '~/dev/orbit/dashboard'], agents: 3, facts: 9, board: 'Billing migration', active: 1 },
@@ -440,12 +477,28 @@ class Component extends DCLogic {
       bdOpen: b.open ? 'true' : 'false', bdAskCls: b.open ? 'on' : '', bdMade: !!b.made, bdTitle: b.made || '', bdSendCls: b.text.trim() ? 'ready' : '',
       bdDown: (e) => this.bdDown(e), bdMove: (e) => this.bdMove(e), bdUp: (e) => this.bdUp(e), bdToggle: () => this.bdToggle(), bdClose: () => this.bdClose(),
       bdInput: (e) => this.bdSet({ text: e.target.value }), bdKey: (e) => this.bdKey(e), bdSend: () => this.bdSend(), bdNudge: (e) => this.bdNudge(e),
-      bdRef: (el) => { this.bdTa = el; }, bdUnmade: () => this.bdSet({ made: null }),
+      bdAway: !!v.petAway, bdHome: !v.petAway, bdSaying: !!v.petSay && !b.open && !b.made, bdSay: v.petSay || '', bdRef: (el) => { this.bdTa = el; }, bdUnmade: () => this.bdSet({ made: null }),
     };
   }
   /* /buddy */
 
-  state = { q: '', sel: null, started: null };
+  // fx: the page opens fetching its list (loading), then the cards arrive a frame apart (landing, got counts them in) and it is loaded.
+  // While it fetches Jarvis is at the file box (fetch.py) and off his plinth; when it lands he is back, cheering, and says Got them
+  state = { q: '', sel: null, started: null, fx: 'loading', got: 0, cheer: false, tick: 0 };
+  componentDidMount() {
+    this.fxQ = [];
+    this.still = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.still) { this.setState({ fx: 'loaded', got: WS.length }); return; }
+    this.fxIv = setInterval(() => this.setState((s) => ({ tick: s.tick + 1 })), 420);
+    this.fxQ.push(setTimeout(() => this.land(), FETCH_MS));
+  }
+  componentWillUnmount() { clearInterval(this.fxIv); (this.fxQ || []).forEach(clearTimeout); }
+  land() {
+    clearInterval(this.fxIv);
+    this.setState({ fx: 'landing', got: 0, cheer: true });
+    WS.forEach((_, i) => this.fxQ.push(setTimeout(() => this.setState(i === WS.length - 1 ? { got: WS.length, fx: 'loaded' } : { got: i + 1 }), 90 * (i + 1))));
+    this.fxQ.push(setTimeout(() => this.setState({ cheer: false }), 2500));
+  }
   // Theme: the "theme" prop picks the default (paper by day, night in the dark); the moon button in the rail flips it for this view.
   themeVals() {
     const night = this.state.night ?? ((this.props.theme ?? 'paper') === 'night');
@@ -458,12 +511,16 @@ class Component extends DCLogic {
   renderVals0() {
     const st = this.state;
     const q = st.q.trim().toLowerCase();
-    const list = WS.filter((w) => !q || w.name.toLowerCase().includes(q) || w.dirs.some((d) => d.toLowerCase().includes(q)) || (w.board || '').toLowerCase().includes(q));
+    const all = WS.filter((w) => !q || w.name.toLowerCase().includes(q) || w.dirs.some((d) => d.toLowerCase().includes(q)) || (w.board || '').toLowerCase().includes(q));
+    const fetching = st.fx === 'loading', loaded = st.fx === 'loaded';
+    const list = loaded ? all : all.slice(0, fetching ? 0 : st.got);
     const started = WS.find((w) => w.id === st.started);
     const busyN = WS.reduce((n, w) => n + w.active, 0);
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'workspaces' ? 'is-on' : '', cur: n.id === 'workspaces' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
-      sub: WS.length + ' workspaces · ' + plural(WS.reduce((n, w) => n + w.dirs.length, 0), 'folder') + ' · ' + busyN + ' sessions working',
+      fetching, busy: fetching ? 'true' : 'false', status: fetching ? 'Fetching your workspaces' : WS.length + ' workspaces',
+      petAway: fetching, petCls: st.cheer ? 'celebrate' : '', petSay: st.cheer ? 'Got them!' : '', ...fxVals(st.tick, this.still),
+      sub: fetching ? '' : WS.length + ' workspaces · ' + plural(WS.reduce((n, w) => n + w.dirs.length, 0), 'folder') + ' · ' + busyN + ' sessions working',
       qRef: (el) => { if (el) this.q = el; },
       onSearch: (e) => this.setState({ q: e.currentTarget.value, sel: null }),
       q: st.q,
@@ -478,8 +535,8 @@ class Component extends DCLogic {
         ctaAria: 'New session in ' + w.name,
         start: () => this.setState({ started: w.id, sel: w.id })
       })),
-      empty: list.length === 0,
-      showNew: !q,
+      empty: loaded && list.length === 0,
+      showNew: loaded && !q,
       demoText: started ? 'Started a session in ' + started.name + ' · in the app this opens the chat with that workspace\'s folders mounted' : 'Search matches names, folders and boards · click a card to pick it up · New session opens a chat there',
       reset: () => { if (this.q) this.q.value = ''; this.setState({ q: '', sel: null, started: null }); }
     };

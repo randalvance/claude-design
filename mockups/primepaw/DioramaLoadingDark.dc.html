@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Workspaces, loading: three variations, dark mode</title>
+<title>Loading: Jarvis fetches, dark mode</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -40,7 +40,7 @@ button,input{font:inherit}
 .top{display:flex;align-items:flex-end;gap:18px;padding:22px 28px 0;flex-wrap:wrap}
 .ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
 .ttl h1{margin:0;font-family:var(--font-serif);font-weight:600;font-size:26px;letter-spacing:-.01em;font-variation-settings:"opsz" 48}
-.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.ttl .sub{font-family:var(--font-hand);font-size:17px;color:var(--mute);min-height:1.35em}
 .top-r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pp-search{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;background-color:var(--sheet);border:1px solid var(--line);box-shadow:var(--lift-1);color:var(--mute);box-sizing:border-box;width:260px;max-width:100%}
 .pp-search input{all:unset;flex:1;min-width:0;font-size:13px;color:var(--ink)}
@@ -265,6 +265,28 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .rb-jarvis span.jface{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
+/* fetch: the loading state every page shares. Jarvis is away from his plinth and at a kraft file box on a ledge in the middle of the empty sheet:
+   his standing cut steps between two frames of work, the index cards lift one at a time, and a paper bubble says what he is fetching. He stands as
+   tall here as he sits on the plinth; the type is on the scale (Caveat 26, Courier 12) */
+.fx{grid-column:1/-1;display:flex;justify-content:center;padding-top:clamp(20px,7vh,72px);pointer-events:none}
+.fx-scene{position:relative;flex:none;width:370px;height:316px}
+.fx-say{position:absolute;left:8px;top:0;z-index:6;transform:rotate(-3deg);filter:drop-shadow(1.2px 0 0 var(--stk)) drop-shadow(-1.2px 0 0 var(--stk)) drop-shadow(0 1.2px 0 var(--stk)) drop-shadow(0 -1.2px 0 var(--stk)) drop-shadow(2px 3px 0 var(--shadow))}
+.fx-say-in{position:relative;z-index:1;padding:11px 17px 12px 18px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(2% 14%,9% 3%,30% 0,58% 3%,84% 0,95% 7%,100% 32%,98% 74%,93% 96%,68% 100%,40% 96%,12% 100%,3% 88%,0 52%);white-space:nowrap}
+.fx-say-t{display:block;font-family:var(--hand);font-size:26px;font-weight:700;line-height:1;color:var(--ink)}
+.fx-dots{display:inline-block;width:.9em;text-align:left}
+.fx-say-tail{position:absolute;top:calc(100% - 3px);left:78px;width:21px;height:18px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(0 0,100% 0,30% 100%)}
+.fx-jw{position:absolute;left:40px;bottom:10px;z-index:2;width:180px;height:225px;background:url(/_blob/21d0915356dadf4fbcb2992c973934bc) -540px -450px/1080px 900px no-repeat;filter:drop-shadow(1px 2px 1px var(--amb));animation:fx-work .38s step-end infinite}
+@keyframes fx-work{0%{background-position-x:-540px}50%{background-position-x:-720px}100%{background-position-x:-540px}}
+.fx-box{position:absolute;right:25px;bottom:11px;z-index:3;width:170px;height:78px;box-sizing:border-box;display:grid;place-items:center;padding-top:10px;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 3px 0 var(--board-2),3px 8px 10px -4px var(--amb)}
+.fx-box::before{content:"";position:absolute;left:50%;top:-1px;width:34px;height:15px;transform:translateX(-50%);border-radius:0 0 17px 17px;background:var(--board-2);opacity:.6}
+.fx-label{padding:3px 10px 2px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:2px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink);transform:rotate(-1.5deg);box-shadow:1px 1px 0 var(--shadow)}
+.fx-card{position:absolute;z-index:1;width:130px;height:75px;box-sizing:border-box;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:3px 3px 0 0}
+.fx-card::before{content:"";position:absolute;left:var(--tx);bottom:100%;width:32px;height:11px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c) var(--dye,100%),var(--card));border:1px solid rgba(0,0,0,.16);border-bottom:0;border-radius:3px 3px 0 0}
+.fx-card.up{transform:translateY(-14px) rotate(-2deg)}
+.fx-ledge{position:absolute;left:15px;right:15px;bottom:0;height:11px;box-sizing:border-box;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 2px 0 var(--board-2),3px 7px 8px -4px var(--amb)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.fx-jw{animation:none}}
+/* /fetch */
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
@@ -309,90 +331,61 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .bd-slip small{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--green)}
 .bd-slip .bd-x{position:absolute;right:6px;top:6px}
 @media (prefers-reduced-motion:reduce){.bd-ask.on,.bd-slip{animation:none}}
+/* away: while the page fetches, the pet is at the file box and a small card stands on the plinth in its place; back on it, it says a word */
+.bd-out{position:relative;z-index:2;margin-bottom:8px;padding:1px 8px 2px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:2px;font-family:var(--hand);font-size:15px;font-weight:600;line-height:1.1;color:var(--mute);white-space:nowrap;transform:rotate(-4deg);box-shadow:1px 1px 0 var(--shadow)}
+.fx-say.bd-say{left:auto;top:auto;right:20px;bottom:calc(100% + 2px);pointer-events:none;animation:bdsay .27s steps(3,jump-end) both}
+.fx-say.bd-say.l{right:auto;left:20px}
+.bd-say .fx-say-in{padding:8px 13px 9px 14px}
+.bd-say .fx-say-t{font-size:20px}
+.bd-say .fx-say-tail{left:auto;right:30px;clip-path:polygon(0 0,100% 0,70% 100%)}
+.bd-say.l .fx-say-tail{right:auto;left:30px;clip-path:polygon(0 0,100% 0,30% 100%)}
+@keyframes bdsay{from{scale:.5}to{scale:1}}
+@media (prefers-reduced-motion:reduce){.fx-say.bd-say{animation:none}}
 /* /buddy */
 
-/* loading: three cuts of the Workspaces sheet side by side, each resting in its loading state. Only the pinwheel's turn and stepped frames move */
-.lpg{--pencil:color-mix(in srgb,var(--mute) 50%,transparent);position:relative;z-index:1;flex:1;min-width:0;display:grid;grid-template-columns:232px repeat(3,minmax(0,1fr));gap:22px;padding:20px 26px 22px;height:calc(100vh - 6px);box-sizing:border-box}
+/* loading: the Workspaces sheet at nearly its page width, resting in its loading state */
+.lpg{position:relative;z-index:1;flex:1;min-width:0;display:grid;grid-template-columns:240px minmax(0,1fr);gap:26px;padding:20px 26px 22px;height:calc(100vh - 6px);box-sizing:border-box}
 .vside{display:flex;flex-direction:column;gap:12px;min-width:0;padding-top:4px}
 .vh{margin:4px 0 0;font-family:var(--serif);font-weight:600;font-size:34px;letter-spacing:-.01em;font-variation-settings:"opsz" 72;line-height:1}
 .vp{margin:0;font-size:13px;line-height:1.45;color:var(--mute)}
 .vlist{margin:2px 0 0;padding:0 0 0 16px;font-size:12.5px;line-height:1.45;color:var(--mute);display:flex;flex-direction:column;gap:8px}
 .vlist b{color:var(--ink)}
 .mock{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
-.mh{display:flex;align-items:center;justify-content:space-between;height:30px;margin-bottom:6px}
+.mh{display:flex;align-items:center;justify-content:space-between;height:30px;margin-bottom:8px}
 .lbl{font-family:var(--hand);font-size:22px;font-weight:600;color:var(--ink);transform:rotate(-2deg);padding:0 8px;background:linear-gradient(transparent 55%,var(--attn) 55%,var(--attn) 92%,transparent 92%)}
 .page.night .lbl{background:linear-gradient(transparent 55%,color-mix(in srgb,var(--attn) 42%,transparent) 55%,color-mix(in srgb,var(--attn) 42%,transparent) 92%,transparent 92%)}
 .replay{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border-radius:13px;font-family:var(--hand);font-size:17px;font-weight:600;color:var(--mute);transition:background .12s var(--ease),color .12s var(--ease)}
 .replay:hover{background:var(--hover);background-image:var(--face),var(--pulp);color:var(--ink)}
 .replay:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .ric{width:15px;height:15px;flex:none}
-.md{margin:0 0 10px;min-height:35px;font-size:12.5px;line-height:1.4;color:var(--mute)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.dots{display:inline-block;width:.9em;text-align:left}
-@keyframes turn{to{transform:rotate(360deg)}}
-/* the sheet, cut to one column: the title and New workspace on a row, the count under them, Find across */
 .lsheet{margin:0;overflow:hidden}
-.lsheet .top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 10px;padding:14px 18px 0}
-.lsheet h1{margin:0}
-.lsheet .sub{grid-column:1/-1;display:flex;align-items:center;gap:7px;min-height:22px;font-family:var(--hand);font-size:17px;line-height:22px;color:var(--mute);white-space:nowrap}
-.lsheet .pp-search{grid-column:1/-1;width:100%;margin-top:10px}
-.lsheet .grid{position:relative;min-height:0;padding:16px 18px 0;grid-template-columns:minmax(0,1fr);grid-auto-rows:158px;gap:16px;overflow:hidden}
-.lsheet .newc{min-height:0}
-.wsin{display:flex;flex-direction:column;flex:1;min-height:0}
 .lsheet .hit{cursor:default}
-.wsin.ink{animation:inkin .27s steps(3,jump-end) both}
-@keyframes inkin{from{opacity:.2}to{opacity:1}}
-/* a blank: the same card with nothing on it yet. The spine is plain kraft, the square an outline, the words pencil rules, the button a cut line */
-.ws.blank{--c:var(--kraft)}
-.ws.blank:hover{transform:none;box-shadow:var(--lift-2)}
-.bl .nmrow{height:20px}
-.bl .sq{background:none;box-shadow:none;border:1.5px solid var(--pencil);box-sizing:border-box}
-.pl{display:block;flex:none;height:7px;background-color:var(--pencil);-webkit-mask:var(--rule) 0 50%/100% 100% no-repeat;mask:var(--rule) 0 50%/100% 100% no-repeat;
-  --rule:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 7' preserveAspectRatio='none'%3E%3Cpath d='M2 4.1C28 2.7 51 4.8 83 3.5 118 2.2 150 4.5 198 3.1' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")}
-.pl.g{height:15px;--rule:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 15' preserveAspectRatio='none'%3E%3Cpath d='M2 2.6C30 1.6 62 3.2 96 2.2 130 1.4 160 3 198 2M2 12.8C34 11.6 60 13.4 99 12.3 136 11.4 165 13.2 198 12.2' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")}
-.bl .dirs{gap:6px;margin-top:13px}
-.pl.sm{margin-top:15px}
-.cut{display:block;width:124px;height:32px;box-sizing:border-box;border:1.5px dashed var(--bar);border-radius:4px}
-/* the wait: what stands on the empty sheet in place of the cards */
-.lwait{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;pointer-events:none}
-/* 2, the pinwheel: the one toy at 96px, on a stick, a strip of tape holding it to the sheet; it turns as it does on a working session */
-.b .lwait{padding-top:104px}
-.toy{position:relative;width:96px;height:186px;transform:rotate(5deg)}
-.toy .pw.big{position:absolute;left:0;top:0;z-index:2;width:96px;height:96px;filter:drop-shadow(1.5px 2.5px 1.5px var(--amb))}
-.toy .stick{position:absolute;left:45px;top:48px;z-index:1;width:6px;height:136px;border-radius:1px 1px 3px 3px;background:linear-gradient(90deg,var(--kraft-2),var(--kraft) 45%,var(--kraft-2));box-shadow:1px 1px 0 var(--edge),2px 3px 3px var(--amb)}
-.toy .tp{position:absolute;left:19px;top:136px;z-index:3;width:58px;height:17px;transform:rotate(-9deg);background:var(--tape);box-shadow:0 1px 1px rgba(0,0,0,.08)}
-.wline{margin:16px 0 0;font-family:var(--hand);font-size:23px;font-weight:600;line-height:1.1;color:var(--mute);transform:rotate(-1.5deg);white-space:nowrap}
-/* the bubble: a scissor-cut paper sticker with the white edge, as on the press */
-.say{position:absolute;z-index:6;transform:rotate(-3deg);filter:drop-shadow(1.2px 0 0 var(--stk)) drop-shadow(-1.2px 0 0 var(--stk)) drop-shadow(0 1.2px 0 var(--stk)) drop-shadow(0 -1.2px 0 var(--stk)) drop-shadow(2px 3px 0 var(--shadow))}
-.say-in{position:relative;z-index:1;padding:8px 13px 9px 14px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(2% 14%,9% 3%,30% 0,58% 3%,84% 0,95% 7%,100% 32%,98% 74%,93% 96%,68% 100%,40% 96%,12% 100%,3% 88%,0 52%);white-space:nowrap}
-.say-t{display:block;font-family:var(--hand);font-size:22px;font-weight:700;line-height:1;color:var(--ink)}
-.say-tail{position:absolute;top:calc(100% - 3px);left:44px;width:17px;height:15px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(0 0,100% 0,30% 100%)}
-/* 3, Jarvis fetches: his standing cut, side on, stepping between two frames of work; a kraft file box of index cards on a ledge */
-.c .lwait{padding-top:74px}
-.fetch{position:relative;width:272px;height:240px}
-.fetch .say{left:14px;top:0}
-.jw{position:absolute;left:20px;bottom:8px;z-index:2;width:144px;height:180px;background:url(/_blob/21d0915356dadf4fbcb2992c973934bc) -432px -360px/864px 720px no-repeat;filter:drop-shadow(1px 2px 1px var(--amb));animation:jwork .38s step-end infinite}
-@keyframes jwork{0%{background-position-x:-432px}50%{background-position-x:-576px}100%{background-position-x:-432px}}
-.fb{position:absolute;right:8px;bottom:9px;z-index:3;width:136px;height:62px;box-sizing:border-box;display:grid;place-items:center;padding-top:8px;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 3px 0 var(--board-2),3px 8px 10px -4px var(--amb)}
-.fb::before{content:"";position:absolute;left:50%;top:-1px;width:28px;height:12px;transform:translateX(-50%);border-radius:0 0 14px 14px;background:var(--board-2);opacity:.6}
-.fb-l{padding:2px 8px 1px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:2px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--ink);transform:rotate(-1.5deg);box-shadow:1px 1px 0 var(--shadow)}
-.fc{position:absolute;z-index:1;width:104px;height:60px;box-sizing:border-box;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:3px 3px 0 0}
-.fc::before{content:"";position:absolute;left:var(--tx);bottom:100%;width:26px;height:9px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c) var(--dye,100%),var(--card));border:1px solid rgba(0,0,0,.16);border-bottom:0;border-radius:3px 3px 0 0}
-.fc.up{transform:translateY(-11px) rotate(-2deg)}
-.ledge{position:absolute;left:0;right:0;bottom:0;height:9px;box-sizing:border-box;background-color:var(--board);background-image:var(--face),var(--pulp);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 2px 0 var(--board-2),3px 7px 8px -4px var(--amb)}
-/* Jarvis on his plinth in the sheet's lower right, as the page has him */
-.lsheet .buddy{position:absolute;right:6px;bottom:14px;z-index:4;pointer-events:none}
+/* Jarvis's plinth in the sheet's lower right, as the page has it */
+.lsheet .buddy{position:absolute;right:22px;bottom:12px;z-index:4;pointer-events:none}
 .lsheet .buddy .pet{cursor:default}
-.bd-out{position:relative;z-index:2;margin-bottom:8px;padding:1px 8px 2px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:2px;font-family:var(--hand);font-size:15px;font-weight:600;line-height:1.1;color:var(--mute);white-space:nowrap;transform:rotate(-4deg);box-shadow:1px 1px 0 var(--shadow)}
-.say.got{right:34px;bottom:150px;pointer-events:none;animation:sayin .27s steps(3,jump-end) both}
-.say.got .say-tail{left:auto;right:30px;clip-path:polygon(0 0,100% 0,70% 100%)}
-@keyframes sayin{from{scale:.5}to{scale:1}}
-@media (prefers-reduced-motion:reduce){.pwg,.jw,.wsin.ink,.say.got,.lsheet .ws,.lsheet .pet,.live i{animation:none}}
+@media (prefers-reduced-motion:reduce){.lsheet .ws,.lsheet .pet,.live i{animation:none}}
 </style>
 </helmet>
-<div class="page {{themeCls}}"><svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg><div class="lpg"><aside class="vside"><h1 class="vh">Loading</h1><p class="vp">What the Workspaces page shows while it fetches the list, three ways. The one picked becomes the loading state of every other page. Each is a cut of the sheet, one column of the grid at its true size.</p><ul class="vlist"><li><b>What stays.</b> The rail, the title, Find and New workspace are there from the first frame.</li><li><b>What it says.</b> Fetching your workspaces, in pen, with dots that step one at a time. On another page only the noun changes.</li><li><b>What moves.</b> The pinwheel’s turn and stepped frames. Nothing pulses and nothing shimmers.</li><li><b>When it lands,</b> the cards come a frame apart from the top, and the count takes its place under the title.</li><li><b>Let it load</b> lands the list and <b>Load again</b> goes back. Under reduced motion each is a still.</li></ul></aside><section class="mock a" aria-label="Blanks"><div class="mh"><span class="lbl">1 · Blanks</span><button class="replay" onClick="{{a.go}}"><sc-if value="{{a.fetching}}" hint-placeholder-val="{{true}}"><svg class="ric" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if><sc-if value="{{a.landed}}" hint-placeholder-val="{{false}}"><svg class="ric" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5a7.5 7.5 0 1 0 2.3-5.6M4.6 4.2v4.4h4.4"></path></svg></sc-if><span>{{a.goLabel}}</span></button></div><p class="md">Blank cards hold the places, ruled in pencil where the words will go. The count’s place says it is fetching.</p><div class="main lsheet"><header class="top"><h1>Workspaces</h1><button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New workspace</button><span class="sub"><sc-if value="{{a.fetching}}" hint-placeholder-val="{{true}}"><svg class="pw " viewBox="0 0 24 24" aria-hidden="true"><g class="pwg"><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg><span>Fetching your workspaces<span class="dots">{{a.dots}}</span></span></sc-if><sc-if value="{{a.landed}}" hint-placeholder-val="{{false}}"><span>{{a.sub}}</span></sc-if></span><label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a workspace or folder" aria-label="Find a workspace"><span class="pp-kbd">⌘K</span></label></header><section class="grid" aria-label="Workspaces" aria-busy="{{a.busy}}"><sc-for list="{{a.cards}}" as="w" hint-placeholder-count="4"><article class="ws {{w.cls}}" style="--c: {{w.color}}"><sc-if value="{{w.real}}" hint-placeholder-val="{{false}}"><div class="wsin {{w.inCls}}"><div class="hit"><span class="nmrow"><i class="sq" aria-hidden="true"></i><span class="nm"><span>{{w.name}}</span></span><sc-if value="{{w.busy}}" hint-placeholder-val="{{false}}"><span class="live"><i aria-hidden="true"></i>{{w.live}}</span></sc-if></span><span class="dirs"><sc-for list="{{w.dirs}}" as="d" hint-placeholder-count="2"><span class="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>{{d}}</span></span></sc-for></span><span class="sum">{{w.sum}}</span></div><div class="cta"><button class="chat" aria-label="{{w.ctaAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg>New session</button></div></div></sc-if><sc-if value="{{w.blank}}" hint-placeholder-val="{{true}}"><div class="wsin bl" aria-hidden="true"><div class="hit"><span class="nmrow"><i class="sq"></i><i class="pl g" style="width: {{w.p0}}%"></i></span><span class="dirs"><i class="pl" style="width: {{w.p1}}%"></i><i class="pl" style="width: {{w.p2}}%"></i></span><i class="pl sm" style="width: {{w.p3}}%"></i></div><div class="cta"><i class="cut"></i></div></div></sc-if></article></sc-for><sc-if value="{{a.loaded}}" hint-placeholder-val="{{false}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if></section><div class="buddy" aria-hidden="true"><span class="prop pet idle"></span><div class="bd-ped"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div></div><span class="sr" role="status">{{a.status}}</span></div></section><section class="mock b" aria-label="The pinwheel"><div class="mh"><span class="lbl">2 · The pinwheel</span><button class="replay" onClick="{{b.go}}"><sc-if value="{{b.fetching}}" hint-placeholder-val="{{true}}"><svg class="ric" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if><sc-if value="{{b.landed}}" hint-placeholder-val="{{false}}"><svg class="ric" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5a7.5 7.5 0 1 0 2.3-5.6M4.6 4.2v4.4h4.4"></path></svg></sc-if><span>{{b.goLabel}}</span></button></div><p class="md">The one toy, big, taped to the empty sheet with a line in pen under it. The same on every page.</p><div class="main lsheet"><header class="top"><h1>Workspaces</h1><button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New workspace</button><span class="sub"><sc-if value="{{b.landed}}" hint-placeholder-val="{{false}}"><span>{{b.sub}}</span></sc-if></span><label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a workspace or folder" aria-label="Find a workspace"><span class="pp-kbd">⌘K</span></label></header><section class="grid" aria-label="Workspaces" aria-busy="{{b.busy}}"><sc-for list="{{b.cards}}" as="w" hint-placeholder-count="0"><article class="ws {{w.cls}}" style="--c: {{w.color}}"><sc-if value="{{w.real}}" hint-placeholder-val="{{false}}"><div class="wsin {{w.inCls}}"><div class="hit"><span class="nmrow"><i class="sq" aria-hidden="true"></i><span class="nm"><span>{{w.name}}</span></span><sc-if value="{{w.busy}}" hint-placeholder-val="{{false}}"><span class="live"><i aria-hidden="true"></i>{{w.live}}</span></sc-if></span><span class="dirs"><sc-for list="{{w.dirs}}" as="d" hint-placeholder-count="2"><span class="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>{{d}}</span></span></sc-for></span><span class="sum">{{w.sum}}</span></div><div class="cta"><button class="chat" aria-label="{{w.ctaAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg>New session</button></div></div></sc-if><sc-if value="{{w.blank}}" hint-placeholder-val="{{true}}"><div class="wsin bl" aria-hidden="true"><div class="hit"><span class="nmrow"><i class="sq"></i><i class="pl g" style="width: {{w.p0}}%"></i></span><span class="dirs"><i class="pl" style="width: {{w.p1}}%"></i><i class="pl" style="width: {{w.p2}}%"></i></span><i class="pl sm" style="width: {{w.p3}}%"></i></div><div class="cta"><i class="cut"></i></div></div></sc-if></article></sc-for><sc-if value="{{b.loaded}}" hint-placeholder-val="{{false}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if><sc-if value="{{b.fetching}}" hint-placeholder-val="{{true}}"><div class="lwait" aria-hidden="true"><div class="toy"><i class="stick"></i><svg class="pw big" viewBox="0 0 24 24" aria-hidden="true"><g class="pwg"><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg><i class="tp"></i></div><p class="wline">Fetching your workspaces<span class="dots">{{b.dots}}</span></p></div></sc-if></section><div class="buddy" aria-hidden="true"><span class="prop pet idle"></span><div class="bd-ped"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div></div><span class="sr" role="status">{{b.status}}</span></div></section><section class="mock c" aria-label="Jarvis fetches"><div class="mh"><span class="lbl">3 · Jarvis fetches</span><button class="replay" onClick="{{c.go}}"><sc-if value="{{c.fetching}}" hint-placeholder-val="{{true}}"><svg class="ric" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if><sc-if value="{{c.landed}}" hint-placeholder-val="{{false}}"><svg class="ric" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5a7.5 7.5 0 1 0 2.3-5.6M4.6 4.2v4.4h4.4"></path></svg></sc-if><span>{{c.goLabel}}</span></button></div><p class="md">Jarvis leaves his plinth to go through the file box, and cheers from the plinth when it lands.</p><div class="main lsheet"><header class="top"><h1>Workspaces</h1><button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New workspace</button><span class="sub"><sc-if value="{{c.landed}}" hint-placeholder-val="{{false}}"><span>{{c.sub}}</span></sc-if></span><label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a workspace or folder" aria-label="Find a workspace"><span class="pp-kbd">⌘K</span></label></header><section class="grid" aria-label="Workspaces" aria-busy="{{c.busy}}"><sc-for list="{{c.cards}}" as="w" hint-placeholder-count="0"><article class="ws {{w.cls}}" style="--c: {{w.color}}"><sc-if value="{{w.real}}" hint-placeholder-val="{{false}}"><div class="wsin {{w.inCls}}"><div class="hit"><span class="nmrow"><i class="sq" aria-hidden="true"></i><span class="nm"><span>{{w.name}}</span></span><sc-if value="{{w.busy}}" hint-placeholder-val="{{false}}"><span class="live"><i aria-hidden="true"></i>{{w.live}}</span></sc-if></span><span class="dirs"><sc-for list="{{w.dirs}}" as="d" hint-placeholder-count="2"><span class="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>{{d}}</span></span></sc-for></span><span class="sum">{{w.sum}}</span></div><div class="cta"><button class="chat" aria-label="{{w.ctaAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg>New session</button></div></div></sc-if><sc-if value="{{w.blank}}" hint-placeholder-val="{{true}}"><div class="wsin bl" aria-hidden="true"><div class="hit"><span class="nmrow"><i class="sq"></i><i class="pl g" style="width: {{w.p0}}%"></i></span><span class="dirs"><i class="pl" style="width: {{w.p1}}%"></i><i class="pl" style="width: {{w.p2}}%"></i></span><i class="pl sm" style="width: {{w.p3}}%"></i></div><div class="cta"><i class="cut"></i></div></div></sc-if></article></sc-for><sc-if value="{{c.loaded}}" hint-placeholder-val="{{false}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if><sc-if value="{{c.fetching}}" hint-placeholder-val="{{true}}"><div class="lwait" aria-hidden="true"><div class="fetch"><div class="say"><div class="say-in"><span class="say-t">Fetching your workspaces<span class="dots">{{c.dots}}</span></span></div><i class="say-tail"></i></div><sc-for list="{{c.files}}" as="f" hint-placeholder-count="4"><i class="fc {{f.cls}}" style="--c: {{f.c}}; --tx: {{f.tx}}px; right: {{f.r}}px; bottom: {{f.b}}px"></i></sc-for><span class="jw"></span><div class="fb"><span class="fb-l">WORKSPACES</span></div><i class="ledge"></i></div></div></sc-if></section><div class="buddy" aria-hidden="true"><sc-if value="{{c.petHome}}" hint-placeholder-val="{{false}}"><span class="prop pet {{c.petCls}}"></span></sc-if><sc-if value="{{c.fetching}}" hint-placeholder-val="{{true}}"><span class="bd-out">out fetching</span></sc-if><div class="bd-ped"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div></div><sc-if value="{{c.cheer}}" hint-placeholder-val="{{false}}"><div class="say got" aria-hidden="true"><div class="say-in"><span class="say-t">Got them!</span></div><i class="say-tail"></i></div></sc-if><span class="sr" role="status">{{c.status}}</span></div></section></div></div>
+<div class="page {{themeCls}}"><svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg><div class="lpg"><aside class="vside"><h1 class="vh">Loading</h1><p class="vp">What a page shows while it fetches its list: Jarvis fetches. Picked from three ways; the blank cards and the one big pinwheel were dropped. Workspaces has it first, and every other page takes the same state.</p><ul class="vlist"><li><b>What stays.</b> The rail, the title, Find and New workspace are there from the first frame. The sheet under them is empty.</li><li><b>Jarvis</b> is off his plinth, where a small card says out fetching, and at a kraft file box on a ledge. His standing cut steps between two frames of work and the index cards lift one at a time.</li><li><b>The box</b> wears the page’s name on its label. That label and the noun in the bubble are all that change from page to page.</li><li><b>The bubble</b> says what he is fetching, in pen, with dots that step one at a time.</li><li><b>When it lands,</b> the scene goes in a frame, the cards come a frame apart from the top, the count takes its place under the title, and Jarvis is back on the plinth, cheering, with Got them in a small bubble.</li><li><b>Let it load</b> lands the list and <b>Load again</b> goes back. The Workspaces board plays it once when it opens. Under reduced motion it is a still.</li></ul></aside><section class="mock" aria-label="Jarvis fetches"><div class="mh"><span class="lbl">Jarvis fetches</span><button class="replay" onClick="{{go}}"><sc-if value="{{fetching}}" hint-placeholder-val="{{true}}"><svg class="ric" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if><sc-if value="{{landed}}" hint-placeholder-val="{{false}}"><svg class="ric" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5a7.5 7.5 0 1 0 2.3-5.6M4.6 4.2v4.4h4.4"></path></svg></sc-if><span>{{goLabel}}</span></button></div><div class="main lsheet"><header class="top">
+      <div class="ttl"><h1>Workspaces</h1><span class="sub">{{sub}}</span></div>
+      <div class="top-r">
+        <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a workspace or folder" aria-label="Find a workspace"><span class="pp-kbd">⌘K</span></label>
+        <button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New workspace</button>
+      </div>
+    </header><section class="grid" aria-label="Workspaces" aria-busy="{{busy}}"><sc-if value="{{fetching}}" hint-placeholder-val="{{true}}"><div class="fx" aria-hidden="true"><div class="fx-scene"><div class="fx-say"><div class="fx-say-in"><span class="fx-say-t">Fetching your workspaces<span class="fx-dots">{{fxDots}}</span></span></div><i class="fx-say-tail"></i></div><sc-for list="{{fxFiles}}" as="f" hint-placeholder-count="4"><i class="fx-card {{f.cls}}" style="--c: {{f.c}}; --tx: {{f.tx}}px; right: {{f.r}}px; bottom: {{f.b}}px"></i></sc-for><span class="fx-jw"></span><div class="fx-box"><span class="fx-label">Workspaces</span></div><i class="fx-ledge"></i></div></div></sc-if><sc-for list="{{items}}" as="w" hint-placeholder-count="0">
+        <article class="ws {{w.cls}}" style="--c: {{w.color}}">
+          <button class="hit" aria-pressed="{{w.on}}">
+            <span class="nmrow"><i class="sq" aria-hidden="true"></i><span class="nm"><span>{{w.name}}</span></span><sc-if value="{{w.busy}}" hint-placeholder-val="{{false}}"><span class="live"><i aria-hidden="true"></i>{{w.active}} working</span></sc-if></span>
+            <span class="dirs"><sc-for list="{{w.dirs}}" as="d" hint-placeholder-count="2"><span class="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>{{d}}</span></span></sc-for></span>
+            <span class="sum">{{w.sum}}</span>
+          </button>
+          <div class="cta"><button class="chat {{w.ctaCls}}" aria-label="{{w.ctaAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z"></path></svg>{{w.ctaLabel}}</button></div>
+        </article>
+      </sc-for>
+      <sc-if value="{{showNew}}" hint-placeholder-val="{{false}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if></section><div class="buddy" aria-hidden="true"><sc-if value="{{cheer}}" hint-placeholder-val="{{false}}"><div class="fx-say bd-say r"><div class="fx-say-in"><span class="fx-say-t">Got them!</span></div><i class="fx-say-tail"></i></div></sc-if><sc-if value="{{landed}}" hint-placeholder-val="{{false}}"><span class="prop pet {{petCls}}"></span></sc-if><sc-if value="{{fetching}}" hint-placeholder-val="{{true}}"><span class="bd-out">out fetching</span></sc-if><div class="bd-ped"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div></div><span class="sr" role="status">{{status}}</span></div></section></div></div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
+/* fetch */ const FX_FILES = [['var(--blue)', 85, 45, 45], ['var(--amber)', 59, 40, 39], ['var(--red)', 32, 35, 32], ['var(--green)', 6, 30, 26]]; const fxVals = (t, still) => ({ fxDots: still ? '…' : '.'.repeat((t % 3) + 1), fxFiles: FX_FILES.map(([c, tx, r, b], i) => ({ c, tx, r, b, cls: !still && t % 4 === i ? 'up' : '' })) }); /* /fetch */
 const WS = [
   { name: 'Lighthouse Web', color: '#5b8c5a', dirs: ['~/dev/lighthouse/web', '~/dev/lighthouse/design-tokens'], agents: 4, facts: 5, board: 'Lighthouse Q4', active: 2 },
   { name: 'Orbit Billing', color: '#c8553d', dirs: ['~/dev/orbit/api', '~/dev/orbit/dashboard'], agents: 3, facts: 9, board: 'Billing migration', active: 1 },
@@ -401,62 +394,40 @@ const WS = [
   { name: 'Harbor Mobile', color: '#8b6bb3', dirs: ['~/dev/harbor/ios', '~/dev/harbor/android'], agents: 2, facts: 7, board: 'Harbor 1.0', active: 0 },
   { name: 'Kiln Data', color: '#4a8f99', dirs: ['~/dev/kiln/pipelines'], agents: 1, facts: 3, board: null, active: 0 }
 ];
-const N = WS.length, KEYS = ['a', 'b', 'c'];
+const N = WS.length;
 const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
 const SUB = N + ' workspaces · ' + plural(WS.reduce((n, w) => n + w.dirs.length, 0), 'folder') + ' · ' + WS.reduce((n, w) => n + w.active, 0) + ' sessions working';
-// a blank's pencil rules, in percent of the card: the name's guides, two folders, the summary. No two blanks are ruled alike
-const RULES = [[52, 62, 78, 86], [44, 54, 66, 80], [40, 70, 52, 90], [36, 48, 60, 74], [50, 58, 72, 84], [34, 64, 50, 78]];
-// the file box: four index cards, back to front, each with a workspace's colour on its tab
-const FILES = [['var(--blue)', 68, 24, 36], ['var(--amber)', 47, 20, 31], ['var(--red)', 26, 16, 26], ['var(--green)', 5, 12, 21]];
 class Component extends DCLogic {
-  // each cut has its own little clock: ph is loading, landing (the cards arriving a frame apart) or loaded; dealt counts the blanks laid, got the cards in
-  state = { tick: 0, a: { ph: 'loading', dealt: 0, got: 0 }, b: { ph: 'loading', dealt: 0, got: 0 }, c: { ph: 'loading', dealt: 0, got: 0, cheer: false } };
+  // ph is loading (it rests here), landing (the cards arriving a frame apart, got counts them in) or loaded
+  state = { tick: 0, ph: 'loading', got: 0, cheer: false };
   componentDidMount() {
-    this.tq = { a: [], b: [], c: [] };
+    this.tq = [];
     this.still = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!this.still) this.iv = setInterval(() => this.setState((s) => ({ tick: s.tick + 1 })), 420);
-    KEYS.forEach((k) => this.load(k));
   }
-  componentWillUnmount() { clearInterval(this.iv); KEYS.forEach((k) => (this.tq[k] || []).forEach(clearTimeout)); }
-  put(k, p) { this.setState((s) => ({ [k]: { ...s[k], ...p } })); }
-  clear(k) { (this.tq[k] || []).forEach(clearTimeout); this.tq[k] = []; }
-  // back to waiting: the blanks are laid a frame apart (the first cut only)
-  load(k) {
-    this.clear(k);
-    const lay = k === 'a' && !this.still;
-    this.put(k, { ph: 'loading', got: 0, dealt: lay ? 0 : N, cheer: false });
-    if (lay) this.tq[k] = WS.map((_, i) => setTimeout(() => this.put(k, { dealt: i + 1 }), 160 + i * 70));
+  componentWillUnmount() { clearInterval(this.iv); (this.tq || []).forEach(clearTimeout); }
+  clear() { (this.tq || []).forEach(clearTimeout); this.tq = []; }
+  load() { this.clear(); this.setState({ ph: 'loading', got: 0, cheer: false }); }
+  // the list is in: the cards arrive a frame apart from the top, and Jarvis cheers from the plinth
+  land() {
+    this.clear();
+    if (this.still) { this.setState({ ph: 'loaded', got: N, cheer: false }); return; }
+    this.setState({ ph: 'landing', got: 0, cheer: true });
+    this.tq = WS.map((_, i) => setTimeout(() => this.setState(i === N - 1 ? { got: N, ph: 'loaded' } : { got: i + 1 }), 90 * (i + 1)));
+    this.tq.push(setTimeout(() => this.setState({ cheer: false }), 2500));
   }
-  // the list is in: the cards arrive a frame apart from the top, and Jarvis cheers from the plinth (the third cut)
-  land(k) {
-    this.clear(k);
-    if (this.still) { this.put(k, { ph: 'loaded', got: N, dealt: N, cheer: false }); return; }
-    this.put(k, { ph: 'landing', got: 0, dealt: N, cheer: k === 'c' });
-    this.tq[k] = WS.map((_, i) => setTimeout(() => this.put(k, i === N - 1 ? { got: N, ph: 'loaded' } : { got: i + 1 }), 90 * (i + 1)));
-    if (k === 'c') this.tq[k].push(setTimeout(() => this.put(k, { cheer: false }), 2500));
-  }
-  themeVals() { const night = this.state.night ?? ((this.props.theme ?? 'night') === 'night'); return { themeCls: night ? 'night' : '' }; }
-  cut(k) {
-    const m = this.state[k], t = this.state.tick, fetching = m.ph === 'loading';
-    const cards = [];
-    WS.forEach((w, i) => {
-      const real = i < m.got;
-      if (!real && (k !== 'a' || i >= m.dealt)) return;
-      const r = RULES[i];
-      cards.push({ real, blank: !real, cls: real ? '' : 'blank', inCls: k === 'a' ? 'ink' : '', color: real ? w.color : 'var(--kraft)', name: w.name, dirs: w.dirs,
-        busy: w.active > 0, live: w.active + ' working', ctaAria: 'New session in ' + w.name,
-        sum: plural(w.agents, 'agent') + ' · ' + plural(w.facts, 'memory fact') + ' · ' + (w.board ? 'board: ' + w.board : 'no board yet'),
-        p0: r[0], p1: r[1], p2: r[2], p3: r[3] });
-    });
+  renderVals() {
+    const st = this.state, fetching = st.ph === 'loading';
+    const night = st.night ?? ((this.props.theme ?? 'night') === 'night');
     return {
-      fetching, landed: !fetching, loaded: m.ph === 'loaded', busy: fetching ? 'true' : 'false', cards, sub: SUB,
-      dots: this.still ? '…' : '.'.repeat((t % 3) + 1), status: fetching ? 'Fetching your workspaces' : N + ' workspaces',
-      goLabel: fetching ? 'Let it load' : 'Load again', go: () => (fetching ? this.land(k) : this.load(k)),
-      petHome: !fetching, petCls: m.cheer ? 'celebrate' : 'idle', cheer: !!m.cheer,
-      files: FILES.map(([c, tx, r, b], i) => ({ c, tx, r, b, cls: !this.still && t % 4 === i ? 'up' : '' })),
+      themeCls: night ? 'night' : '', fetching, landed: !fetching, busy: fetching ? 'true' : 'false', ...fxVals(st.tick, this.still),
+      sub: fetching ? '' : SUB, status: fetching ? 'Fetching your workspaces' : N + ' workspaces',
+      items: WS.slice(0, st.got).map((w) => ({ name: w.name, color: w.color, dirs: w.dirs, busy: w.active > 0, active: w.active, cls: '', on: false, ctaCls: '', ctaLabel: 'New session', ctaAria: 'New session in ' + w.name,
+        sum: plural(w.agents, 'agent') + ' · ' + plural(w.facts, 'memory fact') + ' · ' + (w.board ? 'board: ' + w.board : 'no board yet') })),
+      showNew: st.ph === 'loaded', petCls: st.cheer ? 'celebrate' : 'idle', cheer: st.cheer,
+      goLabel: fetching ? 'Let it load' : 'Load again', go: () => (fetching ? this.land() : this.load()),
     };
   }
-  renderVals() { return { ...this.themeVals(), a: this.cut('a'), b: this.cut('b'), c: this.cut('c') }; }
 }
 </script>
 </body>

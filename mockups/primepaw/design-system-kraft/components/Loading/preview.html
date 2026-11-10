@@ -1,0 +1,50 @@
+<!-- @dsCard group="Paper parts" height=440 subtitle="Loading: Jarvis fetches. The file box and the bubble while a page fetches its list, his plinth while he is away and when he is back, and the label on other pages" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraft · Loading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-height:100%}
+.wrap{display:flex;gap:40px;align-items:flex-end;flex-wrap:wrap;padding:30px 28px 26px}
+.wrap>.col{width:370px}
+.col{display:flex;flex-direction:column;gap:16px}
+.side{display:flex;flex-direction:column;gap:26px;width:340px}
+.pair{display:flex;gap:26px;align-items:flex-start}
+.pair>div{display:flex;flex-direction:column;align-items:center;gap:16px;width:150px}
+.stand{height:170px;display:flex;align-items:flex-end;padding-bottom:7px}
+.boxes{display:flex;gap:14px;flex-wrap:wrap}
+.boxes .kr-filebox{width:104px;height:50px;padding-top:7px}
+.boxes .kr-filebox::before{width:24px;height:10px}
+.boxes .kr-filebox>b{font-size:10px;padding:2px 7px 1px}
+.cap{margin:0;font-family:var(--font-hand);font-size:17px;line-height:1.15;color:var(--mute)}
+.pair .cap{text-align:center}
+</style>
+</head>
+<body class="kr-root">
+<div class="wrap">
+  <div class="col">
+    <div class="kr-fetch" aria-hidden="true">
+      <div class="kr-say"><span>Fetching your workspaces<span class="kr-dots"><i>.</i><i>.</i><i>.</i></span></span><i></i></div>
+      <i class="kr-filecard is-1"></i><i class="kr-filecard is-2"></i><i class="kr-filecard is-3"></i><i class="kr-filecard is-4"></i>
+      <span class="kr-fetch-pet" style="background-image:url(/_blob/a444ccfa0bdebda931885f442f4c0b61)"></span>
+      <div class="kr-filebox"><b>Workspaces</b></div>
+      <i class="kr-ledge"></i>
+    </div>
+    <p class="cap">While the page fetches: the pet at the file box, two frames of work, a card lifting, and what it is fetching in pen.</p>
+  </div>
+  <div class="side">
+    <div class="pair">
+      <div><div class="stand"><div class="kr-buddy" aria-hidden="true"><span class="kr-out">out fetching</span><div class="kr-plinth"><b>Jarvis</b></div></div></div><p class="cap">Its plinth meanwhile.</p></div>
+      <div><div class="stand"><div class="kr-buddy" aria-hidden="true"><div class="kr-say is-s"><span>Got them!</span><i></i></div><span class="kr-plinth-pet" style="background-image:url(/_blob/ca37abb2b1bc698af8938661326b5bd1)"></span><div class="kr-plinth"><b>Jarvis</b></div></div></div><p class="cap">Back on it when the list lands.</p></div>
+    </div>
+    <div class="col">
+      <div class="boxes" aria-hidden="true"><div class="kr-filebox is-inline"><b>Agents</b></div><div class="kr-filebox is-inline"><b>Skills</b></div><div class="kr-filebox is-inline"><b>Memory</b></div></div>
+      <p class="cap">On another page only the label and the noun change.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

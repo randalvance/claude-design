@@ -708,3 +708,44 @@
 .kr-rpt-f{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px dashed var(--line)}
 .kr-rpt-f small{margin-right:auto;font-family:var(--font-hand);font-size:15px;color:var(--mute)}
 [data-theme="night"] .kr-rpt-col{filter:brightness(.84) saturate(.9)}
+
+/* ---------- loading: Jarvis fetches. What a page shows while it fetches its list: the pet at a kraft file box on a ledge, a paper bubble saying what it is fetching, and its plinth standing empty but for a small card. Only stepped frames move ---------- */
+/* the bubble: a scissor-cut paper sticker with the die-cut rim and one hard shadow; is-s is the small one over the plinth */
+.kr-say{position:relative;display:inline-block;transform:rotate(-3deg);filter:drop-shadow(1.2px 0 0 var(--sticker-cut)) drop-shadow(-1.2px 0 0 var(--sticker-cut)) drop-shadow(0 1.2px 0 var(--sticker-cut)) drop-shadow(0 -1.2px 0 var(--sticker-cut)) drop-shadow(2px 3px 0 var(--shadow))}
+.kr-say>span{position:relative;z-index:1;display:block;padding:11px 17px 12px 18px;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);clip-path:polygon(2% 14%,9% 3%,30% 0,58% 3%,84% 0,95% 7%,100% 32%,98% 74%,93% 96%,68% 100%,40% 96%,12% 100%,3% 88%,0 52%);font-family:var(--font-hand);font-size:26px;font-weight:700;line-height:1;color:var(--ink);white-space:nowrap}
+.kr-say>i{position:absolute;top:calc(100% - 3px);left:78px;width:21px;height:18px;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);clip-path:polygon(0 0,100% 0,30% 100%)}
+.kr-say.is-s>span{padding:8px 13px 9px 14px;font-size:20px}
+.kr-say.is-s>i{left:auto;right:30px;width:17px;height:15px;clip-path:polygon(0 0,100% 0,70% 100%)}
+.kr-dots{display:inline-block;width:.9em;text-align:left}
+.kr-dots i{font-style:normal;animation:kr-dot 1.26s step-end infinite}
+.kr-dots i:first-child{animation:none}
+.kr-dots i:nth-child(3){animation-name:kr-dot-3}
+@keyframes kr-dot{0%{opacity:0}33.3%{opacity:1}}
+@keyframes kr-dot-3{0%{opacity:0}66.6%{opacity:1}}
+/* the scene: the ledge, the pet's standing cut stepping between two frames of work, the file box with the page's name on its label, four index cards lifting one at a time */
+.kr-fetch{position:relative;width:370px;height:316px}
+.kr-fetch>.kr-say{position:absolute;left:8px;top:0;z-index:6}
+.kr-fetch-pet{position:absolute;left:40px;bottom:10px;z-index:2;width:180px;height:225px;background-repeat:no-repeat;background-size:360px 225px;filter:drop-shadow(1px 2px 1px var(--amb));animation:kr-fetch-work .38s step-end infinite}
+@keyframes kr-fetch-work{0%{background-position-x:0}50%{background-position-x:-180px}100%{background-position-x:0}}
+.kr-filebox{position:absolute;right:25px;bottom:11px;z-index:3;width:170px;height:78px;box-sizing:border-box;display:grid;place-items:center;padding-top:10px;background-color:var(--board);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);border:1px solid var(--board-2);border-radius:var(--radius-3);box-shadow:0 3px 0 var(--board-2),3px 8px 10px -4px var(--amb)}
+.kr-filebox::before{content:"";position:absolute;left:50%;top:-1px;width:34px;height:15px;transform:translateX(-50%);border-radius:0 0 17px 17px;background:var(--board-2);opacity:.6}
+.kr-filebox>b{padding:3px 10px 2px;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid var(--line);border-radius:var(--radius-2);font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink);transform:rotate(-1.5deg);box-shadow:1px 1px 0 var(--shadow)}
+.kr-filebox.is-inline{position:relative;right:auto;bottom:auto}
+.kr-filecard{position:absolute;z-index:1;width:130px;height:75px;box-sizing:border-box;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid var(--line);border-radius:var(--radius-3) var(--radius-3) 0 0;animation:kr-file-lift 1.68s step-end infinite}
+.kr-filecard::before{content:"";position:absolute;left:var(--tx);bottom:100%;width:32px;height:11px;box-sizing:border-box;background-color:color-mix(in srgb,var(--c) var(--dye,100%),var(--card));border:1px solid rgba(0,0,0,.16);border-bottom:0;border-radius:var(--radius-3) var(--radius-3) 0 0}
+.kr-filecard.is-1{--c:var(--blue);--tx:85px;right:45px;bottom:45px}
+.kr-filecard.is-2{--c:var(--amber);--tx:59px;right:40px;bottom:39px;animation-delay:.42s}
+.kr-filecard.is-3{--c:var(--red);--tx:32px;right:35px;bottom:32px;animation-delay:.84s}
+.kr-filecard.is-4{--c:var(--green);--tx:6px;right:30px;bottom:26px;animation-delay:1.26s}
+@keyframes kr-file-lift{0%{transform:translateY(-14px) rotate(-2deg)}25%{transform:none}}
+.kr-ledge{position:absolute;left:15px;right:15px;bottom:0;height:11px;box-sizing:border-box;background-color:var(--board);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);border:1px solid var(--board-2);border-radius:var(--radius-3);box-shadow:0 2px 0 var(--board-2),3px 7px 8px -4px var(--amb)}
+/* the plinth the pet stands on at the lower right of a page with no composer: a kraft block under a cardboard slab, its name by hand; kr-out is the card that stands in its place while it fetches */
+.kr-buddy{position:relative;display:inline-flex;flex-direction:column;align-items:center;width:132px}
+.kr-buddy>.kr-say{position:absolute;right:20px;bottom:calc(100% + 2px)}
+.kr-plinth{position:relative;z-index:1;width:112px;height:30px;box-sizing:border-box;display:grid;place-items:center;background-color:var(--kraft);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid var(--kraft-2);border-radius:var(--radius-2) var(--radius-2) var(--radius-3) var(--radius-3);box-shadow:0 2px 0 var(--kraft-2),3px 8px 10px -4px var(--amb);color:var(--ink)}
+.kr-plinth::before{content:"";position:absolute;left:-7px;right:-7px;top:-9px;height:10px;background-color:var(--board);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);border:1px solid var(--board-2);border-radius:var(--radius-3);box-shadow:0 2px 0 var(--board-2)}
+.kr-plinth::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-7px;height:6px;background-color:var(--board-2);border-radius:0 0 var(--radius-3) var(--radius-3);opacity:.85}
+.kr-plinth>b{font-family:var(--font-hand);font-size:20px;font-weight:700;line-height:1;transform:rotate(-2deg) translateY(2px)}
+.kr-plinth-pet{position:relative;z-index:2;display:block;width:91px;height:111px;margin-bottom:-1px;background-size:contain;background-repeat:no-repeat;background-position:50% 100%;transform:rotate(var(--tilt-cat));transform-origin:50% 100%}
+.kr-out{position:relative;z-index:2;margin-bottom:8px;padding:1px 8px 2px;background-color:var(--card);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);border:1px solid var(--line);border-radius:var(--radius-2);font-family:var(--font-hand);font-size:15px;font-weight:600;line-height:1.1;color:var(--mute);white-space:nowrap;transform:rotate(-4deg);box-shadow:1px 1px 0 var(--shadow)}
+@media (prefers-reduced-motion:reduce){.kr-fetch-pet,.kr-filecard,.kr-dots i{animation:none}}

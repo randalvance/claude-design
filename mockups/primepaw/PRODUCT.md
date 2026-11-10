@@ -47,6 +47,7 @@ Confirmed functionality, each with a light and a dark board in this folder (see 
 - Agents list and edit page (description, system prompt, preferred model, MCP servers, skills).
 - Skills list and edit page (slash command, trigger phrases, instructions, files, who it is on for, usage).
 - Workspaces list and edit page. Memory with Global, Workspaces and Agents tabs and a 4 KB budget. MCP servers on one timetable with a tools drawer.
+- Loading: while a page fetches its list the title and the toolbar are there at once and Jarvis leaves his plinth to go through a file box labelled with the page's name, saying what he is fetching; when the list lands he is back on the plinth and says so. Shown on Workspaces, and meant as the one loading state for every page. *(prototype)*
 - Idea board: sticky notes pinned anywhere on a cork, written in markdown (headings, lists, todos, quotes, bold, italic, strike, code, links), dragged freely, in five colours, with Undo for a thrown-away note.
 - Finish reports in the inbox: the task, when it was done, the time all its sessions took, tracker and board links, a summary, the questions asked with their options and who answered, and a retro (went well, went wrong, action items), with Dismiss.
 - Kanban boards list; one board as pinned notes with a dependencies view and a card drawer. Background jobs and workflows with run history.
@@ -84,7 +85,7 @@ Undecided or not recorded:
 
 ## Accessibility & Inclusion
 
-- Motion respects `prefers-reduced-motion`. Only a working session's pinwheel and Max effort loop, and nothing pulses.
+- Motion respects `prefers-reduced-motion`. Only a working session's pinwheel, Max effort and the pet's stepped frames loop, and nothing pulses. A page that is fetching marks its list `aria-busy` and says so in a status line.
 - White glyphs on identity colours hold 4.5:1 in both themes; the Kraft tokens carry contrast notes.
 - Keyboard: arrow keys walk the knowledge-base tree, Tab and Shift+Tab nest list items, Alt+↑↓ moves them, Esc stops voice input, Enter sends.
 
