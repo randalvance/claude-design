@@ -734,6 +734,7 @@ span.jface{display:block;background-image:url(/_blob/321765f58f4887563e0759eb680
 span.jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9)}
 span.jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
 span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
+span.jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e)}
 .rb-jarvis span.jface{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
@@ -1071,7 +1072,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
   </div>
   <div class="mlbl">Portrait</div>
   <div class="pstrip" role="radiogroup" aria-label="Portrait">
-    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="3"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface {{f.id}}" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
+    <sc-for list="{{m.faces}}" as="f" hint-placeholder-count="4"><button class="pph {{f.cls}}" style="--tilt: {{f.tilt}}" role="radio" aria-checked="{{f.on}}" aria-label="{{f.name}}" onClick="{{f.pick}}"><span class="jface {{f.id}}" aria-hidden="true"></span><sc-if value="{{f.on}}" hint-placeholder-val="{{false}}"><svg class="pring" viewBox="0 0 64 64" aria-hidden="true"><path pathLength="1" d="M10 33c-3-11 6-23 21-24 14-1 26 8 25 22-1 13-12 22-26 21C17 51 8 44 10 33c1-2 2-3 3-4"></path></svg></sc-if></button></sc-for>
   </div>
   <div class="mlbl">Model</div>
   <div class="mmodel">
@@ -1181,7 +1182,7 @@ const NAV = [
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
-const FACES = [{"id":"robot","name":"A paper robot dog"},{"id":"dog","name":"A paper puppy"},{"id":"cat","name":"A paper cat"}];
+const FACES = [{"id":"robot","name":"A paper robot dog"},{"id":"dog","name":"A paper puppy"},{"id":"cat","name":"A paper cat"},{"id":"pug","name":"A paper pug"}];
 // ---------- meet your main agent: the form shared by the setup list and the home card. Everything here is made up. ----------
 const PROVIDERS = [
   { id: 'anthropic', name: 'Anthropic', desc: 'Claude', models: [{ id: 'opus', name: 'Claude Opus 5.5', desc: 'the most capable' }, { id: 'sonnet', name: 'Claude Sonnet 5.5', desc: 'the global default' }, { id: 'haiku', name: 'Claude Haiku 5.5', desc: 'quick and cheap' }] },

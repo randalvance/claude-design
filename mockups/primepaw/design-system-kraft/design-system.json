@@ -265,6 +265,12 @@
           "size": 23728,
           "type": "image/png"
         },
+        "pug-face.png": {
+          "blob": "7e84e2602e81de108fb2a26f32d4918d",
+          "name": "pug-face.png",
+          "size": 25286,
+          "type": "image/png"
+        },
         "robot-fetch.png": {
           "blob": "a444ccfa0bdebda931885f442f4c0b61",
           "name": "robot-fetch.png",
@@ -285,6 +291,7 @@
         "robot-face.png",
         "dog-face.png",
         "cat-face.png",
+        "pug-face.png",
         "robot-fetch.png",
         "robot-cheer.png"
       ],
@@ -308,9 +315,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-11T09:30:00Z",
+    "at": "2026-11-11T16:00:00Z",
     "via": "Claude Code",
-    "note": "Tasks: a task that waits on others carries a kr-taskwaits, a pin and a count of how many of them are done, red while something is still to do and green (is-clear) once nothing is. Pressed, its kr-string goes is-hot while the rest fade, and the squares it waits on are ringed, is-dep in red and is-met in green"
+    "note": "A fourth pet character, the pug: pug-face.png joins the Characters assets and the Meet your Main Agent strip shows four portrait stickers. The robot dog is still the one every board wears"
   },
   "layout": "files",
   "libraries": [],

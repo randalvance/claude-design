@@ -16,10 +16,10 @@ template, for the base they all descend from, the avatar and the body) and slice
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
-building it and wiring it into the picker and the boards. The cat (`cat`) is the second one and the robot dog (`robot`) the third, drawn with that skill from the
+building it and wiring it into the picker and the boards. The cat (`cat`) is the second one, the robot dog (`robot`) the third and the pug (`pug`) the fourth, drawn with that skill from the
 puppy's prompts with their slots refilled; "The characters" below has their values.
 
-See `DioramaPets.dc.html` for the three side by side, with every mood and the standee walking a round.
+See `DioramaPets.dc.html` for the four side by side, with every mood and the standee walking a round.
 
 ## How the peeking puppy plays
 
@@ -98,6 +98,7 @@ height as it turns), and lays them out with the flat cut edge, or the feet, on o
 | `dog` | A paper puppy | 101x104 CSS px | the picker; worn by every board until the robot dog; `DioramaPets.dc.html` | by hand; the prompts below |
 | `cat` | A paper cat | 104x114 CSS px | the picker only, not worn; `DioramaPets.dc.html` | by the `primepaw-character` skill; the puppy's prompts with the slots below |
 | `robot` | A paper robot dog | 111x135 CSS px | worn by every board; `DioramaPets.dc.html` | by the `primepaw-character` skill, the first through its options step; the puppy's prompts with the slots below |
+| `pug` | A paper pug | 104x114 CSS px | the picker only, not worn; `DioramaPets.dc.html` | by the `primepaw-character` skill, through two rounds of options; the puppy's prompts with the slots below |
 
 The cat's slot values, as the skill's templates in `references/prompts.md` took them:
 
@@ -153,8 +154,42 @@ had drawn with the arms bent up and the fists beside the shoulders: now the uppe
 sides and only the elbows show, the way the puppy's and the cat's do; and a fourth (seed 20261143)
 fixed the pushing cell, whose arm was raised out to the side with the paw showing: now it goes
 forward from the shoulder and only a stub of it shows, the paw out of sight in front, like the
-cat's. That one is the source. Its peeking frame is the tallest of the three characters because the
+cat's. That one is the source. Its peeking frame is the tallest of the four characters because the
 ears stand up and the error and ask marks sit above them.
+
+The pug's slot values:
+
+| Slot | Value |
+| --- | --- |
+| `CREATURE` | a friendly jowly cream pug with a squashed face and droopy cheeks |
+| `FEATURES` | a wide squarish cream paper face (#f3e9d5) with round jowly cheeks, two big round ink-black eyes each with a tiny white paper highlight, a dark kraft paper muzzle patch (#b3905a) with a round ink-black nose and a small pink paper tongue (#e8a9a2) poking out under it, two round pink paper cheeks (#e8a9a2), two small dark kraft paper ears folded down at the top corners of its head, two curled forehead wrinkles drawn with a dark pen (#2a2219), a blue paper bandana (#3b5b9a) around its neck |
+| `RECAP` | the same cream paper face with round jowly cheeks, big round ink-black eyes with a white highlight, dark kraft muzzle with its black nose and pink tongue, pink cheeks, dark kraft folded ears, pen-drawn forehead wrinkles, blue bandana, the white die-cut sticker border |
+| `HEAD` | the pug's head with its folded ears and the top of its blue bandana |
+| `BODY` | a short round cream paper body, the blue paper bandana (#3b5b9a) around its neck hanging as a neat triangle on its chest, its two front paws hanging relaxed at its sides, two short legs with little round feet planted on the ground, a small dark kraft paper tail (#b3905a) curled in a tight spiral showing at one side, and the same friendly face with its pink tongue out |
+| `SIDE` | one eye, one folded ear, its short flat muzzle pointing left with the pink tongue showing, the bandana's triangle as a sliver at its chest and its knot at the back of its neck, and its curled tail at the right |
+| `BACK` | the back of its head with no face, the backs of both folded dark kraft ears at the top corners of its head, the knot of the blue bandana at the back of its neck with two short ends and no triangle showing, a plain cream back, its small dark kraft tail curled in a tight spiral sitting at the centre of its rump, in the middle of the bottom of its back where the two legs meet the body, the whole curl visible against its back, never hanging down between its legs, its two paws at its sides and the backs of its feet |
+| `PAWS`, `PAW` | paws, paw |
+| `EARS`, `EAR` | ears, ear |
+
+Where the pug's drawing went differently: it went through the options step twice. The base was drawn five
+ways in one Qwen batch (seeds 20261150 to 20261154: a classic fawn pug with a black mask, a jowly cream one
+in a blue bandana, a big-eyed baby, a darker grump with an underbite, and one in bold shapes). The fifth
+came back as grey noise twice (seeds 20261154 and 20261155): its prompt was the longest, 1416 characters,
+where the four that drew were 1338 or under, and a shorter wording (1221 characters, seed 20261156) drew
+at once, so a base prompt is kept under about 1340 characters. The pick was the cream one with the
+classic's eyes, and that was drawn five more ways (seeds 20261151 and 20261157 to 20261159: as it was,
+with pink cheeks and its tongue out and the bandana as a triangle at the front, rounder, with black ears
+and a collar, and in a red bandana), the base sentence now asking for a clear white die-cut border where
+it had asked for a narrow one, since the cream paper had come back with almost none. The second of those
+is the base (seed 20261151), kept as drawn rather than redrawn: its bandana's tip hung below the edge the
+paws sit on, so it was cut off flat at that edge with the sticker's white border under it, and the wall
+line was painted green outside the figure like the cat's. The avatar (seed 20261161, the first of two)
+keeps the tongue out where the template asks for a closed smile, because the tongue is the look that was
+picked; the body is seed 20261162, the first of two, with a small dark kraft tail curled in a spiral that
+the base never shows. The turnaround (seed 20261165), the six moods (20261166 to 20261171, idle to ask)
+and the four walk sheets (20261172 to 20261175, down, left, right, up) were all first seeds and none was
+edited: eleven GPT Image sheets, about 20 credits each. In those prompts the creature goes in without its
+article ("the paper cut-out friendly jowly cream pug"), which reads better than the puppy's did.
 
 ## The prompts
 
