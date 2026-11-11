@@ -119,7 +119,7 @@
 .kr-ib.is-sm.kr-red:hover{box-shadow:3px 4px 0 var(--mat-red-3),6px 9px 10px var(--amb)}
 .kr-ib.is-sm.kr-red:active{box-shadow:0 0 0 var(--mat-red-3),1px 1px 2px var(--amb)}
 .kr-ib.is-sm:disabled{background-color:var(--paper-2);background-image:none;color:var(--faint);border-color:transparent;box-shadow:none;transform:none}
-.kr-rail{display:flex;flex-direction:column;align-items:center;gap:var(--space-8);padding:var(--space-12) 0 var(--space-8);width:72px;box-sizing:border-box}
+.kr-rail{display:flex;flex-direction:column;align-items:center;gap:var(--space-4);padding:var(--space-12) 0 var(--space-8);width:72px;box-sizing:border-box}
 .kr-rail.is-row{flex-direction:row;width:auto;padding:var(--space-8) var(--space-12)}
 
 /* ---------- toggles ---------- */
@@ -780,3 +780,34 @@
 .kr-pinned-cap em{font-style:normal;font-family:var(--font-mono);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kr-pinned-cap span{display:flex;align-items:center;gap:6px;margin-top:2px;font-family:var(--font-hand);font-size:15px;line-height:1.1;color:var(--mute);white-space:nowrap;overflow:hidden}
 [data-theme="night"] .kr-pinned-page.is-web,[data-theme="night"] .kr-pinned-img{filter:brightness(.86) saturate(.92)}
+/* tasks: a tree of squares. A leaf is a sticky note in the colour of its status; a task with tasks inside it is a box of paper that holds their squares,
+   cream and kraft by turns. Red string runs pin to pin from a task to the one it waits on. (kr-tasknote, further up, is something else: a factory task's folder) */
+.kr-ib.kr-blush{--c:var(--blush);color:var(--on-attn)}
+.kr-tasknote{position:relative;box-sizing:border-box;width:108px;height:108px;display:flex;flex-direction:column;padding:11px 9px 8px;--nc:#fff39b;background-color:var(--nc);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);box-shadow:2px 3px 0 rgba(0,0,0,.2),0 10px 12px -9px rgba(0,0,0,.45);transform:rotate(var(--tilt,0deg));font-family:var(--font-hand);font-size:17px;font-weight:700;line-height:1.02;color:#2a2219;overflow-wrap:anywhere}
+.kr-tasknote::after{content:"";position:absolute;right:0;bottom:0;width:0;height:0;border-style:solid;border-width:0 0 13px 13px;border-color:transparent transparent rgba(0,0,0,.14) transparent}
+.kr-tasknote.is-doing{--nc:#c4e4ff}
+.kr-tasknote.is-done{--nc:#cdf0b9}
+.kr-tasknote.is-done>span:first-child{text-decoration:line-through;text-decoration-thickness:1.5px;color:#6f6252}
+.kr-tasknote.is-held::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background-image:repeating-linear-gradient(-45deg,rgba(143,58,42,.5) 0 3px,rgba(0,0,0,0) 3px 7px)}
+.kr-tasknote.is-sel,.kr-taskbox.is-sel,.kr-taskstack.is-sel{outline:2px dashed var(--ink);outline-offset:3px}
+.kr-tasknote.is-over,.kr-taskbox.is-over,.kr-taskstack.is-over{outline:3px dashed var(--blue);outline-offset:3px}
+.kr-tasknote-stamp{all:unset;cursor:pointer;margin-top:auto;align-self:flex-start;padding:2px 5px 1px;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.08em;line-height:1.2;text-transform:uppercase;color:#6f6252;border:1.5px dashed currentColor;border-radius:var(--radius-2);transform:rotate(-3deg)}
+.kr-tasknote-stamp:focus-visible{outline:2px solid #2a4070;outline-offset:2px}
+.kr-tasknote.is-doing .kr-tasknote-stamp{color:#2a4070;border-style:solid}
+.kr-tasknote.is-done .kr-tasknote-stamp{color:#2f6b3a;border-style:solid}
+.kr-tasknote.is-held .kr-tasknote-stamp{color:#8f3a2a}
+.kr-taskbox{position:relative;box-sizing:border-box;display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px;min-width:188px;padding:34px 10px 10px;border:1px solid rgba(0,0,0,.09);border-radius:var(--radius-3);background-color:var(--sheet);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-paper);box-shadow:var(--lift-paper-2)}
+.kr-taskbox.is-kraft{background-color:var(--board);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);box-shadow:var(--lift-paper-1)}
+.kr-taskbox.has-about{padding-top:52px}
+.kr-taskbox-head{position:absolute;left:0;right:0;top:0;height:34px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 10px}
+.kr-taskbox-head b{flex:1;min-width:0;font-family:var(--font-serif);font-size:14px;font-weight:600;line-height:1.2;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kr-taskbox-head em{flex:none;font-style:normal;font-family:var(--font-hand);font-size:17px;font-weight:700;line-height:1;color:var(--mute)}
+.kr-taskbox-about{position:absolute;left:10px;right:12px;top:29px;font-family:var(--font-sans);font-size:12px;line-height:1.3;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kr-taskstack{position:relative;box-sizing:border-box;width:108px;height:108px;display:flex;flex-direction:column;padding:11px 9px 8px;border:1px solid rgba(0,0,0,.12);border-radius:var(--radius-3);background-color:var(--board);background-image:linear-gradient(180deg,var(--face),rgba(255,255,255,0) 55%),var(--pulp-board);box-shadow:3px 3px 0 -1px var(--sheet),3px 3px 0 0 rgba(0,0,0,.2),6px 6px 0 -1px var(--sheet),6px 6px 0 0 rgba(0,0,0,.2),8px 10px 9px var(--amb);font-family:var(--font-serif);font-size:14px;font-weight:600;line-height:1.15;color:var(--ink)}
+.kr-taskstack em{margin-top:auto;font-style:normal;font-family:var(--font-hand);font-size:15px;font-weight:500;line-height:1;color:var(--mute)}
+.kr-strings{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.kr-strings .kr-string-shadow{fill:none;stroke:rgba(0,0,0,.3);stroke-width:3;transform:translate(1.5px,2.5px)}
+.kr-strings .kr-string{fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round}
+.kr-strings .kr-string-pin{fill:var(--red);stroke:var(--red-2);stroke-width:1}
+.kr-slot{display:block;width:4px;align-self:stretch;border-radius:var(--radius-2);background-color:var(--blue);box-shadow:0 0 0 1.5px var(--sticker-cut)}
+[data-theme="night"] .kr-tasknote{filter:brightness(.86) saturate(.92)}
