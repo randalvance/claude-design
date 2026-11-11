@@ -810,4 +810,26 @@
 .kr-strings .kr-string{fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round}
 .kr-strings .kr-string-pin{fill:var(--red);stroke:var(--red-2);stroke-width:1}
 .kr-slot{display:block;width:4px;align-self:stretch;border-radius:var(--radius-2);background-color:var(--blue);box-shadow:0 0 0 1.5px var(--sticker-cut)}
+/* how many tasks a task waits on and how many of those are done: a pin and a count, red while something is still to do, green (is-clear) once nothing is.
+   Pressed, its strings go to full strength and the squares at their other ends are ringed (is-dep): red still to do, green (is-met) done */
+.kr-taskwaits{all:unset;cursor:pointer;position:relative;flex:none;box-sizing:border-box;display:inline-flex;align-items:center;gap:3px;height:19px;padding:0 6px 0 4px;font-family:var(--font-hand);font-size:15px;font-weight:700;line-height:1;white-space:nowrap;--wc:#8f3a2a;color:var(--wc);background-color:rgba(255,255,255,.55);border:1.5px solid var(--wc);border-radius:10px}
+.kr-taskwaits::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background-color:currentColor}
+.kr-taskwaits.is-clear{--wc:#2f6b3a}
+.kr-taskwaits:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.kr-taskwaits[aria-pressed="true"]{color:#fff;background-color:var(--wc)}
+.kr-tasknote>.kr-taskwaits{position:absolute;right:6px;bottom:8px}
+.kr-taskstack>.kr-taskwaits{position:absolute;right:7px;bottom:31px}
+.kr-tasknote.is-dep,.kr-taskbox.is-dep,.kr-taskstack.is-dep{--ring:var(--red);--cut:var(--sticker-cut)}
+.kr-tasknote.is-dep.is-met,.kr-taskbox.is-dep.is-met,.kr-taskstack.is-dep.is-met{--ring:var(--green)}
+.kr-tasknote.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),2px 3px 0 rgba(0,0,0,.2),0 10px 12px -9px rgba(0,0,0,.45)}
+.kr-taskbox.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),var(--lift-paper-2)}
+.kr-taskbox.is-kraft.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),var(--lift-paper-1)}
+.kr-taskstack.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),3px 3px 0 -1px var(--sheet),3px 3px 0 0 rgba(0,0,0,.2),6px 6px 0 -1px var(--sheet),6px 6px 0 0 rgba(0,0,0,.2),8px 10px 9px var(--amb)}
+.kr-strings .kr-string.is-hot{stroke-width:3.2}
+.kr-strings.has-hot .kr-string:not(.is-hot){opacity:.3}
+.kr-strings.has-hot .kr-string-shadow:not(.is-hot){opacity:.2}
 [data-theme="night"] .kr-tasknote{filter:brightness(.86) saturate(.92)}
+[data-theme="night"] .kr-taskbox-head .kr-taskwaits,[data-theme="night"] .kr-taskstack>.kr-taskwaits{--wc:var(--red);background-color:var(--sheet)}
+[data-theme="night"] .kr-taskbox-head .kr-taskwaits.is-clear,[data-theme="night"] .kr-taskstack>.kr-taskwaits.is-clear{--wc:var(--green)}
+[data-theme="night"] .kr-taskbox-head .kr-taskwaits[aria-pressed="true"],[data-theme="night"] .kr-taskstack>.kr-taskwaits[aria-pressed="true"]{color:#1c1712;background-color:var(--wc)}
+[data-theme="night"] .kr-tasknote.is-dep,[data-theme="night"] .kr-taskbox.is-dep,[data-theme="night"] .kr-taskstack.is-dep{--cut:#16120d}

@@ -308,9 +308,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-11T06:10:00Z",
+    "at": "2026-11-11T09:30:00Z",
     "via": "Claude Code",
-    "note": "Tasks: one person’s list as a tree of squares. A leaf is a kr-tasknote, a sticky note in its status colour with the status stamped at its foot; a task with tasks inside it is a kr-taskbox that holds their squares, a kr-taskstack when folded; red kr-string runs to what a task waits on. The rail gets the squares tile in kr-blush, and its tiles sit space-4 apart so thirteen fit a 900px window"
+    "note": "Tasks: a task that waits on others carries a kr-taskwaits, a pin and a count of how many of them are done, red while something is still to do and green (is-clear) once nothing is. Pressed, its kr-string goes is-hot while the rest fade, and the squares it waits on are ringed, is-dep in red and is-met in green"
   },
   "layout": "files",
   "libraries": [],

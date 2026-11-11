@@ -1,4 +1,4 @@
-<!-- @dsCard group="Paper parts" height=360 subtitle="Tasks: a tree of squares. A leaf is a sticky note in its status colour, a task with tasks inside is a box that holds them, and red string runs to what a task waits on" -->
+<!-- @dsCard group="Paper parts" height=400 subtitle="Tasks: a tree of squares. A leaf is a sticky note in its status colour, a task with tasks inside is a box that holds them, and red string runs to what a task waits on, with a count that shows them when pressed" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,20 +24,20 @@ html,body{margin:0;min-height:100%}
       <div class="kr-taskbox has-about">
         <div class="kr-taskbox-head"><b>Move to the new flat</b><em>2/6</em></div>
         <span class="kr-taskbox-about">Out of Calle Olmo by the 28th. Keys for the new place on the 1st.</span>
-        <div class="kr-taskbox is-kraft is-sel">
+        <div class="kr-taskbox is-kraft is-dep">
           <div class="kr-taskbox-head"><b>Packing</b><em>1/2</em></div>
           <div class="kr-tasknote is-done" style="--tilt:-1.2deg"><span>Books into boxes</span><button class="kr-tasknote-stamp">Done</button></div>
-          <div class="kr-tasknote is-doing" style="--tilt:.8deg"><span>Label every box</span><button class="kr-tasknote-stamp">Doing</button></div>
+          <div class="kr-tasknote is-doing is-sel" style="--tilt:.8deg"><span>Label every box</span><button class="kr-tasknote-stamp">Doing</button></div>
         </div>
-        <div class="kr-tasknote" style="--tilt:-.5deg"><span>Ask Nico and Ines to help</span><button class="kr-tasknote-stamp">To do</button></div>
-        <div class="kr-tasknote is-held" style="--tilt:1.1deg"><span>Clean the old flat</span><button class="kr-tasknote-stamp">Waits</button></div>
-        <svg class="kr-strings" aria-hidden="true"><path class="kr-string-shadow" d="M434 57 Q283 101 133 54"/><path class="kr-string" d="M434 57 Q283 101 133 54"/><circle class="kr-string-pin" cx="434" cy="57" r="5"/><circle class="kr-string-pin" cx="133" cy="54" r="5"/></svg>
+        <div class="kr-tasknote" style="--tilt:-.5deg"><span>Ask Nico and Ines to help</span><button class="kr-tasknote-stamp">To do</button><button class="kr-taskwaits is-clear" aria-pressed="false" aria-label="Waits on 1 task, 1 done. Show them">1/1</button></div>
+        <div class="kr-tasknote is-held" style="--tilt:1.1deg"><span>Clean the old flat</span><button class="kr-tasknote-stamp">Waits</button><button class="kr-taskwaits" aria-pressed="true" aria-label="Waits on 1 task, 0 done. Stop showing them">0/1</button></div>
+        <svg class="kr-strings has-hot" aria-hidden="true"><path class="kr-string-shadow is-hot" d="M434 57 Q283 101 133 54"/><path class="kr-string is-hot" d="M434 57 Q283 101 133 54"/><circle class="kr-string-pin" cx="434" cy="57" r="5"/><circle class="kr-string-pin" cx="133" cy="54" r="5"/></svg>
       </div>
-      <div class="kr-taskstack">Trip to Lisbon<em>5 inside · 1/5</em></div>
+      <div class="kr-taskstack">Trip to Lisbon<button class="kr-taskwaits" aria-pressed="false" aria-label="Waits on 2 tasks, 1 done. Show them">1/2</button><em>5 inside · 1/5</em></div>
       <div class="kr-tasknote is-over" style="--tilt:.4deg"><span>Call grandma on Sunday</span><button class="kr-tasknote-stamp">To do</button></div>
     </div>
   </div>
-  <span class="cap">A box is done when everything inside it is. Drop a square on the middle of another and it goes inside; the dashed blue outline says so.</span>
+  <span class="cap">A box is done when everything inside it is. Drop a square on the middle of another and it goes inside; the dashed blue outline says so. The pin and count say how many tasks a task waits on are done: pressed, its string and those squares light up.</span>
 </div>
 </body>
 </html>

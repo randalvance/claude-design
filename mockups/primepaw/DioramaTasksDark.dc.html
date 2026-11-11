@@ -367,13 +367,34 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .tq.is-box.is-done .tq-bt{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--mute)}
 .tq.is-box.is-done .tq-n{color:var(--green)}
 .tq-d{position:absolute;left:29px;right:12px;top:29px;font-size:12px;line-height:1.3;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tq.is-box.is-held .tq-h::after{content:"";flex:none;width:22px;height:8px;background-image:repeating-linear-gradient(-45deg,var(--red) 0 3px,rgba(0,0,0,0) 3px 7px);opacity:.6}
 /* a folded box: a stack of sheets the size of one square, with what is inside it by count */
 .tq.is-stack{border:1px solid rgba(0,0,0,.12);border-radius:3px;background-color:var(--board);background-image:var(--face),var(--pulp-board);box-shadow:3px 3px 0 -1px var(--sheet),3px 3px 0 0 rgba(0,0,0,.2),6px 6px 0 -1px var(--sheet),6px 6px 0 0 rgba(0,0,0,.2),8px 10px 9px var(--amb);--ik:var(--ink);--ik-2:var(--mute)}
 .tq.is-stack .tq-t{font-family:var(--font-serif);font-size:14px;font-weight:600;line-height:1.15;-webkit-line-clamp:3}
 .tq-in{margin-top:auto;display:flex;align-items:center;gap:3px;margin-left:-5px;font-family:var(--font-hand);font-size:15px;line-height:1;color:var(--mute);white-space:nowrap}
 .tq-in span{flex:1;min-width:0}
 .tq-in b{font-weight:700}
+/* how many tasks it waits on and how many of those are done: a pin and a count, red while something is still to do, green once nothing is.
+   Pressed, it shows them: its strings go to full strength and the squares at their other ends are ringed, red to do and green done */
+.tq-w{all:unset;cursor:pointer;position:relative;flex:none;box-sizing:border-box;display:inline-flex;align-items:center;gap:3px;height:19px;padding:0 6px 0 4px;font-family:var(--font-hand);font-size:15px;font-weight:700;line-height:1;white-space:nowrap;--wc:#8f3a2a;color:var(--wc);background-color:rgba(255,255,255,.55);border:1.5px solid var(--wc);border-radius:10px}
+.tq-w.is-clear{--wc:#2f6b3a}
+.tq-w i{flex:none;width:7px;height:7px;border-radius:50%;background-color:currentColor}
+.tq-w::after{content:"";position:absolute;inset:-6px}
+.tq-w:hover{background-color:rgba(255,255,255,.9)}
+.tq-w:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.tq-w.is-on{color:#fff;background-color:var(--wc)}
+.tq.is-leaf .tq-w,.tq.is-stack .tq-w{position:absolute;right:6px;bottom:8px}
+.tq.is-stack .tq-w{right:7px;bottom:31px}
+.tq-h .tq-w{margin:0 2px}
+.page.night .tq.is-box .tq-w,.page.night .tq.is-stack .tq-w{--wc:var(--red);background-color:var(--stamp-ground)}
+.page.night .tq.is-box .tq-w.is-clear,.page.night .tq.is-stack .tq-w.is-clear{--wc:var(--green)}
+.page.night .tq.is-box .tq-w.is-on,.page.night .tq.is-stack .tq-w.is-on{color:#1c1712;background-color:var(--wc)}
+.tq.is-dep{--ring:var(--red);--cut:var(--stk)}
+.page.night .tq.is-dep{--cut:#16120d}
+.tq.is-dep.is-depdone{--ring:var(--green)}
+.tq.is-leaf.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),2px 3px 0 rgba(0,0,0,.2),0 10px 12px -9px rgba(0,0,0,.45)}
+.tq.is-box.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),var(--lift-2)}
+.tq.is-box.d1.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),var(--lift-1)}
+.tq.is-stack.is-dep{box-shadow:0 0 0 2px var(--cut),0 0 0 5px var(--ring),3px 3px 0 -1px var(--sheet),3px 3px 0 0 rgba(0,0,0,.2),6px 6px 0 -1px var(--sheet),6px 6px 0 0 rgba(0,0,0,.2),8px 10px 9px var(--amb)}
 /* red string, pin to pin, from a task to the one it waits on */
 .tk-strings{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:300}
 .tk-strings .sh{fill:none;stroke:rgba(0,0,0,.3);stroke-width:3;transform:translate(1.5px,2.5px);opacity:.55}
@@ -534,7 +555,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
               <p class="sl-note">Done when everything inside it is done.</p>
             </sc-if>
             <div class="sl-sec">
-              <div class="sl-lr"><span class="sl-l">Waits on</span><button class="pp-dashed {{o.linkCls}}" onClick="{{startLink}}" aria-pressed="{{o.linking}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="7" r="2"></circle><circle cx="19" cy="7" r="2"></circle><path d="M5 9c1 9 13 9 14 0"></path></svg>String</button></div>
+              <div class="sl-lr"><span class="sl-l">{{o.waitsLabel}}</span><button class="pp-dashed {{o.linkCls}}" onClick="{{startLink}}" aria-pressed="{{o.linking}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="7" r="2"></circle><circle cx="19" cy="7" r="2"></circle><path d="M5 9c1 9 13 9 14 0"></path></svg>String</button></div>
               <sc-for list="{{o.waits}}" as="w" hint-placeholder-count="1">
                 <div class="sl-w {{w.cls}}"><button class="sl-go" onClick="{{w.go}}"><i class="dot {{w.dot}}" aria-hidden="true"></i><span>{{w.title}}</span></button><button class="sl-cut" onClick="{{w.drop}}" aria-label="{{w.dropAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
               </sc-for>
@@ -558,7 +579,7 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
         <sc-if value="{{noSel}}" hint-placeholder-val="{{true}}">
           <section class="slip is-none" aria-label="How the board works">
             <b>Nothing picked</b>
-            <ul><li>Double-click a square to put a task inside it.</li><li>Drag a square to move it.</li><li>Drop it on another square to group them.</li><li>Double-click the cork for a new one.</li></ul>
+            <ul><li>Double-click a square to put a task inside it.</li><li>Drag a square to move it.</li><li>Drop it on another square to group them.</li><li>Double-click the cork for a new one.</li><li>Press a count to see what it waits on.</li></ul>
           </section>
         </sc-if>
       </aside>
@@ -570,16 +591,18 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
           <sc-for list="{{squares}}" as="n" hint-placeholder-count="20">
             <div class="tq {{n.cls}}" style="--x: {{n.x}}; --y: {{n.y}}; --w: {{n.w}}; --h: {{n.h}}; --z: {{n.z}}; --dx: {{n.dx}}; --dy: {{n.dy}}; --r: {{n.rot}}" role="group" tabindex="{{n.tab}}" aria-label="{{n.aria}}" aria-current="{{n.on}}" onPointerDown="{{n.down}}" onPointerMove="{{n.move}}" onPointerUp="{{n.up}}" onPointerCancel="{{n.up}}" onDoubleClick="{{n.dbl}}" onKeyDown="{{n.key}}">
               <sc-if value="{{n.isBox}}" hint-placeholder-val="{{false}}">
-                <div class="tq-h"><button class="tq-fold is-open" onClick="{{n.fold}}" aria-expanded="true" aria-label="{{n.foldAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><b class="tq-bt">{{n.title}}</b><span class="tq-n">{{n.count}}</span></div>
+                <div class="tq-h"><button class="tq-fold is-open" onClick="{{n.fold}}" aria-expanded="true" aria-label="{{n.foldAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><b class="tq-bt">{{n.title}}</b><sc-if value="{{n.hasWaits}}" hint-placeholder-val="{{false}}"><button class="tq-w {{n.wCls}}" onClick="{{n.showWaits}}" aria-pressed="{{n.wOn}}" aria-label="{{n.wAria}}" title="{{n.wTip}}"><i aria-hidden="true"></i>{{n.wn}}</button></sc-if><span class="tq-n">{{n.count}}</span></div>
                 <sc-if value="{{n.hasDesc}}" hint-placeholder-val="{{false}}"><span class="tq-d">{{n.desc}}</span></sc-if>
               </sc-if>
               <sc-if value="{{n.isLeaf}}" hint-placeholder-val="{{true}}">
                 <span class="tq-t">{{n.title}}</span>
                 <button class="tq-st" onClick="{{n.cycle}}" aria-label="{{n.stAria}}">{{n.stWord}}</button>
+                <sc-if value="{{n.hasWaits}}" hint-placeholder-val="{{false}}"><button class="tq-w {{n.wCls}}" onClick="{{n.showWaits}}" aria-pressed="{{n.wOn}}" aria-label="{{n.wAria}}" title="{{n.wTip}}"><i aria-hidden="true"></i>{{n.wn}}</button></sc-if>
               </sc-if>
               <sc-if value="{{n.isStack}}" hint-placeholder-val="{{false}}">
                 <span class="tq-t">{{n.title}}</span>
                 <span class="tq-in"><button class="tq-fold" onClick="{{n.fold}}" aria-expanded="false" aria-label="{{n.foldAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span>{{n.inside}}</span><b>{{n.count}}</b></span>
+                <sc-if value="{{n.hasWaits}}" hint-placeholder-val="{{false}}"><button class="tq-w {{n.wCls}}" onClick="{{n.showWaits}}" aria-pressed="{{n.wOn}}" aria-label="{{n.wAria}}" title="{{n.wTip}}"><i aria-hidden="true"></i>{{n.wn}}</button></sc-if>
               </sc-if>
             </div>
           </sc-for>
@@ -646,7 +669,7 @@ const SEED = [
   T('t17', 't16', 'Renew my passport', 'The photos are in the desk drawer.', 'doing'),
   T('t18', 't16', 'Book the flights'),
   T('t19', 't16', 'Find a place in Alfama'),
-  T('t20', 't16', 'Ask Marta to feed the cat'),
+  T('t20', 't16', 'Ask Marta to feed the cat', '', 'done'),
   T('t21', 't16', 'Buy a pocket phrasebook', '', 'done'),
   T('t22', null, 'Feel better by spring', 'Small things, every week.'),
   T('t23', 't22', 'Dentist check-up'),
@@ -655,13 +678,13 @@ const SEED = [
   T('t26', null, 'Call grandma on Sunday'),
   T('t27', null, 'Fix the bike tyre', 'The patch kit is in the hall cupboard.', 'doing')
 ];
-const LINKS = [['t15', 't2'], ['t18', 't17'], ['t19', 't18'], ['t11', 't9']];   // [a, b]: a waits on b
+const LINKS = [['t12', 't2'], ['t12', 't9'], ['t18', 't17'], ['t18', 't20'], ['t19', 't18'], ['t11', 't9']];   // [a, b]: a waits on b
 const seed = () => {
   const nodes = SEED.map((n) => ({ ...n })), kids = { root: [] };
   nodes.forEach((n) => { (kids[n.p || 'root'] = kids[n.p || 'root'] || []).push(n.id); });
   return { nodes, kids, links: LINKS.map((l) => l.slice()) };
 };
-const INIT = () => ({ ...seed(), fold: {}, sel: null, mode: null, drag: null, dx: 0, dy: 0, over: null, trash: null, nextId: SEED.length + 1, fresh: null });
+const INIT = () => ({ ...seed(), fold: {}, sel: null, mode: null, drag: null, dx: 0, dy: 0, over: null, trash: null, nextId: SEED.length + 1, fresh: null, trace: null });
 const byId = (nodes) => Object.fromEntries(nodes.map((n) => [n.id, n]));
 const kidsOf = (kids, id) => kids[id || 'root'] || [];
 const under = (by, id, anc) => { for (let p = by[id] && by[id].p; p; p = by[p].p) if (p === anc) return true; return false; };   // is id somewhere inside anc
@@ -705,8 +728,8 @@ function pack(kids, fold, by, bw) {
 }
 const NOOP = () => {};
 const BLANK = { cls: 'is-out', x: '0px', y: '0px', w: '0px', h: '0px', z: '0', dx: '0px', dy: '0px', rot: '0deg', tab: '-1', aria: '', on: 'false', isBox: false, isLeaf: false, isStack: false,
-  title: '', desc: '', hasDesc: false, count: '', inside: '', stWord: '', stAria: '', foldAria: '', cycle: NOOP, fold: NOOP, down: NOOP, move: NOOP, up: NOOP, dbl: NOOP, key: NOOP };
-const NONE = { kind: '', hasParent: false, parent: '', goUp: NOOP, isLeaf: false, isBox: false, sts: [], progress: '', ticks: [], waits: [], noWaits: false, hasBlocks: false, blocks: [],
+  title: '', desc: '', hasDesc: false, count: '', inside: '', stWord: '', stAria: '', foldAria: '', hasWaits: false, wn: '', wCls: '', wOn: 'false', wAria: '', wTip: '', showWaits: NOOP, cycle: NOOP, fold: NOOP, down: NOOP, move: NOOP, up: NOOP, dbl: NOOP, key: NOOP };
+const NONE = { kind: '', hasParent: false, parent: '', goUp: NOOP, isLeaf: false, isBox: false, sts: [], progress: '', ticks: [], waits: [], waitsLabel: 'Waits on', noWaits: false, hasBlocks: false, blocks: [],
   linking: false, notLinking: false, moving: false, notMoving: false, linkCls: '', moveCls: '', toss: NOOP };
 
 /* buddy */ const BD0 = { right: 22, open: false, text: '', made: null, shot: null, leftHalf: false, dragging: false }; const BD_MIN = 10, BD_LEFT = 92; /* /buddy */
@@ -771,6 +794,7 @@ class Component extends DCLogic {
   // nodes: every task, in the order it was made. The order never changes and a thrown-away task stays as gone, so a square keeps its place in the list
   //   (the page draws them by index) and glides when the tree is rearranged. kids: each parent's children in order, 'root' for the top.
   // links: [a, b], a waits on b. fold: boxes folded to a stack, in the tree and on the board alike. sel: the picked task, shown in the slip.
+  // trace: the task whose count of what it waits on is pressed: its strings and the squares at their other ends are lit until it is pressed again.
   // mode: 'link' or 'move' while the next click picks another task. drag, dx, dy, over: a square in the hand and where it would land.
   // bw: the cork's width, which the pack fills. fx: the page opens fetching (loading), the squares go down a frame apart (landing), then it is loaded.
   state = { ...INIT(), bw: 1090, fx: 'loading', got: 0, cheer: false, tick: 0 };
@@ -933,6 +957,13 @@ class Component extends DCLogic {
     const tone = (id) => { const ls = leaves(kids, id); return isDone(id) ? 'done' : ls.some((l) => by[l].s !== 'todo') ? 'doing' : 'todo'; };
     const held = (id) => !isDone(id) && st.links.some(([a, b]) => a === id && !isDone(b));
     const sel = st.sel && by[st.sel] && !by[st.sel].gone ? by[st.sel] : null;
+    const waitsOf = (id) => st.links.filter(([a]) => a === id).map(([, b]) => b);
+    // a task folded away is stood in for by the stack that holds it
+    const stand = (id) => { let a = id; while (a && !rect[a]) a = by[a].p; return a || null; };
+    // the pressed count: only while its square is on the board and still waits on something
+    const trace = loaded && st.trace && by[st.trace] && !by[st.trace].gone && rect[st.trace] && waitsOf(st.trace).length ? st.trace : null;
+    const deps = {};   // the squares the pressed count points at, and whether what each stands for is done
+    if (trace) waitsOf(trace).forEach((b) => { const a = stand(b); if (a && a !== trace) deps[a] = (deps[a] === undefined ? true : deps[a]) && isDone(b); });
     const picking = !!st.mode && !!sel;
     const can = (id) => st.mode === 'link' ? this.canTie(sel.id, id) : this.canPut(sel.id, id);
     const pickCls = (id) => !picking || id === sel.id ? '' : can(id) ? 'is-pick' : 'is-off';
@@ -943,27 +974,31 @@ class Component extends DCLogic {
       if (!r || n.gone || fetching || (!loaded && i >= st.got)) return BLANK;
       const leaf = !r.box && !r.stack, ls = leaves(kids, n.id), nd = doneN(n.id), h = held(n.id), ride = riding(n.id), to = tone(n.id);
       const word = leaf ? (h && n.s === 'todo' ? 'Waits' : ST[n.s]) : '';
+      const ws = waitsOf(n.id), wd = ws.filter(isDone).length, wSay = ws.length ? 'waits on ' + ws.length + (ws.length > 1 ? ' tasks' : ' task') + ', ' + wd + ' done' : '';
       return {
         cls: [r.box ? 'is-box' : r.stack ? 'is-stack' : 'is-leaf', 'is-' + to, 'd' + (r.depth % 2), sel && sel.id === n.id ? 'is-sel' : '', h ? 'is-held' : '', n.id === st.drag ? 'is-drag' : ride ? 'is-ride' : '',
-          over && !over.same && (over.ring === n.id || (over.pid === n.id && !over.ring)) ? (over.ring === n.id ? 'is-over' : 'is-into') : '', st.fresh === n.id ? 'is-new' : '', pickCls(n.id), n.t.trim() ? '' : 'is-blank'].filter(Boolean).join(' '),
+          over && !over.same && (over.ring === n.id || (over.pid === n.id && !over.ring)) ? (over.ring === n.id ? 'is-over' : 'is-into') : '', st.fresh === n.id ? 'is-new' : '', pickCls(n.id), n.t.trim() ? '' : 'is-blank', deps[n.id] === undefined ? '' : deps[n.id] ? 'is-dep is-depdone' : 'is-dep'].filter(Boolean).join(' '),
         x: r.x + 'px', y: r.y + 'px', w: r.w + 'px', h: r.h + 'px', z: String(r.depth + 1 + (ride ? 500 : 0)), dx: (ride ? st.dx : 0) + 'px', dy: (ride ? st.dy : 0) + 'px', rot: leaf ? ROT[i % ROT.length] + 'deg' : '0deg',
         tab: '0', on: sel && sel.id === n.id ? 'true' : 'false',
-        aria: name(n) + (leaf ? ', ' + word.toLowerCase() : ', ' + nd + ' of ' + ls.length + ' done' + (r.stack ? ', folded' : '')) + (n.p ? ', inside ' + name(by[n.p]) : ''),
+        aria: name(n) + (leaf ? ', ' + word.toLowerCase() : ', ' + nd + ' of ' + ls.length + ' done' + (r.stack ? ', folded' : '')) + (wSay ? ', ' + wSay : '') + (n.p ? ', inside ' + name(by[n.p]) : ''),
         isBox: r.box, isLeaf: leaf, isStack: r.stack, title: name(n), desc: n.d, hasDesc: r.box && r.head === HEAD2, count: nd + '/' + ls.length, inside: kidsOf(kids, n.id).length + ' inside',
         stWord: word, stAria: leaf ? name(n) + ' is ' + ST[n.s].toLowerCase() + '. Make it ' + ST[NEXT[n.s]].toLowerCase() : '', cycle: () => this.patch(n.id, { s: NEXT[n.s] }),
         foldAria: (r.stack ? 'Unfold ' : 'Fold ') + name(n), fold: () => this.toggle(n.id),
+        hasWaits: ws.length > 0, wn: wd + '/' + ws.length, wCls: (wd === ws.length ? 'is-clear' : '') + (trace === n.id ? ' is-on' : ''), wOn: trace === n.id ? 'true' : 'false',
+        wAria: name(n) + ' ' + wSay + '. ' + (trace === n.id ? 'Stop showing them' : 'Show them on the board'), wTip: wSay ? wSay[0].toUpperCase() + wSay.slice(1) : '',
+        showWaits: () => this.setState((s) => ({ trace: s.trace === n.id ? null : n.id })),
         down: (e) => this.down(e, n.id), move: (e) => this.move(e), up: (e) => this.up(e, n.id),
         dbl: (e) => { if (e.target.closest('button') || Date.now() - (this.draggedAt || 0) < 400 || Date.now() - (this.pickedAt || 0) < 500) return; this.add(n.id); },
         key: (e) => { if (e.target !== e.currentTarget) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.tap(n.id); } }
       };
     });
-    // strings: a waits on b. A task folded away is stood in for by the stack that holds it.
-    const anchor = (id) => { let a = id; while (a && !rect[a]) a = by[a].p; if (!a) return null; const r = rect[a], ride = riding(a); return { id: a, x: r.x + r.w / 2 + (ride ? st.dx : 0), y: r.y + (r.box ? 2 : 5) + (ride ? st.dy : 0) }; };
+    // strings: a waits on b. With a count pressed, its task's strings are the lit ones; otherwise the picked task's are.
+    const anchor = (id) => { const a = stand(id); if (!a) return null; const r = rect[a], ride = riding(a); return { id: a, x: r.x + r.w / 2 + (ride ? st.dx : 0), y: r.y + (r.box ? 2 : 5) + (ride ? st.dy : 0) }; };
     const pins = {}, strings = !loaded ? [] : st.links.map(([a, b]) => {
       const p = anchor(a), q = anchor(b); if (!p || !q || p.id === q.id) return null;
       pins[p.id] = p; pins[q.id] = q;
       const dist = Math.hypot(q.x - p.x, q.y - p.y), cx = (p.x + q.x) / 2, cy = Math.max(p.y, q.y) + 14 + dist * .1;
-      return { d: 'M' + p.x + ' ' + p.y + ' Q' + cx + ' ' + cy + ' ' + q.x + ' ' + q.y, cls: sel && (sel.id === a || sel.id === b) ? 'is-hot' : '' };
+      return { d: 'M' + p.x + ' ' + p.y + ' Q' + cx + ' ' + cy + ' ' + q.x + ' ' + q.y, cls: (trace ? a === trace : sel && (sel.id === a || sel.id === b)) ? 'is-hot' : '' };
     }).filter(Boolean);
     // the tree at the side: the same tasks as an outline. A fold here folds the box on the board too.
     const rows = [];
@@ -981,10 +1016,11 @@ class Component extends DCLogic {
     const dot = (id) => (kidsOf(kids, id).length ? 'is-group ' : '') + 'is-' + tone(id);
     const o = sel ? (() => {
       const ks = kidsOf(kids, sel.id), box = ks.length > 0, ls = leaves(kids, sel.id), par = sel.p ? by[sel.p] : null;
-      const ws = st.links.filter(([a]) => a === sel.id).map(([, b]) => b), bl = st.links.filter(([, b]) => b === sel.id).map(([a]) => a);
+      const ws = waitsOf(sel.id), bl = st.links.filter(([, b]) => b === sel.id).map(([a]) => a);
       return { kind: box ? 'Holds ' + ks.length : 'Task', hasParent: !!par, parent: par ? name(par) : '', goUp: () => par && this.pick(par.id), isLeaf: !box, isBox: box,
         sts: ['todo', 'doing', 'done'].map((k) => ({ label: ST[k], cls: 'is-' + k + (sel.s === k ? ' is-on' : ''), on: sel.s === k ? 'true' : 'false', set: () => this.patch(sel.id, { s: k }) })),
         progress: doneN(sel.id) + ' of ' + ls.length + ' done', ticks: ls.map((l) => ({ cls: 'is-' + by[l].s })),
+        waitsLabel: ws.length ? 'Waits on ' + ws.length + ' · ' + ws.filter(isDone).length + ' done' : 'Waits on',
         waits: ws.map((b) => ({ title: name(by[b]), dot: dot(b), cls: isDone(b) ? 'is-done' : '', go: () => this.pick(b), drop: () => this.setState((s) => ({ links: s.links.filter(([x, y]) => !(x === sel.id && y === b)) })), dropAria: 'Cut the string to ' + name(by[b]) })),
         noWaits: !ws.length && st.mode !== 'link', hasBlocks: bl.length > 0, blocks: bl.map((a) => ({ title: name(by[a]), dot: dot(a), go: () => this.pick(a) })),
         linking: st.mode === 'link', notLinking: st.mode !== 'link', moving: st.mode === 'move', notMoving: st.mode !== 'move', linkCls: st.mode === 'link' ? 'is-on' : '', moveCls: st.mode === 'move' ? 'is-on' : '',
@@ -995,7 +1031,7 @@ class Component extends DCLogic {
     const tagAt = over && !over.same ? (over.ring ? rect[over.ring] : over.mark) : null;
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'tasks' ? 'is-on' : '', cur: n.id === 'tasks' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
-      fetching, busy: fetching ? 'true' : 'false', status: fetching ? 'Fetching your tasks' : st.drag ? (land || 'It stays where it is') : leafN.length + ' tasks',
+      fetching, busy: fetching ? 'true' : 'false', status: fetching ? 'Fetching your tasks' : st.drag ? (land || 'It stays where it is') : trace ? name(by[trace]) + ' waits on ' + waitsOf(trace).map((b) => name(by[b]) + (isDone(b) ? ', done' : ', not done')).join('; ') : leafN.length + ' tasks',
       petAway: fetching, petCls: st.cheer ? 'celebrate' : '', petSay: st.cheer ? 'Got them!' : '', ...fxVals(st.tick, this.still),
       meta: fetching ? '' : leafN.length + ' tasks · ' + nDone + ' done' + (heldN ? ' · ' + heldN + ' waiting' : ''),
       hasGone: !!st.trash, goneLine: st.trash ? 'Threw away ' + st.trash.title + (st.trash.ids.length > 1 ? ' and ' + (st.trash.ids.length - 1) + ' inside' : '') : '', undo: () => this.undo(),
@@ -1010,7 +1046,7 @@ class Component extends DCLogic {
         if (e.target !== e.currentTarget) return;
         const s = this.state;
         if (s.mode === 'move' && s.sel && by[s.sel] && by[s.sel].p) return this.moveTo(s.sel, 'root', kidsOf(s.kids, null).length);
-        this.setState({ sel: null, mode: null, fresh: null });
+        this.setState({ sel: null, mode: null, fresh: null, trace: null });
       },
       squares, strings, pins: Object.values(pins).map((p) => ({ x: String(p.x), y: String(p.y) })), stringsCls: strings.some((s) => s.cls) ? 'has-sel' : '',
       dragging: !!src, hx: src ? src.x + 'px' : '0px', hy: src ? src.y + 'px' : '0px', hw: src ? src.w + 'px' : '0px', hh: src ? src.h + 'px' : '0px',
