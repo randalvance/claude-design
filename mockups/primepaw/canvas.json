@@ -14,7 +14,7 @@
     },
     "DioramaAgent.dc.html": {
       "x": 0,
-      "y": 21900,
+      "y": 42900,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, live demo",
@@ -24,7 +24,7 @@
     },
     "DioramaAgentDark.dc.html": {
       "x": 1540,
-      "y": 21900,
+      "y": 42900,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, dark mode, live demo",
@@ -34,7 +34,7 @@
     },
     "DioramaAgents.dc.html": {
       "x": 0,
-      "y": 20900,
+      "y": 41900,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, live demo",
@@ -44,7 +44,7 @@
     },
     "DioramaAgentsDark.dc.html": {
       "x": 1540,
-      "y": 20900,
+      "y": 41900,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, dark mode, live demo",
@@ -74,7 +74,7 @@
     },
     "DioramaBackground.dc.html": {
       "x": 0,
-      "y": 46300,
+      "y": 40500,
       "w": 1440,
       "h": 900,
       "title": "Background jobs, paper diorama, live demo",
@@ -84,7 +84,7 @@
     },
     "DioramaBackgroundDark.dc.html": {
       "x": 1540,
-      "y": 46300,
+      "y": 40500,
       "w": 1440,
       "h": 900,
       "title": "Background jobs, paper diorama, dark mode, live demo",
@@ -94,7 +94,7 @@
     },
     "DioramaBoard.dc.html": {
       "x": 0,
-      "y": 35900,
+      "y": 30100,
       "w": 1440,
       "h": 900,
       "title": "Kanban, one board, paper diorama, live demo",
@@ -104,7 +104,7 @@
     },
     "DioramaBoardDark.dc.html": {
       "x": 1540,
-      "y": 35900,
+      "y": 30100,
       "w": 1440,
       "h": 900,
       "title": "Kanban, one board, paper diorama, dark mode, live demo",
@@ -324,7 +324,7 @@
     },
     "DioramaKanban.dc.html": {
       "x": 0,
-      "y": 34900,
+      "y": 29100,
       "w": 1440,
       "h": 900,
       "title": "Kanban, boards, paper diorama, live demo",
@@ -334,7 +334,7 @@
     },
     "DioramaKanbanDark.dc.html": {
       "x": 1540,
-      "y": 34900,
+      "y": 29100,
       "w": 1440,
       "h": 900,
       "title": "Kanban, boards, paper diorama, dark mode, live demo",
@@ -344,7 +344,7 @@
     },
     "DioramaKnowledge.dc.html": {
       "x": 0,
-      "y": 29700,
+      "y": 25300,
       "w": 1440,
       "h": 900,
       "title": "Knowledge base, paper diorama, live demo",
@@ -354,7 +354,7 @@
     },
     "DioramaKnowledgeDark.dc.html": {
       "x": 1540,
-      "y": 29700,
+      "y": 25300,
       "w": 1440,
       "h": 900,
       "title": "Knowledge base, paper diorama, dark mode, live demo",
@@ -364,7 +364,7 @@
     },
     "DioramaKnowledgeSetup.dc.html": {
       "x": 0,
-      "y": 30700,
+      "y": 26300,
       "w": 1440,
       "h": 900,
       "title": "Knowledge base, setting up, paper diorama, live demo",
@@ -374,7 +374,7 @@
     },
     "DioramaKnowledgeSetupDark.dc.html": {
       "x": 1540,
-      "y": 30700,
+      "y": 26300,
       "w": 1440,
       "h": 900,
       "title": "Knowledge base, setting up, paper diorama, dark mode, live demo",
@@ -384,7 +384,7 @@
     },
     "DioramaMCPs.dc.html": {
       "x": 0,
-      "y": 32100,
+      "y": 45900,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, live demo",
@@ -394,7 +394,7 @@
     },
     "DioramaMCPsDark.dc.html": {
       "x": 1540,
-      "y": 32100,
+      "y": 45900,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, dark mode, live demo",
@@ -404,7 +404,7 @@
     },
     "DioramaMemory.dc.html": {
       "x": 0,
-      "y": 28700,
+      "y": 24300,
       "w": 1440,
       "h": 900,
       "title": "Memory, paper diorama, live demo",
@@ -414,7 +414,7 @@
     },
     "DioramaMemoryDark.dc.html": {
       "x": 1540,
-      "y": 28700,
+      "y": 24300,
       "w": 1440,
       "h": 900,
       "title": "Memory, paper diorama, dark mode, live demo",
@@ -504,7 +504,7 @@
     },
     "DioramaSkill.dc.html": {
       "x": 0,
-      "y": 23900,
+      "y": 44900,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, live demo",
@@ -514,7 +514,7 @@
     },
     "DioramaSkillDark.dc.html": {
       "x": 1540,
-      "y": 23900,
+      "y": 44900,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, dark mode, live demo",
@@ -524,7 +524,7 @@
     },
     "DioramaSkills.dc.html": {
       "x": 0,
-      "y": 22900,
+      "y": 43900,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, live demo",
@@ -534,7 +534,7 @@
     },
     "DioramaSkillsDark.dc.html": {
       "x": 1540,
-      "y": 22900,
+      "y": 43900,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, dark mode, live demo",
@@ -544,7 +544,7 @@
     },
     "DioramaWorkspace.dc.html": {
       "x": 0,
-      "y": 27300,
+      "y": 22900,
       "w": 1440,
       "h": 900,
       "title": "Workspace, edit page, paper diorama, live demo",
@@ -554,7 +554,7 @@
     },
     "DioramaWorkspaceDark.dc.html": {
       "x": 1540,
-      "y": 27300,
+      "y": 22900,
       "w": 1440,
       "h": 900,
       "title": "Workspace, edit page, paper diorama, dark mode, live demo",
@@ -564,7 +564,7 @@
     },
     "DioramaWorkspaces.dc.html": {
       "x": 0,
-      "y": 25300,
+      "y": 20900,
       "w": 1440,
       "h": 900,
       "title": "Workspaces, list page, paper diorama, live demo",
@@ -574,7 +574,7 @@
     },
     "DioramaWorkspacesDark.dc.html": {
       "x": 1540,
-      "y": 25300,
+      "y": 20900,
       "w": 1440,
       "h": 900,
       "title": "Workspaces, list page, paper diorama, dark mode, live demo",
@@ -584,7 +584,7 @@
     },
     "DioramaFactory.dc.html": {
       "x": 0,
-      "y": 36900,
+      "y": 31100,
       "w": 1440,
       "h": 900,
       "title": "Factory, paper diorama, live demo",
@@ -594,7 +594,7 @@
     },
     "DioramaFactoryDark.dc.html": {
       "x": 1540,
-      "y": 36900,
+      "y": 31100,
       "w": 1440,
       "h": 900,
       "title": "Factory, paper diorama, dark mode, live demo",
@@ -604,7 +604,7 @@
     },
     "DioramaFactoryEmpty.dc.html": {
       "x": 0,
-      "y": 37900,
+      "y": 32100,
       "w": 1440,
       "h": 900,
       "title": "Factory, no factories yet, paper diorama, live demo",
@@ -614,7 +614,7 @@
     },
     "DioramaFactoryEmptyDark.dc.html": {
       "x": 1540,
-      "y": 37900,
+      "y": 32100,
       "w": 1440,
       "h": 900,
       "title": "Factory, no factories yet, paper diorama, dark mode, live demo",
@@ -624,7 +624,7 @@
     },
     "DioramaFactoryPaused.dc.html": {
       "x": 0,
-      "y": 38900,
+      "y": 33100,
       "w": 1440,
       "h": 900,
       "title": "Factory, all paused, paper diorama, live demo",
@@ -634,7 +634,7 @@
     },
     "DioramaFactoryPausedDark.dc.html": {
       "x": 1540,
-      "y": 38900,
+      "y": 33100,
       "w": 1440,
       "h": 900,
       "title": "Factory, all paused, paper diorama, dark mode, live demo",
@@ -644,7 +644,7 @@
     },
     "DioramaFactoryBlocked.dc.html": {
       "x": 0,
-      "y": 39900,
+      "y": 34100,
       "w": 1440,
       "h": 900,
       "title": "Factory, a factory with Blocked tasks, paper diorama, live demo",
@@ -654,7 +654,7 @@
     },
     "DioramaFactoryBlockedDark.dc.html": {
       "x": 1540,
-      "y": 39900,
+      "y": 34100,
       "w": 1440,
       "h": 900,
       "title": "Factory, a factory with Blocked tasks, paper diorama, dark mode, live demo",
@@ -664,7 +664,7 @@
     },
     "DioramaJarvis.dc.html": {
       "x": 0,
-      "y": 48700,
+      "y": 48300,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, live demo",
@@ -674,7 +674,7 @@
     },
     "DioramaJarvisDark.dc.html": {
       "x": 1540,
-      "y": 48700,
+      "y": 48300,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, dark mode, live demo",
@@ -684,7 +684,7 @@
     },
     "DioramaPets.dc.html": {
       "x": 0,
-      "y": 47700,
+      "y": 47300,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy and the cat, each in three cuts, live demo",
@@ -694,7 +694,7 @@
     },
     "DioramaPetsDark.dc.html": {
       "x": 1540,
-      "y": 47700,
+      "y": 47300,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy and the cat, each in three cuts, dark mode, live demo",
@@ -724,7 +724,7 @@
     },
     "DioramaFactoryPage.dc.html": {
       "x": 0,
-      "y": 40900,
+      "y": 35100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Overview, paper diorama, live demo",
@@ -734,7 +734,7 @@
     },
     "DioramaFactoryPageDark.dc.html": {
       "x": 1540,
-      "y": 40900,
+      "y": 35100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Overview, paper diorama, dark mode, live demo",
@@ -744,7 +744,7 @@
     },
     "DioramaFactoryFloor.dc.html": {
       "x": 0,
-      "y": 41900,
+      "y": 36100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory view, paper diorama, live demo",
@@ -754,7 +754,7 @@
     },
     "DioramaFactoryFloorDark.dc.html": {
       "x": 1540,
-      "y": 41900,
+      "y": 36100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory view, paper diorama, dark mode, live demo",
@@ -764,7 +764,7 @@
     },
     "DioramaFactoryPlan.dc.html": {
       "x": 0,
-      "y": 42900,
+      "y": 37100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Plan view, paper diorama, live demo",
@@ -774,7 +774,7 @@
     },
     "DioramaFactoryPlanDark.dc.html": {
       "x": 1540,
-      "y": 42900,
+      "y": 37100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Plan view, paper diorama, dark mode, live demo",
@@ -784,7 +784,7 @@
     },
     "DioramaFactoryKanban.dc.html": {
       "x": 0,
-      "y": 43900,
+      "y": 38100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Kanban view, paper diorama, live demo",
@@ -794,7 +794,7 @@
     },
     "DioramaFactoryKanbanDark.dc.html": {
       "x": 1540,
-      "y": 43900,
+      "y": 38100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Kanban view, paper diorama, dark mode, live demo",
@@ -804,7 +804,7 @@
     },
     "DioramaFactorySettings.dc.html": {
       "x": 0,
-      "y": 44900,
+      "y": 39100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Settings, paper diorama, live demo",
@@ -814,7 +814,7 @@
     },
     "DioramaFactorySettingsDark.dc.html": {
       "x": 1540,
-      "y": 44900,
+      "y": 39100,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Settings, paper diorama, dark mode, live demo",
@@ -844,7 +844,7 @@
     },
     "DioramaIdeas.dc.html": {
       "x": 0,
-      "y": 33500,
+      "y": 27700,
       "w": 1440,
       "h": 900,
       "title": "Idea board, paper diorama, live demo",
@@ -854,7 +854,7 @@
     },
     "DioramaIdeasDark.dc.html": {
       "x": 1540,
-      "y": 33500,
+      "y": 27700,
       "w": 1440,
       "h": 900,
       "title": "Idea board, paper diorama, dark mode, live demo",
@@ -884,7 +884,7 @@
     },
     "DioramaLoading.dc.html": {
       "x": 0,
-      "y": 26300,
+      "y": 21900,
       "w": 1440,
       "h": 900,
       "title": "Loading: Jarvis fetches, live demo",
@@ -894,7 +894,7 @@
     },
     "DioramaLoadingDark.dc.html": {
       "x": 1540,
-      "y": 26300,
+      "y": 21900,
       "w": 1440,
       "h": 900,
       "title": "Loading: Jarvis fetches, dark mode, live demo",
@@ -940,7 +940,6 @@
     "s5",
     "s6",
     "s7",
-    "s8",
     "s9",
     "s10",
     "p26",
@@ -952,7 +951,8 @@
     "p32",
     "p33",
     "s12",
-    "p34"
+    "p34",
+    "p35"
   ],
   "notes": {
     "p14": {
@@ -974,7 +974,7 @@
       "y": 20900,
       "w": 320,
       "page": "diorama",
-      "text": "The other screens, light on the left and dark on the right. Each is a live demo on the same materials: a cardboard rail with coloured thick-card tiles, one paper sheet for the content, paper pieces with the wall texture, thick-card buttons, sticker pills and rubber stamps inked on the paper."
+      "text": "The other screens, light on the left and dark on the right. Each is a live demo on the same materials: a cardboard rail with coloured thick-card tiles, one paper sheet for the content, paper pieces with the wall texture, thick-card buttons, sticker pills and rubber stamps inked on the paper. The rail carries Jarvis, Inbox, Sessions, Workspaces, Memory, the Knowledge base, Workflows, the Idea board, Kanban, Factory, PRs and Background jobs; Agents, Skills and MCP servers live in Settings."
     },
     "p17": {
       "x": 3080,
@@ -992,7 +992,7 @@
     },
     "p19": {
       "x": 3080,
-      "y": 29700,
+      "y": 25300,
       "w": 320,
       "page": "diorama",
       "text": "Knowledge base: the book on the rail. The notes board is a file tree on one sheet of paper: nested folders and .md files with their git state. The note is a sheet of paper: type, title, description and tags on top, then blocks you can drag by the grip to move. Drag a list bullet to move an item, or drop it onto another item to nest it. Parent, related, links and backlinks sit in the margin. Graph is react-force-graph on cork: index cards strung with thread that you drag, zoom and click open. The second pair starts on setting up: pick a folder or clone a repo."
@@ -1027,7 +1027,7 @@
     },
     "p25": {
       "x": 3080,
-      "y": 36900,
+      "y": 31100,
       "w": 320,
       "page": "diorama",
       "text": "Factory: every factory at a glance, on the factory tile after Kanban’s. One card per factory on the sheet: its name by hand, its board as a dashed link (primepaw issues →), a state sticker (Running green, Idle a plain paper label, Off a dashed ghost, Paused amber under the global pause) and the factory’s own switch. Under them five counts by hand with their words: in flight, waiting on you, Blocked, to plan, queued; zeros go faint, waiting on you is amber, Blocked red, and a card with either sits on the amber mat. Along the bottom the steps that are on, as small chips joined by arrows: Planning → Plan review → Implementation → Testing → Code review → Merge; a step that is off is a dashed ghost with only its icon. The header has New factory, which opens a short menu of the boards that have none, and Factory settings. Above the cards, Pause all factories is the slot switch with its consequence in one line by hand: nothing new starts, what is in flight finishes its step and waits. Nothing pulses. The second pair has no factories yet, and New factory is the way in. On the third every factory is paused. On the fourth PrimePaw has a Blocked task, with the reason in red and the way to it."
@@ -1067,15 +1067,15 @@
     "s5": {
       "kind": "title1",
       "x": 0,
-      "y": 20600,
+      "y": 41600,
       "maxW": 2980,
       "page": "diorama",
-      "text": "Agents and skills"
+      "text": "Settings: agents, skills and MCP servers"
     },
     "s6": {
       "kind": "title1",
       "x": 0,
-      "y": 25000,
+      "y": 20600,
       "maxW": 2980,
       "page": "diorama",
       "text": "Workspaces"
@@ -1083,23 +1083,15 @@
     "s7": {
       "kind": "title1",
       "x": 0,
-      "y": 28400,
+      "y": 24000,
       "maxW": 2980,
       "page": "diorama",
       "text": "Memory and knowledge"
     },
-    "s8": {
-      "kind": "title1",
-      "x": 0,
-      "y": 31800,
-      "maxW": 2980,
-      "page": "diorama",
-      "text": "MCP servers"
-    },
     "s9": {
       "kind": "title1",
       "x": 0,
-      "y": 34600,
+      "y": 28800,
       "maxW": 2980,
       "page": "diorama",
       "text": "Kanban and the factory"
@@ -1107,14 +1099,14 @@
     "s10": {
       "kind": "title1",
       "x": 0,
-      "y": 46000,
+      "y": 40200,
       "maxW": 2980,
       "page": "diorama",
       "text": "Background jobs"
     },
     "p26": {
       "x": 3080,
-      "y": 48700,
+      "y": 48300,
       "w": 320,
       "page": "diorama",
       "text": "Button, the cut-out cat in a bow tie: Jarvis’s first character, picked from five cuts, cut from cream and kraft in 1.6px ink, and the try before the pet. Every board wore him until the paper creatures; the boards wear the robot dog now, and the other agents’ portraits stay drawn stickers in his style. This sheet lays out every piece he is cut into. The cut: the kraft patch over his right ear, bead eyes, blush, a red nose, the red bow, two paws to hold an edge, with the paper’s cut edge around him (a light rim by day, white at night). The portrait: the same face as a flat sticker with a white die-cut rim and no shadow, never pixel art, on the cream tile that topped every rail, as the first Meet your Main Agent photo, and at the head of the threads board. Over the composer he was 92px wide, in from the right, leaning 4 degrees on his paws; over the empty home’s greeting 84px. He is a cut-out, not an animation: he never blinks, bounces, pulses, changes face with a session’s state, or does anything when clicked, which is what the pet does instead. The drawing is Kraft’s Characters asset, jarvis.svg."
@@ -1124,12 +1116,12 @@
       "page": "diorama",
       "text": "Jarvis, the pet: three paper creatures drawn on Comfy Cloud, side by side, each in three cuts. The robot dog is the one every board wears: an angular sheet-white hound with pen-drawn panel lines, a kraft snout and chest plate, blue ear tips, gold-ringed eyes and a red collar, the first character through the primepaw-character skill’s options step. The puppy was the first character, and the cat, a round-faced tabby with a blue collar, the second; both wait in the portrait picker. Peeking: over the composer, paws hooked on the frame, a sprite atlas per character with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the buttons set all three and a click on one says hello. The sticker: each head as one round sticker at the sizes the boards use (the sticker, the rail tile, a thread portrait, a row). The standee: a sprite sheet each (pet/<id>-walk.png, <id>-walk.json and standee.js), six poses by four facings, every cell one drawing of the whole creature, the three walking one round of a factory floor and taking turns at the benches. The pictures are the canvas’s uploads of the pet/ files: a board cannot show a picture over 2 MiB that it names by a path, and the atlases are 2 to 3 MiB each. Qwen Image 2.1 drew the bases, faces and bodies and GPT Image 2.6 the moods, turnarounds and walks, through the primepaw-character skill in mockups/primepaw/.claude/skills/; pet/build.py slices them and pet/README.md lists every prompt, slot value and seed.",
       "x": 3080,
-      "y": 47700
+      "y": 47300
     },
     "s11": {
       "kind": "title1",
       "x": 0,
-      "y": 47400,
+      "y": 47000,
       "maxW": 2980,
       "page": "diorama",
       "text": "Jarvis, the pet"
@@ -1143,7 +1135,7 @@
     },
     "p30": {
       "x": 3080,
-      "y": 40900,
+      "y": 35100,
       "w": 320,
       "page": "diorama",
       "text": "The factory page: one factory, reached from the factories list on Home or a card on the Factory list, in five views on one row of card buttons under the head: Overview, Factory view, Plan view, Kanban view, Settings. The head has Factory as a crumb, the name by hand, the state sticker, the board as a dashed link, the curator’s line, and the factory’s own switch. Overview: four count cards, in flight over the cap with one paper slot per place (green taken, amber waiting), waiting on you, Blocked and merged; press waiting on you and the row becomes the inbox’s strips on a board with the ticket’s session beside them, the same strip, notes, capsules and composer a session has, only the tickets that need you; press Blocked and the inbox’s own Blocked items appear, with Done once it is unblocked; press merged and the list of merged tickets with their PR chips. Under the cards the Factory ledger, every event with its day, a kind on a chip (Curator woke, Curator decision, Gate refused, Daily digest sent), the words and a dashed link to the session, with a filter by kind; and the Tasks, every task in the factory with its key on a kraft tag, agent and step, a state sticker, filtered by state and paged six at a time. Factory view: the tickets under To do on a board at the left and the floor at the right, a placeholder for the animated one: a paper room per step with a kraft roof, the agents’ faces at work holding their ticket on a tag, a Blocked ticket parked with its red sticker, the belt in and out with the queued crates, on grass, sand or snow. Plan view: the tickets to plan on the left, the planner’s session on the right with Planning done, Planning done implement later, and Close task above the composer. Kanban view: the Board page’s cork and sticky notes with two places to drop a note above it, Into the factory and To planning; a dropped note is queued or sent to planning and says so by hand on its corner. Settings: the Agent page’s sheets. Name, Description, Main goal, the curator agent as radio rows with New curator agent beside them, Ticket sizing guidance, the Ready label with its tag; the six steps each with a switch, an icon to pick, a label on a dashed line, Kanban status, agent, least and most instances, room and floor; Biome; Trust profile; and the three numbers, fix rounds before Blocked, new tasks per wake, the factory’s cap. Save settings in the head. Everything is fake and nothing pulses."
@@ -1164,7 +1156,7 @@
     },
     "p33": {
       "x": 3080,
-      "y": 33500,
+      "y": 27700,
       "w": 320,
       "page": "diorama",
       "text": "Idea board: the bulb on the rail, the one tile in sticky-note yellow with its glyph in ink. The Board page’s cork and sticky notes, opened up: no columns, each note pinned wherever you left it with a red tack and its own slight tilt. Drag a note anywhere; the one you touch comes to the top. Click a note and it turns into the markdown you wrote, in the same hand, with five colours and a bin under it. Escape, ⌘↵ or a click away pins it back, rendered: headings, bullet and numbered lists, todos you tick on the note itself, quotes, a rule, bold, italic, strike, code and links. New note puts an empty one in the first free spot and opens it; a double-click on the cork puts one where you clicked. A note left empty comes down by itself, and one you throw away comes back with Undo in the head. With a note focused, Enter writes on it and the arrow keys move it. Everything is fake and nothing pulses."
@@ -1172,17 +1164,24 @@
     "s12": {
       "kind": "title1",
       "x": 0,
-      "y": 33200,
+      "y": 27400,
       "maxW": 2980,
       "page": "diorama",
       "text": "Idea board"
     },
     "p34": {
       "x": 3080,
-      "y": 26300,
+      "y": 21900,
       "w": 320,
       "page": "diorama",
       "text": "Loading: Jarvis fetches, the one picked from three ways (the blank cards ruled in pencil and the one big pinwheel were dropped). It is what the Workspaces page shows while it fetches its list, and every other page takes the same state. The rail, the title, Find and New workspace are there from the first frame and the sheet under them is empty but for Jarvis: he is off his plinth, where a small card says out fetching, and at a kraft file box on a ledge. His standing cut steps between two frames of work, the index cards in the box lift one at a time, and a scissor-cut paper bubble says Fetching your workspaces in pen, its dots stepping. The box wears the page’s name on its label; that label and the noun in the bubble are all that change from page to page. When the list lands the scene goes in a frame, the cards come a frame apart from the top, the count takes its place under the title, and Jarvis is back on the plinth, cheering, with Got them in a small bubble. This board rests in the loading state so it can be looked at: Let it load lands the list and Load again goes back. The Workspaces board above plays it once when it opens. Only stepped frames move, nothing pulses, and under reduced motion it is a still."
+    },
+    "p35": {
+      "x": 3080,
+      "y": 41900,
+      "w": 320,
+      "page": "diorama",
+      "text": "Settings: Agents, Skills and MCP servers are off the rail and live in Settings. On these five boards, the two lists, the two edit pages and the MCP timetable, no tile of their own is on the rail, and the Settings gear at its foot is the pressed one. The pages themselves are as they were. There is no board for the Settings page itself yet."
     },
     "p22": {
       "x": 3080,
@@ -1231,14 +1230,6 @@
     "DioramaInboxResolvedDark.dc.html",
     "DioramaInboxReport.dc.html",
     "DioramaInboxReportDark.dc.html",
-    "DioramaAgents.dc.html",
-    "DioramaAgentsDark.dc.html",
-    "DioramaAgent.dc.html",
-    "DioramaAgentDark.dc.html",
-    "DioramaSkills.dc.html",
-    "DioramaSkillsDark.dc.html",
-    "DioramaSkill.dc.html",
-    "DioramaSkillDark.dc.html",
     "DioramaWorkspaces.dc.html",
     "DioramaWorkspacesDark.dc.html",
     "DioramaLoading.dc.html",
@@ -1251,8 +1242,6 @@
     "DioramaKnowledgeDark.dc.html",
     "DioramaKnowledgeSetup.dc.html",
     "DioramaKnowledgeSetupDark.dc.html",
-    "DioramaMCPs.dc.html",
-    "DioramaMCPsDark.dc.html",
     "DioramaIdeas.dc.html",
     "DioramaIdeasDark.dc.html",
     "DioramaKanban.dc.html",
@@ -1279,6 +1268,16 @@
     "DioramaFactorySettingsDark.dc.html",
     "DioramaBackground.dc.html",
     "DioramaBackgroundDark.dc.html",
+    "DioramaAgents.dc.html",
+    "DioramaAgentsDark.dc.html",
+    "DioramaAgent.dc.html",
+    "DioramaAgentDark.dc.html",
+    "DioramaSkills.dc.html",
+    "DioramaSkillsDark.dc.html",
+    "DioramaSkill.dc.html",
+    "DioramaSkillDark.dc.html",
+    "DioramaMCPs.dc.html",
+    "DioramaMCPsDark.dc.html",
     "DioramaPets.dc.html",
     "DioramaPetsDark.dc.html",
     "DioramaJarvis.dc.html",

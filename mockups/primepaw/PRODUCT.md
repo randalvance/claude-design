@@ -44,9 +44,10 @@ Confirmed functionality, each with a light and a dark board in this folder (see 
 - Home thread with the main agent; the threads board; empty, waiting, asking and Thread-YOLO states; Meet your Main Agent (name, portrait, model) as a setup step and as the card on an empty home.
 - Sessions: the workspace-grouped list with attention badges, busy and done states; an open session with tabs, capsules, composer, artifacts clipboard, side chat, and a title that can be rewritten or generated.
 - Approvals: permission slips (Allow once, Allow for this session, Deny), question sheets, the inbox, YOLO per session (skips slips, never questions) and Thread YOLO.
-- Agents list and edit page (description, system prompt, preferred model, MCP servers, skills).
-- Skills list and edit page (slash command, trigger phrases, instructions, files, who it is on for, usage).
-- Workspaces list and edit page. Memory with Global, Workspaces and Agents tabs and a 4 KB budget. MCP servers on one timetable with a tools drawer.
+- Agents list and edit page (description, system prompt, preferred model, MCP servers, skills), in Settings.
+- Skills list and edit page (slash command, trigger phrases, instructions, files, who it is on for, usage), in Settings.
+- Workspaces list and edit page. Memory with Global, Workspaces and Agents tabs and a 4 KB budget. MCP servers on one timetable with a tools drawer, in Settings.
+- The rail: Jarvis, Inbox, Sessions, Workspaces, Memory, the Knowledge base, Workflows, the Idea board, Kanban, Factory, PRs and Background jobs. Agents, Skills and MCP servers are not on it; they are reached from Settings. The Settings page itself has no board yet.
 - Loading: while a page fetches its list the title and the toolbar are there at once and Jarvis leaves his plinth to go through a file box labelled with the page's name, saying what he is fetching; when the list lands he is back on the plinth and says so. Shown on Workspaces, and meant as the one loading state for every page. *(prototype)*
 - Idea board: sticky notes pinned anywhere on a cork, written in markdown (headings, lists, todos, quotes, bold, italic, strike, code, links), dragged freely, in five colours, with Undo for a thrown-away note.
 - Finish reports in the inbox: the task, when it was done, the time all its sessions took, tracker and board links, a summary, the questions asked with their options and who answered, and a retro (went well, went wrong, action items), with Dismiss.
