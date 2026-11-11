@@ -182,6 +182,12 @@
           "name": "ideas.svg",
           "size": 288,
           "type": "image/svg+xml"
+        },
+        "artifacts.svg": {
+          "blob": "ca39e08cf00973e0cf708949131f8eb9",
+          "name": "artifacts.svg",
+          "size": 221,
+          "type": "image/svg+xml"
         }
       },
       "name": "Icons",
@@ -196,6 +202,7 @@
         "workspaces.svg",
         "memory.svg",
         "knowledge.svg",
+        "artifacts.svg",
         "mcps.svg",
         "workflows.svg",
         "ideas.svg",
@@ -294,9 +301,9 @@
   ],
   "lastChange": {
     "by": "Randal Vance Cunanan",
-    "at": "2026-11-11T00:20:00Z",
+    "at": "2026-11-11T00:50:00Z",
     "via": "Claude Code",
-    "note": "The rail: Agents, Skills and MCP servers have no tile any more, they live in Settings; the rail demos drop the three tiles and the icon button shows the uncoloured Settings gear"
+    "note": "Artifacts: the pin in a session’s clipboard is kr-pinmark, and a pinned artifact is a kr-pinned piece on the Artifacts page’s cork, with a thumbnail for markdown, web pages and images and a kr-ext stamp for anything else; the rail gets the clipboard tile in kr-blue-2"
   },
   "layout": "files",
   "libraries": [],

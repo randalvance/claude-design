@@ -39,7 +39,7 @@ button{font:inherit}
 .rb:hover svg,.rb:hover .jface{transform:translate(-1px,-1px);box-shadow:3px 4px 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),6px 9px 10px var(--amb)}
 .rb:active svg,.rb:active .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb)}
 .rb.on svg,.rb.on .jface{transform:translate(2px,3px);box-shadow:0 0 0 color-mix(in srgb,var(--c,var(--kraft-2)) 55%,var(--edge-2)),1px 1px 2px var(--amb);background-color:color-mix(in srgb,color-mix(in srgb,var(--c,var(--kraft-2)) var(--dye,100%),var(--desk)) 82%,var(--edge-2))}
-.rb-sessions{--c:var(--blue)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}.rb-factory{--c:var(--green)}.rb-ideas{--c:var(--attn)}.rb-ideas svg{color:var(--on-attn)}
+.rb-sessions{--c:var(--blue)}.rb-workspaces{--c:var(--max)}.rb-memory{--c:var(--red)}.rb-kb{--c:var(--book)}.rb-artifacts{--c:var(--blue-2)}.rb-workflows{--c:var(--kind-think)}.rb-kanban{--c:var(--kind-sub)}.rb-prs{--c:var(--red-2)}.rb-bg{--c:var(--amber)}.rb-inbox{--c:var(--amber)}.rb-factory{--c:var(--green)}.rb-ideas{--c:var(--attn)}.rb-ideas svg{color:var(--on-attn)}
 .rb:focus-visible svg,.rb:focus-visible .jface{outline:2px solid var(--blue);outline-offset:3px}
 .rb .nb{position:absolute;top:-4px;right:-1px;min-width:19px;height:19px;padding:0 5px;border-radius:50%;background-color:var(--attn);background-image:var(--gloss);color:var(--on-attn);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s);box-sizing:border-box;transform:rotate(8deg);z-index:1}
 .rb-prs .nb{background-color:var(--st-red);color:var(--white)}
@@ -402,6 +402,17 @@ button{font:inherit}
 .ver .ib svg{width:13px;height:13px}
 .ver .ib.off{opacity:.3;cursor:default}
 .art-old{font-family:var(--hand);font-size:15px;color:var(--mute);margin-right:4px}
+/* the pin: a pushpin drawn in pen with a word by hand, a bare mark like the other pen marks. Pressed, it is red and the artifact is on the Artifacts page */
+.art-r{flex:none;display:flex;align-items:center;gap:8px}
+.apin{all:unset;cursor:pointer;box-sizing:border-box;display:inline-flex;align-items:center;gap:3px;height:26px;padding:0 7px 0 4px;border-radius:5px;font-family:var(--hand);font-size:17px;font-weight:700;line-height:1;color:var(--mute);white-space:nowrap;transition:color .15s var(--ease),background-color .12s var(--ease)}
+.apin svg{width:16px;height:16px;flex:none;transform:rotate(25deg);transition:transform .15s var(--ease)}
+.apin:hover{color:var(--ink);background-color:var(--hover);background-image:var(--pulp)}
+.apin:hover svg{transform:rotate(10deg)}
+.apin.is-on{color:var(--red)}
+.apin.is-on svg{transform:rotate(-15deg)}
+.apin:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.arttabs .tab{position:relative}
+.arttabs .tk{position:absolute;top:2px;right:4px;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff9b85,var(--red) 55%,var(--red-2));box-shadow:.5px 1px 1px rgba(0,0,0,.35)}
 .art-b{flex:1;min-height:0;overflow:auto;padding:12px 14px 16px;font-size:13px;line-height:1.55;color:var(--ink)}
 .art-b h4{margin:12px 0 4px;font-family:var(--serif);font-size:15px;font-weight:600;line-height:1.3}
 .art-b h4:first-child{margin-top:0}
@@ -1098,10 +1109,10 @@ span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
         <span class="clipb-clip" aria-hidden="true"><svg viewBox="0 0 92 30"><path class="wire" d="M32 12V8a14 6 0 0 1 28 0v4"></path><path class="jaw" d="M12 11h68l10 17H2z"></path><path class="crease" d="M12 15h68"></path></svg></span>
         <header class="clipb-h"><h2>Artifacts</h2><button class="ib" onClick="{{toggleArts}}" aria-label="Close artifacts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
         <sc-if value="{{hasArts}}" hint-placeholder-val="{{false}}">
-          <nav class="tabs arttabs" aria-label="Artifacts in this session"><sc-for list="{{arts}}" as="a" hint-placeholder-count="3"><button class="tab {{a.cls}}" onClick="{{a.pick}}" aria-current="{{a.cur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{a.icon}}"></path></svg>{{a.short}}</button></sc-for></nav>
+          <nav class="tabs arttabs" aria-label="Artifacts in this session"><sc-for list="{{arts}}" as="a" hint-placeholder-count="3"><button class="tab {{a.cls}}" onClick="{{a.pick}}" aria-current="{{a.cur}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{a.icon}}"></path></svg>{{a.short}}<sc-if value="{{a.pinned}}" hint-placeholder-val="{{false}}"><i class="tk" aria-hidden="true"></i></sc-if></button></sc-for></nav>
           <article class="art">
             <div class="art-h"><div><h3>{{artv.title}}</h3><span class="art-k">{{artv.meta}}</span></div>
-              <sc-if value="{{artv.hasVers}}" hint-placeholder-val="{{false}}"><div class="ver" role="group" aria-label="Versions"><sc-if value="{{artv.isOld}}" hint-placeholder-val="{{false}}"><span class="art-old">older</span></sc-if><button class="ib {{artv.prevCls}}" onClick="{{artv.prev}}" aria-label="Older version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span>{{artv.verLabel}}</span><button class="ib {{artv.nextCls}}" onClick="{{artv.next}}" aria-label="Newer version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div></sc-if>
+              <div class="art-r"><sc-if value="{{artv.hasVers}}" hint-placeholder-val="{{false}}"><div class="ver" role="group" aria-label="Versions"><sc-if value="{{artv.isOld}}" hint-placeholder-val="{{false}}"><span class="art-old">older</span></sc-if><button class="ib {{artv.prevCls}}" onClick="{{artv.prev}}" aria-label="Older version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span>{{artv.verLabel}}</span><button class="ib {{artv.nextCls}}" onClick="{{artv.next}}" aria-label="Newer version"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div></sc-if><button class="apin {{artv.pinCls}}" onClick="{{artv.togglePin}}" aria-pressed="{{artv.pinned}}" aria-label="{{artv.pinAria}}" title="{{artv.pinTip}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2l8 8-3 1-4 4 1 6-4-4-6 6-1-1 6-6-4-4 6 1 4-4z"></path></svg><span>{{artv.pinWord}}</span></button></div>
             </div>
             <div class="art-b">
               <sc-if value="{{artv.isDoc}}" hint-placeholder-val="{{false}}"><sc-for list="{{artv.blocks}}" as="b" hint-placeholder-count="4"><sc-if value="{{b.isH}}" hint-placeholder-val="{{false}}"><h4>{{b.t}}</h4></sc-if><sc-if value="{{b.isP}}" hint-placeholder-val="{{false}}"><p>{{b.t}}</p></sc-if><sc-if value="{{b.isLi}}" hint-placeholder-val="{{false}}"><div class="art-li">{{b.t}}</div></sc-if><sc-if value="{{b.isRow}}" hint-placeholder-val="{{false}}"><div class="art-row"><span>{{b.a}}</span><b>{{b.b}}</b></div></sc-if></sc-for></sc-if>
@@ -1152,6 +1163,7 @@ const NAV = [
   { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
   { id: 'memory', label: 'Memory', icon: 'M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18ZM12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18ZM15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4M17.599 6.5a3 3 0 0 0 .399-1.375M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M19.938 10.5a4 4 0 0 1 .585.396M6 18a4 4 0 0 1-1.967-.516M19.967 17.484A4 4 0 0 1 18 18' },
   { id: 'kb', label: 'Knowledge base', icon: 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20M9 6h7M9 10h5' },
+  { id: 'artifacts', label: 'Artifacts', icon: 'M8 3h8v4H8zM8 5H5v16h14V5h-3M9 12h6M9 16h6' },
   { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
   { id: 'ideas', label: 'Idea board', icon: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
   { id: 'kanban', label: 'Kanban', icon: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z' },
@@ -1352,7 +1364,7 @@ const FLOWS = { s5: {
 class Component extends DCLogic {
   ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
   titleOf(id, fallback) { return (this.state.titles || {})[id] || fallback; }
-  state = { flow: { s5: { at: 0, res: {} } }, askDraft: {}, qdOpen: false, qdTab: 0, allow: {}, yoloBy: {}, mod: null, padOpen: false, done: {}, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: 's5', tab: 'Chat', open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
+  state = { flow: { s5: { at: 0, res: {} } }, askDraft: {}, qdOpen: false, qdTab: 0, allow: {}, yoloBy: {}, mod: null, padOpen: false, done: {}, artSel: {}, artVer: {}, pad: {}, padCtx: {}, padBusy: null, padDraft: 0, sideW: null, artCopied: false, artSaved: false, sid: 's5', tab: 'Chat', pins: { a41: true, a43: true }, open: null, caps: {}, msgs: {}, openWs: { lighthouse: true, orbit: true, fleet: true, tf: false }, activeOnly: false, model: 'sonnet', effort: 2, auto: true, yolo: true, draft: 0, focus: false, fly: false, used: {}, tick: 0, adv: false, newWs: 'lighthouse', newRole: 'Orchestrator', newSessions: [], nextId: 1,
     todos: { s3: [{ t: 'Read how local cards render markdown', d: true }, { t: 'Find why synced cards are plain text', d: true }, { t: 'Create the issue', d: true }, { t: 'Link the issue to LH-273', d: false }] } };
   // Jarvis, the paper pet over the composer: it rests in a mood read off the session (asking while the agent waits on you, idle otherwise) and plays a short one when something happens: a hello when a session opens or you poke it, a cheer when a turn lands, a droop when you stop the agent or deny it
   petMood() { const shot = this.state.petShot; if (shot) return shot.name; const sid = this.state.sid; if (!sid) return 'idle'; const waiting = !!this.flowPending(sid) || this.curMsgs().some((m) => !m.done && m.tool && !m.tool.status); return waiting ? 'ask' : 'idle'; }
@@ -1406,12 +1418,13 @@ class Component extends DCLogic {
   sideVals(st, c, sessionBusy) {
     const sid = st.sid; const arts = sid ? this.artsOf(sid, c) : []; const sel = sid ? this.artSelOf(sid, arts) : null;
     const seedOnly = sid ? (ARTS[sid] || (c.isNew ? [] : genericArts({ ...c, id: sid }))) : [];
-    let artv = { title: '', meta: '', isDoc: false, isCode: false, isPage: false, hasVers: false, isOld: false, blocks: [], lines: [], page: { title: '', sub: '', stats: [], bars: [] }, verLabel: '', prevCls: '', nextCls: '', prev: () => {}, next: () => {} };
+    let artv = { title: '', meta: '', isDoc: false, isCode: false, isPage: false, hasVers: false, isOld: false, blocks: [], lines: [], page: { title: '', sub: '', stats: [], bars: [] }, verLabel: '', prevCls: '', nextCls: '', prev: () => {}, next: () => {}, pinCls: '', pinned: 'false', pinWord: 'Pin', pinAria: 'Pin to the Artifacts page', pinTip: 'Pin to the Artifacts page', togglePin: () => {} };
     let copyText = '';
     if (sel) {
       const n = sel.versions.length; const saved = (st.artVer || {})[sel.id]; const vi = saved == null ? n - 1 : Math.min(n - 1, saved); const v = sel.versions[vi];
       const go = (d) => { const to = vi + d; if (to < 0 || to > n - 1) return; this.setState({ artVer: { ...st.artVer, [sel.id]: to } }); };
-      artv = { ...artv, title: sel.title, meta: sel.meta, hasVers: n > 1, isOld: vi < n - 1, verLabel: 'v' + (vi + 1) + ' of ' + n, prevCls: vi === 0 ? 'off' : '', nextCls: vi === n - 1 ? 'off' : '', prev: () => go(-1), next: () => go(1), isDoc: sel.kind === 'doc', isCode: sel.kind === 'code', isPage: sel.kind === 'page' };
+      const pin = !!(st.pins || {})[sel.id];   // pinned artifacts show up on the Artifacts page
+      artv = { ...artv, title: sel.title, meta: sel.meta + (pin ? ' · pinned to Artifacts' : ''), pinCls: pin ? 'is-on' : '', pinned: pin ? 'true' : 'false', pinWord: pin ? 'Pinned' : 'Pin', pinAria: (pin ? 'Unpin ' + sel.title + ' from the Artifacts page' : 'Pin ' + sel.title + ' to the Artifacts page'), pinTip: pin ? 'On the Artifacts page. Press to unpin' : 'Pin to the Artifacts page', togglePin: () => this.setState({ pins: { ...(st.pins || {}), [sel.id]: !pin } }), hasVers: n > 1, isOld: vi < n - 1, verLabel: 'v' + (vi + 1) + ' of ' + n, prevCls: vi === 0 ? 'off' : '', nextCls: vi === n - 1 ? 'off' : '', prev: () => go(-1), next: () => go(1), isDoc: sel.kind === 'doc', isCode: sel.kind === 'code', isPage: sel.kind === 'page' };
       if (sel.kind === 'doc') { artv.blocks = v.map((b) => ({ isH: b.k === 'h', isP: b.k === 'p', isLi: b.k === 'li', isRow: b.k === 'row', t: b.t || '', a: b.a || '', b: b.b || '' })); copyText = v.map((b) => b.t || (b.a + ': ' + b.b)).join('\n'); }
       if (sel.kind === 'code') { artv.lines = v; copyText = v.map((l) => l.t).join('\n'); }
       if (sel.kind === 'page') { artv.page = { ...v, bars: v.bars.map((b) => ({ h: b + '%' })) }; copyText = v.title; }
@@ -1425,7 +1438,7 @@ class Component extends DCLogic {
       artsTabCls: st.mod === 'arts' ? 'on' : '', padTabCls: st.padOpen ? 'on' : '',
       toggleArts: () => this.setState({ mod: st.mod === 'arts' ? null : 'arts' }), togglePad: () => { this.setState({ padOpen: !st.padOpen }); this.padEnd(); },
       hasArts: arts.length > 0, noArts: arts.length === 0, artCount: String(arts.length),
-      arts: arts.map((a) => ({ short: a.short, icon: ART_ICON[a.kind], cls: sel && sel.id === a.id ? 'on' : '', cur: sel && sel.id === a.id ? 'page' : false, pick: () => this.openArt(a.id) })),
+      arts: arts.map((a) => ({ short: a.short, icon: ART_ICON[a.kind], cls: sel && sel.id === a.id ? 'on' : '', cur: sel && sel.id === a.id ? 'page' : false, pinned: !!(st.pins || {})[a.id], pick: () => this.openArt(a.id) })),
       artv,
       seedChits: seedOnly.map((a) => this.chitView(a, sid, arts)), hasSeedChits: seedOnly.length > 0 && !(FLOWS[sid] && this.flowOf(sid).at < FLOWS[sid].stages.length),
       artCopyLabel: st.artCopied ? 'Copied' : 'Copy', artSaveLabel: st.artSaved ? 'Downloaded' : 'Download',
