@@ -16,10 +16,10 @@ template, for the base they all descend from, the avatar and the body) and slice
 
 Every file is named after the character, `dog`; a second character is the same five files and a source
 folder under another id. The `primepaw-character` skill in `.claude/skills/` walks through drawing one,
-building it and wiring it into the picker and the boards. The cat (`cat`) is the second one, the robot dog (`robot`) the third and the pug (`pug`) the fourth, drawn with that skill from the
+building it and wiring it into the picker and the boards. The cat (`cat`) is the second one, the robot dog (`robot`) the third, the pug (`pug`) the fourth and the kitten (`kitten`) the fifth, drawn with that skill from the
 puppy's prompts with their slots refilled; "The characters" below has their values.
 
-See `DioramaPets.dc.html` for the four side by side, with every mood and the standee walking a round.
+See `DioramaPets.dc.html` for the five side by side, with every mood and the standee walking a round.
 
 ## How the peeking puppy plays
 
@@ -99,6 +99,7 @@ height as it turns), and lays them out with the flat cut edge, or the feet, on o
 | `cat` | A paper cat | 104x114 CSS px | the picker only, not worn; `DioramaPets.dc.html` | by the `primepaw-character` skill; the puppy's prompts with the slots below |
 | `robot` | A paper robot dog | 111x135 CSS px | worn by every board; `DioramaPets.dc.html` | by the `primepaw-character` skill, the first through its options step; the puppy's prompts with the slots below |
 | `pug` | A paper pug | 104x114 CSS px | the picker only, not worn; `DioramaPets.dc.html` | by the `primepaw-character` skill, through two rounds of options; the puppy's prompts with the slots below |
+| `kitten` | A paper kitten | 111x124 CSS px | the picker only, not worn; `DioramaPets.dc.html` | by the `primepaw-character` skill, from a second set of options drawn as edits; the puppy's prompts with the slots below |
 
 The cat's slot values, as the skill's templates in `references/prompts.md` took them:
 
@@ -154,7 +155,7 @@ had drawn with the arms bent up and the fists beside the shoulders: now the uppe
 sides and only the elbows show, the way the puppy's and the cat's do; and a fourth (seed 20261143)
 fixed the pushing cell, whose arm was raised out to the side with the paw showing: now it goes
 forward from the shoulder and only a stub of it shows, the paw out of sight in front, like the
-cat's. That one is the source. Its peeking frame is the tallest of the four characters because the
+cat's. That one is the source. Its peeking frame is the tallest of the five characters because the
 ears stand up and the error and ask marks sit above them.
 
 The pug's slot values:
@@ -190,6 +191,41 @@ the base never shows. The turnaround (seed 20261165), the six moods (20261166 to
 and the four walk sheets (20261172 to 20261175, down, left, right, up) were all first seeds and none was
 edited: eleven GPT Image sheets, about 20 credits each. In those prompts the creature goes in without its
 article ("the paper cut-out friendly jowly cream pug"), which reads better than the puppy's did.
+
+The kitten's slot values:
+
+| Slot | Value |
+| --- | --- |
+| `CREATURE` | a friendly round black kitten with big round gold eyes |
+| `FEATURES` | a very round charcoal black paper face (#3a3129), two pointed charcoal paper ears with pink paper inner ears (#e8a9a2), two big round gold paper eyes (#e3b53a) each with a big round ink-black pupil and a white paper highlight, a small pink triangle paper nose, a little w-shaped mouth cut from sheet-white paper (#fbf7ee), two round pink paper cheeks (#e8a9a2), a blue paper ribbon (#3b5b9a) tied in a bow under its chin |
+| `RECAP` | the same round charcoal black paper face, pointed ears with pink inner ears, big round gold eyes with round black pupils and a white highlight, pink triangle nose, white w-shaped mouth, pink cheeks, blue ribbon bow under its chin, the white die-cut sticker border |
+| `HEAD` | the kitten's head with its pointed ears and the blue bow under its chin |
+| `BODY` | a short round charcoal black paper body, the blue paper bow (#3b5b9a) at its neck, its two front paws hanging relaxed at its sides, two short legs with little round feet planted on the ground, a charcoal black paper tail curving up at one side with its tip curled, and the same friendly face |
+| `SIDE` | one gold eye, one pointed ear, its small muzzle pointing left with the pink nose at its tip, the bow as a sliver at its throat, and its tail curving up at the right |
+| `BACK` | the back of its head with no face, the backs of both pointed charcoal ears with no pink showing, the thin blue ribbon across the back of its neck with no bow showing, a plain charcoal black back, its tail rising from the centre of its rump and curving up to one side with its tip curled, its two paws at its sides and the backs of its feet |
+| `PAWS`, `PAW` | paws, paw |
+| `EARS`, `EAR` | ears, ear |
+
+Where the kitten's drawing went differently: it is a second cat, beside the tabby, and its options took
+four sheets. Five cats as Qwen text-to-image (seeds 20261176 to 20261180: a black cat with slit eyes, a
+Siamese, a tuxedo, a fluffy white one, a calico) came back with wall lines and bows hanging below the
+edge. The same five as GPT Image 2.6 text-to-image, the graph with no reference image (20261181 to
+20261185, about 16.5 credits each), came back clean: GPT keeps to "nothing at all is drawn below that
+edge" and "the wall itself is not drawn" where Qwen does not. Five variations of the fluffy white one
+were then Qwen edits of its GPT drawing (20261191 to 20261195), which cost no partner credits and kept
+the drawing while one piece changed. The last sheet, five cute cats, used the same trick to draw new
+cats: a Qwen edit that takes a GPT drawing as the reference for the pose, the cut edge and the paper
+style and is told to redraw it as a different cat (20261196 to 20261200). Three of those were redrawn
+(20261201 to 20261203) because the ginger one read as a bear cub, the big-eared one as a fennec fox and
+the white one's black cap as a hat; "clearly a cat", pointed triangular ears and whiskers fixed them.
+The pick was the black kitten (20261200, an edit of the GPT black cat). Its bow tails and paws hung
+below the edge over a soft shadow, so the base is that drawing redrawn with a flat cut (20261204, the
+first of two) and then given toe marks on its paws (20261206). The avatar is seed 20261207. The body
+(20261208) is black all over: every limb is asked for as its own piece of paper with a pen outline, and
+that is enough for the arms, legs and tail to read against the body; one with a white tummy patch
+(20261209) was drawn and not used. The turnaround (20261210), the six moods (20261211 to 20261216, idle
+to ask) and the four walk sheets (20261217 to 20261220, down, left, right, up) were all first seeds and
+none was edited.
 
 ## The prompts
 

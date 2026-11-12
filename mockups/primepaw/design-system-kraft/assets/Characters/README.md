@@ -1,6 +1,6 @@
 # Characters
 
-The faces of the main agent. The pet’s four characters are PNG stickers, 176px square, each a round head with a white die-cut rim and no shadow: `robot-face.png` (the robot dog, the one every board wears), `dog-face.png` (the puppy), `cat-face.png` (the cat) and `pug-face.png` (the pug). Show one with `kr-pface` as a background image: 64px as the sticker, 32px as a thread portrait or on the Meet your Main Agent strip, 26px on the `kr-ib kr-jarvis` tile, 24px on a small photo, 16px on a row. The peeking sprites and the standee sheets live with the Primepaw mockup under `pet/`.
+The faces of the main agent. The pet’s five characters are PNG stickers, 128px square, each a round head with a white die-cut rim and no shadow: `robot-face.png` (the robot dog, the one every board wears), `dog-face.png` (the puppy), `cat-face.png` (the cat), `pug-face.png` (the pug) and `kitten-face.png` (the kitten). Show one with `kr-pface` as a background image: 64px as the sticker, 32px as a thread portrait or on the Meet your Main Agent strip, 26px on the `kr-ib kr-jarvis` tile, 24px on a small photo, 16px on a row. The peeking sprites and the standee sheets live with the Primepaw mockup under `pet/`.
 
 `robot-fetch.png` and `robot-cheer.png` are the robot dog’s cuts for the loading state: the two frames of work at the file box side by side, 256 by 320 each, shown by `kr-fetch-pet` at 180 by 225, and the cheer on the plinth, 222 by 270, shown by `kr-plinth-pet` at 91 by 111. See the `Loading` component.
 

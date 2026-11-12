@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Jarvis, the pet: the robot dog, the puppy, the cat and the pug, each in three cuts</title>
+<title>Jarvis, the pet: the robot dog, the puppy, the cat, the pug and the kitten, each in three cuts</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -46,7 +46,7 @@ button{font:inherit}
 .hand.sm{font-size:15px}
 .note{margin:14px 0 0;font:500 15px/1.35 var(--font-hand);color:var(--mute)}
 .note code{font:600 11px/1 var(--font-mono);color:var(--ink);background:var(--paper-2);padding:2px 5px;border-radius:3px}
-/* 1. peeking: four stand-ins for the composer, the mat-red frame with its card inside, one character hooked over each top edge */
+/* 1. peeking: five stand-ins for the composer, the mat-red frame with its card inside, one character hooked over each top edge */
 .frame{position:relative;margin:104px 0 0;padding:10px;background-color:var(--mat-red);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--mat-red-2) 60%,var(--mat-red));border-radius:14px;box-shadow:3px 4px 0 var(--mat-red-2),6px 9px 10px var(--amb),12px 20px 28px -8px var(--amb-2)}
 .frame .card{position:relative;min-height:80px;padding:14px 16px 34px;box-sizing:border-box;background:var(--card);border-radius:8px;box-shadow:var(--recess);font:500 17px/1.3 var(--font-hand);color:var(--faint)}
 .frame .hint{position:absolute;right:16px;bottom:14px;font:500 15px/1 var(--font-hand);color:var(--mute)}
@@ -91,12 +91,13 @@ button{font:inherit}
 .states .hand{flex-basis:100%;margin-top:2px}
 @media (prefers-reduced-motion:reduce){.walker .body{transform:none !important}}
 
-/* pet: Jarvis is one of four paper characters, the robot dog (the one every board wears), the puppy, the cat and the pug. Each has a sprite atlas (pet/<id>.png) with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion, peeking over a composer frame with its paws hooked on; a sticker like the cut-out was: a white cut, no shadow, tilted tilt-cat. Its face (pet/<id>-face.png) is the round sticker the rail tile and the portraits show. The pictures are the canvas's uploads of those files. */
+/* pet: Jarvis is one of five paper characters, the robot dog (the one every board wears), the puppy, the cat, the pug and the kitten. Each has a sprite atlas (pet/<id>.png) with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion, peeking over a composer frame with its paws hooked on; a sticker like the cut-out was: a white cut, no shadow, tilted tilt-cat. Its face (pet/<id>-face.png) is the round sticker the rail tile and the portraits show. The pictures are the canvas's uploads of those files. */
 .pet{--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.robot{--pw:111px;--ph:135px;background-image:url(/_blob/f7824c7f9aac093a02c70a17f4b16938)}
 .pet.dog{--pw:101px;--ph:104px;background-image:url(/_blob/aa865b54704c6c655ac32e0b9f408edd)}
 .pet.cat{--pw:104px;--ph:114px;background-image:url(/_blob/de463a60232188f0d9ab58d74b22409c)}
 .pet.pug{--pw:104px;--ph:114px;background-image:url(/_blob/ffbf61d43d24f99a57e4d1c0f1382102)}
+.pet.kitten{--pw:111px;--ph:124px;background-image:url(/_blob/2ec58a4fd839c5d3adfa10c871803f3a)}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -114,16 +115,18 @@ button{font:inherit}
 .jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
 .jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
 .jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e)}
+.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .rbt.jarvis .jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .rbt.jarvis .jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .rbt.jarvis .jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .rbt.jarvis .jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .hd p{max-width:none}
 .peekgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0 26px;align-items:end}.peekgrid .moods{margin-top:10px}.peekgrid .legend{flex-wrap:wrap;gap:6px 14px}
-.peeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 16px}
+.peeks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 12px}
 .peek-l{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:8px 4px 0}
-.faces3{display:flex;flex-direction:column;gap:4px;margin-top:4px}
-.faces3 .faces{margin-top:0}.faces3 .who{min-width:96px;text-align:left}.faces3 .face{width:64px;gap:0}
+.faces3{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.faces3 .faces{margin-top:0;gap:8px;align-items:center}.faces3 .who{min-width:74px;text-align:left}.faces3 .face{width:84px;gap:0}
 .faces3 .fhead .face .hand{font-size:14px}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
@@ -135,7 +138,7 @@ button{font:inherit}
 <div class="hd">
   <div>
     <h1>Jarvis, the pet</h1>
-    <p>Four paper creatures in three cuts each. The robot dog is the one every board wears; the puppy, the cat and the pug wait in the portrait picker.</p>
+    <p>Five paper creatures in three cuts each. The robot dog is the one every board wears; the puppy, the cat, the pug and the kitten wait in the portrait picker.</p>
   </div>
   <button class="kbtn lg" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}">{{themeWord}}</button>
 </div>
@@ -143,7 +146,7 @@ button{font:inherit}
   <div class="peekgrid">
     <div>
       <h2 id="h-peek">1. Peeking over the composer</h2>
-      <p class="lede">One atlas per character, <span class="hand sm">pet/&lt;id&gt;.png</span>: a row per mood and 8 frames across, stepped like paper stop-motion. The buttons set all four; a click on one says hello.</p>
+      <p class="lede">One atlas per character, <span class="hand sm">pet/&lt;id&gt;.png</span>: a row per mood and 8 frames across, stepped like paper stop-motion. The buttons set all five; a click on one says hello.</p>
       <div class="moods" role="group" aria-label="Moods">
       <sc-for list="{{moods}}" as="m" hint-placeholder-count="6"><button class="kbtn {{m.cls}}" aria-pressed="{{m.on}}" onClick="{{m.pick}}"><i class="dot"></i>{{m.t}}</button></sc-for>
     </div>
@@ -154,6 +157,7 @@ button{font:inherit}
       <div class="peek"><div class="frame"><span class="prop pet dog {{petCls_dog}}" onClick="{{petPoke_dog}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the puppy to say hello</span></div></div><div class="peek-l"><span class="hand">the puppy</span><span class="hand sm">pet/dog.png</span></div></div>
       <div class="peek"><div class="frame"><span class="prop pet cat {{petCls_cat}}" onClick="{{petPoke_cat}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the cat to say hello</span></div></div><div class="peek-l"><span class="hand">the cat</span><span class="hand sm">pet/cat.png</span></div></div>
       <div class="peek"><div class="frame"><span class="prop pet pug {{petCls_pug}}" onClick="{{petPoke_pug}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the pug to say hello</span></div></div><div class="peek-l"><span class="hand">the pug</span><span class="hand sm">pet/pug.png</span></div></div>
+      <div class="peek"><div class="frame"><span class="prop pet kitten {{petCls_kitten}}" onClick="{{petPoke_kitten}}" aria-hidden="true"></span><div class="card">Describe the job, or paste a ticket…<span class="hint">click the kitten to say hello</span></div></div><div class="peek-l"><span class="hand">the kitten</span><span class="hand sm">pet/kitten.png</span></div></div>
     </div>
   </div>
 </section>
@@ -162,18 +166,18 @@ button{font:inherit}
     <h2 id="h-face">2. The sticker</h2>
     <p class="lede"><span class="hand sm">pet/&lt;id&gt;-face.png</span>, one round sticker each, at the sizes the boards use.</p>
     <div class="faces3">
-      <div class="faces fhead" aria-hidden="true"><span class="who"></span><div class="face"><span class="hand">the sticker</span></div><div class="face"><span class="hand">rail tile</span></div><div class="face"><span class="hand">portrait</span></div><div class="face"><span class="hand">row</span></div></div>
-      <div class="faces"><span class="hand who">the robot dog</span><div class="face"><span class="jface big robot" role="img" aria-label="the robot dog"></span></div><div class="face"><span class="rbt jarvis"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface robot" aria-hidden="true"></span></span></div></div>
-      <div class="faces"><span class="hand who">the puppy</span><div class="face"><span class="jface big dog" role="img" aria-label="the puppy"></span></div><div class="face"><span class="rbt jarvis"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface dog" aria-hidden="true"></span></span></div></div>
-      <div class="faces"><span class="hand who">the cat</span><div class="face"><span class="jface big cat" role="img" aria-label="the cat"></span></div><div class="face"><span class="rbt jarvis"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface cat" aria-hidden="true"></span></span></div></div>
-      <div class="faces"><span class="hand who">the pug</span><div class="face"><span class="jface big pug" role="img" aria-label="the pug"></span></div><div class="face"><span class="rbt jarvis"><span class="jface pug" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface pug" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface pug" aria-hidden="true"></span></span></div></div>
+      <div class="faces fhead" aria-hidden="true"><span class="who"></span><div class="face"><span class="hand">the robot dog</span></div><div class="face"><span class="hand">the puppy</span></div><div class="face"><span class="hand">the cat</span></div><div class="face"><span class="hand">the pug</span></div><div class="face"><span class="hand">the kitten</span></div></div>
+      <div class="faces"><span class="hand who">the sticker</span><div class="face"><span class="jface big robot" role="img" aria-label="the robot dog"></span></div><div class="face"><span class="jface big dog" role="img" aria-label="the puppy"></span></div><div class="face"><span class="jface big cat" role="img" aria-label="the cat"></span></div><div class="face"><span class="jface big pug" role="img" aria-label="the pug"></span></div><div class="face"><span class="jface big kitten" role="img" aria-label="the kitten"></span></div></div>
+      <div class="faces"><span class="hand who">rail tile</span><div class="face"><span class="rbt jarvis"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="rbt jarvis"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="rbt jarvis"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="rbt jarvis"><span class="jface pug" aria-hidden="true"></span></span></div><div class="face"><span class="rbt jarvis"><span class="jface kitten" aria-hidden="true"></span></span></div></div>
+      <div class="faces"><span class="hand who">portrait</span><div class="face"><span class="qph"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface pug" aria-hidden="true"></span></span></div><div class="face"><span class="qph"><span class="jface kitten" aria-hidden="true"></span></span></div></div>
+      <div class="faces"><span class="hand who">row</span><div class="face"><span class="rowp"><span class="jface robot" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface dog" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface cat" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface pug" aria-hidden="true"></span></span></div><div class="face"><span class="rowp"><span class="jface kitten" aria-hidden="true"></span></span></div></div>
     </div>
-    <p class="note">64px as the sticker, 26px on the 44px rail tile, 32px as a thread portrait, 16px on a row. All four drawn on Comfy Cloud and sliced by <code>pet/build.py</code>; <code>pet/README.md</code> has the prompts.</p>
+    <p class="note">64px as the sticker, 26px on the 44px rail tile, 32px as a thread portrait, 16px on a row. All five drawn on Comfy Cloud and sliced by <code>pet/build.py</code>; <code>pet/README.md</code> has the prompts.</p>
   </section>
   <section class="sheet" aria-labelledby="h-walk">
     <h2 id="h-walk">3. The standee, a sprite sheet each</h2>
-    <p class="lede"><span class="hand sm">pet/&lt;id&gt;-walk.png</span>, cut to the Factory Overseer's pet sheet, 6 columns by 4 facings, played by <span class="hand sm">pet/standee.js</span>: the four walk one round of the floor and take turns at the benches.</p>
-    <div class="floor" ref="{{floorRef}}" aria-label="A corner of the factory floor, with the four walking a round">
+    <p class="lede"><span class="hand sm">pet/&lt;id&gt;-walk.png</span>, cut to the Factory Overseer's pet sheet, 6 columns by 4 facings, played by <span class="hand sm">pet/standee.js</span>: the five walk one round of the floor and take turns at the benches.</p>
+    <div class="floor" ref="{{floorRef}}" aria-label="A corner of the factory floor, with the five walking a round">
       <div class="belt" aria-hidden="true"></div>
       <div class="bench" style="left:64%;top:63px" aria-hidden="true"></div>
       <div class="bench" style="left:10%;top:63px" aria-hidden="true"></div>
@@ -181,8 +185,9 @@ button{font:inherit}
       <div class="walker" data-id="dog" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="dog" ref="{{bodyRef}}"></span><span class="bub" data-id="dog" ref="{{bubRef}}"></span></div>
       <div class="walker" data-id="cat" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="cat" ref="{{bodyRef}}"></span><span class="bub" data-id="cat" ref="{{bubRef}}"></span></div>
       <div class="walker" data-id="pug" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="pug" ref="{{bodyRef}}"></span><span class="bub" data-id="pug" ref="{{bubRef}}"></span></div>
+      <div class="walker" data-id="kitten" ref="{{walkerRef}}" aria-hidden="true"><span class="shade"></span><span class="body standee" data-id="kitten" ref="{{bodyRef}}"></span><span class="bub" data-id="kitten" ref="{{bubRef}}"></span></div>
     </div>
-    <div class="states" role="group" aria-label="What the four are doing">
+    <div class="states" role="group" aria-label="What the five are doing">
           <sc-for list="{{states}}" as="s" hint-placeholder-count="4"><button class="kbtn {{s.cls}}" aria-pressed="{{s.on}}" onClick="{{s.pick}}">{{s.t}}</button></sc-for>
           <span class="hand sm">{{walkNote}}</span>
         </div>
@@ -192,12 +197,12 @@ button{font:inherit}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
-// Jarvis, the pet: the four characters side by side. Each peeking sprite and sticker is CSS; each standee is a sprite
+// Jarvis, the pet: the five characters side by side. Each peeking sprite and sticker is CSS; each standee is a sprite
 // sheet (pet/<id>-walk.png, its layout from pet/<id>-walk.json written into SHEETS, the picture the canvas's upload of the
-// sheet), mounted and posed by pet/standee.js (loaded from the helmet), the four driven the way a
+// sheet), mounted and posed by pet/standee.js (loaded from the helmet), the five driven the way a
 // host floor would drive them: one round of waypoints, facing the way they go, idle, walking, working or asking for
 // attention at each, and waiting their turn when the next corner is taken.
-const PETS = ['robot', 'dog', 'cat', 'pug'];
+const PETS = ['robot', 'dog', 'cat', 'pug', 'kitten'];
 const MOODS = [
   { id: 'idle', t: 'Idle', loop: true }, { id: 'greet', t: 'Greet', ms: 1900 }, { id: 'celebrate', t: 'Celebrate', ms: 2500 },
   { id: 'sad', t: 'Sad', ms: 1500 }, { id: 'error', t: 'Error', loop: true }, { id: 'ask', t: 'Ask', loop: true }
@@ -206,20 +211,21 @@ const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: '
 const onStandee = (fn) => window.PetStandee ? fn(window.PetStandee) : document.addEventListener('pet-standee', () => fn(window.PetStandee), { once: true });
 const FACING = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'right' : 'left') : (dy >= 0 ? 'down' : 'up');
 const BUBBLE = { working: 'Writing the parser', attention: 'Needs a staging token' };
-const SHEETS = {"robot":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/21d0915356dadf4fbcb2992c973934bc"},"dog":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/35aac9300e6736cfcdaad5c2af995090"},"cat":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/eea99f7a9ab642aecf06ca931c83d617"},"pug":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/4628b391a664a7662044706f8797afef"}}, WALK_H = 104; // the standing figure's height on the floor
+const SHEETS = {"robot":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/21d0915356dadf4fbcb2992c973934bc"},"dog":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/35aac9300e6736cfcdaad5c2af995090"},"cat":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/eea99f7a9ab642aecf06ca931c83d617"},"pug":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/4628b391a664a7662044706f8797afef"},"kitten":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/8162923a0bbbcf77c1b2178c12b09fe6"}}, WALK_H = 104; // the standing figure's height on the floor
 const SPEED = 92; // px per second
 // the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as its column;
 // y in px, since it is always 260 tall), what a walker does when it gets to each corner, and the corner each starts at.
 // There are two more corners than walkers, so there is always a free one ahead and the round never locks
 const WAY = [
-  { x: .15, y: 234, pause: 'idle', ms: 700 },
-  { x: .5, y: 234, pause: 'idle', ms: 300 },
-  { x: .85, y: 234, pause: 'idle', ms: 500 },
+  { x: .12, y: 234, pause: 'idle', ms: 700 },
+  { x: .38, y: 234, pause: 'idle', ms: 300 },
+  { x: .62, y: 234, pause: 'idle', ms: 300 },
+  { x: .88, y: 234, pause: 'idle', ms: 500 },
   { x: .72, y: 118, pause: 'working', ms: 2600 },
   { x: .45, y: 118, pause: 'idle', ms: 300 },
   { x: .17, y: 118, pause: 'attention', ms: 2400 }
 ];
-const START = { robot: 0, pug: 2, dog: 3, cat: 5 };
+const START = { robot: 0, kitten: 1, pug: 3, dog: 4, cat: 6 };
 
 class Component extends DCLogic {
   state = { mood: 'idle', shots: {}, walk: 'roam' };
@@ -240,7 +246,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { this.gone = true; cancelAnimationFrame(this.raf); (this.tq || []).forEach(clearTimeout); }
   floorW() { const f = this.floor; return (f && f.clientWidth) || 600; }
-  // a mood played once by one pet (a poke) or by all four (a button), then back to the resting mood
+  // a mood played once by one pet (a poke) or by all five (a button), then back to the resting mood
   petPlay(id, name, ms) { this.petPlayAll(name, ms, [id]); }
   petPlayAll(name, ms, ids = PETS) {
     const sid = Date.now() + Math.random(); const shots = { ...this.state.shots }; ids.forEach((id) => { shots[id] = { name, sid }; }); this.setState({ shots });
