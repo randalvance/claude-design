@@ -1262,7 +1262,7 @@ const CONVS = [
       text: 'Two wordings for the banner are ready. Pick one and the task goes on to the page.', action: 'Open the task', or: 'the task waits until you do' } ] },
   { id: 'c7', title: 'GW-77 Rate limits per key', src: 'factory', items: [
     { id: 'f7', k: 'plan_ready', from: 'Factory', time: '8:40', unread: false, task: 'GW-77 Rate limits per key', col: 'Planning',
-      text: 'A plan in 4 steps across 3 files is ready for your OK. Nothing has been written yet.', action: 'Open the Plan tab', or: 'it starts when you approve the plan' } ] },
+      text: 'A plan in 4 steps across 3 files is ready for your OK. Nothing has been written yet.', action: 'Open the plan', or: 'it starts when you approve the plan' } ] },
   { id: 'c10', title: 'Rate limit headers', src: 'pr', items: [
     { id: 'p10', k: 'pull_request', from: 'Mina Okafor', time: '8:15', unread: true, pr: '#926', title: 'Rate limit headers', repo: 'gateway', branch: 'feat/rate-limit-headers', diff: '+131 −9', files: '7 files', checks: '2 of 14 checks fail', checksOk: false,
       text: 'Adds X-RateLimit-Limit and X-RateLimit-Remaining to every API response, read from the key’s bucket.' } ] },
@@ -1491,7 +1491,7 @@ class Component extends DCLogic {
       if (v.isFac) {
         const st = x.k === 'factory_blocked' ? ['Blocked', 'blocked', 'blocked needs'] : x.k === 'factory_waiting' ? ['Waiting on you', 'needs', 'needs'] : ['Ready for you', 'plan', 'plan'];
         Object.assign(v, { status: st[0], stCls: st[1], fcls: st[2], task: x.task, col: x.col, text: x.text, action: x.action, or: x.or,
-          act: () => this.say(x.k === 'plan_ready' ? 'Opens the Plan tab of ' + x.task : 'Opens ' + x.task + ' in Factory') });
+          act: () => this.say(x.k === 'plan_ready' ? 'Opens the planning session of ' + x.task + ' in Factory' : 'Opens ' + x.task + ' in Factory') });
       }
       return v;
     });

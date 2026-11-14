@@ -727,7 +727,7 @@
       "y": 37900,
       "w": 1440,
       "h": 900,
-      "title": "Factory page, Overview, paper diorama, live demo",
+      "title": "Factory page, Tasks, paper diorama, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -737,14 +737,14 @@
       "y": 37900,
       "w": 1440,
       "h": 900,
-      "title": "Factory page, Overview, paper diorama, dark mode, live demo",
+      "title": "Factory page, Tasks, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
     },
     "DioramaFactoryFloor.dc.html": {
       "x": 0,
-      "y": 38900,
+      "y": 39900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory view, paper diorama, live demo",
@@ -754,30 +754,10 @@
     },
     "DioramaFactoryFloorDark.dc.html": {
       "x": 1540,
-      "y": 38900,
+      "y": 39900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory view, paper diorama, dark mode, live demo",
-      "page": "diorama",
-      "expand": "fill",
-      "is_interactive": true
-    },
-    "DioramaFactoryPlan.dc.html": {
-      "x": 0,
-      "y": 39900,
-      "w": 1440,
-      "h": 900,
-      "title": "Factory page, Plan view, paper diorama, live demo",
-      "page": "diorama",
-      "expand": "fill",
-      "is_interactive": true
-    },
-    "DioramaFactoryPlanDark.dc.html": {
-      "x": 1540,
-      "y": 39900,
-      "w": 1440,
-      "h": 900,
-      "title": "Factory page, Plan view, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -941,6 +921,26 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaFactoryOverview.dc.html": {
+      "x": 0,
+      "y": 38900,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Factory overview, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaFactoryOverviewDark.dc.html": {
+      "x": 1540,
+      "y": 38900,
+      "w": 1440,
+      "h": 900,
+      "title": "Factory page, Factory overview, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "createdOnFiles": {
@@ -1004,7 +1004,7 @@
       "y": 300,
       "w": 320,
       "page": "diorama",
-      "text": "Paper diorama: the Primepaw shell built as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the pet, a paper robot dog, peeking over the composer are stickers too. The composer has a mic disc beside the send disc: pressed, it latches flat and turns red, the hint gives way to a sound trace in red pen and the time by hand, and what you say lands in the box word by word; press it again or Esc to stop. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a thick-card pull-tab sliding in a slot cut into the paper, with on and off handwritten in the slot, YOLO is a rubber stamp, a faded black outline when off and red ink when on, and the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for Max, a green sticker check on a picked row. The white paper (the chat sheet, the leaf, the rows and fields) carries the paper texture of the Factory Overseer workshop walls with its colour kept; cardboard is a flecked board; the workspace headers are paper strips in their workspace’s colour with the rows’ texture, their count and caret written in pen ink; an open session’s title bar and tab strip take the same paper colour as its workspace header, with unselected tabs a lighter cut of it; the prompt box stays plain. The rail icons, the Select button and every other button are cut-outs in their own colours carrying the same paper texture as the chat sheet and the session rows, not stickers. Sessions under a header are a plain list, straight and 4px apart; hovering one shows a three-dot menu mark at its far right. A working session carries a paper pinwheel in the robot’s place at its left: four coloured blades with folded tips on an ink pin, turning. A factory task goes through several sessions, so its sessions are filed together in a kraft folder: its tab is the factory sticker, the task key and title, the count by hand and a caret that folds it. Each session in it carries its stage as a small paper chip with the factory’s step glyph (Planning, Plan review, Implementation, Testing, Code review), in that order. A folded folder still shows the stage it is in, the pinwheel while that stage works and a red badge when one waits on you. Same live demo, same Night toggle."
+      "text": "Paper diorama: the Primepaw shell built as cardboard and paper cut-outs laid on one cream sheet, lit from the top left so each piece casts one shadow down and to the right. The rail, the sessions board, the capsule mats and the composer frame are cardboard: thick, with a darker cut edge along the bottom and the right. The chat column is a sheet of paper level with the sessions board, with the thread and the composer on a second sheet laid over the tabs. Sessions are paper strips, the workspace headers sage strips, the capsules cream plates on green mats with the time badge straddling the edge. The rail icons and the paw are solid-colour die-cut stickers, the active one ringed in gold; badges, dots, the pinwheel, the busy pill and the pet, a paper robot dog, peeking over the composer are stickers too. The composer has a mic disc beside the send disc: pressed, it latches flat and turns red, the hint gives way to a sound trace in red pen and the time by hand, and what you say lands in the box word by word; press it again or Esc to stop. Stickers are stuck flat, so they have a white cut border and no shadow. Boards run edge to edge with a 3px margin. The Advanced options switch is a thick-card pull-tab sliding in a slot cut into the paper, with on and off handwritten in the slot, YOLO is a rubber stamp, a faded black outline when off and red ink when on, and the effort levels and the picker checks follow the Kraft toggles: cardboard that stays pressed flat when on, terracotta for Max, a green sticker check on a picked row. The white paper (the chat sheet, the leaf, the rows and fields) carries the paper texture of the Factory Overseer workshop walls with its colour kept; cardboard is a flecked board; the workspace headers are paper strips in their workspace’s colour with the rows’ texture, their count and caret written in pen ink; an open session’s title bar and tab strip take the same paper colour as its workspace header, with unselected tabs a lighter cut of it; the prompt box stays plain. The rail icons, the Select button and every other button are cut-outs in their own colours carrying the same paper texture as the chat sheet and the session rows, not stickers. Sessions under a header are a plain list, straight and 4px apart; hovering one shows a three-dot menu mark at its far right. A working session carries a paper pinwheel in the robot’s place at its left: four coloured blades with folded tips on an ink pin, turning. A factory’s tasks are not filed here: the factory page lists them, under Tasks. Same live demo, same Night toggle."
     },
     "p15": {
       "x": 3080,
@@ -1182,7 +1182,7 @@
       "y": 37900,
       "w": 320,
       "page": "diorama",
-      "text": "The factory page: one factory, reached from the factories list on Home or a card on the Factory list, in five views on one row of card buttons under the head: Overview, Factory view, Plan view, Kanban view, Settings. The head has Factory as a crumb, the name by hand, the state sticker, the board as a dashed link, the curator’s line, and the factory’s own switch. Overview: four count cards, in flight over the cap with one paper slot per place (green taken, amber waiting), waiting on you, Blocked and merged; press waiting on you and the row becomes the inbox’s strips on a board with the ticket’s session beside them, the same strip, notes, capsules and composer a session has, only the tickets that need you; press Blocked and the inbox’s own Blocked items appear, with Done once it is unblocked; press merged and the list of merged tickets with their PR chips. Under the cards the Factory ledger, every event with its day, a kind on a chip (Curator woke, Curator decision, Gate refused, Daily digest sent), the words and a dashed link to the session, with a filter by kind; and the Tasks, every task in the factory with its key on a kraft tag, agent and step, a state sticker, filtered by state and paged six at a time. Factory view: the tickets under To do on a board at the left and the floor at the right, a placeholder for the animated one: a paper room per step with a kraft roof, the agents’ faces at work holding their ticket on a tag, a Blocked ticket parked with its red sticker, the belt in and out with the queued crates, on grass, sand or snow. Plan view: the tickets to plan on the left, the planner’s session on the right with Planning done, Planning done implement later, and Close task above the composer. Kanban view: the Board page’s cork and sticky notes with two places to drop a note above it, Into the factory and To planning; a dropped note is queued or sent to planning and says so by hand on its corner. Settings: the Agent page’s sheets. Name, Description, Main goal, the curator agent as radio rows with New curator agent beside them, Ticket sizing guidance, the Ready label with its tag; the six steps each with a switch, an icon to pick, a label on a dashed line, Kanban status, agent, least and most instances, room and floor; Biome; Trust profile; and the three numbers, fix rounds before Blocked, new tasks per wake, the factory’s cap. Save settings in the head. Everything is fake and nothing pulses."
+      "text": "The factory page: one factory, reached from the factories list on Home or a card on the Factory list. Four views on one row of card buttons across the very top, over the board and the sheet: Tasks, Factory view, Kanban view, Settings. The head has Factory as a crumb, the name by hand, the state sticker, the board as a dashed link, the curator’s line, the Factory overview button and the factory’s own switch. Tasks, the page it opens on, is the sessions list of this factory and nothing else: the factory’s tasks left the sessions list on the Sessions page and live here. It is laid out as the Sessions page is: the board, headed Factory, runs down the window beside the rail under the row of views, with a search field, and the session fills the sheet under the factory’s head. On the board each task is a kraft folder with its key, its title, the count of sessions by hand and a caret that folds it; inside, a paper strip per session it has been through, one per step, with the agent’s face, the step on a small chip, the title and how long it ran; the pinwheel takes the face’s place while it works and a red sticker says it waits on you. A folded folder still shows the step it is in; a Blocked task wears its sticker; a task with no session yet says queued or to plan by hand. What needs you comes first, then what is at work. Under them is Queue: the queued tasks, numbered in the order the factory takes them; drag one to another place, or move it with the up and down arrows from its grip, and it says its new place. At the bottom is Done: the merged tasks with a green tick and the day, five at first and Show all for the rest. Five filters above: All, Needs you, At work, Queue, Done. The picked session opens beside it, the strip, notes, capsules and composer a session has; a task in Planning has Planning done, Planning done implement later, and Close task above the composer, which is where the Plan view went. Factory overview, in the head, latches and swaps the tasks for the overview: four count cards, in flight over the cap with one paper slot per place (green taken, amber waiting), waiting on you, Blocked and merged; press waiting on you and the row becomes the inbox’s strips with the ticket’s session beside them; press Blocked and the inbox’s own Blocked items appear, with Done once it is unblocked; press merged and the list of merged tickets with their PR chips. Under the cards the Factory ledger, every event with its day, a kind on a chip, the words and a dashed link to the session, with a filter by kind; and every task in the factory with its key on a kraft tag, agent and step, a state sticker, filtered by state and paged six at a time: press one and it opens under Tasks. Press Factory overview again for the tasks. Factory view: the tickets under To do on a board at the left and the floor at the right, a placeholder for the animated one: a paper room per step with a kraft roof, the agents’ faces at work holding their ticket on a tag, a Blocked ticket parked with its red sticker, the belt in and out with the queued crates, on grass, sand or snow. Kanban view: the Board page’s cork and sticky notes with two places to drop a note above it, Into the factory and To planning; a dropped note is queued or sent to planning and says so by hand on its corner. Settings: the Agent page’s sheets. Name, Description, Main goal, the curator agent as radio rows with New curator agent beside them, Ticket sizing guidance, the Ready label with its tag; the six steps each with a switch, an icon to pick, a label on a dashed line, Kanban status, agent, least and most instances, room and floor; Biome; Trust profile; and the three numbers, fix rounds before Blocked, new tasks per wake, the factory’s cap. Save settings in the head. Everything is fake and nothing pulses."
     },
     "p31": {
       "x": 3080,
@@ -1336,10 +1336,10 @@
     "DioramaFactoryBlockedDark.dc.html",
     "DioramaFactoryPage.dc.html",
     "DioramaFactoryPageDark.dc.html",
+    "DioramaFactoryOverview.dc.html",
+    "DioramaFactoryOverviewDark.dc.html",
     "DioramaFactoryFloor.dc.html",
     "DioramaFactoryFloorDark.dc.html",
-    "DioramaFactoryPlan.dc.html",
-    "DioramaFactoryPlanDark.dc.html",
     "DioramaFactoryKanban.dc.html",
     "DioramaFactoryKanbanDark.dc.html",
     "DioramaFactorySettings.dc.html",

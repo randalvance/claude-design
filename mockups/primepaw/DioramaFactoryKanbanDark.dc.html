@@ -1132,6 +1132,15 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .fptop .abtn.go svg{width:14px;height:14px}
 /* the views: five card buttons, the open one pressed flat, like the inbox filters */
 .fpviews{display:flex;flex-wrap:wrap;gap:8px;padding:14px 28px 0}
+/* the views run across the very top, over the board and the sheet, on the desk itself */
+.fpmain{flex:1;min-width:0;display:flex;flex-direction:column}
+.fpbar{padding:7px 4px 10px 12px}
+.fprow{flex:1;min-height:0;display:flex}
+.fprow>.panel{position:relative;top:auto;height:auto;align-self:stretch}
+/* under Tasks the page is one window tall, as the Sessions page is: the board's list and the session's thread scroll on their own, and the composer stays at the bottom */
+.tkmain{height:calc(100vh - 6px)}
+.tkmain .sheet,.tkmain .leaf,.tkmain .maincol,.tkmain .fpcontent,.tkmain .fchat{min-height:0}
+.tkmain .fchat .content{min-height:0;overflow:auto}
 .vbtn{height:30px;padding:0 12px 0 10px;font-size:12.5px}
 .vbtn .ic{width:15px;height:15px;flex:none}
 .vbtn.on,.vbtn.on:hover{transform:translate(2px,3px);box-shadow:var(--press-board);background-color:color-mix(in srgb,var(--board) 80%,var(--board-2))}
@@ -1213,7 +1222,7 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .fchat{display:flex;flex-direction:column;min-width:0;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:8px;box-shadow:var(--lift-1)}
 .fchat .top.strip{padding:0 16px 0 14px;border-bottom:1px dashed var(--line)}
 .fchat .content{padding:18px 20px 10px;gap:16px}
-.fchat .foot{padding:8px 14px 12px}
+.fchat .foot{padding:8px 150px 12px 14px}   /* room at the right for Jarvis on its plinth, so it stands beside the composer and not on the send disc */
 .fchat .foot-in{max-width:none;padding:9px 9px 10px}
 .fchat .fcard{max-width:none}
 .fstep-l2{font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap;padding-right:6px}
@@ -1363,6 +1372,79 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .nr-t{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
 .nr-t b{font-size:14px;font-weight:800}
 .nr-t small{font-size:12px;line-height:1.4;color:var(--mute)}
+/* ---------- Tasks: the sessions list of this factory. A task is a kraft folder, as it was in the sessions list; inside, a paper strip per session with its step on a chip ---------- */
+.ovbtn{margin-right:14px}
+/* laid out as the Sessions page: the tasks on a board the full height of the window, beside the rail; the session fills the sheet's leaf, no card around it */
+.tkpanel{width:330px}
+.tkpanel .ptop{gap:10px}
+.tkfac{width:34px;height:34px;border-radius:8px}
+.tkfac svg{width:21px;height:21px}
+.tkfilters{padding:0}
+.tkpanel .list{padding:6px 10px 14px}
+/* its sections: the queue, which you can drag into another order, and what was done, at the bottom */
+.tksec{margin:10px 0 0;padding:0 2px}
+.tkq-l,.tkd-l{display:flex;flex-direction:column;gap:5px}
+.tk.solo.cur{background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp)}
+.tkq{display:flex;align-items:center;padding:0 5px 0 0;cursor:grab;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
+.tkq:active{cursor:grabbing}
+.tkq.is-drag{opacity:.45}
+.tkq.is-over{transform:translateY(3px);box-shadow:0 -3px 0 var(--blue),1px 1px 0 var(--kraft-2),3px 4px 5px var(--amb)}
+.tkgrip{all:unset;flex:none;box-sizing:border-box;cursor:grab;width:22px;height:34px;display:grid;place-items:center;color:color-mix(in srgb,var(--ink) 55%,transparent);border-radius:3px}
+.tkgrip svg{width:14px;height:14px}
+.tkgrip:hover{color:var(--ink)}
+.tkgrip:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;color:var(--ink)}
+.tkq .tkh{flex:1;min-width:0;width:auto}
+.tkn{flex:none;min-width:14px;font-family:var(--hand);font-size:17px;font-weight:600;line-height:1;text-align:center;color:var(--ink)}
+.tkq-none{font-size:15px;margin:2px 4px}
+.tkd{background-color:var(--paper-2);border-color:var(--line);box-shadow:var(--lift-1)}
+.tkd .tkh{font-weight:700}
+.tkd .tt{color:color-mix(in srgb,var(--ink) 80%,transparent)}
+.tkok{flex:none;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background-color:var(--st-green);background-image:var(--gloss);color:var(--white);box-shadow:var(--sticker-s)}
+.tkok svg{width:10px;height:10px}
+.tkmore{all:unset;cursor:pointer;align-self:flex-start;margin:2px 4px 0;font-family:var(--hand);font-size:16px;color:var(--ink);border-bottom:1.5px dashed var(--line)}
+.tkmore:hover{border-bottom-color:var(--ink)}
+.tkmore:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.page.night .tkn{mix-blend-mode:screen}
+/* with the board beside it the sheet is narrower, so the head puts the board link and the curator's line on a second row */
+.tksheet .top.fptop{flex-wrap:wrap;row-gap:4px}
+.tksheet .top.fptop .ttl{flex:none}
+.tksheet .top.fptop .meta{order:3;flex:0 0 100%;min-width:0;padding-bottom:0}
+.fpcontent.tkmode{padding:0;gap:0}
+.tkmode .fchat{flex:1;border:0;border-radius:0;box-shadow:none;background:none}
+.tkmode .fchat .top.strip{padding:4px 24px 0 22px}
+.tkmode .fchat .content{flex:1;padding:22px 26px 12px}
+.tkmode .fchat .foot{padding:10px 150px 14px 24px}
+.tkmode .plan-act{margin:0 26px}
+.tkmode .fhello2{flex:1}
+.tklist{display:flex;flex-direction:column;gap:6px}
+.tk{position:relative;padding:0 5px;background-color:var(--kraft);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--kraft-2) 60%,var(--kraft));border-radius:4px;box-shadow:1px 1px 0 var(--kraft-2),3px 4px 5px var(--amb)}
+.tkh{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;width:100%;box-sizing:border-box;min-height:34px;padding:6px 3px 6px 2px;font-size:12px;font-weight:800;color:var(--ink)}
+.tkh:focus-visible{outline:2px solid var(--blue);outline-offset:1px;border-radius:3px}
+.tkh .tkey{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:color-mix(in srgb,var(--ink) 78%,transparent)}
+.tkh .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tkh .pin,.fs-who .pin{width:16px;height:16px;flex:none}
+.tkh .nb,.fsrow .nb{flex:none;transform:rotate(-8deg);width:16px;height:16px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s)}
+.tkh .sticker{flex:none;font-size:10px;padding:1px 7px}
+.tkw,.tkh .tcnt{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--ink)}
+.tkh .tchev{width:12px;height:12px;flex:none;transition:transform .2s var(--ease)}
+.tk.closed .tchev{transform:rotate(-90deg)}
+.tkb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .26s var(--ease)}
+.tk.closed .tkb{grid-template-rows:0fr}
+.tki{min-height:0;overflow:hidden}
+.tkrows{display:flex;flex-direction:column;gap:4px;padding:0 0 5px}
+.fsrow{position:relative;display:flex;align-items:center;gap:7px;min-height:34px;box-sizing:border-box;padding:5px 8px 5px 7px;background-color:var(--card);background-image:var(--face),var(--pulp);border-radius:3px;box-shadow:var(--lift-1);font-size:12.5px;font-weight:700;color:var(--ink)}
+.fsrow .rowhit{all:unset;position:absolute;inset:0;cursor:pointer;border-radius:3px}
+.fsrow>*:not(.rowhit){position:relative;pointer-events:none}
+.fsrow:hover{background-color:var(--hover)}
+.fsrow.on,.fsrow.on:hover{background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp)}
+.fsrow:has(.rowhit:focus-visible){outline:2px solid var(--blue);outline-offset:1px}
+.fs-who{width:18px;height:18px;flex:none;display:grid;place-items:center}
+.fs-who .ap{width:18px;height:18px}
+.fs-who .ap svg{width:13px;height:13px}
+.fs-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fs-d{flex:none;font-family:var(--hand);font-size:15px;color:var(--mute)}
+.fsrow.on .fs-d{color:var(--ink)}
+.page.night .tkw,.page.night .tkh .tcnt{mix-blend-mode:screen}
 @media (max-width:1100px){.ocards{grid-template-columns:repeat(2,minmax(0,1fr))}.ocols,.fcols{grid-template-columns:minmax(0,1fr)}.split,.floorsplit{grid-template-columns:minmax(0,1fr)}.rooms{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
@@ -1428,19 +1510,86 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
     <button class="rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
   </nav></div>
 
-<div class="sheet hsheet fpsheet">
+<div class="fpmain {{mainCls}}">
+  <div class="fpviews fpbar" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="4"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div>
+  <div class="fprow">
+  <sc-if value="{{isTasks}}" hint-placeholder-val="{{true}}"><aside class="panel board tpanel tkpanel" aria-label="Factory tasks">
+    <div class="ptop">
+      <div class="jhead"><span class="tfac tkfac" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><div><b>Factory</b><small>{{tkSub}}</small></div></div>
+      <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search tasks…" aria-label="Search tasks" onInput="{{onTkFind}}"></label>
+      <div class="filters tkfilters" role="group" aria-label="Show tasks"><sc-for list="{{tkFilters}}" as="f" hint-placeholder-count="5"><button class="abtn fbtn {{f.cls}}" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+    </div>
+    <div class="list">
+        <div class="tklist">
+          <sc-if value="{{showAct}}" hint-placeholder-val="{{true}}">
+          <sc-for list="{{tks}}" as="g" hint-placeholder-count="8"><div class="tk {{g.cls}}">
+            <button class="tkh" onClick="{{g.toggle}}" aria-expanded="{{g.open}}" title="{{g.title}}"><span class="tkey">{{g.key}}</span><span class="tt">{{g.t}}</span><sc-if value="{{g.showNow}}" hint-placeholder-val="{{false}}"><span class="stg" title="{{g.nowStage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.nowIcon}}"></path></svg></span></sc-if><sc-if value="{{g.nowBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{g.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">1</span></sc-if><sc-if value="{{g.isBlocked}}" hint-placeholder-val="{{false}}"><span class="sticker blocked">Blocked</span></sc-if><sc-if value="{{g.hasWord}}" hint-placeholder-val="{{false}}"><span class="tkw">{{g.word}}</span></sc-if><sc-if value="{{g.hasCount}}" hint-placeholder-val="{{true}}"><span class="tcnt">{{g.count}}</span><svg class="tchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg></sc-if></button>
+            <sc-if value="{{g.hasRows}}" hint-placeholder-val="{{true}}"><div class="tkb"><div class="tki"><div class="tkrows" role="list"><sc-for list="{{g.sessions}}" as="s" hint-placeholder-count="2"><div class="fsrow {{s.cls}}" role="listitem"><button class="rowhit" onClick="{{s.pick}}" aria-current="{{s.cur}}" aria-label="{{s.aria}}"></button><span class="fs-who" aria-hidden="true"><sc-if value="{{s.busy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{s.idle}}" hint-placeholder-val="{{true}}"><span class="ap"><sc-if value="{{s.af_curator}}" hint-placeholder-val="{{true}}"><svg class="apf" aria-hidden="true"><use href="#af-curator"></use></svg></sc-if><sc-if value="{{s.af_implementer}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-implementer"></use></svg></sc-if><sc-if value="{{s.af_issue}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-issue"></use></svg></sc-if><sc-if value="{{s.af_reviewer}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-reviewer"></use></svg></sc-if><sc-if value="{{s.af_triage}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-triage"></use></svg></sc-if><sc-if value="{{s.af_release}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-release"></use></svg></sc-if><sc-if value="{{s.af_support}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-support"></use></svg></sc-if><sc-if value="{{s.af_planner}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-planner"></use></svg></sc-if></span></sc-if></span><span class="stg" title="{{s.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"></path></svg></span><span class="fs-t">{{s.t}}</span><sc-if value="{{s.attn}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">1</span></sc-if><span class="fs-d">{{s.dur}}</span></div></sc-for></div></div></div></sc-if>
+          </div></sc-for>
+          </sc-if>
+          <sc-if value="{{showQ}}" hint-placeholder-val="{{true}}">
+          <div class="hfacs-h tksec"><b>Queue</b><small>{{qSub}}</small></div>
+          <div class="tkq-l" role="list" aria-label="Queue, in the order the factory takes them">
+            <sc-for list="{{qs}}" as="g" hint-placeholder-count="4"><div class="tk tkq {{g.cls}}" role="listitem" draggable="true" onDragStart="{{g.dragstart}}" onDragEnd="{{g.dragend}}" onDragOver="{{g.over}}" onDragEnter="{{g.enter}}" onDrop="{{g.drop}}"><button class="tkgrip" ref="{{g.gripRef}}" onKeyDown="{{g.onKey}}" aria-label="{{g.gripAria}}" title="Drag to reorder, or press the up and down arrows"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.7"></circle><circle cx="15" cy="6" r="1.7"></circle><circle cx="9" cy="12" r="1.7"></circle><circle cx="15" cy="12" r="1.7"></circle><circle cx="9" cy="18" r="1.7"></circle><circle cx="15" cy="18" r="1.7"></circle></svg></button><button class="tkh" onClick="{{g.pick}}" aria-current="{{g.cur}}" title="{{g.title}}"><span class="tkn">{{g.n}}</span><span class="tkey">{{g.id}}</span><span class="tt">{{g.t}}</span></button></div></sc-for>
+            <sc-if value="{{noQ}}" hint-placeholder-val="{{false}}"><p class="tnone tkq-none">{{noQText}}</p></sc-if>
+          </div>
+          </sc-if>
+          <sc-if value="{{showD}}" hint-placeholder-val="{{true}}">
+          <div class="hfacs-h tksec"><b>Done</b><small>{{dSub}}</small></div>
+          <div class="tkd-l" role="list" aria-label="Done">
+            <sc-for list="{{ds}}" as="g" hint-placeholder-count="5"><div class="tk tkd {{g.cls}}" role="listitem"><button class="tkh" onClick="{{g.pick}}" aria-current="{{g.cur}}" title="{{g.title}}"><span class="tkok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></span><span class="tkey">{{g.key}}</span><span class="tt">{{g.t}}</span><span class="tkw">{{g.when}}</span></button></div></sc-for>
+            <sc-if value="{{dMore}}" hint-placeholder-val="{{false}}"><button class="tkmore" onClick="{{dToggle}}" aria-expanded="{{dAll}}">{{dMoreText}}</button></sc-if>
+          </div>
+          </sc-if>
+          <sc-if value="{{noTks}}" hint-placeholder-val="{{false}}"><p class="tnone">No task like that.</p></sc-if>
+        </div>
+    </div>
+  </aside></sc-if>
+
+<div class="sheet hsheet fpsheet {{sheetCls}}">
   <header class="top htop fptop">
     <div class="ttl"><span class="fp-crumb">Factory</span><h1>{{fac.name}}</h1><span class="sticker {{stCls}}" role="status"><i aria-hidden="true"></i>{{stLabel}}</span></div>
     <div class="meta"><button class="fac-b" onClick="{{openBoard}}" title="Open the board">{{fac.board}} <span aria-hidden="true">→</span></button><span class="scount">{{metaLine}}</span></div>
     <div class="top-r">
+      <button class="abtn vbtn ovbtn {{ovCls}}" aria-pressed="{{ovOn}}" onClick="{{toggleOv}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>Factory overview</button>
       <sc-if value="{{isSettings}}" hint-placeholder-val="{{false}}"><span class="stt {{sttCls}}">{{sttText}}</span><button class="abtn go" onClick="{{save}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg>Save settings</button></sc-if>
       <sc-if value="{{notSettings}}" hint-placeholder-val="{{true}}"><span class="pl-l" id="fpon">This factory</span><button class="sw" role="switch" aria-checked="{{facOn}}" aria-labelledby="fpon" onClick="{{toggleOn}}"></button></sc-if>
     </div>
   </header>
-  <div class="fpviews" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="5"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div>
-  <div class="leaf"><div class="maincol"><div class="content fpcontent">
+  <div class="leaf"><div class="maincol"><div class="content fpcontent {{contentCls}}">
 
-  <sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
+  <sc-if value="{{isTasks}}" hint-placeholder-val="{{true}}">
+      <sc-if value="{{hasChat}}" hint-placeholder-val="{{true}}"><div class="fchat" aria-label="Session {{chat.title}}">
+  <header class="top strip">
+    <div class="ttl"><span class="who"><span class="aface" title="{{chat.agentTitle}}"><sc-if value="{{chat.af_curator}}" hint-placeholder-val="{{true}}"><svg class="face" aria-hidden="true"><use href="#af-curator"></use></svg></sc-if><sc-if value="{{chat.af_implementer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-implementer"></use></svg></sc-if><sc-if value="{{chat.af_issue}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-issue"></use></svg></sc-if><sc-if value="{{chat.af_reviewer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-reviewer"></use></svg></sc-if><sc-if value="{{chat.af_triage}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-triage"></use></svg></sc-if><sc-if value="{{chat.af_release}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-release"></use></svg></sc-if><sc-if value="{{chat.af_support}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-support"></use></svg></sc-if><sc-if value="{{chat.af_planner}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-planner"></use></svg></sc-if><i class="dot {{chat.stCls}}" aria-hidden="true"></i></span><span class="hz" title="{{chat.hzTitle}}"><sc-if value="{{chat.hz_claude}}" hint-placeholder-val="{{true}}"><svg class="logo" aria-hidden="true"><use href="#hz-claude"></use></svg></sc-if><sc-if value="{{chat.hz_codex}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-codex"></use></svg></sc-if><sc-if value="{{chat.hz_pi}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-pi"></use></svg></sc-if></span></span><h1>{{chat.title}}</h1><span class="tagw ktag" title="{{chat.taskTitle}}"><span class="tagb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{chat.key}}</span></span></div>
+    <div class="top-r"><span class="fstep-l2">{{chat.stepLine}}</span></div>
+  </header>
+  <div class="content fcontent2">
+    <sc-for list="{{chat.items}}" as="it" hint-placeholder-count="4">
+      <sc-if value="{{it.isUser}}" hint-placeholder-val="{{true}}"><div class="note"><div class="note-in">{{it.text}}</div></div></sc-if>
+      <sc-if value="{{it.isReply}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{it.text}}</p><sc-if value="{{it.hasList}}" hint-placeholder-val="{{false}}"><ol class="plan-ol"><sc-for list="{{it.list}}" as="l" hint-placeholder-count="4"><li>{{l.t}}</li></sc-for></ol></sc-if></div></sc-if>
+      <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
+        <section class="deck {{it.cls}}" aria-label="Agent work">
+          <button class="cap" onClick="{{it.toggle}}" aria-expanded="{{it.open}}">
+            <span class="tb">{{it.time}}<sc-if value="{{it.ok}}" hint-placeholder-val="{{true}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if></span>
+            <span class="cap-t"><strong>{{it.title}}</strong><span class="cap-s">{{it.sub}}</span></span>
+            <span class="trail" aria-hidden="true"><sc-for list="{{it.dots}}" as="d" hint-placeholder-count="3"><i class="dot {{d.cls}}"></i></sc-for></span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <div class="body"><div class="body-in"><ol class="steps"><sc-for list="{{it.steps}}" as="s" hint-placeholder-count="3"><li class="step" style="animation-delay: {{s.delay}}"><i class="dot {{s.k}}" aria-hidden="true" style="animation: none"></i><span class="k">{{s.label}}</span><code>{{s.detail}}</code><span class="tm">{{s.time}}</span></li></sc-for></ol></div></div>
+        </section>
+      </sc-if>
+      <sc-if value="{{it.isAsk}}" hint-placeholder-val="{{false}}"><section class="fcard needs" aria-label="Waiting on you"><div class="fcard-h"><span class="sticker needs">Waiting on you</span><b>{{it.title}}</b><small>{{it.sub}}</small></div><p class="fcard-p">{{it.text}}</p><div class="fcard-act"><sc-for list="{{it.opts}}" as="o" hint-placeholder-count="2"><button class="abtn {{o.cls}}" onClick="{{o.pick}}">{{o.label}}</button></sc-for><span class="fcard-or">{{it.or}}</span></div></section></sc-if>
+    </sc-for>
+  </div>
+  <sc-if value="{{chat.hasAct}}" hint-placeholder-val="{{false}}"><div class="plan-act" role="group" aria-label="Planning"><span class="plan-act-l">Planning</span><button class="abtn go" onClick="{{chat.planDone}}">Planning done</button><button class="abtn" onClick="{{chat.planLater}}">Planning done, implement later</button><button class="abtn red" onClick="{{chat.closeTask}}">Close task</button></div></sc-if>
+  <footer class="foot"><div class="foot-in fin2"><div class="card"><div class="ed"><label class="sr" for="fta">Write to the session</label><textarea id="fta" class="ta" rows="2" placeholder="{{chat.placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea></div><div class="bar"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="Send to the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div></div></div></footer>
+</div>
+</sc-if>
+      <sc-if value="{{noChat}}" hint-placeholder-val="{{false}}"><section class="hello fhello2" aria-label="No tasks"><div class="hello-in"><h1 class="hi">No tasks in the factory</h1><p class="hi2">Drop a ticket onto the factory from the Kanban view, or wait for the curator’s next wake.</p></div></section></sc-if>
+  </sc-if>
+
+  <sc-if value="{{isOverview}}" hint-placeholder-val="{{false}}">
     <div class="ocards">
       <div class="ocard oflight"><dl class="fcounts"><div class="fcnt"><dt>{{inflight}}<small> of {{cap}}</small></dt><dd>in flight</dd></div></dl><div class="obar" aria-hidden="true"><sc-for list="{{slots}}" as="s" hint-placeholder-count="6"><i class="{{s.cls}}"></i></sc-for></div><p class="ocap">{{capLine}}</p></div>
       <button class="ocard {{waitCls}}" onClick="{{showWaiting}}" aria-pressed="{{subWaiting}}"><dl class="fcounts"><div class="fcnt {{waitN}}"><dt>{{waiting}}</dt><dd>waiting on you</dd></div></dl><span class="olink">{{waitLink}}</span></button>
@@ -1556,43 +1705,6 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
     </div>
   </sc-if>
 
-  <sc-if value="{{isPlan}}" hint-placeholder-val="{{false}}">
-    <div class="split">
-      <div class="board inboard"><div class="inb-h"><b>To plan</b><small>{{planSub}}</small></div><div class="trows" role="list">
-        <sc-for list="{{planRows}}" as="t" hint-placeholder-count="2"><div class="trow irow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><span class="ir-top"><span class="ir-src {{t.srcCls}}">{{t.step}}</span><span class="tr-t">{{t.title}}</span></span><span class="tr-tm">{{t.id}}</span><span class="tr-l">{{t.line}}</span></div></sc-for>
-        <sc-if value="{{noPlan}}" hint-placeholder-val="{{false}}"><p class="tnone">Nothing to plan. Drag a ticket onto planning from the Kanban view.</p></sc-if>
-      </div></div>
-      <sc-if value="{{hasChat}}" hint-placeholder-val="{{true}}"><div class="fchat" aria-label="Session {{chat.title}}">
-  <header class="top strip">
-    <div class="ttl"><span class="who"><span class="aface" title="{{chat.agentTitle}}"><sc-if value="{{chat.af_curator}}" hint-placeholder-val="{{true}}"><svg class="face" aria-hidden="true"><use href="#af-curator"></use></svg></sc-if><sc-if value="{{chat.af_implementer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-implementer"></use></svg></sc-if><sc-if value="{{chat.af_issue}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-issue"></use></svg></sc-if><sc-if value="{{chat.af_reviewer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-reviewer"></use></svg></sc-if><sc-if value="{{chat.af_triage}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-triage"></use></svg></sc-if><sc-if value="{{chat.af_release}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-release"></use></svg></sc-if><sc-if value="{{chat.af_support}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-support"></use></svg></sc-if><sc-if value="{{chat.af_planner}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-planner"></use></svg></sc-if><i class="dot {{chat.stCls}}" aria-hidden="true"></i></span><span class="hz" title="{{chat.hzTitle}}"><sc-if value="{{chat.hz_claude}}" hint-placeholder-val="{{true}}"><svg class="logo" aria-hidden="true"><use href="#hz-claude"></use></svg></sc-if><sc-if value="{{chat.hz_codex}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-codex"></use></svg></sc-if><sc-if value="{{chat.hz_pi}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-pi"></use></svg></sc-if></span></span><h1>{{chat.title}}</h1><span class="tagw ktag" title="{{chat.taskTitle}}"><span class="tagb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{chat.key}}</span></span></div>
-    <div class="top-r"><span class="fstep-l2">{{chat.stepLine}}</span></div>
-  </header>
-  <div class="content fcontent2">
-    <sc-for list="{{chat.items}}" as="it" hint-placeholder-count="4">
-      <sc-if value="{{it.isUser}}" hint-placeholder-val="{{true}}"><div class="note"><div class="note-in">{{it.text}}</div></div></sc-if>
-      <sc-if value="{{it.isReply}}" hint-placeholder-val="{{false}}"><div class="reply"><p>{{it.text}}</p><sc-if value="{{it.hasList}}" hint-placeholder-val="{{false}}"><ol class="plan-ol"><sc-for list="{{it.list}}" as="l" hint-placeholder-count="4"><li>{{l.t}}</li></sc-for></ol></sc-if></div></sc-if>
-      <sc-if value="{{it.isCap}}" hint-placeholder-val="{{false}}">
-        <section class="deck {{it.cls}}" aria-label="Agent work">
-          <button class="cap" onClick="{{it.toggle}}" aria-expanded="{{it.open}}">
-            <span class="tb">{{it.time}}<sc-if value="{{it.ok}}" hint-placeholder-val="{{true}}"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg></span></sc-if></span>
-            <span class="cap-t"><strong>{{it.title}}</strong><span class="cap-s">{{it.sub}}</span></span>
-            <span class="trail" aria-hidden="true"><sc-for list="{{it.dots}}" as="d" hint-placeholder-count="3"><i class="dot {{d.cls}}"></i></sc-for></span>
-            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-          </button>
-          <div class="body"><div class="body-in"><ol class="steps"><sc-for list="{{it.steps}}" as="s" hint-placeholder-count="3"><li class="step" style="animation-delay: {{s.delay}}"><i class="dot {{s.k}}" aria-hidden="true" style="animation: none"></i><span class="k">{{s.label}}</span><code>{{s.detail}}</code><span class="tm">{{s.time}}</span></li></sc-for></ol></div></div>
-        </section>
-      </sc-if>
-      <sc-if value="{{it.isAsk}}" hint-placeholder-val="{{false}}"><section class="fcard needs" aria-label="Waiting on you"><div class="fcard-h"><span class="sticker needs">Waiting on you</span><b>{{it.title}}</b><small>{{it.sub}}</small></div><p class="fcard-p">{{it.text}}</p><div class="fcard-act"><sc-for list="{{it.opts}}" as="o" hint-placeholder-count="2"><button class="abtn {{o.cls}}" onClick="{{o.pick}}">{{o.label}}</button></sc-for><span class="fcard-or">{{it.or}}</span></div></section></sc-if>
-    </sc-for>
-  </div>
-  <sc-if value="{{chat.hasAct}}" hint-placeholder-val="{{false}}"><div class="plan-act" role="group" aria-label="Planning"><span class="plan-act-l">Planning</span><button class="abtn go" onClick="{{chat.planDone}}">Planning done</button><button class="abtn" onClick="{{chat.planLater}}">Planning done, implement later</button><button class="abtn red" onClick="{{chat.closeTask}}">Close task</button></div></sc-if>
-  <footer class="foot"><div class="foot-in fin2"><div class="card"><div class="ed"><label class="sr" for="fta">Write to the session</label><textarea id="fta" class="ta" rows="2" placeholder="{{chat.placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea></div><div class="bar"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="Send to the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div></div></div></footer>
-</div>
-</sc-if>
-      <sc-if value="{{noChat}}" hint-placeholder-val="{{false}}"><section class="hello fhello2" aria-label="Nothing to plan"><div class="hello-in"><h1 class="hi">Nothing to plan</h1><p class="hi2">Every ticket in the factory has its plan. The curator writes new ones on its next wake.</p></div></section></sc-if>
-    </div>
-  </sc-if>
-
   <sc-if value="{{isKanban}}" hint-placeholder-val="{{false}}">
     <div class="kdrops">
       <div class="kdrop {{dropFacCls}}" onDragOver="{{dropFac.over}}" onDragEnter="{{dropFac.enter}}" onDragLeave="{{dropFac.leave}}" onDrop="{{dropFac.drop}}" aria-label="Into the factory"><span class="kdrop-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><span class="kdrop-t"><b>Into the factory</b><small>{{dropFacText}}</small></span></div>
@@ -1667,11 +1779,13 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
   </div></div></div>
   <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="htoast" role="status"><span>{{toast}}</span></div></sc-if>
 </div>
+  </div>
+</div>
 </div>
 <div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"view":{"editor":"enum","default":"kanban","options":["overview","floor","plan","kanban","settings"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"view":{"editor":"enum","default":"kanban","options":["tasks","overview","floor","kanban","settings"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
   { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
@@ -1687,7 +1801,7 @@ const NAV = [
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
-// ---------- Factory page: one factory in five views, Overview, Factory view, Plan view, Kanban view, Settings. Everything here is made up. ----------
+// ---------- Factory page: one factory. Tasks first, the sessions list of this factory; then Factory view, Kanban view and Settings; the overview behind a button in the head. Everything here is made up. ----------
 const STEPS = [
   ['planning', 'Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'],
   ['plan_review', 'Plan review', 'M12 5C7 5 3.6 9 2.5 12c1.1 3 4.5 7 9.5 7s8.4-4 9.5-7c-1.1-3-4.5-7-9.5-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'],
@@ -1697,9 +1811,9 @@ const STEPS = [
   ['merge', 'Merge', 'M6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 7v10M18 13c0 2.5-2.5 4-6 4H8']
 ];
 const STEP = Object.fromEntries(STEPS.map((s) => [s[0], { id: s[0], label: s[1], icon: s[2] }]));
-const ICONS = { grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', factory: 'M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1', kanban: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z',
+const ICONS = { folder: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', factory: 'M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1', kanban: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z',
   gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z' };
-const VIEWS = [['overview', 'Overview', ICONS.grid], ['floor', 'Factory view', ICONS.factory], ['plan', 'Plan view', STEP.planning.icon], ['kanban', 'Kanban view', ICONS.kanban], ['settings', 'Settings', ICONS.gear]];
+const VIEWS = [['tasks', 'Tasks', ICONS.folder], ['floor', 'Factory view', ICONS.factory], ['kanban', 'Kanban view', ICONS.kanban], ['settings', 'Settings', ICONS.gear]];
 const AGENTS = { curator: 'Shepherd', implementer: 'Implementer', issue: 'Issue creator', reviewer: 'Reviewer', triage: 'Triage', release: 'Release', support: 'Support', planner: 'Planner' };
 const AGENT_IDS = Object.keys(AGENTS);
 const COLS = [['backlog', 'Backlog'], ['todo', 'To do'], ['doing', 'Doing'], ['review', 'Review'], ['done', 'Done']];
@@ -1777,6 +1891,28 @@ const CHATS = {
   'PP-147': [{ k: 'user', text: 'Ticket PP-147 · Archive threads after 30 days\nThreads nobody has opened in 30 days leave the board on their own, and come back when searched for.' },
     { k: 'reply', text: 'No planning session has started on this one. The planner picks it up on the next wake, or you can write what the plan should cover below.' }]
 };
+// the factory's tasks as the Tasks view lists them: what needs you first, then what is at work, then what waits its turn
+const TK_ORDER = ['waiting', 'blocked', 'running', 'planning', 'toplan', 'later', 'queued'];
+const TK_ACTIVE = TK_ORDER.filter((x) => x !== 'queued');   // at work or waiting on someone; the queue and what is done have their own sections
+const TK_WORD = { toplan: 'to plan', later: 'planned, parked', queued: 'queued' };
+// the sessions a task has been through so far, one per step: step, title, agent, how long it ran, and the line it ended on
+const SESS = {
+  'PP-118': [['planning', 'Plan the trial banner', 'planner', '4:10', 'A plan in two steps: write two wordings, then put the chosen one on the onboarding page.'],
+    ['plan_review', 'Review the banner plan', 'reviewer', '2:05', '']],
+  'PP-141': [['planning', 'Plan session replay', 'planner', '7:30', 'A plan in five steps across four files, with a migration for the replay table.'],
+    ['plan_review', 'Review the replay plan', 'reviewer', '1:50', 'The plan holds. One note: the migration has to run before the worker ships.'],
+    ['implementation', 'Build session replay', 'implementer', '31:12', '']],
+  'PP-138': [['planning', 'Plan session search', 'planner', '6:12', 'A plan in four steps: an index of titles and last lines, a query, the field on the board, tests.'],
+    ['plan_review', 'Review the search plan', 'reviewer', '1:40', 'Approved as written.'],
+    ['implementation', 'Build session search', 'implementer', '41:02', '']],
+  'PP-129': [['planning', 'Plan the rail badges', 'planner', '3:48', 'A plan in three steps: read the inbox count, draw it on the tile, keep it fresh.'],
+    ['plan_review', 'Review the badge plan', 'reviewer', '1:12', 'Approved as written.'],
+    ['implementation', 'Build the rail badges', 'implementer', '22:40', 'Built in two files, with the count read from the inbox store.'],
+    ['testing', 'Test the badge counts', 'implementer', '8:15', '11 tests pass, one of them new, for archived threads.'],
+    ['code_review', 'Review PR #921', 'reviewer', '12:04', '']],
+  'PP-144': [['planning', 'Plan the keyboard map', 'planner', '6:00', '']]
+};
+const ORD = (n) => n + (n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th');
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); }
 const clone = (o) => JSON.parse(JSON.stringify(o));
 const FACE_FLAGS = (a) => ({ af_curator: a === 'curator', af_implementer: a === 'implementer', af_issue: a === 'issue', af_reviewer: a === 'reviewer', af_triage: a === 'triage', af_release: a === 'release', af_support: a === 'support', af_planner: a === 'planner' });
@@ -1840,7 +1976,7 @@ class Component extends DCLogic {
   }
   /* /buddy */
 
-  state = { tickets: null, view: null, sub: 'none', curWait: undefined, curPlan: undefined, evFilter: 'all', tFilter: 'all', page: 0, open: {}, menu: null, dirty: false, saved: false, toast: null, drag: null, over: null, hasText: false, on: true, cfgTick: 0 };
+  state = { tickets: null, view: null, sub: 'none', curWait: undefined, curTk: null, openTk: {}, tkFilter: 'all', tkFind: '', qDrag: null, qOver: null, qTick: 0, dAll: false, evFilter: 'all', tFilter: 'all', page: 0, open: {}, menu: null, dirty: false, saved: false, toast: null, drag: null, over: null, hasText: false, on: true, cfgTick: 0 };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); clearTimeout(this.tt); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -1861,29 +1997,31 @@ class Component extends DCLogic {
   say(text) { this.setState({ toast: text }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
   byState(...sts) { return this.list().filter((t) => sts.includes(t.st)); }
   waitList() { return this.byState('waiting'); }
-  planList() { return this.byState('planning', 'toplan'); }
   curOf(key, list) { const v = this.state[key]; if (v !== undefined && list.some((t) => t.id === v)) return v; return list.length ? list[0].id : null; }
   // a face's flags for the sc-if chain, plus the words the strip shows
   stepLabel(t) { const s = this.cfg().steps[t.step]; return s ? s.label : (t.st === 'queued' ? 'Queued' : t.st === 'merged' ? 'Merged' : ''); }
   // the chat of the chosen ticket: the same strip, notes, capsules and composer a session has
-  chatVals(t, withPlan) {
+  chatVals(t, withPlan, s) {
     if (!t) return { hasChat: false, noChat: true, chat: {} };
-    const st = this.state; const key = 'chat_' + t.id; const extra = (this.chats && this.chats[t.id]) || [];
-    const items = [...(CHATS[t.id] || [{ k: 'user', text: 'Ticket ' + t.id + ' · ' + t.title }, { k: 'reply', text: t.line }]), ...extra].map((x, i) => {
+    const past = !!s && !s.last; const who = s ? s.agent : t.agent;
+    const st = this.state; const key = 'chat_' + t.id + (past ? '_' + s.i : ''); const extra = past ? [] : (this.chats && this.chats[t.id]) || [];
+    const base = past ? [{ k: 'user', text: 'Ticket ' + t.id + ' · ' + t.title + '\n' + STEP[s.stage].label + '.' }, { k: 'reply', text: s.sum || STEP[s.stage].label + ' is done. The task went on to its next step.' }]
+      : (CHATS[t.id] || [{ k: 'user', text: 'Ticket ' + t.id + ' · ' + t.title }, { k: 'reply', text: t.why || t.line }]);
+    const items = [...base, ...extra].map((x, i) => {
       const v = { isUser: x.k === 'user', isReply: x.k === 'reply', isCap: x.k === 'cap', isAsk: x.k === 'ask', text: x.text || '', hasList: !!x.list, list: (x.list || []).map((l) => ({ t: l })) };
       if (x.k === 'cap') { const open = !!st.open[key + i]; Object.assign(v, { cls: open ? 'open' : '', open, ok: !!x.ok, time: x.time, title: x.title, sub: x.sub, dots: x.steps.map((s) => ({ cls: s.k })), steps: x.steps.map((s) => ({ ...s, delay: '0s' })), toggle: () => this.setState({ open: { ...this.state.open, [key + i]: !open } }) }); }
       if (x.k === 'ask') Object.assign(v, { title: x.title, sub: x.sub, or: x.or, opts: x.opts.map((o, j) => ({ label: o, cls: j === 0 ? 'go' : '', pick: () => this.answer(t, o) })) });
       return v;
     });
-    const dot = t.st === 'waiting' ? 'attn' : (t.st === 'running' || t.st === 'planning') ? 'busy' : '';
-    return { hasChat: true, noChat: false, chat: { title: t.title, key: t.id, taskTitle: 'Kanban task ' + t.id + ' · ' + t.title + '. Opens the board', stCls: dot,
-      agentTitle: AGENTS[t.agent] + ' · ' + (dot === 'attn' ? 'needs you' : dot === 'busy' ? 'busy' : 'idle'), hzTitle: 'Runs on Claude', ...FACE_FLAGS(t.agent), hz_claude: true, hz_codex: false, hz_pi: false,
-      stepLine: this.stepLabel(t) + (t.st === 'toplan' ? ' · no session yet' : ''), items, hasAct: !!withPlan, placeholder: t.st === 'waiting' ? 'Or write what to do instead…' : 'Write to the session…',
+    const dot = past ? '' : t.st === 'waiting' ? 'attn' : (t.st === 'running' || t.st === 'planning') ? 'busy' : '';
+    return { hasChat: true, noChat: false, chat: { title: s ? s.title : t.title, key: t.id, taskTitle: 'Kanban task ' + t.id + ' · ' + t.title + '. Opens the board', stCls: dot,
+      agentTitle: AGENTS[who] + ' · ' + (dot === 'attn' ? 'needs you' : dot === 'busy' ? 'busy' : 'idle'), hzTitle: 'Runs on Claude', ...FACE_FLAGS(who), hz_claude: true, hz_codex: false, hz_pi: false,
+      stepLine: past ? STEP[s.stage].label + ' · done' : t.st === 'blocked' ? this.stepLabel(t) + ' · Blocked' : this.stepLabel(t) + (!s && (t.st === 'toplan' || t.st === 'queued') ? ' · no session yet' : ''), items, hasAct: !!withPlan, placeholder: t.st === 'waiting' ? 'Or write what to do instead…' : 'Write to the session…',
       planDone: () => this.planOut(t, 'queued', 'queued', 'Plan approved. Queued for Implementation.', t.id + ' is planned and queued'),
       planLater: () => this.planOut(t, 'later', 'planning', 'Planned. Implementation waits until you say.', t.id + ' is planned; it waits for you to start it'),
       closeTask: () => { this.setTickets((ts) => ts.filter((x) => x.id !== t.id)); this.say(t.id + ' is closed'); } } };
   }
-  answer(t, o) { this.patch(t.id, { st: 'running', step: 'implementation', when: 'now', line: 'Wording ' + o.slice(-1) + ' chosen. Building the banner.' }); this.pushChat(t.id, { k: 'reply', text: 'Wording ' + o.slice(-1) + ' it is. On to Implementation.' }); this.say(t.id + ' goes on to Implementation'); }
+  answer(t, o) { this.addSess(t.id, ['implementation', 'Build the trial banner', 'implementer', '0:04', '']); this.patch(t.id, { st: 'running', step: 'implementation', agent: 'implementer', when: 'now', line: 'Wording ' + o.slice(-1) + ' chosen. Building the banner.' }); this.pushChat(t.id, { k: 'reply', text: 'Wording ' + o.slice(-1) + ' it is. On to Implementation.' }); this.say(t.id + ' goes on to Implementation'); }
   planOut(t, st, step, line, toast) { this.patch(t.id, { st, step, when: 'now', line }); this.say(toast); }
   pushChat(id, ...items) { this.chats = this.chats || {}; this.chats[id] = [...(this.chats[id] || []), ...items]; this.setState({ cfgTick: this.state.cfgTick + 1 }); }
   send(t) {
@@ -1920,7 +2058,7 @@ class Component extends DCLogic {
       // the tasks
       tasksSub: plural(all.length, 'task') + ' in the factory',
       tFilters: [['all', 'All'], ['flight', 'In flight'], ['waiting', 'Waiting on you'], ['blocked', 'Blocked'], ['plan', 'Planning'], ['queued', 'Queued'], ['merged', 'Merged']].map(([id, label]) => ({ label, on: st.tFilter === id, cls: st.tFilter === id ? 'on' : '', pick: () => this.setState({ tFilter: id, page: 0 }) })),
-      tasks: shown.map((t) => ({ id: t.id, title: t.title, when: t.when, line: AGENTS[t.agent] + ' · ' + this.stepLabel(t), st: ST[t.st][0], stCls: ST[t.st][1], ...FACE_FLAGS(t.agent), aria: t.id + ' ' + t.title + ', ' + ST[t.st][0], open: () => this.say('Opens ' + t.id + ' on the board') })),
+      tasks: shown.map((t) => ({ id: t.id, title: t.title, when: t.when, line: AGENTS[t.agent] + ' · ' + this.stepLabel(t), st: ST[t.st][0], stCls: ST[t.st][1], ...FACE_FLAGS(t.agent), aria: t.id + ' ' + t.title + ', ' + ST[t.st][0], open: () => TK_ORDER.includes(t.st) ? this.setState({ view: 'tasks', sub: 'none', curTk: { id: t.id }, tkFilter: 'all' }) : this.say('Opens ' + t.id + ' on the board') })),
       noTasks: !shown.length, pageText: all.length ? (page * per + 1) + '–' + Math.min(all.length, page * per + per) + ' of ' + all.length : 'none',
       noPrev: page === 0, prevCls: page === 0 ? 'off' : '', prevPage: () => { if (page > 0) this.setState({ page: page - 1 }); },
       noNext: page >= pages - 1, nextCls: page >= pages - 1 ? 'off' : '', nextPage: () => { if (page < pages - 1) this.setState({ page: page + 1 }); },
@@ -1946,8 +2084,62 @@ class Component extends DCLogic {
       floorNote: plural(ts.filter((t) => t.st === 'running' || t.st === 'waiting').length, 'worker') + ' at work · ' + c.biome + ' biome', beltCrates: queued.map((t) => ({ key: t.id, title: t.id + ' ' + t.title })), mergedToday: ts.filter((t) => t.st === 'merged' && t.when === 'Mon').length,
       placeholder: 'Placeholder for the animated floor: the workers walk the belts between these rooms, each carrying its ticket; a refused gate sends one back a room.' };
   }
-  planVals() { const list = this.planList(); const cur = this.curOf('curPlan', list); const t = list.find((x) => x.id === cur) || null;
-    return { planRows: this.rowVals(list, cur, 'curPlan'), planSub: plural(list.length, 'ticket') + ' to plan', noPlan: !list.length, ...this.chatVals(t, true) }; }
+  // Tasks: the sessions list of this factory, laid out as the Sessions page is: a board the full height of the window beside the rail, and the session filling the sheet. Each task is a kraft folder holding the sessions it has been through, one per step
+  sessList(id) { return (this.ss && this.ss[id]) || SESS[id] || []; }
+  addSess(id, row) { this.ss = this.ss || {}; this.ss[id] = [...this.sessList(id), row]; }
+  // the queue is in the order the factory takes it, and that order is yours to change: a task that joins goes last
+  queue() { const ids = this.list().filter((t) => t.st === 'queued').map((t) => t.id); this.q = [...(this.q || []).filter((id) => ids.includes(id)), ...ids.filter((id) => !(this.q || []).includes(id))]; return this.q.map((id) => this.list().find((t) => t.id === id)); }
+  qMove(id, to) { const q = this.queue().map((t) => t.id); const from = q.indexOf(id); if (from < 0) return; const at = Math.max(0, Math.min(q.length - 1, to)); if (at === from) return; q.splice(from, 1); q.splice(at, 0, id); this.q = q; this.setState({ qTick: this.state.qTick + 1 }); this.say(id + ' is now ' + ORD(at + 1) + ' in the queue'); }
+  doneList() { return this.byState('merged'); }
+  tkList() { return [...this.list().filter((t) => TK_ACTIVE.includes(t.st)).sort((a, b) => TK_ACTIVE.indexOf(a.st) - TK_ACTIVE.indexOf(b.st)), ...this.queue()]; }
+  sessOf(t, i) { const ss = this.sessList(t.id); const [stage, title, agent, dur, sum] = ss[i]; return { stage, title, agent, dur, sum, i, last: i === ss.length - 1 }; }
+  curTk() {
+    const list = this.tkList(); const c = this.state.curTk; let t = c && [...list, ...this.doneList()].find((x) => x.id === c.id); if (!t) t = list[0] || null; if (!t) return { t: null, s: null };
+    const n = this.sessList(t.id).length; const i = c && c.id === t.id && c.i != null && c.i < n ? c.i : n - 1; return { t, s: i >= 0 ? this.sessOf(t, i) : null };
+  }
+  tasksVals() {
+    const st = this.state; const cur = this.curTk(); const f = st.tkFilter; const isCur = (t) => !!cur.t && cur.t.id === t.id;
+    const q = st.tkFind.trim().toLowerCase(); const hit = (t) => !q || (t.id + ' ' + t.title + ' ' + this.sessList(t.id).map((x) => x[1]).join(' ')).toLowerCase().includes(q);
+    const active = this.list().filter((t) => TK_ACTIVE.includes(t.st)).sort((a, b) => TK_ACTIVE.indexOf(a.st) - TK_ACTIVE.indexOf(b.st));
+    const F = { all: () => true, needs: (t) => t.st === 'waiting' || t.st === 'blocked', work: (t) => t.st === 'running' || t.st === 'planning' };
+    const showAct = f === 'all' || f === 'needs' || f === 'work'; const showQ = f === 'all' || f === 'queue'; const showD = f === 'all' || f === 'done';
+    const shown = showAct ? active.filter(F[f] || F.all).filter(hit) : []; const needs = active.filter(F.needs).length;
+    const queue = this.queue(); const qShown = showQ ? queue.filter(hit) : []; const done = this.doneList(); const dHit = showD ? done.filter(hit) : []; const dShown = st.dAll || q || f === 'done' ? dHit : dHit.slice(0, 5);
+    const liveOf = (t) => t.st === 'waiting' ? 'attn' : (t.st === 'running' || t.st === 'planning') ? 'busy' : '';
+    const withPlan = !!cur.t && (cur.t.st === 'toplan' || (cur.t.st === 'planning' && (!cur.s || (cur.s.last && cur.s.stage === 'planning'))));
+    const pick = (t) => () => this.setState({ curTk: { id: t.id } });
+    return {
+      tkSub: 'PrimePaw · ' + plural(active.length, 'task') + ' at work' + (needs ? ', ' + needs + ' need you' : ''),
+      tkFilters: [['all', 'All'], ['needs', 'Needs you'], ['work', 'At work'], ['queue', 'Queue'], ['done', 'Done']].map(([id, label]) => ({ label, on: f === id, cls: f === id ? 'on' : '', pick: () => this.setState({ tkFilter: id }) })),
+      showAct: showAct && shown.length > 0, showQ: showQ && (qShown.length > 0 || (!q && f === 'queue') || (!q && f === 'all')), showD: showD && dShown.length > 0,
+      // the queue: in the order the factory takes it; drag a task, or move it with the arrow keys from its grip, to change who goes next
+      qSub: queue.length ? queue.length + ' waiting · drag to reorder' : 'empty', noQ: !qShown.length, noQText: q ? 'Nothing queued like that.' : 'Nothing is queued. Drop a ticket onto the factory from the Kanban view.',
+      qs: qShown.map((t) => { const at = queue.indexOf(t); const on = isCur(t);
+        return { id: t.id, t: t.title, n: at + 1, gripRef: (el) => { (this.grips = this.grips || [])[at] = el; },
+          onKey: (e) => { if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); const to = Math.max(0, Math.min(queue.length - 1, at + (e.key === 'ArrowUp' ? -1 : 1))); this.qMove(t.id, to); this.later(() => { const el = (this.grips || [])[to]; if (el && el.isConnected) el.focus(); }, 0); } }, cur: on ? 'page' : false, cls: 'solo ' + (on ? 'cur ' : '') + (st.qDrag === t.id ? 'is-drag ' : '') + (st.qOver === t.id && st.qDrag && st.qDrag !== t.id ? 'is-over' : ''),
+          title: t.id + ' · ' + t.title + ' · ' + ORD(at + 1) + ' in the queue', gripAria: 'Move ' + t.id + ', ' + ORD(at + 1) + ' of ' + queue.length + ' in the queue: drag, or press the up and down arrows', pick: pick(t),
+          dragstart: (e) => { try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', t.id); } catch (_) {} this.setState({ qDrag: t.id }); },
+          dragend: () => this.setState({ qDrag: null, qOver: null }), enter: (e) => e.preventDefault(),
+          over: (e) => { if (!this.state.qDrag) return; e.preventDefault(); try { e.dataTransfer.dropEffect = 'move'; } catch (_) {} if (this.state.qOver !== t.id) this.setState({ qOver: t.id }); },
+          drop: (e) => { e.preventDefault(); const id = this.state.qDrag; this.setState({ qDrag: null, qOver: null }); if (id && id !== t.id) this.qMove(id, at); } }; }),
+      dSub: done.length + ' merged', ds: dShown.map((t) => { const on = isCur(t); return { key: t.id, t: t.title, pr: t.pr, when: t.when, cur: on ? 'page' : false, cls: 'solo ' + (on ? 'cur' : ''), title: t.id + ' · ' + t.title + ' · merged ' + t.when + ', PR ' + t.pr, pick: pick(t) }; }),
+      dMore: showD && !q && f !== 'done' && dHit.length > 5, dAll: !!st.dAll, dMoreText: st.dAll ? 'Show fewer' : 'Show all ' + dHit.length, dToggle: () => this.setState({ dAll: !st.dAll }),
+      noTks: !shown.length && !qShown.length && !dShown.length && (!!q || f === 'needs' || f === 'work' || f === 'done'), onTkFind: (e) => this.setState({ tkFind: e.target.value }),
+      tks: shown.map((t) => {
+        const ss = this.sessList(t.id); const n = ss.length; const on_ = isCur(t); const live = liveOf(t);
+        const open = n > 0 && (st.openTk[t.id] ?? (on_ || t.st === 'waiting' || t.st === 'blocked')); const now = n ? STEP[ss[n - 1][0]] : null;
+        return { key: t.id, t: t.title, open, cls: (open ? '' : 'closed ') + (on_ ? 'cur ' : '') + (n ? '' : 'solo'), hasRows: n > 0, hasCount: n > 0, count: n,
+          showNow: !open && !!now, nowStage: now ? 'Now in ' + now.label : '', nowIcon: now ? now.icon : '', nowBusy: !open && live === 'busy', hasAttn: !open && live === 'attn', isBlocked: t.st === 'blocked',
+          hasWord: !n, word: TK_WORD[t.st] || ST[t.st][0].toLowerCase(),
+          title: t.id + ' · ' + t.title + ' · ' + (n ? plural(n, 'session') + ', now in ' + now.label : 'no session yet') + ' · ' + ST[t.st][0],
+          toggle: () => { if (!n) { this.setState({ curTk: { id: t.id } }); return; } this.setState({ openTk: { ...this.state.openTk, [t.id]: !open }, ...(open ? {} : { curTk: { id: t.id } }) }); },
+          sessions: ss.map((_, i) => { const s = this.sessOf(t, i); const sl = s.last ? live : ''; const on = on_ && !!cur.s && cur.s.i === i; const step = STEP[s.stage];
+            return { t: s.title, dur: s.dur, stage: step.label, icon: step.icon, busy: sl === 'busy', idle: sl !== 'busy', attn: sl === 'attn', on, cur: on ? 'page' : false, cls: on ? 'on' : '', ...FACE_FLAGS(s.agent),
+              aria: s.title + ', ' + step.label + ' for ' + t.id + (sl === 'attn' ? ', waiting on you' : sl === 'busy' ? ', working' : ''), pick: () => this.setState({ curTk: { id: t.id, i } }) }; }) };
+      }),
+      ...this.chatVals(cur.t, withPlan, cur.s)
+    };
+  }
   kanbanVals() {
     const st = this.state; const ts = this.list(); const c = this.cfg();
     const COLORS = ['#fff39b', '#ffc9d2', '#c4e4ff', '#cdf0b9', '#ffd9a1']; const ROTS = ['-1.5deg', '1deg', '-.6deg', '1.6deg', '-1deg', '.4deg', '-1.2deg'];
@@ -1999,14 +2191,17 @@ class Component extends DCLogic {
     const st = this.state; const c = this.cfg(); const view = this.view(); const ts = this.list();
     const inflight = ts.filter((t) => t.st === 'running' || t.st === 'waiting').length;
     const state = !st.on ? ['Off', 'off'] : inflight ? ['Running', 'run'] : ['Idle', 'idle'];
-    const t = this.view() === 'plan' ? this.planList().find((x) => x.id === this.curOf('curPlan', this.planList())) : this.waitList().find((x) => x.id === this.curOf('curWait', this.waitList()));
+    const t = view === 'tasks' ? this.curTk().t : this.waitList().find((x) => x.id === this.curOf('curWait', this.waitList()));
+    const ov = view === 'overview';
     return {
       cls: 'facpage', nav: NAV.map((n) => ({ ...n, cls: n.id === 'factory' ? 'is-on' : '', cur: n.id === 'factory' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
       fac: { name: c.name, board: c.board }, stLabel: state[0], stCls: state[1], facOn: st.on, toggleOn: () => { this.setState({ on: !st.on }); this.say(st.on ? c.name + ' is off: nothing new starts, what is in flight finishes its step' : c.name + ' is on'); },
       metaLine: 'curator ' + CURATORS.find((x) => x[0] === c.curator)[1] + ' · woke at 9:35, next on the hour · ' + inflight + ' of ' + c.cap + ' in flight', openBoard: () => this.say('Opens the board ' + c.board),
       views: VIEWS.map(([id, label, icon]) => ({ label, icon, on: view === id, cls: view === id ? 'on' : '', pick: () => this.setState({ view: id, menu: null, drag: null, over: null }) })),
-      isOverview: view === 'overview', isFloor: view === 'floor', isPlan: view === 'plan', isKanban: view === 'kanban', isSettings: view === 'settings', notSettings: view !== 'settings',
-      ...(view === 'overview' ? this.overviewVals() : {}), ...(view === 'floor' ? this.floorVals() : {}), ...(view === 'plan' ? this.planVals() : {}), ...(view === 'kanban' ? this.kanbanVals() : {}), ...(view === 'settings' ? this.settingsVals() : {}),
+      // the overview sits behind a button in the head: pressed, it latches and the row of views lets go; pressed again, it gives the tasks back
+      ovOn: ov, ovCls: ov ? 'on' : '', toggleOv: () => this.setState({ view: ov ? 'tasks' : 'overview', sub: 'none', menu: null, drag: null, over: null }),
+      contentCls: view === 'tasks' ? 'tkmode' : '', sheetCls: view === 'tasks' ? 'tksheet' : '', mainCls: view === 'tasks' ? 'tkmain' : '', isTasks: view === 'tasks', isOverview: ov, isFloor: view === 'floor', isKanban: view === 'kanban', isSettings: view === 'settings', notSettings: view !== 'settings',
+      ...(view === 'tasks' ? this.tasksVals() : {}), ...(ov ? this.overviewVals() : {}), ...(view === 'floor' ? this.floorVals() : {}), ...(view === 'kanban' ? this.kanbanVals() : {}), ...(view === 'settings' ? this.settingsVals() : {}),
       taRef: (el) => { this.ta = el; }, onInput: (e) => { const v = !!e.target.value.trim(); if (v !== st.hasText) this.setState({ hasText: v }); },
       onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(t); } }, sendCls: st.hasText ? 'ready' : '', sendNow: () => this.send(t),
       hasToast: !!st.toast, toast: st.toast || ''

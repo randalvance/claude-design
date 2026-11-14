@@ -1177,19 +1177,9 @@ const NAV = [
 const ROLES = [['Orchestrator', 'plans, delegates, reports back'], ['Implementer', 'writes the code itself'], ['Curator', 'reads, summarises, drafts'], ['Reviewer', 'reads diffs, leaves comments'], ['Triage', 'sorts and labels']];
 const STAGE = { planning: ['Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'], plan_review: ['Plan review', 'M12 5C7 5 3.6 9 2.5 12c1.1 3 4.5 7 9.5 7s8.4-4 9.5-7c-1.1-3-4.5-7-9.5-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'], implementation: ['Implementation', 'M8 6l-5 6 5 6M16 6l5 6-5 6'], testing: ['Testing', 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3'], code_review: ['Code review', 'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L21 21M7.5 10.5l2 2 4-4'] };
 const STAGE_ORDER = ['planning', 'plan_review', 'implementation', 'testing', 'code_review'];
-const FTASKS = { 'LH-284': { t: 'Search the docs from the header' }, 'LH-276': { t: 'Image CDN fallback' }, 'LH-279': { t: 'Cookie banner, consent per region', closed: true } };
+const FTASKS = {};
 const WS = [
   { id: 'lighthouse', name: 'Lighthouse Web', color: '#5b8c5a', sessions: [
-    { id: 's20', harness: 'claude', agent: 'planner', t: 'Plan header search', st: 'idle', dur: '6:12', role: 'Orchestrator', branch: 'feat/LH-284-search', task: 'LH-284', stage: 'planning' },
-    { id: 's21', harness: 'codex', agent: 'reviewer', t: 'Review the search plan', st: 'idle', dur: '1:40', role: 'Implementer', branch: 'feat/LH-284-search', task: 'LH-284', stage: 'plan_review' },
-    { id: 's22', harness: 'claude', agent: 'implementer', t: 'Build header search', st: 'busy', dur: '18:04', role: 'Implementer', branch: 'feat/LH-284-search', task: 'LH-284', stage: 'implementation' },
-    { id: 's23', harness: 'pi', agent: 'planner', t: 'Plan the CDN fallback', st: 'idle', dur: '4:30', role: 'Orchestrator', branch: 'feat/LH-276-cdn', task: 'LH-276', stage: 'planning' },
-    { id: 's24', harness: 'claude', agent: 'reviewer', t: 'Review the fallback plan', st: 'idle', dur: '2:15', role: 'Implementer', branch: 'feat/LH-276-cdn', task: 'LH-276', stage: 'plan_review', attn: 1 },
-    { id: 's25', harness: 'claude', agent: 'planner', t: 'Plan per-region consent', st: 'idle', dur: '5:48', role: 'Orchestrator', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'planning' },
-    { id: 's26', harness: 'codex', agent: 'reviewer', t: 'Review the consent plan', st: 'idle', dur: '1:12', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'plan_review' },
-    { id: 's27', harness: 'claude', agent: 'implementer', t: 'Build the consent banner', st: 'idle', dur: '24:30', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'implementation' },
-    { id: 's28', harness: 'pi', agent: 'implementer', t: 'Test consent in three regions', st: 'idle', dur: '9:05', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'testing' },
-    { id: 's29', harness: 'claude', agent: 'reviewer', t: 'Review PR #318', st: 'busy', dur: '3:22', role: 'Implementer', branch: 'feat/LH-279-consent', task: 'LH-279', stage: 'code_review' },
     { id: 's1', harness: 'claude', agent: 'curator', t: 'nightly digest: curator drafts the changelog', st: 'busy', dur: '22:21', role: 'Orchestrator', branch: 'feat/curator-digest' },
     { id: 's2', harness: 'codex', agent: 'implementer', t: 'Rebase feature onto main and release-2.4', st: 'busy', dur: '4:55', role: 'Implementer', branch: 'feat/LH-281' },
     { id: 's3', harness: 'claude', agent: 'issue', t: 'Issue Creator', st: 'idle', dur: '6h 06m', role: 'Orchestrator', branch: 'main', sub: 2 } ] },
