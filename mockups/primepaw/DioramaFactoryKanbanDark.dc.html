@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Factory page, Kanban view, paper diorama, dark mode</title>
+<title>Factory page, Kanban, paper diorama, dark mode</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -1114,13 +1114,25 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .fhello .orl{text-align:left;margin:0 0 0 2px}
 @media (max-width:1100px){.facs{grid-template-columns:1fr}}
 
+/* ---------- voice: a mic disc on the composer; while it listens the hint gives way to a sound trace in red pen and the time by hand ---------- */
+.mic{all:unset;position:relative;cursor:pointer;flex:none;width:30px;height:30px;border-radius:50%;background-color:var(--paper2);background-image:var(--face),var(--pulp);color:var(--mute);display:grid;place-items:center;box-shadow:2px 3px 0 var(--shadow);transition:transform .15s var(--ease),background-color .15s var(--ease),color .15s var(--ease),box-shadow .15s var(--ease)}
+.mic svg{width:15px;height:15px}
+.mic:hover{color:var(--ink);transform:translate(-1px,-1px);box-shadow:3px 4px 0 var(--shadow)}
+.mic:active{transform:scale(.92)}
+.mic.on{background-color:var(--red);color:var(--white);box-shadow:0 1px 0 var(--red-2);transform:translate(1px,2px)}
+.mic.on:hover{color:var(--white);transform:translate(1px,2px)}
+.mic:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.listen{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.listen b{font-weight:600;color:var(--ink)}
+.trace{display:inline-flex;align-items:center;gap:2px;height:18px}
+.trace i{display:block;width:2px;border-radius:1px;background-color:var(--red);transition:height .1s linear}
+
 /* ---------- Factory page: one factory in five views. Everything below sits on the same paper as Home, the Inbox and the Factory list ---------- */
 .page{--cork:#b98c5e;--cork-2:#7a5634}
 .page.night{--cork:#5a4028;--cork-2:#3a2816}
 /* the head: Factory as a crumb, the name by hand, the state sticker; the board as a dashed link and the curator's line; the factory's own switch at the right */
 .fptop .ttl{display:flex;align-items:center;gap:12px;min-width:0}
-.fp-crumb{font-family:var(--hand);font-size:17px;color:var(--mute);padding-right:12px;border-right:1.5px dashed var(--line);white-space:nowrap}
-.fptop .ttl h1{font-size:34px}
+.fptop .ttl h1.fp-h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .fptop .ttl .sticker{flex:none}
 .fptop .meta{gap:12px}
 .fptop .meta .fac-b{font-size:13px}
@@ -1222,10 +1234,11 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .fchat{display:flex;flex-direction:column;min-width:0;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid color-mix(in srgb,var(--edge-2) 40%,var(--card));border-radius:8px;box-shadow:var(--lift-1)}
 .fchat .top.strip{padding:0 16px 0 14px;border-bottom:1px dashed var(--line)}
 .fchat .content{padding:18px 20px 10px;gap:16px}
-.fchat .foot{padding:8px 150px 12px 14px}   /* room at the right for Jarvis on its plinth, so it stands beside the composer and not on the send disc */
-.fchat .foot-in{max-width:none;padding:9px 9px 10px}
+.fchat .foot{padding:8px 14px 12px}
+.fchat .foot-in{max-width:none}
 .fchat .fcard{max-width:none}
-.fstep-l2{font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap;padding-right:6px}
+.fstep-l2{display:inline-flex;align-items:center;gap:6px;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap;padding-right:6px}
+.fstep-l2 svg{width:15px;height:15px;flex:none;color:var(--ink)}
 .plan-ol{margin:8px 0 0;padding-left:20px;font-size:14px;line-height:1.55}
 .plan-act{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 20px;padding:10px 0 2px;border-top:1px dashed var(--line)}
 .plan-act-l{font-family:var(--hand);font-size:16px;color:var(--mute);margin-right:4px}
@@ -1373,7 +1386,6 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .nr-t b{font-size:14px;font-weight:800}
 .nr-t small{font-size:12px;line-height:1.4;color:var(--mute)}
 /* ---------- Tasks: the sessions list of this factory. A task is a kraft folder, as it was in the sessions list; inside, a paper strip per session with its step on a chip ---------- */
-.ovbtn{margin-right:14px}
 /* laid out as the Sessions page: the tasks on a board the full height of the window, beside the rail; the session fills the sheet's leaf, no card around it */
 .tkpanel{width:330px}
 .tkpanel .ptop{gap:10px}
@@ -1406,14 +1418,11 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .tkmore:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .page.night .tkn{mix-blend-mode:screen}
 /* with the board beside it the sheet is narrower, so the head puts the board link and the curator's line on a second row */
-.tksheet .top.fptop{flex-wrap:wrap;row-gap:4px}
-.tksheet .top.fptop .ttl{flex:none}
-.tksheet .top.fptop .meta{order:3;flex:0 0 100%;min-width:0;padding-bottom:0}
 .fpcontent.tkmode{padding:0;gap:0}
 .tkmode .fchat{flex:1;border:0;border-radius:0;box-shadow:none;background:none}
 .tkmode .fchat .top.strip{padding:4px 24px 0 22px}
 .tkmode .fchat .content{flex:1;padding:22px 26px 12px}
-.tkmode .fchat .foot{padding:10px 150px 14px 24px}
+.tkmode .fchat .foot{padding:10px 24px 14px}
 .tkmode .plan-act{margin:0 26px}
 .tkmode .fhello2{flex:1}
 .tklist{display:flex;flex-direction:column;gap:6px}
@@ -1478,6 +1487,24 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 .fpick-all .ic{width:15px;height:15px;flex:none}
 .fpbar>.scrim{z-index:40}
 .fpick-w .rmenu{z-index:42}
+/* the factory's own switch sits at the right end of the top bar, on the desk, beside the views */
+.fpon{margin-left:auto;display:flex;align-items:center;gap:10px;padding-right:6px}
+/* Settings is an icon button at the very right of the bar, pressed while it is open */
+.fpset{width:30px;padding:0;justify-content:center;margin-right:20px}
+.fpset.fpfloor{margin-right:0}
+.fpset .ic{width:16px;height:16px}
+/* start and stop: a card button that says what it does; stop wears a red square, start is the blue go button with a play mark */
+.fpss{height:30px;padding:0 12px 0 10px;gap:7px;font-size:12.5px}
+.fpss .ic{width:13px;height:13px;flex:none}
+.fpss.stop .ic{color:var(--red)}
+/* the slots under the board's head: in flight over the cap, one paper slot each, green working, amber waiting on you */
+.tkslots{display:flex;align-items:center;gap:10px;padding:0 2px}
+.tkslots-l{flex:none;font-family:var(--hand);font-size:16px;color:var(--mute);white-space:nowrap}
+.tkslots-l b{font-weight:700;color:var(--ink)}
+.obar.tkbar{flex:1;margin:0}
+.obar.tkbar i{height:9px}
+/* bd-also: the composer is the session's, Jarvis peeking over it; on a view with no session the plinth carries Jarvis instead */
+.page:has(.fchat .foot .prop.pet) .buddy{display:none}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
 .buddy{position:fixed;bottom:12px;z-index:25;width:132px;display:flex;flex-direction:column;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -1543,11 +1570,12 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
   </nav></div>
 
 <div class="fpmain {{mainCls}}">
-  <div class="fpviews fpbar"><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{facClose}}" aria-label="Close menu"></button></sc-if><span class="fsel-w fpick-w"><button class="fsel fpick" onClick="{{facMenu}}" aria-haspopup="menu" aria-expanded="{{facOpen}}" title="Switch factory, or go back to all factories"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg><b>{{fac.name}}</b><i class="fpick-dot {{stCls}}" aria-label="{{stLabel}}"></i><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu fpick-m" role="menu" aria-label="Factories"><sc-for list="{{facs}}" as="f" hint-placeholder-count="3"><button role="menuitem" class="{{f.cls}}" onClick="{{f.pick}}" aria-current="{{f.cur}}"><i class="fpick-dot {{f.stCls}}" aria-hidden="true"></i><span class="fpick-n">{{f.name}}</span><span class="fpick-s">{{f.stLabel}}</span><sc-if value="{{f.here}}" hint-placeholder-val="{{false}}"><svg class="fpick-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button></sc-for><span class="fpick-sep" role="separator"></span><button role="menuitem" class="fpick-all" onClick="{{facAll}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>All factories</button></div></sc-if></span><span class="fpick-bar" aria-hidden="true"></span><div class="fptabs" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="4"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div></div>
+  <div class="fpviews fpbar"><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{facClose}}" aria-label="Close menu"></button></sc-if><span class="fsel-w fpick-w"><button class="fsel fpick" onClick="{{facMenu}}" aria-haspopup="menu" aria-expanded="{{facOpen}}" title="Switch factory, or go back to all factories"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg><b>{{fac.name}}</b><i class="fpick-dot {{stCls}}" aria-label="{{stLabel}}"></i><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu fpick-m" role="menu" aria-label="Factories"><sc-for list="{{facs}}" as="f" hint-placeholder-count="3"><button role="menuitem" class="{{f.cls}}" onClick="{{f.pick}}" aria-current="{{f.cur}}"><i class="fpick-dot {{f.stCls}}" aria-hidden="true"></i><span class="fpick-n">{{f.name}}</span><span class="fpick-s">{{f.stLabel}}</span><sc-if value="{{f.here}}" hint-placeholder-val="{{false}}"><svg class="fpick-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button></sc-for><span class="fpick-sep" role="separator"></span><button role="menuitem" class="fpick-all" onClick="{{facAll}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>All factories</button></div></sc-if></span><span class="fpick-bar" aria-hidden="true"></span><div class="fptabs" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="4"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div><span class="fpon"><button class="abtn fpss {{ssCls}}" onClick="{{toggleOn}}" title="{{ssTitle}}"><sc-if value="{{facOn}}" hint-placeholder-val="{{true}}"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1.5"></rect></svg></sc-if><sc-if value="{{facOff}}" hint-placeholder-val="{{false}}"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg></sc-if>{{ssLabel}}</button></span><button class="abtn vbtn fpset fpfloor {{flCls}}" aria-pressed="{{flOn}}" onClick="{{flPick}}" aria-label="Factory view" title="Factory view"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{flIcon}}"></path></svg></button><button class="abtn vbtn fpset {{setCls}}" aria-pressed="{{setOn}}" onClick="{{setPick}}" aria-label="Factory settings" title="Factory settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{setIcon}}"></path></svg></button></div>
   <div class="fprow">
   <sc-if value="{{isTasks}}" hint-placeholder-val="{{true}}"><aside class="panel board tpanel tkpanel" aria-label="Factory tasks">
     <div class="ptop">
       <div class="jhead"><span class="tfac tkfac" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><div><b>Factory</b><small>{{tkSub}}</small></div></div>
+      <div class="tkslots" role="img" aria-label="{{tkSlotsAria}}"><span class="tkslots-l"><b>{{tkInflight}}</b> of {{tkCap}} slots</span><span class="obar tkbar" aria-hidden="true"><sc-for list="{{tkSlots}}" as="s" hint-placeholder-count="6"><i class="{{s.cls}}"></i></sc-for></span></div>
       <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Search tasks…" aria-label="Search tasks" onInput="{{onTkFind}}"></label>
       <div class="filters tkfilters" role="group" aria-label="Show tasks"><sc-for list="{{tkFilters}}" as="f" hint-placeholder-count="5"><button class="abtn fbtn {{f.cls}}" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
     </div>
@@ -1578,21 +1606,19 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 
 <div class="sheet hsheet fpsheet {{sheetCls}}">
   <header class="top htop fptop">
-    <div class="ttl"><span class="fp-crumb">Factory</span><h1>{{fac.name}}</h1><span class="sticker {{stCls}}" role="status"><i aria-hidden="true"></i>{{stLabel}}</span></div>
+    <div class="ttl"><h1 class="fp-h1">{{fac.name}} factory</h1><span class="sticker {{stCls}}" role="status"><i aria-hidden="true"></i>{{stLabel}}</span></div>
     <div class="meta"><button class="fac-b" onClick="{{openBoard}}" title="Open the board">{{fac.board}} <span aria-hidden="true">→</span></button><span class="scount">{{metaLine}}</span></div>
     <div class="top-r">
-      <button class="abtn vbtn ovbtn {{ovCls}}" aria-pressed="{{ovOn}}" onClick="{{toggleOv}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>Factory overview</button>
       <sc-if value="{{isSettings}}" hint-placeholder-val="{{false}}"><span class="stt {{sttCls}}">{{sttText}}</span><button class="abtn go" onClick="{{save}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg>Save settings</button></sc-if>
-      <sc-if value="{{notSettings}}" hint-placeholder-val="{{true}}"><span class="pl-l" id="fpon">This factory</span><button class="sw" role="switch" aria-checked="{{facOn}}" aria-labelledby="fpon" onClick="{{toggleOn}}"></button></sc-if>
     </div>
   </header>
   <div class="leaf"><div class="maincol"><div class="content fpcontent {{contentCls}}">
 
   <sc-if value="{{isTasks}}" hint-placeholder-val="{{true}}">
-      <sc-if value="{{hasChat}}" hint-placeholder-val="{{true}}"><div class="fchat" aria-label="Session {{chat.title}}">
+      <sc-if value="{{hasChat}}" hint-placeholder-val="{{true}}"><div class="fchat {{chat.mode}}" aria-label="Session {{chat.title}}">
   <header class="top strip">
     <div class="ttl"><span class="who"><span class="aface" title="{{chat.agentTitle}}"><sc-if value="{{chat.af_curator}}" hint-placeholder-val="{{true}}"><svg class="face" aria-hidden="true"><use href="#af-curator"></use></svg></sc-if><sc-if value="{{chat.af_implementer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-implementer"></use></svg></sc-if><sc-if value="{{chat.af_issue}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-issue"></use></svg></sc-if><sc-if value="{{chat.af_reviewer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-reviewer"></use></svg></sc-if><sc-if value="{{chat.af_triage}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-triage"></use></svg></sc-if><sc-if value="{{chat.af_release}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-release"></use></svg></sc-if><sc-if value="{{chat.af_support}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-support"></use></svg></sc-if><sc-if value="{{chat.af_planner}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-planner"></use></svg></sc-if><i class="dot {{chat.stCls}}" aria-hidden="true"></i></span><span class="hz" title="{{chat.hzTitle}}"><sc-if value="{{chat.hz_claude}}" hint-placeholder-val="{{true}}"><svg class="logo" aria-hidden="true"><use href="#hz-claude"></use></svg></sc-if><sc-if value="{{chat.hz_codex}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-codex"></use></svg></sc-if><sc-if value="{{chat.hz_pi}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-pi"></use></svg></sc-if></span></span><h1>{{chat.title}}</h1><span class="tagw ktag" title="{{chat.taskTitle}}"><span class="tagb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{chat.key}}</span></span></div>
-    <div class="top-r"><span class="fstep-l2">{{chat.stepLine}}</span></div>
+    <div class="top-r"><span class="fstep-l2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{chat.stepIcon}}"></path></svg>{{chat.stepLine}}</span></div>
   </header>
   <div class="content fcontent2">
     <sc-for list="{{chat.items}}" as="it" hint-placeholder-count="4">
@@ -1613,10 +1639,62 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
     </sc-for>
   </div>
   <sc-if value="{{chat.hasAct}}" hint-placeholder-val="{{false}}"><div class="plan-act" role="group" aria-label="Planning"><span class="plan-act-l">Planning</span><button class="abtn go" onClick="{{chat.planDone}}">Planning done</button><button class="abtn" onClick="{{chat.planLater}}">Planning done, implement later</button><button class="abtn red" onClick="{{chat.closeTask}}">Close task</button></div></sc-if>
-  <footer class="foot"><div class="foot-in fin2"><div class="card"><div class="ed"><label class="sr" for="fta">Write to the session</label><textarea id="fta" class="ta" rows="2" placeholder="{{chat.placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea></div><div class="bar"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="Send to the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div></div></div></footer>
+  <footer class="foot">
+    <div class="foot-in">
+      <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
+      <sc-if value="{{anyPop}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closePop}}" aria-label="Close menu"></button></sc-if>
+      <div class="card">
+        <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
+        <div class="ed"><label class="sr" for="fta">Write to the session</label><textarea id="fta" class="ta" rows="2" placeholder="{{chat.placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea></div>
+        <div class="bar">
+          <div class="tools">
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Model and effort">
+                  <div class="pop-h"><span>Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="tool gtool"><button class="gauge" onClick="{{toggleCtx}}" aria-expanded="{{ctxOpen}}" aria-haspopup="dialog" aria-label="{{ctxAria}}">
+              <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
+                <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                <text x="6" y="36">E</text><text x="29" y="36">F</text>
+                <line class="needle" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line>
+                <circle class="hub" cx="20" cy="20" r="2.2"></circle>
+              </svg>
+              <span>{{pct}}%</span></button><sc-if value="{{ctxOpen}}" hint-placeholder-val="{{false}}"><div class="pop" role="dialog" aria-label="Context window"><div class="pop-h"><span>Context window</span><span class="val">{{pct}}% <span class="mode">left</span></span></div><div class="ctxbar" aria-hidden="true"><sc-for list="{{ctxParts}}" as="p" hint-placeholder-count="4"><i style="width: {{p.w}}; background-color: {{p.c}}"></i></sc-for></div><sc-for list="{{ctxRows}}" as="p" hint-placeholder-count="5"><div class="ctxrow"><i class="sq" style="background-color: {{p.c}}" aria-hidden="true"></i><span>{{p.label}}</span><span class="v">{{p.val}}</span></div></sc-for><div class="adapt"><span>{{ctxNote}}</span></div></div></sc-if></span>
+
+            <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              YOLO
+            </button>
+
+            <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="dirn">{{chat.ws}}</span></span><span class="tagw brtag"><span class="tagb">{{chat.branch}}</span></span>
+          </div>
+          <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="Send to the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+      </div>
+    </div>
+  </footer>
 </div>
 </sc-if>
-      <sc-if value="{{noChat}}" hint-placeholder-val="{{false}}"><section class="hello fhello2" aria-label="No tasks"><div class="hello-in"><h1 class="hi">No tasks in the factory</h1><p class="hi2">Drop a ticket onto the factory from the Kanban view, or wait for the curator’s next wake.</p></div></section></sc-if>
+      <sc-if value="{{noChat}}" hint-placeholder-val="{{false}}"><section class="hello fhello2" aria-label="No tasks"><div class="hello-in"><h1 class="hi">No tasks in the factory</h1><p class="hi2">Drop a ticket onto the factory from Kanban, or wait for the curator’s next wake.</p></div></section></sc-if>
   </sc-if>
 
   <sc-if value="{{isOverview}}" hint-placeholder-val="{{false}}">
@@ -1656,10 +1734,10 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
           <sc-for list="{{waitRows}}" as="t" hint-placeholder-count="2"><div class="trow irow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><span class="ir-top"><span class="ir-src {{t.srcCls}}">{{t.step}}</span><span class="tr-t">{{t.title}}</span></span><span class="tr-tm">{{t.when}}</span><span class="tr-l">{{t.line}}</span><span class="tr-r"><sc-if value="{{t.needs}}" hint-placeholder-val="{{true}}"><span class="nb" aria-hidden="true">1</span></sc-if></span></div></sc-for>
           <sc-if value="{{noWait}}" hint-placeholder-val="{{false}}"><p class="tnone">Nothing waits on you. The factory runs on.</p></sc-if>
         </div></div>
-        <sc-if value="{{hasChat}}" hint-placeholder-val="{{true}}"><div class="fchat" aria-label="Session {{chat.title}}">
+        <sc-if value="{{hasChat}}" hint-placeholder-val="{{true}}"><div class="fchat {{chat.mode}}" aria-label="Session {{chat.title}}">
   <header class="top strip">
     <div class="ttl"><span class="who"><span class="aface" title="{{chat.agentTitle}}"><sc-if value="{{chat.af_curator}}" hint-placeholder-val="{{true}}"><svg class="face" aria-hidden="true"><use href="#af-curator"></use></svg></sc-if><sc-if value="{{chat.af_implementer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-implementer"></use></svg></sc-if><sc-if value="{{chat.af_issue}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-issue"></use></svg></sc-if><sc-if value="{{chat.af_reviewer}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-reviewer"></use></svg></sc-if><sc-if value="{{chat.af_triage}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-triage"></use></svg></sc-if><sc-if value="{{chat.af_release}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-release"></use></svg></sc-if><sc-if value="{{chat.af_support}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-support"></use></svg></sc-if><sc-if value="{{chat.af_planner}}" hint-placeholder-val="{{false}}"><svg class="face" aria-hidden="true"><use href="#af-planner"></use></svg></sc-if><i class="dot {{chat.stCls}}" aria-hidden="true"></i></span><span class="hz" title="{{chat.hzTitle}}"><sc-if value="{{chat.hz_claude}}" hint-placeholder-val="{{true}}"><svg class="logo" aria-hidden="true"><use href="#hz-claude"></use></svg></sc-if><sc-if value="{{chat.hz_codex}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-codex"></use></svg></sc-if><sc-if value="{{chat.hz_pi}}" hint-placeholder-val="{{false}}"><svg class="logo" aria-hidden="true"><use href="#hz-pi"></use></svg></sc-if></span></span><h1>{{chat.title}}</h1><span class="tagw ktag" title="{{chat.taskTitle}}"><span class="tagb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{chat.key}}</span></span></div>
-    <div class="top-r"><span class="fstep-l2">{{chat.stepLine}}</span></div>
+    <div class="top-r"><span class="fstep-l2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{chat.stepIcon}}"></path></svg>{{chat.stepLine}}</span></div>
   </header>
   <div class="content fcontent2">
     <sc-for list="{{chat.items}}" as="it" hint-placeholder-count="4">
@@ -1680,7 +1758,59 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
     </sc-for>
   </div>
   <sc-if value="{{chat.hasAct}}" hint-placeholder-val="{{false}}"><div class="plan-act" role="group" aria-label="Planning"><span class="plan-act-l">Planning</span><button class="abtn go" onClick="{{chat.planDone}}">Planning done</button><button class="abtn" onClick="{{chat.planLater}}">Planning done, implement later</button><button class="abtn red" onClick="{{chat.closeTask}}">Close task</button></div></sc-if>
-  <footer class="foot"><div class="foot-in fin2"><div class="card"><div class="ed"><label class="sr" for="fta">Write to the session</label><textarea id="fta" class="ta" rows="2" placeholder="{{chat.placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea></div><div class="bar"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="Send to the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div></div></div></footer>
+  <footer class="foot">
+    <div class="foot-in">
+      <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
+      <sc-if value="{{anyPop}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closePop}}" aria-label="Close menu"></button></sc-if>
+      <div class="card">
+        <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
+        <div class="ed"><label class="sr" for="fta">Write to the session</label><textarea id="fta" class="ta" rows="2" placeholder="{{chat.placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea></div>
+        <div class="bar">
+          <div class="tools">
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Model and effort">
+                  <div class="pop-h"><span>Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="tool gtool"><button class="gauge" onClick="{{toggleCtx}}" aria-expanded="{{ctxOpen}}" aria-haspopup="dialog" aria-label="{{ctxAria}}">
+              <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
+                <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                <text x="6" y="36">E</text><text x="29" y="36">F</text>
+                <line class="needle" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line>
+                <circle class="hub" cx="20" cy="20" r="2.2"></circle>
+              </svg>
+              <span>{{pct}}%</span></button><sc-if value="{{ctxOpen}}" hint-placeholder-val="{{false}}"><div class="pop" role="dialog" aria-label="Context window"><div class="pop-h"><span>Context window</span><span class="val">{{pct}}% <span class="mode">left</span></span></div><div class="ctxbar" aria-hidden="true"><sc-for list="{{ctxParts}}" as="p" hint-placeholder-count="4"><i style="width: {{p.w}}; background-color: {{p.c}}"></i></sc-for></div><sc-for list="{{ctxRows}}" as="p" hint-placeholder-count="5"><div class="ctxrow"><i class="sq" style="background-color: {{p.c}}" aria-hidden="true"></i><span>{{p.label}}</span><span class="v">{{p.val}}</span></div></sc-for><div class="adapt"><span>{{ctxNote}}</span></div></div></sc-if></span>
+
+            <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              YOLO
+            </button>
+
+            <span class="dirtag" title="Working directory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="dirn">{{chat.ws}}</span></span><span class="tagw brtag"><span class="tagb">{{chat.branch}}</span></span>
+          </div>
+          <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="Send to the session"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+      </div>
+    </div>
+  </footer>
 </div>
 </sc-if>
         <sc-if value="{{noChat}}" hint-placeholder-val="{{false}}"><section class="hello fhello2" aria-label="All answered"><div class="hello-in"><h1 class="hi">All answered</h1><p class="hi2">Every ticket has what it needs. Come back when a sticker turns amber.</p></div></section></sc-if>
@@ -1831,6 +1961,47 @@ const NAV = [
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 },
   { id: 'bg', label: 'Backgr.', icon: 'M21 12a9 9 0 1 1-3-6.7M21 3v6h-6' }
 ];
+
+// ---------- voice: press the mic and a made-up transcript lands in the box word by word. Nothing is recorded. ----------
+const DICTATION = 'Add CSV export to the reports page, same columns as the table, and open a PR once the tests pass.'.split(' ');
+function micBars(loud) { return Array.from({ length: 14 }, () => ({ h: Math.round(loud ? 4 + Math.random() * 12 : 3 + Math.random() * 3) + 'px' })); }
+function micTime(ticks) { const s = Math.floor(ticks * 0.12); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+const VOICE = {
+  listening() { const v = this.state.voice; return !!(v && v.on); },
+  toggleMic() { if (this.listening()) this.stopMic(); else this.startMic(); },
+  startMic() {
+    const el = this.ta; if (!el) return;
+    const pre = el.value && !/\s$/.test(el.value) ? el.value + ' ' : el.value;
+    this.setState({ voice: { on: true, i: 0, t: 0, bars: micBars(false) } });
+    el.focus();
+    const word = () => {
+      const v = this.state.voice; if (!v || !v.on || !el.isConnected || v.i >= DICTATION.length) return this.stopMic();
+      el.value = pre + DICTATION.slice(0, v.i + 1).join(' ');
+      this.onDictated(el);
+      this.setState((s) => ({ voice: s.voice && { ...s.voice, i: s.voice.i + 1 } }));
+      this.vt = setTimeout(word, 160 + Math.random() * 240);
+    };
+    this.vt = setTimeout(word, 800);
+    this.vm = setInterval(() => this.setState((s) => ({ voice: s.voice && { ...s.voice, t: s.voice.t + 1, bars: micBars(s.voice.i > 0 && s.voice.i < DICTATION.length) } })), 120);
+  },
+  stopMic() { clearTimeout(this.vt); clearInterval(this.vm); if (this.state.voice) this.setState({ voice: null }); if (this.ta && this.ta.isConnected) this.ta.focus(); },
+  voiceVals() {
+    const v = this.state.voice; const on = !!(v && v.on);
+    return { listening: on, notListening: !on, micCls: on ? 'on' : '', micLabel: on ? 'Stop listening' : 'Speak instead of typing',
+      toggleMic: () => this.toggleMic(), bars: on ? v.bars : [], listenTime: on ? micTime(v.t) : '' };
+  }
+};
+const MODELS = [
+  { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', def: 2 },
+  { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', def: 1 },
+  { id: 'sonnet', name: 'Sonnet 5.5', desc: 'Fast and capable', def: 2 },
+  { id: 'haiku', name: 'Haiku 5.5', desc: 'Instant', def: 1 }
+];
+const EFFORT = ['Low', 'Med', 'High', 'X-high', 'Max'];
+const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
+const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
+function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
+const CTX_PARTS = [['System prompt', .14, 'var(--kind-think)'], ['Memory', .09, 'var(--amber)'], ['Tools', .22, 'var(--green)'], ['This chat', .55, 'var(--blue)']];
 // ---------- Factory page: one factory. Tasks first, the sessions list of this factory; then Factory view, Kanban view and Settings; the overview behind a button in the head. Everything here is made up. ----------
 const STEPS = [
   ['planning', 'Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'],
@@ -1845,7 +2016,7 @@ const ICONS = { folder: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 
   gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z' };
 // the factories the selector lists, as the Factory list has them; this page is PrimePaw's
 const FACS = [['primepaw', 'PrimePaw', ['Running', 'run']], ['cerebro', 'Cerebro', ['Idle', 'idle']], ['docs', 'Docs', ['Off', 'off']]];
-const VIEWS = [['tasks', 'Tasks', ICONS.folder], ['floor', 'Factory view', ICONS.factory], ['kanban', 'Kanban view', ICONS.kanban], ['settings', 'Settings', ICONS.gear]];
+const VIEWS = [['overview', 'Overview', ICONS.grid], ['tasks', 'Tasks', ICONS.folder], ['kanban', 'Kanban', ICONS.kanban]];
 const AGENTS = { curator: 'Shepherd', implementer: 'Implementer', issue: 'Issue creator', reviewer: 'Reviewer', triage: 'Triage', release: 'Release', support: 'Support', planner: 'Planner' };
 const AGENT_IDS = Object.keys(AGENTS);
 const COLS = [['backlog', 'Backlog'], ['todo', 'To do'], ['doing', 'Doing'], ['review', 'Review'], ['done', 'Done']];
@@ -1944,6 +2115,9 @@ const SESS = {
     ['code_review', 'Review PR #921', 'reviewer', '12:04', '']],
   'PP-144': [['planning', 'Plan the keyboard map', 'planner', '6:00', '']]
 };
+// how much of each task's session the context already holds, made up
+const USED_TK = { 'PP-118': 46000, 'PP-141': 131000, 'PP-138': 88000, 'PP-129': 172000, 'PP-144': 21000 };
+const slugOf = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').split('-').slice(0, 4).join('-');
 const ORD = (n) => n + (n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th');
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); }
 const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -2008,7 +2182,7 @@ class Component extends DCLogic {
   }
   /* /buddy */
 
-  state = { tickets: null, view: null, sub: 'none', curWait: undefined, curTk: null, tkFilter: 'all', tkFind: '', qDrag: null, qOver: null, qTick: 0, dAll: false, evFilter: 'all', tFilter: 'all', page: 0, open: {}, menu: null, dirty: false, saved: false, toast: null, drag: null, over: null, hasText: false, on: true, cfgTick: 0 };
+  state = { pop: null, model: 'sonnet', effort: 2, auto: true, yolo: {}, used: {}, draft: 0, focus: false, petShot: null, tickets: null, view: null, sub: 'none', curWait: undefined, curTk: null, tkFilter: 'all', tkFind: '', qDrag: null, qOver: null, qTick: 0, dAll: false, evFilter: 'all', tFilter: 'all', page: 0, open: {}, menu: null, dirty: false, saved: false, toast: null, drag: null, over: null, hasText: false, on: true, cfgTick: 0 };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); clearTimeout(this.tt); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -2046,8 +2220,10 @@ class Component extends DCLogic {
       return v;
     });
     const dot = past ? '' : t.st === 'waiting' ? 'attn' : (t.st === 'running' || t.st === 'planning') ? 'busy' : '';
-    return { hasChat: true, noChat: false, chat: { title: s ? s.title : t.title, key: t.id, taskTitle: 'Kanban task ' + t.id + ' · ' + t.title + '. Opens the board', stCls: dot,
+    const isMax = this.state.effort === 4;
+    return { hasChat: true, noChat: false, chat: { ws: 'primepaw', branch: t.id.toLowerCase() + '/' + slugOf(t.title), mode: (isMax ? 'max ' : '') + (this.state.focus ? 'focus' : ''), title: s ? s.title : t.title, key: t.id, taskTitle: 'Kanban task ' + t.id + ' · ' + t.title + '. Opens the board', stCls: dot,
       agentTitle: AGENTS[who] + ' · ' + (dot === 'attn' ? 'needs you' : dot === 'busy' ? 'busy' : 'idle'), hzTitle: 'Runs on Claude', ...FACE_FLAGS(who), hz_claude: true, hz_codex: false, hz_pi: false,
+      stepIcon: (() => { const id = past ? s.stage : STEP[t.step] ? t.step : s ? s.stage : 'planning'; const k = this.cfg().steps[id]; return (STEP[k && k.icon] || STEP[id]).icon; })(),
       stepLine: past ? STEP[s.stage].label + ' · done' : t.st === 'blocked' ? this.stepLabel(t) + ' · Blocked' : this.stepLabel(t) + (!s && (t.st === 'toplan' || t.st === 'queued') ? ' · no session yet' : ''), items, hasAct: !!withPlan, placeholder: t.st === 'waiting' ? 'Or write what to do instead…' : 'Write to the session…',
       planDone: () => this.planOut(t, 'queued', 'queued', 'Plan approved. Queued for Implementation.', t.id + ' is planned and queued'),
       planLater: () => this.planOut(t, 'later', 'planning', 'Planned. Implementation waits until you say.', t.id + ' is planned; it waits for you to start it'),
@@ -2056,9 +2232,32 @@ class Component extends DCLogic {
   answer(t, o) { this.addSess(t.id, ['implementation', 'Build the trial banner', 'implementer', '0:04', '']); this.patch(t.id, { st: 'running', step: 'implementation', agent: 'implementer', when: 'now', line: 'Wording ' + o.slice(-1) + ' chosen. Building the banner.' }); this.pushChat(t.id, { k: 'reply', text: 'Wording ' + o.slice(-1) + ' it is. On to Implementation.' }); this.say(t.id + ' goes on to Implementation'); }
   planOut(t, st, step, line, toast) { this.patch(t.id, { st, step, when: 'now', line }); this.say(toast); }
   pushChat(id, ...items) { this.chats = this.chats || {}; this.chats[id] = [...(this.chats[id] || []), ...items]; this.setState({ cfgTick: this.state.cfgTick + 1 }); }
+  // the composer's own: the context gauge's card, a mood for the pet over it, the dictation hook
+  ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
+  onDictated(el) { this.setState({ hasText: !!el.value.trim(), draft: el.value.length }); }
+  petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ petShot: { name, id } }); this.later(() => { const s = this.state.petShot; if (s && s.id === id) this.setState({ petShot: null }); }, ms); }
+  usedOf(id) { const u = this.state.used; return id in u ? u[id] : USED_TK[id] || 9000; }
+  composerVals(t) {
+    const st = this.state; const total = 200000; const used = Math.min(total - 1000, this.usedOf(t ? t.id : null)); const remaining = (total - used) / total;
+    const draftFrac = Math.min(remaining * total, st.draft * TPC) / total; const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0]; const yolo = !!t && !!st.yolo[t.id];
+    return { yolo, toggleYolo: () => { if (!t) return; this.setState({ yolo: { ...st.yolo, [t.id]: !yolo } }); this.say(yolo ? 'YOLO is off for ' + t.id : 'YOLO is on for ' + t.id + ': no permission prompts'); }, isMax,
+      petCls: st.petShot ? st.petShot.name : t && t.st === 'waiting' ? 'ask' : t && t.st === 'blocked' ? 'error' : 'idle', petPoke: () => this.petPlay('greet', 1900),
+      anyPop: !!st.pop, closePop: () => this.setState({ pop: null }),
+      modelOpen: st.pop === 'model', toggleModel: () => this.setState({ pop: st.pop === 'model' ? null : 'model' }),
+      ctxOpen: st.pop === 'ctx', toggleCtx: () => this.setState({ pop: st.pop === 'ctx' ? null : 'ctx' }), ...this.ctxCard(used, total),
+      modelName: model.name,
+      models: MODELS.map((m) => ({ ...m, defLabel: EFFORT_FULL[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
+      ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
+      efforts: EFFORT.map((x, i) => ({ t: x, on: i === st.effort, cls: (i === st.effort ? 'on ' : '') + (i === model.def ? 'def ' : '') + (i === 4 && st.effort === 4 ? 'maxon' : ''), pick: () => this.setState({ effort: i, auto: false }) })),
+      effortLabel: EFFORT_FULL[st.effort], effortMode: st.auto ? 'model default' : 'custom', custom: !st.auto, resetEffort: () => this.setState({ effort: model.def, auto: true }),
+      gaugeCls: remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok', pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
+      arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC, draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC, draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
+      ctxAria: 'Context window: ' + Math.round(remaining * 100) + ' percent left, ' + kfmt(total - used) + ' of ' + kfmt(total) + ' tokens',
+      onFocus: () => this.setState({ focus: true }), onBlur: () => this.setState({ focus: false }), ...this.voiceVals() };
+  }
   send(t) {
     const el = this.ta; const text = el ? el.value.trim() : ''; if (!text || !t) return;
-    el.value = ''; this.setState({ hasText: false }); this.pushChat(t.id, { k: 'user', text });
+    el.value = ''; if (this.listening()) this.stopMic(); this.setState({ hasText: false, draft: 0, used: { ...this.state.used, [t.id]: this.usedOf(t.id) + Math.max(40, text.length * TPC) + 1500 } }); this.petPlay('celebrate', 2400); this.pushChat(t.id, { k: 'user', text });
     this.later(() => this.pushChat(t.id, { k: 'reply', text: t.st === 'toplan' ? 'Noted. The planner reads this when it starts on ' + t.id + '.' : 'Noted. The session picks this up on its next turn.' }), 900);
   }
   // rows for the boards on the left: the inbox strip with the step on its chip
@@ -2141,11 +2340,14 @@ class Component extends DCLogic {
     const withPlan = !!cur.t && (cur.t.st === 'toplan' || (cur.t.st === 'planning' && (!cur.s || (cur.s.last && cur.s.stage === 'planning'))));
     const pick = (t) => () => this.setState({ curTk: { id: t.id } });
     return {
+      ...(() => { const c = this.cfg(); const run = this.byState('running').length; const fl = run + this.waitList().length; const free = Math.max(0, c.cap - fl);
+        return { tkInflight: fl, tkCap: c.cap, tkSlots: Array.from({ length: c.cap }, (_, i) => ({ cls: i < run ? 'run' : i < fl ? 'wait' : '' })),
+          tkSlotsAria: fl + ' of ' + c.cap + ' slots in use: ' + run + ' working, ' + (fl - run) + ' waiting on you, ' + free + ' free' }; })(),
       tkSub: 'PrimePaw · ' + plural(active.length, 'task') + ' at work' + (needs ? ', ' + needs + ' need you' : ''),
       tkFilters: [['all', 'All'], ['needs', 'Needs you'], ['work', 'At work'], ['queue', 'Queue'], ['done', 'Done']].map(([id, label]) => ({ label, on: f === id, cls: f === id ? 'on' : '', pick: () => this.setState({ tkFilter: id }) })),
       showAct: showAct && shown.length > 0, showQ: showQ && (qShown.length > 0 || (!q && f === 'queue') || (!q && f === 'all')), showD: showD && dShown.length > 0,
       // the queue: in the order the factory takes it; drag a task, or move it with the arrow keys from its grip, to change who goes next
-      qSub: queue.length ? queue.length + ' waiting · drag to reorder' : 'empty', noQ: !qShown.length, noQText: q ? 'Nothing queued like that.' : 'Nothing is queued. Drop a ticket onto the factory from the Kanban view.',
+      qSub: queue.length ? queue.length + ' waiting · drag to reorder' : 'empty', noQ: !qShown.length, noQText: q ? 'Nothing queued like that.' : 'Nothing is queued. Drop a ticket onto the factory from Kanban.',
       qs: qShown.map((t) => { const at = queue.indexOf(t); const on = isCur(t);
         return { id: t.id, t: t.title, n: at + 1, gripRef: (el) => { (this.grips = this.grips || [])[at] = el; },
           onKey: (e) => { if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); const to = Math.max(0, Math.min(queue.length - 1, at + (e.key === 'ArrowUp' ? -1 : 1))); this.qMove(t.id, to); this.later(() => { const el = (this.grips || [])[to]; if (el && el.isConnected) el.focus(); }, 0); } }, cur: on ? 'page' : false, cls: 'solo ' + (on ? 'cur ' : '') + (st.qDrag === t.id ? 'is-drag ' : '') + (st.qOver === t.id && st.qDrag && st.qDrag !== t.id ? 'is-over' : ''),
@@ -2232,19 +2434,23 @@ class Component extends DCLogic {
       facOpen: st.menu === 'fac', facMenu: () => this.setState({ menu: st.menu === 'fac' ? null : 'fac' }), facClose: () => this.setState({ menu: null }),
       facAll: () => { this.setState({ menu: null }); this.say('Opens Factory, the list of every factory'); },
       facs: FACS.map(([id, name, s], i) => { const here = i === 0; const s_ = here ? state : s;
-        return { name: here ? c.name : name, stLabel: s_[0], stCls: s_[1], here, cur: here ? 'page' : false, cls: here ? 'on' : '', pick: () => { this.setState({ menu: null }); if (!here) this.say('Opens ' + name + '’s factory page'); } }; }), facOn: st.on, toggleOn: () => { this.setState({ on: !st.on }); this.say(st.on ? c.name + ' is off: nothing new starts, what is in flight finishes its step' : c.name + ' is on'); },
+        return { name: here ? c.name : name, stLabel: s_[0], stCls: s_[1], here, cur: here ? 'page' : false, cls: here ? 'on' : '', pick: () => { this.setState({ menu: null }); if (!here) this.say('Opens ' + name + '’s factory page'); } }; }), facOn: st.on, facOff: !st.on, ssLabel: st.on ? 'Stop factory' : 'Start factory', ssCls: st.on ? 'stop' : 'go', ssTitle: st.on ? 'Stop: nothing new starts, what is in flight finishes its step' : 'Start: the curator picks up ready tickets on its next wake', toggleOn: () => { this.setState({ on: !st.on }); this.say(st.on ? c.name + ' is stopped: nothing new starts, what is in flight finishes its step' : c.name + ' is on'); },
       metaLine: 'curator ' + CURATORS.find((x) => x[0] === c.curator)[1] + ' · woke at 9:35, next on the hour · ' + inflight + ' of ' + c.cap + ' in flight', openBoard: () => this.say('Opens the board ' + c.board),
+      flOn: view === 'floor', flCls: view === 'floor' ? 'on' : '', flPick: () => this.setState({ view: view === 'floor' ? 'tasks' : 'floor', menu: null, drag: null, over: null }), flIcon: ICONS.factory,
+      setOn: view === 'settings', setCls: view === 'settings' ? 'on' : '', setPick: () => this.setState({ view: view === 'settings' ? 'tasks' : 'settings', menu: null, drag: null, over: null }), setIcon: ICONS.gear,
       views: VIEWS.map(([id, label, icon]) => ({ label, icon, on: view === id, cls: view === id ? 'on' : '', pick: () => this.setState({ view: id, menu: null, drag: null, over: null }) })),
       // the overview sits behind a button in the head: pressed, it latches and the row of views lets go; pressed again, it gives the tasks back
       ovOn: ov, ovCls: ov ? 'on' : '', toggleOv: () => this.setState({ view: ov ? 'tasks' : 'overview', sub: 'none', menu: null, drag: null, over: null }),
       contentCls: view === 'tasks' ? 'tkmode' : '', sheetCls: view === 'tasks' ? 'tksheet' : '', mainCls: view === 'tasks' ? 'tkmain' : '', isTasks: view === 'tasks', isOverview: ov, isFloor: view === 'floor', isKanban: view === 'kanban', isSettings: view === 'settings', notSettings: view !== 'settings',
       ...(view === 'tasks' ? this.tasksVals() : {}), ...(ov ? this.overviewVals() : {}), ...(view === 'floor' ? this.floorVals() : {}), ...(view === 'kanban' ? this.kanbanVals() : {}), ...(view === 'settings' ? this.settingsVals() : {}),
-      taRef: (el) => { this.ta = el; }, onInput: (e) => { const v = !!e.target.value.trim(); if (v !== st.hasText) this.setState({ hasText: v }); },
-      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(t); } }, sendCls: st.hasText ? 'ready' : '', sendNow: () => this.send(t),
+      ...this.composerVals(view === 'tasks' ? this.curTk().t : t),
+      taRef: (el) => { this.ta = el; }, onInput: (e) => { const v = !!e.target.value.trim(); this.setState({ hasText: v, draft: e.target.value.length }); },
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(t); } if (e.key === 'Escape') { if (this.listening()) this.stopMic(); else if (st.pop) this.setState({ pop: null }); } }, sendCls: st.hasText ? 'ready' : '', sendNow: () => this.send(t),
       hasToast: !!st.toast, toast: st.toast || ''
     };
   }
 }
+Object.assign(Component.prototype, VOICE);
 </script>
 </body>
 </html>
