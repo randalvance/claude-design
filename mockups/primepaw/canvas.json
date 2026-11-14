@@ -247,7 +247,7 @@
       "y": 13100,
       "w": 1440,
       "h": 900,
-      "title": "Home with Jarvis, Thread YOLO on, paper diorama, live demo",
+      "title": "Home with Jarvis, YOLO on, paper diorama, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -257,7 +257,7 @@
       "y": 13100,
       "w": 1440,
       "h": 900,
-      "title": "Home with Jarvis, Thread YOLO on, paper diorama, dark mode, live demo",
+      "title": "Home with Jarvis, YOLO on, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -1046,14 +1046,14 @@
       "y": 9100,
       "w": 320,
       "page": "diorama",
-      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, the paper robot dog’s face, badged with the threads waiting on you. Above the threads, the factories that are on: one strip each with the factory icon, the name, its state sticker, in flight over its cap by hand and a red badge for what waits on you; press one and it opens the factory’s page. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Thread YOLO makes. A job ends on a finish report on the sage mat. The header has the title, how many sessions the thread started, and the Thread YOLO stamp, off by default, which says what it risks when you strike it. Everything is fake."
+      "text": "Home, the page at /: you talk to one personal agent, Jarvis, and it starts the sessions. Jarvis tops the rail as a cream tile with its portrait, the paper robot dog’s face, badged with the threads waiting on you. Above the threads, the factories that are on: one strip each with the factory icon, the name, its state sticker, in flight over its cap by hand and a red badge for what waits on you; press one and it opens the factory’s page. Threads are paper strips, newest first, with the last thing said, the time and a badge when something waits on you; rename and archive are in each row’s menu. In a thread your words are kraft notes and Jarvis’s are set in Fraunces. Jarvis leaves three kinds of cards: a session card for every session it starts, with the workspace strip in the workspace’s colour, branch, model, a live status sticker and the session’s last line; a helper card, an index card folded to one line, for a read-only look into the code; and a decision line for every call Jarvis makes under YOLO. A job ends on a finish report on the sage mat. The header has the title and how many sessions the thread started. The composer is the session’s: the model and effort button, the context gauge and the YOLO stamp, off by default, with the folder and the branch left out because the main agent has neither. Everything is fake."
     },
     "p21": {
       "x": 3080,
       "y": 10100,
       "w": 320,
       "page": "diorama",
-      "text": "The states: empty, a big prompt box where sending starts a thread; a session waiting on you, on the amber mat, next to one that failed; Jarvis asking which workspace with the same question card and sheet a session uses; and Thread YOLO on, which answers waiting prompts and writes each call down. Turn YOLO on in Bump Node to 22 to watch it answer the waiting session."
+      "text": "The states: empty, a big prompt box where sending starts a thread; a session waiting on you, on the amber mat, next to one that failed; Jarvis asking which workspace with the same question card and sheet a session uses; and YOLO on, the composer’s stamp struck red, where Jarvis answers the waiting prompts of the sessions it started and writes each call down. Strike YOLO in Bump Node to 22 to watch it answer the waiting session."
     },
     "p23": {
       "x": 3080,

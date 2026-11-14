@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Home with Jarvis, Thread YOLO on, paper diorama</title>
+<title>Home with Jarvis, YOLO on, paper diorama</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -814,14 +814,10 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .hsheet .leaf{margin-top:16px}
 .hsheet .top{padding-top:20px}
 .hsheet .meta .scount{font-family:var(--hand);font-size:17px;color:var(--ink)}
-.ylbl{font-family:var(--hand);font-size:17px;line-height:1;color:var(--mute);align-self:center;margin-right:4px}
 .hsheet .top-r{align-items:center;gap:6px}
 .hsheet .top-r .stampbtn{margin-right:4px}
-.yrisk{display:flex;align-items:flex-start;gap:12px;margin:0;max-width:760px;padding:10px 14px;font-size:13px;line-height:1.5;color:var(--ink);background-color:color-mix(in srgb,var(--red) 8%,var(--card));background-image:var(--face),var(--pulp);border:1.5px dashed color-mix(in srgb,var(--red) 70%,var(--ink));border-radius:3px;animation:dropflat .22s var(--ease) both}
-.yrisk b{font-weight:800;color:color-mix(in srgb,var(--red) 78%,var(--ink))}
-.ystamp,.ys{flex:none;display:inline-grid;place-items:center;box-sizing:border-box;padding:0 6px;border:2px solid currentColor;border-radius:3px;font-family:var(--mono);font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--red) 88%,var(--ink));transform:rotate(-4deg);filter:url(#inkstamp);mix-blend-mode:multiply}
-.ystamp{height:24px;font-size:11px;margin-top:1px}
-.page.night .ystamp,.page.night .ys{mix-blend-mode:normal}
+.ys{flex:none;display:inline-grid;place-items:center;box-sizing:border-box;padding:0 6px;border:2px solid currentColor;border-radius:3px;font-family:var(--mono);font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--red) 88%,var(--ink));transform:rotate(-4deg);filter:url(#inkstamp);mix-blend-mode:multiply}
+.page.night .ys{mix-blend-mode:normal}
 /* ---------- the thread ---------- */
 .hsheet .content{gap:16px}
 .jt{position:relative;padding-left:44px;max-width:780px;box-sizing:border-box}
@@ -865,7 +861,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .helper-b li{margin:2px 0}
 .helper-src{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 0;font-family:var(--hand);font-size:15px;color:var(--mute)}
 .helper-src code{font-family:var(--mono);font-size:11px;color:var(--ink);background-color:var(--paper-2);padding:1px 5px;border-radius:2px}
-/* a decision line: one per call Thread YOLO made, with the stamp it was made under */
+/* a decision line: one per call Jarvis made under YOLO, with the stamp it was made under */
 .dline{display:flex;align-items:baseline;gap:10px;margin:-6px 0 0;padding:3px 0;font-size:13px;line-height:1.45;color:var(--ink);border-bottom:1px dashed var(--line);max-width:640px}
 .ys{height:18px;font-size:10px;border-width:1.5px;padding:0 4px;transform:rotate(-4deg) translateY(-1px)}
 .dt{flex:1;min-width:0}
@@ -1054,7 +1050,6 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
   <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}"><header class="top htop">
     <div class="ttl"><h1>{{th.title}}</h1></div>
     <div class="meta"><span>with {{agentName}}</span><span class="scount">{{sessCount}}</span></div>
-    <div class="top-r"><span class="ylbl" id="ylbl">Thread YOLO</span><button class="stampbtn" role="switch" aria-checked="{{yoloOn}}" aria-labelledby="ylbl" aria-describedby="{{yoloDesc}}" onClick="{{toggleYolo}}">YOLO</button></div>
   </header></sc-if>
 
   <sc-if value="{{isMeet}}" hint-placeholder-val="{{false}}">
@@ -1102,12 +1097,54 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
         <p class="hi2">{{hi2}}</p>
         <div class="foot-in" style="max-width: none">
           <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
+          <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
           <div class="card">
+            <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
             <div class="ed">
               <label class="sr" for="hta0">What should we work on?</label>
-              <textarea id="hta0" class="ta" rows="3" placeholder="Describe the job, or paste a ticket…" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea>
+              <textarea id="hta0" class="ta" rows="3" placeholder="Describe the job, or paste a ticket…" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea>
             </div>
-            <div class="bar"><sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ start a thread · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+            <div class="bar">
+          <div class="tools">
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Model and effort">
+                  <div class="pop-h"><span>Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="tool gtool"><button class="gauge" onClick="{{toggleCtx}}" aria-expanded="{{ctxOpen}}" aria-haspopup="dialog" aria-label="{{ctxAria}}">
+              <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
+                <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                <text x="6" y="36">E</text><text x="29" y="36">F</text>
+                <line class="needle" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line>
+                <circle class="hub" cx="20" cy="20" r="2.2"></circle>
+              </svg>
+              <span>{{pct}}%</span></button><sc-if value="{{ctxOpen}}" hint-placeholder-val="{{false}}"><div class="pop" role="dialog" aria-label="Context window"><div class="pop-h"><span>Context window</span><span class="val">{{pct}}% <span class="mode">left</span></span></div><div class="ctxbar" aria-hidden="true"><sc-for list="{{ctxParts}}" as="p" hint-placeholder-count="4"><i style="width: {{p.w}}; background-color: {{p.c}}"></i></sc-for></div><sc-for list="{{ctxRows}}" as="p" hint-placeholder-count="5"><div class="ctxrow"><i class="sq" style="background-color: {{p.c}}" aria-hidden="true"></i><span>{{p.label}}</span><span class="v">{{p.val}}</span></div></sc-for><div class="adapt"><span>{{ctxNote}}</span></div></div></sc-if></span>
+
+            <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              YOLO
+            </button>
+          </div>
+          <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ start a thread · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
           </div>
         </div>
         <p class="orl">{{emptyWhere}}</p>
@@ -1118,7 +1155,6 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
   <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}">
   <div class="leaf"><div class="maincol">
   <div class="content">
-    <sc-if value="{{yoloOn}}" hint-placeholder-val="{{false}}"><p class="yrisk" id="yrisk" role="note"><span class="ystamp" aria-hidden="true">YOLO</span><span><b>Thread YOLO is on.</b> Jarvis answers the permission prompts of every session this thread starts, and writes each call down here. That includes pushing code, running migrations and deleting files, without asking you first.</span></p></sc-if>
     <sc-for list="{{items}}" as="it" hint-placeholder-count="6">
       <sc-if value="{{it.isMe}}" hint-placeholder-val="{{false}}"><div class="note"><div class="note-in">{{it.text}}</div></div></sc-if>
       <sc-if value="{{it.isJ}}" hint-placeholder-val="{{true}}"><div class="jt {{it.turnCls}}"><sc-if value="{{it.face}}" hint-placeholder-val="{{true}}"><span class="qph sm" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span></sc-if><p class="jsay"><sc-for list="{{it.segs}}" as="g" hint-placeholder-count="1"><sc-if value="{{g.code}}" hint-placeholder-val="{{false}}"><code>{{g.t}}</code></sc-if><sc-if value="{{g.plain}}" hint-placeholder-val="{{true}}">{{g.t}}</sc-if></sc-for></p></div></sc-if>
@@ -1151,12 +1187,54 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
         <button class="abtn go" onClick="{{qd.openDlg}}" aria-haspopup="dialog" ref="{{qd.answerRef}}">Answer</button>
       </div></section></sc-if>
       <span class="prop pet {{petCls}}" onClick="{{petPoke}}" aria-hidden="true"></span>
+      <sc-if value="{{anyOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeAll}}" aria-label="Close menu"></button></sc-if>
       <div class="card">
+        <sc-if value="{{isMax}}" hint-placeholder-val="{{false}}"><span class="maxstamp" aria-hidden="true">MAX EFFORT</span></sc-if>
         <div class="ed">
           <label class="sr" for="hta">Write to {{agentName}}</label>
-          <textarea id="hta" class="ta" rows="2" placeholder="{{placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}"></textarea>
+          <textarea id="hta" class="ta" rows="2" placeholder="{{placeholder}}" ref="{{taRef}}" onInput="{{onInput}}" onKeyDown="{{onKeyDown}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}"></textarea>
         </div>
-        <div class="bar"><sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
+        <div class="bar">
+          <div class="tools">
+            <span class="tool">
+              <button class="mbtn" onClick="{{toggleModel}}" aria-expanded="{{modelOpen}}" aria-haspopup="dialog" aria-label="Model and effort">
+                <span>{{modelName}}</span>
+                <span class="ebars" aria-hidden="true"><sc-for list="{{ebars}}" as="b" hint-placeholder-count="5"><i class="{{b.cls}}" style="height: {{b.h}}"></i></sc-for></span>
+              </button>
+              <sc-if value="{{modelOpen}}" hint-placeholder-val="{{false}}">
+                <div class="pop" role="dialog" aria-label="Model and effort">
+                  <div class="pop-h"><span>Model</span></div>
+                  <sc-for list="{{models}}" as="mo" hint-placeholder-count="4">
+                    <button class="mrow {{mo.cls}}" onClick="{{mo.pick}}" aria-pressed="{{mo.sel}}"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span><span>{{mo.name}}</span><span class="mdesc">{{mo.desc}} · {{mo.defLabel}}</span></button>
+                  </sc-for>
+                  <div class="pop-h" style="margin-top: 12px"><span>Effort</span><span class="val">{{effortLabel}} <span class="mode">· {{effortMode}}</span></span></div>
+                  <div class="efs" role="group" aria-label="Effort level">
+                    <sc-for list="{{efforts}}" as="e" hint-placeholder-count="5"><button class="ef {{e.cls}}" onClick="{{e.pick}}" aria-pressed="{{e.on}}">{{e.t}}</button></sc-for>
+                  </div>
+                  <div class="adapt">
+                    <span>Thinking is adaptive: {{modelName}} decides when and how deeply to think. Effort sets the ceiling.</span>
+                    <sc-if value="{{custom}}" hint-placeholder-val="{{false}}"><button class="lnk" onClick="{{resetEffort}}">use default</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </span>
+
+            <span class="tool gtool"><button class="gauge" onClick="{{toggleCtx}}" aria-expanded="{{ctxOpen}}" aria-haspopup="dialog" aria-label="{{ctxAria}}">
+              <svg class="g" viewBox="0 0 40 40" aria-hidden="true">
+                <circle class="g-track" cx="20" cy="20" r="14" transform="rotate(135 20 20)"></circle>
+                <circle class="g-fill {{gaugeCls}}" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{arcDash}}"></circle>
+                <circle class="g-draft" cx="20" cy="20" r="14" transform="rotate(135 20 20)" style="stroke-dasharray: {{draftDash}}; stroke-dashoffset: {{draftOff}}"></circle>
+                <text x="6" y="36">E</text><text x="29" y="36">F</text>
+                <line class="needle" x1="20" y1="20" x2="30.5" y2="20" style="transform: rotate({{needleDeg}}deg)"></line>
+                <circle class="hub" cx="20" cy="20" r="2.2"></circle>
+              </svg>
+              <span>{{pct}}%</span></button><sc-if value="{{ctxOpen}}" hint-placeholder-val="{{false}}"><div class="pop" role="dialog" aria-label="Context window"><div class="pop-h"><span>Context window</span><span class="val">{{pct}}% <span class="mode">left</span></span></div><div class="ctxbar" aria-hidden="true"><sc-for list="{{ctxParts}}" as="p" hint-placeholder-count="4"><i style="width: {{p.w}}; background-color: {{p.c}}"></i></sc-for></div><sc-for list="{{ctxRows}}" as="p" hint-placeholder-count="5"><div class="ctxrow"><i class="sq" style="background-color: {{p.c}}" aria-hidden="true"></i><span>{{p.label}}</span><span class="v">{{p.val}}</span></div></sc-for><div class="adapt"><span>{{ctxNote}}</span></div></div></sc-if></span>
+
+            <button class="stampbtn" role="switch" aria-checked="{{yolo}}" onClick="{{toggleYolo}}" aria-label="Yolo mode: skip permission prompts">
+              YOLO
+            </button>
+          </div>
+          <sc-if value="{{notListening}}" hint-placeholder-val="{{true}}"><span class="hint" aria-hidden="true">↵ send · ⇧↵ newline</span></sc-if><sc-if value="{{listening}}" hint-placeholder-val="{{false}}"><span class="listen" role="status"><span class="trace" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="14"><i style="height: {{b.h}}"></i></sc-for></span><span>Listening… <b>{{listenTime}}</b></span></span></sc-if><button class="mic {{micCls}}" onClick="{{toggleMic}}" aria-pressed="{{listening}}" aria-label="{{micLabel}}" title="{{micLabel}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button class="send {{sendCls}}" onClick="{{sendNow}}" aria-label="{{sendLabel}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div>
       </div>
     </div>
   </footer>
@@ -1269,6 +1347,17 @@ const VOICE = {
       toggleMic: () => this.toggleMic(), bars: on ? v.bars : [], listenTime: on ? micTime(v.t) : '' };
   }
 };
+const MODELS = [
+  { id: 'fable', name: 'Fable 5.1', desc: 'Most intelligent', def: 2 },
+  { id: 'opus', name: 'Opus 5.5', desc: 'Deep reasoning', def: 1 },
+  { id: 'sonnet', name: 'Sonnet 5.5', desc: 'Fast and capable', def: 2 },
+  { id: 'haiku', name: 'Haiku 5.5', desc: 'Instant', def: 1 }
+];
+const EFFORT = ['Low', 'Med', 'High', 'X-high', 'Max'];
+const EFFORT_FULL = ['Low', 'Medium', 'High', 'Extra high', 'Max'];
+const ARC = 65.97, CIRC = 87.96, TPC = 25, BASE = 138000;
+function kfmt(n) { return n >= 1000 ? Math.round(n / 1000) + 'k' : String(n); }
+const CTX_PARTS = [['System prompt', .14, 'var(--kind-think)'], ['Memory', .09, 'var(--amber)'], ['Tools', .22, 'var(--green)'], ['This chat', .55, 'var(--blue)']];
 // ---------- Home: one personal agent, Jarvis, and the threads you have with it. Everything here is made up. ----------
 const WSX = { primepaw: { name: 'primepaw', color: '#c8553d' }, gateway: { name: 'gateway', color: '#4a8f99' }, lighthouse: { name: 'Lighthouse Web', color: '#5b8c5a' }, orbit: { name: 'Orbit Billing', color: '#d06a8c' } };
 const STATUS = { working: { label: 'Working', cls: 'work' }, waiting: { label: 'Waiting on you', cls: 'needs' }, done: { label: 'Done', cls: 'done' }, failed: { label: 'Failed', cls: 'fail' } };
@@ -1328,13 +1417,15 @@ function titleFrom(text) {
   if (w.length > 6) { w = w.slice(0, 5); while (w.length > 2 && SMALL.includes(w[w.length - 1].toLowerCase())) w.pop(); }
   const t = w.join(' ').replace(/[,;:]+$/, ''); return t ? t.charAt(0).toUpperCase() + t.slice(1) : 'New thread';
 }
+// how full each thread's context window already is, so the gauge has somewhere to stand
+const USED = { t1: 46000, t2: 31000, t3: 12000, t4: 58000, t5: 17000, t6: 24000 };
 const JARVIS = ['j', 'help', 'sess', 'dec', 'rep', 'ask'];
 // the factories that are on, as the Factory page counts them: in flight over the cap, and what waits on you
 const FACS = [{ id: 'primepaw', name: 'PrimePaw', inflight: 3, cap: 6, waiting: 1, blocked: 1, line: 'PP-138 in Implementation · PP-129 in Code review · PP-118 waits on you' },
   { id: 'cerebro', name: 'Cerebro', inflight: 0, cap: 4, waiting: 0, blocked: 0, line: 'Nothing ready. The curator wakes on the hour.' }];
 
 class Component extends DCLogic {
-  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false };
+  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false, open: null, model: 'sonnet', effort: 2, auto: true, used: {}, draft: 0, focus: false, yolo0: false };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -1355,6 +1446,10 @@ class Component extends DCLogic {
   justMet() { return this.state.justMet || this.meetMode() === 'created'; }
   meetDefault() { return this.meetInit(this.meetMode() === 'invalid' ? { err: 'It needs a name' } : {}); }
   onCreated(a) { this.setState({ agent: a, justMet: true, cur: null }); this.say(a.name + ' is ready.'); }
+  // the composer's gauge: what the open thread has used of the context window; a new thread has only the system prompt in it
+  total() { return 200000; }
+  usedOf(id) { const u = this.state.used; return id in u ? u[id] : USED[id] || 1800; }
+  ctxCard(used, total) { const parts = CTX_PARTS.map(([label, f, c]) => ({ label, c, n: Math.round(used * f) })); return { ctxParts: parts.map((p) => ({ c: p.c, w: (p.n / total * 100).toFixed(1) + '%' })), ctxRows: [...parts.map((p) => ({ label: p.label, c: p.c, val: kfmt(p.n) })), { label: 'Free', c: 'var(--paper-2)', val: kfmt(total - used) }], ctxNote: kfmt(used) + ' of ' + kfmt(total) + ' tokens used. Near empty, the agent compacts this chat.' }; }
   setThreads(fn) { this.ts = fn(this.list()); this.setState({ threads: this.ts }); }
   patchThread(id, fn) { this.setThreads((ts) => ts.map((t) => t.id === id ? fn(t) : t)); }
   patchItem(tid, iid, patch) { this.patchThread(tid, (t) => ({ ...t, items: t.items.map((x) => x.id === iid ? { ...x, ...patch } : x) })); }
@@ -1388,23 +1483,25 @@ class Component extends DCLogic {
   send() {
     const el = this.ta; const text = el ? el.value.trim() : ''; if (!text) return;
     if (this.listening()) this.stopMic();
-    el.value = ''; this.setState({ hasText: false });
+    el.value = ''; this.setState({ hasText: false, draft: 0, open: null });
+    const spend = (id) => this.setState({ used: { ...this.state.used, [id]: this.usedOf(id) + Math.max(40, text.length * TPC) + 1500 } });
     const cur = this.curId();
     if (!cur) {
       const id = 'n' + Date.now(); const title = titleFrom(text);
-      this.setThreads((ts) => [{ id, title, time: 'now', yolo: false, items: [{ k: 'me', text }] }, ...ts]); this.setState({ cur: id, thinking: id });
+      this.setThreads((ts) => [{ id, title, time: 'now', yolo: !!this.state.yolo0, items: [{ k: 'me', text }] }, ...ts]); this.setState({ cur: id, thinking: id, yolo0: false }); spend(id);
       this.later(() => { this.setState({ thinking: null }); this.petPlay('greet', 1900); this.push(id, { k: 'j', text: 'On it. Nothing here says which workspace, and this sounds like primepaw, so I started there. Tell me if it belongs somewhere else.' },
         { k: 'sess', id: 's' + id, title, ws: 'primepaw', branch: 'feat/' + slug(title), model: 'Sonnet 5.5', status: 'working', summary: 'Reading the code and planning the change.' }); }, 1100);
       return;
     }
-    this.push(cur, { k: 'me', text }); this.setState({ thinking: cur });
+    this.push(cur, { k: 'me', text }); this.setState({ thinking: cur }); spend(cur);
     // writing to Jarvis while it waits on a question sets the question aside
     const t = this.list().find((x) => x.id === cur); const ask = t && t.items.find((x) => x.k === 'ask' && !x.status && !x.folded);
     if (ask) this.patchItem(cur, ask.id, { status: 'replied', folded: true });
     this.later(() => { this.setState({ thinking: null }); this.petPlay('greet', 1900); this.push(cur, { k: 'j', text: ask ? 'Got it, I’ll go with what you wrote instead of the question.' : 'Got it. I’ll pass that on to the sessions in this thread and tell you here when something changes.' }); }, 900);
   }
-  // Thread YOLO: off by default. Turning it on lets Jarvis answer prompts for this thread's sessions, so it answers any that are waiting.
+  // YOLO, the composer's stamp, as on a session: off by default and kept per thread. On, Jarvis answers the permission prompts of the sessions this thread started, so it answers any that are waiting.
   toggleYolo(t) {
+    if (!t) { this.setState({ yolo0: !this.state.yolo0 }); return; }
     const on = !t.yolo; this.patchThread(t.id, (x) => ({ ...x, yolo: on }));
     if (!on) return;
     t.items.filter((x) => x.k === 'sess' && x.status === 'waiting' && x.yolo).forEach((x) => {
@@ -1493,9 +1590,12 @@ class Component extends DCLogic {
   renderVals0() {
     const st = this.state; const ts = this.list(); const cur = this.curId(); const t = ts.find((x) => x.id === cur) || null;
     const waiting = ts.filter((x) => this.waitingIn(x) > 0).length; const a = this.agent(); const who = a ? a.name : 'Main agent';
+    const total = this.total(); const used = Math.min(total - 1000, this.usedOf(t ? t.id : null)); const remaining = (total - used) / total;
+    const draftFrac = Math.min(remaining * total, st.draft * TPC) / total; const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
+    const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0]; const yolo = t ? !!t.yolo : !!st.yolo0;
     const qd = this.qdFor(t); const sess = t ? t.items.filter((x) => x.k === 'sess').length : 0; const rows = this.rowsVals(ts, cur);
     return {
-      cls: 'home', sheetCls: t ? '' : 'empty',
+      cls: ['home', st.focus ? 'focus' : '', isMax ? 'max' : '', yolo ? 'yolo' : ''].join(' '), sheetCls: t ? '' : 'empty',
       nav: NAV.map((n) => ({ ...n, cls: '', cur: false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
       hasJBadge: waiting > 0, jBadge: waiting,
       petCls: this.petMood(), petPoke: () => this.petPlay('greet', 1900),
@@ -1514,12 +1614,26 @@ class Component extends DCLogic {
       isEmpty: !t && !!a, hasThread: !!t, emptyWhere: ts.length ? 'or pick up a thread on the left' : who + ' keeps every thread, so you can come back to it',
       th: t ? { title: t.title } : { title: 'New thread' },
       sessCount: sess === 0 ? 'no sessions yet' : sess === 1 ? '1 session started' : sess + ' sessions started',
-      yoloOn: !!(t && t.yolo), yoloDesc: t && t.yolo ? 'yrisk' : '', toggleYolo: () => t && this.toggleYolo(t),
+      // the composer's controls, the session's own: model and effort, the context gauge, YOLO
+      yolo, toggleYolo: () => this.toggleYolo(t), isMax,
+      anyOpen: !!st.open, closeAll: () => this.setState({ open: null }),
+      modelOpen: st.open === 'model', toggleModel: () => this.setState({ open: st.open === 'model' ? null : 'model' }),
+      ctxOpen: st.open === 'ctx', toggleCtx: () => this.setState({ open: st.open === 'ctx' ? null : 'ctx' }), ...this.ctxCard(used, total),
+      modelName: model.name,
+      models: MODELS.map((m) => ({ ...m, defLabel: EFFORT_FULL[m.def], sel: m.id === st.model, cls: m.id === st.model ? 'sel' : '', pick: () => this.setState({ model: m.id, effort: st.auto ? m.def : st.effort }) })),
+      ebars: [0, 1, 2, 3, 4].map((i) => ({ h: (4 + i * 2) + 'px', cls: i <= st.effort ? 'on' : '' })),
+      efforts: EFFORT.map((x, i) => ({ t: x, on: i === st.effort, cls: (i === st.effort ? 'on ' : '') + (i === model.def ? 'def ' : '') + (i === 4 && st.effort === 4 ? 'maxon' : ''), pick: () => this.setState({ effort: i, auto: false }) })),
+      effortLabel: EFFORT_FULL[st.effort], effortMode: st.auto ? 'model default' : 'custom', custom: !st.auto,
+      resetEffort: () => this.setState({ effort: model.def, auto: true }),
+      gaugeCls, pct: Math.round(remaining * 100), needleDeg: Math.round(135 + 270 * remaining),
+      arcDash: (ARC * remaining).toFixed(2) + ' ' + CIRC, draftDash: (ARC * draftFrac).toFixed(2) + ' ' + CIRC, draftOff: (-(ARC * Math.max(0, remaining - draftFrac))).toFixed(2),
+      ctxAria: 'Context window: ' + Math.round(remaining * 100) + ' percent left, ' + kfmt(total - used) + ' of ' + kfmt(total) + ' tokens',
+      onFocus: () => this.setState({ focus: true }), onBlur: () => this.setState({ focus: false }),
       items: t ? this.itemsVals(t) : [], thinking: !!t && st.thinking === t.id,
-      qd, placeholder: qd.show ? 'Or just write your answer…' : 'Write to ' + who + '…',
+      qd, placeholder: qd.show ? 'Or just write your answer…' : isMax ? 'Max effort. Give it the hard one…' : yolo ? 'Write to ' + who + ' · no permission prompts' : 'Write to ' + who + '…',
       taRef: (el) => { this.ta = el; },
-      onInput: (e) => { const v = !!e.target.value.trim(); if (v !== st.hasText) this.setState({ hasText: v }); },
-      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape' && this.listening()) this.stopMic(); },
+      onInput: (e) => { this.setState({ hasText: !!e.target.value.trim(), draft: e.target.value.length }); },
+      onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } if (e.key === 'Escape') { if (this.listening()) this.stopMic(); else if (st.open) this.setState({ open: null }); } },
       ...this.voiceVals(), sendCls: st.hasText ? 'ready' : '', sendLabel: t ? 'Send to ' + who : 'Start the thread', sendNow: () => this.send(),
       hasToast: !!st.toast, toast: st.toast || '', toastUndo: !!(st.toastUndo && st.archived), undo: () => this.undo()
     };
