@@ -29,6 +29,11 @@ button{font:inherit}
 /* ---------- rail: a kraft strip with sticker icons ---------- */
 .board{position:relative;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:10px;box-sizing:border-box;box-shadow:2px 3px 0 var(--board-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2)}
 .railwrap{width:72px;flex:none;margin:0;position:sticky;top:3px;height:calc(100vh - 6px);align-self:flex-start;z-index:3}
+/* the rail is no board of its own: its tiles sit straight on the desk */
+.railwrap.board{width:50px;background:none;border-color:transparent;box-shadow:none}
+.railwrap.board .rb,.railwrap.board .pp-rb{width:50px}
+/* the tiles' shadows and badges reach past the narrow rail, so it does not clip them (all the tiles fit a 900px board without scrolling) */
+.railwrap.board .rail,.railwrap.board .pp-rail{overflow:visible}
 .rail{height:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 0 8px;box-sizing:border-box;overflow:auto;scrollbar-width:none;border-radius:inherit}
 .rail::-webkit-scrollbar{display:none}
 .logo{width:54px;height:54px;display:grid;place-items:center;color:var(--red);margin-bottom:4px;transform:rotate(-8deg);filter:drop-shadow(1.5px 0 0 var(--stk)) drop-shadow(-1.5px 0 0 var(--stk)) drop-shadow(0 1.5px 0 var(--stk)) drop-shadow(0 -1.5px 0 var(--stk)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
@@ -1505,6 +1510,18 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 .obar.tkbar i{height:9px}
 /* bd-also: the composer is the session's, Jarvis peeking over it; on a view with no session the plinth carries Jarvis instead */
 .page:has(.fchat .foot .prop.pet) .buddy{display:none}
+/* Kanban beside the board of tasks: the board's name, its count and sync, Sync with Jira and New card over the cork, which scrolls in the sheet */
+.tkmain .fpcontent.kbmode{min-height:0;overflow:auto}
+.kbhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.kb-t{font-family:var(--hand);font-size:26px;font-weight:600;line-height:1}
+.kb-s{margin-right:auto;font-family:var(--hand);font-size:16px;color:var(--mute)}
+.kbhead .abtn{height:30px;padding:0 14px;font-size:13px}
+/* while a note is dragged off the cork, two drop places open on the board of tasks */
+.tkdrop{display:flex;align-items:center;gap:10px;margin:4px 0 6px;padding:7px 12px 7px 8px;background-color:var(--paper-2);background-image:var(--face),var(--pulp);border:1.5px dashed color-mix(in srgb,var(--ink) 45%,transparent);border-radius:6px;animation:bdin .2s steps(2,jump-end) both}
+.tkdrop.is-over{border-style:solid;border-color:var(--ink);background-color:var(--marker);transform:translateY(-1px)}
+.tkdrop .kdrop-i{width:32px;height:32px}
+.tkdrop .kdrop-i svg{width:18px;height:18px}
+.tkdrop *{pointer-events:none}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
 .buddy{position:fixed;bottom:12px;z-index:25;width:132px;display:flex;flex-direction:column;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -1572,7 +1589,7 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 <div class="fpmain {{mainCls}}">
   <div class="fpviews fpbar"><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{facClose}}" aria-label="Close menu"></button></sc-if><span class="fsel-w fpick-w"><button class="fsel fpick" onClick="{{facMenu}}" aria-haspopup="menu" aria-expanded="{{facOpen}}" title="Switch factory, or go back to all factories"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg><b>{{fac.name}}</b><i class="fpick-dot {{stCls}}" aria-label="{{stLabel}}"></i><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu fpick-m" role="menu" aria-label="Factories"><sc-for list="{{facs}}" as="f" hint-placeholder-count="3"><button role="menuitem" class="{{f.cls}}" onClick="{{f.pick}}" aria-current="{{f.cur}}"><i class="fpick-dot {{f.stCls}}" aria-hidden="true"></i><span class="fpick-n">{{f.name}}</span><span class="fpick-s">{{f.stLabel}}</span><sc-if value="{{f.here}}" hint-placeholder-val="{{false}}"><svg class="fpick-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button></sc-for><span class="fpick-sep" role="separator"></span><button role="menuitem" class="fpick-all" onClick="{{facAll}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>All factories</button></div></sc-if></span><span class="fpick-bar" aria-hidden="true"></span><div class="fptabs" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="4"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div><span class="fpon"><button class="abtn fpss {{ssCls}}" onClick="{{toggleOn}}" title="{{ssTitle}}"><sc-if value="{{facOn}}" hint-placeholder-val="{{true}}"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1.5"></rect></svg></sc-if><sc-if value="{{facOff}}" hint-placeholder-val="{{false}}"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg></sc-if>{{ssLabel}}</button></span><button class="abtn vbtn fpset fpfloor {{flCls}}" aria-pressed="{{flOn}}" onClick="{{flPick}}" aria-label="Factory view" title="Factory view"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{flIcon}}"></path></svg></button><button class="abtn vbtn fpset {{setCls}}" aria-pressed="{{setOn}}" onClick="{{setPick}}" aria-label="Factory settings" title="Factory settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{setIcon}}"></path></svg></button></div>
   <div class="fprow">
-  <sc-if value="{{isTasks}}" hint-placeholder-val="{{true}}"><aside class="panel board tpanel tkpanel" aria-label="Factory tasks">
+  <sc-if value="{{hasSide}}" hint-placeholder-val="{{true}}"><aside class="panel board tpanel tkpanel" aria-label="Factory tasks">
     <div class="ptop">
       <div class="jhead"><span class="tfac tkfac" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><div><b>Factory</b><small>{{tkSub}}</small></div></div>
       <div class="tkslots" role="img" aria-label="{{tkSlotsAria}}"><span class="tkslots-l"><b>{{tkInflight}}</b> of {{tkCap}} slots</span><span class="obar tkbar" aria-hidden="true"><sc-for list="{{tkSlots}}" as="s" hint-placeholder-count="6"><i class="{{s.cls}}"></i></sc-for></span></div>
@@ -1581,11 +1598,13 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
     </div>
     <div class="list">
         <div class="tklist">
+          <sc-if value="{{kDragging}}" hint-placeholder-val="{{false}}"><div class="tkdrop {{dropPlanCls}}" onDragOver="{{dropPlan.over}}" onDragEnter="{{dropPlan.enter}}" onDragLeave="{{dropPlan.leave}}" onDrop="{{dropPlan.drop}}" aria-label="To planning"><span class="kdrop-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v14H5zM8.5 10h7M8.5 14h4.5"></path></svg></span><span class="kdrop-t"><b>To planning</b><small>drop it here to plan it first</small></span></div></sc-if>
           <sc-if value="{{showAct}}" hint-placeholder-val="{{true}}">
           <sc-for list="{{tks}}" as="g" hint-placeholder-count="6"><div class="tk tkc {{g.cls}}" role="listitem"><button class="rowhit" onClick="{{g.pick}}" aria-current="{{g.cur}}" aria-label="{{g.title}}"></button><div class="tk1"><span class="tkey">{{g.key}}</span><span class="tt">{{g.t}}</span><sc-if value="{{g.busy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{g.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">1</span></sc-if><sc-if value="{{g.isBlocked}}" hint-placeholder-val="{{false}}"><span class="sticker blocked">Blocked</span></sc-if></div><div class="tk2"><span class="tknow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.nowIcon}}"></path></svg>{{g.now}}</span><sc-if value="{{g.hasWord}}" hint-placeholder-val="{{false}}"><span class="tkw">{{g.word}}</span></sc-if><span class="tksteps" role="group" aria-label="{{g.stepsAria}}"><sc-for list="{{g.steps}}" as="s" hint-placeholder-count="6"><sc-if value="{{s.can}}" hint-placeholder-val="{{false}}"><button class="tkst {{s.cls}}" onClick="{{s.pick}}" title="{{s.title}}" aria-label="{{s.aria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.d}}"></path></svg></button></sc-if><sc-if value="{{s.cant}}" hint-placeholder-val="{{true}}"><span class="tkst {{s.cls}}" title="{{s.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.d}}"></path></svg></span></sc-if></sc-for></span></div>
           </div></sc-for>
           </sc-if>
           <sc-if value="{{showQ}}" hint-placeholder-val="{{true}}">
+          <sc-if value="{{kDragging}}" hint-placeholder-val="{{false}}"><div class="tkdrop {{dropFacCls}}" onDragOver="{{dropFac.over}}" onDragEnter="{{dropFac.enter}}" onDragLeave="{{dropFac.leave}}" onDrop="{{dropFac.drop}}" aria-label="Into the factory"><span class="kdrop-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><span class="kdrop-t"><b>Into the factory</b><small>drop it here to queue it, last in line</small></span></div></sc-if>
           <div class="hfacs-h tksec"><b>Queue</b><small>{{qSub}}</small></div>
           <div class="tkq-l" role="list" aria-label="Queue, in the order the factory takes them">
             <sc-for list="{{qs}}" as="g" hint-placeholder-count="4"><div class="tk tkq {{g.cls}}" role="listitem" draggable="true" onDragStart="{{g.dragstart}}" onDragEnd="{{g.dragend}}" onDragOver="{{g.over}}" onDragEnter="{{g.enter}}" onDrop="{{g.drop}}"><button class="tkgrip" ref="{{g.gripRef}}" onKeyDown="{{g.onKey}}" aria-label="{{g.gripAria}}" title="Drag to reorder, or press the up and down arrows"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.7"></circle><circle cx="15" cy="6" r="1.7"></circle><circle cx="9" cy="12" r="1.7"></circle><circle cx="15" cy="12" r="1.7"></circle><circle cx="9" cy="18" r="1.7"></circle><circle cx="15" cy="18" r="1.7"></circle></svg></button><button class="tkh" onClick="{{g.pick}}" aria-current="{{g.cur}}" title="{{g.title}}"><span class="tkn">{{g.n}}</span><span class="tkey">{{g.id}}</span><span class="tt">{{g.t}}</span></button></div></sc-for>
@@ -1866,11 +1885,7 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
   </sc-if>
 
   <sc-if value="{{isKanban}}" hint-placeholder-val="{{false}}">
-    <div class="kdrops">
-      <div class="kdrop {{dropFacCls}}" onDragOver="{{dropFac.over}}" onDragEnter="{{dropFac.enter}}" onDragLeave="{{dropFac.leave}}" onDrop="{{dropFac.drop}}" aria-label="Into the factory"><span class="kdrop-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><span class="kdrop-t"><b>Into the factory</b><small>{{dropFacText}}</small></span></div>
-      <div class="kdrop {{dropPlanCls}}" onDragOver="{{dropPlan.over}}" onDragEnter="{{dropPlan.enter}}" onDragLeave="{{dropPlan.leave}}" onDrop="{{dropPlan.drop}}" aria-label="To planning"><span class="kdrop-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v14H5zM8.5 10h7M8.5 14h4.5"></path></svg></span><span class="kdrop-t"><b>To planning</b><small>{{dropPlanText}}</small></span></div>
-      <span class="kdrop-hint">{{dragHint}}</span>
-    </div>
+    <div class="kbhead"><b class="kb-t">{{fac.board}}</b><span class="kb-s">{{kbSub}}</span><button class="abtn" onClick="{{kbSync}}">Sync with Jira</button><button class="abtn go" onClick="{{kbNew}}">New card</button></div>
     <section class="cork kcork" aria-label="Board">
       <div class="colsview">
         <sc-for list="{{cols}}" as="c" hint-placeholder-count="5">
@@ -2328,8 +2343,8 @@ class Component extends DCLogic {
     const list = this.tkList(); const c = this.state.curTk; let t = c && [...list, ...this.doneList()].find((x) => x.id === c.id); if (!t) t = list[0] || null; if (!t) return { t: null, s: null };
     const n = this.sessList(t.id).length; const i = c && c.id === t.id && c.i != null && c.i < n ? c.i : n - 1; return { t, s: i >= 0 ? this.sessOf(t, i) : null };
   }
-  tasksVals() {
-    const st = this.state; const cur = this.curTk(); const f = st.tkFilter; const isCur = (t) => !!cur.t && cur.t.id === t.id;
+  tasksVals(onTasks = true) {
+    const st = this.state; const cur = this.curTk(); const f = st.tkFilter; const isCur = (t) => onTasks && !!cur.t && cur.t.id === t.id;
     const q = st.tkFind.trim().toLowerCase(); const hit = (t) => !q || (t.id + ' ' + t.title + ' ' + this.sessList(t.id).map((x) => x[1]).join(' ')).toLowerCase().includes(q);
     const active = this.list().filter((t) => TK_ACTIVE.includes(t.st)).sort((a, b) => TK_ACTIVE.indexOf(a.st) - TK_ACTIVE.indexOf(b.st));
     const F = { all: () => true, needs: (t) => t.st === 'waiting' || t.st === 'blocked', work: (t) => t.st === 'running' || t.st === 'planning' };
@@ -2338,7 +2353,7 @@ class Component extends DCLogic {
     const queue = this.queue(); const qShown = showQ ? queue.filter(hit) : []; const done = this.doneList(); const dHit = showD ? done.filter(hit) : []; const dShown = st.dAll || q || f === 'done' ? dHit : dHit.slice(0, 5);
     const liveOf = (t) => t.st === 'waiting' ? 'attn' : (t.st === 'running' || t.st === 'planning') ? 'busy' : '';
     const withPlan = !!cur.t && (cur.t.st === 'toplan' || (cur.t.st === 'planning' && (!cur.s || (cur.s.last && cur.s.stage === 'planning'))));
-    const pick = (t) => () => this.setState({ curTk: { id: t.id } });
+    const pick = (t) => () => this.setState({ curTk: { id: t.id }, view: 'tasks' });
     return {
       ...(() => { const c = this.cfg(); const run = this.byState('running').length; const fl = run + this.waitList().length; const free = Math.max(0, c.cap - fl);
         return { tkInflight: fl, tkCap: c.cap, tkSlots: Array.from({ length: c.cap }, (_, i) => ({ cls: i < run ? 'run' : i < fl ? 'wait' : '' })),
@@ -2367,7 +2382,7 @@ class Component extends DCLogic {
         const steps = STEPS.map(([id], i) => ({ id, i })).filter((x) => x.i === at || !cfg[x.id] || cfg[x.id].on).map(({ id, i }) => {
           const si = ss.findIndex((x) => x[0] === id); const state = i < at || (i === at && parked) ? 'done' : i > at ? 'todo' : fresh ? 'next' : 'now'; const open = on_ && !!cur.s && cur.s.i === si;
           const say = state === 'done' ? 'done' : state === 'now' ? (red ? (t.st === 'blocked' ? 'Blocked here' : 'waiting on you') : 'now') : state === 'next' ? 'next' : 'to come';
-          return { d: ico(id), cls: state + (state === 'now' && red ? ' attn' : '') + (open ? ' open' : ''), title: lab(id) + ' · ' + say, can: si >= 0, cant: si < 0, aria: 'Open the ' + lab(id) + ' session of ' + t.id + ', ' + say, pick: () => this.setState({ curTk: { id: t.id, i: si } }) }; });
+          return { d: ico(id), cls: state + (state === 'now' && red ? ' attn' : '') + (open ? ' open' : ''), title: lab(id) + ' · ' + say, can: si >= 0, cant: si < 0, aria: 'Open the ' + lab(id) + ' session of ' + t.id + ', ' + say, pick: () => this.setState({ curTk: { id: t.id, i: si }, view: 'tasks' }) }; });
         return { key: t.id, t: t.title, cls: 'solo ' + (on_ ? 'cur' : ''), cur: on_ ? 'page' : false, now: lab(nowId), nowIcon: ico(nowId), steps, stepsAria: 'Steps of ' + t.id + ', now in ' + lab(nowId),
           busy: live === 'busy', hasAttn: live === 'attn', isBlocked: t.st === 'blocked', hasWord: !n || parked, word: TK_WORD[t.st] || ST[t.st][0].toLowerCase(),
           title: t.id + ' · ' + t.title + ' · ' + (fresh ? 'no session yet' : 'now in ' + lab(nowId)) + ' · ' + ST[t.st][0], pick: pick(t) };
@@ -2391,7 +2406,8 @@ class Component extends DCLogic {
       dropFac: dz('fac', (t) => { if (t.st === 'out' || t.st === 'later' || t.st === 'toplan') { this.patch(t.id, { st: 'queued', step: 'queued', col: 'todo', when: 'now', line: 'Queued by you, last in line.' }); this.say(t.id + ' is queued for the factory'); } else this.say(t.id + ' is already in the factory'); }),
       dropPlan: dz('plan', (t) => { if (t.st === 'planning') this.say(t.id + ' is being planned already'); else { this.patch(t.id, { st: 'toplan', step: 'planning', col: c.steps.planning.col, when: 'now', line: 'Sent to planning by you.' }); this.say(t.id + ' goes to planning'); } }),
       dropFacCls: st.over === 'fac' ? 'is-over' : '', dropPlanCls: st.over === 'plan' ? 'is-over' : '', dropFacText: 'drop a ticket here to queue it', dropPlanText: 'or here, to plan it first',
-      dragHint: dragged ? 'drop ' + dragged.id + ' on a column, the factory or planning' : 'drag a note onto the factory or onto planning · ' + plural(ts.filter((t) => t.st !== 'out' && t.st !== 'merged').length, 'ticket') + ' in the factory',
+      kDragging: !!dragged, kbSub: plural(ts.filter((t) => t.st !== 'out').length, 'card') + ' · synced 4 min ago' + (dragged ? ' · drop ' + dragged.id + ' on a column, or on the board at the left to queue or plan it' : ' · drag a note onto the board at the left to queue it or plan it'),
+      kbSync: () => this.say('Synced with Jira: nothing new on ' + c.board), kbNew: () => this.say('Opens a new card on ' + c.board),
       cols: COLS.map(([col, name]) => { const list = ts.filter((t) => t.col === col && (t.st !== 'merged' || t.onBoard));
         return { name, n: list.length, cls: st.over === col ? 'is-over' : '', empty: !list.length, notes: list.map(note), ...dz(col, (t) => { if (t.col === col) return; const p = { col };
           if (col === 'backlog' && (t.st === 'queued' || t.st === 'toplan' || t.st === 'later')) Object.assign(p, { st: 'out', step: '', line: 'Taken out of the factory by you.' });
@@ -2441,8 +2457,8 @@ class Component extends DCLogic {
       views: VIEWS.map(([id, label, icon]) => ({ label, icon, on: view === id, cls: view === id ? 'on' : '', pick: () => this.setState({ view: id, menu: null, drag: null, over: null }) })),
       // the overview sits behind a button in the head: pressed, it latches and the row of views lets go; pressed again, it gives the tasks back
       ovOn: ov, ovCls: ov ? 'on' : '', toggleOv: () => this.setState({ view: ov ? 'tasks' : 'overview', sub: 'none', menu: null, drag: null, over: null }),
-      contentCls: view === 'tasks' ? 'tkmode' : '', sheetCls: view === 'tasks' ? 'tksheet' : '', mainCls: view === 'tasks' ? 'tkmain' : '', isTasks: view === 'tasks', isOverview: ov, isFloor: view === 'floor', isKanban: view === 'kanban', isSettings: view === 'settings', notSettings: view !== 'settings',
-      ...(view === 'tasks' ? this.tasksVals() : {}), ...(ov ? this.overviewVals() : {}), ...(view === 'floor' ? this.floorVals() : {}), ...(view === 'kanban' ? this.kanbanVals() : {}), ...(view === 'settings' ? this.settingsVals() : {}),
+      contentCls: view === 'tasks' ? 'tkmode' : view === 'kanban' ? 'kbmode' : '', sheetCls: view === 'tasks' ? 'tksheet' : '', mainCls: view === 'tasks' || view === 'kanban' ? 'tkmain' : '', isTasks: view === 'tasks', isOverview: ov, isFloor: view === 'floor', isKanban: view === 'kanban', isSettings: view === 'settings', notSettings: view !== 'settings',
+      ...(view === 'tasks' ? this.tasksVals() : view === 'kanban' ? this.tasksVals(false) : {}), hasSide: view === 'tasks' || view === 'kanban', ...(ov ? this.overviewVals() : {}), ...(view === 'floor' ? this.floorVals() : {}), ...(view === 'kanban' ? this.kanbanVals() : {}), ...(view === 'settings' ? this.settingsVals() : {}),
       ...this.composerVals(view === 'tasks' ? this.curTk().t : t),
       taRef: (el) => { this.ta = el; }, onInput: (e) => { const v = !!e.target.value.trim(); this.setState({ hasText: v, draft: e.target.value.length }); },
       onKeyDown: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(t); } if (e.key === 'Escape') { if (this.listening()) this.stopMic(); else if (st.pop) this.setState({ pop: null }); } }, sendCls: st.hasText ? 'ready' : '', sendNow: () => this.send(t),

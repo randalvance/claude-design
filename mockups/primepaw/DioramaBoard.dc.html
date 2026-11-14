@@ -207,6 +207,11 @@ button,input,textarea{font:inherit}
 .page.night::after{background:#000;mix-blend-mode:screen;opacity:.14}
 .board{position:relative;background:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid color-mix(in srgb,var(--board-2) 60%,var(--board));border-radius:10px;box-sizing:border-box;box-shadow:2px 3px 0 var(--board-2),5px 8px 10px var(--amb),10px 18px 26px -8px var(--amb-2)}
 .railwrap{width:72px;flex:none;margin:0;position:sticky;top:3px;height:calc(100vh - 6px);align-self:flex-start;z-index:3}
+/* the rail is no board of its own: its tiles sit straight on the desk */
+.railwrap.board{width:50px;background:none;border-color:transparent;box-shadow:none}
+.railwrap.board .rb,.railwrap.board .pp-rb{width:50px}
+/* the tiles' shadows and badges reach past the narrow rail, so it does not clip them (all the tiles fit a 900px board without scrolling) */
+.railwrap.board .rail,.railwrap.board .pp-rail{overflow:visible}
 .pp-rail{position:static;width:auto;height:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 0 8px;box-sizing:border-box;overflow:auto;scrollbar-width:none;border:0;border-radius:inherit;background:none;background-color:transparent;z-index:auto}
 .pp-rail::-webkit-scrollbar{display:none}
 .pp-logo{width:54px;height:54px;display:grid;place-items:center;color:var(--red);margin-bottom:4px;transform:rotate(-8deg);filter:drop-shadow(1.5px 0 0 var(--stk)) drop-shadow(-1.5px 0 0 var(--stk)) drop-shadow(0 1.5px 0 var(--stk)) drop-shadow(0 -1.5px 0 var(--stk)) drop-shadow(0 0 .6px rgba(0,0,0,.4))}
