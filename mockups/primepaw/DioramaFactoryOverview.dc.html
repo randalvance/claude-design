@@ -1455,6 +1455,29 @@ button.tkst{pointer-events:auto;cursor:pointer}
 button.tkst.done:hover{background-color:color-mix(in srgb,var(--ink) 12%,transparent)}
 button.tkst.done.open{box-shadow:inset 0 0 0 1.5px var(--ink)}
 button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+/* the factory selector opens the bar, before the views: this factory's name and state; its menu lists every factory and goes back to all of them */
+.fpbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.fptabs{display:flex;flex-wrap:wrap;gap:8px}
+.fpick-w{flex:none}
+.fpick{height:30px;padding:0 8px 0 10px;gap:7px}
+.fpick .ic{width:15px;height:15px;flex:none}
+.fpick b{font-family:var(--hand);font-size:17px;font-weight:600;line-height:1}
+.fpick-dot{flex:none;width:8px;height:8px;border-radius:50%;background-color:var(--mute);box-sizing:border-box}
+.fpick-dot.run{background-color:var(--st-green)}
+.fpick-dot.paused{background-color:var(--st-amber)}
+.fpick-dot.off{background-color:transparent;border:1.5px solid var(--mute)}
+.fpick-bar{flex:none;width:1.5px;height:20px;margin:0 2px;background:color-mix(in srgb,var(--ink) 22%,transparent);border-radius:1px}
+.fpick-w .rmenu.fpick-m{min-width:210px}
+.fpick-m button{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:32px;padding:6px 12px;font-size:12.5px;font-weight:700;color:var(--ink)}
+.fpick-m button:hover{background-color:var(--hover)}
+.fpick-m button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.fpick-n{flex:1;min-width:0}
+.fpick-s{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--mute)}
+.fpick-ok{width:13px;height:13px;flex:none}
+.fpick-sep{display:block;height:1px;margin:5px 10px;background:var(--line)}
+.fpick-all .ic{width:15px;height:15px;flex:none}
+.fpbar>.scrim{z-index:40}
+.fpick-w .rmenu{z-index:42}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
 .buddy{position:fixed;bottom:12px;z-index:25;width:132px;display:flex;flex-direction:column;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -1520,7 +1543,7 @@ button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
   </nav></div>
 
 <div class="fpmain {{mainCls}}">
-  <div class="fpviews fpbar" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="4"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div>
+  <div class="fpviews fpbar"><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{facClose}}" aria-label="Close menu"></button></sc-if><span class="fsel-w fpick-w"><button class="fsel fpick" onClick="{{facMenu}}" aria-haspopup="menu" aria-expanded="{{facOpen}}" title="Switch factory, or go back to all factories"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg><b>{{fac.name}}</b><i class="fpick-dot {{stCls}}" aria-label="{{stLabel}}"></i><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{facOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu fpick-m" role="menu" aria-label="Factories"><sc-for list="{{facs}}" as="f" hint-placeholder-count="3"><button role="menuitem" class="{{f.cls}}" onClick="{{f.pick}}" aria-current="{{f.cur}}"><i class="fpick-dot {{f.stCls}}" aria-hidden="true"></i><span class="fpick-n">{{f.name}}</span><span class="fpick-s">{{f.stLabel}}</span><sc-if value="{{f.here}}" hint-placeholder-val="{{false}}"><svg class="fpick-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button></sc-for><span class="fpick-sep" role="separator"></span><button role="menuitem" class="fpick-all" onClick="{{facAll}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>All factories</button></div></sc-if></span><span class="fpick-bar" aria-hidden="true"></span><div class="fptabs" role="tablist" aria-label="Views"><sc-for list="{{views}}" as="v" hint-placeholder-count="4"><button class="abtn vbtn {{v.cls}}" role="tab" aria-selected="{{v.on}}" onClick="{{v.pick}}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{v.icon}}"></path></svg>{{v.label}}</button></sc-for></div></div>
   <div class="fprow">
   <sc-if value="{{isTasks}}" hint-placeholder-val="{{true}}"><aside class="panel board tpanel tkpanel" aria-label="Factory tasks">
     <div class="ptop">
@@ -1820,6 +1843,8 @@ const STEPS = [
 const STEP = Object.fromEntries(STEPS.map((s) => [s[0], { id: s[0], label: s[1], icon: s[2] }]));
 const ICONS = { folder: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', factory: 'M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1', kanban: 'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z',
   gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z' };
+// the factories the selector lists, as the Factory list has them; this page is PrimePaw's
+const FACS = [['primepaw', 'PrimePaw', ['Running', 'run']], ['cerebro', 'Cerebro', ['Idle', 'idle']], ['docs', 'Docs', ['Off', 'off']]];
 const VIEWS = [['tasks', 'Tasks', ICONS.folder], ['floor', 'Factory view', ICONS.factory], ['kanban', 'Kanban view', ICONS.kanban], ['settings', 'Settings', ICONS.gear]];
 const AGENTS = { curator: 'Shepherd', implementer: 'Implementer', issue: 'Issue creator', reviewer: 'Reviewer', triage: 'Triage', release: 'Release', support: 'Support', planner: 'Planner' };
 const AGENT_IDS = Object.keys(AGENTS);
@@ -2203,7 +2228,11 @@ class Component extends DCLogic {
     const ov = view === 'overview';
     return {
       cls: 'facpage', nav: NAV.map((n) => ({ ...n, cls: n.id === 'factory' ? 'is-on' : '', cur: n.id === 'factory' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
-      fac: { name: c.name, board: c.board }, stLabel: state[0], stCls: state[1], facOn: st.on, toggleOn: () => { this.setState({ on: !st.on }); this.say(st.on ? c.name + ' is off: nothing new starts, what is in flight finishes its step' : c.name + ' is on'); },
+      fac: { name: c.name, board: c.board }, stLabel: state[0], stCls: state[1],
+      facOpen: st.menu === 'fac', facMenu: () => this.setState({ menu: st.menu === 'fac' ? null : 'fac' }), facClose: () => this.setState({ menu: null }),
+      facAll: () => { this.setState({ menu: null }); this.say('Opens Factory, the list of every factory'); },
+      facs: FACS.map(([id, name, s], i) => { const here = i === 0; const s_ = here ? state : s;
+        return { name: here ? c.name : name, stLabel: s_[0], stCls: s_[1], here, cur: here ? 'page' : false, cls: here ? 'on' : '', pick: () => { this.setState({ menu: null }); if (!here) this.say('Opens ' + name + '’s factory page'); } }; }), facOn: st.on, toggleOn: () => { this.setState({ on: !st.on }); this.say(st.on ? c.name + ' is off: nothing new starts, what is in flight finishes its step' : c.name + ' is on'); },
       metaLine: 'curator ' + CURATORS.find((x) => x[0] === c.curator)[1] + ' · woke at 9:35, next on the hour · ' + inflight + ' of ' + c.cap + ' in flight', openBoard: () => this.say('Opens the board ' + c.board),
       views: VIEWS.map(([id, label, icon]) => ({ label, icon, on: view === id, cls: view === id ? 'on' : '', pick: () => this.setState({ view: id, menu: null, drag: null, over: null }) })),
       // the overview sits behind a button in the head: pressed, it latches and the row of views lets go; pressed again, it gives the tasks back
