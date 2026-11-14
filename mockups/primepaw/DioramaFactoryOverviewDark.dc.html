@@ -1422,30 +1422,39 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .tkh:focus-visible{outline:2px solid var(--blue);outline-offset:1px;border-radius:3px}
 .tkh .tkey{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:color-mix(in srgb,var(--ink) 78%,transparent)}
 .tkh .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tkh .pin,.fs-who .pin{width:16px;height:16px;flex:none}
-.tkh .nb,.fsrow .nb{flex:none;transform:rotate(-8deg);width:16px;height:16px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s)}
-.tkh .sticker{flex:none;font-size:10px;padding:1px 7px}
-.tkw,.tkh .tcnt{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--ink)}
-.tkh .tchev{width:12px;height:12px;flex:none;transition:transform .2s var(--ease)}
-.tk.closed .tchev{transform:rotate(-90deg)}
-.tkb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .26s var(--ease)}
-.tk.closed .tkb{grid-template-rows:0fr}
-.tki{min-height:0;overflow:hidden}
-.tkrows{display:flex;flex-direction:column;gap:4px;padding:0 0 5px}
-.fsrow{position:relative;display:flex;align-items:center;gap:7px;min-height:34px;box-sizing:border-box;padding:5px 8px 5px 7px;background-color:var(--card);background-image:var(--face),var(--pulp);border-radius:3px;box-shadow:var(--lift-1);font-size:12.5px;font-weight:700;color:var(--ink)}
-.fsrow .rowhit{all:unset;position:absolute;inset:0;cursor:pointer;border-radius:3px}
-.fsrow>*:not(.rowhit){position:relative;pointer-events:none}
-.fsrow:hover{background-color:var(--hover)}
-.fsrow.on,.fsrow.on:hover{background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp)}
-.fsrow:has(.rowhit:focus-visible){outline:2px solid var(--blue);outline-offset:1px}
-.fs-who{width:18px;height:18px;flex:none;display:grid;place-items:center}
-.fs-who .ap{width:18px;height:18px}
-.fs-who .ap svg{width:13px;height:13px}
-.fs-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fs-d{flex:none;font-family:var(--hand);font-size:15px;color:var(--mute)}
-.fsrow.on .fs-d{color:var(--ink)}
-.page.night .tkw,.page.night .tkh .tcnt{mix-blend-mode:screen}
+.tkh .pin,.tk1 .pin{width:16px;height:16px;flex:none}
+.tkh .nb,.tk1 .nb{flex:none;transform:rotate(-8deg);width:16px;height:16px;border-radius:50%;background-color:var(--st-red);background-image:var(--gloss);color:var(--white);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:var(--sticker-s)}
+.tkh .sticker,.tk1 .sticker{flex:none;font-size:10px;padding:1px 7px}
+.tkw{flex:none;font-family:var(--hand);font-size:15px;font-weight:600;color:var(--ink)}
+.page.night .tkd .tkw{mix-blend-mode:screen}
 @media (max-width:1100px){.ocards{grid-template-columns:repeat(2,minmax(0,1fr))}.ocols,.fcols{grid-template-columns:minmax(0,1fr)}.split,.floorsplit{grid-template-columns:minmax(0,1fr)}.rooms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* a task at work is one card, not a folder: key and title, then the step it is in and the steps as a small row of icons with that one marked */
+.tkc{display:flex;flex-direction:column;gap:5px;padding:7px 9px 7px 9px;border:0;border-radius:3px;background-color:var(--card);background-image:var(--face),var(--pulp);box-shadow:var(--lift-1);font-size:12px;color:var(--ink)}
+.tkc:hover{background-color:var(--hover)}
+.tkc.cur,.tkc.cur:hover{background-color:var(--marker)}
+.tkc .rowhit{all:unset;position:absolute;inset:0;cursor:pointer;border-radius:3px}
+.tkc>*:not(.rowhit){position:relative;pointer-events:none}
+.tkc:has(.rowhit:focus-visible){outline:2px solid var(--blue);outline-offset:1px}
+.tk1{display:flex;align-items:center;gap:6px;min-height:18px;font-weight:800}
+.tk1 .tkey{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:color-mix(in srgb,var(--ink) 78%,transparent)}
+.tk1 .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tk2{display:flex;align-items:center;gap:7px;min-height:22px}
+.tknow svg{width:13px;height:13px;flex:none}
+.tknow{display:flex;align-items:center;gap:5px;flex:none;font-size:11.5px;font-weight:700;color:color-mix(in srgb,var(--ink) 80%,transparent)}
+.tk2 .tkw{flex:1;min-width:0;line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tksteps{flex:none;margin-left:auto;display:flex;align-items:center;gap:7px}
+.tkst{all:unset;box-sizing:border-box;position:relative;flex:none;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.tkst svg{width:12px;height:12px}
+.tkst+.tkst::before{content:"";position:absolute;right:100%;top:50%;width:7px;height:1.5px;margin-top:-.75px;background:color-mix(in srgb,var(--ink) 30%,transparent)}
+.tkst.done,.tkst.next{color:var(--ink)}
+.tkst.done+.tkst::before{background:var(--ink)}
+.tkst.next{border:1.5px dashed var(--ink)}
+.tkst.now{background-color:var(--blue);background-image:var(--gloss);color:var(--card);box-shadow:var(--sticker-s)}
+.tkst.now.attn{background-color:var(--st-red);color:var(--white)}
+button.tkst{pointer-events:auto;cursor:pointer}
+button.tkst.done:hover{background-color:color-mix(in srgb,var(--ink) 12%,transparent)}
+button.tkst.done.open{box-shadow:inset 0 0 0 1.5px var(--ink)}
+button.tkst:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 /* buddy: Jarvis as a companion at the lower right of the board, standing on a kraft plinth whose top edge its paws hook over, so the peeking cut
    and every mood row play as they did over the composer. Drag it left or right; a click opens a prompt card above its head; Send starts a session with Jarvis */
 .buddy{position:fixed;bottom:12px;z-index:25;width:132px;display:flex;flex-direction:column;align-items:center;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -1522,9 +1531,7 @@ button.ocard:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
     <div class="list">
         <div class="tklist">
           <sc-if value="{{showAct}}" hint-placeholder-val="{{true}}">
-          <sc-for list="{{tks}}" as="g" hint-placeholder-count="8"><div class="tk {{g.cls}}">
-            <button class="tkh" onClick="{{g.toggle}}" aria-expanded="{{g.open}}" title="{{g.title}}"><span class="tkey">{{g.key}}</span><span class="tt">{{g.t}}</span><sc-if value="{{g.showNow}}" hint-placeholder-val="{{false}}"><span class="stg" title="{{g.nowStage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.nowIcon}}"></path></svg></span></sc-if><sc-if value="{{g.nowBusy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{g.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">1</span></sc-if><sc-if value="{{g.isBlocked}}" hint-placeholder-val="{{false}}"><span class="sticker blocked">Blocked</span></sc-if><sc-if value="{{g.hasWord}}" hint-placeholder-val="{{false}}"><span class="tkw">{{g.word}}</span></sc-if><sc-if value="{{g.hasCount}}" hint-placeholder-val="{{true}}"><span class="tcnt">{{g.count}}</span><svg class="tchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 8.4c2.4 2.5 4.3 4.7 6.8 7.4 2.1-2.8 3.9-5.1 6.4-7.8"></path></svg></sc-if></button>
-            <sc-if value="{{g.hasRows}}" hint-placeholder-val="{{true}}"><div class="tkb"><div class="tki"><div class="tkrows" role="list"><sc-for list="{{g.sessions}}" as="s" hint-placeholder-count="2"><div class="fsrow {{s.cls}}" role="listitem"><button class="rowhit" onClick="{{s.pick}}" aria-current="{{s.cur}}" aria-label="{{s.aria}}"></button><span class="fs-who" aria-hidden="true"><sc-if value="{{s.busy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{s.idle}}" hint-placeholder-val="{{true}}"><span class="ap"><sc-if value="{{s.af_curator}}" hint-placeholder-val="{{true}}"><svg class="apf" aria-hidden="true"><use href="#af-curator"></use></svg></sc-if><sc-if value="{{s.af_implementer}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-implementer"></use></svg></sc-if><sc-if value="{{s.af_issue}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-issue"></use></svg></sc-if><sc-if value="{{s.af_reviewer}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-reviewer"></use></svg></sc-if><sc-if value="{{s.af_triage}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-triage"></use></svg></sc-if><sc-if value="{{s.af_release}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-release"></use></svg></sc-if><sc-if value="{{s.af_support}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-support"></use></svg></sc-if><sc-if value="{{s.af_planner}}" hint-placeholder-val="{{false}}"><svg class="apf" aria-hidden="true"><use href="#af-planner"></use></svg></sc-if></span></sc-if></span><span class="stg" title="{{s.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"></path></svg></span><span class="fs-t">{{s.t}}</span><sc-if value="{{s.attn}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">1</span></sc-if><span class="fs-d">{{s.dur}}</span></div></sc-for></div></div></div></sc-if>
+          <sc-for list="{{tks}}" as="g" hint-placeholder-count="6"><div class="tk tkc {{g.cls}}" role="listitem"><button class="rowhit" onClick="{{g.pick}}" aria-current="{{g.cur}}" aria-label="{{g.title}}"></button><div class="tk1"><span class="tkey">{{g.key}}</span><span class="tt">{{g.t}}</span><sc-if value="{{g.busy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{g.hasAttn}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">1</span></sc-if><sc-if value="{{g.isBlocked}}" hint-placeholder-val="{{false}}"><span class="sticker blocked">Blocked</span></sc-if></div><div class="tk2"><span class="tknow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.nowIcon}}"></path></svg>{{g.now}}</span><sc-if value="{{g.hasWord}}" hint-placeholder-val="{{false}}"><span class="tkw">{{g.word}}</span></sc-if><span class="tksteps" role="group" aria-label="{{g.stepsAria}}"><sc-for list="{{g.steps}}" as="s" hint-placeholder-count="6"><sc-if value="{{s.can}}" hint-placeholder-val="{{false}}"><button class="tkst {{s.cls}}" onClick="{{s.pick}}" title="{{s.title}}" aria-label="{{s.aria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.d}}"></path></svg></button></sc-if><sc-if value="{{s.cant}}" hint-placeholder-val="{{true}}"><span class="tkst {{s.cls}}" title="{{s.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.d}}"></path></svg></span></sc-if></sc-for></span></div>
           </div></sc-for>
           </sc-if>
           <sc-if value="{{showQ}}" hint-placeholder-val="{{true}}">
@@ -1976,7 +1983,7 @@ class Component extends DCLogic {
   }
   /* /buddy */
 
-  state = { tickets: null, view: null, sub: 'none', curWait: undefined, curTk: null, openTk: {}, tkFilter: 'all', tkFind: '', qDrag: null, qOver: null, qTick: 0, dAll: false, evFilter: 'all', tFilter: 'all', page: 0, open: {}, menu: null, dirty: false, saved: false, toast: null, drag: null, over: null, hasText: false, on: true, cfgTick: 0 };
+  state = { tickets: null, view: null, sub: 'none', curWait: undefined, curTk: null, tkFilter: 'all', tkFind: '', qDrag: null, qOver: null, qTick: 0, dAll: false, evFilter: 'all', tFilter: 'all', page: 0, open: {}, menu: null, dirty: false, saved: false, toast: null, drag: null, over: null, hasText: false, on: true, cfgTick: 0 };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); clearTimeout(this.tt); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -2084,7 +2091,7 @@ class Component extends DCLogic {
       floorNote: plural(ts.filter((t) => t.st === 'running' || t.st === 'waiting').length, 'worker') + ' at work · ' + c.biome + ' biome', beltCrates: queued.map((t) => ({ key: t.id, title: t.id + ' ' + t.title })), mergedToday: ts.filter((t) => t.st === 'merged' && t.when === 'Mon').length,
       placeholder: 'Placeholder for the animated floor: the workers walk the belts between these rooms, each carrying its ticket; a refused gate sends one back a room.' };
   }
-  // Tasks: the sessions list of this factory, laid out as the Sessions page is: a board the full height of the window beside the rail, and the session filling the sheet. Each task is a kraft folder holding the sessions it has been through, one per step
+  // Tasks: the sessions list of this factory, laid out as the Sessions page is: a board the full height of the window beside the rail, and the session filling the sheet. Each task is one card: its key and title, the step it is in, and the steps in a small row of icons with that one marked; a step it has been through opens that step's session
   sessList(id) { return (this.ss && this.ss[id]) || SESS[id] || []; }
   addSess(id, row) { this.ss = this.ss || {}; this.ss[id] = [...this.sessList(id), row]; }
   // the queue is in the order the factory takes it, and that order is yours to change: a task that joins goes last
@@ -2126,16 +2133,17 @@ class Component extends DCLogic {
       dMore: showD && !q && f !== 'done' && dHit.length > 5, dAll: !!st.dAll, dMoreText: st.dAll ? 'Show fewer' : 'Show all ' + dHit.length, dToggle: () => this.setState({ dAll: !st.dAll }),
       noTks: !shown.length && !qShown.length && !dShown.length && (!!q || f === 'needs' || f === 'work' || f === 'done'), onTkFind: (e) => this.setState({ tkFind: e.target.value }),
       tks: shown.map((t) => {
-        const ss = this.sessList(t.id); const n = ss.length; const on_ = isCur(t); const live = liveOf(t);
-        const open = n > 0 && (st.openTk[t.id] ?? (on_ || t.st === 'waiting' || t.st === 'blocked')); const now = n ? STEP[ss[n - 1][0]] : null;
-        return { key: t.id, t: t.title, open, cls: (open ? '' : 'closed ') + (on_ ? 'cur ' : '') + (n ? '' : 'solo'), hasRows: n > 0, hasCount: n > 0, count: n,
-          showNow: !open && !!now, nowStage: now ? 'Now in ' + now.label : '', nowIcon: now ? now.icon : '', nowBusy: !open && live === 'busy', hasAttn: !open && live === 'attn', isBlocked: t.st === 'blocked',
-          hasWord: !n, word: TK_WORD[t.st] || ST[t.st][0].toLowerCase(),
-          title: t.id + ' · ' + t.title + ' · ' + (n ? plural(n, 'session') + ', now in ' + now.label : 'no session yet') + ' · ' + ST[t.st][0],
-          toggle: () => { if (!n) { this.setState({ curTk: { id: t.id } }); return; } this.setState({ openTk: { ...this.state.openTk, [t.id]: !open }, ...(open ? {} : { curTk: { id: t.id } }) }); },
-          sessions: ss.map((_, i) => { const s = this.sessOf(t, i); const sl = s.last ? live : ''; const on = on_ && !!cur.s && cur.s.i === i; const step = STEP[s.stage];
-            return { t: s.title, dur: s.dur, stage: step.label, icon: step.icon, busy: sl === 'busy', idle: sl !== 'busy', attn: sl === 'attn', on, cur: on ? 'page' : false, cls: on ? 'on' : '', ...FACE_FLAGS(s.agent),
-              aria: s.title + ', ' + step.label + ' for ' + t.id + (sl === 'attn' ? ', waiting on you' : sl === 'busy' ? ', working' : ''), pick: () => this.setState({ curTk: { id: t.id, i } }) }; }) };
+        const ss = this.sessList(t.id); const n = ss.length; const on_ = isCur(t); const live = liveOf(t); const cfg = this.cfg().steps;
+        const lab = (id) => (cfg[id] && cfg[id].label) || STEP[id].label; const ico = (id) => (STEP[cfg[id] && cfg[id].icon] || STEP[id]).icon;
+        const nowId = STEP[t.step] ? t.step : n ? ss[n - 1][0] : 'planning'; const at = STEPS.findIndex((s) => s[0] === nowId);
+        const parked = t.st === 'later'; const fresh = !n && !parked; const red = live === 'attn' || t.st === 'blocked';
+        const steps = STEPS.map(([id], i) => ({ id, i })).filter((x) => x.i === at || !cfg[x.id] || cfg[x.id].on).map(({ id, i }) => {
+          const si = ss.findIndex((x) => x[0] === id); const state = i < at || (i === at && parked) ? 'done' : i > at ? 'todo' : fresh ? 'next' : 'now'; const open = on_ && !!cur.s && cur.s.i === si;
+          const say = state === 'done' ? 'done' : state === 'now' ? (red ? (t.st === 'blocked' ? 'Blocked here' : 'waiting on you') : 'now') : state === 'next' ? 'next' : 'to come';
+          return { d: ico(id), cls: state + (state === 'now' && red ? ' attn' : '') + (open ? ' open' : ''), title: lab(id) + ' · ' + say, can: si >= 0, cant: si < 0, aria: 'Open the ' + lab(id) + ' session of ' + t.id + ', ' + say, pick: () => this.setState({ curTk: { id: t.id, i: si } }) }; });
+        return { key: t.id, t: t.title, cls: 'solo ' + (on_ ? 'cur' : ''), cur: on_ ? 'page' : false, now: lab(nowId), nowIcon: ico(nowId), steps, stepsAria: 'Steps of ' + t.id + ', now in ' + lab(nowId),
+          busy: live === 'busy', hasAttn: live === 'attn', isBlocked: t.st === 'blocked', hasWord: !n || parked, word: TK_WORD[t.st] || ST[t.st][0].toLowerCase(),
+          title: t.id + ' · ' + t.title + ' · ' + (fresh ? 'no session yet' : 'now in ' + lab(nowId)) + ' · ' + ST[t.st][0], pick: pick(t) };
       }),
       ...this.chatVals(cur.t, withPlan, cur.s)
     };
