@@ -1144,6 +1144,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
         <p class="wd-desc">{{d.desc}}</p>
         <div class="wd-acts">
           <button class="abtn go" onClick="{{d.runNow}}" aria-disabled="{{d.busy}}">{{d.runLabel}}</button>
+          <button class="abtn" onClick="{{d.edit}}">Edit the steps</button>
           <span class="wd-next">{{d.nextLine}}</span>
         </div>
         <sc-if value="{{d.hasErr}}" hint-placeholder-val="{{false}}"><p class="wd-err"><span class="sticker blocked">Failed</span><span class="wd-err-t">{{d.err}}</span><button class="abtn" onClick="{{d.runAgain}}">Run again</button></p></sc-if>
@@ -1382,7 +1383,7 @@ class Component extends DCLogic {
     return { name: f.name, desc: f.desc, on: !f.paused, cls: f.paused ? 'held' : '', busy,
       swAria: f.paused ? 'Resume ' + f.name : 'Pause ' + f.name,
       toggle: () => { f.paused = !f.paused; if (f.paused) f.pausedSince = 'today'; this.touch(); this.say(f.paused ? f.name + ' is paused. It will not run until you switch it back on.' : f.name + ' is on again' + (f.next ? ', next ' + f.next : '') + '.'); },
-      runLabel: busy ? 'Running…' : 'Run now', runNow: () => this.run(f, false), runAgain: () => this.run(f, true),
+      runLabel: busy ? 'Running…' : 'Run now', edit: () => this.say('Opens ' + f.name + ' to edit: its steps as cards, as on the board “Workflow, open to edit”'), runNow: () => this.run(f, false), runAgain: () => this.run(f, true),
       nextLine: f.paused ? 'paused since ' + f.pausedSince : f.next ? 'next ' + f.next : f.wait,
       hasErr: failed, err: failed ? l.note : '',
       stepsSub: multi ? plural(f.steps.length, 'step') + ', in order' + (agents.length ? ' · ' + agents.join(', ') : '') : 'one step: a job',
@@ -1407,7 +1408,7 @@ class Component extends DCLogic {
       cls: 'home flows', sheetCls: fs.length ? '' : 'empty', hasFlows: fs.length > 0, isEmpty: !fs.length,
       nav: NAV.map((n) => { const o = n.id === 'workflows'; return { ...n, cls: o ? 'on' : '', cur: o ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} }; }),
       metaLine: meta, onQ: (e) => this.setState({ q: e.target.value }),
-      newFlow: () => this.say('Opens a new workflow: pick a trigger, then add steps, each with an agent or a script'),
+      newFlow: () => this.say('Opens a new workflow to edit, as on the board “Workflow, a new one”: pick what starts it, then add steps'),
       filts: FILTS.map(([k, label]) => ({ label, n: String(count(k)), on: st.filt === k, cls: (st.filt === k ? 'on' : '') + (k === 'needs' && count(k) ? ' wneed' : ''), pick: () => this.setState({ filt: k }) })),
       days: DAYS.map(([label, a, b, cls]) => ({ label, cls, x: pct(a), w: ((Math.min(b, T1) - a) / (T1 - T0) * 100).toFixed(2) + '%' })),
       nowX, nowClock: NOW_CLOCK, nowLine: 'calc(var(--wname) + (100% - var(--wname)) * ' + ((0 - T0) / (T1 - T0)).toFixed(4) + ')',
