@@ -14,7 +14,7 @@
     },
     "DioramaAgent.dc.html": {
       "x": 0,
-      "y": 45700,
+      "y": 47700,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, live demo",
@@ -24,7 +24,7 @@
     },
     "DioramaAgentDark.dc.html": {
       "x": 1540,
-      "y": 45700,
+      "y": 47700,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, dark mode, live demo",
@@ -34,7 +34,7 @@
     },
     "DioramaAgents.dc.html": {
       "x": 0,
-      "y": 44700,
+      "y": 46700,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, live demo",
@@ -44,7 +44,7 @@
     },
     "DioramaAgentsDark.dc.html": {
       "x": 1540,
-      "y": 44700,
+      "y": 46700,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, dark mode, live demo",
@@ -68,26 +68,6 @@
       "w": 1440,
       "h": 900,
       "title": "Session waiting on a tool approval, paper diorama, dark mode, live demo",
-      "page": "diorama",
-      "expand": "fill",
-      "is_interactive": true
-    },
-    "DioramaBackground.dc.html": {
-      "x": 0,
-      "y": 43300,
-      "w": 1440,
-      "h": 900,
-      "title": "Background jobs, paper diorama, live demo",
-      "page": "diorama",
-      "expand": "fill",
-      "is_interactive": true
-    },
-    "DioramaBackgroundDark.dc.html": {
-      "x": 1540,
-      "y": 43300,
-      "w": 1440,
-      "h": 900,
-      "title": "Background jobs, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -384,7 +364,7 @@
     },
     "DioramaMCPs.dc.html": {
       "x": 0,
-      "y": 48700,
+      "y": 50700,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, live demo",
@@ -394,7 +374,7 @@
     },
     "DioramaMCPsDark.dc.html": {
       "x": 1540,
-      "y": 48700,
+      "y": 50700,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, dark mode, live demo",
@@ -504,7 +484,7 @@
     },
     "DioramaSkill.dc.html": {
       "x": 0,
-      "y": 47700,
+      "y": 49700,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, live demo",
@@ -514,7 +494,7 @@
     },
     "DioramaSkillDark.dc.html": {
       "x": 1540,
-      "y": 47700,
+      "y": 49700,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, dark mode, live demo",
@@ -524,7 +504,7 @@
     },
     "DioramaSkills.dc.html": {
       "x": 0,
-      "y": 46700,
+      "y": 48700,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, live demo",
@@ -534,7 +514,7 @@
     },
     "DioramaSkillsDark.dc.html": {
       "x": 1540,
-      "y": 46700,
+      "y": 48700,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, dark mode, live demo",
@@ -664,7 +644,7 @@
     },
     "DioramaJarvis.dc.html": {
       "x": 0,
-      "y": 51100,
+      "y": 53100,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, live demo",
@@ -674,7 +654,7 @@
     },
     "DioramaJarvisDark.dc.html": {
       "x": 1540,
-      "y": 51100,
+      "y": 53100,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, dark mode, live demo",
@@ -684,7 +664,7 @@
     },
     "DioramaPets.dc.html": {
       "x": 0,
-      "y": 50100,
+      "y": 52100,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy, the cat, the pug and the kitten, each in three cuts, live demo",
@@ -694,7 +674,7 @@
     },
     "DioramaPetsDark.dc.html": {
       "x": 1540,
-      "y": 50100,
+      "y": 52100,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy, the cat, the pug and the kitten, each in three cuts, dark mode, live demo",
@@ -941,6 +921,66 @@
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
+    },
+    "DioramaWorkflows.dc.html": {
+      "x": 0,
+      "y": 43300,
+      "w": 1440,
+      "h": 900,
+      "title": "Workflows, the failed one open, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkflowsDark.dc.html": {
+      "x": 1540,
+      "y": 43300,
+      "w": 1440,
+      "h": 900,
+      "title": "Workflows, the failed one open, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkflowsSteps.dc.html": {
+      "x": 0,
+      "y": 44300,
+      "w": 1440,
+      "h": 900,
+      "title": "Workflows, a workflow of several steps open, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkflowsStepsDark.dc.html": {
+      "x": 1540,
+      "y": 44300,
+      "w": 1440,
+      "h": 900,
+      "title": "Workflows, a workflow of several steps open, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkflowsEmpty.dc.html": {
+      "x": 0,
+      "y": 45300,
+      "w": 1440,
+      "h": 900,
+      "title": "Workflows, none yet, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkflowsEmptyDark.dc.html": {
+      "x": 1540,
+      "y": 45300,
+      "w": 1440,
+      "h": 900,
+      "title": "Workflows, none yet, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
     }
   },
   "createdOnFiles": {
@@ -996,7 +1036,8 @@
     "p36",
     "s13",
     "p37",
-    "s14"
+    "s14",
+    "p38"
   ],
   "notes": {
     "p14": {
@@ -1111,7 +1152,7 @@
     "s5": {
       "kind": "title1",
       "x": 0,
-      "y": 44400,
+      "y": 46400,
       "maxW": 2980,
       "page": "diorama",
       "text": "Settings: agents, skills and MCP servers"
@@ -1146,11 +1187,11 @@
       "y": 43000,
       "maxW": 2980,
       "page": "diorama",
-      "text": "Background jobs"
+      "text": "Workflows and background jobs"
     },
     "p26": {
       "x": 3080,
-      "y": 51100,
+      "y": 53100,
       "w": 320,
       "page": "diorama",
       "text": "Button, the cut-out cat in a bow tie: Jarvis’s first character, picked from five cuts, cut from cream and kraft in 1.6px ink, and the try before the pet. Every board wore him until the paper creatures; the boards wear the robot dog now, and the other agents’ portraits stay drawn stickers in his style. This sheet lays out every piece he is cut into. The cut: the kraft patch over his right ear, bead eyes, blush, a red nose, the red bow, two paws to hold an edge, with the paper’s cut edge around him (a light rim by day, white at night). The portrait: the same face as a flat sticker with a white die-cut rim and no shadow, never pixel art, on the cream tile that topped every rail, as the first Meet your Main Agent photo, and at the head of the threads board. Over the composer he was 92px wide, in from the right, leaning 4 degrees on his paws; over the empty home’s greeting 84px. He is a cut-out, not an animation: he never blinks, bounces, pulses, changes face with a session’s state, or does anything when clicked, which is what the pet does instead. The drawing is Kraft’s Characters asset, jarvis.svg."
@@ -1160,12 +1201,12 @@
       "page": "diorama",
       "text": "Jarvis, the pet: five paper creatures drawn on Comfy Cloud, side by side, each in three cuts. The robot dog is the one every board wears: an angular sheet-white hound with pen-drawn panel lines, a kraft snout and chest plate, blue ear tips, gold-ringed eyes and a red collar, the first character through the primepaw-character skill’s options step. The puppy was the first character, and the cat, a round-faced tabby with a blue collar, the second; the pug is the fourth, a jowly cream pug with big round eyes, a brown muzzle with its tongue out, pink cheeks, folded brown ears and a blue bandana, picked from five options and then from five variations of the one chosen; the kitten is the fifth, a round black kitten with big gold eyes, pink cheeks and a blue bow, picked from a set of five cute cats. The four wait in the portrait picker. Peeking: over the composer, paws hooked on the frame, a sprite atlas per character with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the buttons set all five and a click on one says hello. The sticker: each head as one round sticker at the sizes the boards use (the sticker, the rail tile, a thread portrait, a row). The standee: a sprite sheet each (pet/<id>-walk.png, <id>-walk.json and standee.js), six poses by four facings, every cell one drawing of the whole creature, the five walking one round of a factory floor and taking turns at the benches. The pictures are the canvas’s uploads of the pet/ files: a board cannot show a picture over 2 MiB that it names by a path, and the atlases are 2 to 3 MiB each. Qwen Image 2.1 drew the bases, faces and bodies and GPT Image 2.6 the moods, turnarounds and walks, through the primepaw-character skill in mockups/primepaw/.claude/skills/; pet/build.py slices them and pet/README.md lists every prompt, slot value and seed.",
       "x": 3080,
-      "y": 50100
+      "y": 52100
     },
     "s11": {
       "kind": "title1",
       "x": 0,
-      "y": 49800,
+      "y": 51800,
       "maxW": 2980,
       "page": "diorama",
       "text": "Jarvis, the pet"
@@ -1222,7 +1263,7 @@
     },
     "p35": {
       "x": 3080,
-      "y": 44700,
+      "y": 46700,
       "w": 320,
       "page": "diorama",
       "text": "Settings: Agents, Skills and MCP servers are off the rail and live in Settings. On these five boards, the two lists, the two edit pages and the MCP timetable, no tile of their own is on the rail, and the Settings gear at its foot is the pressed one. The pages themselves are as they were. There is no board for the Settings page itself yet."
@@ -1263,6 +1304,13 @@
       "w": 320,
       "page": "diorama",
       "text": "Setting up: the checklist a new install opens on, six steps on one sheet with a tick box each, the open one unfolded. Meet your Main Agent is the only step that has to be done before Open Primepaw works. It is a form on the paper: the name on a ruled line with Jarvis pencilled in as the placeholder, three portrait stickers, the characters’ faces, taped on like photos with the picked one ringed in pen, and the model, which is the global default until the pull-tab says otherwise and then a provider and a model from torn-paper pickers. One line says what the agent is for: it starts work for you and never edits code itself. Create with no name writes “It needs a name” in red pen; with one, a WELCOME stamp lands and the step folds to done. The second pair restored a backup, so the step is already ticked: Jarvis came with your backup. Choose a backup on the first pair does the same."
+    },
+    "p38": {
+      "x": 3080,
+      "y": 43300,
+      "w": 320,
+      "page": "diorama",
+      "text": "Workflows: the workflows and the background jobs on one page, on one rail tile (the Background tile is gone). A job is a workflow of one step, so both live in one list. The list is a schedule board: one row per workflow, its agents as stickers, its name and its trigger by hand, its step count; at the right of each row a lane from yesterday at this hour to Monday, the weekend hatched, a red pencil line at now through every row. A run is a dot by its status (done green, failed red and bigger, skipped a hollow grey, running blue and pulsing; one run by hand has square corners), the next scheduled run a dashed ring with its time beside it, a sync every 15 minutes a comb; an event-driven one says what it waits for after now. Rows come in groups: Needs you (the last run failed), Running now, On a schedule, On an event, Paused (faded, its ring grey). Filters over the board count each group. Press a row, or a dot, and the card at the right opens it: its name by hand and its switch (on or paused), Run now and when it runs next, the failure on a dashed red slip with Run again, How it runs as a pipeline (the trigger and its cron or event, then each step numbered with the agent that does it, or a script), the workspace, and its runs, newest first, the one picked on the board highlighted. Run now puts a running dot at now and finishes it a moment later."
     }
   },
   "order": [
@@ -1344,8 +1392,12 @@
     "DioramaFactoryKanbanDark.dc.html",
     "DioramaFactorySettings.dc.html",
     "DioramaFactorySettingsDark.dc.html",
-    "DioramaBackground.dc.html",
-    "DioramaBackgroundDark.dc.html",
+    "DioramaWorkflows.dc.html",
+    "DioramaWorkflowsDark.dc.html",
+    "DioramaWorkflowsSteps.dc.html",
+    "DioramaWorkflowsStepsDark.dc.html",
+    "DioramaWorkflowsEmpty.dc.html",
+    "DioramaWorkflowsEmptyDark.dc.html",
     "DioramaAgents.dc.html",
     "DioramaAgentsDark.dc.html",
     "DioramaAgent.dc.html",
