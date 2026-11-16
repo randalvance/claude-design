@@ -815,6 +815,66 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .frow2 .tr-tm::after{content:" in flight";font-size:12px}
 .frow2 .tr-l{-webkit-line-clamp:1}
 .tpanel .list>.scrim{z-index:25}
+/* a thread and the sessions it started: the thread's strip, then its sessions as child slips on a dashed stem; pressing one shows the session on the sheet */
+.tgrp{position:relative}
+.tgrp+.tgrp{margin-top:-2px}
+.tgrp:nth-child(even)>.trow{--rot:.2deg;--dx:1px}
+.tgrp:nth-child(2){z-index:9}.tgrp:nth-child(3){z-index:8}.tgrp:nth-child(4){z-index:7}.tgrp:nth-child(5){z-index:6}.tgrp:nth-child(6){z-index:5}.tgrp:nth-child(7){z-index:4}.tgrp:nth-child(8){z-index:3}
+.tgrp:hover{z-index:20}.tgrp:has(.trow.on){z-index:21}.tgrp:has(.menu-open){z-index:30}
+.trow.on.sub{background-color:color-mix(in srgb,var(--marker) 42%,var(--sheet));box-shadow:var(--lift-1);transform:rotate(-.25deg)}
+.tkids{position:relative;display:flex;flex-direction:column;gap:3px;margin:3px 0 7px 16px;padding-left:13px}
+.tkids::before{content:"";position:absolute;left:0;top:-3px;bottom:14px;border-left:1.5px dashed color-mix(in srgb,var(--ink) 38%,transparent)}
+.tkid{all:unset;cursor:pointer;position:relative;display:flex;align-items:center;gap:7px;box-sizing:border-box;min-height:27px;padding:4px 8px 4px 9px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.06);border-radius:3px;box-shadow:var(--lift-1);font-size:12.5px;font-weight:750;line-height:1.2;color:var(--ink);transition:transform .12s var(--ease),background-color .12s var(--ease)}
+.tkid::before{content:"";position:absolute;left:-14px;top:50%;width:12px;border-top:1.5px dashed color-mix(in srgb,var(--ink) 38%,transparent)}
+.tkid:hover{background-color:var(--hover);transform:translateX(2px)}
+.tkid:focus-visible{outline:2px solid var(--blue);outline-offset:-1px}
+.tkid.on{background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp);box-shadow:1px 1px 0 var(--highlighter-2),3px 4px 5px var(--amb);transform:translateX(3px) rotate(-.4deg)}
+.tkid .wsd{flex:none;width:8px;height:8px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.tk-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tk-st{flex:none;display:inline-flex;align-items:center;gap:4px;font-family:var(--hand);font-size:14px;font-weight:400;line-height:1;color:var(--mute);white-space:nowrap}
+.tk-st i{width:7px;height:7px;border-radius:50%;background-color:currentColor}
+.tk-st.work{color:color-mix(in srgb,var(--blue) 80%,var(--ink))}.tk-st.work i{animation:tkpulse 1.4s var(--ease) infinite}
+.tk-st.needs{color:color-mix(in srgb,var(--amber) 45%,var(--ink))}.tk-st.needs i{background-color:var(--amber)}
+.tk-st.done{color:color-mix(in srgb,var(--green) 80%,var(--ink))}
+.tk-st.fail{color:color-mix(in srgb,var(--red) 85%,var(--ink))}
+@keyframes tkpulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.tk-st.work i,.svstep.now .dot{animation:none}}
+/* ---------- a session shown in place on Home ---------- */
+.svtop .ttl{gap:2px}
+.svback{all:unset;cursor:pointer;align-self:flex-start;display:inline-flex;align-items:center;gap:3px;margin-left:-4px;padding:1px 4px;border-radius:3px;font-family:var(--hand);font-size:17px;line-height:1.1;color:var(--mute)}
+.svback svg{width:16px;height:16px;flex:none}
+.svback:hover{color:var(--ink)}.svback:hover span{text-decoration:underline;text-decoration-style:wavy;text-underline-offset:3px}
+.svback:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.svk{font-family:var(--hand);font-size:17px}
+.svcontent{gap:14px}
+.svws{max-width:640px;box-sizing:border-box;border:1px solid rgba(0,0,0,.1);border-radius:5px;box-shadow:var(--lift-1)}
+.svfrom{display:block;margin-bottom:2px;font-family:var(--hand);font-size:15px;font-weight:400;opacity:.75}
+.svsteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;max-width:640px}
+.svstep{display:flex;align-items:baseline;gap:10px;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:13px;line-height:1.4;color:var(--ink)}
+.svstep .dot{flex:none;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background-color:var(--mute);transform:translateY(1px)}
+.svstep.read .dot{background-color:transparent;border:1.5px solid var(--ink)}
+.svstep.edit .dot{background-color:var(--ink)}
+.svstep.ok .dot{background-color:var(--green)}
+.svstep.fail .dot{background-color:var(--st-red)}
+.svstep.ask .dot{background-color:var(--amber)}
+.svstep.now .dot{background-color:var(--blue);animation:tkpulse 1.4s var(--ease) infinite}
+.svstep.me .dot{background-color:var(--kraft)}
+.svstep .k{flex:none;font-weight:800}
+.svstep code{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono);font-size:12px;background-color:var(--paper-2);padding:1px 5px;border-radius:2px}
+.svstep .svt{flex:1;min-width:0}
+.svstep.fail .k,.svstep.fail code{color:color-mix(in srgb,var(--red) 85%,var(--ink))}
+.svstep time{flex:none;margin-left:auto;font-family:var(--hand);font-size:15px;color:var(--mute)}
+.svsay{margin:0;font-family:var(--serif);font-size:17px;line-height:1.55;color:var(--ink);max-width:68ch}
+.svsay.fail{color:color-mix(in srgb,var(--red) 80%,var(--ink))}
+.svask{max-width:626px;box-sizing:border-box;margin:7px 0 4px 7px;padding:12px 14px 13px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border-radius:5px;box-shadow:0 0 0 6px color-mix(in srgb,var(--amber) 58%,var(--board)),0 0 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),2px 3.5px 0 7.5px color-mix(in srgb,var(--amber) 62%,var(--edge-2)),5px 9px 10px 7px var(--amb)}
+.svask-q{margin:0;font-size:15px;font-weight:800}
+.svask-q code{font-family:var(--mono);font-size:13px;background-color:var(--paper-2);padding:1px 5px;border-radius:2px}
+.svask-w{margin:4px 0 11px;font-size:13px;line-height:1.45;color:var(--ink)}
+.svask-b{display:flex;gap:8px}
+.svask .abtn{height:30px;padding:0 14px;font-size:13px}
+.svcard{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 16px}
+.svin{all:unset;flex:1;min-width:0;height:34px;font-size:14px;color:var(--ink)}
+.svin::placeholder{color:var(--mute)}
 /* ---------- the sheet ---------- */
 .hsheet .leaf{margin-top:16px}
 .hsheet .top{padding-top:20px}
@@ -1047,12 +1107,12 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
       <div class="hfacs-h thr"><b>Threads</b><small>{{threadsSub}}</small></div>
     </div></sc-if>
     <div class="list" onKeyDown="{{menuKey}}">
-<div class="trows" role="list"><sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if><sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><div class="trow {{t.cls}}" role="listitem"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><sc-if value="{{t.renaming}}" hint-placeholder-val="{{false}}"><input class="tr-in" aria-label="Rename the thread" ref="{{t.renameRef}}" onKeyDown="{{t.renameKey}}" onBlur="{{t.renameCommit}}"></sc-if><sc-if value="{{t.notRenaming}}" hint-placeholder-val="{{true}}"><span class="tr-t">{{t.title}}</span></sc-if><span class="tr-tm">{{t.time}}</span><span class="tr-l">{{t.last}}</span><span class="tr-r"><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{t.badge}}</span></sc-if><button class="rowmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></span><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></div></sc-for><sc-if value="{{noThreads}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noThreadsText}}</p></sc-if></div>
+<div class="trows" role="list"><sc-if value="{{anyMenu}}" hint-placeholder-val="{{false}}"><button class="scrim" onClick="{{closeMenus}}" aria-label="Close menu"></button></sc-if><sc-for list="{{threads}}" as="t" hint-placeholder-count="5"><div class="tgrp {{t.grpCls}}" role="listitem"><div class="trow {{t.cls}}"><button class="rowhit" onClick="{{t.pick}}" aria-current="{{t.cur}}" aria-label="{{t.aria}}"></button><sc-if value="{{t.renaming}}" hint-placeholder-val="{{false}}"><input class="tr-in" aria-label="Rename the thread" ref="{{t.renameRef}}" onKeyDown="{{t.renameKey}}" onBlur="{{t.renameCommit}}"></sc-if><sc-if value="{{t.notRenaming}}" hint-placeholder-val="{{true}}"><span class="tr-t">{{t.title}}</span></sc-if><span class="tr-tm">{{t.time}}</span><span class="tr-l">{{t.last}}</span><span class="tr-r"><sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="nb" aria-hidden="true">{{t.badge}}</span></sc-if><button class="rowmore" onClick="{{t.menu}}" aria-label="More for {{t.title}}" aria-haspopup="menu" aria-expanded="{{t.menuOpen}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></button></span><sc-if value="{{t.menuOpen}}" hint-placeholder-val="{{false}}"><div class="rmenu" role="menu" aria-label="Thread"><button role="menuitem" onClick="{{t.rename}}" ref="{{t.menuRef}}">Rename</button><button role="menuitem" onClick="{{t.archive}}">Archive</button></div></sc-if></div><sc-if value="{{t.hasKids}}" hint-placeholder-val="{{false}}"><div class="tkids" role="group" aria-label="{{t.kidsAria}}"><sc-for list="{{t.kids}}" as="k" hint-placeholder-count="2"><button class="tkid {{k.cls}}" onClick="{{k.pick}}" aria-current="{{k.cur}}" aria-label="{{k.aria}}"><i class="wsd" style="background: {{k.wsColor}}" aria-hidden="true"></i><span class="tk-t">{{k.title}}</span><span class="tk-st {{k.stCls}}" aria-hidden="true"><i></i>{{k.stLabel}}</span></button></sc-for></div></sc-if></div></sc-for><sc-if value="{{noThreads}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noThreadsText}}</p></sc-if></div>
     </div>
   </aside>
 
 <div class="sheet hsheet {{sheetCls}}">
-  <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}"><header class="top htop">
+  <sc-if value="{{showThread}}" hint-placeholder-val="{{true}}"><header class="top htop">
     <div class="ttl"><h1>{{th.title}}</h1></div>
     <div class="meta"><span>with {{agentName}}</span><span class="scount">{{sessCount}}</span></div>
   </header></sc-if>
@@ -1157,7 +1217,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
     </section>
   </sc-if>
 
-  <sc-if value="{{hasThread}}" hint-placeholder-val="{{true}}">
+  <sc-if value="{{showThread}}" hint-placeholder-val="{{true}}">
   <div class="leaf"><div class="maincol">
   <div class="content">
     <sc-for list="{{items}}" as="it" hint-placeholder-count="6">
@@ -1245,12 +1305,41 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
   </footer>
   </div></div>
   </sc-if>
+  <!-- a session Jarvis started, shown in place: its trail, what it said, and a line back to it, without leaving Home -->
+  <sc-if value="{{showSess}}" hint-placeholder-val="{{false}}">
+  <header class="top htop svtop">
+    <div class="ttl"><button class="svback" onClick="{{sv.back}}" aria-label="{{sv.backAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5.5c-2.4 2.3-4.4 4.2-6.6 6.6 2.3 2.2 4.2 4.1 6.4 6.4"></path></svg><span>{{sv.from}}</span></button><h1>{{sv.title}}</h1></div>
+    <div class="meta"><span class="svk">session</span><span class="scount">{{sv.when}}</span></div>
+    <div class="top-r"><button class="abtn" onClick="{{sv.full}}">Open in Sessions</button></div>
+  </header>
+  <div class="leaf"><div class="maincol">
+  <div class="content svcontent">
+    <div class="svws scard-ws" style="--wc: {{sv.wsColor}}"><i class="wsd" style="background: {{sv.wsColor}}" aria-hidden="true"></i><span class="nm">{{sv.wsName}}</span><span class="sbr">{{sv.branch}}</span><span class="smod">{{sv.model}}</span><span class="sticker {{sv.stCls}}"><sc-if value="{{sv.isWorking}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{sv.notWorking}}" hint-placeholder-val="{{true}}"><i aria-hidden="true"></i></sc-if>{{sv.stLabel}}</span></div>
+    <div class="note"><div class="note-in"><span class="svfrom">{{agentName}} asked</span>{{sv.brief}}</div></div>
+    <ol class="svsteps" aria-label="What the session did">
+      <sc-for list="{{sv.steps}}" as="s" hint-placeholder-count="4"><li class="svstep {{s.cls}}"><i class="dot" aria-hidden="true"></i><span class="k">{{s.label}}</span><sc-if value="{{s.hasCode}}" hint-placeholder-val="{{true}}"><code>{{s.detail}}</code></sc-if><sc-if value="{{s.hasText}}" hint-placeholder-val="{{false}}"><span class="svt">{{s.detail}}</span></sc-if><time>{{s.time}}</time></li></sc-for>
+    </ol>
+    <sc-if value="{{sv.hasSay}}" hint-placeholder-val="{{true}}"><p class="svsay {{sv.sayCls}}">{{sv.say}}</p></sc-if>
+    <sc-if value="{{sv.asks}}" hint-placeholder-val="{{false}}"><section class="svask" aria-label="The session asks to run a command">
+      <p class="svask-q">May I run <code>{{sv.cmd}}</code>?</p><p class="svask-w">{{sv.why}}</p>
+      <div class="svask-b"><button class="abtn go" onClick="{{sv.allow}}">Allow</button><button class="abtn" onClick="{{sv.deny}}">Don’t allow</button></div>
+    </section></sc-if>
+  </div>
+  <footer class="foot svfoot">
+    <div class="foot-in"><div class="card svcard">
+      <label class="sr" for="hsv">Write to the session {{sv.title}}</label>
+      <input id="hsv" class="svin" placeholder="{{sv.placeholder}}" ref="{{sv.inRef}}" onInput="{{sv.onInput}}" onKeyDown="{{sv.onKey}}">
+      <button class="send {{sv.sendCls}}" onClick="{{sv.send}}" aria-label="{{sv.sendAria}}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button>
+    </div></div>
+  </footer>
+  </div></div>
+  </sc-if>
   <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="htoast" role="status"><span>{{toast}}</span><sc-if value="{{toastUndo}}" hint-placeholder-val="{{false}}"><button onClick="{{undo}}">Undo</button></sc-if></div></sc-if>
 </div>
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"open":{"editor":"enum","default":"new","options":["new","t1","t2","t3","t4","t5","t6"]},"meet":{"editor":"enum","default":"card","options":["none","card","invalid","created"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"open":{"editor":"enum","default":"new","options":["new","t1","t2","t3","t4","t5","t6"]},"meet":{"editor":"enum","default":"card","options":["none","card","invalid","created"]},"sess":{"editor":"enum","default":"none","options":["none","s1","s2","s3","s4","s6"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
   { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
@@ -1411,6 +1500,27 @@ const THREADS = [
     { k: 'sess', id: 's6', title: 'Digest wording', ws: 'lighthouse', branch: 'chore/digest-copy', model: 'Haiku 5.5', status: 'done', summary: 'Changed 6 strings and their snapshots.' },
     { k: 'rep', text: 'Digest wording is done: PR #903 is merged.', pr: '#903', checks: '9 checks pass' } ] }
 ];
+// what each session did, for the session shown in place on Home: Jarvis's brief, the trail and the session's last word. k: read, edit, run, ok, fail, ask, now
+const TRAIL = {
+  s1: { brief: 'Add a CSV export to the invoices table. Reuse useInvoices for the filters; there is no CSV helper yet, but lib/download.ts saves a blob.', when: 'started 9:02 · took 31 min', steps: [
+    ['read', 'Read', 'apps/web/invoices/use-invoices.ts', '9:02'], ['edit', 'Wrote', 'lib/csv.ts', '9:09'], ['edit', 'Edited', 'apps/web/invoices/table.tsx', '9:14'],
+    ['ok', 'Ran', 'pnpm test invoices', '9:21'], ['ok', 'Pushed', 'feat/csv-export', '9:30'], ['ok', 'Opened', 'PR #918', '9:33']],
+    say: 'Added an Export CSV button that reuses the table filters. Money and dates go through their own formatter, with tests for both.' },
+  s2: { brief: 'Bump Node to 22 in the Orbit Billing web app. It builds and deploys on its own, apart from the api.', when: 'started 9:05 · 12 min', steps: [
+    ['read', 'Read', 'apps/web/package.json', '9:05'], ['edit', 'Edited', '.nvmrc', '9:07'], ['edit', 'Edited', 'apps/web/package.json', '9:08'],
+    ['ok', 'Ran', 'pnpm build --dry-run', '9:12'], ['ask', 'Asks to run', 'pnpm install', '9:17']],
+    ask: { cmd: 'pnpm install', why: 'It rewrites pnpm-lock.yaml for Node 22. Nothing else changes outside apps/web.', after: 'Installing with the new lockfile.', no: 'Left the lockfile alone. I’ll stop here so you can rewrite it yourself.' } },
+  s3: { brief: 'Bump Node to 22 in the Orbit Billing api, packages/api.', when: 'started 9:05 · stopped 9:19', steps: [
+    ['read', 'Read', 'packages/api/package.json', '9:05'], ['edit', 'Edited', '.nvmrc', '9:06'], ['edit', 'Edited', 'packages/api/package.json', '9:07'],
+    ['fail', 'Ran', 'pnpm test api', '9:18']],
+    say: '3 tests in packages/api still mock node-fetch, which Node 22 replaces with its own fetch. I stopped instead of rewriting the mocks.', sayCls: 'fail' },
+  s4: { brief: 'Fix the token refresh in gateway: on a 401, refresh first and retry once with the new token. Push it.', when: 'started 10:18 · 26 min', steps: [
+    ['read', 'Read', 'gateway/src/http/retry.ts', '10:18'], ['edit', 'Edited', 'gateway/src/http/retry.ts', '10:24'], ['edit', 'Wrote', 'gateway/src/http/retry.test.ts', '10:27'],
+    ['ok', 'Ran', 'pnpm test auth', '10:31'], ['ok', 'Pushed', 'fix/token-refresh', '10:42'], ['now', 'Opening', 'the pull request', 'now']] },
+  s6: { brief: 'The weekly digest says “jobs” where it means sessions. Fix the wording and its snapshots.', when: 'Mon · took 9 min', steps: [
+    ['read', 'Searched', '"jobs" in emails/digest', '14:02'], ['edit', 'Edited', '6 strings', '14:05'], ['ok', 'Ran', 'pnpm test -u digest', '14:08'], ['ok', 'Merged', 'PR #903', '14:11']],
+    say: 'Changed 6 strings and their snapshots.' }
+};
 function segs(text) { return String(text).split('`').map((t, i) => ({ t, code: i % 2 === 1, plain: i % 2 === 0 })).filter((g) => g.t); }
 function plainOf(text) { return String(text).replace(/`/g, ''); }
 function slug(t) { return String(t).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 28) || 'new-work'; }
@@ -1429,7 +1539,7 @@ const FACS = [{ id: 'primepaw', name: 'PrimePaw', inflight: 3, cap: 6, waiting: 
   { id: 'cerebro', name: 'Cerebro', inflight: 0, cap: 4, waiting: 0, blocked: 0, line: 'Nothing ready. The curator wakes on the hour.' }];
 
 class Component extends DCLogic {
-  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false, open: null, model: 'sonnet', effort: 2, auto: true, used: {}, draft: 0, focus: false, yolo0: false };
+  state = { threads: null, cur: undefined, find: '', menu: null, renaming: null, toast: null, hasText: false, thinking: null, qdOpen: false, qdTab: 0, askDraft: {}, archived: null, meet: null, agent: undefined, justMet: false, open: null, model: 'sonnet', effort: 2, auto: true, used: {}, draft: 0, focus: false, yolo0: false, sess: undefined, svText: false, svMore: {} };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -1472,7 +1582,31 @@ class Component extends DCLogic {
   petPlay(name, ms) { const id = Date.now() + Math.random(); this.setState({ petShot: { name, id } }); this.later(() => { const s = this.state.petShot; if (s && s.id === id) this.setState({ petShot: null }); }, ms); }
   petArrive(id) { const t = this.list().find((x) => x.id === id); const failed = !!t && t.items.some((x) => x.k === 'sess' && x.status === 'failed'); this.later(() => { if (this.curId() === id) this.petPlay(failed ? 'error' : 'greet', failed ? 2800 : 1900); }, 350); }
   componentDidMount() { this.petArrive(this.curId()); }
-  open(id) { this.setState({ cur: id, menu: null, qdOpen: false, qdTab: 0 }); this.petArrive(id); }
+  open(id) { this.setState({ cur: id, menu: null, qdOpen: false, qdTab: 0, sess: null }); this.petArrive(id); }
+  // the session shown in place: a child row under a thread, or Open on its card, shows it on the sheet without leaving Home
+  sessId() { const st = this.state; if (st.sess !== undefined) return st.sess; const p = this.props.sess ?? 'none'; return p === 'none' ? null : p; }
+  openSess(tid, sid) { const was = this.curId(); this.setState({ cur: tid, sess: sid, menu: null, qdOpen: false, svText: false }); if (was !== tid) this.petArrive(tid); }
+  trailOf(x) { return TRAIL[x.id] || { brief: x.title + '.', when: 'started just now', steps: [['now', 'Reading', 'the code', 'now']] }; }
+  svVals(t, x) {
+    const s = STATUS[x.status]; const ws = WSX[x.ws]; const tr = this.trailOf(x); const more = this.state.svMore[x.id] || [];
+    const asking = x.status === 'waiting' && tr.ask;
+    const steps = tr.steps.map(([k, label, detail, time]) => ({ k, label, detail, time })).filter((y) => !(y.k === 'ask' && !asking)).concat(more)
+      .map((y) => ({ cls: y.k, label: y.label, detail: y.detail, time: y.time, hasCode: y.k !== 'me', hasText: y.k === 'me' }));
+    const say = x.status === 'waiting' ? '' : x.status === 'working' ? '' : tr.say || plainOf(x.summary);
+    const answer = (ok) => { const a = tr.ask; const add = ok ? [{ k: 'now', label: 'Running', detail: a.cmd, time: 'now' }] : [{ k: 'read', label: 'You said no to', detail: a.cmd, time: 'now' }];
+      this.patchItem(t.id, x.id, { status: ok ? 'working' : 'done', summary: ok ? a.after : a.no });
+      this.setState({ svMore: { ...this.state.svMore, [x.id]: [...more, ...add] } }); this.say(ok ? 'Allowed ' + a.cmd + ' in ' + x.title : 'Didn’t allow ' + a.cmd); };
+    const send = () => { const el = this.svIn; const v = el ? el.value.trim() : ''; if (!v) return; el.value = '';
+      this.setState({ svText: false, svMore: { ...this.state.svMore, [x.id]: [...more, { k: 'me', label: 'You', detail: v, time: 'now' }] } }); this.say('Sent to ' + x.title); };
+    return { title: x.title, from: t.title, backAria: 'Back to the thread ' + t.title, when: tr.when, brief: tr.brief,
+      wsName: ws.name, wsColor: ws.color, branch: x.branch, model: x.model, stLabel: s.label, stCls: s.cls, isWorking: x.status === 'working', notWorking: x.status !== 'working',
+      steps, hasSay: !!say, say, sayCls: tr.sayCls && x.status === 'failed' ? tr.sayCls : '',
+      asks: !!asking, cmd: asking ? tr.ask.cmd : '', why: asking ? tr.ask.why : '', allow: () => answer(true), deny: () => answer(false),
+      back: () => this.setState({ sess: null }), full: () => this.say('Opens ' + x.title + ' in Sessions'),
+      placeholder: 'Write to ' + x.title + '…', inRef: (el) => { this.svIn = el; },
+      onInput: (e) => this.setState({ svText: !!e.target.value.trim() }), onKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); send(); } if (e.key === 'Escape') this.setState({ sess: null }); },
+      send, sendCls: this.state.svText ? 'ready' : '', sendAria: 'Send to ' + x.title };
+  }
   newThread() { this.setState({ cur: null, menu: null, qdOpen: false }); this.petPlay('greet', 1900); setTimeout(() => { if (this.ta && this.ta.isConnected) this.ta.focus(); }, 0); }
   say(text) { this.setState({ toast: text, toastUndo: false }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
   archive(t) {
@@ -1560,13 +1694,18 @@ class Component extends DCLogic {
   }
   rowsVals(ts, cur) {
     const st = this.state; const f = st.find.trim().toLowerCase();
-    return ts.filter((t) => !f || (t.title + ' ' + this.lastOf(t)).toLowerCase().includes(f)).map((t) => {
+    return ts.filter((t) => !f || (t.title + ' ' + this.lastOf(t) + ' ' + t.items.filter((x) => x.k === 'sess').map((x) => x.title).join(' ')).toLowerCase().includes(f)).map((t) => {
       const w = this.waitingIn(t); const on = t.id === cur; const menuOpen = st.menu === t.id; const renaming = st.renaming === t.id;
       // Enter and leaving the field keep the new name, Escape keeps the old one
       const commit = (raw) => { if (this.state.renaming !== t.id) return; const v = String(raw).trim(); this.setState({ renaming: null }); if (v && v !== t.title) this.patchThread(t.id, (x) => ({ ...x, title: v })); };
-      return { title: t.title, time: t.time, last: this.lastOf(t), hasBadge: w > 0, badge: w, badgeLabel: w + ' waiting on you', on,
+      const sv = this.sessId(); const ks = t.items.filter((x) => x.k === 'sess');
+      const kids = ks.map((x) => { const S = STATUS[x.status]; const kon = on && sv === x.id; const ws = WSX[x.ws];
+        return { title: x.title, wsColor: ws.color, stLabel: S.label, stCls: S.cls, on: kon, cur: kon ? 'page' : false, cls: (kon ? 'on ' : '') + S.cls,
+          aria: x.title + ', a session in ' + ws.name + ', ' + S.label.toLowerCase() + '. Shows it here', pick: () => this.openSess(t.id, x.id) }; });
+      return { hasKids: kids.length > 0, kids, kidsAria: 'Sessions started in ' + t.title, grpCls: on && sv ? 'kid-on' : '',
+        title: t.title, time: t.time, last: this.lastOf(t), hasBadge: w > 0, badge: w, badgeLabel: w + ' waiting on you', on,
         aria: t.title + (w ? ', ' + w + ' waiting on you' : ''), cur: on ? 'page' : false, menuOpen, renaming, notRenaming: !renaming,
-        cls: [on ? 'on' : '', menuOpen ? 'menu-open' : '', w ? 'waits' : ''].join(' '),
+        cls: [on ? 'on' : '', on && sv ? 'sub' : '', menuOpen ? 'menu-open' : '', w ? 'waits' : ''].join(' '),
         pick: () => this.open(t.id),
         menu: () => this.setState({ menu: menuOpen ? null : t.id }),
         menuRef: (el) => { if (el && !el.dataset.ready) { el.dataset.ready = '1'; el.focus(); } },
@@ -1583,7 +1722,7 @@ class Component extends DCLogic {
       const face = JARVIS.includes(x.k) && !JARVIS.includes(prev) && x.k !== 'dec'; const turnCls = face ? 'first' : ''; prev = x.k;
       const v = { isMe: x.k === 'me', isJ: x.k === 'j', isHelp: x.k === 'help', isSess: x.k === 'sess', isDec: x.k === 'dec', isRep: x.k === 'rep', isAskStub: x.k === 'ask', face, turnCls, text: x.text || '', segs: segs(x.text || '') };
       if (x.k === 'help') { const open = !!(this.state['help_' + x.id]); Object.assign(v, { title: x.title, peek: x.peek, open, closed: !open, openCls: open ? 'open' : '', body: x.body.map((b) => ({ t: b })), files: x.files.map((fl) => ({ t: fl })), toggle: () => this.setState({ ['help_' + x.id]: !open }) }); }
-      if (x.k === 'sess') { const s = STATUS[x.status]; const ws = WSX[x.ws]; Object.assign(v, { title: x.title, wsName: ws.name, wsColor: ws.color, how: 'on a new worktree', branch: x.branch, model: x.model, stLabel: s.label, stCls: s.cls, isWorking: x.status === 'working', notWorking: x.status !== 'working', summary: plainOf(x.summary), openCls: x.status === 'waiting' ? 'go' : '', open: () => this.say('Opens ' + x.title + ' in Sessions') }); }
+      if (x.k === 'sess') { const s = STATUS[x.status]; const ws = WSX[x.ws]; Object.assign(v, { title: x.title, wsName: ws.name, wsColor: ws.color, how: 'on a new worktree', branch: x.branch, model: x.model, stLabel: s.label, stCls: s.cls, isWorking: x.status === 'working', notWorking: x.status !== 'working', summary: plainOf(x.summary), openCls: x.status === 'waiting' ? 'go' : '', open: () => this.openSess(t.id, x.id) }); }
       if (x.k === 'dec') Object.assign(v, { time: x.time });
       if (x.k === 'rep') Object.assign(v, { pr: x.pr, checks: x.checks, openPr: () => this.say('Opens PR ' + x.pr + ' on GitHub') });
       if (x.k === 'ask') Object.assign(v, { rows: x.status === 'replied' ? [{ h: 'Your call', a: 'You answered in your own message' }] : (x.rows || []) });
@@ -1597,7 +1736,7 @@ class Component extends DCLogic {
     const total = this.total(); const used = Math.min(total - 1000, this.usedOf(t ? t.id : null)); const remaining = (total - used) / total;
     const draftFrac = Math.min(remaining * total, st.draft * TPC) / total; const gaugeCls = remaining < 0.15 ? 'low' : remaining < 0.4 ? 'mid' : 'ok';
     const isMax = st.effort === 4; const model = MODELS.find((m) => m.id === st.model) || MODELS[0]; const yolo = t ? !!t.yolo : !!st.yolo0;
-    const qd = this.qdFor(t); const sess = t ? t.items.filter((x) => x.k === 'sess').length : 0; const rows = this.rowsVals(ts, cur);
+    const qd = this.qdFor(t); const sess = t ? t.items.filter((x) => x.k === 'sess').length : 0; const rows = this.rowsVals(ts, cur); const svx = t ? t.items.find((x) => x.k === 'sess' && x.id === this.sessId()) || null : null;
     return {
       cls: ['home', st.focus ? 'focus' : '', isMax ? 'max' : '', yolo ? 'yolo' : ''].join(' '), sheetCls: t ? '' : 'empty',
       nav: NAV.map((n) => ({ ...n, cls: '', cur: false, hasBadge: !!n.badge, badge: n.badge || '', pick: () => {} })),
@@ -1615,7 +1754,7 @@ class Component extends DCLogic {
       onFind: (e) => this.setState({ find: e.target.value }),
       anyMenu: !!st.menu, closeMenus: () => this.setState({ menu: null }),
       menuKey: (e) => { if (e.key === 'Escape' && st.menu) { e.preventDefault(); this.setState({ menu: null }); } },
-      isEmpty: !t && !!a, hasThread: !!t, emptyWhere: ts.length ? 'or pick up a thread on the left' : who + ' keeps every thread, so you can come back to it',
+      isEmpty: !t && !!a, hasThread: !!t, showThread: !!t && !svx, showSess: !!svx, sv: svx ? this.svVals(t, svx) : {}, emptyWhere: ts.length ? 'or pick up a thread on the left' : who + ' keeps every thread, so you can come back to it',
       th: t ? { title: t.title } : { title: 'New thread' },
       sessCount: sess === 0 ? 'no sessions yet' : sess === 1 ? '1 session started' : sess + ' sessions started',
       // the composer's controls, the session's own: model and effort, the context gauge, YOLO
