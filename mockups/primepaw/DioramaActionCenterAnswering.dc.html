@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Inbox, nothing needs you, paper diorama, dark mode</title>
+<title>Action Center, answering questions, paper diorama</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -1096,6 +1096,128 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .bd-slip .bd-x{position:absolute;right:6px;top:6px}
 @media (prefers-reduced-motion:reduce){.bd-ask.on,.bd-slip{animation:none}}
 /* /buddy */
+/* ---------- Action Center: everything that waits on you on one full sheet (no board at the left): the factories as a strip across the top, then four sections in three columns.
+   What you settle here sits on a mat (amber for a question, a slip or a blocked task, sage for a finished report); a pull request, which you
+   settle on its own page, is a plain paper card. A card leaves once it is dealt with; a report stays until you dismiss it. ---------- */
+/* the totals: three counts by hand on one strip of paper */
+.ac-tot{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:10px 12px 9px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.07);border-radius:3px;box-shadow:var(--lift-1);transform:rotate(-.25deg)}
+.ac-tot div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ac-tot dt{font-family:var(--hand);font-size:30px;font-weight:600;line-height:1;color:var(--ink);white-space:nowrap}
+.ac-tot dt small{font-size:18px;font-weight:500;color:var(--mute)}
+.ac-tot dd{margin:0;font-size:11.5px;font-weight:800;line-height:1.2;color:var(--ink)}
+.ac-tot .ac-bad dt,.ac-tot .ac-bad dd{color:color-mix(in srgb,var(--red) 82%,var(--ink))}
+.ac-tot .ac-zero dt,.ac-tot .ac-zero dd{color:var(--faint)}
+/* one card per factory: its name by hand, its state as a dot and a word, a paper slot per place under its cap, the counts */
+.ac-facs{display:contents}
+.ac-fac{position:relative;display:flex;flex-direction:column;gap:7px;padding:10px 12px 9px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.07);border-radius:3px;box-shadow:var(--lift-1);transform:rotate(var(--rot,0deg));transition:transform .12s var(--ease),box-shadow .12s var(--ease),background-color .12s var(--ease)}
+.ac-fac:nth-child(odd){--rot:.2deg}.ac-fac:nth-child(even){--rot:-.2deg}
+.ac-fac:hover{background-color:var(--hover);transform:translateY(-2px) rotate(var(--rot,0deg));box-shadow:var(--lift-2)}
+.ac-fac:has(.ac-hit:focus-visible){outline:2px solid var(--blue);outline-offset:-2px}
+.ac-hit{all:unset;position:absolute;inset:0;z-index:0;cursor:pointer;border-radius:inherit}
+.ac-fac>*:not(.ac-hit){position:relative;pointer-events:none}
+.ac-fh{display:flex;align-items:center;gap:8px;min-width:0}
+.ac-fh b{flex:1;min-width:0;font-family:var(--hand);font-size:21px;font-weight:600;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-st{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;color:var(--ink);white-space:nowrap}
+.ac-st i{width:8px;height:8px;border-radius:50%;background-color:var(--st-green);box-shadow:var(--sticker-s)}
+.ac-st.ac-bad{color:color-mix(in srgb,var(--red) 82%,var(--ink))}.ac-st.ac-bad i{background-color:var(--st-red)}
+.ac-st.ac-cap i{background-color:var(--st-amber)}
+.ac-st.ac-off{color:var(--mute)}.ac-st.ac-off i{background-color:var(--faint);box-shadow:none}
+.obar{display:flex;gap:4px}
+.obar i{flex:1;height:10px;border-radius:2px;background-color:var(--paper-2);box-shadow:inset 1px 1px 2px rgba(0,0,0,.18)}
+.obar i.run{background-color:var(--st-green);background-image:var(--gloss);box-shadow:var(--sticker-s)}
+.obar i.wait{background-color:var(--st-amber);background-image:var(--gloss);box-shadow:var(--sticker-s)}
+.obar i.blk{background-color:var(--st-red);background-image:var(--gloss);box-shadow:var(--sticker-s)}
+.ac-fl{display:flex;align-items:baseline;gap:6px;font-family:var(--hand);font-size:14.5px;line-height:1.1;color:var(--mute);white-space:nowrap}
+.ac-fl b{font-weight:700;color:var(--ink)}
+.ac-fl span{margin-left:auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.ac-fac.ac-off .ac-fh b,.ac-fac.ac-off .tfac{opacity:.6}
+.ac-leg{margin:2px 4px 0;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--hand);font-size:15px;line-height:1.1;color:var(--ink);opacity:.85}
+.ac-leg span{display:inline-flex;align-items:center;gap:5px}
+.ac-leg i{width:14px;height:8px;border-radius:2px;box-shadow:var(--sticker-s)}
+.ac-leg .run{background-color:var(--st-green)}.ac-leg .wait{background-color:var(--st-amber)}.ac-leg .blk{background-color:var(--st-red)}
+/* ---------- the sheet: two columns of sections. What you answer and unblock on the left, what you review and read on the right ---------- */
+.acsheet .content.ac-page{gap:26px;padding-bottom:150px}
+.ac-ico{display:grid;place-items:center;width:30px;height:30px;flex:none;color:var(--ink)}
+.ac-ico svg{width:24px;height:24px}
+/* the factories: one strip across the top of the sheet, the totals first, then a card per factory */
+.ac-fsec{display:flex;flex-direction:column;gap:12px;min-width:0}
+.ac-fsec .ac-h .ac-leg{margin:0 0 0 auto}
+.ac-fstrip{display:grid;grid-template-columns:minmax(220px,.9fr) repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+.ac-fstrip .ac-tot{align-content:center}
+.ac-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 30px;align-items:start}
+/* the pager under a section that holds more than a page: two small card buttons, the range by hand, a dot per page */
+.ac-pg{display:flex;align-items:center;gap:8px;min-height:28px;padding:0 2px}
+.ac-pgb{width:28px;height:26px;padding:0;justify-content:center}
+.ac-pgb.off,.ac-pgb.off:hover,.ac-pgb.off:active{cursor:default;transform:none;opacity:.45;box-shadow:var(--lift-board-sm)}
+.ac-pgl{font-family:var(--hand);font-size:17px;line-height:1;color:var(--mute);white-space:nowrap}
+.ac-pgl b{font-weight:700;color:var(--ink)}
+.ac-pgd{display:inline-flex;align-items:center;gap:4px;margin-left:4px}
+.ac-pgd i{width:6px;height:6px;border-radius:50%;background-color:var(--bar)}
+.ac-pgd i.on{background-color:var(--ink)}
+.ac-h .ac-all{margin-left:auto;font-size:16px;font-weight:600}
+.ac-col{display:flex;flex-direction:column;gap:28px;min-width:0}
+.ac-sec{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ac-h{margin:0;display:flex;align-items:baseline;gap:10px;font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.2;color:var(--ink)}
+.ac-h small{font-family:var(--hand);font-size:17px;font-weight:500;color:var(--mute)}
+.ac-sec .tnone{margin:0 2px}
+.ac-out{animation:acout .3s var(--ease) both!important;pointer-events:none}
+@keyframes acout{to{opacity:0;transform:translateY(-8px) scale(.985)}}
+/* a question card: the dock card from the session, with where it came from under the line */
+.ac-sec .qdock{margin:0}
+.ac-sec .qdock-in{position:relative}
+.qph .jface{width:32px;height:32px}
+.qph .ac-bot{width:26px;height:26px;color:var(--ink)}
+.qdlg-h .qph .jface{width:27px;height:27px}
+.qdlg-h .qph .ac-bot{width:22px;height:22px}
+.ac-q .qdock-t>span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ac-q .ac-from{font-family:var(--body,inherit);font-size:12px;font-weight:700;color:var(--mute);line-height:1.3}
+.ac-q.done .abtn{visibility:hidden}
+.ac-q .pstamp{position:absolute;right:14px;top:50%;margin-top:-13px;animation:stampdown .26s var(--ease-pop) both}
+.ac-sec .slipw{margin:0;max-width:none}
+.ac-slipfrom{margin:-6px 2px 0 4px;font-family:var(--hand);font-size:15px;line-height:1.1;color:var(--mute)}
+/* a blocked task: the factory card on the amber mat, the reason in words, the one button that fits the reason, and Open task */
+.ac-sec .fcard{max-width:none}
+.ac-sec .fcard.needs{margin:7px 8px 4px 7px;max-width:none}
+.ac-b .fcard-h{gap:6px 10px}
+.ac-b.going .fcard-p{color:var(--ink)}
+.ac-b .fcard-act.settled{visibility:visible}
+.ac-b .fcard-act.settled .abtn{display:none}
+/* a pull request: a plain paper card that opens the PR on the PRs page, with GitHub as a hand-written link */
+.ac-pr{display:block;transition:transform .12s var(--ease),box-shadow .12s var(--ease),background-color .12s var(--ease)}
+.ac-pr:hover{background-color:var(--hover);transform:translateY(-2px);box-shadow:var(--lift-3,var(--lift-2))}
+.ac-pr:has(.ac-hit:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+.ac-pr>*:not(.ac-hit){position:relative;pointer-events:none}
+.ac-pr .fcard-h small{margin-left:auto}
+.ac-pr .fcard-p{margin-top:6px;font-size:13.5px}
+.ac-prf{display:flex;align-items:center;gap:12px;margin-top:8px}
+.ac-prf .chk{margin-right:auto}
+.ac-prf .rpt-a{pointer-events:auto;font-size:16px}
+/* a finished report: a compact card on the sage mat; it opens the whole report in a dialog */
+.ac-rep{position:relative;padding:5px;background-color:color-mix(in srgb,var(--mat-green) 72%,var(--board));background-image:var(--face),var(--pulp-board);border:1.5px solid var(--mat-green-2);border-radius:8px;box-shadow:1.5px 2px 0 var(--mat-green-2),4px 6px 7px var(--amb);transition:transform .12s var(--ease)}
+.ac-rep:hover{transform:translateY(-2px)}
+.ac-rep:has(.ac-hit:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+.ac-rep>*:not(.ac-hit){position:relative;pointer-events:none}
+.ac-rep-in{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:10px 14px 10px 12px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border-radius:4px;box-shadow:var(--lift-1)}
+.ac-rep-in .tfac{grid-row:1 / span 2;width:26px;height:26px}
+.ac-rep-in .tfac svg{width:16px;height:16px}
+.ac-rep-t{min-width:0;font-size:14.5px;font-weight:800;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-rep-t code{margin-right:7px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--mute)}
+.ac-rep-l{grid-column:2;min-width:0;font-family:var(--hand);font-size:15.5px;line-height:1.15;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-rep-in .pstamp{grid-column:3;grid-row:1 / span 2;height:22px;font-size:11px}
+/* Finished runs the full width under the three columns, its reports three across, so no column is left with a hole beside it */
+.ac-reps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 30px;align-items:start}
+.ac-reps:empty{display:none}
+/* the report dialog: the whole report over the board, with Close and Dismiss at its foot */
+.rd{position:relative;width:min(840px,100%);animation:dropflat .24s var(--ease) both}
+.rd:focus{outline:none}
+.rd .rpt{max-width:none}
+.rd .rpt-in{max-height:calc(100vh - 64px);box-sizing:border-box;overflow:auto;overscroll-behavior:contain}
+.rd .rpt-f{position:sticky;bottom:-14px;z-index:2;margin:0 -20px -14px;padding:12px 20px 14px;background-color:var(--sheet);background-image:var(--face),var(--pulp);box-shadow:0 -6px 8px -6px var(--amb)}
+/* nothing waiting: the hello sheet */
+.acsheet .ihello .hello-in{max-width:640px;align-items:flex-start}
+@container (max-width:1080px){.ac-reps{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-fstrip{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-fstrip .ac-tot{grid-column:1 / -1}}
+@container (max-width:700px){.ac-grid,.ac-fstrip,.ac-reps{grid-template-columns:minmax(0,1fr)}.ac-fsec .ac-h .ac-leg{display:none}}
+@media (prefers-reduced-motion:reduce){.ac-out{animation:none!important;opacity:0}.ac-fac,.ac-pr,.ac-rep{transition:none}}
 </style>
 </helmet>
 <div class="page {{cls}} {{themeCls}}">
@@ -1116,104 +1238,152 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
     <button class="rb" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg><span>Settings</span></button>
   </nav></div>
 
-  <aside class="panel board tpanel ipanel" aria-label="Inbox">
-    <div class="ptop">
-      <div class="jhead ihead"><span class="ibig" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5"></path></svg></span><div><b>Inbox</b><small>{{countLine}}</small></div></div>
-      <div class="filters" role="group" aria-label="Show"><sc-for list="{{filters}}" as="f" hint-placeholder-count="4"><button class="abtn fbtn {{f.cls}}" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
-    </div>
-    <div class="list trows">
-      <sc-for list="{{convs}}" as="c" hint-placeholder-count="5">
-        <div class="trow irow {{c.cls}}">
-          <button class="rowhit" onClick="{{c.pick}}" aria-current="{{c.cur}}" aria-label="{{c.aria}}"></button>
-          <span class="ir-top"><span class="ir-src {{c.src}}">{{c.src}}</span><span class="tr-t">{{c.title}}</span></span>
-          <span class="tr-tm">{{c.time}}</span>
-          <span class="tr-l">{{c.line}}</span>
-          <span class="tr-r"><sc-if value="{{c.unread}}" hint-placeholder-val="{{false}}"><i class="udot" aria-hidden="true"></i></sc-if><sc-if value="{{c.needs}}" hint-placeholder-val="{{false}}"><span class="nb" aria-label="{{c.needsAria}}">{{c.needsN}}</span></sc-if></span>
-        </div>
-      </sc-for>
-      <sc-if value="{{noConvs}}" hint-placeholder-val="{{false}}"><p class="tnone">{{noneText}}</p></sc-if>
-    </div>
-  </aside>
-
-<div class="sheet hsheet isheet {{sheetCls}}">
-  <sc-if value="{{hasConv}}" hint-placeholder-val="{{true}}">
+<div class="sheet hsheet isheet acsheet {{sheetCls}}">
+  <sc-if value="{{hasAny}}" hint-placeholder-val="{{true}}">
   <header class="top htop">
-    <div class="ttl"><h1>{{convTitle}}</h1></div>
-    <div class="meta"><span class="scount">{{convMeta}}</span></div>
-    <div class="top-r"><button class="abtn" onClick="{{openSource}}">{{openLabel}}</button></div>
+    <div class="ttl"><span class="ac-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></span><h1>Action Center</h1></div>
+    <div class="meta"><span class="scount">{{headLine}}</span></div>
   </header>
-  <div class="leaf"><div class="maincol"><div class="content icontent">
-    <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
-      <article class="iitem {{it.cls}}" aria-label="{{it.aria}}">
-        <div class="ihd">
-          <button class="imark {{it.readCls}}" onClick="{{it.toggleRead}}" aria-pressed="{{it.unread}}" title="{{it.readTitle}}" aria-label="{{it.readTitle}}"><i aria-hidden="true"></i></button>
-          <span class="ikind">{{it.kindLabel}}</span><span class="iwho">{{it.from}}</span><time class="itime">{{it.time}}</time>
-          <sc-if value="{{it.notRep}}" hint-placeholder-val="{{true}}"><button class="idone" onClick="{{it.archive}}" title="Done, archive it" aria-label="Done, archive it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg><span>Done</span></button></sc-if>
-        </div>
-        <sc-if value="{{it.isQ}}" hint-placeholder-val="{{true}}">
-          <section class="slipw qinl {{it.q.cls}}" aria-label="Question" aria-live="polite">
-            <sc-if value="{{it.q.open}}" hint-placeholder-val="{{true}}"><div class="slip"><span class="tape" aria-hidden="true"></span>
-              <div class="slip-h"><h4 class="slip-q">{{it.q.lead}}</h4><span class="slip-k"><i class="dot ask" aria-hidden="true" style="animation: none"></i>question</span></div>
-              <p class="qprob">{{it.q.problem}}</p>
-              <h4 class="qq">{{it.q.text}}</h4>
-              <span class="qhint">{{it.q.hint}}</span>
-              <div class="qopts" role="radiogroup" aria-label="{{it.q.text}}"><sc-for list="{{it.q.opts}}" as="o" hint-placeholder-count="3"><div class="qopt"><button class="qbtn {{o.cls}}" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}"><span class="qk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{o.name}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sticker qrec">suggested</span></sc-if></button><p class="qdesc">{{o.desc}}</p></div></sc-for></div>
-              <div class="slip-act {{it.q.actCls}}"><button class="abtn go {{it.q.submitCls}}" aria-disabled="{{it.q.notReady}}" onClick="{{it.q.submit}}">{{it.q.submitLabel}}</button><span class="slip-or">or ask about it below</span></div>
-              <sc-if value="{{it.q.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp ok" role="status">ANSWERED</span></sc-if>
-            </div></sc-if>
-            <sc-if value="{{it.q.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><dl class="qdone"><dt>{{it.q.head}}</dt><dd>{{it.q.answer}}</dd></dl><span class="pstamp ok">ANSWERED</span></div></sc-if>
-          </section>
-          <sc-if value="{{it.hasBy}}" hint-placeholder-val="{{false}}"><p class="iby">{{it.byVerb}} <b>{{it.byWho}}</b> · {{it.byAt}}</p></sc-if>
-          <sc-if value="{{it.q.hasAsk}}" hint-placeholder-val="{{true}}"><div class="iask">
-            <sc-for list="{{it.q.asks}}" as="a" hint-placeholder-count="2"><sc-if value="{{a.isYou}}" hint-placeholder-val="{{true}}"><div class="iask-t you"><div class="note"><div class="note-in">{{a.text}}</div></div></div></sc-if><sc-if value="{{a.isJ}}" hint-placeholder-val="{{false}}"><div class="iask-t jarvis"><span class="qph sm" aria-hidden="true"><span class="jface" aria-hidden="true"></span></span><p class="jsay">{{a.text}}</p></div></sc-if></sc-for>
-            <sc-if value="{{it.q.open}}" hint-placeholder-val="{{true}}"><div class="iask-box"><label class="sr" for="{{it.q.askId}}">Ask about this</label><input id="{{it.q.askId}}" class="iask-in" placeholder="Ask about this…" ref="{{it.q.askRef}}" onKeyDown="{{it.q.askKey}}"><button class="abtn iask-go" onClick="{{it.q.askSend}}">Ask</button></div></sc-if>
-          </div></sc-if>
-        </sc-if>
-        <sc-if value="{{it.isSlip}}" hint-placeholder-val="{{false}}"><section class="slipw {{it.slip.cls}}" aria-label="Permission request" aria-live="polite" ref="{{it.slip.ref}}">
-  <sc-if value="{{it.slip.open}}" hint-placeholder-val="{{true}}"><div class="slip"><span class="tape" aria-hidden="true"></span>
-    <div class="slip-h"><h4 class="slip-q">{{it.slip.ask}}</h4><span class="slip-k"><i class="dot {{it.slip.kind}}" aria-hidden="true" style="animation: none"></i>{{it.slip.kind}}</span></div>
-    <sc-if value="{{it.slip.isCmd}}" hint-placeholder-val="{{true}}"><code class="slip-cmd">{{it.slip.cmd}}</code></sc-if>
-    <sc-if value="{{it.slip.isDiff}}" hint-placeholder-val="{{false}}"><div class="slip-file"><span>{{it.slip.cmd}}</span><span class="sum">{{it.slip.sum}}</span></div><ol class="slip-diff"><sc-for list="{{it.slip.diff}}" as="dl" hint-placeholder-count="4"><li class="{{dl.c}}">{{dl.t}}</li></sc-for></ol></sc-if>
-    <p class="slip-why">{{it.slip.why}}</p>
-    <ul class="slip-tags"><sc-for list="{{it.slip.tags}}" as="tg" hint-placeholder-count="2"><li>{{tg.t}}</li></sc-for></ul>
-    <div class="slip-act {{it.slip.actCls}}"><button class="abtn go" onClick="{{it.slip.allow}}">Allow once</button><button class="abtn" onClick="{{it.slip.always}}">Allow for this session</button><button class="abtn" onClick="{{it.slip.deny}}">Deny</button><span class="slip-or">or open the session to say what to do instead</span></div>
-    <sc-if value="{{it.slip.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{it.slip.stampCls}}" role="status">{{it.slip.stamp}}</span></sc-if>
+  <div class="leaf"><div class="maincol"><div class="content icontent ac-page">
+    <section class="ac-fsec" aria-labelledby="ac-h-fac">
+      <h2 class="ac-h" id="ac-h-fac">Factories<small>{{facLine}}</small><span class="ac-leg" aria-hidden="true"><span><i class="run"></i>working</span><span><i class="wait"></i>waiting on you</span><span><i class="blk"></i>blocked</span></span></h2>
+      <div class="ac-fstrip">
+        <dl class="ac-tot" aria-label="All factories">
+        <div><dt>{{totRun}}</dt><dd>running</dd></div>
+        <div><dt>{{totUsed}}<small> of {{totCap}}</small></dt><dd>slots used</dd></div>
+        <div class="{{totBlkCls}}"><dt>{{totBlk}}</dt><dd>blocked</dd></div>
+      </dl>
+        <div class="ac-facs">
+        <sc-for list="{{facs}}" as="f" hint-placeholder-count="4">
+          <div class="ac-fac {{f.cls}}">
+            <button class="ac-hit" onClick="{{f.open}}" aria-label="{{f.aria}}"></button>
+            <span class="ac-fh"><span class="tfac" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span><b>{{f.name}}</b><span class="ac-st {{f.stCls}}"><i aria-hidden="true"></i>{{f.state}}</span></span>
+            <span class="obar" aria-hidden="true"><sc-for list="{{f.slots}}" as="s" hint-placeholder-count="6"><i class="{{s.cls}}"></i></sc-for></span>
+            <span class="ac-fl"><b>{{f.used}}</b> of {{f.cap}} slots<span>{{f.counts}}</span></span>
+          </div>
+        </sc-for>
+      </div>
+      </div>
+    </section>
+    <div class="ac-grid">
+    <div class="ac-col">
+      <section class="ac-sec" aria-labelledby="ac-h-answer">
+        <h2 class="ac-h" id="ac-h-answer">Needs your answer<small>{{nAnswer}}</small></h2>
+        <sc-for list="{{answers}}" as="a" hint-placeholder-count="3">
+          <sc-if value="{{a.isQ}}" hint-placeholder-val="{{true}}"><section class="qdock ac-q {{a.cls}}" aria-label="{{a.aria}}"><div class="qdock-in">
+            <span class="qph" aria-hidden="true"><sc-if value="{{a.isJ}}" hint-placeholder-val="{{false}}"><span class="jface" aria-hidden="true"></span></sc-if><sc-if value="{{a.isBot}}" hint-placeholder-val="{{true}}"><svg class="ac-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if></span>
+            <div class="qdock-t"><b><span class="qwho">{{a.who}}</span> has {{a.count}}</b><span>{{a.sub}}</span><span class="ac-from">{{a.where}}</span></div>
+            <button class="abtn go" onClick="{{a.open}}">Answer</button>
+            <sc-if value="{{a.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp ok" role="status">ANSWERED</span></sc-if>
+          </div></section></sc-if>
+                  <sc-if value="{{a.isSlip}}" hint-placeholder-val="{{false}}"><section class="slipw {{a.slip.cls}}" aria-label="Permission request" aria-live="polite" ref="{{a.slip.ref}}">
+  <sc-if value="{{a.slip.open}}" hint-placeholder-val="{{true}}"><div class="slip"><span class="tape" aria-hidden="true"></span>
+    <div class="slip-h"><h4 class="slip-q">{{a.slip.ask}}</h4><span class="slip-k"><i class="dot {{a.slip.kind}}" aria-hidden="true" style="animation: none"></i>{{a.slip.kind}}</span></div>
+    <sc-if value="{{a.slip.isCmd}}" hint-placeholder-val="{{true}}"><code class="slip-cmd">{{a.slip.cmd}}</code></sc-if>
+    <sc-if value="{{a.slip.isDiff}}" hint-placeholder-val="{{false}}"><div class="slip-file"><span>{{a.slip.cmd}}</span><span class="sum">{{a.slip.sum}}</span></div><ol class="slip-diff"><sc-for list="{{a.slip.diff}}" as="dl" hint-placeholder-count="4"><li class="{{dl.c}}">{{dl.t}}</li></sc-for></ol></sc-if>
+    <p class="slip-why">{{a.slip.why}}</p>
+    <ul class="slip-tags"><sc-for list="{{a.slip.tags}}" as="tg" hint-placeholder-count="2"><li>{{tg.t}}</li></sc-for></ul>
+    <div class="slip-act {{a.slip.actCls}}"><button class="abtn go" onClick="{{a.slip.allow}}">Allow once</button><button class="abtn" onClick="{{a.slip.always}}">Allow for this session</button><button class="abtn" onClick="{{a.slip.deny}}">Deny</button><span class="slip-or">or open the session to say what to do instead</span></div>
+    <sc-if value="{{a.slip.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{a.slip.stampCls}}" role="status">{{a.slip.stamp}}</span></sc-if>
   </div></sc-if>
-  <sc-if value="{{it.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{it.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{it.slip.cmd}}</code><span class="pstamp {{it.slip.stampCls}}">{{it.slip.stamp}}</span></div></sc-if>
+  <sc-if value="{{a.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{a.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{a.slip.cmd}}</code><span class="pstamp {{a.slip.stampCls}}">{{a.slip.stamp}}</span></div></sc-if>
 </section></sc-if>
-        <sc-if value="{{it.isRep}}" hint-placeholder-val="{{false}}"><section class="rpt" aria-label="Finish report, {{it.r.key}} {{it.r.title}}"><div class="rpt-in">
-          <header class="rpt-h"><sc-if value="{{it.r.isFac}}" hint-placeholder-val="{{true}}"><span class="tfac" title="Factory task"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span></sc-if><sc-if value="{{it.r.isJ}}" hint-placeholder-val="{{false}}"><span class="jface" title="Jarvis"></span></sc-if><div class="rpt-ht"><span class="rpt-key">{{it.r.key}}</span><h3 class="rpt-t">{{it.r.title}}</h3></div><span class="pstamp ok" aria-hidden="true">DONE</span></header>
-          <dl class="rpt-facts"><dt>Completed</dt><dd>{{it.r.done}}</dd><dt>Took</dt><dd>{{it.r.total}}<small>{{it.r.across}}</small></dd><dt>Links</dt><dd><button class="rpt-a" onClick="{{it.r.openTracker}}" title="Open the issue in the tracker">{{it.r.tracker}}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button><button class="rpt-a" onClick="{{it.r.openBoard}}" title="Open the task on its board"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{it.r.board}}</button><span class="prchip">{{it.r.prLine}}</span></dd></dl>
-          <div class="rpt-steps" aria-label="Time by session"><sc-for list="{{it.r.steps}}" as="s" hint-placeholder-count="5"><span class="rpt-step" title="{{s.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"></path></svg>{{s.label}}<i>{{s.time}}</i></span></sc-for></div>
-          <section class="rpt-sec"><h4>What was done</h4><p class="rpt-p">{{it.r.summary}}</p><ul class="rpt-ul"><sc-for list="{{it.r.points}}" as="p" hint-placeholder-count="3"><li>{{p.t}}</li></sc-for></ul></section>
-          <section class="rpt-sec"><h4>Questions along the way<small>{{it.r.qLine}}</small></h4><div class="rpt-qs"><sc-for list="{{it.r.qs}}" as="q" hint-placeholder-count="3"><div class="rpt-q"><div class="rpt-qh"><span class="stg" title="{{q.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{q.icon}}"></path></svg></span><b>{{q.text}}</b><small>{{q.asked}}</small></div><ul class="rpt-opts" aria-label="Options given"><sc-for list="{{q.opts}}" as="o" hint-placeholder-count="3"><li class="rpt-o {{o.cls}}"><sc-if value="{{o.on}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{o.name}}</li></sc-for></ul><p class="rpt-ans">Answer: <b>{{q.answer}}</b><span class="rpt-by {{q.byCls}}" title="{{q.byTitle}}"><sc-if value="{{q.isAgent}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if><sc-if value="{{q.isYou}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 21a7.5 7.5 0 0 1 15 0"></path></svg></sc-if>{{q.by}}</span></p></div></sc-for></div></section>
-          <section class="rpt-sec"><h4>Retro</h4><div class="rpt-cols"><div class="rpt-col good"><h5>Went well</h5><ul><sc-for list="{{it.r.well}}" as="w" hint-placeholder-count="3"><li>{{w.t}}</li></sc-for></ul></div><div class="rpt-col bad"><h5>Went wrong</h5><ul><sc-for list="{{it.r.wrong}}" as="w" hint-placeholder-count="2"><li>{{w.t}}</li></sc-for></ul></div><div class="rpt-col act"><h5>Action items</h5><ul><sc-for list="{{it.r.actions}}" as="a" hint-placeholder-count="3"><li class="{{a.cls}}"><button class="rpt-box {{a.boxCls}}" role="checkbox" aria-checked="{{a.done}}" aria-label="{{a.t}}" onClick="{{a.toggle}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></button><span><span class="ax">{{a.t}}</span><small>{{a.owner}}</small></span></li></sc-for></ul></div></div></section>
-          <footer class="rpt-f"><span class="rpt-fn">{{it.r.foot}}</span><button class="abtn" onClick="{{it.archive}}">Dismiss</button></footer>
-        </div></section></sc-if>
-        <sc-if value="{{it.isFac}}" hint-placeholder-val="{{false}}"><section class="fcard {{it.fcls}}" aria-label="{{it.kindLabel}}"><div class="fcard-h"><span class="sticker {{it.stCls}}">{{it.status}}</span><b>{{it.task}}</b><small>{{it.col}}</small></div><p class="fcard-p">{{it.text}}</p><div class="fcard-act"><button class="abtn go" onClick="{{it.act}}">{{it.action}}</button><span class="fcard-or">{{it.or}}</span></div></section></sc-if>
-        <sc-if value="{{it.isPr}}" hint-placeholder-val="{{false}}">
-          <sc-if value="{{it.prOpen}}" hint-placeholder-val="{{true}}"><section class="fcard needs prcard" aria-label="Pull request"><div class="fcard-h"><span class="prchip">{{it.prLabel}}</span><b>{{it.title}}</b><small>{{it.where}}</small></div><p class="pr-meta">{{it.meta}} · <span class="chk {{it.chkCls}}"><sc-if value="{{it.chkOk}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{it.checks}}</span></p><p class="fcard-p">{{it.text}}</p><div class="fcard-act {{it.actCls}}"><button class="abtn go" onClick="{{it.openPr}}">Open the PR</button><button class="abtn" onClick="{{it.approve}}">Approve</button><span class="fcard-or">or request changes on GitHub</span></div><sc-if value="{{it.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp ok" role="status">APPROVED</span></sc-if></section></sc-if>
-          <sc-if value="{{it.prFolded}}" hint-placeholder-val="{{false}}"><section class="slipw stub" aria-label="Reviewed"><div class="slip done"><dl class="qdone"><dt>PR {{it.pr}}</dt><dd>{{it.title}}</dd></dl><span class="pstamp ok">APPROVED</span></div></section></sc-if>
-          <sc-if value="{{it.hasBy}}" hint-placeholder-val="{{false}}"><p class="iby">{{it.byVerb}} <b>{{it.byWho}}</b> · {{it.byAt}}</p></sc-if>
-        </sc-if>
-        <sc-if value="{{it.isSlip}}" hint-placeholder-val="{{false}}"><sc-if value="{{it.hasBy}}" hint-placeholder-val="{{false}}"><p class="iby">{{it.byVerb}} <b>{{it.byWho}}</b> · {{it.byAt}}</p></sc-if></sc-if>
-      </article>
-    </sc-for>
-    <sc-if value="{{noItems}}" hint-placeholder-val="{{false}}"><p class="tnone inone">{{noItemsText}}</p></sc-if>
+          <sc-if value="{{a.isSlip}}" hint-placeholder-val="{{false}}"><p class="ac-slipfrom {{a.cls}}">{{a.where}}</p></sc-if>
+        </sc-for>
+        <sc-if value="{{pgA.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of things to answer"><button class="abtn ac-pgb {{pgA.prevCls}}" onClick="{{pgA.prev}}" aria-disabled="{{pgA.first}}" aria-label="Previous things to answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgA.range}}</b> of {{pgA.total}}</span><button class="abtn ac-pgb {{pgA.nextCls}}" onClick="{{pgA.next}}" aria-disabled="{{pgA.last}}" aria-label="Next things to answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgA.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        <sc-if value="{{noAnswers}}" hint-placeholder-val="{{false}}"><p class="tnone">Nothing to answer.</p></sc-if>
+      </section>
+    </div>
+    <div class="ac-col">
+      <section class="ac-sec" aria-labelledby="ac-h-blocked">
+        <h2 class="ac-h" id="ac-h-blocked">Blocked<small>{{nBlocked}}</small></h2>
+        <sc-for list="{{blocked}}" as="b" hint-placeholder-count="3">
+          <section class="fcard needs ac-b {{b.cls}}" aria-label="{{b.aria}}" aria-live="polite">
+            <div class="fcard-h"><span class="sticker {{b.stCls}}"><sc-if value="{{b.busy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if>{{b.status}}</span><b>{{b.task}}</b><small>{{b.where}}</small></div>
+            <p class="fcard-p">{{b.text}}</p>
+            <div class="fcard-act {{b.actCls}}"><button class="abtn go" onClick="{{b.act}}">{{b.action}}</button><button class="abtn" onClick="{{b.open}}">Open task</button><span class="fcard-or">{{b.note}}</span></div>
+          </section>
+        </sc-for>
+        <sc-if value="{{pgB.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of blocked tasks"><button class="abtn ac-pgb {{pgB.prevCls}}" onClick="{{pgB.prev}}" aria-disabled="{{pgB.first}}" aria-label="Previous blocked tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgB.range}}</b> of {{pgB.total}}</span><button class="abtn ac-pgb {{pgB.nextCls}}" onClick="{{pgB.next}}" aria-disabled="{{pgB.last}}" aria-label="Next blocked tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgB.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        <sc-if value="{{noBlocked}}" hint-placeholder-val="{{false}}"><p class="tnone">Nothing is blocked.</p></sc-if>
+      </section>
+    </div>
+    <div class="ac-col">
+      <section class="ac-sec" aria-labelledby="ac-h-prs">
+        <h2 class="ac-h" id="ac-h-prs">PRs to approve<small>{{nPrs}}</small><button class="rpt-a ac-all" onClick="{{allPrs}}">All in PRs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16L18 6M10 6h8v8"></path></svg></button></h2>
+        <sc-for list="{{prs}}" as="p" hint-placeholder-count="3">
+          <section class="fcard prcard ac-pr" aria-label="{{p.aria}}">
+            <button class="ac-hit" onClick="{{p.open}}" aria-label="{{p.hitAria}}"></button>
+            <div class="fcard-h"><span class="prchip">{{p.label}}</span><b>{{p.title}}</b><small>{{p.time}}</small></div>
+            <p class="pr-meta">{{p.where}} · {{p.meta}}</p>
+            <p class="fcard-p">{{p.text}}</p>
+            <div class="ac-prf"><span class="chk {{p.chkCls}}"><sc-if value="{{p.chkOk}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if><sc-if value="{{p.chkBad}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg></sc-if>{{p.checks}}</span><button class="rpt-a" onClick="{{p.github}}">Open on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16L18 6M10 6h8v8"></path></svg></button></div>
+          </section>
+        </sc-for>
+        <sc-if value="{{pgP.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of pull requests"><button class="abtn ac-pgb {{pgP.prevCls}}" onClick="{{pgP.prev}}" aria-disabled="{{pgP.first}}" aria-label="Previous pull requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgP.range}}</b> of {{pgP.total}}</span><button class="abtn ac-pgb {{pgP.nextCls}}" onClick="{{pgP.next}}" aria-disabled="{{pgP.last}}" aria-label="Next pull requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgP.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        <sc-if value="{{noPrs}}" hint-placeholder-val="{{false}}"><p class="tnone">No pull requests wait for you.</p></sc-if>
+      </section>
+    </div>
+    </div>
+      <section class="ac-sec ac-done" aria-labelledby="ac-h-done">
+        <h2 class="ac-h" id="ac-h-done">Finished<small>{{nReports}}</small></h2>
+        <div class="ac-reps"><sc-for list="{{reports}}" as="r" hint-placeholder-count="2">
+          <section class="ac-rep" aria-label="{{r.aria}}">
+            <button class="ac-hit" onClick="{{r.open}}" aria-label="{{r.hitAria}}"></button>
+            <div class="ac-rep-in"><span class="tfac" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span>
+              <span class="ac-rep-t"><code>{{r.key}}</code>{{r.title}}</span><span class="pstamp ok" aria-hidden="true">DONE</span>
+              <span class="ac-rep-l">{{r.line}}</span></div>
+          </section>
+        </sc-for></div>
+        <sc-if value="{{pgR.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of reports"><button class="abtn ac-pgb {{pgR.prevCls}}" onClick="{{pgR.prev}}" aria-disabled="{{pgR.first}}" aria-label="Previous reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgR.range}}</b> of {{pgR.total}}</span><button class="abtn ac-pgb {{pgR.nextCls}}" onClick="{{pgR.next}}" aria-disabled="{{pgR.last}}" aria-label="Next reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgR.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        <sc-if value="{{noReports}}" hint-placeholder-val="{{false}}"><p class="tnone">No reports to read.</p></sc-if>
+      </section>
   </div></div></div>
   </sc-if>
   <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
-    <section class="hello ihello" aria-label="{{emptyHead}}"><div class="hello-in"><h1 class="hi">{{emptyHead}}</h1><p class="hi2">{{emptyLine}}</p><p class="orl">{{emptyWhere}}</p></div></section>
+    <section class="hello ihello" aria-label="Nothing needs you"><div class="hello-in"><h1 class="hi">Nothing needs you.</h1><p class="hi2">Questions, blocked tasks, pull requests to approve and finish reports land here as they come.</p><p class="orl">The factories keep going; the tile on the rail shows a count when something waits.</p></div></section>
   </sc-if>
   <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}"><div class="htoast" role="status"><span>{{toast}}</span><sc-if value="{{toastUndo}}" hint-placeholder-val="{{false}}"><button onClick="{{undo}}">Undo</button></sc-if></div></sc-if>
 </div>
 </div>
+<sc-if value="{{qd.open}}" hint-placeholder-val="{{false}}"><div class="qdlg-wrap" onKeyDown="{{qd.key}}">
+  <button class="qdlg-scrim" tabIndex="-1" aria-hidden="true" onClick="{{qd.close}}"></button>
+  <section class="qdlg" role="dialog" aria-modal="true" aria-labelledby="qdlg-h" ref="{{qd.dlgRef}}">
+    <div class="qtabs" role="tablist" aria-label="Questions" onKeyDown="{{qd.tabKey}}"><sc-for list="{{qd.tabs}}" as="t" hint-placeholder-count="3"><button class="qtab {{t.cls}}" role="tab" id="{{t.id}}" aria-selected="{{t.sel}}" aria-controls="qpanel" tabIndex="{{t.tab}}" onClick="{{t.pick}}" ref="{{t.ref}}"><span class="qtick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{t.label}}<sc-if value="{{t.done}}" hint-placeholder-val="{{false}}"><span class="sr">, answered</span></sc-if></button></sc-for></div>
+    <div class="qpaper">
+      <header class="qdlg-h"><span class="qph" aria-hidden="true"><sc-if value="{{qd.isJ}}" hint-placeholder-val="{{false}}"><span class="jface" aria-hidden="true"></span></sc-if><sc-if value="{{qd.isBot}}" hint-placeholder-val="{{true}}"><svg class="ac-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if></span><h3 id="qdlg-h"><span class="qwho">{{qd.who}}</span> has {{qd.count}}<small>{{qd.where}}</small></h3><button class="qx" onClick="{{qd.close}}" aria-label="Close. Your answers are kept." title="Close. Your answers are kept."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
+      <div class="qpanel" role="tabpanel" id="qpanel" aria-labelledby="{{qd.tabId}}">
+        <p class="qprob">{{qd.problem}}</p>
+        <h4 class="qq">{{qd.question}}</h4>
+        <span class="qhint">{{qd.hint}}</span>
+        <sc-if value="{{qd.isOne}}" hint-placeholder-val="{{true}}"><div class="qopts" role="radiogroup" aria-label="{{qd.question}}"><sc-for list="{{qd.opts}}" as="o" hint-placeholder-count="3"><div class="qopt"><button class="qbtn {{o.cls}}" role="radio" aria-checked="{{o.on}}" aria-describedby="{{o.descId}}" onClick="{{o.pick}}"><span class="qk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{o.name}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sr">, recommended</span></sc-if></button><sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sticker qrec" aria-hidden="true">Recommended</span></sc-if><p class="qdesc" id="{{o.descId}}">{{o.desc}}</p></div></sc-for></div></sc-if>
+        <sc-if value="{{qd.isMulti}}" hint-placeholder-val="{{false}}"><div class="qopts" role="group" aria-label="{{qd.question}}"><sc-for list="{{qd.opts}}" as="o" hint-placeholder-count="3"><div class="qopt"><button class="qchk {{o.cls}}" role="checkbox" aria-checked="{{o.on}}" aria-describedby="{{o.descId}}" onClick="{{o.pick}}"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></span>{{o.name}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sr">, recommended</span></sc-if></button><sc-if value="{{o.rec}}" hint-placeholder-val="{{false}}"><span class="sticker qrec" aria-hidden="true">Recommended</span></sc-if><p class="qdesc" id="{{o.descId}}">{{o.desc}}</p></div></sc-for></div></sc-if>
+      </div>
+      <footer class="qdlg-f"><span class="qstep">{{qd.step}}</span><sc-if value="{{qd.hasNext}}" hint-placeholder-val="{{true}}"><button class="abtn" onClick="{{qd.next}}">Next question</button></sc-if><button class="abtn go {{qd.submitCls}}" aria-disabled="{{qd.notReady}}" onClick="{{qd.submit}}">{{qd.submitLabel}}</button></footer>
+      <sc-if value="{{qd.hasStamp}}" hint-placeholder-val="{{false}}"><span class="pstamp {{qd.stampCls}}" role="status">{{qd.stamp}}</span></sc-if>
+    </div>
+  </section>
+</div></sc-if>
+<sc-if value="{{rd.open}}" hint-placeholder-val="{{false}}"><div class="qdlg-wrap rd-wrap" onKeyDown="{{rd.key}}">
+  <button class="qdlg-scrim" tabIndex="-1" aria-hidden="true" onClick="{{rd.close}}"></button>
+  <div class="rd" role="dialog" aria-modal="true" aria-label="{{rd.aria}}" tabIndex="-1" ref="{{rd.ref}}">
+            <section class="rpt" aria-label="Finish report, {{rd.r.key}} {{rd.r.title}}"><div class="rpt-in">
+          <header class="rpt-h"><sc-if value="{{rd.r.isFac}}" hint-placeholder-val="{{true}}"><span class="tfac" title="Factory task"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1"></path></svg></span></sc-if><sc-if value="{{rd.r.isJ}}" hint-placeholder-val="{{false}}"><span class="jface" title="Jarvis"></span></sc-if><div class="rpt-ht"><span class="rpt-key">{{rd.r.key}}</span><h3 class="rpt-t">{{rd.r.title}}</h3></div><span class="pstamp ok" aria-hidden="true">DONE</span></header>
+          <dl class="rpt-facts"><dt>Completed</dt><dd>{{rd.r.done}}</dd><dt>Took</dt><dd>{{rd.r.total}}<small>{{rd.r.across}}</small></dd><dt>Links</dt><dd><button class="rpt-a" onClick="{{rd.r.openTracker}}" title="Open the issue in the tracker">{{rd.r.tracker}}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button><button class="rpt-a" onClick="{{rd.r.openBoard}}" title="Open the task on its board"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v7h-4z"></path></svg>{{rd.r.board}}</button><span class="prchip">{{rd.r.prLine}}</span></dd></dl>
+          <div class="rpt-steps" aria-label="Time by session"><sc-for list="{{rd.r.steps}}" as="s" hint-placeholder-count="5"><span class="rpt-step" title="{{s.title}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"></path></svg>{{s.label}}<i>{{s.time}}</i></span></sc-for></div>
+          <section class="rpt-sec"><h4>What was done</h4><p class="rpt-p">{{rd.r.summary}}</p><ul class="rpt-ul"><sc-for list="{{rd.r.points}}" as="p" hint-placeholder-count="3"><li>{{p.t}}</li></sc-for></ul></section>
+          <section class="rpt-sec"><h4>Questions along the way<small>{{rd.r.qLine}}</small></h4><div class="rpt-qs"><sc-for list="{{rd.r.qs}}" as="q" hint-placeholder-count="3"><div class="rpt-q"><div class="rpt-qh"><span class="stg" title="{{q.stage}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{q.icon}}"></path></svg></span><b>{{q.text}}</b><small>{{q.asked}}</small></div><ul class="rpt-opts" aria-label="Options given"><sc-for list="{{q.opts}}" as="o" hint-placeholder-count="3"><li class="rpt-o {{o.cls}}"><sc-if value="{{o.on}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if>{{o.name}}</li></sc-for></ul><p class="rpt-ans">Answer: <b>{{q.answer}}</b><span class="rpt-by {{q.byCls}}" title="{{q.byTitle}}"><sc-if value="{{q.isAgent}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if><sc-if value="{{q.isYou}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 21a7.5 7.5 0 0 1 15 0"></path></svg></sc-if>{{q.by}}</span></p></div></sc-for></div></section>
+          <section class="rpt-sec"><h4>Retro</h4><div class="rpt-cols"><div class="rpt-col good"><h5>Went well</h5><ul><sc-for list="{{rd.r.well}}" as="w" hint-placeholder-count="3"><li>{{w.t}}</li></sc-for></ul></div><div class="rpt-col bad"><h5>Went wrong</h5><ul><sc-for list="{{rd.r.wrong}}" as="w" hint-placeholder-count="2"><li>{{w.t}}</li></sc-for></ul></div><div class="rpt-col act"><h5>Action items</h5><ul><sc-for list="{{rd.r.actions}}" as="a" hint-placeholder-count="3"><li class="{{a.cls}}"><button class="rpt-box {{a.boxCls}}" role="checkbox" aria-checked="{{a.done}}" aria-label="{{a.t}}" onClick="{{a.toggle}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></button><span><span class="ax">{{a.t}}</span><small>{{a.owner}}</small></span></li></sc-for></ul></div></div></section>
+          <footer class="rpt-f"><span class="rpt-fn">{{rd.r.foot}}</span><button class="abtn" onClick="{{rd.close}}">Close</button><button class="abtn go" onClick="{{rd.dismiss}}">Dismiss</button></footer>
+        </div></section>
+  </div>
+</div></sc-if>
 <div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"scene":{"editor":"enum","default":"empty","options":["inbox","empty","resolved","report"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"scene":{"editor":"enum","default":"answering","options":["center","answering","unblock","report","empty","busy","many"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
-  { id: 'inbox', label: 'Inbox', icon: 'M3 12l2.5-7h13L21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 12h5l2 3h4l2-3h5', badge: 6 },
+  { id: 'inbox', label: 'Action Center', icon: 'M13 2L4 14h7l-1 8 9-12h-7z', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
   { id: 'memory', label: 'Memory', icon: 'M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18ZM12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18ZM15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4M17.599 6.5a3 3 0 0 0 .399-1.375M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M19.938 10.5a4 4 0 0 1 .585.396M6 18a4 4 0 0 1-1.967-.516M19.967 17.484A4 4 0 0 1 18 18' },
@@ -1226,94 +1396,100 @@ const NAV = [
   { id: 'factory', label: 'Factory', icon: 'M3 20V5h3v7l5-3v3l5-3v3l5-3v11zM7.5 16h1M12.5 16h1M17.5 16h1' },
   { id: 'prs', label: 'PRs', icon: 'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v6M18 15V9a3 3 0 0 0-3-3h-3M13 3l-3 3 3 3', badge: 7 }
 ];
-// ---------- Inbox: everything that needs you, grouped by the request it came from. Everything here is made up. ----------
-const KIND = { question: 'Question', approval: 'Approval', report: 'Report', pull_request: 'Pull request', factory_blocked: 'Factory · Blocked', factory_waiting: 'Factory · Waiting on you', plan_ready: 'Factory · Plan ready' };
-const STAMPS = { once: ['APPROVED', 'ok'], always: ['APPROVED FOR SESSION', 'ok'], denied: ['DENIED', 'no'], answered: ['ANSWERED', 'ok'], approved: ['APPROVED', 'ok'] };
-const VERB = { once: 'Allowed by', always: 'Allowed for the session by', denied: 'Denied by', answered: 'Answered by', approved: 'Approved by' };
-const OPEN_SRC = { thread: 'Open the thread', factory: 'Open the task', session: 'Open the session', pr: 'Open in PRs' };
-const FILTERS = [['needs', 'Needs answer'], ['reports', 'Reports'], ['prs', 'PRs'], ['factory', 'Factory'], ['all', 'All']];
-const Q_WS = { head: 'Workspace', text: 'Which workspace should I start this in?',
+const STAGE = { planning: ['Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'], plan_review: ['Plan review', 'M12 5C7 5 3.6 9 2.5 12c1.1 3 4.5 7 9.5 7s8.4-4 9.5-7c-1.1-3-4.5-7-9.5-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'], implementation: ['Implementation', 'M8 6l-5 6 5 6M16 6l5 6-5 6'], testing: ['Testing', 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3'], code_review: ['Code review', 'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L21 21M7.5 10.5l2 2 4-4'] };
+// ---------- Action Center: the factories at the left, everything that waits on you on the sheet. Everything here is made up. ----------
+const STAMPS = { once: ['APPROVED', 'ok'], always: ['APPROVED FOR SESSION', 'ok'], denied: ['DENIED', 'no'] };
+const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+// why a task is blocked decides the one button on its card: [the button, the reason in two words]
+const WHY = { checks: ['Retry', 'checks failed'], crash: ['Retry', 'the run crashed'], conflict: ['Resolve', 'merge conflict'], decision: ['Answer', 'needs a decision'], access: ['Fix in Settings', 'missing a secret'] };
+const Q_EVENTS = [
+  { head: 'Event names', text: 'How should the browser events be named?', problem: 'The server already sends events like invoice.paid. Browser events can follow the same pattern or get their own, and whichever it is will show up in every dashboard built on them.',
+    opts: [{ id: 'dot', name: 'object.action', rec: true, desc: 'Same as the server: invoice.viewed, plan.changed. One naming rule for everything.' }, { id: 'ui', name: 'ui_ prefix', desc: 'ui_invoice_viewed. Easy to tell apart from server events, but a second rule to remember.' }, { id: 'free', name: 'Free text', desc: 'Whatever each page calls it. Fast now, messy later.' }] },
+  { head: 'Batching', text: 'How often should the browser send its events?', problem: 'Sending each event on its own is simple but chatty: a busy page makes dozens of requests a minute. Batching saves requests and can lose the last few events if the tab closes.',
+    opts: [{ id: 'five', name: 'Every 5 s, or 20 events', rec: true, desc: 'Flushes on page hide too, so little is lost.' }, { id: 'each', name: 'One by one', desc: 'Nothing is ever lost. About ten times the requests.' }, { id: 'unload', name: 'Only on page hide', desc: 'The fewest requests. A crash loses the whole visit.' }] },
+  { head: 'Pages', multi: true, text: 'Which pages should send events in this first pass?', problem: 'Each page needs a few lines added and a check that nothing personal ends up in an event. Start with the ones you would look at first.',
+    opts: [{ id: 'invoices', name: 'Invoices', rec: true, desc: 'The busiest page, and the one finance asks about.' }, { id: 'checkout', name: 'Checkout', desc: 'Where people drop off. Needs care around card fields.' }, { id: 'settings', name: 'Billing settings', desc: 'Low traffic. Useful for plan changes.' }] } ];
+const Q_WS = [{ head: 'Workspace', text: 'Which workspace should I start this in?',
   problem: 'The banner belongs in the web app, but the trial length comes from billing. Starting in the wrong one means a second session later, so it is worth a quick check.',
   opts: [{ id: 'lighthouse', name: 'Lighthouse Web', rec: true, desc: 'Where the onboarding page lives. It can read the trial end from the billing API as it is.' },
     { id: 'orbit', name: 'Orbit Billing', desc: 'Where trials are defined. Only if the billing API needs a new field first.' },
-    { id: 'primepaw', name: 'primepaw', desc: 'The shared shell. Only if the banner should show on every page, not just onboarding.' }] };
-const Q_RETRY = { head: 'Retry budget', text: 'How many times should a 502 be retried?', problem: 'The upstream returns a 502 for a second or two during deploys. Too few retries and requests fail for nothing; too many and a real outage takes longer to show.',
-  opts: [{ id: 'three', name: '3 tries, 2 s apart', rec: true, desc: 'Covers a deploy blip without hiding an outage.' }, { id: 'once', name: 'Once', desc: 'One more try, right away.' }, { id: 'never', name: 'Never', desc: 'Fail at once and let the caller decide.' }] };
-const CONVS = [
-  { id: 'c1', title: 'Onboarding banner', src: 'thread', items: [
-    { id: 'q1', k: 'question', from: 'Jarvis', time: '9:52', unread: true, q: Q_WS, asks: [{ who: 'you', text: 'simplify this' },
-      { who: 'j', text: 'Short version: the page lives in Lighthouse Web, the trial length lives in Orbit Billing. Pick Lighthouse Web unless the billing API needs a new field first.' }] } ] },
-  { id: 'c2', title: 'Add CSV export', src: 'thread', items: [
-    { id: 'a2a', k: 'approval', from: 'Add CSV export session', time: '9:30', unread: false, status: 'once', by: 'You', at: '9:30', folded: true,
-      tool: { kind: 'bash', ask: 'May I run the invoices tests?', cmd: 'pnpm test --filter invoices', why: 'Checks the money and date formatting the export reuses. Nothing is written.', tags: ['read-only', 'about 30 s'] } },
-    { id: 'a2b', k: 'approval', from: 'Add CSV export session', time: '9:41', unread: true,
-      tool: { kind: 'bash', ask: 'May I push this branch?', cmd: 'git push origin feat/csv-export', why: 'Pushes the export so the PR can open. Nothing on main changes.', tags: ['leaves the machine', 'a PR follows'] } } ] },
-  { id: 'c3', title: 'ORB-272 Browser events', src: 'factory', items: [
-    { id: 'f3', k: 'factory_blocked', from: 'Factory', time: '9:35', unread: true, task: 'ORB-272 Browser events', col: 'In progress',
-      text: 'The add_browser_events migration needs a database the factory runner cannot reach. Give the task a staging DATABASE_URL, or run the migration yourself and say so.', action: 'Open the task', or: 'or mark it done once it is unblocked' } ] },
-  { id: 'c4', title: 'Fix token refresh', src: 'thread', items: [
-    { id: 'a4a', k: 'approval', from: 'auth-fix session', time: '9:05', unread: false, status: 'once', by: 'Jarvis (Thread YOLO)', at: '9:05', folded: true,
-      tool: { kind: 'bash', ask: 'May I run the auth tests?', cmd: 'pnpm test auth', why: 'Runs the auth suite only. Nothing is written.', tags: ['read-only', 'about 40 s'] } },
-    { id: 'a4b', k: 'approval', from: 'auth-fix session', time: '9:20', unread: true, status: 'once', by: 'Jarvis (Thread YOLO)', at: '9:20', folded: true,
-      tool: { kind: 'bash', ask: 'May I push this branch?', cmd: 'git push origin fix/token-refresh', why: 'Pushes the fix so the PR can open. Nothing on main changes.', tags: ['leaves the machine', 'a PR follows'] } },
-    { id: 'p4', k: 'pull_request', from: 'auth-fix session', time: '9:24', unread: true, pr: '#921', title: 'Fix token refresh', repo: 'gateway', branch: 'fix/token-refresh', diff: '+48 −12', files: '4 files', checks: '14 checks pass', checksOk: true,
-      text: 'Refreshes the token on a 401 before the retry, so people stop getting logged out after an hour.' } ] },
-  { id: 'c5', title: 'Bump Node to 22', src: 'thread', items: [
-    { id: 'a5', k: 'approval', from: 'Node 22 for web session', time: '9:12', unread: false, status: 'once', by: 'You, through Jarvis', at: '9:12', folded: true,
-      tool: { kind: 'bash', ask: 'May I rewrite the lockfile?', cmd: 'pnpm install', why: 'Node 22 needs the new lockfile. It touches pnpm-lock.yaml only.', tags: ['writes one file', 'about 1 min'] } } ] },
-  { id: 'c6', title: 'LH-118 Trial banner copy', src: 'factory', items: [
-    { id: 'f6', k: 'factory_waiting', from: 'Factory', time: '8:58', unread: true, task: 'LH-118 Trial banner copy', col: 'Review',
-      text: 'Two wordings for the banner are ready. Pick one and the task goes on to the page.', action: 'Open the task', or: 'the task waits until you do' } ] },
-  { id: 'c7', title: 'GW-77 Rate limits per key', src: 'factory', items: [
-    { id: 'f7', k: 'plan_ready', from: 'Factory', time: '8:40', unread: false, task: 'GW-77 Rate limits per key', col: 'Planning',
-      text: 'A plan in 4 steps across 3 files is ready for your OK. Nothing has been written yet.', action: 'Open the plan', or: 'it starts when you approve the plan' } ] },
-  { id: 'c10', title: 'Rate limit headers', src: 'pr', items: [
-    { id: 'p10', k: 'pull_request', from: 'Mina Okafor', time: '8:15', unread: true, pr: '#926', title: 'Rate limit headers', repo: 'gateway', branch: 'feat/rate-limit-headers', diff: '+131 −9', files: '7 files', checks: '2 of 14 checks fail', checksOk: false,
-      text: 'Adds X-RateLimit-Limit and X-RateLimit-Remaining to every API response, read from the key’s bucket.' } ] },
-  { id: 'c8', title: 'Retry on 502s', src: 'session', items: [
-    { id: 'q8', k: 'question', from: 'Retry on 502s', time: 'Yesterday', unread: false, q: Q_RETRY, asks: [], status: 'answered', answer: '3 tries, 2 s apart', by: 'You', at: 'Yesterday', folded: true } ] },
-  { id: 'c9', title: 'LH-268 Saved searches', src: 'factory', items: [
-    { id: 'r9', k: 'report', from: 'Factory', time: 'Mon', unread: true, r: {
-      key: 'LH-268', title: 'Saved searches', done: 'Mon 9 Nov, 16:42', tracker: 'LH-268 in Jira', board: 'Lighthouse issues · Done', pr: '#309', prState: 'merged',
-      sessions: [['planning', 12], ['plan_review', 4], ['implementation', 91], ['testing', 21], ['code_review', 12], ['implementation', 27, 'round 2']],
-      summary: 'Saved searches are in. Save the search you are on from the results header, give it a name, and it waits under Saved in the search menu. They are kept per workspace through the preferences API, so the server did not change.',
-      points: ['9 files, +412 −38, 31 new tests', 'Names over 64 characters are cut with an ellipsis', 'At most 20 a workspace; the 21st asks you to remove one first'],
-      qs: [
-        { stage: 'planning', asker: 'Planner', when: 'Mon 9:14', text: 'Where should saved searches live?', opts: ['Per workspace', 'Per person, across workspaces', 'Both, with a toggle'], pick: 0, by: 'You', agent: false },
-        { stage: 'plan_review', asker: 'Reviewer', when: 'Mon 10:02', text: 'Cap how many a workspace can keep?', opts: ['No cap', '20 a workspace', '50 a workspace'], pick: 1, by: 'Curator', agent: true },
-        { stage: 'implementation', asker: 'Implementer', when: 'Mon 13:40', text: 'The preferences API refuses keys over 64 characters. What happens to a longer name?', opts: ['Cut it with an ellipsis', 'Refuse it and ask for a shorter one'], pick: 0, by: 'Jarvis (Thread YOLO)', agent: true } ],
-      well: ['The plan held: the build followed it step for step.', 'Reusing the preferences API meant no server change.', 'Testing caught the empty-name case before review did.'],
-      wrong: ['Code review sent it back once: the Save button could not be reached with the keyboard.', 'Testing waited 18 min on a flaky search index rebuild.'],
-      actions: [['Add a keyboard check to the implementer’s list', 'Curator', false], ['Pin the search index fixture so tests skip the rebuild', 'LH-290, a new task', false], ['Note saved searches in the docs', 'done in PR #309', true]] } } ] },
-  { id: 'c11', title: 'Weekly digest wording', src: 'thread', items: [
-    { id: 'r11', k: 'report', from: 'Jarvis', time: 'Yesterday', unread: false, r: {
-      key: 'PP-133', title: 'Weekly digest wording', done: 'Sun 8 Nov, 18:05', tracker: 'PP-133 in Jira', board: 'PrimePaw issues · Done', pr: '#903', prState: 'merged',
-      sessions: [['planning', 6], ['implementation', 38], ['code_review', 9]],
-      summary: 'The Friday digest reads like a person wrote it: one line for each merged PR, then what got stuck and why, then what is next.',
-      points: ['2 files, +86 −41', 'Weeks with nothing merged send no digest'],
-      qs: [{ stage: 'planning', asker: 'Jarvis', when: 'Sun 16:20', text: 'Sign it from Jarvis or from the team?', opts: ['From Jarvis', 'From the team'], pick: 0, by: 'You, through Jarvis', agent: false }],
-      well: ['One short session did most of it.'], wrong: ['The first draft listed every commit, not every PR.'],
-      actions: [['Group by PR in the curator’s digest skill', 'Curator', false]] } } ] }
-];
-const STAGE = { planning: ['Planning', 'M5 5h14v14H5zM8.5 10h7M8.5 14h4.5'], plan_review: ['Plan review', 'M12 5C7 5 3.6 9 2.5 12c1.1 3 4.5 7 9.5 7s8.4-4 9.5-7c-1.1-3-4.5-7-9.5-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'], implementation: ['Implementation', 'M8 6l-5 6 5 6M16 6l5 6-5 6'], testing: ['Testing', 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3'], code_review: ['Code review', 'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L21 21M7.5 10.5l2 2 4-4'] };
+    { id: 'primepaw', name: 'primepaw', desc: 'The shared shell. Only if the banner should show on every page, not just onboarding.' }] }];
+const Q_LIMITS = [{ head: 'Where limits live', text: 'Where should the per-key limits be stored?',
+  problem: 'The plan cannot go on until this is settled, because the rest of it depends on the answer. The limits are read on every request, so they need to be fast to look up and easy to change without a deploy.',
+  opts: [{ id: 'redis', name: 'Redis, next to the buckets', rec: true, desc: 'One lookup for the limit and the count. Changes take effect at once.' }, { id: 'pg', name: 'Postgres, cached', desc: 'Sits with the keys themselves. A change takes up to a minute to show.' }, { id: 'config', name: 'A config file', desc: 'No new storage at all. Every change is a deploy.' }] }];
+const ANSWERS = [
+  { id: 'q1', k: 'question', who: 'implementer-agent', fac: 'orbit', where: 'ORB-272 Browser events · Orbit Billing factory', dlgWhere: 'in ORB-272 Browser events, a task in the Orbit Billing factory', qs: Q_EVENTS },
+  { id: 'q2', k: 'question', who: 'Jarvis', isJ: true, where: 'Onboarding banner · a thread on Home', dlgWhere: 'in Onboarding banner, a thread on Home', qs: Q_WS },
+  { id: 'a1', k: 'approval', where: 'from the Add CSV export session · 9:41',
+    tool: { kind: 'bash', ask: 'May I push this branch?', cmd: 'git push origin feat/csv-export', why: 'Pushes the export so the PR can open. Nothing on main changes.', tags: ['leaves the machine', 'a PR follows'] } } ];
+const BLOCKED = [
+  { id: 'b1', task: 'LH-131 Search index rebuild', fac: 'lighthouse', why: 'checks', since: 'blocked 12 min',
+    text: 'Checks failed twice: 2 of 14, both on the search index fixture timing out. Nothing in the diff touches it, so a retry may be all it needs.' },
+  { id: 'b2', task: 'GW-77 Rate limits per key', fac: 'gateway', why: 'decision', since: 'blocked 40 min', who: 'planner-agent', dlgWhere: 'in GW-77 Rate limits per key, a task in the Gateway factory', qs: Q_LIMITS,
+    text: 'The plan needs one decision from you before any code is written: where the per-key limits are stored.' },
+  { id: 'b3', task: 'GW-80 Staging smoke tests', fac: 'gateway', why: 'access', since: 'blocked 1 h 5 min',
+    text: 'The runner has no STAGING_DATABASE_URL, so the smoke tests cannot reach a database. Add the secret and the task picks up where it stopped.' } ];
+const BLOCKED_BUSY = [
+  { id: 'b4', task: 'GW-79 Key rotation', fac: 'gateway', why: 'conflict', since: 'blocked 25 min',
+    text: 'main moved under it: keys.ts conflicts in 2 places with PR #918, merged an hour ago. Resolve sends it back to its agent to rebase and carry on.' },
+  { id: 'b5', task: 'GW-82 Webhook retries', fac: 'gateway', why: 'crash', since: 'blocked 6 min',
+    text: 'The run crashed: the runner ran out of memory installing dependencies. Its work so far is kept.' } ];
+const PRS = [
+  { id: 'p1', pr: '#921', title: 'Fix token refresh', repo: 'gateway', branch: 'fix/token-refresh', from: 'the auth-fix session', diff: '+48 −12', files: '4 files', checks: '14 checks pass', checksOk: true, time: '9:24',
+    text: 'Refreshes the token on a 401 before the retry, so people stop getting logged out after an hour.' },
+  { id: 'p2', pr: '#926', title: 'Rate limit headers', repo: 'gateway', branch: 'feat/rate-limit-headers', from: 'Mina Okafor', diff: '+131 −9', files: '7 files', checks: '2 of 14 checks fail', checksOk: false, time: '8:15',
+    text: 'Adds X-RateLimit-Limit and X-RateLimit-Remaining to every API response, read from the key’s bucket.' },
+  { id: 'p3', pr: '#312', title: 'LH-270 Empty state for saved searches', repo: 'lighthouse-web', branch: 'lh-270-empty-state', from: 'the Lighthouse Web factory', diff: '+96 −4', files: '3 files', checks: '22 checks pass', checksOk: true, time: 'Yesterday',
+    text: 'Shows a short hint and a Save button when a workspace has no saved searches yet.' } ];
+const REPORTS = [
+  { id: 'r1', r: {
+    key: 'LH-268', title: 'Saved searches', fac: 'Lighthouse Web', done: 'Mon 9 Nov, 16:42', short: 'Mon 16:42', tracker: 'LH-268 in Jira', board: 'Lighthouse issues · Done', pr: '#309', prState: 'merged',
+    sessions: [['planning', 12], ['plan_review', 4], ['implementation', 91], ['testing', 21], ['code_review', 12], ['implementation', 27, 'round 2']],
+    summary: 'Saved searches are in. Save the search you are on from the results header, give it a name, and it waits under Saved in the search menu. They are kept per workspace through the preferences API, so the server did not change.',
+    points: ['9 files, +412 −38, 31 new tests', 'Names over 64 characters are cut with an ellipsis', 'At most 20 a workspace; the 21st asks you to remove one first'],
+    qs: [
+      { stage: 'planning', asker: 'Planner', when: 'Mon 9:14', text: 'Where should saved searches live?', opts: ['Per workspace', 'Per person, across workspaces', 'Both, with a toggle'], pick: 0, by: 'You', agent: false },
+      { stage: 'plan_review', asker: 'Reviewer', when: 'Mon 10:02', text: 'Cap how many a workspace can keep?', opts: ['No cap', '20 a workspace', '50 a workspace'], pick: 1, by: 'Curator', agent: true },
+      { stage: 'implementation', asker: 'Implementer', when: 'Mon 13:40', text: 'The preferences API refuses keys over 64 characters. What happens to a longer name?', opts: ['Cut it with an ellipsis', 'Refuse it and ask for a shorter one'], pick: 0, by: 'Jarvis (Thread YOLO)', agent: true } ],
+    well: ['The plan held: the build followed it step for step.', 'Reusing the preferences API meant no server change.', 'Testing caught the empty-name case before review did.'],
+    wrong: ['Code review sent it back once: the Save button could not be reached with the keyboard.', 'Testing waited 18 min on a flaky search index rebuild.'],
+    actions: [['Add a keyboard check to the implementer’s list', 'Curator', false], ['Pin the search index fixture so tests skip the rebuild', 'LH-290, a new task', false], ['Note saved searches in the docs', 'done in PR #309', true]] } },
+  { id: 'r2', r: {
+    key: 'ORB-266', title: 'Proration on plan change', fac: 'Orbit Billing', done: 'Sun 8 Nov, 18:05', short: 'Sun 18:05', tracker: 'ORB-266 in Jira', board: 'Orbit issues · Done', pr: '#914', prState: 'merged',
+    sessions: [['planning', 9], ['implementation', 52], ['testing', 14], ['code_review', 8]],
+    summary: 'Changing plan mid-cycle now charges or credits the difference for the days left, to the cent, and shows the line on the next invoice.',
+    points: ['6 files, +203 −27, 18 new tests', 'Downgrades credit the account, they do not refund the card'],
+    qs: [{ stage: 'planning', asker: 'Planner', when: 'Sun 16:20', text: 'Round the daily rate up or down?', opts: ['Half up, to the cent', 'Always down'], pick: 0, by: 'You', agent: false }],
+    well: ['One pass through review.', 'The invoice tests covered the leap-day case already.'], wrong: ['The first plan forgot annual plans.'],
+    actions: [['Add annual plans to the planner’s billing checklist', 'Curator', false]] } } ];
+const PRS_MANY = [
+  ['#927', 'Retry webhooks with backoff', 'gateway', 'feat/webhook-backoff', 'the Gateway factory', '+212 −30', '9 files', true, '7:50', 'Retries a failed webhook 5 times, doubling the wait each time, then parks it.'],
+  ['#313', 'LH-271 Keyboard path for Save search', 'lighthouse-web', 'lh-271-save-keyboard', 'the Lighthouse Web factory', '+41 −6', '2 files', true, '7:32', 'Save search can be reached and pressed with the keyboard alone.'],
+  ['#915', 'ORB-270 Tax lines on credit notes', 'orbit-billing', 'orb-270-credit-tax', 'the Orbit Billing factory', '+158 −22', '6 files', true, 'Yesterday', 'Credit notes carry the same tax lines as the invoice they reverse.'],
+  ['#916', 'ORB-274 Dunning email copy', 'orbit-billing', 'orb-274-dunning-copy', 'the Orbit Billing factory', '+37 −31', '3 files', true, 'Yesterday', 'Rewrites the three payment-failed emails so each says what to do next.'],
+  ['#928', 'Trace ids in error responses', 'gateway', 'feat/trace-ids', 'Dana Ruiz', '+64 −8', '5 files', false, 'Yesterday', 'Every 4xx and 5xx body carries the trace id, so support can find the request.'],
+  ['#314', 'LH-266 Sort results by updated', 'lighthouse-web', 'lh-266-sort-updated', 'the Lighthouse Web factory', '+88 −12', '4 files', true, 'Sat', 'Adds Updated to the sort menu on search results and remembers the choice.'],
+  ['#58', 'Night theme for the pet picker', 'primepaw', 'night-pet-picker', 'Jarvis', '+52 −19', '2 files', true, 'Sat', 'The portrait picker follows the night theme like the rest of Settings.'],
+  ['#917', 'ORB-268 Export invoices as CSV', 'orbit-billing', 'orb-268-invoice-csv', 'the Orbit Billing factory', '+240 −14', '8 files', true, 'Fri', 'Exports the filtered invoice list as CSV, streamed so large exports do not time out.'],
+  ['#929', 'Drop Node 18 from CI', 'gateway', 'chore/drop-node-18', 'Mina Okafor', '+6 −21', '2 files', true, 'Fri', 'Node 18 is past end of life; CI runs on 20 and 22 only.']
+].map(([pr, title, repo, branch, from, diff, files, ok, time, text], i) => ({ id: 'pm' + i, pr, title, repo, branch, from, diff, files, checks: ok ? 'checks pass' : '1 check fails', checksOk: ok, time, text }));
+const REPORTS_MANY = [['GW-74', 'Per-route timeouts', 'Gateway', 'Sat 14:10', 64, '#911'], ['LH-262', 'Search result highlights', 'Lighthouse Web', 'Fri 17:26', 118, '#305'], ['ORB-259', 'Receipt PDF footer', 'Orbit Billing', 'Fri 11:02', 41, '#908']]
+  .map(([key, title, fac, short, m, pr], i) => ({ id: 'rm' + i, r: { key, title, fac, done: short, short, tracker: key + ' in Jira', board: fac + ' issues · Done', pr, prState: 'merged', sessions: [['planning', 8], ['implementation', m - 20], ['code_review', 12]],
+    summary: title + ' is in and merged.', points: [], qs: [], well: ['One pass through review.'], wrong: [], actions: [] } }));
+// how many cards a section shows before it pages
+const PAGE = { a: 3, b: 3, p: 3, r: 3 };
+// the factories: what runs without you. A question from a task holds a slot in amber, a blocked task holds one in red.
+const FACS = [
+  { id: 'orbit', name: 'Orbit Billing', cap: 6, run: 3, queued: 4 },
+  { id: 'lighthouse', name: 'Lighthouse Web', cap: 4, run: 2, queued: 2 },
+  { id: 'gateway', name: 'Gateway', cap: 4, run: 1, queued: 1 },
+  { id: 'primepaw', name: 'primepaw', cap: 3, run: 0, queued: 3, paused: true } ];
+const FAC_BUSY = { orbit: { run: 5, queued: 7 }, gateway: { run: 0, queued: 5 } };
+const FAC_EMPTY = { orbit: { run: 4 }, gateway: { run: 2 } };
 const mins = (m) => (m >= 60 ? Math.floor(m / 60) + ' h ' + (m % 60 ? (m % 60) + ' min' : '') : m + ' min').trim();
 const totalOf = (r) => r.sessions.reduce((n, x) => n + x[1], 0);
-function needsYou(x) { return (x.k === 'question' || x.k === 'approval' || x.k === 'pull_request') ? !x.status : x.k !== 'report'; }
-function lineOf(x) {
-  if (x.k === 'question') return x.status ? (x.by === 'You' ? 'You' : x.by) + ' answered: ' + x.answer : x.from + ' asks: ' + x.q.text;
-  if (x.k === 'approval') return x.status ? (x.by || 'You') + (x.status === 'denied' ? ' denied ' : ' allowed ') + x.tool.cmd : 'Allow ' + x.tool.cmd + '?';
-  if (x.k === 'pull_request') return x.status ? (x.by || 'You') + ' approved PR ' + x.pr : 'Needs your review: PR ' + x.pr + ' ' + x.title;
-  if (x.k === 'factory_blocked') return 'Blocked: ' + x.text;
-  if (x.k === 'factory_waiting') return 'Waiting on you: ' + x.text;
-  if (x.k === 'plan_ready') return 'Ready for you in Planning: ' + x.text;
-  if (x.k === 'report') return 'Done: ' + x.r.key + ' ' + x.r.title + ' · ' + mins(totalOf(x.r));
-  return x.text;
-}
-function jarvisReply(text) {
-  if (/simpl|short/i.test(text)) return 'Short version: the page lives in Lighthouse Web, the trial length lives in Orbit Billing. Pick Lighthouse Web unless the billing API needs a new field first.';
-  if (/why|because/i.test(text)) return 'Because the banner is a page in Lighthouse Web, and that app can already read the trial end from the billing API. Only a missing field would send the work to Orbit Billing.';
-  return 'Here is what I would do: pick Lighthouse Web. If the billing API turns out to need a new field, I will start a second session in Orbit Billing and say so here.';
-}
+const NO_QD = { open: false, tabs: [], opts: [] };
+const NO_RD = { open: false, r: { steps: [], points: [], qs: [], well: [], wrong: [], actions: [] } };
 
 /* buddy */ const BD0 = { right: 22, open: false, text: '', made: null, shot: null, leftHalf: false, dragging: false }; const BD_MIN = 10, BD_LEFT = 92; /* /buddy */
 class Component extends DCLogic {
@@ -1374,157 +1550,171 @@ class Component extends DCLogic {
   }
   /* /buddy */
 
-  state = { convs: null, cur: undefined, filter: null, toast: null, archived: null, picks: {} };
+  state = { pg: {}, gone: {}, out: {}, done: {}, going: {}, qd: undefined, qa: {}, rd: undefined, resumed: {}, slip: {}, ticks: {}, toast: null, dismissed: null };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); clearTimeout(this.tt); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
   themeVals() {
-    const night = this.state.night ?? ((this.props.theme ?? 'night') === 'night');
+    const night = this.state.night ?? ((this.props.theme ?? 'paper') === 'night');
     return { themeCls: night ? 'night' : '', isNight: night, themeWord: night ? 'Day' : 'Night',
       themeLabel: night ? 'Switch to the paper theme' : 'Switch to the night theme',
       themeIcon: night ? 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' : 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z',
       toggleTheme: () => this.setState({ night: !night }) };
   }
-  // the scene: the inbox as it stands, nothing left in it, or an item that gets resolved elsewhere while you look
-  scene() { return this.props.scene ?? 'empty'; }
-  filt() { return this.state.filter || (this.scene() === 'report' ? 'reports' : 'all'); }
-  list() {
-    if (!this.cs) {
-      this.cs = this.scene() === 'empty' ? [] : CONVS.map((c) => ({ ...c, items: c.items.map((x) => ({ ...x, asks: (x.asks || []).slice() })) }));
-      const cur = this.curId(); this.cs.forEach((c) => { if (c.id === cur) c.items.forEach((x) => { x.unread = false; }); });
-      if (this.scene() === 'resolved') this.resolveElsewhere();
-    }
-    return this.cs;
+  // the scene: the centre as it stands, a question sheet open, a blocked task retried while you look, a report open, nothing waiting, or the factories at their busiest
+  scene() { return this.props.scene ?? 'answering'; }
+  data() {
+    const sc = this.scene();
+    if (sc === 'empty') return { answers: [], blocked: [], prs: [], reports: [] };
+    const many = sc === 'many';
+    return { answers: ANSWERS, blocked: sc === 'busy' || many ? [...BLOCKED, ...BLOCKED_BUSY] : BLOCKED, prs: many ? [...PRS, ...PRS_MANY] : PRS, reports: many ? [...REPORTS, ...REPORTS_MANY] : REPORTS };
   }
-  curId() { const st = this.state; if (st.cur !== undefined) return st.cur; return this.scene() === 'resolved' ? 'c2' : this.scene() === 'report' ? 'c9' : 'c1'; }
-  setConvs(fn) { this.cs = fn(this.list()); this.setState({ convs: this.cs }); }
-  patchItem(cid, iid, patch) { this.setConvs((cs) => cs.map((c) => c.id === cid ? { ...c, items: c.items.map((x) => x.id === iid ? { ...x, ...(typeof patch === 'function' ? patch(x) : patch) } : x) } : c)); }
-  // the git push in Add CSV export gets allowed by Jarvis under Thread YOLO while you look, so it closes here on its own
-  resolveElsewhere() {
-    this.later(() => this.patchItem('c2', 'a2b', { status: 'once', by: 'Jarvis (Thread YOLO)', at: 'just now', unread: false }), 2200);
-    this.later(() => { this.patchItem('c2', 'a2b', { folded: true }); this.say('Jarvis allowed it under Thread YOLO, so it closed here.'); }, 3100);
+  live(list) { return list.filter((x) => !this.state.gone[x.id]); }
+  qdId() { const v = this.state.qd; return v !== undefined ? v : (this.scene() === 'answering' ? { id: 'q1', tab: 0 } : null); }
+  rdId() { const v = this.state.rd; return v !== undefined ? v : (this.scene() === 'report' ? 'r1' : null); }
+  say(text, undo) { this.setState({ toast: text, toastUndo: !!undo }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null, dismissed: null }), undo ? 5000 : 2800); }
+  // a card that is dealt with leaves on its own: it lifts off, then the ones under it close up
+  leave(id, wait) {
+    this.later(() => this.setState((s) => ({ out: { ...s.out, [id]: true } })), wait);
+    this.later(() => this.setState((s) => ({ gone: { ...s.gone, [id]: true } })), wait + 300);
   }
-  say(text, undo) { this.setState({ toast: text, toastUndo: !!undo }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null, archived: null }), undo ? 5000 : 2600); }
-  // the filters and the rows they leave
-  inFilter(c, f) {
-    if (f === 'needs') return c.items.some(needsYou);
-    if (f === 'reports') return c.items.some((x) => x.k === 'report');
-    if (f === 'prs') return c.items.some((x) => x.k === 'pull_request');
-    if (f === 'factory') return c.src === 'factory';
-    return true;
+  resume(fac) { if (fac) this.setState((s) => ({ resumed: { ...s.resumed, [fac]: (s.resumed[fac] || 0) + 1 } })); }
+  // the button on a blocked card: what it does depends on why the task is blocked
+  unblock(b) {
+    if (this.state.going[b.id] || this.state.gone[b.id]) return;
+    const key = b.task.split(' ')[0];
+    if (b.why === 'decision') { this.setState({ qd: { id: b.id, tab: 0 } }); return; }
+    if (b.why === 'access') { this.say('Opens Settings, on the secrets of the ' + this.facName(b.fac) + ' factory'); return; }
+    const conflict = b.why === 'conflict';
+    this.setState((s) => ({ going: { ...s.going, [b.id]: conflict ? 'Sent back' : 'Retrying' } }));
+    this.later(() => { this.resume(b.fac); this.say(conflict ? key + ' went back to its agent to rebase. It is running again.' : key + ' is running again.'); }, 1700);
+    this.leave(b.id, 1700);
   }
-  visible(cs, f) { return cs.filter((c) => c.items.length && this.inFilter(c, f)); }
-  setFilter(f) {
-    const vis = this.visible(this.list(), f); const cur = this.curId();
-    this.setState({ filter: f, cur: vis.some((c) => c.id === cur) ? cur : (vis[0] ? vis[0].id : null) });
-  }
-  // opening a conversation reads its items, like opening a mail
-  open(id) { this.setConvs((cs) => cs.map((c) => c.id === id ? { ...c, items: c.items.map((x) => ({ ...x, unread: false })) } : c)); this.setState({ cur: id }); }
-  // Done takes the item off the pile; a conversation with nothing left leaves the list
-  archive(c, x) {
-    const at = c.items.findIndex((y) => y.id === x.id); const left = c.items.filter((y) => y.id !== x.id);
-    this.setConvs((cs) => cs.map((y) => y.id === c.id ? { ...y, items: left } : y));
-    if (!left.length) { const vis = this.visible(this.list(), this.filt()).filter((y) => y.id !== c.id); if (this.curId() === c.id) this.setState({ cur: vis[0] ? vis[0].id : null }); }
-    this.setState({ archived: { cid: c.id, item: x, at } }); this.say(x.k === 'report' ? 'Dismissed the report on ' + x.r.key + ' ' + x.r.title : 'Done: ' + lineOf(x), true);
-  }
-  undo() {
-    const a = this.state.archived; if (!a) return;
-    this.setConvs((cs) => cs.map((c) => c.id === a.cid ? { ...c, items: [...c.items.slice(0, a.at), a.item, ...c.items.slice(a.at)] } : c));
-    clearTimeout(this.tt); this.setState({ archived: null, toast: null, cur: a.cid });
-  }
-  // a question is answered in place with prompt 1's card
-  qVals(c, x) {
-    const q = x.q; const open = !x.status; const folded = !!x.folded; const pick = this.state.picks[x.id];
-    const opts = q.opts.map((o) => { const on = pick === o.id; return { name: o.name, desc: o.desc, rec: !!o.rec, on, cls: on ? 'on' : '',
-      pick: () => { if (!x.status) this.setState({ picks: { ...this.state.picks, [x.id]: o.id } }); } }; });
-    const asks = x.asks.map((a) => ({ isYou: a.who === 'you', isJ: a.who === 'j', text: a.text }));
-    const send = () => {
-      const el = (this.askEls || {})[x.id]; const text = el ? el.value.trim() : ''; if (!text) return; el.value = '';
-      this.patchItem(c.id, x.id, (y) => ({ asks: [...y.asks, { who: 'you', text }] }));
-      this.later(() => this.patchItem(c.id, x.id, (y) => ({ asks: [...y.asks, { who: 'j', text: jarvisReply(text) }] })), 900);
-    };
-    return { cls: open ? 'open' : 'stub', open: !folded, folded, lead: x.from + ' asks', problem: q.problem, text: q.text, hint: 'Pick one', opts,
-      actCls: x.status ? 'settled' : '', notReady: !pick, submitCls: pick ? '' : 'off', submitLabel: 'Answer', hasStamp: !!x.status,
-      head: q.head, answer: x.answer || '', hasAsk: !folded || asks.length > 0, asks,
-      askId: 'ask-' + x.id, askRef: (el) => { (this.askEls = this.askEls || {})[x.id] = el; }, askKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); send(); } }, askSend: send,
+  facName(id) { return (FACS.find((f) => f.id === id) || {}).name || ''; }
+  find(id) { const d = this.data(); return [...d.answers, ...d.blocked].find((x) => x.id === id); }
+  // the question sheet, the same one as in the session: a folder tab per question, Submit once every tab has an answer
+  qdView() {
+    const d = this.qdId(); const it = d && this.find(d.id); if (!it || this.state.done[it.id]) return NO_QD;
+    const qs = it.qs, n = qs.length, i = Math.min(d.tab, n - 1), q = qs[i], ans = this.state.qa[it.id] || {};
+    const has = (k) => { const a = ans[k]; return Array.isArray(a) ? a.length > 0 : !!a; };
+    const all = qs.every((_, k) => has(k)); const next = qs.findIndex((_, k) => k !== i && !has(k));
+    const put = (v) => this.setState((s) => ({ qa: { ...s.qa, [it.id]: { ...(s.qa[it.id] || {}), [i]: v } } }));
+    const close = () => this.setState({ qd: null });
+    const go = (k) => this.setState({ qd: { id: it.id, tab: k } });
+    const cur = ans[i];
+    return {
+      open: true, close, dlgRef: (el) => { if (el && this.qdEl !== el) { this.qdEl = el; const t = el.querySelector('.qtab.on') || el.querySelector('button'); if (t) setTimeout(() => t.focus(), 30); } },
+      key: (e) => { if (e.key === 'Escape') { e.preventDefault(); close(); } },
+      tabKey: (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go((i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n); } },
+      tabs: qs.map((x, k) => ({ id: 'qtab-' + k, label: x.head, done: has(k), sel: k === i, tab: k === i ? 0 : -1, cls: [k === i ? 'on' : '', has(k) ? 'done' : ''].join(' '), pick: () => go(k), ref: () => {} })),
+      isJ: !!it.isJ, isBot: !it.isJ, who: it.who, count: plural(n, 'question'), where: it.dlgWhere, tabId: 'qtab-' + i,
+      problem: q.problem, question: q.text, hint: q.multi ? 'Pick any that apply' : 'Pick one', isOne: !q.multi, isMulti: !!q.multi,
+      opts: q.opts.map((o) => { const on = q.multi ? (cur || []).includes(o.id) : cur === o.id;
+        return { name: o.name, desc: o.desc, rec: !!o.rec, on, cls: on ? 'on' : '', descId: 'qd-' + i + '-' + o.id,
+          pick: () => put(q.multi ? (on ? cur.filter((x) => x !== o.id) : [...(cur || []), o.id]) : o.id) }; }),
+      step: n === 1 ? 'One question' : 'Question ' + (i + 1) + ' of ' + n + ' · ' + qs.filter((_, k) => has(k)).length + ' answered',
+      hasNext: n > 1 && next >= 0 && has(i), next: () => go(next),
+      submitCls: all ? '' : 'off', notReady: !all, submitLabel: n === 1 ? 'Submit' : 'Submit all ' + n, hasStamp: false, stamp: '', stampCls: '',
       submit: () => {
-        if (!pick || x.status) return; const o = q.opts.find((y) => y.id === pick);
-        this.patchItem(c.id, x.id, { status: 'answered', answer: o.name, by: 'You', at: 'just now', unread: false });
-        this.later(() => this.patchItem(c.id, x.id, { folded: true }), 700);
+        if (!all) return;
+        this.setState((s) => ({ qd: null, done: { ...s.done, [it.id]: true }, ...(it.why ? { going: { ...s.going, [it.id]: 'Answered' } } : {}) }));
+        this.later(() => { this.resume(it.fac); this.say((n === 1 ? 'Your answer went to ' : 'Your ' + n + ' answers went to ') + it.who + (it.fac ? '. The task is running again.' : '. It carries on.')); }, 900);
+        this.leave(it.id, 900);
       } };
   }
-  // an approval is the same slip as in the session, minus the composer under it
-  slipVals(c, x) {
-    const p = x.tool; const stamp = x.status ? STAMPS[x.status] : ['', '']; const settle = (status) => {
-      if (x.status) return; this.patchItem(c.id, x.id, { status, by: 'You', at: 'just now', unread: false });
-      this.later(() => this.patchItem(c.id, x.id, { folded: true }), 700); };
-    return { cls: x.folded ? 'stub' : 'open', ref: () => {}, open: !x.folded, folded: !!x.folded, ask: p.ask, kind: p.kind, isCmd: true, cmd: p.cmd, isDiff: false, sum: '', diff: [], why: p.why,
-      tags: p.tags.map((t) => ({ t })), actCls: x.status ? 'settled' : '', allow: () => settle('once'), always: () => settle('always'), deny: () => settle('denied'),
-      hasStamp: !!x.status, stamp: stamp[0], stampCls: stamp[1] };
+  // an approval is the same slip as in the session
+  slipVals(x) {
+    const p = x.tool, status = this.state.slip[x.id], stamp = status ? STAMPS[status] : ['', ''];
+    const settle = (s) => { if (status) return; this.setState((st) => ({ slip: { ...st.slip, [x.id]: s } }));
+      this.later(() => this.say(s === 'denied' ? 'Denied. The session was told.' : 'Allowed. The session carries on.'), 800); this.leave(x.id, 800); };
+    return { cls: 'open', ref: () => {}, open: true, folded: false, ask: p.ask, kind: p.kind, isCmd: true, cmd: p.cmd, isDiff: false, sum: '', diff: [], why: p.why,
+      tags: p.tags.map((t) => ({ t })), actCls: status ? 'settled' : '', allow: () => settle('once'), always: () => settle('always'), deny: () => settle('denied'),
+      hasStamp: !!status, stamp: stamp[0], stampCls: stamp[1] };
   }
   // a finish report: the task, when it was done, the time every session took, the links, what was done, the questions on the way and who answered, the retro
-  repVals(c, x) {
-    const r = x.r, n = r.sessions.length, ticks = (this.state.ticks || {})[x.id] || {};
-    return { key: r.key, title: r.title, isFac: c.src === 'factory', isJ: c.src !== 'factory', done: r.done, total: mins(totalOf(r)), across: 'across ' + n + (n === 1 ? ' session' : ' sessions'),
+  repVals(x) {
+    const r = x.r, n = r.sessions.length, ticks = this.state.ticks[x.id] || {};
+    return { key: r.key, title: r.title, isFac: true, isJ: false, done: r.done, total: mins(totalOf(r)), across: 'across ' + plural(n, 'session'),
       tracker: r.tracker, board: r.board, prLine: 'PR ' + r.pr + ' ' + r.prState,
       openTracker: () => this.say('Opens ' + r.key + ' in Jira'), openBoard: () => this.say('Opens ' + r.key + ' on ' + r.board.split(' · ')[0]),
       steps: r.sessions.map(([k, m, note]) => ({ icon: STAGE[k][1], label: STAGE[k][0] + (note ? ', ' + note : ''), time: mins(m), title: STAGE[k][0] + (note ? ', ' + note : '') + ' · ' + mins(m) })),
       summary: r.summary, points: r.points.map((t) => ({ t })),
-      qLine: r.qs.length + (r.qs.length === 1 ? ' question' : ' questions') + ' · ' + r.qs.filter((q) => !q.agent).length + ' answered by you',
+      qLine: plural(r.qs.length, 'question') + ' · ' + r.qs.filter((q) => !q.agent).length + ' answered by you',
       qs: r.qs.map((q) => ({ stage: 'Asked in ' + STAGE[q.stage][0], icon: STAGE[q.stage][1], text: q.text, asked: q.asker + ' asked · ' + q.when,
         opts: q.opts.map((o, i) => ({ name: o, on: i === q.pick, cls: i === q.pick ? 'on' : '' })), answer: q.opts[q.pick],
         by: q.by, isAgent: !!q.agent, isYou: !q.agent, byCls: q.agent ? 'agent' : 'you', byTitle: q.agent ? 'Answered by an agent' : 'Answered by you' })),
       well: r.well.map((t) => ({ t })), wrong: r.wrong.map((t) => ({ t })),
       actions: r.actions.map(([t, owner, done0], i) => { const done = ticks[i] ?? done0; return { t, owner, done, cls: done ? 'is-done' : '', boxCls: done ? 'on' : '',
-        toggle: () => this.setState((s) => ({ ticks: { ...(s.ticks || {}), [x.id]: { ...((s.ticks || {})[x.id] || {}), [i]: !done } } })) }; }),
-      foot: c.src === 'factory' ? 'Filed by the factory when ' + r.key + ' merged' : 'Filed by Jarvis when the work was done' };
+        toggle: () => this.setState((s) => ({ ticks: { ...s.ticks, [x.id]: { ...(s.ticks[x.id] || {}), [i]: !done } } })) }; }),
+      foot: 'Filed by the ' + r.fac + ' factory when ' + r.key + ' merged' };
   }
-  itemsVals(c) {
-    return c.items.map((x) => {
-      const by = x.status ? { hasBy: true, byVerb: VERB[x.status], byWho: x.by, byAt: x.at } : { hasBy: false, byVerb: '', byWho: '', byAt: '' };
-      const v = { cls: [x.k, x.unread ? 'unread' : '', x.status ? 'done' : ''].join(' '), aria: KIND[x.k] + ': ' + lineOf(x),
-        readCls: x.unread ? 'unread' : '', unread: !!x.unread, readTitle: x.unread ? 'Mark as read' : 'Mark as unread', toggleRead: () => this.patchItem(c.id, x.id, { unread: !x.unread }),
-        kindLabel: KIND[x.k], from: x.from, time: x.time, archive: () => this.archive(c, x),
-        notRep: x.k !== 'report', isQ: x.k === 'question', isSlip: x.k === 'approval', isRep: x.k === 'report', isPr: x.k === 'pull_request', isFac: x.k.startsWith('factory') || x.k === 'plan_ready', ...by };
-      if (x.k === 'question') v.q = this.qVals(c, x);
-      if (x.k === 'approval') v.slip = this.slipVals(c, x);
-      if (x.k === 'report') v.r = this.repVals(c, x);
-      if (x.k === 'pull_request') Object.assign(v, { prOpen: !x.folded, prFolded: !!x.folded, pr: x.pr, prLabel: 'PR ' + x.pr, title: x.title, where: x.repo + ' · ' + x.branch + ' → main', meta: 'Opened by ' + x.from + ' · ' + x.diff + ' in ' + x.files,
-        checks: x.checks, chkOk: !!x.checksOk, chkCls: x.checksOk ? '' : 'bad', text: x.text, actCls: x.status ? 'settled' : '', hasStamp: !!x.status, openPr: () => this.say('Opens PR ' + x.pr + ' on GitHub'),
-        approve: () => { if (x.status) return; this.patchItem(c.id, x.id, { status: 'approved', by: 'You', at: 'just now', unread: false }); this.later(() => this.patchItem(c.id, x.id, { folded: true }), 700); } });
-      if (v.isFac) {
-        const st = x.k === 'factory_blocked' ? ['Blocked', 'blocked', 'blocked needs'] : x.k === 'factory_waiting' ? ['Waiting on you', 'needs', 'needs'] : ['Ready for you', 'plan', 'plan'];
-        Object.assign(v, { status: st[0], stCls: st[1], fcls: st[2], task: x.task, col: x.col, text: x.text, action: x.action, or: x.or,
-          act: () => this.say(x.k === 'plan_ready' ? 'Opens the planning session of ' + x.task + ' in Factory' : 'Opens ' + x.task + ' in Factory') });
-      }
-      return v;
+  rdView() {
+    const id = this.rdId(); const x = id && this.data().reports.find((y) => y.id === id); if (!x || this.state.gone[x.id]) return NO_RD;
+    const close = () => this.setState({ rd: null });
+    return { open: true, aria: 'Finish report, ' + x.r.key + ' ' + x.r.title, r: this.repVals(x), close,
+      ref: (el) => { if (el && this.rdEl !== el) { this.rdEl = el; setTimeout(() => el.focus({ preventScroll: true }), 30); } },
+      key: (e) => { if (e.key === 'Escape') { e.preventDefault(); close(); } },
+      dismiss: () => { this.setState((s) => ({ rd: null, gone: { ...s.gone, [x.id]: true }, dismissed: x.id })); this.say('Dismissed the report on ' + x.r.key + ' ' + x.r.title, true); } };
+  }
+  undo() { const id = this.state.dismissed; if (!id) return; clearTimeout(this.tt); this.setState((s) => ({ gone: { ...s.gone, [id]: false }, dismissed: null, toast: null })); }
+  facVals(answers, blocked) {
+    const sc = this.scene(), over = sc === 'busy' || sc === 'many' ? FAC_BUSY : sc === 'empty' ? FAC_EMPTY : {};
+    return FACS.map((f0) => {
+      const f = { ...f0, ...(over[f0.id] || {}) };
+      const wait = answers.filter((x) => x.fac === f.id && !this.state.done[x.id]).length;
+      const blk = blocked.filter((x) => x.fac === f.id && !this.state.done[x.id]).length;
+      const run = f.run + (this.state.resumed[f.id] || 0), used = run + wait + blk;
+      const st = f.paused ? ['Paused', 'ac-off'] : blk ? [blk + ' blocked', 'ac-bad'] : used >= f.cap ? ['At its cap', 'ac-cap'] : ['Running', ''];
+      return { id: f.id, name: f.name, cap: f.cap, run, wait, blk, used, state: st[0], stCls: st[1], cls: f.paused ? 'ac-off' : '',
+        slots: Array.from({ length: f.cap }, (_, i) => ({ cls: i < run ? 'run' : i < run + wait ? 'wait' : i < used ? 'blk' : '' })),
+        counts: f.paused ? f.queued + ' queued, none started' : run + ' running · ' + f.queued + ' queued',
+        aria: f.name + ' factory, ' + st[0].toLowerCase() + ': ' + used + ' of ' + f.cap + ' slots used, ' + run + ' running, ' + wait + ' waiting on you, ' + blk + ' blocked, ' + f.queued + ' queued. Opens the factory.',
+        open: () => this.say('Opens the ' + f.name + ' factory') };
     });
+  }
+  // a section shows one page of its cards; when a card leaves, the next one moves up into the page
+  paged(k, list) {
+    const size = PAGE[k], n = list.length, pages = Math.max(1, Math.ceil(n / size)), at = Math.min(this.state.pg[k] || 0, pages - 1);
+    const go = (to) => { if (to >= 0 && to < pages) this.setState((s) => ({ pg: { ...s.pg, [k]: to } })); };
+    return { items: list.slice(at * size, at * size + size),
+      pg: { show: pages > 1, range: (at * size + 1) + '–' + Math.min(n, at * size + size), total: n, first: at === 0, last: at === pages - 1, prevCls: at === 0 ? 'off' : '', nextCls: at === pages - 1 ? 'off' : '',
+        prev: () => go(at - 1), next: () => go(at + 1), dots: Array.from({ length: pages }, (_, i) => ({ cls: i === at ? 'on' : '' })) } };
   }
   renderValsBoard() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
-    const st = this.state; const cs = this.list(); const f = this.filt(); const vis = this.visible(cs, f); const cur = this.curId();
-    const c = vis.find((x) => x.id === cur) || null;
-    const all = cs.filter((x) => x.items.length); const unread = all.reduce((n, x) => n + x.items.filter((y) => y.unread).length, 0);
-    const needs = all.reduce((n, x) => n + x.items.filter(needsYou).length, 0);
-    const label = FILTERS.find((x) => x[0] === f)[1]; const cneeds = c ? c.items.filter(needsYou).length : 0;
-    const heads = { needs: 'Nothing needs you.', reports: 'No reports yet.', prs: 'No pull requests waiting.', factory: 'Nothing from the factory.', all: 'Nothing needs you.' };
+    const st = this.state, d = this.data();
+    if (!this.started) { this.started = true; if (this.scene() === 'unblock') this.later(() => this.unblock(BLOCKED[0]), 1500); }
+    const answers = this.live(d.answers), blocked = this.live(d.blocked), prs = this.live(d.prs), reports = this.live(d.reports);
+    const needs = answers.length + blocked.length + prs.length, any = needs + reports.length > 0;
+    const facs = this.facVals(answers, blocked), sum = (k) => facs.reduce((n, f) => n + f[k], 0);
+    const outCls = (id) => (st.out[id] ? ' ac-out' : '');
+    const pa = this.paged('a', answers), pb = this.paged('b', blocked), pp = this.paged('p', prs), pr = this.paged('r', reports);
     return {
-      cls: 'home inbox', sheetCls: c ? '' : 'empty',
-      nav: NAV.map((n) => { const on = n.id === 'inbox'; const b = on ? unread : n.badge; return { ...n, cls: on ? 'on' : '', cur: on ? 'page' : false, hasBadge: !!b, badge: b || '', pick: () => {} }; }),
-      countLine: (unread ? unread + ' unread' : 'nothing unread') + ' · ' + (needs ? needs + ' need' + (needs === 1 ? 's' : '') + ' you' : 'nothing needs you'),
-      filters: FILTERS.map(([id, lab]) => ({ label: lab, on: id === f, cls: id === f ? 'on' : '', pick: () => this.setFilter(id) })),
-      convs: vis.map((x) => { const on = x.id === cur; const u = x.items.some((y) => y.unread); const k = x.items.filter(needsYou).length; const last = x.items[x.items.length - 1];
-        return { title: x.title, src: x.src, time: last.time, line: lineOf(last), unread: u, needs: k > 0, needsN: k, needsAria: k + ' need' + (k === 1 ? 's' : '') + ' you', on, cur: on ? 'page' : false,
-          cls: [on ? 'on' : '', u ? 'unread' : ''].join(' '), aria: x.title + ', ' + x.src + (u ? ', unread' : '') + (k ? ', ' + k + ' need' + (k === 1 ? 's' : '') + ' you' : ''), pick: () => this.open(x.id) }; }),
-      noConvs: !vis.length, noneText: all.length ? 'Nothing under ' + label + '.' : 'Nothing here. Enjoy it.',
-      hasConv: !!c, isEmpty: !c, convTitle: c ? c.title : '', openLabel: c ? OPEN_SRC[c.src] : '',
-      convMeta: c ? (c.items.length === 1 ? '1 item' : c.items.length + ' items') + ' · ' + (cneeds ? cneeds + ' need' + (cneeds === 1 ? 's' : '') + ' you' : 'nothing needs you') : '',
-      openSource: () => c && this.say(c.src === 'thread' ? 'Opens “' + c.title + '” on Home' : c.src === 'factory' ? 'Opens ' + c.title + ' in Factory' : c.src === 'pr' ? 'Opens ' + c.title + ' in PRs' : 'Opens ' + c.title + ' in Sessions'),
-      items: c ? this.itemsVals(c) : [], noItems: !!c && !c.items.length, noItemsText: 'Nothing left here.',
-      emptyHead: all.length ? heads[f] : 'Nothing needs you.',
-      emptyLine: all.length ? 'Nothing under ' + label + ' right now.' : 'Questions, approvals and finish reports land here as they come, from Jarvis, the factory and your sessions.',
-      emptyWhere: all.length ? 'Pick another filter on the left.' : 'The tile on the rail shows a count when something does.',
-      hasToast: !!st.toast, toast: st.toast || '', toastUndo: !!(st.toastUndo && st.archived), undo: () => this.undo()
+      cls: 'home inbox', sheetCls: any ? '' : 'empty',
+      nav: NAV.map((n) => { const on = n.id === 'inbox'; const b = on ? needs : n.badge; return { ...n, cls: on ? 'on' : '', cur: on ? 'page' : false, hasBadge: !!b, badge: b || '', pick: () => {} }; }),
+      countLineOld: (needs ? plural(needs, 'thing') + (needs === 1 ? ' needs you' : ' need you') : 'nothing needs you') + (reports.length ? ' · ' + plural(reports.length, 'report') : ''),
+      facLine: facs.filter((f) => f.stCls !== 'ac-off').length + ' of ' + facs.length + ' at work',
+      totRun: sum('run'), totUsed: sum('used'), totCap: sum('cap'), totBlk: sum('blk'), totBlkCls: sum('blk') ? 'ac-bad' : 'ac-zero', facs,
+      hasAny: any, isEmpty: !any,
+      headLine: needs ? plural(needs, 'thing') + (needs === 1 ? ' needs you' : ' need you') + (reports.length ? ', ' + plural(reports.length, 'report') + ' to read' : '') : plural(reports.length, 'report') + ' to read, nothing else waits',
+      nAnswer: answers.length || '', nBlocked: blocked.length || '', nPrs: prs.length || '', nReports: reports.length || '',
+      noAnswers: !answers.length, noBlocked: !blocked.length, noPrs: !prs.length, noReports: !reports.length,
+      pgA: pa.pg, pgB: pb.pg, pgP: pp.pg, pgR: pr.pg, allPrs: () => this.say('Opens the PRs page, on the ' + prs.length + ' that wait for your review'),
+      answers: pa.items.map((x) => x.k === 'question'
+        ? { isQ: true, isSlip: false, isJ: !!x.isJ, isBot: !x.isJ, who: x.who, count: plural(x.qs.length, 'question'), sub: x.qs.length === 1 ? x.qs[0].text : x.qs.map((q) => q.head).join(', '), where: x.where,
+            cls: (st.done[x.id] ? 'done' : '') + outCls(x.id), hasStamp: !!st.done[x.id], aria: x.who + ' has ' + plural(x.qs.length, 'question') + ', ' + x.where, open: () => this.setState({ qd: { id: x.id, tab: 0 } }) }
+        : { isQ: false, isSlip: true, where: x.where, cls: outCls(x.id), slip: { ...this.slipVals(x), cls: 'open' + outCls(x.id) } }),
+      blocked: pb.items.map((b) => { const w = WHY[b.why], going = st.going[b.id];
+        return { task: b.task, where: this.facName(b.fac) + ' · ' + w[1], text: b.text, action: w[0], note: going ? (going === 'Answered' ? 'your answer is on its way' : 'its slot turns green when it starts') : b.since,
+          status: going || 'Blocked', stCls: going ? 'work' : 'blocked', busy: !!going && going !== 'Answered', cls: (going ? 'going' : 'blocked') + outCls(b.id), actCls: going ? 'settled' : '',
+          aria: (going || 'Blocked') + ': ' + b.task + ', ' + w[1], act: () => this.unblock(b), open: () => this.say('Opens ' + b.task + ' in the ' + this.facName(b.fac) + ' factory') }; }),
+      prs: pp.items.map((p) => ({ label: 'PR ' + p.pr, title: p.title, time: p.time, where: p.repo + ' · ' + p.branch + ' → main', meta: 'opened by ' + p.from + ' · ' + p.diff + ' in ' + p.files, text: p.text,
+        checks: p.checks, chkOk: !!p.checksOk, chkBad: !p.checksOk, chkCls: p.checksOk ? '' : 'bad', aria: 'Pull request ' + p.pr + ' ' + p.title, hitAria: 'Open PR ' + p.pr + ' ' + p.title + ' in PRs',
+        open: () => this.say('Opens PR ' + p.pr + ' ' + p.title + ' on the PRs page'), github: () => this.say('Opens PR ' + p.pr + ' on GitHub') })),
+      reports: pr.items.map((x) => ({ key: x.r.key, title: x.r.title, line: x.r.fac + ' · done ' + x.r.short + ' · took ' + mins(totalOf(x.r)),
+        aria: 'Finish report, ' + x.r.key + ' ' + x.r.title, hitAria: 'Read the report on ' + x.r.key + ' ' + x.r.title, open: () => this.setState({ rd: x.id }) })),
+      qd: this.qdView(), rd: this.rdView(),
+      hasToast: !!st.toast, toast: st.toast || '', toastUndo: !!(st.toastUndo && st.dismissed), undo: () => this.undo()
     };
   }
 }
