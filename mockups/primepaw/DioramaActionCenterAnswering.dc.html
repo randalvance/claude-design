@@ -1136,7 +1136,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .ac-leg i{width:14px;height:8px;border-radius:2px;box-shadow:var(--sticker-s)}
 .ac-leg .run{background-color:var(--st-green)}.ac-leg .wait{background-color:var(--st-amber)}.ac-leg .blk{background-color:var(--st-red)}
 /* ---------- the sheet: two columns of sections. What you answer and unblock on the left, what you review and read on the right ---------- */
-.acsheet .content.ac-page{gap:26px;padding-bottom:150px}
+.acsheet .content.ac-page{gap:18px;padding-top:20px;padding-bottom:120px;min-height:430px}
 .ac-ico{display:grid;place-items:center;width:30px;height:30px;flex:none;color:var(--ink)}
 .ac-ico svg{width:24px;height:24px}
 /* the factories: one strip across the top of the sheet, the totals first, then a card per factory */
@@ -1144,7 +1144,22 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .ac-fsec .ac-h .ac-leg{margin:0 0 0 auto}
 .ac-fstrip{display:grid;grid-template-columns:minmax(220px,.9fr) repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
 .ac-fstrip .ac-tot{align-content:center}
-.ac-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 30px;align-items:start}
+/* the sections are folder tabs over one leaf: a tab per kind of thing, its count by hand, so nothing sits below the fold of another section */
+.ac-top{container-type:inline-size;padding:18px 28px 0}
+.acsheet .leaf{margin-top:-5px}
+.ac-tabs{margin-top:20px}
+.ac-tabs .tab{font-size:14px;padding:9px 16px 16px}
+.ac-tabs .tab.on{padding-top:7px}
+.ac-tabs .tab svg{width:15px;height:15px}
+.ac-tabs .tabn{margin-left:3px;font-size:19px}
+.ac-tabs .tab.nil{color:var(--mute)}
+/* the line under the tabs: what this tab holds, and its pager at the right, where it stays put whatever the cards do */
+.ac-ph{display:flex;align-items:center;gap:16px;min-height:28px}
+.ac-pl{flex:1;min-width:0;margin:0 2px;font-family:var(--hand);font-size:17.5px;line-height:1.15;color:var(--mute)}
+.ac-ph .ac-all{flex:none;font-size:16px;font-weight:600}
+.ac-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 30px;align-items:start}
+.ac-cards:empty{display:none}
+.ac-cell{display:flex;flex-direction:column;gap:14px;min-width:0}
 /* the pager under a section that holds more than a page: two small card buttons, the range by hand, a dot per page */
 .ac-pg{display:flex;align-items:center;gap:8px;min-height:28px;padding:0 2px}
 .ac-pgb{width:28px;height:26px;padding:0;justify-content:center}
@@ -1154,7 +1169,6 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .ac-pgd{display:inline-flex;align-items:center;gap:4px;margin-left:4px}
 .ac-pgd i{width:6px;height:6px;border-radius:50%;background-color:var(--bar)}
 .ac-pgd i.on{background-color:var(--ink)}
-.ac-h .ac-all{margin-left:auto;font-size:16px;font-weight:600}
 .ac-col{display:flex;flex-direction:column;gap:28px;min-width:0}
 .ac-sec{display:flex;flex-direction:column;gap:14px;min-width:0}
 .ac-h{margin:0;display:flex;align-items:baseline;gap:10px;font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.2;color:var(--ink)}
@@ -1204,7 +1218,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .ac-rep-t code{margin-right:7px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--mute)}
 .ac-rep-l{grid-column:2;min-width:0;font-family:var(--hand);font-size:15.5px;line-height:1.15;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ac-rep-in .pstamp{grid-column:3;grid-row:1 / span 2;height:22px;font-size:11px}
-/* Finished runs the full width under the three columns, its reports three across, so no column is left with a hole beside it */
+/* the Finished tab: reports three across */
 .ac-reps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 30px;align-items:start}
 .ac-reps:empty{display:none}
 /* the report dialog: the whole report over the board, with Close and Dismiss at its foot */
@@ -1215,8 +1229,8 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .rd .rpt-f{position:sticky;bottom:-14px;z-index:2;margin:0 -20px -14px;padding:12px 20px 14px;background-color:var(--sheet);background-image:var(--face),var(--pulp);box-shadow:0 -6px 8px -6px var(--amb)}
 /* nothing waiting: the hello sheet */
 .acsheet .ihello .hello-in{max-width:640px;align-items:flex-start}
-@container (max-width:1080px){.ac-reps{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-fstrip{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-fstrip .ac-tot{grid-column:1 / -1}}
-@container (max-width:700px){.ac-grid,.ac-fstrip,.ac-reps{grid-template-columns:minmax(0,1fr)}.ac-fsec .ac-h .ac-leg{display:none}}
+@container (max-width:1080px){.ac-reps{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-fstrip{grid-template-columns:repeat(2,minmax(0,1fr))}.ac-fstrip .ac-tot{grid-column:1 / -1}}
+@container (max-width:700px){.ac-ph{flex-wrap:wrap}.ac-cards,.ac-fstrip,.ac-reps{grid-template-columns:minmax(0,1fr)}.ac-fsec .ac-h .ac-leg{display:none}}
 @media (prefers-reduced-motion:reduce){.ac-out{animation:none!important;opacity:0}.ac-fac,.ac-pr,.ac-rep{transition:none}}
 </style>
 </helmet>
@@ -1244,7 +1258,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
     <div class="ttl"><span class="ac-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></span><h1>Action Center</h1></div>
     <div class="meta"><span class="scount">{{headLine}}</span></div>
   </header>
-  <div class="leaf"><div class="maincol"><div class="content icontent ac-page">
+  <div class="ac-top">
     <section class="ac-fsec" aria-labelledby="ac-h-fac">
       <h2 class="ac-h" id="ac-h-fac">Factories<small>{{facLine}}</small><span class="ac-leg" aria-hidden="true"><span><i class="run"></i>working</span><span><i class="wait"></i>waiting on you</span><span><i class="blk"></i>blocked</span></span></h2>
       <div class="ac-fstrip">
@@ -1265,11 +1279,14 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
       </div>
       </div>
     </section>
-    <div class="ac-grid">
-    <div class="ac-col">
-      <section class="ac-sec" aria-labelledby="ac-h-answer">
-        <h2 class="ac-h" id="ac-h-answer">Needs your answer<small>{{nAnswer}}</small></h2>
+  </div>
+  <div class="tabs ac-tabs" role="tablist" aria-label="What needs you" onKeyDown="{{tabKey}}"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button class="tab {{t.cls}}" role="tab" id="{{t.id}}" aria-selected="{{t.sel}}" aria-controls="ac-panel" tabIndex="{{t.tab}}" onClick="{{t.pick}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg>{{t.label}}<sc-if value="{{t.hasN}}" hint-placeholder-val="{{true}}"><span class="tabn">{{t.n}}</span></sc-if><span class="sr">{{t.sr}}</span></button></sc-for></div>
+  <div class="leaf"><div class="maincol"><div class="content icontent ac-page" role="tabpanel" id="ac-panel" aria-labelledby="{{tabId}}">
+    <sc-if value="{{isA}}" hint-placeholder-val="{{true}}"><section class="ac-sec" aria-label="Needs your answer">
+        <div class="ac-ph"><p class="ac-pl">Questions and permission slips. Answer here, and the card leaves once it is settled.</p><sc-if value="{{pgA.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of things to answer"><button class="abtn ac-pgb {{pgA.prevCls}}" onClick="{{pgA.prev}}" aria-disabled="{{pgA.first}}" aria-label="Previous things to answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgA.range}}</b> of {{pgA.total}}</span><button class="abtn ac-pgb {{pgA.nextCls}}" onClick="{{pgA.next}}" aria-disabled="{{pgA.last}}" aria-label="Next things to answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgA.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if></div>
+        <div class="ac-cards">
         <sc-for list="{{answers}}" as="a" hint-placeholder-count="3">
+          <div class="ac-cell">
           <sc-if value="{{a.isQ}}" hint-placeholder-val="{{true}}"><section class="qdock ac-q {{a.cls}}" aria-label="{{a.aria}}"><div class="qdock-in">
             <span class="qph" aria-hidden="true"><sc-if value="{{a.isJ}}" hint-placeholder-val="{{false}}"><span class="jface" aria-hidden="true"></span></sc-if><sc-if value="{{a.isBot}}" hint-placeholder-val="{{true}}"><svg class="ac-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"></rect><path d="M12 8V4M8 14h.01M16 14h.01"></path></svg></sc-if></span>
             <div class="qdock-t"><b><span class="qwho">{{a.who}}</span> has {{a.count}}</b><span>{{a.sub}}</span><span class="ac-from">{{a.where}}</span></div>
@@ -1289,14 +1306,14 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
   <sc-if value="{{a.slip.folded}}" hint-placeholder-val="{{false}}"><div class="slip done"><i class="dot {{a.slip.kind}}" aria-hidden="true" style="animation: none"></i><code>{{a.slip.cmd}}</code><span class="pstamp {{a.slip.stampCls}}">{{a.slip.stamp}}</span></div></sc-if>
 </section></sc-if>
           <sc-if value="{{a.isSlip}}" hint-placeholder-val="{{false}}"><p class="ac-slipfrom {{a.cls}}">{{a.where}}</p></sc-if>
+          </div>
         </sc-for>
-        <sc-if value="{{pgA.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of things to answer"><button class="abtn ac-pgb {{pgA.prevCls}}" onClick="{{pgA.prev}}" aria-disabled="{{pgA.first}}" aria-label="Previous things to answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgA.range}}</b> of {{pgA.total}}</span><button class="abtn ac-pgb {{pgA.nextCls}}" onClick="{{pgA.next}}" aria-disabled="{{pgA.last}}" aria-label="Next things to answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgA.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        </div>
         <sc-if value="{{noAnswers}}" hint-placeholder-val="{{false}}"><p class="tnone">Nothing to answer.</p></sc-if>
-      </section>
-    </div>
-    <div class="ac-col">
-      <section class="ac-sec" aria-labelledby="ac-h-blocked">
-        <h2 class="ac-h" id="ac-h-blocked">Blocked<small>{{nBlocked}}</small></h2>
+    </section></sc-if>
+    <sc-if value="{{isB}}" hint-placeholder-val="{{false}}"><section class="ac-sec" aria-label="Blocked">
+        <div class="ac-ph"><p class="ac-pl">Factory tasks that stopped. The button on each fits the reason it stopped.</p><sc-if value="{{pgB.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of blocked tasks"><button class="abtn ac-pgb {{pgB.prevCls}}" onClick="{{pgB.prev}}" aria-disabled="{{pgB.first}}" aria-label="Previous blocked tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgB.range}}</b> of {{pgB.total}}</span><button class="abtn ac-pgb {{pgB.nextCls}}" onClick="{{pgB.next}}" aria-disabled="{{pgB.last}}" aria-label="Next blocked tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgB.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if></div>
+        <div class="ac-cards">
         <sc-for list="{{blocked}}" as="b" hint-placeholder-count="3">
           <section class="fcard needs ac-b {{b.cls}}" aria-label="{{b.aria}}" aria-live="polite">
             <div class="fcard-h"><span class="sticker {{b.stCls}}"><sc-if value="{{b.busy}}" hint-placeholder-val="{{false}}"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><g><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if>{{b.status}}</span><b>{{b.task}}</b><small>{{b.where}}</small></div>
@@ -1304,13 +1321,12 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
             <div class="fcard-act {{b.actCls}}"><button class="abtn go" onClick="{{b.act}}">{{b.action}}</button><button class="abtn" onClick="{{b.open}}">Open task</button><span class="fcard-or">{{b.note}}</span></div>
           </section>
         </sc-for>
-        <sc-if value="{{pgB.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of blocked tasks"><button class="abtn ac-pgb {{pgB.prevCls}}" onClick="{{pgB.prev}}" aria-disabled="{{pgB.first}}" aria-label="Previous blocked tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgB.range}}</b> of {{pgB.total}}</span><button class="abtn ac-pgb {{pgB.nextCls}}" onClick="{{pgB.next}}" aria-disabled="{{pgB.last}}" aria-label="Next blocked tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgB.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        </div>
         <sc-if value="{{noBlocked}}" hint-placeholder-val="{{false}}"><p class="tnone">Nothing is blocked.</p></sc-if>
-      </section>
-    </div>
-    <div class="ac-col">
-      <section class="ac-sec" aria-labelledby="ac-h-prs">
-        <h2 class="ac-h" id="ac-h-prs">PRs to approve<small>{{nPrs}}</small><button class="rpt-a ac-all" onClick="{{allPrs}}">All in PRs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16L18 6M10 6h8v8"></path></svg></button></h2>
+    </section></sc-if>
+    <sc-if value="{{isP}}" hint-placeholder-val="{{false}}"><section class="ac-sec" aria-label="PRs to approve">
+        <div class="ac-ph"><p class="ac-pl">Pull requests that wait for your review. A card opens it on the PRs page.</p><button class="rpt-a ac-all" onClick="{{allPrs}}">All in PRs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16L18 6M10 6h8v8"></path></svg></button><sc-if value="{{pgP.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of pull requests"><button class="abtn ac-pgb {{pgP.prevCls}}" onClick="{{pgP.prev}}" aria-disabled="{{pgP.first}}" aria-label="Previous pull requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgP.range}}</b> of {{pgP.total}}</span><button class="abtn ac-pgb {{pgP.nextCls}}" onClick="{{pgP.next}}" aria-disabled="{{pgP.last}}" aria-label="Next pull requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgP.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if></div>
+        <div class="ac-cards">
         <sc-for list="{{prs}}" as="p" hint-placeholder-count="3">
           <section class="fcard prcard ac-pr" aria-label="{{p.aria}}">
             <button class="ac-hit" onClick="{{p.open}}" aria-label="{{p.hitAria}}"></button>
@@ -1320,13 +1336,11 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
             <div class="ac-prf"><span class="chk {{p.chkCls}}"><sc-if value="{{p.chkOk}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l6 7L23 2"></path></svg></sc-if><sc-if value="{{p.chkBad}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg></sc-if>{{p.checks}}</span><button class="rpt-a" onClick="{{p.github}}">Open on GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16L18 6M10 6h8v8"></path></svg></button></div>
           </section>
         </sc-for>
-        <sc-if value="{{pgP.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of pull requests"><button class="abtn ac-pgb {{pgP.prevCls}}" onClick="{{pgP.prev}}" aria-disabled="{{pgP.first}}" aria-label="Previous pull requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgP.range}}</b> of {{pgP.total}}</span><button class="abtn ac-pgb {{pgP.nextCls}}" onClick="{{pgP.next}}" aria-disabled="{{pgP.last}}" aria-label="Next pull requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgP.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
+        </div>
         <sc-if value="{{noPrs}}" hint-placeholder-val="{{false}}"><p class="tnone">No pull requests wait for you.</p></sc-if>
-      </section>
-    </div>
-    </div>
-      <section class="ac-sec ac-done" aria-labelledby="ac-h-done">
-        <h2 class="ac-h" id="ac-h-done">Finished<small>{{nReports}}</small></h2>
+    </section></sc-if>
+    <sc-if value="{{isR}}" hint-placeholder-val="{{false}}"><section class="ac-sec" aria-label="Finished">
+        <div class="ac-ph"><p class="ac-pl">Finish reports from the factories. Each stays until you dismiss it.</p><sc-if value="{{pgR.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of reports"><button class="abtn ac-pgb {{pgR.prevCls}}" onClick="{{pgR.prev}}" aria-disabled="{{pgR.first}}" aria-label="Previous reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgR.range}}</b> of {{pgR.total}}</span><button class="abtn ac-pgb {{pgR.nextCls}}" onClick="{{pgR.next}}" aria-disabled="{{pgR.last}}" aria-label="Next reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgR.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if></div>
         <div class="ac-reps"><sc-for list="{{reports}}" as="r" hint-placeholder-count="2">
           <section class="ac-rep" aria-label="{{r.aria}}">
             <button class="ac-hit" onClick="{{r.open}}" aria-label="{{r.hitAria}}"></button>
@@ -1335,9 +1349,8 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
               <span class="ac-rep-l">{{r.line}}</span></div>
           </section>
         </sc-for></div>
-        <sc-if value="{{pgR.show}}" hint-placeholder-val="{{false}}"><nav class="ac-pg" aria-label="Pages of reports"><button class="abtn ac-pgb {{pgR.prevCls}}" onClick="{{pgR.prev}}" aria-disabled="{{pgR.first}}" aria-label="Previous reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="ac-pgl" aria-live="polite"><b>{{pgR.range}}</b> of {{pgR.total}}</span><button class="abtn ac-pgb {{pgR.nextCls}}" onClick="{{pgR.next}}" aria-disabled="{{pgR.last}}" aria-label="Next reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button><span class="ac-pgd" aria-hidden="true"><sc-for list="{{pgR.dots}}" as="d" hint-placeholder-count="3"><i class="{{d.cls}}"></i></sc-for></span></nav></sc-if>
         <sc-if value="{{noReports}}" hint-placeholder-val="{{false}}"><p class="tnone">No reports to read.</p></sc-if>
-      </section>
+    </section></sc-if>
   </div></div></div>
   </sc-if>
   <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
@@ -1477,7 +1490,11 @@ const REPORTS_MANY = [['GW-74', 'Per-route timeouts', 'Gateway', 'Sat 14:10', 64
   .map(([key, title, fac, short, m, pr], i) => ({ id: 'rm' + i, r: { key, title, fac, done: short, short, tracker: key + ' in Jira', board: fac + ' issues · Done', pr, prState: 'merged', sessions: [['planning', 8], ['implementation', m - 20], ['code_review', 12]],
     summary: title + ' is in and merged.', points: [], qs: [], well: ['One pass through review.'], wrong: [], actions: [] } }));
 // how many cards a section shows before it pages
-const PAGE = { a: 3, b: 3, p: 3, r: 3 };
+const PAGE = { a: 6, b: 6, p: 6, r: 12 };
+// the sections are tabs: one shows at a time
+const TABS = [['a', 'Needs your answer', 'M9 9a3 3 0 1 1 4.5 2.6c-.9.6-1.5 1.2-1.5 2.4M12 18h.01'], ['b', 'Blocked', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM5.6 5.6l12.8 12.8'],
+  ['p', 'PRs to approve', 'M6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 8v8M18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 16V9a3 3 0 0 0-3-3h-3'], ['r', 'Finished', 'M4 12l5 6L20 5']];
+const SCENE_TAB = { unblock: 'b', report: 'r', many: 'p' };
 // the factories: what runs without you. A question from a task holds a slot in amber, a blocked task holds one in red.
 const FACS = [
   { id: 'orbit', name: 'Orbit Billing', cap: 6, run: 3, queued: 4 },
@@ -1550,7 +1567,7 @@ class Component extends DCLogic {
   }
   /* /buddy */
 
-  state = { pg: {}, gone: {}, out: {}, done: {}, going: {}, qd: undefined, qa: {}, rd: undefined, resumed: {}, slip: {}, ticks: {}, toast: null, dismissed: null };
+  state = { tab: null, pg: {}, gone: {}, out: {}, done: {}, going: {}, qd: undefined, qa: {}, rd: undefined, resumed: {}, slip: {}, ticks: {}, toast: null, dismissed: null };
   componentWillUnmount() { (this.tq || []).forEach(clearTimeout); clearTimeout(this.tt); }
   later(fn, ms) { const id = setTimeout(fn, ms); (this.tq = this.tq || []).push(id); return id; }
   // theme: the "theme" prop picks the default, the button on the rail flips it
@@ -1688,6 +1705,10 @@ class Component extends DCLogic {
     const needs = answers.length + blocked.length + prs.length, any = needs + reports.length > 0;
     const facs = this.facVals(answers, blocked), sum = (k) => facs.reduce((n, f) => n + f[k], 0);
     const outCls = (id) => (st.out[id] ? ' ac-out' : '');
+    // the tab you picked, else the one the scene opens on, else the first that holds something (fixed at the start, so it never jumps under you)
+    const counts = { a: answers.length, b: blocked.length, p: prs.length, r: reports.length };
+    if (!this.tab0) this.tab0 = SCENE_TAB[this.scene()] || (TABS.find((t) => counts[t[0]]) || TABS[0])[0];
+    const tab = st.tab || this.tab0, ti = TABS.findIndex((t) => t[0] === tab);
     const pa = this.paged('a', answers), pb = this.paged('b', blocked), pp = this.paged('p', prs), pr = this.paged('r', reports);
     return {
       cls: 'home inbox', sheetCls: any ? '' : 'empty',
@@ -1696,6 +1717,12 @@ class Component extends DCLogic {
       facLine: facs.filter((f) => f.stCls !== 'ac-off').length + ' of ' + facs.length + ' at work',
       totRun: sum('run'), totUsed: sum('used'), totCap: sum('cap'), totBlk: sum('blk'), totBlkCls: sum('blk') ? 'ac-bad' : 'ac-zero', facs,
       hasAny: any, isEmpty: !any,
+      isA: tab === 'a', isB: tab === 'b', isP: tab === 'p', isR: tab === 'r', tabId: 'ac-tab-' + tab,
+      tabs: TABS.map(([k, label, icon]) => ({ id: 'ac-tab-' + k, label, icon, n: counts[k], hasN: counts[k] > 0, sr: counts[k] ? '' : ', none', sel: k === tab, tab: k === tab ? 0 : -1,
+        cls: (k === tab ? 'on' : '') + (counts[k] ? '' : ' nil'), pick: () => this.setState({ tab: k }) })),
+      tabKey: (e) => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; e.preventDefault();
+        const to = (ti + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length, el = e.currentTarget; this.setState({ tab: TABS[to][0] });
+        setTimeout(() => { const b = el.querySelectorAll('.tab')[to]; if (b) b.focus(); }, 30); },
       headLine: needs ? plural(needs, 'thing') + (needs === 1 ? ' needs you' : ' need you') + (reports.length ? ', ' + plural(reports.length, 'report') + ' to read' : '') : plural(reports.length, 'report') + ' to read, nothing else waits',
       nAnswer: answers.length || '', nBlocked: blocked.length || '', nPrs: prs.length || '', nReports: reports.length || '',
       noAnswers: !answers.length, noBlocked: !blocked.length, noPrs: !prs.length, noReports: !reports.length,
