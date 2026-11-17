@@ -406,6 +406,18 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .bd-slip .bd-x{position:absolute;right:6px;top:6px}
 @media (prefers-reduced-motion:reduce){.bd-ask.on,.bd-slip{animation:none}}
 /* /buddy */
+/* ---------- the rail, spaced: air between the tiles, and the main agent's portrait at the top as a sticker where the paw was (no tile under it, 30% bigger than a tile) ---------- */
+.railwrap.board .rail,.railwrap.board .pp-rail{gap:9px}
+.railwrap.board .rb-jarvis.rb-jarvis{width:58px;margin:0 0 9px}
+.railwrap.board .rb-jarvis span.jface,.railwrap.board .rb-jarvis.on span.jface,.railwrap.board .rb-jarvis.is-on span.jface{width:57px;height:57px;padding:0;background-color:transparent;background-size:contain,0 0,0 0;background-origin:border-box;border:0;border-radius:0;box-shadow:none;transform:rotate(-7deg);filter:drop-shadow(1.5px 0 0 var(--stk)) drop-shadow(-1.5px 0 0 var(--stk)) drop-shadow(0 1.5px 0 var(--stk)) drop-shadow(0 -1.5px 0 var(--stk)) drop-shadow(0 0 .6px rgba(0,0,0,.4)) drop-shadow(1.5px 2.5px 1.5px var(--amb));transition:transform .15s var(--ease)}
+.railwrap.board .rb-jarvis:hover span.jface{transform:rotate(-2deg) scale(1.06);box-shadow:none}
+.railwrap.board .rb-jarvis:active span.jface{transform:rotate(-7deg) scale(.95);box-shadow:none}
+.railwrap.board .rb-jarvis.rb-jarvis::after{left:13px;right:13px;bottom:-8px}
+.railwrap.board .rb-jarvis.on::after,.railwrap.board .rb-jarvis.is-on::after{height:3px;background-color:color-mix(in srgb,var(--ink) 70%,transparent)}
+.railwrap.board .rb-jarvis .nb,.railwrap.board .rb-jarvis .pp-nb{top:-3px;right:-4px}
+.railwrap.board .rb-nobody .jframe{width:57px;height:57px;border-radius:14px;font-size:32px;transform:rotate(-7deg)}
+.railwrap.board .rb-nobody:hover .jframe{transform:rotate(-2deg) scale(1.06)}
+@media (max-width:860px){.railwrap.board .rb-jarvis.rb-jarvis{margin:0 9px 0 0}.railwrap.board .rb-jarvis.rb-jarvis::after{display:none}}
 </style>
 </helmet>
 <div class="page {{themeCls}}">
@@ -413,7 +425,6 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 <div class="app">
 
   <div class="railwrap board"><nav class="pp-rail" aria-label="Primary">
-    <div class="pp-logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="7" cy="8" r="2.2"></circle><circle cx="12" cy="5.5" r="2.2"></circle><circle cx="17" cy="8" r="2.2"></circle><path d="M12 10c-3.5 0-6.5 3-6.5 6 0 1.8 1.3 3 3 3 1.2 0 2.2-.6 3.5-.6s2.3.6 3.5.6c1.7 0 3-1.2 3-3 0-3-3-6-6.5-6z"></path></svg></div>
     <button class="pp-rb rb-jarvis" title="Jarvis, your main agent"><span class="jface" aria-hidden="true"></span><span>Jarvis</span><span class="pp-nb">2</span></button>
     <sc-for list="{{nav}}" as="n" hint-placeholder-count="10">
       <button class="pp-rb {{n.cls}} rb-{{n.id}}" aria-current="{{n.cur}}" title="{{n.label}}">
