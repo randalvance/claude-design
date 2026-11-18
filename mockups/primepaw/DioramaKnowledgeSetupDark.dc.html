@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Knowledge base, setting up, paper diorama, dark mode</title>
+<title>Notes, setting up, paper diorama, dark mode</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -585,11 +585,183 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .railwrap.board .rb-nobody .jframe{width:57px;height:57px;border-radius:14px;font-size:32px;transform:rotate(-7deg)}
 .railwrap.board .rb-nobody:hover .jframe{transform:rotate(-2deg) scale(1.06)}
 @media (max-width:860px){.railwrap.board .rb-jarvis.rb-jarvis{margin:0 9px 0 0}.railwrap.board .rb-jarvis.rb-jarvis::after{display:none}}
+/* ---------- notes: tags to filter by, under the tree ---------- */
+.ktags{flex:none;margin:10px 10px 0;padding:0 2px}
+.ktl{display:flex;align-items:baseline;gap:8px;font-family:var(--font-hand);font-size:19px;font-weight:600;color:var(--ink);padding:0 2px 5px;line-height:1.1}
+.ktl small{font-family:var(--font-mono);font-size:10px;font-weight:400;color:var(--ink);opacity:.72}
+.ktc{all:unset;cursor:pointer;margin-left:auto;font-family:var(--font-hand);font-size:16px;color:var(--ink);text-decoration:underline dashed;text-underline-offset:3px}
+.ktc:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.ktw{display:flex;flex-wrap:wrap;gap:6px 5px;max-height:112px;overflow:auto;padding:2px 2px 6px;scrollbar-width:thin}
+.ktag{all:unset;cursor:pointer;box-sizing:border-box;display:inline-flex;align-items:center;gap:5px;height:23px;padding:0 7px 0 8px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.1);border-radius:3px;box-shadow:1px 2px 0 rgba(0,0,0,.14);font-family:var(--font-hand);font-size:16px;font-weight:600;line-height:1;color:var(--ink);white-space:nowrap;transition:transform .12s var(--ease)}
+.ktag small{font-family:var(--font-mono);font-size:10px;font-weight:700;color:var(--mute)}
+.ktag:hover{transform:translate(-1px,-1px)}
+.ktag:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.ktag.is-on,.ktag.is-on:hover{background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp);border-color:var(--highlighter-2);transform:rotate(-1.2deg)}
+.ktag.is-on small{color:var(--ink)}
+.ctags{display:flex;flex-wrap:wrap;gap:6px 5px;padding:7px 4px 2px}
+/* ---------- the note's three faces: blocks to write in, the same sheet read-only, and the Markdown file ---------- */
+.modes{margin-left:auto;display:inline-flex;padding:2px;border:1px solid var(--line);border-radius:4px;background-color:var(--paper-2);box-shadow:var(--recess)}
+.mdb{all:unset;cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:800;color:var(--mute);padding:3px 10px;border-radius:3px}
+.mdb:hover{color:var(--ink)}
+.mdb:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.mdb.is-on{background-color:var(--card);background-image:var(--face),var(--pulp);color:var(--ink);box-shadow:var(--lift-1)}
+.leaf.m-read .gut,.leaf.m-read .addb,.leaf.m-read .tadd,.leaf.m-read .tagin,.leaf.m-read .tag .x,.leaf.m-read .bi-drop,.leaf.m-read .mini svg{display:none}
+.leaf.m-read .tag{padding-right:9px}
+.leaf.m-read .props{pointer-events:none}
+.leaf.m-read .blocks *,.leaf.m-read .ntitle,.leaf.m-read .ndesc{cursor:auto}
+.leaf.m-read .blocks .lk{cursor:pointer}
+.app.m-read .conn .cadd,.app.m-read .conn .crow .x{display:none}
+.src{all:unset;display:block;width:100%;box-sizing:border-box;min-height:540px;field-sizing:content;resize:none;white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono);font-size:12.5px;line-height:1.75;color:var(--ink);tab-size:2;margin-top:4px;padding:14px 16px;background-color:var(--paper-2);border:1px solid var(--line);border-radius:4px;box-shadow:var(--recess)}
+.src:focus-visible{outline:1px dashed color-mix(in srgb,var(--blue) 55%,transparent);outline-offset:3px}
+.srcn{font-family:var(--font-hand);font-size:16px;color:var(--mute);margin:10px 2px 0;line-height:1.2}
+/* ---------- an image is a block: a print glued to the page, with a caption ---------- */
+.bi{margin:8px 0 6px}
+.bi-pic{position:relative;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.1);border-radius:3px;box-shadow:var(--lift-1);padding:20px 12px 8px;color:var(--mute);transform:rotate(-.3deg)}
+.bi-pic svg{display:block;width:100%;height:auto}
+.bi-src{position:absolute;top:5px;left:11px;font-family:var(--font-mono);font-size:10px;color:var(--mute)}
+.bi-drop{all:unset;cursor:pointer;display:grid;place-items:center;box-sizing:border-box;width:100%;min-height:110px;padding:0 20px;text-align:center;border:1.5px dashed var(--bar);border-radius:4px;font-family:var(--font-hand);font-size:17px;color:var(--mute)}
+.bi-drop:hover{color:var(--ink);border-color:var(--ink)}
+.bi-drop:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.bi figcaption{font-family:var(--font-hand);font-size:16px;line-height:1.3;color:var(--mute);text-align:center;margin-top:7px;cursor:text;min-height:1.3em}
+/* ---------- the outline: one row per heading, and the block it goes to lights up ---------- */
+.orow{all:unset;cursor:pointer;display:block;box-sizing:border-box;width:100%;padding:4px 6px 4px 10px;font-size:13px;font-weight:800;color:var(--ink);border-left:2px solid var(--line);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.orow.l3{padding-left:22px;font-size:12.5px;font-weight:600;color:var(--mute)}
+.orow:hover{color:var(--blue);border-left-color:var(--blue)}
+.orow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.cgrp .orow:first-of-type{margin-top:5px}
+.blk{transition:background-color .6s var(--ease)}
+.blk.is-hot{background-color:color-mix(in srgb,var(--highlighter) 50%,transparent);transition-duration:.15s}
+/* ---------- maximized: the rail, the tree and the details step aside, and the sheet takes the board ---------- */
+.app.kmax .railwrap,.app.kmax .kside{display:none}
+.app.kmax .main{margin-left:0}
+.app.kmax .kbody{grid-template-columns:minmax(0,1fr)}
+.app.kmax .leafw{max-width:900px}
+.pp-btn.ghost.is-on,.pp-btn.ghost.is-on:hover{transform:translate(2px,3px);box-shadow:0 0 0 var(--board-2),1px 1px 2px var(--amb);background-color:color-mix(in srgb,var(--board) 82%,var(--board-2))}
+/* ---------- the chat: a pad clipped beside the note, where the details were ---------- */
+.app.kai-on .kbody,.app.kmax.kai-on .kbody{grid-template-columns:minmax(0,1fr) 372px}
+.app.kai-on~.buddy{display:none}
+.kai{position:sticky;top:14px;display:flex;flex-direction:column;height:calc(100vh - 150px);min-height:440px;max-height:780px;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:5px;box-shadow:var(--lift-3);overflow:hidden;animation:drop .25s var(--ease) both}
+.kai-h{display:flex;align-items:center;gap:8px;padding:10px 10px 9px 12px;border-bottom:1px dashed var(--line)}
+.kai-h b{font-family:var(--font-hand);font-size:23px;font-weight:600;line-height:1}
+.kai-h small{flex:1;min-width:0;font-family:var(--font-mono);font-size:10.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-top:3px}
+.kai-ic{width:22px;height:22px;display:grid;place-items:center;color:var(--red-2);flex:none}
+.kai-ic svg{width:19px;height:19px}
+.kai-log{flex:1;min-height:0;overflow:auto;padding:14px 14px 8px;display:flex;flex-direction:column;gap:11px;scrollbar-width:thin}
+.kai-hi{font-family:var(--font-hand);font-size:18px;color:var(--mute);line-height:1.25;margin:0}
+.kai-me{align-self:flex-end;max-width:86%;box-sizing:border-box;background-color:var(--marker);background-image:var(--strokes),var(--face),var(--pulp);border:1px solid var(--highlighter-2);border-radius:3px;padding:6px 10px;font-size:13px;font-weight:700;line-height:1.4;color:var(--ink);transform:rotate(.4deg);animation:drop .2s var(--ease) both}
+.kai-ai{align-self:stretch;font-size:13px;font-weight:600;line-height:1.5;color:var(--ink);animation:fade .25s var(--ease) both}
+.kai-ai p{margin:0 0 6px}
+.kai-card{margin:4px 0 2px;display:flex;flex-direction:column;gap:5px;padding:9px 11px 11px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.09);border-radius:4px;box-shadow:var(--lift-2)}
+.kai-k{font-family:var(--font-mono);font-size:10.5px;color:var(--mute)}
+.kai-card b{font-family:var(--font-serif);font-size:15px;font-weight:600;line-height:1.25}
+.kai-adds{display:flex;flex-direction:column;font-family:var(--font-mono);font-size:11px;line-height:1.65;color:color-mix(in srgb,var(--green) 62%,var(--ink));background-color:color-mix(in srgb,var(--green) 10%,transparent);border-left:2px solid var(--green);border-radius:2px;padding:5px 8px}
+.kai-adds span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kai-adds.is-no{opacity:.5;text-decoration:line-through}
+.kai-act{display:flex;align-items:center;gap:10px;margin-top:5px;min-height:32px}
+.kai-st{font-family:var(--font-hand);font-size:17px;color:color-mix(in srgb,var(--green) 62%,var(--ink))}
+.kai-st.is-no{color:var(--mute)}
+.kai-dots{display:flex;gap:5px;padding:4px 2px}
+.kai-dots i{width:7px;height:7px;border-radius:50%;background-color:var(--mute);animation:kaidot 1s var(--ease) infinite}
+.kai-dots i:nth-child(2){animation-delay:.15s}
+.kai-dots i:nth-child(3){animation-delay:.3s}
+@keyframes kaidot{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.kai-sug{display:flex;flex-wrap:wrap;gap:6px;padding:6px 12px 9px}
+.kai-chip{all:unset;cursor:pointer;font-family:var(--font-hand);font-size:16px;font-weight:600;line-height:1.2;color:var(--ink);border:1.5px dashed var(--bar);border-radius:3px;padding:1px 9px 2px}
+.kai-chip:hover{border-color:var(--ink)}
+.kai-chip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.kai-in{display:flex;align-items:flex-end;gap:8px;margin:0 10px 10px;padding:8px 8px 8px 12px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid var(--line);border-radius:5px;box-shadow:var(--recess)}
+.kai-in:focus-within{border-color:var(--blue)}
+.kai-in textarea{all:unset;flex:1;min-width:0;box-sizing:border-box;font-size:13px;line-height:1.45;color:var(--ink);min-height:38px;max-height:120px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.kai-in textarea::placeholder{color:var(--faint)}
+.kai-send{all:unset;cursor:pointer;flex:none;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background-color:var(--ink);color:var(--card)}
+.kai-send:hover{background-color:var(--blue)}
+.kai-send:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.kai-send svg{width:14px;height:14px}
+@media (max-width:1240px){.app.kai-on .kbody,.app.kmax.kai-on .kbody{grid-template-columns:minmax(0,1fr)}.kai{position:static;height:520px}}
+/* ---------- the note, plain: the one place the paper steps back. No sheet under it and no tilt: a solid page with the note set straight on it, like a document editor ---------- */
+/* the page behind the note is the board's own textured paper (it was solid white for a while; the owner asked for the paper back). Only the sheet around the note stays gone. */
+.page{--note-bg:var(--sheet-warm);--note-soft:color-mix(in srgb,var(--ink) 5%,transparent);--note-line:color-mix(in srgb,var(--ink) 13%,transparent);--note-pill:color-mix(in srgb,var(--ink) 9%,transparent)}
+.kbody .leafw{max-width:780px;animation:none}
+.kbody .leafw::before,.kbody .leafw::after{display:none}
+.kbody .leaf{background:none;border:0;border-radius:0;box-shadow:none;min-height:600px;padding:4px 8px 80px 56px;font-family:var(--font-sans)}
+.kbody .lmeta{font-family:var(--font-sans);font-size:12px;margin-bottom:24px}
+.kbody .lmeta .chg{font-family:var(--font-sans);font-size:12px}
+.kbody .modes{background-color:var(--note-soft);border-color:var(--note-line);box-shadow:none}
+.kbody .mdb.is-on{background-color:var(--note-bg);background-image:none;box-shadow:0 0 0 1px var(--note-line)}
+.kbody .ntitle{font-family:var(--font-sans);font-size:40px;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+.kbody .props{grid-template-columns:120px minmax(0,1fr);gap:4px 12px;margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--note-line)}
+.kbody .pk{font-family:var(--font-sans);font-size:14px;line-height:30px;text-transform:capitalize}
+.kbody .pv{min-height:30px}
+.kbody .ndesc{font-size:14px}
+.kbody .ndesc::placeholder,.kbody .tagin::placeholder,.kbody .leaf .ph{font-family:var(--font-sans);font-size:inherit;font-weight:400}
+.kbody .tag,.kbody .tag:nth-child(even){transform:none;animation:none;height:22px;padding:0 2px 0 7px;background-color:var(--note-pill);background-image:none;border:0;border-radius:3px;font-family:var(--font-sans);font-size:13px;font-weight:500}
+.kbody .leaf.m-read .tag{padding-right:7px}
+.kbody .tagin{font-family:var(--font-sans);font-size:13px;height:22px}
+.kbody .leaf .mini,.kbody .leaf .mini:hover,.kbody .leaf .mini.open,.kbody .leaf .mini.open:hover{transform:none;box-shadow:none;border:0;background-color:var(--note-pill);background-image:none;height:22px;padding:0 7px;border-radius:3px;font-size:13px;font-weight:500}
+.kbody .blocks{margin-top:18px}
+.kbody .bh{font-family:var(--font-sans);font-weight:700;letter-spacing:-.01em}
+.kbody .blk.h2 .bh{font-size:24px;padding-top:20px}
+.kbody .blk.h3 .bh{font-size:19px;padding-top:12px}
+.kbody .blk.h2 .gut{top:26px}
+.kbody .blk.h3 .gut{top:15px}
+.kbody .bp,.kbody .li{font-size:16px;line-height:1.6}
+.kbody .bul{height:26px}
+.kbody .bq{font-family:var(--font-sans);font-style:normal;font-size:16px;line-height:1.6;border-left:3px solid var(--ink);padding:2px 0 2px 14px}
+.kbody .bc{background-color:var(--note-soft);border:0;box-shadow:none;font-size:13px;padding:16px 18px}
+.kbody .ic-code{background-color:var(--note-pill);border:0;border-radius:3px;font-size:13px;padding:1px 5px}
+.kbody .bt th{font-size:14px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--ink);background-color:var(--note-soft)}
+.kbody .bt td,.kbody .bt th{border:1px solid var(--note-line);padding:7px 10px}
+.kbody .bi-pic{transform:none;background-color:var(--note-soft);background-image:none;border:0;box-shadow:none;border-radius:4px}
+.kbody .bi figcaption{font-family:var(--font-sans);font-size:13px;text-align:left}
+.kbody .bi-drop{font-family:var(--font-sans);font-size:14px;background-color:var(--note-soft);border:0}
+.kbody .tadd button,.kbody .srcn{font-family:var(--font-sans);font-size:13px}
+.kbody .leaf .addb,.kbody .leaf .addb:hover,.kbody .leaf .addb:active{transform:none;box-shadow:none;border:0;background:none;color:var(--mute);font-size:14px;font-weight:500;padding:4px 6px;border-radius:3px}
+.kbody .leaf .addb:hover{color:var(--ink);background-color:var(--note-soft)}
+.kbody .src{background-color:var(--note-soft);border:0;box-shadow:none;font-size:13px}
+.kbody .li.drop-child{background-image:none;box-shadow:none;background-color:color-mix(in srgb,var(--blue) 14%,transparent)}
+.kbody .li.drop-child .lx::after{font-family:var(--font-sans);font-size:13px}
+.kbody .blk.is-hot{background-color:color-mix(in srgb,var(--blue) 12%,transparent)}
+.kbody .leaf .bmenu{background-color:var(--note-bg);background-image:none;border-color:var(--note-line)}
+.kbody .leaf .bmh{font-family:var(--font-sans);font-size:12px}
+.kbody .leaf .bmi:hover,.kbody .leaf .bmi:focus-visible,.kbody .leaf .bmi.is-on{background-color:var(--note-soft);background-image:none}
+@media (max-width:1240px){.kbody .leaf{padding-left:56px;padding-right:8px}}
+/* the grain laid over the whole board would put texture back on the solid page, so this board goes without it; the kraft and paper pieces keep their own */
+/* ---------- no title bar: the buttons sit in one slim row and the note starts right under them; the sync state is a tooltip on Sync ---------- */
+.app:not(.is-setup) .top{padding-top:12px}
+.kbody{padding-top:12px}
+.gwrap{padding-top:14px}
+.syncw{position:relative;display:inline-flex}
+.stip{position:absolute;top:calc(100% + 10px);left:0;z-index:30;display:flex;flex-direction:column;gap:2px;white-space:nowrap;padding:7px 11px 8px;border-radius:5px;background-color:var(--ink);color:var(--note-bg);font-family:var(--font-sans);box-shadow:0 6px 16px rgba(0,0,0,.22);opacity:0;visibility:hidden;transform:translateY(-3px);transition:opacity .12s var(--ease),transform .12s var(--ease),visibility .12s;pointer-events:none}
+.stip::before{content:"";position:absolute;left:18px;top:-4px;width:9px;height:9px;background-color:var(--ink);transform:rotate(45deg)}
+.stip b{font-size:12.5px;font-weight:700}
+.stip small{font-size:11px;font-weight:500;opacity:.72}
+.syncw:hover .stip,.syncw:focus-within .stip{opacity:1;visibility:visible;transform:none}
+/* ---------- the file line (path, edited, the Edit/Read/Source switch) sits under the title, not over it ---------- */
+.kbody .leaf{display:flex;flex-direction:column}
+.kbody .leaf>*{flex:none}
+.kbody .leaf>.ntitle{order:-1;margin-top:6px}
+.kbody .leaf>.lmeta{margin:10px 0 6px}
+.kbody .leaf>.addb{align-self:flex-start}
+.kbody .leaf>.props{margin-top:8px}
+.kbody .leaf.m-source>.lmeta{margin:6px 0 14px}
+/* ---------- the graph, plain: no cork and no cards, the library's own dots and links, filling the content page with the buttons floating over its upper right ---------- */
+.app.kgraph .top{position:relative;z-index:6;pointer-events:none}
+.app.kgraph .top-r{pointer-events:auto}
+.app.kgraph .gwrap{position:absolute;inset:0;padding:0;z-index:1;animation:none}
+.cork{height:100%;min-height:0;border-radius:10px;background:none;box-shadow:none}
+.cork::before,.cork::after{display:none}
+.gfield{inset:0;border-radius:0}
+.gcount{left:16px;right:auto;bottom:12px;padding:0;background:none;box-shadow:none;transform:none;font-family:var(--font-sans);font-size:12px;font-weight:500;color:var(--mute)}
+/* ---------- setting up, plain too: no sheet around the form, it sits straight on the solid page ---------- */
+.setup .leafw{animation:none}
+.setup .leafw::before,.setup .leafw::after{display:none}
+.setup .leaf{background:none;border:0;border-radius:0;box-shadow:none;min-height:0;padding-top:8px}
+/* ---------- setting up keeps the paper: the page behind the form is the textured sheet again, not white (the solid page is for the note and the graph) ---------- */
 </style>
 </helmet>
 <div class="page {{themeCls}}">
 <svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
-<div class="app">
+<div class="app {{appCls}}" onKeyDown="{{appKey}}">
 
   <div class="railwrap board"><nav class="pp-rail" aria-label="Primary">
     <button class="pp-rb rb-jarvis" title="Jarvis, your main agent"><span class="jface" aria-hidden="true"></span><span>Jarvis</span><span class="pp-nb">2</span></button>
@@ -608,7 +780,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
   <aside class="kside board" aria-label="Notes">
     <sc-if value="{{isReady}}" hint-placeholder-val="{{true}}">
     <div class="ktop">
-      <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"></path></svg><input type="search" placeholder="Filter notes…" aria-label="Filter notes by name, #tag or type:" ref="{{filterRef}}" onInput="{{onFilter}}"><sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}"><button class="clr" onClick="{{clearFilter}}" aria-label="Clear the filter"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></label>
+      <label class="srch"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"></path></svg><input type="search" placeholder="Search notes…" aria-label="Search notes by name, #tag or type:" ref="{{filterRef}}" onInput="{{onFilter}}"><sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}"><button class="clr" onClick="{{clearFilter}}" aria-label="Clear the filter"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></label>
       <sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}"><div class="fhint">{{filterHint}}</div></sc-if>
     </div>
     <div class="fx">
@@ -626,6 +798,10 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
         <sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">{{noMatchText}}</div></sc-if>
       </div>
     </div>
+    <div class="ktags" role="group" aria-label="Filter by tag">
+      <div class="ktl">Tags<small>{{tagLine}}</small><sc-if value="{{hasTagSel}}" hint-placeholder-val="{{false}}"><button class="ktc" onClick="{{clearTags}}">clear</button></sc-if></div>
+      <div class="ktw"><sc-for list="{{tagList}}" as="t" hint-placeholder-count="10"><button class="ktag {{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}" title="{{t.tip}}">#{{t.name}}<small>{{t.n}}</small></button></sc-for></div>
+    </div>
     <div class="ksb">{{sideFoot}}</div>
     </sc-if>
     <sc-if value="{{isSetup}}" hint-placeholder-val="{{false}}"><div class="pp-scrap" style="padding-top: 120px">No notes yet. Pick a folder or clone a repo, and its files show up here.</div></sc-if>
@@ -633,21 +809,17 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 
   <main class="main">
     <header class="top">
-      <div class="ttl"><h1>Knowledge Base</h1>
-        <div class="kpath">
-          <sc-if value="{{isReady}}" hint-placeholder-val="{{true}}"><span class="kdir" title="Where the notes live on this Mac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{kbPath}}</span><span class="kbr" title="{{remote}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9"></path></svg>{{branch}}</span><span class="kst {{stCls}}">{{status}}</span></sc-if>
-          <sc-if value="{{isSetup}}" hint-placeholder-val="{{false}}"><span class="kst">{{setupSub}}</span></sc-if>
-        </div>
-      </div>
+      <sc-if value="{{isSetup}}" hint-placeholder-val="{{false}}"><div class="ttl"><h1>Notes</h1><div class="kpath"><span class="kst">{{setupSub}}</span></div></div></sc-if>
       <sc-if value="{{isReady}}" hint-placeholder-val="{{true}}">
       <div class="top-r">
-        <button class="pp-btn ghost {{syncCls}}" onClick="{{sync}}" aria-label="{{syncAria}}" title="Pull, commit and push now"><sc-if value="{{syncing}}" hint-placeholder-val="{{false}}"><svg class="pw" viewBox="0 0 24 24" aria-hidden="true"><g class="pwg"><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{notSyncing}}" hint-placeholder-val="{{true}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"></path></svg></sc-if>{{syncWord}}<sc-if value="{{hasChanges}}" hint-placeholder-val="{{true}}"><span class="pp-nb" aria-hidden="true">{{changeN}}</span></sc-if></button>
-        <button class="pp-btn ghost" onClick="{{openSearch}}" aria-haspopup="dialog"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search</button>
-        <button class="pp-btn ghost ico" onClick="{{openSettings}}" aria-haspopup="dialog" aria-label="Knowledge base settings" title="Settings: remote, auto-commit and push"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></button>
+        <span class="syncw"><button class="pp-btn ghost {{syncCls}}" onClick="{{sync}}" aria-label="{{syncAria}}" aria-describedby="synctip"><sc-if value="{{syncing}}" hint-placeholder-val="{{false}}"><svg class="pw" viewBox="0 0 24 24" aria-hidden="true"><g class="pwg"><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg></sc-if><sc-if value="{{notSyncing}}" hint-placeholder-val="{{true}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"></path></svg></sc-if>{{syncWord}}<sc-if value="{{hasChanges}}" hint-placeholder-val="{{true}}"><span class="pp-nb" aria-hidden="true">{{changeN}}</span></sc-if></button><span class="stip" id="synctip" role="tooltip"><b class="{{stCls}}">{{status}}</b><small>{{kbPath}} · {{branch}} · click to pull, commit and push</small></span></span>
+        <button class="pp-btn ghost ico" onClick="{{openSettings}}" aria-haspopup="dialog" aria-label="Notes settings" title="Settings: remote, auto-commit and push"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></button>
         <div class="views" role="group" aria-label="View">
           <button class="vt {{noteViewCls}}" onClick="{{showNote}}" aria-pressed="{{isNoteView}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4"></path></svg>Note</button>
           <button class="vt {{graphViewCls}}" onClick="{{showGraph}}" aria-pressed="{{isGraph}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="18" cy="8" r="2.5"></circle><circle cx="9" cy="18" r="2.5"></circle><path d="M8.3 7.2l7.4 1.2M7 8.3l1.4 7.3M16.4 10l-5.6 6.2"></path></svg>Graph</button>
         </div>
+        <button class="pp-btn ghost {{aiCls}}" onClick="{{toggleAi}}" aria-pressed="{{aiOpen}}" title="Ask about this note, have it edited, or draft a new one"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path></svg>Ask AI</button>
+        <button class="pp-btn ghost ico {{maxCls}}" onClick="{{toggleMax}}" aria-pressed="{{isMax}}" aria-label="{{maxLabel}}" title="{{maxLabel}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{maxIcon}}"></path></svg></button>
         <button class="pp-btn" onClick="{{newNote}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New note</button>
       </div>
       </sc-if>
@@ -655,9 +827,10 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 
     <sc-if value="{{showNoteView}}" hint-placeholder-val="{{true}}">
     <div class="kbody">
-      <div class="leafw"><article class="leaf" aria-label="{{leafAria}}">
-        <div class="lmeta"><span>{{file}}</span><span aria-hidden="true">·</span><span>{{edited}}</span><sc-if value="{{curDirty}}" hint-placeholder-val="{{false}}"><span class="chg">changed, not committed yet</span></sc-if></div>
-        <textarea class="ntitle" rows="1" placeholder="Untitled" aria-label="Title" ref="{{titleRef}}" onInput="{{onTitle}}" onKeyDown="{{titleKey}}"></textarea>
+      <div class="leafw"><article class="leaf {{leafCls}}" aria-label="{{leafAria}}">
+        <div class="lmeta"><span>{{file}}</span><span aria-hidden="true">·</span><span>{{edited}}</span><sc-if value="{{curDirty}}" hint-placeholder-val="{{false}}"><span class="chg">changed, not committed yet</span></sc-if><div class="modes" role="group" aria-label="How the note is shown"><sc-for list="{{modes}}" as="m" hint-placeholder-count="3"><button class="mdb {{m.cls}}" onClick="{{m.pick}}" aria-pressed="{{m.on}}" title="{{m.tip}}">{{m.label}}</button></sc-for></div></div>
+        <sc-if value="{{notSource}}" hint-placeholder-val="{{true}}">
+        <textarea class="ntitle" readOnly="{{isRead}}" rows="1" placeholder="Untitled" aria-label="Title" ref="{{titleRef}}" onInput="{{onTitle}}" onKeyDown="{{titleKey}}"></textarea>
         <div class="props">
           <span class="pk">type</span>
           <div class="pv" onKeyDown="{{menuKey}}">
@@ -665,7 +838,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
             <sc-if value="{{typeMenuOpen}}" hint-placeholder-val="{{false}}"><div class="mscrim" onClick="{{closeMenus}}"></div><div class="bmenu typem" role="menu" aria-label="Note type"><sc-for list="{{typeOpts}}" as="o" hint-placeholder-count="6"><button class="bmi {{o.cls}}" role="menuitemradio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.label}}<span class="k">{{o.hint}}</span></button></sc-for></div></sc-if>
           </div>
           <span class="pk">description</span>
-          <div class="pv"><textarea class="ndesc" rows="1" placeholder="One line on what this note is for" aria-label="Description" ref="{{descRef}}" onInput="{{onDesc}}"></textarea></div>
+          <div class="pv"><textarea class="ndesc" readOnly="{{isRead}}" rows="1" placeholder="One line on what this note is for" aria-label="Description" ref="{{descRef}}" onInput="{{onDesc}}"></textarea></div>
           <span class="pk">tags</span>
           <div class="pv">
             <sc-for list="{{tags}}" as="t" hint-placeholder-count="3"><span class="tag">{{t.label}}<button class="x" onClick="{{t.remove}}" aria-label="{{t.aria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for>
@@ -675,7 +848,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 
         <div class="blocks">
           <sc-for list="{{blocks}}" as="b" hint-placeholder-count="8">
-            <div class="blk {{b.cls}}" onDragOver="{{b.over}}" onDrop="{{b.drop}}" onKeyDown="{{menuKey}}">
+            <div class="blk {{b.cls}}" data-b="{{b.bid}}" onDragOver="{{b.over}}" onDrop="{{b.drop}}" onKeyDown="{{menuKey}}">
               <div class="gut">
                 <button class="gbtn gadd" onClick="{{b.add}}" aria-label="Add a block below" title="Add a block below"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
                 <button class="gbtn grip" draggable="true" onDragStart="{{b.dstart}}" onDragEnd="{{dragEnd}}" onClick="{{b.menu}}" onKeyDown="{{b.gripKey}}" aria-haspopup="menu" aria-label="{{b.gripAria}}" title="Drag to move · click for options · Alt+↑↓ to move"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.6"></circle><circle cx="15" cy="6" r="1.6"></circle><circle cx="9" cy="12" r="1.6"></circle><circle cx="15" cy="12" r="1.6"></circle><circle cx="9" cy="18" r="1.6"></circle><circle cx="15" cy="18" r="1.6"></circle></svg></button>
@@ -685,6 +858,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
               <sc-if value="{{b.isQ}}" hint-placeholder-val="{{false}}"><sc-if value="{{b.viewing}}" hint-placeholder-val="{{true}}"><blockquote class="bq" onClick="{{b.edit}}"><sc-for list="{{b.segs}}" as="s" hint-placeholder-count="1"><sc-if value="{{s.isLink}}" hint-placeholder-val="{{false}}"><button class="lk {{s.cls}}" onClick="{{s.open}}" title="{{s.tip}}">{{s.x}}</button></sc-if><sc-if value="{{s.isText}}" hint-placeholder-val="{{true}}"><span class="{{s.cls}}">{{s.x}}</span></sc-if></sc-for></blockquote></sc-if><sc-if value="{{b.editing}}" hint-placeholder-val="{{false}}"><blockquote class="bq"><textarea class="ed" rows="1" aria-label="Quote" ref="{{b.edRef}}" onInput="{{b.input}}" onKeyDown="{{b.key}}" onBlur="{{b.blur}}"></textarea></blockquote></sc-if></sc-if>
               <sc-if value="{{b.isCode}}" hint-placeholder-val="{{false}}"><sc-if value="{{b.viewing}}" hint-placeholder-val="{{true}}"><pre class="bc" onClick="{{b.edit}}"><span class="lang">{{b.lang}}</span><sc-if value="{{b.codeEmpty}}" hint-placeholder-val="{{false}}"><span class="ph">Code</span></sc-if>{{b.x}}</pre></sc-if><sc-if value="{{b.editing}}" hint-placeholder-val="{{false}}"><pre class="bc"><span class="lang">{{b.lang}}</span><textarea class="ed" rows="1" spellcheck="false" aria-label="Code" ref="{{b.edRef}}" onInput="{{b.input}}" onKeyDown="{{b.key}}" onBlur="{{b.blur}}"></textarea></pre></sc-if></sc-if>
               <sc-if value="{{b.isList}}" hint-placeholder-val="{{false}}"><div class="bl {{b.lcls}}" role="list"><sc-for list="{{b.items}}" as="it" hint-placeholder-count="3"><div class="li {{it.cls}}" style="--d: {{it.d}}; --ld: {{it.ld}}" role="listitem" onDragOver="{{it.over}}" onDrop="{{it.drop}}"><span class="bul" draggable="true" onDragStart="{{it.dstart}}" onDragEnd="{{dragEnd}}" title="Drag to move it · drop it onto another item to nest it" aria-hidden="true"><span class="num">{{it.mark}}</span><svg class="gr" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.8"></circle><circle cx="15" cy="6" r="1.8"></circle><circle cx="9" cy="12" r="1.8"></circle><circle cx="15" cy="12" r="1.8"></circle><circle cx="9" cy="18" r="1.8"></circle><circle cx="15" cy="18" r="1.8"></circle></svg></span><sc-if value="{{it.viewing}}" hint-placeholder-val="{{true}}"><div class="lx" onClick="{{it.edit}}"><sc-for list="{{it.segs}}" as="s" hint-placeholder-count="1"><sc-if value="{{s.isLink}}" hint-placeholder-val="{{false}}"><button class="lk {{s.cls}}" onClick="{{s.open}}" title="{{s.tip}}">{{s.x}}</button></sc-if><sc-if value="{{s.isText}}" hint-placeholder-val="{{true}}"><span class="{{s.cls}}">{{s.x}}</span></sc-if></sc-for></div></sc-if><sc-if value="{{it.editing}}" hint-placeholder-val="{{false}}"><div class="lx"><textarea class="ed" rows="1" aria-label="List item. Tab nests it, Shift+Tab lifts it, Alt+↑↓ moves it" ref="{{it.edRef}}" onInput="{{it.input}}" onKeyDown="{{it.key}}" onBlur="{{it.blur}}"></textarea></div></sc-if></div></sc-for></div></sc-if>
+              <sc-if value="{{b.isImg}}" hint-placeholder-val="{{false}}"><figure class="bi"><sc-if value="{{b.hasSrc}}" hint-placeholder-val="{{true}}"><div class="bi-pic" role="img" aria-label="{{b.alt}}"><svg viewBox="0 0 640 190" role="presentation" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M56 16v140h560" stroke="currentColor" stroke-width="1.6"/><path d="M56 62h560" stroke="var(--red)" stroke-width="1.6" stroke-dasharray="6 6"/><text x="610" y="54" text-anchor="end" font-size="12" fill="var(--red)" stroke="none" font-family="var(--font-mono)">0.5% roll back</text><path d="M242 20v136M428 20v136" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6" opacity=".5"/><path d="M60 142c30-4 44-22 70-20s34 12 60 14 40-6 52-30 30-20 54-12 40 34 62 40 44 2 70-2 60-6 90-4 60 6 94 5" stroke="var(--blue)" stroke-width="2.6"/><circle cx="242" cy="106" r="4.5" fill="var(--blue)" stroke="none"/><circle cx="428" cy="134" r="4.5" fill="var(--blue)" stroke="none"/><g font-size="12" fill="currentColor" stroke="none" font-family="var(--font-mono)"><text x="148" y="176" text-anchor="middle">canary 5%</text><text x="335" y="176" text-anchor="middle">zone A 50%</text><text x="522" y="176" text-anchor="middle">everyone</text><text x="48" y="66" text-anchor="end">0.5</text><text x="48" y="160" text-anchor="end">0</text></g></svg><span class="bi-src">{{b.src}}</span></div></sc-if><sc-if value="{{b.noSrc}}" hint-placeholder-val="{{false}}"><button class="bi-drop" onClick="{{b.fill}}">Drop an image here, paste one, or click to pick a file</button></sc-if><sc-if value="{{b.viewing}}" hint-placeholder-val="{{true}}"><figcaption onClick="{{b.edit}}"><sc-for list="{{b.segs}}" as="s" hint-placeholder-count="1"><span class="{{s.cls}}">{{s.x}}</span></sc-for></figcaption></sc-if><sc-if value="{{b.editing}}" hint-placeholder-val="{{false}}"><figcaption><textarea class="ed" rows="1" aria-label="Caption" ref="{{b.edRef}}" onInput="{{b.input}}" onKeyDown="{{b.key}}" onBlur="{{b.blur}}"></textarea></figcaption></sc-if></figure></sc-if>
               <sc-if value="{{b.isTable}}" hint-placeholder-val="{{false}}"><table class="bt"><thead><tr><sc-for list="{{b.head}}" as="c" hint-placeholder-count="3"><th onClick="{{c.edit}}"><sc-if value="{{c.viewing}}" hint-placeholder-val="{{true}}">{{c.x}}</sc-if><sc-if value="{{c.editing}}" hint-placeholder-val="{{false}}"><input class="cin" aria-label="{{c.aria}}" ref="{{c.edRef}}" onInput="{{c.input}}" onKeyDown="{{c.key}}" onBlur="{{c.blur}}"></sc-if></th></sc-for></tr></thead><tbody><sc-for list="{{b.body}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r.cells}}" as="c" hint-placeholder-count="3"><td onClick="{{c.edit}}"><sc-if value="{{c.viewing}}" hint-placeholder-val="{{true}}">{{c.x}}</sc-if><sc-if value="{{c.editing}}" hint-placeholder-val="{{false}}"><input class="cin" aria-label="{{c.aria}}" ref="{{c.edRef}}" onInput="{{c.input}}" onKeyDown="{{c.key}}" onBlur="{{c.blur}}"></sc-if></td></sc-for></tr></sc-for></tbody></table><div class="tadd"><button onClick="{{b.addRow}}">+ row</button><button onClick="{{b.addCol}}">+ column</button></div></sc-if>
               <sc-if value="{{b.menuOpen}}" hint-placeholder-val="{{false}}"><div class="mscrim" onClick="{{closeMenus}}"></div><div class="bmenu" role="menu" aria-label="{{b.menuLabel}}"><span class="bmh">{{b.menuHead}}</span><sc-for list="{{b.kinds}}" as="o" hint-placeholder-count="8"><button class="bmi {{o.cls}}" role="menuitem" onClick="{{o.pick}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{o.icon}}"></path></svg>{{o.label}}<span class="k">{{o.k}}</span></button></sc-for><sc-if value="{{b.isBlockMenu}}" hint-placeholder-val="{{false}}"><div class="bmsep"></div><button class="bmi" role="menuitem" onClick="{{b.up}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>Move up<span class="k">alt ↑</span></button><button class="bmi" role="menuitem" onClick="{{b.down}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>Move down<span class="k">alt ↓</span></button><button class="bmi" role="menuitem" onClick="{{b.dup}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8h12v12H8zM16 8V4H4v12h4"></path></svg>Duplicate</button><button class="bmi red" role="menuitem" onClick="{{b.del}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>Delete</button></sc-if></div></sc-if>
             </div>
@@ -694,9 +868,25 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
           <button class="pp-dashed addb" onClick="{{addEnd}}" aria-haspopup="menu">+ Add a block</button>
           <sc-if value="{{endMenuOpen}}" hint-placeholder-val="{{false}}"><div class="mscrim" onClick="{{closeMenus}}"></div><div class="bmenu at-end" role="menu" aria-label="Add a block"><span class="bmh">Add a block</span><sc-for list="{{endKinds}}" as="o" hint-placeholder-count="8"><button class="bmi" role="menuitem" onClick="{{o.pick}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{o.icon}}"></path></svg>{{o.label}}<span class="k">{{o.k}}</span></button></sc-for></div></sc-if>
         </div>
+        </sc-if>
+        <sc-if value="{{isSource}}" hint-placeholder-val="{{false}}">
+          <textarea class="src" spellcheck="false" aria-label="Markdown source of this note" ref="{{srcRef}}" onBlur="{{srcBlur}}"></textarea>
+          <p class="srcn">{{srcHint}}</p>
+        </sc-if>
       </article></div>
 
-      <aside class="conn" aria-label="Connections">
+      <sc-if value="{{showConn}}" hint-placeholder-val="{{true}}">
+      <aside class="conn" aria-label="Details of this note">
+        <div class="cgrp">
+          <span class="klabel">Outline<span class="n">{{outN}}</span></span>
+          <sc-for list="{{outline}}" as="o" hint-placeholder-count="3"><button class="orow {{o.cls}}" onClick="{{o.go}}" title="Go to {{o.x}}">{{o.x}}</button></sc-for>
+          <sc-if value="{{noOutline}}" hint-placeholder-val="{{false}}"><span class="chint">Headings in the note show up here.</span></sc-if>
+        </div>
+        <div class="cgrp">
+          <span class="klabel">Tags<span class="n">{{noteTagN}}</span></span>
+          <div class="ctags"><sc-for list="{{noteTags}}" as="t" hint-placeholder-count="3"><button class="ktag {{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}" title="{{t.tip}}">#{{t.name}}<small>{{t.n}}</small></button></sc-for></div>
+          <sc-if value="{{noNoteTags}}" hint-placeholder-val="{{false}}"><span class="chint">No tags. Add one under the title.</span></sc-if>
+        </div>
         <div class="cgrp">
           <span class="klabel">Parent</span>
           <sc-if value="{{hasParent}}" hint-placeholder-val="{{true}}"><div class="crow"><svg class="di" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg><button class="go" onClick="{{parentOpen}}">{{parentTitle}}</button><button class="x" onClick="{{clearParent}}" aria-label="Remove the parent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button><span class="cf">{{parentWhere}}</span></div></sc-if>
@@ -722,16 +912,35 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
           <sc-if value="{{noBack}}" hint-placeholder-val="{{false}}"><span class="chint">No note links here yet.</span></sc-if>
         </div>
       </aside>
+      </sc-if>
+      <sc-if value="{{aiOpen}}" hint-placeholder-val="{{false}}">
+      <aside class="kai" aria-label="Ask AI about this note" onKeyDown="{{aiEsc}}">
+        <div class="kai-h"><span class="kai-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path></svg></span><b>Ask AI</b><small>about {{aiAbout}}</small><button class="bd-x" onClick="{{closeAi}}" aria-label="Close the chat"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <div class="kai-log" ref="{{aiLogRef}}" aria-live="polite">
+          <sc-if value="{{aiEmpty}}" hint-placeholder-val="{{false}}"><p class="kai-hi">Ask about this note, have it edited, or draft a new one. It reads the note you have open.</p></sc-if>
+          <sc-for list="{{aiMsgs}}" as="m" hint-placeholder-count="3">
+            <sc-if value="{{m.isMe}}" hint-placeholder-val="{{false}}"><div class="kai-me">{{m.x}}</div></sc-if>
+            <sc-if value="{{m.isAi}}" hint-placeholder-val="{{true}}"><div class="kai-ai"><sc-for list="{{m.lines}}" as="l" hint-placeholder-count="2"><p>{{l.x}}</p></sc-for>
+              <sc-if value="{{m.hasCard}}" hint-placeholder-val="{{false}}"><div class="kai-card"><span class="kai-k">{{m.k}}</span><b>{{m.title}}</b><div class="kai-adds {{m.addCls}}"><sc-for list="{{m.adds}}" as="a" hint-placeholder-count="3"><span>{{a.x}}</span></sc-for></div>
+                <div class="kai-act"><sc-if value="{{m.open}}" hint-placeholder-val="{{true}}"><button class="pp-btn" onClick="{{m.yes}}">{{m.act}}</button><button class="pp-dashed" onClick="{{m.no}}">Discard</button></sc-if><sc-if value="{{m.done}}" hint-placeholder-val="{{false}}"><span class="kai-st {{m.stCls}}" role="status">{{m.stamp}}</span></sc-if></div>
+              </div></sc-if>
+            </div></sc-if>
+          </sc-for>
+          <sc-if value="{{aiBusy}}" hint-placeholder-val="{{false}}"><div class="kai-dots" role="status" aria-label="Reading the note"><i></i><i></i><i></i></div></sc-if>
+        </div>
+        <div class="kai-sug"><sc-for list="{{aiSugs}}" as="g" hint-placeholder-count="3"><button class="kai-chip" onClick="{{g.pick}}">{{g.x}}</button></sc-for></div>
+        <div class="kai-in"><textarea rows="2" placeholder="Ask, or say what to change…" aria-label="Message to the assistant" ref="{{aiRef}}" onKeyDown="{{aiKey}}"></textarea><button class="kai-send" onClick="{{aiGo}}" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button></div>
+      </aside>
+      </sc-if>
     </div>
     </sc-if>
 
     <sc-if value="{{isGraph}}" hint-placeholder-val="{{false}}">
     <div class="gwrap">
-      <div class="cork" role="group" aria-label="Graph of notes: drag a card to move it, scroll to zoom, click a card to open its note">
+      <div class="cork" role="group" aria-label="Graph of notes: drag a dot to move it, scroll to zoom, hover for the title, click to open the note">
         <div class="gfield" ref="{{gfieldRef}}">
-          <sc-if value="{{gReady}}" hint-placeholder-val="{{false}}"><x-import from="lib/react-force-graph-2d.js" component-from-global-scope="ForceGraph2D" ref="{{fgRef}}" graph-data="{{gData}}" width="{{gW}}" height="{{gH}}" background-color="rgba(0,0,0,0)" node-label="{{gNoLabel}}" node-canvas-object="{{gDraw}}" node-pointer-area-paint="{{gArea}}" link-color="{{gLinkColor}}" link-width="{{gLinkWidth}}" link-line-dash="{{gLinkDash}}" link-curvature="{{gCurve}}" warmup-ticks="{{gWarm}}" cooldown-ticks="{{gCool}}" auto-pause-redraw="{{gNo}}" on-node-click="{{gClick}}" on-node-hover="{{gHover}}" on-engine-stop="{{gStop}}" hint-size="100%,600px"></x-import></sc-if>
+          <sc-if value="{{gReady}}" hint-placeholder-val="{{false}}"><x-import from="lib/react-force-graph-2d.js" component-from-global-scope="ForceGraph2D" ref="{{fgRef}}" graph-data="{{gData}}" width="{{gW}}" height="{{gH}}" background-color="rgba(0,0,0,0)" node-label="title" node-color="{{gNodeColor}}" link-color="{{gLinkPlain}}" warmup-ticks="{{gWarm}}" cooldown-ticks="{{gCool}}" auto-pause-redraw="{{gNo}}" on-node-click="{{gClick}}" on-engine-stop="{{gStop}}" hint-size="100%,600px"></x-import></sc-if>
         </div>
-        <div class="glegend"><span><i class="l1"></i>links</span><span><i class="l2"></i>related</span><span><i class="l3"></i>parent</span><span class="gtip">drag a card · scroll to zoom</span></div>
         <div class="gcount">{{graphCount}}</div>
       </div>
     </div>
@@ -739,8 +948,8 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 
     <sc-if value="{{isSetup}}" hint-placeholder-val="{{false}}">
     <div class="setup">
-      <div class="leafw"><article class="leaf" aria-label="Set up the knowledge base">
-        <h2 class="sh">Set up the knowledge base</h2>
+      <div class="leafw"><article class="leaf" aria-label="Set up your notes">
+        <h2 class="sh">Set up your notes</h2>
         <p class="slead">Notes are Markdown files in a git repo. Agents search them with <span class="ic-code">search_kb</span> when they need the long version, and you write them here or in any editor.</p>
         <div class="step"><span class="no">1</span>Where do the notes live?</div>
         <div class="choices">
@@ -765,7 +974,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
         <div class="lab">Push to the remote</div>
         <div class="rowc" role="radiogroup" aria-label="Push to the remote"><sc-for list="{{sPushOpts}}" as="o" hint-placeholder-count="3"><button class="lvl {{o.cls}}" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.label}}</button></sc-for></div>
         <div class="pinrow"><button class="sw" role="switch" aria-checked="{{sPull}}" onClick="{{sTogglePull}}" aria-label="Pull when Primepaw opens"></button><span>Pull when Primepaw opens</span><span class="ph2">so you start with everyone’s notes</span></div>
-        <div class="sgo"><span class="sp">{{goHint}}</span><button class="pp-btn {{goCls}}" onClick="{{finishSetup}}" aria-disabled="{{goOff}}">Open the knowledge base</button></div>
+        <div class="sgo"><span class="sp">{{goHint}}</span><button class="pp-btn {{goCls}}" onClick="{{finishSetup}}" aria-disabled="{{goOff}}">Open notes</button></div>
       </article></div>
     </div>
     </sc-if>
@@ -784,8 +993,8 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 
     <sc-if value="{{settingsOpen}}" hint-placeholder-val="{{false}}">
       <div class="scrim" onClick="{{closePops}}"></div>
-      <div class="pop cpop" role="dialog" aria-label="Knowledge base settings" onKeyDown="{{settingsKey}}">
-        <h3>Knowledge base settings<span class="hh">it’s a git repo</span></h3>
+      <div class="pop cpop" role="dialog" aria-label="Notes settings" onKeyDown="{{settingsKey}}">
+        <h3>Notes settings<span class="hh">it’s a git repo</span></h3>
         <div class="lab">Folder</div>
         <div class="kdir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{kbPath}}</div>
         <div class="lab">Remote and branch</div>
@@ -806,13 +1015,13 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 <div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"start":{"editor":"enum","default":"setup","options":["notes","setup"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"night","options":["paper","night"]},"start":{"editor":"enum","default":"setup","options":["notes","setup"]},"scene":{"editor":"enum","default":"note","options":["note","read","source","ai","focus","graph"]},"$preview":{"width":1440,"height":900}}'>
 const NAV = [
   { id: 'inbox', label: 'Action Center', icon: 'M13 2L4 14h7l-1 8 9-12h-7z', badge: 6 },
   { id: 'sessions', label: 'Sessions', icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 21l1.4-4.9A8 8 0 1 1 21 12z', badge: 1 },
   { id: 'workspaces', label: 'Workspaces', icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
   { id: 'memory', label: 'Memory', icon: 'M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18ZM12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18ZM15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4M17.599 6.5a3 3 0 0 0 .399-1.375M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M19.938 10.5a4 4 0 0 1 .585.396M6 18a4 4 0 0 1-1.967-.516M19.967 17.484A4 4 0 0 1 18 18' },
-  { id: 'kb', label: 'Knowledge base', icon: 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20M9 6h7M9 10h5' },
+  { id: 'kb', label: 'Notes', icon: 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20M9 6h7M9 10h5' },
   { id: 'artifacts', label: 'Artifacts', icon: 'M8 3h8v4H8zM8 5H5v16h14V5h-3M9 12h6M9 16h6' },
   { id: 'workflows', label: 'Workflows', icon: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
   { id: 'ideas', label: 'Idea board', icon: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
@@ -846,6 +1055,7 @@ const KINDS = [
   { id: 'ol', label: 'Numbered list', k: '1.', icon: 'M10 6h10M10 12h10M10 18h10M4 5h1v4M4 9h2M6 19H4c0-1 2-1.6 2-2.8 0-.7-.5-1.2-1.1-1.2-.5 0-.9.3-.9.7' },
   { id: 'code', label: 'Code', k: '```', icon: 'M8 7l-5 5 5 5M16 7l5 5-5 5' },
   { id: 'quote', label: 'Quote', k: '>', icon: 'M5 7h5v5c0 2.5-1.5 4-4 5M14 7h5v5c0 2.5-1.5 4-4 5' },
+  { id: 'img', label: 'Image', k: '![]', icon: 'M3 5h18v14H3zM3 16l5-5 4 4 3-3 6 5M8.5 9.5h.01' },
   { id: 'table', label: 'Table', k: '|', icon: 'M3 5h18v14H3zM3 10h18M3 15h18M9 5v14M15 5v14' }
 ];
 const COMMIT = [{ id: 'off', label: 'Off' }, { id: '5', label: 'Every 5 min' }, { id: '15', label: 'Every 15 min' }, { id: '60', label: 'Every hour' }];
@@ -859,6 +1069,7 @@ const Q = (x) => ({ id: uid('b'), t: 'quote', x });
 const C = (x, lang) => ({ id: uid('b'), t: 'code', lang: lang || 'bash', x });
 const L = (items, ordered) => ({ id: uid('b'), t: 'list', ordered: !!ordered, items: items.map((it) => typeof it === 'string' ? { id: uid('i'), x: it, d: 0 } : { id: uid('i'), x: it[1], d: it[0] }) });
 const T = (rows) => ({ id: uid('b'), t: 'table', rows });
+const I = (x, src) => ({ id: uid('b'), t: 'img', src: src || '', x: x || '' });
 
 const NOTES = [
   { id: 'start', folder: null, file: 'start-here.md', type: 'note', title: 'Start here', desc: 'What lives in this knowledge base and where to put things.', tags: ['index'], parent: null, related: ['onboard'], edited: '2 weeks ago', blocks: [
@@ -891,6 +1102,7 @@ const NOTES = [
     C('git switch release && git pull\nmake migrate ENV=prod DRY_RUN=0\n./scripts/deploy.sh orbit-billing --canary 5', 'bash'),
     P('Widen the rollout one stage at a time and watch checkout errors between stages.'),
     T([['Stage', 'Traffic', 'Wait'], ['Canary', '5%', '10 min'], ['Zone A', '50%', '15 min'], ['Everyone', '100%', 'until the next deploy']]),
+    I('Checkout errors during the last rollout, stage by stage', 'img/rollout-errors.png'),
     Q('If checkout errors pass 0.5% at any stage, roll back first and ask questions later.'),
     H('Rolling back'),
     P('Run `./scripts/deploy.sh orbit-billing --rollback`. It keeps the migration, so read [[Rollback without losing data]] before you undo one.')
@@ -990,10 +1202,12 @@ function convert(b, kind) {
   if (kind === 'quote') return { id: b.id, t: 'quote', x: txt };
   if (kind === 'code') return { id: b.id, t: 'code', lang: b.lang || 'text', x: plain(txt) };
   if (kind === 'ul' || kind === 'ol') return { id: b.id, t: 'list', ordered: kind === 'ol', items: b.t === 'list' ? b.items : (lines.length ? lines : ['']).map((l) => ({ id: uid('i'), x: l, d: 0 })) };
+  if (kind === 'img') return { id: b.id, t: 'img', src: b.src || '', x: plain(lines[0] || '') };
   if (kind === 'table') return b.t === 'table' ? b : { id: b.id, t: 'table', rows: [['Column', 'Column'], [plain(lines[0] || ''), '']] };
   return b;
 }
 function fresh(kind) {
+  if (kind === 'img') return I('', '');
   if (kind === 'h2') return H('', 2); if (kind === 'h3') return H('', 3);
   if (kind === 'ul') return L(['']); if (kind === 'ol') return L([''], true);
   if (kind === 'code') return C('', 'bash'); if (kind === 'quote') return Q('');
@@ -1001,7 +1215,7 @@ function fresh(kind) {
   return P('');
 }
 const kindOf = (b) => b.t === 'h' ? 'h' + b.lv : b.t === 'list' ? (b.ordered ? 'ol' : 'ul') : b.t;
-const KIND_NAME = { h2: 'heading', h3: 'subheading', p: 'paragraph', ul: 'list', ol: 'numbered list', code: 'code block', quote: 'quote', table: 'table' };
+const KIND_NAME = { h2: 'heading', h3: 'subheading', p: 'paragraph', ul: 'list', ol: 'numbered list', code: 'code block', quote: 'quote', table: 'table', img: 'image' };
 const ROMAN = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'];
 const markOf = (n, d) => d % 3 === 0 ? n + '.' : d % 3 === 1 ? String.fromCharCode(96 + Math.min(n, 26)) + '.' : (ROMAN[n - 1] || n) + '.';
 const edKey = (e) => !e ? '' : e.bid + (e.iid ? ':' + e.iid : '') + (e.r != null ? ':' + e.r + ':' + e.c : '');
@@ -1013,9 +1227,90 @@ const INIT = {
   dirty: ['deploy', 'sync4'], syncing: false, lastSync: '6 min ago', dragging: null, dropB: null, dropI: null, hot: null, newIds: [],
   cfg: { commit: '15', push: 'commit', pull: true, remote: 'git@github.com:primepaw/team-kb.git', branch: 'main', msg: 'kb: {n} notes changed' },
   kbPath: '~/Notes/team-kb', setup: { mode: null, path: '', found: '', url: '', cloning: false, pct: 0, cloned: false, picks: 0 },
-  sCfg: { commit: '15', push: 'commit', pull: true }, nextF: 0, gW: 0, gH: 0
+  sCfg: { commit: '15', push: 'commit', pull: true }, nextF: 0, gW: 0, gH: 0, tagSel: [], hotB: null
 };
 
+/* notes: the scene the board opens in (a prop), the three faces of a note, and Markdown both ways */
+const SCENE = { note: {}, read: { mode: 'read' }, source: { mode: 'source' }, ai: { ai: true }, focus: { max: true, mode: 'read' }, graph: { view: 'graph' } };
+const MODES = [{ id: 'edit', label: 'Edit', tip: 'Write in blocks' }, { id: 'read', label: 'Read', tip: 'Read only: nothing changes by mistake' }, { id: 'source', label: 'Source', tip: 'The Markdown file as it is saved' }];
+const MAX_IN = 'M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3';
+const MAX_OUT = 'M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3';
+const toMd = (n, titleOf) => {
+  const fm = ['---', 'type: ' + n.type];
+  if (n.desc) fm.push('description: ' + n.desc);
+  fm.push('tags: [' + n.tags.join(', ') + ']');
+  const par = n.parent ? titleOf(n.parent) : '';
+  if (par) fm.push('parent: "[[' + par + ']]"');
+  const rel = n.related.map(titleOf).filter(Boolean);
+  if (rel.length) { fm.push('related:'); rel.forEach((t) => fm.push('  - "[[' + t + ']]"')); }
+  fm.push('---', '', '# ' + (n.title || 'Untitled'), '');
+  const body = n.blocks.map((b) => {
+    if (b.t === 'h') return '#'.repeat(b.lv || 2) + ' ' + (b.x || '');
+    if (b.t === 'quote') return (b.x || '').split('\n').map((l) => '> ' + l).join('\n');
+    if (b.t === 'code') return '```' + (b.lang || '') + '\n' + (b.x || '') + '\n```';
+    if (b.t === 'img') return '![' + plain(b.x) + '](' + (b.src || '') + ')';
+    if (b.t === 'list') { const cnt = []; return b.items.map((it) => { const d = it.d || 0; cnt.length = d + 1; cnt[d] = (cnt[d] || 0) + 1; return '  '.repeat(d) + (b.ordered ? cnt[d] + '. ' : '- ') + it.x; }).join('\n'); }
+    if (b.t === 'table') return b.rows.map((r, i) => '| ' + r.join(' | ') + ' |' + (i ? '' : '\n|' + r.map(() => ' --- |').join(''))).join('\n');
+    return b.x || '';
+  });
+  return fm.join('\n') + '\n' + body.join('\n\n') + '\n';
+};
+const fromMd = (text, old, byTitle) => {
+  const lines = (text || '').replace(/\r/g, '').split('\n'); let i = 0; let m;
+  const out = { type: old.type, desc: '', tags: [], parent: null, related: [], title: old.title };
+  if ((lines[0] || '').trim() === '---') {
+    let key = '';
+    const idOf = (s) => { const g = /\[\[([^\]]+)\]\]/.exec(s); const hit = g && byTitle(g[1]); return hit && hit.id !== old.id ? hit.id : null; };
+    for (i = 1; i < lines.length && lines[i].trim() !== '---'; i++) {
+      const l = lines[i];
+      if ((m = /^([a-z]+):\s*(.*)$/.exec(l))) {
+        key = m[1]; const v = m[2].trim();
+        if (key === 'type') { if (TYPES.some((t) => t.id === v)) out.type = v; }
+        else if (key === 'description') out.desc = v;
+        else if (key === 'tags') out.tags = v.replace(/^\[|\]$/g, '').split(',').map((t) => t.trim().toLowerCase().replace(/^#/, '').replace(/\s+/g, '-')).filter(Boolean);
+        else if (key === 'parent') out.parent = idOf(v);
+        else if (key === 'related' && v) { const id = idOf(v); if (id) out.related.push(id); }
+      } else if (key === 'related' && /^\s*-/.test(l)) { const id = idOf(l); if (id && !out.related.includes(id)) out.related.push(id); }
+    }
+    i++;
+  }
+  const blocks = []; let para = []; let titled = false;
+  const flush = () => { if (para.length) { blocks.push(P(para.join(' '))); para = []; } };
+  for (; i < lines.length; i++) {
+    const l = lines[i]; const t = l.trim();
+    if (!t) { flush(); continue; }
+    if (t.startsWith('```')) { flush(); const lang = t.slice(3).trim(); const buf = []; i++; while (i < lines.length && !lines[i].trim().startsWith('```')) buf.push(lines[i++]); blocks.push(C(buf.join('\n'), lang || 'text')); continue; }
+    if ((m = /^(#{1,6})\s+(.*)$/.exec(t))) { flush(); if (m[1].length === 1 && !titled && !blocks.length) { out.title = m[2].trim(); titled = true; } else blocks.push(H(m[2].trim(), m[1].length <= 2 ? 2 : 3)); continue; }
+    if ((m = /^!\[([^\]]*)\]\(([^)]*)\)$/.exec(t))) { flush(); blocks.push(I(m[1], m[2])); continue; }
+    if (t[0] === '>') { flush(); const buf = []; while (i < lines.length && lines[i].trim()[0] === '>') buf.push(lines[i++].trim().replace(/^>\s?/, '')); i--; blocks.push(Q(buf.join('\n'))); continue; }
+    if (t[0] === '|') {
+      flush(); const rows = [];
+      while (i < lines.length && lines[i].trim()[0] === '|') { const r = lines[i++].trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim()); if (!r.every((c) => /^:?-{2,}:?$/.test(c))) rows.push(r); }
+      i--; if (rows.length) { const w = Math.max(...rows.map((r) => r.length)); blocks.push(T(rows.map((r) => r.concat(Array(w - r.length).fill(''))))); }
+      continue;
+    }
+    if (/^\s*([-*+]|\d+[.)])\s+/.test(l)) {
+      flush(); const items = []; let ordered = null;
+      while (i < lines.length && (m = /^(\s*)([-*+]|\d+[.)])\s+(.*)$/.exec(lines[i]))) { if (ordered === null) ordered = /\d/.test(m[2]); items.push({ id: uid('i'), x: m[3], d: Math.min(3, Math.floor(m[1].replace(/\t/g, '  ').length / 2)) }); i++; }
+      i--; if (items.length) items[0].d = 0; blocks.push({ id: uid('b'), t: 'list', ordered: !!ordered, items }); continue;
+    }
+    para.push(t);
+  }
+  flush(); out.blocks = blocks.length ? blocks : [P('')];
+  return out;
+};
+/* the chat beside the note: closed and empty by default; the ai scene opens it part-way through a conversation about the deploy runbook */
+const AI0 = { open: false, busy: false, msgs: [] };
+const AI_SUGS = ['Summarize this note', 'Add a checklist at the end', 'Draft a note for a missing link'];
+const AI_STOP = ['what', 'when', 'where', 'which', 'that', 'this', 'does', 'have', 'with', 'from', 'about', 'note', 'there', 'should', 'would', 'could', 'into', 'your', 'they', 'them', 'then', 'than', 'much', 'many', 'long'];
+const AI_SEED = { open: true, busy: false, msgs: [
+  { id: 'm-s1', who: 'me', x: 'What stops a bad build from reaching everyone?' },
+  { id: 'm-s2', who: 'ai', lines: ['Two things in this note. The rollout widens one stage at a time: the canary takes 5% of traffic for 10 minutes, then Zone A holds at 50% for 15.', 'And there is one hard rule: if checkout errors pass 0.5% at any stage, roll back first and ask questions later.'] },
+  { id: 'm-s3', who: 'me', x: 'Add a checklist for whoever is on call' },
+  { id: 'm-s4', who: 'ai', lines: ['Here is one drawn from the steps already in the note. It goes at the end, and you can drag it up afterwards.'],
+    card: { kind: 'edit', k: 'Edit to this note', title: 'On-call checklist', act: 'Apply to note', nid: 'deploy',
+      blocks: [H('On-call checklist'), L(['Sticky sessions are on', 'Canary at 5% held for 10 min', 'Zone A at 50% held for 15 min', 'Checkout errors stayed under 0.5% at every stage', 'Rollback command is in the terminal history'])] } }
+] };
 /* buddy */ const BD0 = { right: 22, open: false, text: '', made: null, shot: null, leftHalf: false, dragging: false }; const BD_MIN = 10, BD_LEFT = 92; /* /buddy */
 class Component extends DCLogic {
   /* buddy: Jarvis on the plinth. The board's own values come from renderValsBoard; these ride on top. The mood is a timed reaction if one plays,
@@ -1130,11 +1425,10 @@ class Component extends DCLogic {
     if (!inst) { this.fg = null; this.fgArmed = false; return; }
     if (inst === this.fg) return;
     this.fg = inst; this.fitted = false;
-    try { inst.d3Force('charge').strength(-520); inst.d3Force('link').distance(165); inst.d3Force('collide', cardCollide()); inst.d3Force('gravity', gravity(0.07)); } catch (e) {}
     setTimeout(() => {
       if (this.fg !== inst) return;
       this.fgArmed = true; this.forceUpdate();
-      setTimeout(() => { if (this.fg === inst && !this.fitted) inst.zoomToFit(0, 96); }, 40);
+      setTimeout(() => { if (this.fg === inst && !this.fitted) inst.zoomToFit(0, 70); }, 40);
     }, 0);
   };
   graphData() {
@@ -1199,7 +1493,7 @@ class Component extends DCLogic {
   }
   setBlocks(nid, fn, extra) { this.setNote(nid, (n) => ({ ...n, blocks: fn(n.blocks) }), extra); }
   setBlock(nid, bid, fn, extra) { this.setBlocks(nid, (bs) => bs.map((b) => b.id === bid ? fn(b) : b), extra); }
-  edit(ed, caret) { this.wantFocus = edKey(ed); this.caret = caret == null ? null : caret; this.setState({ ed, menu: null, pick: null }); }
+  edit(ed, caret) { if (this.mode() === 'read') return; this.wantFocus = edKey(ed); this.caret = caret == null ? null : caret; this.setState({ ed, menu: null, pick: null }); }
   stopEdit(key) { if (this.wantFocus) return; if (edKey(this.state.ed) === key) this.setState({ ed: null }); }
   openNote(id, extra) {
     const n = this.note(id); if (!n) return; this.reveal = true;
@@ -1330,6 +1624,141 @@ class Component extends DCLogic {
     this.wantFocus = edKey(ed); this.caret = 0;
     this.setBlocks(n.id, (bs) => { const c = bs.slice(); const i = afterId ? c.findIndex((x) => x.id === afterId) + 1 : c.length; c.splice(i, 0, nb); return c; }, { ed, menu: null });
   }
+  // ---- notes: the scene the board opens in, the note's three faces, the outline and the chat ----
+  scn() { return SCENE[this.props.scene ?? 'note'] || SCENE.note; }
+  mode() { return this.state.mode || this.scn().mode || 'edit'; }
+  isMax() { return this.state.max ?? !!this.scn().max; }
+  ai() { return this.state.ai || (this.scn().ai ? AI_SEED : AI0); }
+  aiSet(fn) { this.setState((s) => { const a = s.ai || (this.scn().ai ? AI_SEED : AI0); return { ai: { ...a, ...fn(a) } }; }); }
+  titleOf(id) { const x = id ? this.state.notes.find((n) => n.id === id) : null; return x ? x.title : ''; }
+  md(n) { return toMd(n, (id) => this.titleOf(id)); }
+  // the source is the same note: what is typed there is read back into blocks when the caret leaves it
+  applySrc(el) {
+    const n = this.note(); if (!el || !n) return;
+    if (el.value === this.md(n)) return;
+    const p = fromMd(el.value, n, (t) => this.byTitle(t));
+    this.setNote(n.id, (x) => ({ ...x, ...p }));
+  }
+  goBlock(b) {
+    if (this.mode() === 'source') {
+      const el = this.els.src; if (!el || !el.isConnected) return;
+      const k = '#'.repeat(b.lv || 2) + ' ' + (b.x || ''); const i = el.value.indexOf(k); if (i < 0) return;
+      el.focus({ preventScroll: true }); try { el.setSelectionRange(i, i + k.length); } catch (e) {}
+      const line = el.value.slice(0, i).split('\n').length; const lh = parseFloat(getComputedStyle(el).lineHeight) || 22;
+      window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY + line * lh - window.innerHeight / 3), behavior: 'smooth' });
+      return;
+    }
+    const t = this.els.title; const root = t && t.isConnected ? t.closest('.leaf') : null;
+    const el = root && root.querySelector('[data-b="' + b.id + '"]'); if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    clearTimeout(this.hotT); this.setState({ hotB: b.id }); this.hotT = setTimeout(() => this.setState({ hotB: null }), 1500);
+  }
+  aiDown() { setTimeout(() => { const el = this.els.aiLog; if (el && el.isConnected) el.scrollTop = el.scrollHeight; }, 40); }
+  aiSend(text) {
+    const q = (text || '').trim(); if (!q || this.ai().busy) return; const nid = this.note().id;
+    if (this.els.ai) this.els.ai.value = '';
+    this.aiSet((a) => ({ open: true, busy: true, msgs: a.msgs.concat([{ id: uid('m'), who: 'me', x: q }]) })); this.aiDown();
+    clearTimeout(this.aiT);
+    this.aiT = setTimeout(() => { const r = this.aiReply(q, this.state.notes.find((x) => x.id === nid) || this.note()); this.aiSet((a) => ({ busy: false, msgs: a.msgs.concat([{ id: uid('m'), who: 'ai', ...r }]) })); this.aiDown(); }, 950);
+  }
+  // a stand-in for the model: it reads the open note and answers from it, offers an edit as blocks, or drafts a new note
+  aiReply(q, n) {
+    const k = q.toLowerCase(); const title = n.title || 'Untitled';
+    const heads = n.blocks.filter((b) => b.t === 'h').map((b) => plain(b.x)).filter(Boolean);
+    const join = (a) => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+    if (/(new note|draft|create a|start a note|write a note|missing)/.test(k)) {
+      const miss = []; n.blocks.forEach((b) => linksIn(textOf(b)).forEach((t) => { if (!this.byTitle(t) && !miss.includes(t)) miss.push(t); }));
+      const m = /(?:about|on|called|titled)\s+["“]?([^"”?.]{3,60})/.exec(q);
+      if (!miss.length && !m && /missing/.test(k)) return { lines: ['Every [[link]] in this note already has a note behind it. Tell me what the new note should be about and I’ll draft it.'] };
+      const t = /missing/.test(k) && miss.length ? miss[0] : m ? m[1].trim().replace(/^./, (c) => c.toUpperCase()) : miss[0] || 'Follow-ups to ' + title;
+      const blocks = [P('Started from [[' + title + ']]. This is a first draft: check each line against what really happens.'), H('What this covers'), L(['When you need this, and when you don’t', 'The steps, in order', 'Who to ask when it goes wrong']), H('Open questions'), P('')];
+      return { lines: ['I can start “' + t + '”' + (miss.includes(t) ? ': this note links to it, and nobody has written it yet.' : '.'), 'It goes in ' + this.folderName(n.folder) + ', with this note as its parent.'],
+        card: { kind: 'new', k: 'New note', title: t, act: 'Create note', nid: n.id, folder: n.folder, tags: n.tags.slice(0, 2), blocks } };
+    }
+    if (/(summar|tl;?dr|recap|in short|key points)/.test(k)) {
+      const first = n.blocks.find((b) => b.t === 'p' && b.x); const lead = n.desc || (first ? plain(first.x) : '');
+      const lines = [lead ? '“' + title + '”, in short: ' + lead : '“' + title + '” has nothing written in it yet.'];
+      if (heads.length) lines.push('It has ' + plural(heads.length, 'section') + ': ' + join(heads) + '.');
+      return { lines };
+    }
+    if (/\b(add|append|checklist|rewrite|edit|fix|tighten|shorten|expand|insert|write)\b/.test(k)) {
+      if (/checklist/.test(k)) {
+        const list = n.blocks.find((b) => b.t === 'list'); const items = (list ? list.items.filter((i) => !i.d).map((i) => plain(i.x)) : heads).slice(0, 5);
+        const rows = items.length ? items : ['Read the note top to bottom', 'Check each step still matches what happens', 'Fix what is out of date'];
+        return { lines: ['Here is a checklist drawn from what the note already says. It goes at the end, and you can drag it up afterwards.'], card: { kind: 'edit', k: 'Edit to this note', title: 'Checklist', act: 'Apply to note', nid: n.id, blocks: [H('Checklist'), L(rows)] } };
+      }
+      const paras = n.blocks.filter((b) => b.t === 'p' && b.x).map((b) => plain(b.x).split(/(?<=\.)\s/)[0]).slice(0, 3);
+      return { lines: ['Here is a short section that says it in a few lines. It goes at the end; drag it where you want it.'], card: { kind: 'edit', k: 'Edit to this note', title: 'In short', act: 'Apply to note', nid: n.id, blocks: [H('In short'), L(paras.length ? paras : [n.desc || 'One line on what this note is for'])] } };
+    }
+    const words = k.replace(/[^a-z0-9% ]+/g, ' ').split(/\s+/).filter((w) => w.length > 3 && !AI_STOP.includes(w));
+    const cand = []; n.blocks.forEach((b) => { if (b.t === 'list') b.items.forEach((i) => cand.push(plain(i.x))); else if (b.t === 'table') b.rows.slice(1).forEach((r) => cand.push(r[0] + ': ' + r.slice(1).map((c, i) => (b.rows[0][i + 1] || '').toLowerCase() + ' ' + c).join(', '))); else if (b.t !== 'h' && b.t !== 'code' && b.x) cand.push(plain(b.x).replace(/\n/g, ' ')); });
+    const hits = cand.map((x) => ({ x, s: words.filter((w) => x.toLowerCase().includes(w.replace(/s$/, ''))).length })).filter((c) => c.s > 0).sort((a, b) => b.s - a.s);
+    if (!hits.length) return { lines: ['“' + title + '” doesn’t say. I only read the note that is open: ask me to add a section on it and I’ll draft one.'] };
+    return { lines: ['The note says: “' + hits[0].x + '”'].concat(hits[1] ? ['And also: “' + hits[1].x + '”'] : []) };
+  }
+  aiDo(mid, yes) {
+    const m = this.ai().msgs.find((x) => x.id === mid); if (!m || !m.card || m.st) return; const c = m.card;
+    const mark = (st, stamp) => this.aiSet((a) => ({ msgs: a.msgs.map((x) => x.id === mid ? { ...x, st, stamp } : x) }));
+    if (!yes) { mark('no', 'Discarded'); return; }
+    const blocks = c.blocks.map((b) => { const x = clone(b); x.id = uid('b'); if (x.items) x.items.forEach((i) => { i.id = uid('i'); }); return x; });
+    const st = this.state;
+    if (c.kind === 'edit') {
+      const n = st.notes.find((x) => x.id === c.nid); if (!n) { mark('no', 'That note is gone'); return; }
+      this.setBlocks(n.id, (bs) => (bs.length === 1 && !textOf(bs[0]) ? [] : bs).concat(blocks));
+      mark('done', 'Added to the end of the note');
+      if (st.cur === n.id) setTimeout(() => this.goBlock(blocks[0]), 90);
+      return;
+    }
+    const id = uid('n'); this.reveal = true;
+    const nn = { id, folder: c.folder, file: null, type: 'note', title: c.title, desc: '', tags: c.tags || [], parent: c.nid, related: [], edited: 'new, not saved yet', blocks };
+    const up = this.chain(c.folder); const folders = st.folders.map((f) => up.includes(f.id) ? { ...f, open: true } : f);
+    this.setState({ notes: st.notes.concat([nn]), dirty: st.dirty.concat([id]), newIds: st.newIds.concat([id]), cur: id, ctx: c.folder, folders, view: 'note', ed: null, menu: null, pick: null });
+    mark('done', 'Created and opened');
+  }
+  notesVals(n, shown, tagSel) {
+    const st = this.state; const mode = this.mode(); const max = this.isMax(); const ai = this.ai();
+    const counts = {}; st.notes.forEach((x) => x.tags.forEach((t) => { counts[t] = (counts[t] || 0) + 1; }));
+    const chip = (t) => { const on = tagSel.includes(t); return { name: t, n: counts[t] || 0, on, cls: on ? 'is-on' : '', tip: on ? 'Stop filtering by #' + t : 'Show only notes tagged #' + t, pick: () => this.setState({ tagSel: on ? tagSel.filter((g) => g !== t) : tagSel.concat([t]) }) }; };
+    const all = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+    const heads = n.blocks.filter((b) => b.t === 'h');
+    const addsOf = (c) => { const out = c.kind === 'new' ? ['+ # ' + c.title] : []; c.blocks.forEach((b) => { if (b.t === 'h') out.push('+ ' + '#'.repeat(b.lv || 2) + ' ' + plain(b.x)); else if (b.t === 'list') b.items.forEach((i) => out.push('+ - ' + plain(i.x))); else if (b.x) out.push('+ ' + plain(b.x)); }); return out.slice(0, 7).map((x) => ({ x })); };
+    const setMode = (m) => { if (m !== mode) this.setState({ mode: m, ed: null, menu: null, pick: null }); };
+    const aiOpen = ai.open && st.view === 'note';
+    return {
+      appCls: ['m-' + mode, st.view === 'graph' && this.phase() === 'ready' ? 'kgraph' : '', this.phase() !== 'ready' ? 'is-setup' : '', max ? 'kmax' : '', aiOpen ? 'kai-on' : ''].filter(Boolean).join(' '),
+      appKey: (e) => { if (e.key !== 'Escape' || !this.isMax() || this.state.ed || this.state.menu || this.state.pick || this.state.search || this.state.settings) return; if (/^(TEXTAREA|INPUT)$/.test(e.target.tagName)) return; this.setState({ max: false }); },
+      // graph, plain: a dot per note in its folder's colour, the library's own thin links
+      gNodeColor: (node) => this.col(node.color), gLinkPlain: () => this.themeVals().isNight ? 'rgba(255,255,255,.22)' : 'rgba(0,0,0,.18)',
+      // tags
+      tagList: all.map(chip), hasTagSel: tagSel.length > 0, clearTags: () => this.setState({ tagSel: [] }),
+      tagLine: tagSel.length ? shown.length + ' of ' + plural(st.notes.length, 'note') : all.length + ' in use',
+      noteTags: n.tags.map(chip), noteTagN: n.tags.length, noNoteTags: !n.tags.length,
+      // faces
+      leafCls: 'm-' + mode, isRead: mode === 'read', isSource: mode === 'source', notSource: mode !== 'source',
+      modes: MODES.map((m) => ({ ...m, on: mode === m.id, cls: mode === m.id ? 'is-on' : '', pick: () => setMode(m.id) })),
+      srcRef: this.bindVal('src', mode === 'source' ? this.md(n) : ''), srcBlur: (e) => this.applySrc(e.currentTarget),
+      srcHint: 'This is ' + this.fileOf(n) + ' as it is saved: front matter, then Markdown. What you change here is read back into blocks when you click away.',
+      // maximize
+      isMax: max, maxCls: max ? 'is-on' : '', maxLabel: max ? 'Bring the sidebars back' : 'Maximize the note', maxIcon: max ? MAX_OUT : MAX_IN,
+      toggleMax: () => this.setState({ max: !max, view: 'note', menu: null, pick: null }),
+      // details
+      showConn: !aiOpen && !max,
+      outline: heads.map((b) => ({ x: plain(b.x) || 'Untitled heading', cls: 'l' + (b.lv || 2), go: () => this.goBlock(b) })), outN: heads.length, noOutline: !heads.length,
+      // chat
+      aiOpen, aiCls: ai.open ? 'is-on' : '', aiAbout: this.fileName(n), aiEmpty: !ai.msgs.length, aiBusy: ai.busy,
+      toggleAi: () => { const open = !(ai.open && st.view === 'note'); if (open) this.wantFocus = 'ai'; this.setState({ ai: { ...ai, open }, view: 'note', menu: null, pick: null, ed: null }); if (open) this.aiDown(); },
+      closeAi: () => this.setState({ ai: { ...ai, open: false } }),
+      aiEsc: (e) => { if (e.key === 'Escape') { e.stopPropagation(); this.setState({ ai: { ...ai, open: false } }); } },
+      aiLogRef: (el) => { if (el && this.els.aiLog !== el) { this.els.aiLog = el; el.scrollTop = el.scrollHeight; } },
+      aiRef: (el) => { if (!el) return; this.els.ai = el; if (this.wantFocus === 'ai') { this.wantFocus = null; el.focus(); } },
+      aiKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.aiSend(e.currentTarget.value); } },
+      aiGo: () => this.aiSend(this.els.ai ? this.els.ai.value : ''),
+      aiSugs: AI_SUGS.map((x) => ({ x, pick: () => this.aiSend(x) })),
+      aiMsgs: ai.msgs.map((m) => { const c = m.card; return { isMe: m.who === 'me', isAi: m.who === 'ai', x: m.x || '', lines: (m.lines || []).map((x) => ({ x })), hasCard: !!c,
+        k: c ? c.k : '', title: c ? c.title : '', act: c ? c.act : '', adds: c ? addsOf(c) : [], addCls: m.st === 'no' ? 'is-no' : '', open: !!c && !m.st, done: !!c && !!m.st, stCls: m.st === 'no' ? 'is-no' : '', stamp: m.stamp || '',
+        yes: () => this.aiDo(m.id, true), no: () => this.aiDo(m.id, false) }; })
+    };
+  }
   renderValsBoard() {
     const tv = this.themeVals();
     if (this.palNight !== tv.isNight) { this.palNight = tv.isNight; setTimeout(() => { if (this.gEl) this.readPal(this.gEl); }, 0); }
@@ -1337,6 +1766,7 @@ class Component extends DCLogic {
   }
   renderVals0() {
     const st = this.state; const phase = this.phase(); const ready = phase === 'ready';
+    if (!this.scened) { this.scened = true; if (this.scn().view === 'graph') setTimeout(() => { this.fitted = false; this.setState({ view: 'graph' }); }, 0); }
     const n = this.note() || st.notes[0];
     const curEd = edKey(st.ed);
     // ---- the notes board ----
@@ -1346,7 +1776,8 @@ class Component extends DCLogic {
     const typeF = words.filter((w) => w.startsWith('type:')).map((w) => w.slice(5));
     const textF = words.filter((w) => w[0] !== '#' && !w.startsWith('type:')).join(' ');
     const match = (x) => tagF.every((t) => x.tags.some((g) => g.includes(t))) && typeF.every((t) => x.type.startsWith(t)) && (!textF || (x.title + ' ' + x.desc + ' ' + x.tags.join(' ')).toLowerCase().includes(textF));
-    const shown = st.notes.filter(match);
+    const tagSel = st.tagSel || []; const filtering = !!raw || tagSel.length > 0;
+    const shown = st.notes.filter((x) => match(x) && tagSel.every((t) => x.tags.includes(t)));
     // ---- the file tree: folders first, then files, each sorted by name ----
     const fol = st.folders;
     const byName = (a, b) => (a.name || '').localeCompare(b.name || '');
@@ -1365,8 +1796,8 @@ class Component extends DCLogic {
     const guides = (d) => Array.from({ length: d }, () => ({}));
     const walkT = (pid, d) => {
       kidsOf(pid).forEach((f) => {
-        if (raw && !f.naming && !under(f.id)) return;
-        const open = raw ? true : !!f.open;
+        if (filtering && !f.naming && !under(f.id)) return;
+        const open = filtering ? true : !!f.open;
         if (f.naming) {
           tree.push({ key: 'f:' + f.id, naming: true, plain: false, depth: d, guides: guides(d),
             nameRef: this.bindVal('folder:' + f.id, f.name || '', 'folder:' + f.id),
@@ -1406,11 +1837,13 @@ class Component extends DCLogic {
       const kind = kindOf(b); const key = b.id; const editing = curEd === key;
       const menuOpen = st.menu && st.menu.bid === b.id && (st.menu.kind === 'add' || st.menu.kind === 'block');
       const isBlockMenu = !!(menuOpen && st.menu.kind === 'block');
-      const cls = [kind === 'h2' || kind === 'h3' ? kind : b.t, st.dragging === b.id ? 'is-drag' : '', dropB && dropB.bid === b.id ? 'drop-' + dropB.pos : '', menuOpen ? 'is-menu' : '', editing ? 'is-ed' : ''].filter(Boolean).join(' ');
+      const cls = [kind === 'h2' || kind === 'h3' ? kind : b.t, st.dragging === b.id ? 'is-drag' : '', dropB && dropB.bid === b.id ? 'drop-' + dropB.pos : '', menuOpen ? 'is-menu' : '', editing ? 'is-ed' : '', st.hotB === b.id ? 'is-hot' : ''].filter(Boolean).join(' ');
       const v = {
         cls, lv: b.lv || 2, isH: b.t === 'h', isP: b.t === 'p', isQ: b.t === 'quote', isCode: b.t === 'code', isList: b.t === 'list', isTable: b.t === 'table',
         viewing: !editing, editing, x: b.x || '', lang: b.lang || '', codeEmpty: b.t === 'code' && !b.x,
-        segs: b.t === 'h' || b.t === 'p' || b.t === 'quote' ? this.segs(b.x, b.t === 'h' ? (b.lv === 3 ? 'Subheading' : 'Heading') : b.t === 'quote' ? 'A line worth quoting' : 'Write something, or use + to add a block') : [],
+        bid: b.id, isImg: b.t === 'img', hasSrc: !!b.src, noSrc: !b.src, src: b.src || '', alt: plain(b.x) || 'Image',
+        fill: () => this.setBlock(n.id, b.id, (x) => ({ ...x, src: 'img/pasted-' + slug(n.title).slice(0, 18) + '.png' })),
+        segs: b.t === 'h' || b.t === 'p' || b.t === 'quote' || b.t === 'img' ? this.segs(b.x, b.t === 'h' ? (b.lv === 3 ? 'Subheading' : 'Heading') : b.t === 'quote' ? 'A line worth quoting' : b.t === 'img' ? 'Add a caption' : 'Write something, or use + to add a block') : [],
         edit: () => this.edit({ bid: b.id }),
         edRef: this.bindVal('ed', b.x || '', key),
         input: (e) => { grow(e.currentTarget); this.setBlock(n.id, b.id, (x) => ({ ...x, x: e.currentTarget.value })); },
@@ -1528,11 +1961,11 @@ class Component extends DCLogic {
     }
     const openPick = (kind) => { this.wantFocus = 'pick'; this.setState({ pick: st.pick && st.pick.kind === kind ? null : { kind, q: '' }, menu: null, ed: null }); };
     // ---- graph ----
-    const gm = new Set(st.notes.filter(match).map((x) => x.id));
+    const gm = new Set(shown.map((x) => x.id));
     const gd = this.graphData();
     const lid = (e) => typeof e === 'object' && e ? e.id : e;
     const near = new Set(); if (st.hot) gd.links.forEach((l) => { if (lid(l.source) === st.hot) near.add(lid(l.target)); if (lid(l.target) === st.hot) near.add(lid(l.source)); });
-    this.gView = { cur: n.id, hot: st.hot, near, dim: raw ? new Set(st.notes.filter((x) => !gm.has(x.id)).map((x) => x.id)) : null };
+    this.gView = { cur: n.id, hot: st.hot, near, dim: filtering ? new Set(st.notes.filter((x) => !gm.has(x.id)).map((x) => x.id)) : null };
     const inkRGB = (() => { const h = ((this.pal && this.pal.ink) || '#2a2219').replace('#', ''); const v = h.length === 3 ? h.split('').map((c) => c + c).join('') : h.slice(0, 6); return [0, 2, 4].map((i) => parseInt(v.slice(i, i + 2), 16)).join(','); })();
     const threadColor = (l) => {
       const hot = st.hot && (lid(l.source) === st.hot || lid(l.target) === st.hot); const a = st.hot && !hot ? 0.16 : 0.92;
@@ -1590,7 +2023,7 @@ class Component extends DCLogic {
         else if (r.isFolder && r.expanded) r.toggle();
         else { const p = rows.find((el) => el.getAttribute('data-k') === 'f:' + r.parent); if (p) p.focus(); }
       },
-      noMatch: !!raw && !shown.length, noMatchText: 'Nothing matches “' + st.filter.trim() + '”',
+      noMatch: filtering && !shown.length, noMatchText: 'Nothing matches ' + [st.filter.trim() ? '“' + st.filter.trim() + '”' : '', tagSel.map((t) => '#' + t).join(' ')].filter(Boolean).join(' with '),
       sideFoot: 'Plain Markdown in git. Agents search it with search_kb.',
       // header
       kbPath: st.kbPath, branch: st.cfg.branch, remote: st.cfg.remote, status, stCls: changes && !st.syncing ? 'is-dirty' : '',
@@ -1634,7 +2067,7 @@ class Component extends DCLogic {
       gNoLabel: () => '', gDraw: (node, ctx) => this.drawCard(node, ctx), gArea: (node, color, ctx) => this.cardArea(node, color, ctx),
       gLinkColor: threadColor, gLinkWidth: (l) => st.hot && (lid(l.source) === st.hot || lid(l.target) === st.hot) ? 2.8 : 1.6, gLinkDash: (l) => l.kind === 'parent' ? [5, 5] : null,
       gClick: (node) => this.openNote(node.id), gHover: (node) => { const id = node ? node.id : null; if (this.state.hot !== id) this.setState({ hot: id }); },
-      gStop: () => { if (this.fg && !this.fitted) { this.fitted = true; this.fg.zoomToFit(500, 96); if (this.gEl) this.gEl.setAttribute('data-fitted', '1'); } },
+      gStop: () => { if (this.fg && !this.fitted) { this.fitted = true; this.fg.zoomToFit(500, 70); if (this.gEl) this.gEl.setAttribute('data-fitted', '1'); } },
       graphCount: plural(st.notes.length, 'note') + ' · ' + plural(gd.links.length, 'thread'),
       menuKey: (e) => { if (e.key === 'Escape' && (this.state.menu || this.state.pick)) { e.preventDefault(); this.setState({ menu: null, pick: null }); } },
       // search
@@ -1668,6 +2101,7 @@ class Component extends DCLogic {
       sPull: sc.pull, sTogglePull: () => this.setState({ sCfg: { ...sc, pull: !sc.pull } }),
       goHint: canGo ? cfgLine(sc) : su.mode === 'clone' ? (su.cloning ? 'Cloning…' : 'Clone the repo first.') : 'Choose a folder or clone a repo first.', goCls: canGo ? '' : 'is-clean', goOff: !canGo,
       finishSetup: () => { if (!canGo) return; this.setState({ phase: 'ready', kbPath: su.mode === 'clone' ? '~/Notes/' + repo : su.path, cfg: { ...st.cfg, ...sc } }); },
+      ...this.notesVals(n, shown, tagSel),
       demoText: ''
     };
   }
