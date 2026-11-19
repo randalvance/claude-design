@@ -14,7 +14,7 @@
     },
     "DioramaAgent.dc.html": {
       "x": 0,
-      "y": 59700,
+      "y": 62700,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, live demo",
@@ -24,7 +24,7 @@
     },
     "DioramaAgentDark.dc.html": {
       "x": 1540,
-      "y": 59700,
+      "y": 62700,
       "w": 1440,
       "h": 900,
       "title": "Agent, edit page, paper diorama, dark mode, live demo",
@@ -34,7 +34,7 @@
     },
     "DioramaAgents.dc.html": {
       "x": 0,
-      "y": 58700,
+      "y": 61700,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, live demo",
@@ -44,7 +44,7 @@
     },
     "DioramaAgentsDark.dc.html": {
       "x": 1540,
-      "y": 58700,
+      "y": 61700,
       "w": 1440,
       "h": 900,
       "title": "Agents, list page, paper diorama, dark mode, live demo",
@@ -74,7 +74,7 @@
     },
     "DioramaBoard.dc.html": {
       "x": 0,
-      "y": 41900,
+      "y": 44900,
       "w": 1440,
       "h": 900,
       "title": "Kanban, one board, paper diorama, live demo",
@@ -84,7 +84,7 @@
     },
     "DioramaBoardDark.dc.html": {
       "x": 1540,
-      "y": 41900,
+      "y": 44900,
       "w": 1440,
       "h": 900,
       "title": "Kanban, one board, paper diorama, dark mode, live demo",
@@ -244,7 +244,7 @@
     },
     "DioramaKanban.dc.html": {
       "x": 0,
-      "y": 40900,
+      "y": 43900,
       "w": 1440,
       "h": 900,
       "title": "Kanban, boards, paper diorama, live demo",
@@ -254,7 +254,7 @@
     },
     "DioramaKanbanDark.dc.html": {
       "x": 1540,
-      "y": 40900,
+      "y": 43900,
       "w": 1440,
       "h": 900,
       "title": "Kanban, boards, paper diorama, dark mode, live demo",
@@ -264,7 +264,7 @@
     },
     "DioramaKnowledge.dc.html": {
       "x": 0,
-      "y": 29300,
+      "y": 32300,
       "w": 1440,
       "h": 900,
       "title": "Notes, a note open to write in, paper diorama, live demo",
@@ -274,7 +274,7 @@
     },
     "DioramaKnowledgeDark.dc.html": {
       "x": 1540,
-      "y": 29300,
+      "y": 32300,
       "w": 1440,
       "h": 900,
       "title": "Notes, a note open to write in, paper diorama, dark mode, live demo",
@@ -284,7 +284,7 @@
     },
     "DioramaKnowledgeSetup.dc.html": {
       "x": 0,
-      "y": 35300,
+      "y": 38300,
       "w": 1440,
       "h": 900,
       "title": "Notes, setting up, paper diorama, live demo",
@@ -294,7 +294,7 @@
     },
     "DioramaKnowledgeSetupDark.dc.html": {
       "x": 1540,
-      "y": 35300,
+      "y": 38300,
       "w": 1440,
       "h": 900,
       "title": "Notes, setting up, paper diorama, dark mode, live demo",
@@ -304,7 +304,7 @@
     },
     "DioramaMCPs.dc.html": {
       "x": 0,
-      "y": 62700,
+      "y": 65700,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, live demo",
@@ -314,7 +314,7 @@
     },
     "DioramaMCPsDark.dc.html": {
       "x": 1540,
-      "y": 62700,
+      "y": 65700,
       "w": 1440,
       "h": 900,
       "title": "MCP servers, paper diorama, dark mode, live demo",
@@ -324,7 +324,7 @@
     },
     "DioramaMemory.dc.html": {
       "x": 0,
-      "y": 28300,
+      "y": 31300,
       "w": 1440,
       "h": 900,
       "title": "Memory, paper diorama, live demo",
@@ -334,7 +334,7 @@
     },
     "DioramaMemoryDark.dc.html": {
       "x": 1540,
-      "y": 28300,
+      "y": 31300,
       "w": 1440,
       "h": 900,
       "title": "Memory, paper diorama, dark mode, live demo",
@@ -424,7 +424,7 @@
     },
     "DioramaSkill.dc.html": {
       "x": 0,
-      "y": 61700,
+      "y": 64700,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, live demo",
@@ -434,7 +434,7 @@
     },
     "DioramaSkillDark.dc.html": {
       "x": 1540,
-      "y": 61700,
+      "y": 64700,
       "w": 1440,
       "h": 900,
       "title": "Skill, edit page, paper diorama, dark mode, live demo",
@@ -444,7 +444,7 @@
     },
     "DioramaSkills.dc.html": {
       "x": 0,
-      "y": 60700,
+      "y": 63700,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, live demo",
@@ -454,7 +454,7 @@
     },
     "DioramaSkillsDark.dc.html": {
       "x": 1540,
-      "y": 60700,
+      "y": 63700,
       "w": 1440,
       "h": 900,
       "title": "Skills, list page, paper diorama, dark mode, live demo",
@@ -464,7 +464,7 @@
     },
     "DioramaWorkspace.dc.html": {
       "x": 0,
-      "y": 26900,
+      "y": 29900,
       "w": 1440,
       "h": 900,
       "title": "Workspace, edit page, paper diorama, live demo",
@@ -474,7 +474,7 @@
     },
     "DioramaWorkspaceDark.dc.html": {
       "x": 1540,
-      "y": 26900,
+      "y": 29900,
       "w": 1440,
       "h": 900,
       "title": "Workspace, edit page, paper diorama, dark mode, live demo",
@@ -504,7 +504,7 @@
     },
     "DioramaFactory.dc.html": {
       "x": 0,
-      "y": 42900,
+      "y": 45900,
       "w": 1440,
       "h": 900,
       "title": "Factory, paper diorama, live demo",
@@ -514,7 +514,7 @@
     },
     "DioramaFactoryDark.dc.html": {
       "x": 1540,
-      "y": 42900,
+      "y": 45900,
       "w": 1440,
       "h": 900,
       "title": "Factory, paper diorama, dark mode, live demo",
@@ -524,7 +524,7 @@
     },
     "DioramaFactoryEmpty.dc.html": {
       "x": 0,
-      "y": 43900,
+      "y": 46900,
       "w": 1440,
       "h": 900,
       "title": "Factory, no factories yet, paper diorama, live demo",
@@ -534,7 +534,7 @@
     },
     "DioramaFactoryEmptyDark.dc.html": {
       "x": 1540,
-      "y": 43900,
+      "y": 46900,
       "w": 1440,
       "h": 900,
       "title": "Factory, no factories yet, paper diorama, dark mode, live demo",
@@ -544,7 +544,7 @@
     },
     "DioramaFactoryPaused.dc.html": {
       "x": 0,
-      "y": 44900,
+      "y": 47900,
       "w": 1440,
       "h": 900,
       "title": "Factory, all paused, paper diorama, live demo",
@@ -554,7 +554,7 @@
     },
     "DioramaFactoryPausedDark.dc.html": {
       "x": 1540,
-      "y": 44900,
+      "y": 47900,
       "w": 1440,
       "h": 900,
       "title": "Factory, all paused, paper diorama, dark mode, live demo",
@@ -564,7 +564,7 @@
     },
     "DioramaFactoryBlocked.dc.html": {
       "x": 0,
-      "y": 45900,
+      "y": 48900,
       "w": 1440,
       "h": 900,
       "title": "Factory, a factory with Blocked tasks, paper diorama, live demo",
@@ -574,7 +574,7 @@
     },
     "DioramaFactoryBlockedDark.dc.html": {
       "x": 1540,
-      "y": 45900,
+      "y": 48900,
       "w": 1440,
       "h": 900,
       "title": "Factory, a factory with Blocked tasks, paper diorama, dark mode, live demo",
@@ -584,7 +584,7 @@
     },
     "DioramaJarvis.dc.html": {
       "x": 0,
-      "y": 65100,
+      "y": 68100,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, live demo",
@@ -594,7 +594,7 @@
     },
     "DioramaJarvisDark.dc.html": {
       "x": 1540,
-      "y": 65100,
+      "y": 68100,
       "w": 1440,
       "h": 900,
       "title": "Button, the cut-out cat, Jarvis’s first character, paper diorama, dark mode, live demo",
@@ -604,7 +604,7 @@
     },
     "DioramaPets.dc.html": {
       "x": 0,
-      "y": 64100,
+      "y": 67100,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy, the cat, the pug and the kitten, each in three cuts, live demo",
@@ -614,7 +614,7 @@
     },
     "DioramaPetsDark.dc.html": {
       "x": 1540,
-      "y": 64100,
+      "y": 67100,
       "w": 1440,
       "h": 900,
       "title": "Jarvis, the pet: the robot dog, the puppy, the cat, the pug and the kitten, each in three cuts, dark mode, live demo",
@@ -644,7 +644,7 @@
     },
     "DioramaFactoryPage.dc.html": {
       "x": 0,
-      "y": 46900,
+      "y": 49900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Tasks, paper diorama, live demo",
@@ -654,7 +654,7 @@
     },
     "DioramaFactoryPageDark.dc.html": {
       "x": 1540,
-      "y": 46900,
+      "y": 49900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Tasks, paper diorama, dark mode, live demo",
@@ -664,7 +664,7 @@
     },
     "DioramaFactoryFloor.dc.html": {
       "x": 0,
-      "y": 48900,
+      "y": 51900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory view, paper diorama, live demo",
@@ -674,7 +674,7 @@
     },
     "DioramaFactoryFloorDark.dc.html": {
       "x": 1540,
-      "y": 48900,
+      "y": 51900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory view, paper diorama, dark mode, live demo",
@@ -684,7 +684,7 @@
     },
     "DioramaFactoryKanban.dc.html": {
       "x": 0,
-      "y": 49900,
+      "y": 52900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Kanban, paper diorama, live demo",
@@ -694,7 +694,7 @@
     },
     "DioramaFactoryKanbanDark.dc.html": {
       "x": 1540,
-      "y": 49900,
+      "y": 52900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Kanban, paper diorama, dark mode, live demo",
@@ -704,7 +704,7 @@
     },
     "DioramaFactorySettings.dc.html": {
       "x": 0,
-      "y": 50900,
+      "y": 53900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Settings, paper diorama, live demo",
@@ -714,7 +714,7 @@
     },
     "DioramaFactorySettingsDark.dc.html": {
       "x": 1540,
-      "y": 50900,
+      "y": 53900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Settings, paper diorama, dark mode, live demo",
@@ -744,7 +744,7 @@
     },
     "DioramaIdeas.dc.html": {
       "x": 0,
-      "y": 38100,
+      "y": 41100,
       "w": 1440,
       "h": 900,
       "title": "Idea board, paper diorama, live demo",
@@ -754,7 +754,7 @@
     },
     "DioramaIdeasDark.dc.html": {
       "x": 1540,
-      "y": 38100,
+      "y": 41100,
       "w": 1440,
       "h": 900,
       "title": "Idea board, paper diorama, dark mode, live demo",
@@ -764,7 +764,7 @@
     },
     "DioramaLoading.dc.html": {
       "x": 0,
-      "y": 25900,
+      "y": 28900,
       "w": 1440,
       "h": 900,
       "title": "Loading: Jarvis fetches, live demo",
@@ -774,7 +774,7 @@
     },
     "DioramaLoadingDark.dc.html": {
       "x": 1540,
-      "y": 25900,
+      "y": 28900,
       "w": 1440,
       "h": 900,
       "title": "Loading: Jarvis fetches, dark mode, live demo",
@@ -784,7 +784,7 @@
     },
     "DioramaArtifacts.dc.html": {
       "x": 0,
-      "y": 36700,
+      "y": 39700,
       "w": 1440,
       "h": 900,
       "title": "Artifacts, pinned from sessions, paper diorama, live demo",
@@ -794,7 +794,7 @@
     },
     "DioramaArtifactsDark.dc.html": {
       "x": 1540,
-      "y": 36700,
+      "y": 39700,
       "w": 1440,
       "h": 900,
       "title": "Artifacts, pinned from sessions, paper diorama, dark mode, live demo",
@@ -804,7 +804,7 @@
     },
     "DioramaTasks.dc.html": {
       "x": 0,
-      "y": 39500,
+      "y": 42500,
       "w": 1440,
       "h": 900,
       "title": "Tasks, a tree of squares, paper diorama, live demo",
@@ -814,7 +814,7 @@
     },
     "DioramaTasksDark.dc.html": {
       "x": 1540,
-      "y": 39500,
+      "y": 42500,
       "w": 1440,
       "h": 900,
       "title": "Tasks, a tree of squares, paper diorama, dark mode, live demo",
@@ -824,7 +824,7 @@
     },
     "DioramaFactoryOverview.dc.html": {
       "x": 0,
-      "y": 47900,
+      "y": 50900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory overview, paper diorama, live demo",
@@ -834,7 +834,7 @@
     },
     "DioramaFactoryOverviewDark.dc.html": {
       "x": 1540,
-      "y": 47900,
+      "y": 50900,
       "w": 1440,
       "h": 900,
       "title": "Factory page, Factory overview, paper diorama, dark mode, live demo",
@@ -844,7 +844,7 @@
     },
     "DioramaWorkflows.dc.html": {
       "x": 0,
-      "y": 52300,
+      "y": 55300,
       "w": 1440,
       "h": 900,
       "title": "Workflows, the failed one open, paper diorama, live demo",
@@ -854,7 +854,7 @@
     },
     "DioramaWorkflowsDark.dc.html": {
       "x": 1540,
-      "y": 52300,
+      "y": 55300,
       "w": 1440,
       "h": 900,
       "title": "Workflows, the failed one open, paper diorama, dark mode, live demo",
@@ -864,7 +864,7 @@
     },
     "DioramaWorkflowsSteps.dc.html": {
       "x": 0,
-      "y": 53300,
+      "y": 56300,
       "w": 1440,
       "h": 900,
       "title": "Workflows, a workflow of several steps open, paper diorama, live demo",
@@ -874,7 +874,7 @@
     },
     "DioramaWorkflowsStepsDark.dc.html": {
       "x": 1540,
-      "y": 53300,
+      "y": 56300,
       "w": 1440,
       "h": 900,
       "title": "Workflows, a workflow of several steps open, paper diorama, dark mode, live demo",
@@ -884,7 +884,7 @@
     },
     "DioramaWorkflowsEmpty.dc.html": {
       "x": 0,
-      "y": 54300,
+      "y": 57300,
       "w": 1440,
       "h": 900,
       "title": "Workflows, none yet, paper diorama, live demo",
@@ -894,7 +894,7 @@
     },
     "DioramaWorkflowsEmptyDark.dc.html": {
       "x": 1540,
-      "y": 54300,
+      "y": 57300,
       "w": 1440,
       "h": 900,
       "title": "Workflows, none yet, paper diorama, dark mode, live demo",
@@ -904,7 +904,7 @@
     },
     "DioramaWorkflowEdit.dc.html": {
       "x": 0,
-      "y": 55300,
+      "y": 58300,
       "w": 1440,
       "h": 900,
       "title": "Workflow, open to edit, paper diorama, live demo",
@@ -914,7 +914,7 @@
     },
     "DioramaWorkflowEditDark.dc.html": {
       "x": 1540,
-      "y": 55300,
+      "y": 58300,
       "w": 1440,
       "h": 900,
       "title": "Workflow, open to edit, paper diorama, dark mode, live demo",
@@ -924,7 +924,7 @@
     },
     "DioramaWorkflowRun.dc.html": {
       "x": 0,
-      "y": 56300,
+      "y": 59300,
       "w": 1440,
       "h": 900,
       "title": "Workflow, running with a step waiting for you, paper diorama, live demo",
@@ -934,7 +934,7 @@
     },
     "DioramaWorkflowRunDark.dc.html": {
       "x": 1540,
-      "y": 56300,
+      "y": 59300,
       "w": 1440,
       "h": 900,
       "title": "Workflow, running with a step waiting for you, paper diorama, dark mode, live demo",
@@ -944,7 +944,7 @@
     },
     "DioramaWorkflowNew.dc.html": {
       "x": 0,
-      "y": 57300,
+      "y": 60300,
       "w": 1440,
       "h": 900,
       "title": "Workflow, a new one, paper diorama, live demo",
@@ -954,7 +954,7 @@
     },
     "DioramaWorkflowNewDark.dc.html": {
       "x": 1540,
-      "y": 57300,
+      "y": 60300,
       "w": 1440,
       "h": 900,
       "title": "Workflow, a new one, paper diorama, dark mode, live demo",
@@ -1124,7 +1124,7 @@
     },
     "DioramaKnowledgeRead.dc.html": {
       "x": 0,
-      "y": 30300,
+      "y": 33300,
       "w": 1440,
       "h": 900,
       "title": "Notes, read mode, paper diorama, live demo",
@@ -1134,7 +1134,7 @@
     },
     "DioramaKnowledgeReadDark.dc.html": {
       "x": 1540,
-      "y": 30300,
+      "y": 33300,
       "w": 1440,
       "h": 900,
       "title": "Notes, read mode, paper diorama, dark mode, live demo",
@@ -1144,7 +1144,7 @@
     },
     "DioramaKnowledgeSource.dc.html": {
       "x": 0,
-      "y": 31300,
+      "y": 34300,
       "w": 1440,
       "h": 900,
       "title": "Notes, Markdown source, paper diorama, live demo",
@@ -1154,7 +1154,7 @@
     },
     "DioramaKnowledgeSourceDark.dc.html": {
       "x": 1540,
-      "y": 31300,
+      "y": 34300,
       "w": 1440,
       "h": 900,
       "title": "Notes, Markdown source, paper diorama, dark mode, live demo",
@@ -1164,7 +1164,7 @@
     },
     "DioramaKnowledgeAI.dc.html": {
       "x": 0,
-      "y": 32300,
+      "y": 35300,
       "w": 1440,
       "h": 900,
       "title": "Notes, asking the assistant, paper diorama, live demo",
@@ -1174,7 +1174,7 @@
     },
     "DioramaKnowledgeAIDark.dc.html": {
       "x": 1540,
-      "y": 32300,
+      "y": 35300,
       "w": 1440,
       "h": 900,
       "title": "Notes, asking the assistant, paper diorama, dark mode, live demo",
@@ -1184,7 +1184,7 @@
     },
     "DioramaKnowledgeFocus.dc.html": {
       "x": 0,
-      "y": 33300,
+      "y": 36300,
       "w": 1440,
       "h": 900,
       "title": "Notes, maximized, paper diorama, live demo",
@@ -1194,7 +1194,7 @@
     },
     "DioramaKnowledgeFocusDark.dc.html": {
       "x": 1540,
-      "y": 33300,
+      "y": 36300,
       "w": 1440,
       "h": 900,
       "title": "Notes, maximized, paper diorama, dark mode, live demo",
@@ -1204,7 +1204,7 @@
     },
     "DioramaKnowledgeGraph.dc.html": {
       "x": 0,
-      "y": 34300,
+      "y": 37300,
       "w": 1440,
       "h": 900,
       "title": "Notes, the graph, paper diorama, live demo",
@@ -1214,10 +1214,70 @@
     },
     "DioramaKnowledgeGraphDark.dc.html": {
       "x": 1540,
-      "y": 34300,
+      "y": 37300,
       "w": 1440,
       "h": 900,
       "title": "Notes, the graph, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesNew.dc.html": {
+      "x": 0,
+      "y": 25900,
+      "w": 1440,
+      "h": 900,
+      "title": "New workspace, clone from GitHub, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesNewDark.dc.html": {
+      "x": 1540,
+      "y": 25900,
+      "w": 1440,
+      "h": 900,
+      "title": "New workspace, clone from GitHub, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesNewLocal.dc.html": {
+      "x": 0,
+      "y": 26900,
+      "w": 1440,
+      "h": 900,
+      "title": "New workspace, a folder on this Mac, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesNewLocalDark.dc.html": {
+      "x": 1540,
+      "y": 26900,
+      "w": 1440,
+      "h": 900,
+      "title": "New workspace, a folder on this Mac, paper diorama, dark mode, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesNewCloning.dc.html": {
+      "x": 0,
+      "y": 27900,
+      "w": 1440,
+      "h": 900,
+      "title": "New workspace, cloning, paper diorama, live demo",
+      "page": "diorama",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DioramaWorkspacesNewCloningDark.dc.html": {
+      "x": 1540,
+      "y": 27900,
+      "w": 1440,
+      "h": 900,
+      "title": "New workspace, cloning, paper diorama, dark mode, live demo",
       "page": "diorama",
       "expand": "fill",
       "is_interactive": true
@@ -1277,6 +1337,9 @@
     "p32",
     "p33",
     "s12",
+    "p16n",
+    "p16l",
+    "p16c",
     "p34",
     "p35",
     "p36",
@@ -1324,7 +1387,7 @@
     },
     "p19": {
       "x": 3080,
-      "y": 29300,
+      "y": 32300,
       "w": 320,
       "page": "diorama",
       "text": "Notes: the book on the rail (it was the Knowledge base). On the left, a search bar, then the notes as a file tree on one sheet of paper, folders and .md files with their git state, then the tags in use: click one or more to filter the tree. The note is the one place the paper steps back: no sheet around it and no tilt, the note set straight on the textured page like a document editor. It is made of blocks: heading, paragraph, bulleted or numbered list, code, quote, table and image. Drag a block by its grip, or use + to add one. There is no title bar: the buttons sit in one row above the note. Sync commits and pushes to GitHub, and hovering it shows what is not committed yet, the folder and the branch; New note starts one in the folder you are in. The margin holds the note’s details: an outline you can click through, its tags, parent, related notes, links and backlinks."
@@ -1359,7 +1422,7 @@
     },
     "p25": {
       "x": 3080,
-      "y": 42900,
+      "y": 45900,
       "w": 320,
       "page": "diorama",
       "text": "Factory: every factory at a glance, on the factory tile after Kanban’s. One card per factory on the sheet: its name by hand, its board as a dashed link (primepaw issues →), a state sticker (Running green, Idle a plain paper label, Off a dashed ghost, Paused amber under the global pause) and the factory’s own switch. Under them five counts by hand with their words: in flight, waiting on you, Blocked, to plan, queued; zeros go faint, waiting on you is amber, Blocked red, and a card with either sits on the amber mat. Along the bottom the steps that are on, as small chips joined by arrows: Planning → Plan review → Implementation → Testing → Code review → Merge; a step that is off is a dashed ghost with only its icon. The header has New factory, which opens a short menu of the boards that have none, and Factory settings. Above the cards, Pause all factories is the slot switch with its consequence in one line by hand: nothing new starts, what is in flight finishes its step and waits. Nothing pulses. The second pair has no factories yet, and New factory is the way in. On the third every factory is paused. On the fourth PrimePaw has a Blocked task, with the reason in red and the way to it."
@@ -1399,7 +1462,7 @@
     "s5": {
       "kind": "title1",
       "x": 0,
-      "y": 58400,
+      "y": 61400,
       "maxW": 2980,
       "page": "diorama",
       "text": "Settings: agents, skills and MCP servers"
@@ -1415,7 +1478,7 @@
     "s7": {
       "kind": "title1",
       "x": 0,
-      "y": 28000,
+      "y": 31000,
       "maxW": 2980,
       "page": "diorama",
       "text": "Memory and notes"
@@ -1423,7 +1486,7 @@
     "s9": {
       "kind": "title1",
       "x": 0,
-      "y": 40600,
+      "y": 43600,
       "maxW": 2980,
       "page": "diorama",
       "text": "Kanban and the factory"
@@ -1431,14 +1494,14 @@
     "s10": {
       "kind": "title1",
       "x": 0,
-      "y": 52000,
+      "y": 55000,
       "maxW": 2980,
       "page": "diorama",
       "text": "Workflows and background jobs"
     },
     "p26": {
       "x": 3080,
-      "y": 65100,
+      "y": 68100,
       "w": 320,
       "page": "diorama",
       "text": "Button, the cut-out cat in a bow tie: Jarvis’s first character, picked from five cuts, cut from cream and kraft in 1.6px ink, and the try before the pet. Every board wore him until the paper creatures; the boards wear the robot dog now, and the other agents’ portraits stay drawn stickers in his style. This sheet lays out every piece he is cut into. The cut: the kraft patch over his right ear, bead eyes, blush, a red nose, the red bow, two paws to hold an edge, with the paper’s cut edge around him (a light rim by day, white at night). The portrait: the same face as a flat sticker with a white die-cut rim and no shadow, never pixel art, on the cream tile that topped every rail, as the first Meet your Main Agent photo, and at the head of the threads board. Over the composer he was 92px wide, in from the right, leaning 4 degrees on his paws; over the empty home’s greeting 84px. He is a cut-out, not an animation: he never blinks, bounces, pulses, changes face with a session’s state, or does anything when clicked, which is what the pet does instead. The drawing is Kraft’s Characters asset, jarvis.svg."
@@ -1448,12 +1511,12 @@
       "page": "diorama",
       "text": "Jarvis, the pet: five paper creatures drawn on Comfy Cloud, side by side, each in three cuts. The robot dog is the one every board wears: an angular sheet-white hound with pen-drawn panel lines, a kraft snout and chest plate, blue ear tips, gold-ringed eyes and a red collar, the first character through the primepaw-character skill’s options step. The puppy was the first character, and the cat, a round-faced tabby with a blue collar, the second; the pug is the fourth, a jowly cream pug with big round eyes, a brown muzzle with its tongue out, pink cheeks, folded brown ears and a blue bandana, picked from five options and then from five variations of the one chosen; the kitten is the fifth, a round black kitten with big gold eyes, pink cheeks and a blue bow, picked from a set of five cute cats. The four wait in the portrait picker. Peeking: over the composer, paws hooked on the frame, a sprite atlas per character with a row per mood (idle, greet, celebrate, sad, error, ask) stepped like paper stop-motion; the buttons set all five and a click on one says hello. The sticker: each head as one round sticker at the sizes the boards use (the sticker, the rail tile, a thread portrait, a row). The standee: a sprite sheet each (pet/<id>-walk.png, <id>-walk.json and standee.js), six poses by four facings, every cell one drawing of the whole creature, the five walking one round of a factory floor and taking turns at the benches. The pictures are the canvas’s uploads of the pet/ files: a board cannot show a picture over 2 MiB that it names by a path, and the atlases are 2 to 3 MiB each. Qwen Image 2.1 drew the bases, faces and bodies and GPT Image 2.6 the moods, turnarounds and walks, through the primepaw-character skill in mockups/primepaw/.claude/skills/; pet/build.py slices them and pet/README.md lists every prompt, slot value and seed.",
       "x": 3080,
-      "y": 64100
+      "y": 67100
     },
     "s11": {
       "kind": "title1",
       "x": 0,
-      "y": 63800,
+      "y": 66800,
       "maxW": 2980,
       "page": "diorama",
       "text": "Jarvis, the pet"
@@ -1467,7 +1530,7 @@
     },
     "p30": {
       "x": 3080,
-      "y": 46900,
+      "y": 49900,
       "w": 320,
       "page": "diorama",
       "text": "The factory page: one factory, reached from the factories list on Home or a card on the Factory list. Across the very top, over the board and the sheet: first the factory selector, the factory icon, this factory’s name by hand and its state as a dot; it opens the list of factories with their states, this one ticked, and All factories, which goes back to the Factory list. Then the three views as card buttons: Overview, Tasks, Kanban. At the very right, Factory view as a factory icon button and Settings as a gear icon button, each pressed while it is open. At the right end of that bar, Stop factory (a red square) or Start factory (the blue go button), then the factory and the gear. The sheet’s head no longer names the factory, since the selector does: it has the state sticker, the board as a dashed link and the curator’s line. Tasks, the page it opens on, is the sessions list of this factory and nothing else: the factory’s tasks left the sessions list on the Sessions page and live here. It is laid out as the Sessions page is: the board, headed Factory with the slots in use under it as one row of paper slots (green working, amber waiting on you, blank free) and how many of the cap, runs down the window beside the rail under the row of views, with a search field, and the session fills the sheet under the factory’s head. On the board each task at work is one card, not a group that folds: its key and title, the pinwheel while it works, a red sticker when it waits on you or the Blocked sticker; under them the step it is in, its icon before its name, and at the right the factory’s steps as a small row of icons joined by a line: the ones behind it in ink, the one it is in on a blue disc (red when it waits on you or is Blocked), the ones to come faint. Press the card for the session of the step it is in; press a step behind it for that step’s session. A task with no session yet has its first step ringed with dashes and says to plan by hand; a parked one says planned, parked. Each task has three dots at the end of its line, and the open session has them beside its step: a task at work can be paused (its session stops where it is, its slot frees, it keeps its place with a Paused sticker and its step on a grey disc), sent back to the queue first in line with its work kept, or taken out of the factory back to the board’s backlog; a paused one resumes; a queued one moves to the top or comes out of the queue. What needs you comes first, then what is at work. Under them is Queue: the queued tasks, numbered in the order the factory takes them; drag one to another place, or move it with the up and down arrows from its grip, and it says its new place. At the bottom is Done: the merged tasks with a green tick and the day, five at first and Show all for the rest. Five filters above: All, Needs you, At work, Queue, Done. The picked session opens beside it, the strip, notes, capsules and the session’s own composer (model and effort, the context gauge, YOLO, the folder and the branch, the mic, and Jarvis peeking over it, who leaves the plinth while a session shows); a task in Planning has Planning done, Planning done implement later, and Close task above the composer, which is where the Plan view went. Overview, the first of the views, swaps the tasks for the overview: four count cards, in flight over the cap with one paper slot per place (green taken, amber waiting), waiting on you, Blocked and merged; press waiting on you and the row becomes the inbox’s strips with the ticket’s session beside them; press Blocked and the inbox’s own Blocked items appear, with Done once it is unblocked; press merged and the list of merged tickets with their PR chips. Under the cards the Factory ledger, every event with its day, a kind on a chip, the words and a dashed link to the session, with a filter by kind; and every task in the factory with its key on a kraft tag, agent and step, a state sticker, filtered by state and paged six at a time: press one and it opens under Tasks. Press Factory overview again for the tasks. Factory view: the tickets under To do on a board at the left and the floor at the right, a placeholder for the animated one: a paper room per step with a kraft roof, the agents’ faces at work holding their ticket on a tag, a Blocked ticket parked with its red sticker, the belt in and out with the queued crates, on grass, sand or snow. Kanban: the board of tasks stays at the left, and the right side is the board as the Kanban page has it, its name, count and sync, Sync with Jira and New card over the cork and sticky notes; drag a note and two drop places open on the board of tasks, To planning above the tasks at work and Into the factory above the Queue; a dropped note is queued or sent to planning and says so by hand on its corner. Settings: the Agent page’s sheets. Name, Description, Main goal, the curator agent as radio rows with New curator agent beside them, Ticket sizing guidance, the Ready label with its tag; the six steps each with a switch, an icon to pick, a label on a dashed line, Kanban status, agent, least and most instances, room and floor; Biome; Trust profile; and the three numbers, fix rounds before Blocked, new tasks per wake, the factory’s cap. Save settings in the head. Everything is fake and nothing pulses."
@@ -1488,7 +1551,7 @@
     },
     "p33": {
       "x": 3080,
-      "y": 38100,
+      "y": 41100,
       "w": 320,
       "page": "diorama",
       "text": "Idea board: the bulb on the rail, the one tile in sticky-note yellow with its glyph in ink. The Board page’s cork and sticky notes, opened up: no columns, each note pinned wherever you left it with a red tack and its own slight tilt. Drag a note anywhere; the one you touch comes to the top. Click a note and it turns into the markdown you wrote, in the same hand, with five colours and a bin under it. Escape, ⌘↵ or a click away pins it back, rendered: headings, bullet and numbered lists, todos you tick on the note itself, quotes, a rule, bold, italic, strike, code and links. New note puts an empty one in the first free spot and opens it; a double-click on the cork puts one where you clicked. A note left empty comes down by itself, and one you throw away comes back with Undo in the head. With a note focused, Enter writes on it and the arrow keys move it. Everything is fake and nothing pulses."
@@ -1496,28 +1559,28 @@
     "s12": {
       "kind": "title1",
       "x": 0,
-      "y": 37800,
+      "y": 40800,
       "maxW": 2980,
       "page": "diorama",
       "text": "Idea board"
     },
     "p34": {
       "x": 3080,
-      "y": 25900,
+      "y": 28900,
       "w": 320,
       "page": "diorama",
       "text": "Loading: Jarvis fetches, the one picked from three ways (the blank cards ruled in pencil and the one big pinwheel were dropped). It is what the Workspaces page shows while it fetches its list, and every other page takes the same state. The rail, the title, Find and New workspace are there from the first frame and the sheet under them is empty but for Jarvis: he is off his plinth, where a small card says out fetching, and at a kraft file box on a ledge. His standing cut steps between two frames of work, the index cards in the box lift one at a time, and a scissor-cut paper bubble says Fetching your workspaces in pen, its dots stepping. The box wears the page’s name on its label; that label and the noun in the bubble are all that change from page to page. When the list lands the scene goes in a frame, the cards come a frame apart from the top, the count takes its place under the title, and Jarvis is back on the plinth, cheering, with Got them in a small bubble. This board rests in the loading state so it can be looked at: Let it load lands the list and Load again goes back. The Workspaces board above plays it once when it opens. Only stepped frames move, nothing pulses, and under reduced motion it is a still."
     },
     "p35": {
       "x": 3080,
-      "y": 58700,
+      "y": 61700,
       "w": 320,
       "page": "diorama",
       "text": "Settings: Agents, Skills and MCP servers are off the rail and live in Settings. On these five boards, the two lists, the two edit pages and the MCP timetable, no tile of their own is on the rail, and the Settings gear at its foot is the pressed one. The pages themselves are as they were. There is no board for the Settings page itself yet."
     },
     "p36": {
       "x": 3080,
-      "y": 36700,
+      "y": 39700,
       "w": 320,
       "page": "diorama",
       "text": "Artifacts: the clipboard tile on the rail, after Notes. What you pin in a session’s artifacts sidebar shows up here, on a cork board, newest first, each a card with a red tack through it and its own slight tilt. Markdown, web pages and images show a thumbnail, the real thing made small in a window: a document in the app’s own type, a web page as a white printout under the browser’s bar, an image as it is. Anything else, code, a table or a PDF, has no preview: its kind is stamped on plain paper. Under the window are the name, the kind and size in Courier, and the session and workspace it came from by hand. Five small cards filter by kind, All, Markdown, HTML, Images, Other, each with its count, and Find looks at names, sessions and workspaces. A click opens the piece in a drawer at full size, with the session it was pinned from and Open the session, Copy and Download. Pull the tack, or press Unpin in the drawer, and it comes down; Undo in the head pins it back where it was. The page opens on the shared loading state: Jarvis at the file box, labelled ARTIFACTS, on the cork, and the pieces pinned up a frame apart when the list lands. In the session, the pin is a pushpin drawn in pen beside the artifact’s versions: faint with Pin by hand until pressed, then red with Pinned, the kind line says pinned to Artifacts and the artifact’s tab carries a small tack."
@@ -1525,14 +1588,14 @@
     "s13": {
       "kind": "title1",
       "x": 0,
-      "y": 36400,
+      "y": 39400,
       "maxW": 2980,
       "page": "diorama",
       "text": "Artifacts"
     },
     "p37": {
       "x": 3080,
-      "y": 39500,
+      "y": 42500,
       "w": 320,
       "page": "diorama",
       "text": "Tasks: the squares tile on the rail, in pink, between the Idea board and Kanban. It is one person’s own list and nothing in it has to be code. There are no epics: a task can hold tasks, and those can hold more, as deep as it goes. At the side the tree is an outline that folds, each name with a small square in its status colour and each group with its count. On the cork every task is a square. A leaf is a sticky note, yellow to do, blue doing, green done and struck through, with the status stamped at its foot; press the stamp to move it on. A task with tasks inside it is a box of paper that holds their squares, cream and kraft by turns, with its name, its description and how many are done; it is done when everything inside it is. Fold a box and it becomes a stack the size of one square, in the tree and on the board alike. Double-click a square and a new task goes inside it, with its name ready to type; double-click the cork for one at the top. Drag a square to move it: a blue bar shows where it would go in, and dropped on the middle of another square it goes inside that one, which is how tasks are grouped. The squares pack themselves and glide to their new places. A task can wait on another: String, then a click on the other task, ties red string pin to pin, and the one that waits is hatched and stamped Waits until the other is done. A loop cannot be tied. A task that waits carries a pin and a count: how many of the tasks it waits on are done, over how many there are, red while something is still to do and green once nothing is. Press the count and its strings go to full strength while the rest fade, and the squares it waits on are ringed, red to do and green done; a folded box’s stack stands in for what is inside it. Press it again, or click the bare cork, and it goes. Try Moving day or Book the flights: each waits on two, one of them done. The picked task’s slip sits under the tree: name, description, status or progress, what it waits on and what it holds up, and Add inside, String, Move and the bin, with Undo in the head. The page opens on the shared loading state, Jarvis at the file box labelled TASKS."
@@ -1540,21 +1603,21 @@
     "s14": {
       "kind": "title1",
       "x": 0,
-      "y": 39200,
+      "y": 42200,
       "maxW": 2980,
       "page": "diorama",
       "text": "Tasks"
     },
     "p38": {
       "x": 3080,
-      "y": 52300,
+      "y": 55300,
       "w": 320,
       "page": "diorama",
       "text": "Workflows: the workflows and the background jobs on one page, on one rail tile (the Background tile is gone). A job is a workflow of one step, so both live in one list. The list is a schedule board: one row per workflow, its agents as stickers, its name and its trigger by hand, its step count; at the right of each row a lane from yesterday at this hour to Monday, the weekend hatched, a red pencil line at now through every row. A run is a dot by its status (done green, failed red and bigger, skipped a hollow grey, running blue and pulsing; one run by hand has square corners), the next scheduled run a dashed ring with its time beside it, a sync every 15 minutes a comb; an event-driven one says what it waits for after now. Rows come in groups: Needs you (the last run failed), Running now, On a schedule, On an event, Paused (faded, its ring grey). Filters over the board count each group. Press a row, or a dot, and the card at the right opens it: its name by hand and its switch (on or paused), Run now and when it runs next, the failure on a dashed red slip with Run again, How it runs as a pipeline (the trigger and its cron or event, then each step numbered with the agent that does it, or a script), the workspace, and its runs, newest first, the one picked on the board highlighted. Run now puts a running dot at now and finishes it a moment later."
     },
     "p39": {
       "x": 3080,
-      "y": 55300,
+      "y": 58300,
       "w": 320,
       "page": "diorama",
       "text": "One workflow, open to edit: press a workflow on the board, or New workflow. The top bar has the way back, the name (type over it), whether it is saved, its switch, Test run and Save. The steps go down a cutting mat as cards on a pencil wire: what starts it on top (a schedule, an event, or by hand), each step numbered with the agent that does it, or a script, and a yellow tape on the ones that ask you first. A decision is a kraft card with a diamond; its ways split side by side, each labelled on its wire, and join again before the end card, which says who is told. Hover a wire for a + to put a step there. Press a card and the card at the right opens it. A step: who does it (the agents as faces, or a script), what to do in plain words on lined paper, what it gets from the steps before, what it may use, what happens before it posts or changes anything (just do it, ask me first, only draft) and if it fails. What starts it: the three kinds, then the event and its conditions, or the days, time and time zone with the cron spelled out. Test run walks the steps on the latest issue, a step at a time, each ticked green; a way not taken fades; a step that asks first stops in yellow with its draft at the right to approve. The second board is a real run waiting on the reply; the third a new one, where Jarvis drafts the trigger and steps from a sentence."
@@ -1568,45 +1631,66 @@
     },
     "p19r": {
       "x": 3080,
-      "y": 30300,
+      "y": 33300,
       "w": 320,
       "page": "diorama",
       "text": "Read mode: the same sheet with nothing to click by mistake. The grips, the + buttons and the tag box are gone, and links still open. The switch on the note’s top line goes between Edit, Read and Source."
     },
     "p19s": {
       "x": 3080,
-      "y": 31300,
+      "y": 34300,
       "w": 320,
       "page": "diorama",
       "text": "Source mode: the Markdown file as it is saved, front matter first. Type in it and click away, and the change is read back into blocks, tags and details."
     },
     "p19a": {
       "x": 3080,
-      "y": 32300,
+      "y": 35300,
       "w": 320,
       "page": "diorama",
       "text": "Ask AI opens a chat where the details were. It reads the open note: ask a question and it answers from the note, ask for an edit and it shows the blocks it would add with Apply or Discard, ask for a new note and it drafts one you can create. Try the three chips."
     },
     "p19f": {
       "x": 3080,
-      "y": 33300,
+      "y": 36300,
       "w": 320,
       "page": "diorama",
       "text": "Maximize, the corner-brackets button: the rail, the tree and the details step aside and the note takes the board. The same button, or Esc, brings them back."
     },
     "p19g": {
       "x": 3080,
-      "y": 34300,
+      "y": 37300,
       "w": 320,
       "page": "diorama",
       "text": "Graph is react-force-graph as it comes, with no cork and no cards: a dot per note in its folder’s colour, thin links for links, related and parent. It fills the content page and the buttons float over its upper right. Hover a dot for the title, drag it, scroll to zoom, click to open the note."
     },
     "p19u": {
       "x": 3080,
-      "y": 35300,
+      "y": 38300,
       "w": 320,
       "page": "diorama",
       "text": "The first visit, before any notes: point Notes at a folder on this Mac or clone a repo, choose how often to commit and push, then open it."
+    },
+    "p16n": {
+      "x": 3080,
+      "y": 25900,
+      "w": 320,
+      "page": "diorama",
+      "text": "New workspace: what the New workspace button and the dashed card on the list open. A sheet taped over the page asks one thing first, where the code lives, with two answers side by side. Clone from GitHub lists the repos of the account you are signed in with (private ones marked, the language and when each last changed), searchable; paste a GitHub URL instead and it becomes the one row. A repo that is already a workspace is greyed and says which. Under the list, Clone into shows the folder it will land in, with Change. The name is taken from the repo and can be rewritten; the colour is the first one no workspace uses yet. Clone and create is flat until there is a repo and a name nobody else has, and the line beside it says what is missing."
+    },
+    "p16l": {
+      "x": 3080,
+      "y": 26900,
+      "w": 320,
+      "page": "diorama",
+      "text": "The other answer, a folder on this Mac. Type a path or use Choose folder (a picker in the app; here it steps through three folders). The strip under the field says what Primepaw found: a git repo with its branch and remote, a plain folder that sessions can still work in but without branches or worktrees, or a folder that already belongs to another workspace, which blocks Create and names the workspace. Nothing is copied or moved: the folder is linked where it is, and more folders can be linked later on the workspace page."
+    },
+    "p16c": {
+      "x": 3080,
+      "y": 27900,
+      "w": 320,
+      "page": "diorama",
+      "text": "Cloning. The form gives way to the pinwheel, a bar, and the five steps of the clone ticked off as they pass, with the folder it is going into and the name it will get. Stop goes back to the form. This board is held part-way so it can be looked at; Let it finish runs it out. When it ends the sheet closes, the new workspace lands first in the list with a new tag, picked up, the counts under the title go up, and Jarvis says Made Beacon API. In the app you would land on the workspace page to add agents, memory and a board."
     }
   },
   "order": [
@@ -1658,6 +1742,12 @@
     "DioramaActionCenterManyDark.dc.html",
     "DioramaWorkspaces.dc.html",
     "DioramaWorkspacesDark.dc.html",
+    "DioramaWorkspacesNew.dc.html",
+    "DioramaWorkspacesNewDark.dc.html",
+    "DioramaWorkspacesNewLocal.dc.html",
+    "DioramaWorkspacesNewLocalDark.dc.html",
+    "DioramaWorkspacesNewCloning.dc.html",
+    "DioramaWorkspacesNewCloningDark.dc.html",
     "DioramaLoading.dc.html",
     "DioramaLoadingDark.dc.html",
     "DioramaWorkspace.dc.html",
