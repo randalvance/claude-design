@@ -361,11 +361,98 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .railwrap.board .rb-nobody .jframe{width:57px;height:57px;border-radius:14px;font-size:32px;transform:rotate(-7deg)}
 .railwrap.board .rb-nobody:hover .jframe{transform:rotate(-2deg) scale(1.06)}
 @media (max-width:860px){.railwrap.board .rb-jarvis.rb-jarvis{margin:0 9px 0 0}.railwrap.board .rb-jarvis.rb-jarvis::after{display:none}}
+
+/* ---------- new workspace: a sheet taped over the page; clone from GitHub or point at a folder ---------- */
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.veil{position:absolute;inset:0;z-index:6;background-color:var(--veil);display:grid;place-items:center;animation:fade .16s var(--ease) both;padding:20px;box-sizing:border-box}
+.app.nw-on~.buddy{display:none}
+.nw{position:relative;width:720px;max-width:100%;max-height:100%;overflow:visible;box-sizing:border-box;padding:26px 28px 20px;background-color:var(--card);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.1);border-radius:4px;box-shadow:2px 3px 0 var(--edge-2),10px 18px 26px -8px var(--amb);animation:drop .24s var(--ease) both;isolation:isolate}
+.nw::before{content:"";position:absolute;left:50%;top:-10px;width:84px;height:19px;background-color:var(--tape);transform:translateX(-50%) rotate(-2deg);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.nw-h{display:flex;align-items:baseline;gap:12px}
+.nw-h h2{margin:0;font-family:var(--font-serif);font-size:28px;font-weight:600;line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+.nw-h .hh{font-family:var(--font-hand);font-size:17px;color:var(--mute);line-height:1.1}
+.nw-x{all:unset;cursor:pointer;margin-left:auto;align-self:center;width:28px;height:28px;display:grid;place-items:center;color:var(--mute);border-radius:50%}
+.nw-x:hover{color:var(--ink);background-color:var(--hover)}
+.nw-x:focus-visible{outline:2px solid var(--blue)}
+.nw-x svg{width:16px;height:16px}
+.nw-lab{display:flex;align-items:baseline;gap:10px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin:16px 0 7px}
+.nw-lab .hh{margin-left:auto;font-family:var(--font-hand);font-size:15px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--mute)}
+.nw-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.nw-tab{all:unset;cursor:pointer;display:flex;align-items:center;gap:11px;padding:10px 13px;box-sizing:border-box;background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:5px;box-shadow:var(--lift-1);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.nw-tab:hover{transform:translate(-1px,-1px)}
+.nw-tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.nw-tab svg{width:22px;height:22px;flex:none;color:var(--ink)}
+.nw-tab b{display:block;font-size:14px;font-weight:800;color:var(--ink);line-height:1.25}
+.nw-tab small{display:block;font-size:12px;color:var(--mute);line-height:1.3}
+.nw-tab.is-on{background-color:var(--marker);border-color:var(--highlighter-2);box-shadow:1px 1px 0 var(--highlighter-2),3px 5px 6px var(--amb);transform:rotate(-.4deg);background-image:var(--strokes),var(--face),var(--pulp)}
+.nw-fld{all:unset;display:block;width:100%;box-sizing:border-box;height:34px;padding:0 10px;font-family:var(--font-mono);font-size:12px;color:var(--ink);background-color:var(--sheet);background-image:var(--face),var(--pulp);border:1px solid rgba(0,0,0,.08);border-radius:4px;box-shadow:var(--recess)}
+.nw-fld.nm{font-family:var(--font-sans,inherit);font-size:14px;font-weight:700}
+.nw-fld:focus{outline:2px solid var(--blue);outline-offset:1px}
+.nw-fld::placeholder{color:var(--faint);font-weight:400}
+.nw-find{position:relative}
+.nw-find svg{position:absolute;left:10px;top:10px;width:14px;height:14px;color:var(--mute);pointer-events:none}
+.nw-find .nw-fld{padding-left:32px}
+.nw-list{margin-top:8px;border:1px solid var(--line);border-radius:4px;background-color:var(--sheet);background-image:var(--face),var(--pulp);height:208px;overflow:auto}
+.nw-repo{all:unset;cursor:pointer;display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:1px 10px;align-items:center;padding:8px 12px;box-sizing:border-box;width:100%;border-bottom:1px dashed var(--line)}
+.nw-repo:last-child{border-bottom:0}
+.nw-repo:hover{background-color:var(--hover)}
+.nw-repo:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.nw-repo>svg{width:16px;height:16px;color:var(--mute);grid-row:1/3}
+.nw-repo .rn{display:flex;align-items:center;gap:8px;min-width:0;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--ink)}
+.nw-repo .rn>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nw-repo .rd{grid-column:2;font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nw-repo .rm{grid-row:1/3;grid-column:3;text-align:right;font-family:var(--font-hand);font-size:15px;line-height:1.1;color:var(--mute);white-space:nowrap}
+.nw-repo.is-on,.nw-repo.is-on:hover{background-color:var(--marker);background-image:var(--strokes)}
+.nw-repo.is-used{cursor:default}
+.nw-repo.is-used .rn>span:first-child,.nw-repo.is-used .rd,.nw-repo.is-used>svg{opacity:.5}
+.nw-repo.is-used:hover{background-color:transparent}
+.nw-pill{flex:none;font-family:var(--font-sans,inherit);font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);border:1px solid var(--bar);border-radius:99px;padding:0 6px;line-height:15px}
+.nw-none{font-family:var(--font-hand);font-size:18px;color:var(--mute);text-align:center;padding:34px 16px;transform:rotate(-1deg);line-height:1.2}
+.nw-row{display:flex;align-items:center;gap:10px;margin-top:10px;min-height:28px}
+.nw-row .k{font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
+.nw-dir{display:inline-flex;align-items:center;gap:6px;min-width:0;font-family:var(--font-mono);font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nw-dir svg{width:14px;height:14px;flex:none;color:var(--mute)}
+.nw-row .sp{flex:1}
+.nw-row .hh,.nw-found{font-family:var(--font-hand);font-size:16px;line-height:1.2;color:var(--mute)}
+.nw-path{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.nw-found{display:flex;align-items:flex-start;gap:8px;margin-top:10px;padding:9px 11px;min-height:40px;box-sizing:border-box;background-color:var(--glass);border:1px dashed var(--line);border-radius:3px;color:var(--ink)}
+.nw-found svg{width:16px;height:16px;flex:none;margin-top:1px;color:var(--mute)}
+.nw-found.ok svg{color:var(--green)}
+.nw-found.bad{color:color-mix(in srgb,var(--red) 80%,var(--ink))}
+.nw-found.bad svg{color:var(--red)}
+.nw-pane.local{padding-bottom:14px}
+.nw-local-art{font-family:var(--font-hand);font-size:16px;color:var(--mute);line-height:1.35;margin:14px 0 0;max-width:60ch}
+.nw-id{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;margin-top:2px;padding-top:2px;border-top:1px dashed var(--line)}
+.nw-sws{display:flex;gap:8px;align-items:center;height:34px}
+.nw-sw{all:unset;cursor:pointer;width:20px;height:20px;background-color:var(--c);box-shadow:var(--sticker-s);transition:transform .15s var(--ease)}
+.nw-sw:hover{transform:translateY(-1px)}
+.nw-sw.is-on{outline:2px solid var(--ink);outline-offset:2px;transform:rotate(-8deg)}
+.nw-sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.nw-prog{display:flex;flex-direction:column;justify-content:center;gap:14px;min-height:296px;box-sizing:border-box;padding:0 8px}
+.nw-prog .pl{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:800;color:var(--ink)}
+.nw-prog .pl .pw{width:22px;height:22px}
+.nw-prog .pl .pc{margin-left:auto;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--mute)}
+.nw-prog .bar{height:8px;border:1px solid var(--bar);background-color:var(--sheet);position:relative;overflow:hidden;border-radius:1px;background-image:var(--face),var(--pulp)}
+.nw-prog .bar i{position:absolute;left:0;top:0;bottom:0;background-color:var(--ink);transition:width .25s var(--ease)}
+.nw-steps{display:grid;gap:5px;margin:0;padding:0;list-style:none;font-size:13px;color:var(--mute)}
+.nw-steps li{display:flex;align-items:center;gap:9px}
+.nw-steps li i{width:14px;height:14px;flex:none;border:1.5px solid var(--bar);border-radius:50%;box-sizing:border-box}
+.nw-steps li.done{color:var(--ink)}
+.nw-steps li.done i{border-color:var(--green);background-color:var(--green);box-shadow:inset 0 0 0 2.5px var(--card)}
+.nw-steps li.now{color:var(--ink);font-weight:800}
+.nw-steps li.now i{border-color:var(--ink)}
+.nw-steps li code{font-family:var(--font-mono);font-size:12px}
+.nw-foot{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.nw-foot .sp{flex:1;font-family:var(--font-hand);font-size:16px;line-height:1.15;color:var(--mute)}
+.nw-foot .pp-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.ws.is-new::after{content:"new";position:absolute;right:12px;top:-9px;padding:0 8px;font-family:var(--font-hand);font-size:16px;line-height:20px;color:var(--ink);background-color:var(--marker);background-image:var(--strokes);box-shadow:var(--sticker-s);transform:rotate(3deg)}
+.page.night .nw-h h2{mix-blend-mode:screen}
 </style>
 </helmet>
 <div class="page {{themeCls}}">
 <svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="pp-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="matrix" values="0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0 0.18 0 0 0 0.5 0"></feColorMatrix></filter></svg>
-<div class="app">
+<div class="app {{appCls}}">
 
   <div class="railwrap board"><nav class="pp-rail" aria-label="Primary">
     <button class="pp-rb rb-jarvis" title="Jarvis, your main agent"><span class="jface" aria-hidden="true"></span><span>Jarvis</span><span class="pp-nb">2</span></button>
@@ -386,7 +473,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
       <div class="ttl"><h1>Workspaces</h1><span class="sub">{{sub}}</span></div>
       <div class="top-r">
         <label class="pp-search"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" placeholder="Find a workspace or folder" aria-label="Find a workspace" ref="{{qRef}}" onInput="{{onSearch}}"><span class="pp-kbd">⌘K</span></label>
-        <button class="pp-btn"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New workspace</button>
+        <button class="pp-btn" onClick="{{nwOpenIt}}" aria-haspopup="dialog"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New workspace</button>
       </div>
     </header>
 
@@ -403,16 +490,63 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
         </article>
       </sc-for>
       <sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><div class="pp-scrap">Nothing called “{{q}}” here</div></sc-if>
-      <sc-if value="{{showNew}}" hint-placeholder-val="{{true}}"><button class="newc"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if>
+      <sc-if value="{{showNew}}" hint-placeholder-val="{{true}}"><button class="newc" onClick="{{nwOpenIt}}" aria-haspopup="dialog"><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Make a new workspace</button></sc-if>
     </section>
 
     <span class="sr" role="status">{{status}}</span>
   </main>
+
+  <sc-if value="{{nwOpen}}" hint-placeholder-val="{{false}}">
+    <div class="veil" onClick="{{nwVeil}}">
+      <div class="nw" role="dialog" aria-modal="true" aria-labelledby="nw-h" onKeyDown="{{nwKey}}">
+        <div class="nw-h"><h2 id="nw-h">New workspace</h2><span class="hh">a name, a colour and the folder its sessions work in</span><button class="nw-x" onClick="{{nwClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+        <sc-if value="{{nwForm}}" hint-placeholder-val="{{true}}">
+          <div class="nw-lab">Where the code lives</div>
+          <div class="nw-tabs" role="tablist" aria-label="Where the code lives">
+            <button class="nw-tab {{nwCloneCls}}" role="tab" aria-selected="{{nwIsClone}}" onClick="{{nwTabClone}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9"></path></svg><span><b>Clone from GitHub</b><small>Pick one of your repos, or paste a URL</small></span></button>
+            <button class="nw-tab {{nwLocalCls}}" role="tab" aria-selected="{{nwIsLocal}}" onClick="{{nwTabLocal}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span><b>Use a folder on this Mac</b><small>Point at code that is already here</small></span></button>
+          </div>
+          <sc-if value="{{nwIsClone}}" hint-placeholder-val="{{true}}">
+            <div class="nw-pane" role="tabpanel" aria-label="Clone from GitHub">
+              <div class="nw-lab">Repository<span class="hh">{{nwAcct}}</span></div>
+              <label class="nw-find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="nw-fld" placeholder="Search your repos, or paste git@github.com:team/repo.git" aria-label="Search your repos, or paste a GitHub URL" ref="{{nwQRef}}" onInput="{{nwOnQ}}"></label>
+              <div class="nw-list" role="listbox" aria-label="Repositories">
+                <sc-for list="{{nwRepos}}" as="r" hint-placeholder-count="5"><button class="nw-repo {{r.cls}}" role="option" aria-selected="{{r.on}}" aria-disabled="{{r.off}}" onClick="{{r.pick}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{r.icon}}"></path></svg><span class="rn"><span>{{r.full}}</span><sc-if value="{{r.priv}}" hint-placeholder-val="{{false}}"><span class="nw-pill">private</span></sc-if></span><span class="rd">{{r.desc}}</span><span class="rm">{{r.meta}}</span></button></sc-for>
+                <sc-if value="{{nwNoRepos}}" hint-placeholder-val="{{false}}"><div class="nw-none">{{nwNoReposText}}</div></sc-if>
+              </div>
+              <div class="nw-row"><span class="k">Clone into</span><span class="nw-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{nwInto}}</span><span class="sp"></span><span class="hh">{{nwIntoHint}}</span><button class="pp-dashed" onClick="{{nwChangeInto}}">Change…</button></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{nwIsLocal}}" hint-placeholder-val="{{false}}">
+            <div class="nw-pane local" role="tabpanel" aria-label="Use a folder on this Mac">
+              <div class="nw-lab">Folder<span class="hh">opens a picker in the app · here it steps through three folders</span></div>
+              <div class="nw-path"><input class="nw-fld" placeholder="~/dev/my-project" aria-label="Path to the folder" ref="{{nwPathRef}}" onInput="{{nwOnPath}}"><button class="pp-btn ghost" onClick="{{nwChoose}}">Choose folder…</button></div>
+              <div class="nw-found {{nwFoundCls}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{nwFoundIcon}}"></path></svg><span>{{nwFound}}</span></div>
+              <p class="nw-local-art">The folder stays where it is: nothing is copied or moved. You can link more folders to the workspace afterwards, on its page.</p>
+            </div>
+          </sc-if>
+          <div class="nw-id">
+            <div><div class="nw-lab"><label for="nw-name">Name</label></div><input id="nw-name" class="nw-fld nm" placeholder="Taken from the repo or folder" ref="{{nwNameRef}}" onInput="{{nwOnName}}"></div>
+            <div><div class="nw-lab">Colour</div><div class="nw-sws" role="radiogroup" aria-label="Colour"><sc-for list="{{nwColors}}" as="c" hint-placeholder-count="8"><button class="nw-sw {{c.cls}}" style="--c: {{c.hex}}" role="radio" aria-checked="{{c.on}}" aria-label="{{c.label}}" onClick="{{c.pick}}"></button></sc-for></div></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{nwCloning}}" hint-placeholder-val="{{false}}">
+          <div class="nw-prog" role="status">
+            <div class="pl"><svg class="pw" viewBox="0 0 24 24" aria-hidden="true"><g class="pwg"><path class="b1" d="M2 2h10v10z"/><path class="f1" d="M12 2l5 5-5 5z"/><path class="b2" d="M22 2v10H12z"/><path class="f2" d="M22 12l-5 5-5-5z"/><path class="b3" d="M22 22H12V12z"/><path class="f3" d="M12 22l-5-5 5-5z"/><path class="b4" d="M2 22V12h10z"/><path class="f4" d="M2 12l5-5 5 5z"/><path class="fold" d="M12 2v10M22 12H12M12 22V12M2 12h10"/><circle class="axle" cx="12" cy="12" r="2.4"/><circle class="glint" cx="11.2" cy="11.2" r=".8"/></g></svg><span>Cloning {{nwFull}}</span><span class="pc">{{nwPct}}%</span></div>
+            <div class="bar"><i style="width: {{nwPct}}%"></i></div>
+            <ul class="nw-steps"><sc-for list="{{nwSteps}}" as="s" hint-placeholder-count="5"><li class="{{s.cls}}"><i aria-hidden="true"></i><span>{{s.text}}</span></li></sc-for></ul>
+            <div class="nw-row"><span class="k">Into</span><span class="nw-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{nwInto}}</span><span class="sp"></span><span class="hh">becomes the workspace “{{nwName}}”</span></div>
+          </div>
+        </sc-if>
+        <div class="nw-foot"><span class="sp">{{nwHint}}</span><button class="pp-btn ghost" onClick="{{nwCancel}}">{{nwCancelWord}}</button><button class="pp-btn {{nwGoCls}}" onClick="{{nwGo}}" aria-disabled="{{nwGoOff}}">{{nwGoWord}}</button></div>
+      </div>
+    </div>
+  </sc-if>
 </div>
 <div class="buddy {{bdCls}}" style="right: {{bdRight}}px"><div class="bd-ask {{bdSide}} {{bdAskCls}}" role="dialog" aria-label="Ask Jarvis"><div class="bd-card"><div class="bd-h"><span class="jface" aria-hidden="true"></span><b>Ask Jarvis</b><small>starts a main agent session</small><button class="bd-x" onClick="{{bdClose}}" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><label class="sr" for="bd-ta">Ask Jarvis</label><textarea id="bd-ta" class="bd-ta" rows="2" placeholder="What should Jarvis do?" ref="{{bdRef}}" onInput="{{bdInput}}" onKeyDown="{{bdKey}}"></textarea><div class="bd-bar"><span class="bd-hint" aria-hidden="true">↵ to send · esc to close</span><button class="send {{bdSendCls}}" onClick="{{bdSend}}" aria-label="Start a session with Jarvis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11l18-8-7 18-2-7-9-3z"></path></svg></button></div><i class="bd-tail" aria-hidden="true"></i></div></div><sc-if value="{{bdMade}}" hint-placeholder-val="{{false}}"><div class="bd-slip {{bdSide}}" role="status"><div class="bd-card"><b>Started a session with Jarvis</b><q>{{bdTitle}}</q><small>Main agent · on Home · just now</small><button class="bd-x" onClick="{{bdUnmade}}" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><i class="bd-tail" aria-hidden="true"></i></div></div></sc-if><sc-if value="{{bdSaying}}" hint-placeholder-val="{{false}}"><div class="fx-say bd-say {{bdSide}}" aria-hidden="true"><div class="fx-say-in"><span class="fx-say-t">{{bdSay}}</span></div><i class="fx-say-tail"></i></div></sc-if><sc-if value="{{bdHome}}" hint-placeholder-val="{{true}}"><button class="prop pet {{bdPetCls}}" aria-label="Jarvis. Click to ask, drag to move" aria-expanded="{{bdOpen}}" onClick="{{bdToggle}}" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}"></button></sc-if><sc-if value="{{bdAway}}" hint-placeholder-val="{{false}}"><span class="bd-out" aria-hidden="true">out fetching</span></sc-if><div class="bd-ped" tabindex="0" role="button" aria-label="Move Jarvis: drag, or press the left and right arrow keys" onPointerDown="{{bdDown}}" onPointerMove="{{bdMove}}" onPointerUp="{{bdUp}}" onPointerCancel="{{bdUp}}" onKeyDown="{{bdNudge}}"><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5L4 6l3.5 3.5"></path></svg><span class="bd-name">Jarvis</span><svg class="bd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"></path></svg></div><i class="bd-end" hidden></i></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"paper","options":["paper","night"]},"scene":{"editor":"enum","default":"list","options":["list","clone","local","cloning"]},"$preview":{"width":1440,"height":900}}'>
 // Agents, Skills and MCP servers are not on the rail: they live in Settings
 const NAV = [
   { id: 'inbox', label: 'Action Center', icon: 'M13 2L4 14h7l-1 8 9-12h-7z', badge: 6 },
@@ -440,6 +574,37 @@ const WS = [
 ];
 const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
 
+/* new workspace: the sheet that New workspace opens. The code comes from GitHub (cloned) or from a folder already on this Mac (linked, not moved). */
+const NW_COLORS = [['#a8507a', 'Plum'], ['#5b8c5a', 'Green'], ['#c8553d', 'Red'], ['#b8792f', 'Amber'], ['#3b5b9a', 'Blue'], ['#8b6bb3', 'Violet'], ['#4a8f99', 'Teal'], ['#6b7f3a', 'Olive']];
+const NW_ACCT = 'mika-tan';
+const NW_REPOS = [
+  { id: 'beacon', owner: 'lighthouse-labs', name: 'beacon-api', title: 'Beacon API', priv: true, desc: 'Go service behind the Lighthouse dashboard', lang: 'Go', when: '2 hours ago', branch: 'main', size: '48 MB' },
+  { id: 'web', owner: 'lighthouse-labs', name: 'web', title: 'Web', priv: true, desc: 'The Lighthouse dashboard', lang: 'TypeScript', when: '20 minutes ago', branch: 'main', size: '210 MB', used: 'Lighthouse Web' },
+  { id: 'ledger', owner: 'orbit-pay', name: 'ledger-export', title: 'Ledger Export', priv: true, desc: 'Nightly export of the billing ledger to the warehouse', lang: 'Python', when: 'yesterday', branch: 'main', size: '12 MB' },
+  { id: 'dbt', owner: 'kiln-data', name: 'dbt-models', title: 'dbt Models', priv: true, desc: 'Warehouse models and their tests', lang: 'SQL', when: '5 days ago', branch: 'main', size: '31 MB' },
+  { id: 'relay', owner: 'harbor-app', name: 'push-relay', title: 'Push Relay', priv: false, desc: 'Fans push notifications out to APNs and FCM', lang: 'TypeScript', when: '3 weeks ago', branch: 'trunk', size: '9 MB' },
+  { id: 'dot', owner: NW_ACCT, name: 'dotfiles', title: 'Dotfiles', priv: false, desc: 'Shell, git and editor setup', lang: 'Shell', when: 'last month', branch: 'main', size: '2 MB' }
+];
+const NW_INTO = ['~/dev', '~/Code', '~/dev/lighthouse'];
+// a stand-in for the system folder picker: Choose folder… steps through these
+const NW_PICKS = [
+  { path: '~/dev/lighthouse/beacon-api', name: 'Beacon API', found: 'A git repo, on main, 2 commits ahead of github.com/lighthouse-labs/beacon-api. Sessions can branch and use worktrees here.' },
+  { path: '~/Documents/client-notes', name: 'Client Notes', plain: true, found: 'Not a git repo. Sessions can read and write here, but there are no branches or worktrees until it has one.' },
+  { path: '~/dev/orbit/api', name: 'Api', found: '' }
+];
+const NW_STEPS = [[0, 'Connecting to github.com'], [12, 'Receiving objects'], [68, 'Resolving deltas'], [90, 'Checking out the default branch'], [100, 'Making the workspace']];
+const NW_IC = { repo: 'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20', lock: 'M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4', link: 'M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1', ok: 'M5 12.5l4.5 4.5L19 7.5', info: 'M12 8v5M12 16.5v.5M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', bad: 'M12 8v5M12 16.5v.5M10.3 3.9L2.5 17.5a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z' };
+const NW0 = { open: false, tab: 'clone', q: '', repo: null, url: null, into: 0, path: '', picks: 0, name: '', touched: false, color: null, cloning: false, held: false, pct: 0 };
+const NW_SCENE = {
+  list: {},
+  clone: { open: true, repo: 'beacon' },
+  local: { open: true, tab: 'local', path: NW_PICKS[0].path, picks: 1 },
+  cloning: { open: true, repo: 'beacon', cloning: true, held: true, pct: 62 }
+};
+const nwTitle = (s) => (s || '').replace(/\.git$/, '').split(/[-_.\s]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+const nwParse = (q) => { const m = /github\.com[:/]([\w.-]+)\/([\w.-]+?)(?:\.git)?\/?$/.exec((q || '').trim()); return m ? { owner: m[1], name: m[2] } : null; };
+const nwLooksUrl = (q) => /:\/\/|^git@|\.git$/.test((q || '').trim());
+/* /new workspace */
 /* buddy */ const BD0 = { right: 22, open: false, text: '', made: null, shot: null, leftHalf: false, dragging: false }; const BD_MIN = 10, BD_LEFT = 92; /* /buddy */
 class Component extends DCLogic {
   /* buddy: Jarvis on the plinth. The board's own values come from renderValsBoard; these ride on top. The mood is a timed reaction if one plays,
@@ -501,15 +666,16 @@ class Component extends DCLogic {
 
   // fx: the page opens fetching its list (loading), then the cards arrive a frame apart (landing, got counts them in) and it is loaded.
   // While it fetches Jarvis is at the file box (fetch.py) and off his plinth; when it lands he is back, cheering, and says Got them
-  state = { q: '', sel: null, started: null, fx: 'loading', got: 0, cheer: false, tick: 0 };
+  state = { q: '', sel: null, started: null, fx: null, got: 0, cheer: false, tick: 0 };
   componentDidMount() {
     this.fxQ = [];
     this.still = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.scene() !== 'list') return;
     if (this.still) { this.setState({ fx: 'loaded', got: WS.length }); return; }
     this.fxIv = setInterval(() => this.setState((s) => ({ tick: s.tick + 1 })), 420);
     this.fxQ.push(setTimeout(() => this.land(), FETCH_MS));
   }
-  componentWillUnmount() { clearInterval(this.fxIv); (this.fxQ || []).forEach(clearTimeout); }
+  componentWillUnmount() { clearInterval(this.fxIv); (this.fxQ || []).forEach(clearTimeout); clearTimeout(this.nwT); clearTimeout(this.nwCheerT); }
   land() {
     clearInterval(this.fxIv);
     this.setState({ fx: 'landing', got: 0, cheer: true });
@@ -524,28 +690,124 @@ class Component extends DCLogic {
       themeIcon: night ? 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' : 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z',
       toggleTheme: () => this.setState({ night: !night }) };
   }
+  /* new workspace: the scene prop picks what the board opens on (the list, the sheet on Clone, the sheet on a folder, a clone part-way) */
+  scene() { return this.props.scene ?? 'list'; }
+  added() { return this.state.added || []; }
+  nw() { return this.state.nw || { ...NW0, ...NW_SCENE[this.scene()] }; }
+  nwSet(p) { this.setState({ nw: { ...this.nw(), ...p } }); }
+  nwOpenIt() { clearTimeout(this.nwT); this.setState({ nw: { ...NW0, open: true } }); setTimeout(() => { if (this.nwQ) this.nwQ.focus(); }, 60); }
+  nwCloseIt() { clearTimeout(this.nwT); this.setState({ nw: { ...NW0 } }); }
+  // what the form would make right now: where the code comes from, the folder it ends up in, the name it suggests, and why not if it can't
+  nwSrc(ALL) {
+    const n = this.nw(); const linked = (dir) => ALL.find((w) => w.dirs.includes(dir));
+    if (n.tab === 'clone') {
+      const r = n.url || NW_REPOS.find((x) => x.id === n.repo);
+      if (!r) return { ok: false, why: 'Pick a repo, or paste a GitHub URL.', dir: NW_INTO[n.into] + '/…', auto: '' };
+      const dir = NW_INTO[n.into] + '/' + r.name; const hit = linked(dir);
+      return { ok: !hit && !r.used, why: r.used ? 'That repo is already in ' + r.used + '.' : hit ? dir + ' is already linked to ' + hit.name + '.' : '', dir, auto: r.title || nwTitle(r.name), full: r.owner + '/' + r.name, repo: r };
+    }
+    const path = n.path.trim().replace(/\/+$/, '');
+    if (!path) return { ok: false, why: 'Choose a folder first.', dir: '', auto: '', found: 'No folder yet. Choose one, or type its path.', kind: 'info' };
+    const hit = linked(path); const pick = NW_PICKS.find((p) => p.path === path);
+    if (hit) return { ok: false, why: 'That folder already belongs to ' + hit.name + '.', dir: path, auto: '', found: 'Already linked to ' + hit.name + '. Open that workspace instead, or pick another folder.', kind: 'bad' };
+    if (!/^(~|\/)/.test(path)) return { ok: false, why: 'A path starts with ~ or /.', dir: path, auto: '', found: 'That doesn’t look like a path yet. It should start with ~ or /.', kind: 'info' };
+    return { ok: true, why: '', dir: path, auto: pick ? pick.name : nwTitle(path.split('/').pop()), found: pick ? pick.found : 'Primepaw looks inside when you make the workspace: whether it is a git repo, and which branch it is on.', kind: pick && !pick.plain ? 'ok' : 'info' };
+  }
+  nwColor(ALL) { const n = this.nw(); if (n.color) return n.color; const used = ALL.map((w) => w.color); return (NW_COLORS.find(([hex]) => !used.includes(hex)) || NW_COLORS[0])[0]; }
+  nwName(src) { const n = this.nw(); return (n.touched ? n.name : src.auto).trim(); }
+  nwGo(ALL) {
+    const n = this.nw(); if (n.cloning && !n.held) return;
+    const src = this.nwSrc(ALL), name = this.nwName(src);
+    if (!n.cloning && (!src.ok || !name || ALL.some((w) => w.name.toLowerCase() === name.toLowerCase()))) return;
+    if (n.tab !== 'clone') { this.nwMake(ALL); return; }
+    // a stand-in for git clone: the bar fills, then the workspace is made
+    this.nwSet({ cloning: true, held: false, pct: n.cloning ? n.pct : 0 });
+    const tick = () => { const p = Math.min(100, this.nw().pct + 5 + Math.round(Math.random() * 7)); this.nwSet({ pct: p }); this.nwT = setTimeout(p >= 100 ? () => this.nwMake(ALL) : tick, p >= 100 ? 420 : 170); };
+    this.nwT = setTimeout(tick, 170);
+  }
+  nwMake(ALL) {
+    const src = this.nwSrc(ALL), name = this.nwName(src) || 'Untitled';
+    const w = { id: 'new-' + (this.added().length + 1), name, color: this.nwColor(ALL), dirs: [src.dir], agents: 0, facts: 0, board: null, active: 0, isNew: true, from: src.full || '' };
+    clearTimeout(this.nwT); clearTimeout(this.nwCheerT);
+    if (this.q) this.q.value = '';
+    this.setState({ added: [w, ...this.added()], nw: { ...NW0 }, q: '', sel: w.id, cheer: true, say: 'Made ' + name + '!' });
+    this.nwCheerT = setTimeout(() => this.setState({ cheer: false, say: '' }), 2600);
+  }
+  nwCancel() { const n = this.nw(); if (n.cloning) { clearTimeout(this.nwT); this.nwSet({ cloning: false, held: false, pct: 0 }); return; } this.nwCloseIt(); }
+  nwChoose() { const n = this.nw(); const p = NW_PICKS[n.picks % NW_PICKS.length]; if (this.nwP) this.nwP.value = p.path; this.nwSet({ path: p.path, picks: n.picks + 1 }); }
+  nwVals(ALL) {
+    const n = this.nw(); if (!n.open) return { nwOpen: false, appCls: '', nwOpenIt: () => this.nwOpenIt() };
+    const src = this.nwSrc(ALL), name = this.nwName(src), color = this.nwColor(ALL), clone = n.tab === 'clone';
+    const dupe = !!name && ALL.some((w) => w.name.toLowerCase() === name.toLowerCase());
+    const why = src.why || (!name ? 'Give it a name.' : dupe ? 'There is already a workspace called ' + name + '.' : '');
+    const q = n.q.trim().toLowerCase(), parsed = nwParse(n.q);
+    let rows = NW_REPOS.filter((r) => !q || (r.owner + '/' + r.name + ' ' + r.desc + ' ' + r.lang).toLowerCase().includes(q));
+    if (parsed) { const known = NW_REPOS.find((r) => r.owner === parsed.owner && r.name === parsed.name); rows = [known || { id: 'url', ...parsed, title: '', desc: 'From the URL you pasted', url: true }]; }
+    const sync = (key, value) => (el) => { if (!el) return; this[key] = el; if (document.activeElement !== el && el.value !== value) el.value = value; };
+    const stepAt = NW_STEPS.reduce((k, [at], i) => (n.pct >= at ? i : k), 0);
+    return {
+      nwOpen: true, appCls: 'nw-on', nwOpenIt: () => this.nwOpenIt(),
+      nwForm: !n.cloning, nwCloning: n.cloning, nwIsClone: clone, nwIsLocal: !clone,
+      nwCloneCls: clone ? 'is-on' : '', nwLocalCls: clone ? '' : 'is-on',
+      nwTabClone: () => { this.nwSet({ tab: 'clone' }); setTimeout(() => { if (this.nwQ) this.nwQ.focus(); }, 40); },
+      nwTabLocal: () => { this.nwSet({ tab: 'local' }); setTimeout(() => { if (this.nwP) this.nwP.focus(); }, 40); },
+      nwAcct: 'signed in to GitHub as ' + NW_ACCT,
+      nwQRef: sync('nwQ', n.q),
+      nwOnQ: (e) => { const v = e.currentTarget.value; const u = nwParse(v); const known = u && NW_REPOS.find((r) => r.owner === u.owner && r.name === u.name); this.nwSet({ q: v, url: u && !known ? u : null, repo: known ? known.id : u ? null : n.repo }); },
+      nwRepos: rows.map((r) => {
+        const on = r.url ? true : n.repo === r.id && !n.url;
+        return { full: r.owner + '/' + r.name, desc: r.desc, priv: !!r.priv, icon: r.url ? NW_IC.link : r.priv ? NW_IC.lock : NW_IC.repo,
+          meta: r.used ? 'already in ' + r.used : r.url ? 'default branch' : r.lang + ' · ' + r.when,
+          on: on ? 'true' : 'false', off: r.used ? 'true' : 'false', cls: (on ? 'is-on' : '') + (r.used ? ' is-used' : ''),
+          pick: () => { if (!r.used && !r.url) this.nwSet({ repo: r.id, url: null }); } };
+      }),
+      nwNoRepos: rows.length === 0,
+      nwNoReposText: nwLooksUrl(n.q) ? 'That isn’t a GitHub URL. It should look like git@github.com:team/repo.git' : 'No repo of yours matches “' + n.q.trim() + '”. Paste its URL instead.',
+      nwInto: src.dir,
+      nwIntoHint: clone && src.repo && src.repo.size ? src.repo.size + ' · branch ' + src.repo.branch : '',
+      nwChangeInto: () => this.nwSet({ into: (n.into + 1) % NW_INTO.length }),
+      nwPathRef: sync('nwP', n.path), nwOnPath: (e) => this.nwSet({ path: e.currentTarget.value }), nwChoose: () => this.nwChoose(),
+      nwFound: src.found || '', nwFoundCls: src.kind === 'ok' ? 'ok' : src.kind === 'bad' ? 'bad' : '', nwFoundIcon: NW_IC[src.kind === 'ok' ? 'ok' : src.kind === 'bad' ? 'bad' : 'info'],
+      nwNameRef: sync('nwN', n.touched ? n.name : src.auto),
+      nwOnName: (e) => { const v = e.currentTarget.value; this.nwSet({ name: v, touched: v.trim() !== '' }); },
+      nwColors: NW_COLORS.map(([hex, label]) => ({ hex, label, on: hex === color ? 'true' : 'false', cls: hex === color ? 'is-on' : '', pick: () => this.nwSet({ color: hex }) })),
+      nwFull: src.full || '', nwName: name, nwPct: n.pct,
+      nwSteps: NW_STEPS.map(([, text], i) => ({ text, cls: i < stepAt ? 'done' : i === stepAt ? 'now' : '' })),
+      nwHint: n.cloning ? (n.held ? 'Held part-way so you can look at it.' : 'You can keep working: it finishes on its own.') : why || (clone ? 'Clones it, then makes the workspace around it.' : 'Links the folder as it is. Nothing on disk moves.'),
+      nwCancelWord: n.cloning ? 'Stop' : 'Cancel', nwCancel: () => this.nwCancel(), nwClose: () => { clearTimeout(this.nwT); this.nwCloseIt(); },
+      nwGoWord: n.cloning ? (n.held ? 'Let it finish' : 'Cloning…') : clone ? 'Clone and create' : 'Create workspace',
+      nwGoCls: n.cloning && !n.held ? 'is-busy' : '', nwGoOff: (n.cloning ? !n.held : !!why) ? 'true' : 'false',
+      nwGo: () => this.nwGo(ALL),
+      nwVeil: (e) => { if (e.target === e.currentTarget && !n.cloning) this.nwCloseIt(); },
+      nwKey: (e) => { if (e.key === 'Escape') { e.preventDefault(); this.nwCancel(); } else if (e.key === 'Enter' && e.target && e.target.id === 'nw-name') { e.preventDefault(); this.nwGo(ALL); } }
+    };
+  }
+  /* /new workspace */
+
   renderValsBoard() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
     const st = this.state;
     const q = st.q.trim().toLowerCase();
-    const all = WS.filter((w) => !q || w.name.toLowerCase().includes(q) || w.dirs.some((d) => d.toLowerCase().includes(q)) || (w.board || '').toLowerCase().includes(q));
-    const fetching = st.fx === 'loading', loaded = st.fx === 'loaded';
+    const ALL = [...this.added(), ...WS];
+    const all = ALL.filter((w) => !q || w.name.toLowerCase().includes(q) || w.dirs.some((d) => d.toLowerCase().includes(q)) || (w.board || '').toLowerCase().includes(q));
+    const fx = st.fx || (this.scene() === 'list' ? 'loading' : 'loaded');
+    const fetching = fx === 'loading', loaded = fx === 'loaded';
     const list = loaded ? all : all.slice(0, fetching ? 0 : st.got);
-    const started = WS.find((w) => w.id === st.started);
+    const started = ALL.find((w) => w.id === st.started);
     const busyN = WS.reduce((n, w) => n + w.active, 0);
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'workspaces' ? 'is-on' : '', cur: n.id === 'workspaces' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
-      fetching, busy: fetching ? 'true' : 'false', status: fetching ? 'Fetching your workspaces' : WS.length + ' workspaces',
-      petAway: fetching, petCls: st.cheer ? 'celebrate' : '', petSay: st.cheer ? 'Got them!' : '', ...fxVals(st.tick, this.still),
-      sub: fetching ? '' : WS.length + ' workspaces · ' + plural(WS.reduce((n, w) => n + w.dirs.length, 0), 'folder') + ' · ' + busyN + ' sessions working',
+      fetching, busy: fetching ? 'true' : 'false', status: fetching ? 'Fetching your workspaces' : ALL.length + ' workspaces',
+      petAway: fetching, petCls: st.cheer ? 'celebrate' : '', petSay: st.cheer ? (st.say || 'Got them!') : '', ...fxVals(st.tick, this.still),
+      sub: fetching ? '' : ALL.length + ' workspaces · ' + plural(ALL.reduce((n, w) => n + w.dirs.length, 0), 'folder') + ' · ' + busyN + ' sessions working',
       qRef: (el) => { if (el) this.q = el; },
       onSearch: (e) => this.setState({ q: e.currentTarget.value, sel: null }),
       q: st.q,
       items: list.map((w) => ({
         name: w.name, color: w.color, dirs: w.dirs,
         busy: w.active > 0, active: w.active,
-        sum: plural(w.agents, 'agent') + ' · ' + plural(w.facts, 'memory fact') + ' · ' + (w.board ? 'board: ' + w.board : 'no board yet'),
-        on: st.sel === w.id, cls: st.sel === w.id ? 'on' : '',
+        sum: w.isNew ? (w.from ? 'cloned from ' + w.from : 'linked just now · no agents or board yet') : plural(w.agents, 'agent') + ' · ' + plural(w.facts, 'memory fact') + ' · ' + (w.board ? 'board: ' + w.board : 'no board yet'),
+        on: st.sel === w.id, cls: (st.sel === w.id ? 'on' : '') + (w.isNew ? ' is-new' : ''),
         pick: () => this.setState({ sel: st.sel === w.id ? null : w.id }),
         ctaCls: st.started === w.id ? 'is-on' : '',
         ctaLabel: st.started === w.id ? 'Session opened' : 'New session',
@@ -554,6 +816,7 @@ class Component extends DCLogic {
       })),
       empty: loaded && list.length === 0,
       showNew: loaded && !q,
+      ...this.nwVals(ALL),
       demoText: started ? 'Started a session in ' + started.name + ' · in the app this opens the chat with that workspace\'s folders mounted' : 'Search matches names, folders and boards · click a card to pick it up · New session opens a chat there',
       reset: () => { if (this.q) this.q.value = ''; this.setState({ q: '', sel: null, started: null }); }
     };
