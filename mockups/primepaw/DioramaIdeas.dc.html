@@ -113,6 +113,62 @@ button,input,textarea{font:inherit}
 .ntrash svg{width:14px;height:14px}
 .tossed{font-family:var(--font-hand);font-size:17px;color:var(--mute)}
 
+/* the side: the boards, and under them the open board's notes as a tree. It is the Tasks page's outline (.side, .tree, .tr, .dot), reused:
+   a row per note, the notes under a note nested below it. A row drags onto another row to nest it, onto a board to move it there, or
+   onto the bare tree to bring it back to the top level */
+.side{width:272px;flex:none;min-height:0;display:flex;flex-direction:column;position:relative;z-index:2;background-color:var(--paper);background-image:var(--face),var(--pulp);border-right:1px solid var(--line);box-shadow:1px 0 0 var(--edge),5px 0 10px var(--amb)}
+.bds{flex:none;max-height:40%;overflow:auto;padding:10px 8px 10px;border-bottom:1px dashed var(--bar)}
+.tree{flex:1;min-height:120px;overflow:auto;padding:10px 8px 12px}
+.tree-h{display:flex;align-items:center;gap:8px;min-height:28px;padding:0 4px 6px 8px;border-radius:4px}
+.tree-h b{flex:none;font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--ink)}
+.tree-h span{flex:1;min-width:0;font-family:var(--font-hand);font-size:15px;line-height:1;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tree-h .runb{flex:none}
+.tree-h .runb svg{width:12px;height:12px}
+.tr{display:flex;align-items:center;padding-left:var(--pad);border-radius:4px}
+.tr:hover{background-color:var(--hover)}
+.tr.is-sel{background-color:var(--marker)}
+.page.night .tr.is-sel{background-color:var(--hover);box-shadow:inset 3px 0 0 var(--attn)}
+.tr-c,.tr-c0{all:unset;flex:none;width:18px;height:26px;display:grid;place-items:center;color:var(--mute)}
+.tr-c{cursor:pointer;border-radius:3px}
+.tr-c svg{width:10px;height:10px;transition:transform .12s var(--ease)}
+.tr-c.is-open svg{transform:rotate(90deg)}
+.tr-c:hover{color:var(--ink)}
+.tr-c:focus-visible,.tr-b:focus-visible,.tr-a:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.tr-b{all:unset;cursor:pointer;flex:1;min-width:0;display:flex;align-items:center;gap:7px;height:26px;padding-right:8px;font-size:13px;color:var(--ink);border-radius:4px}
+.tr-b span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-b em{flex:none;font-style:normal;font-family:var(--font-hand);font-size:15px;line-height:1;color:var(--mute)}
+.tr.is-blank .tr-b span{color:var(--faint);font-style:italic}
+.tr-a{all:unset;cursor:pointer;flex:none;width:22px;height:26px;display:grid;place-items:center;color:var(--mute);border-radius:3px;opacity:0}
+.tr-a svg{width:11px;height:11px}
+.tr:hover .tr-a,.tr-a:focus-visible{opacity:1}
+.tr-a:hover{color:var(--ink)}
+.tr.is-lift{opacity:.45}
+.tr.is-over,.tr.is-over:hover,.tree-h.is-over{background-color:var(--hover);box-shadow:inset 0 0 0 1.5px var(--blue)}
+.side.is-dragging .tr-b{cursor:grabbing}
+/* the mark beside a name: a small square in the note's own colour; a board is a small cork board in its frame */
+.dot{flex:none;width:10px;height:10px;box-sizing:border-box;background-color:var(--c);border:1px solid rgba(0,0,0,.28);transform:rotate(-4deg)}
+.dot.is-board{width:13px;height:10px;transform:none;border-radius:1px;background-color:var(--cork);border:1.5px solid var(--cork-2)}
+/* the head: the page's name, then the open board's, which is rewritten in place */
+.bname .bk{color:var(--mute);font-weight:500}
+.bname .bsl{color:var(--faint);font-weight:500;margin:0 -4px}
+.bname-in{all:unset;box-sizing:border-box;font:inherit;letter-spacing:inherit;color:var(--ink);width:260px;min-width:90px;max-width:100%;field-sizing:content;cursor:text;border-bottom:1.5px dashed transparent;caret-color:var(--ink)}
+@supports (field-sizing:content){.bname-in{width:auto}}
+.bname-in:hover{border-bottom-color:var(--bar)}
+.bname-in:focus{border-bottom-color:var(--ink)}
+.bname-in::placeholder{color:var(--faint)}
+/* twine from a note to the notes under it, lying on the cork beneath the paper */
+.twine{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+.twine .sh{fill:none;stroke:rgba(0,0,0,.34);stroke-width:3;transform:translate(1.5px,2.5px)}
+.twine .tw{fill:none;stroke:#efe3c6;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:7 3}
+.page.night .twine .tw{stroke:#c9b98f}
+.inote.is-pick{outline:2px solid var(--blue);outline-offset:3px;transform:rotate(0)}
+.nadd{all:unset;cursor:pointer;flex:none;height:24px;padding:0 6px;display:inline-flex;align-items:center;gap:4px;border-radius:3px;font-family:var(--font-hand);font-size:15px;color:var(--mute)}
+.nadd:hover{color:var(--ink);background-color:rgba(0,0,0,.06)}
+.nadd:focus-visible{outline:2px solid var(--blue)}
+.nadd svg{width:14px;height:14px}
+.blank{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);margin:0;font-family:var(--font-hand);font-size:26px;line-height:1.15;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.45);text-align:center;pointer-events:none}
+@media (max-width:860px){.side{width:auto;border-right:0;border-bottom:1px solid var(--line)}.bds{max-height:none}.tree{max-height:240px}}
+
 @keyframes drop{from{transform:translateY(-10px) rotate(-1deg);opacity:0}to{opacity:1}}
 @keyframes turn{to{transform:rotate(360deg)}}
 @media (max-width:860px){.app{flex-direction:column;height:auto;min-height:100vh;overflow:visible}.pp-rail{width:100%;flex-direction:row;justify-content:center;border-right:0;border-bottom:1px solid var(--line);padding:6px}.pp-rail .pp-sp{display:none}.pp-logo{margin:0 6px 0 0}.body{flex-direction:column}.top-r{margin-left:0;width:100%}}
@@ -379,9 +435,10 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
   <main class="main">
     <header class="top">
       <div class="hrow">
-        <h1 class="bname">Idea board</h1>
+        <h1 class="bname"><span class="bk">Idea board</span><span class="bsl" aria-hidden="true">/</span><input class="bname-in" type="text" aria-label="Board name" placeholder="Name the board" ref="{{nameRef}}" onInput="{{onName}}" onKeyDown="{{nameKey}}" onBlur="{{nameBlur}}"></h1>
         <span class="meta {{metaCls}}">{{meta}}</span>
         <div class="top-r">
+          <sc-if value="{{hasSent}}" hint-placeholder-val="{{false}}"><span class="tossed">{{sentLine}}</span><button class="pp-dashed" onClick="{{goSent}}">Open it</button></sc-if>
           <sc-if value="{{hasTrash}}" hint-placeholder-val="{{false}}"><span class="tossed">{{trashLine}}</span><button class="pp-dashed" onClick="{{undo}}">Undo</button></sc-if>
           <button class="pp-btn" onClick="{{addNote}}"><svg class="pp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New note</button>
         </div>
@@ -389,10 +446,33 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
     </header>
 
     <div class="body">
-      <section class="cork" aria-label="Idea board" ref="{{corkRef}}">
-        <div class="field" style="--fw: {{fieldW}}; --fh: {{fieldH}}" ref="{{fieldRef}}" onDoubleClick="{{fieldDbl}}">
+      <aside class="side {{sideCls}}" aria-label="Boards, and the notes on this one as a tree">
+        <div class="bds">
+          <div class="tree-h"><b>Boards</b><span>{{boardsNote}}</span><button class="runb" onClick="{{addBoard}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New board</button></div>
+          <sc-for list="{{boards}}" as="b" hint-placeholder-count="3">
+            <div class="tr {{b.cls}}" style="--pad: 8px" ref="{{b.ref}}">
+              <button class="tr-b" onClick="{{b.open}}" aria-current="{{b.cur}}"><i class="dot is-board" aria-hidden="true"></i><span>{{b.name}}</span><em>{{b.count}}</em></button>
+            </div>
+          </sc-for>
+        </div>
+        <div class="tree" ref="{{treeRef}}">
+          <div class="tree-h {{rootCls}}"><b>Notes</b><span>{{treeNote}}</span></div>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+            <div class="tr {{r.cls}}" style="--pad: {{r.pad}}" ref="{{r.ref}}">
+              <sc-if value="{{r.hasKids}}" hint-placeholder-val="{{false}}"><button class="tr-c {{r.caretCls}}" onClick="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.toggleAria}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></sc-if>
+              <sc-if value="{{r.noKids}}" hint-placeholder-val="{{true}}"><i class="tr-c0" aria-hidden="true"></i></sc-if>
+              <button class="tr-b" title="{{r.tip}}" onClick="{{r.pick}}" aria-current="{{r.cur}}" onPointerDown="{{r.down}}" onPointerMove="{{r.move}}" onPointerUp="{{r.up}}" onPointerCancel="{{r.up}}" onKeyDown="{{r.key}}"><i class="dot" style="--c: {{r.color}}" aria-hidden="true"></i><span>{{r.title}}</span><em>{{r.count}}</em></button>
+              <button class="tr-a" onClick="{{r.addIn}}" aria-label="{{r.addAria}}" title="Add a note under it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+            </div>
+          </sc-for>
+        </div>
+      </aside>
+      <section class="cork" aria-label="{{corkAria}}" ref="{{corkRef}}">
+        <div class="field" style="--fw: {{fieldW}}; --fh: {{fieldH}}" ref="{{fieldRef}}" onDoubleClick="{{fieldDbl}}" onPointerDown="{{fieldDown}}">
+          <svg class="twine" aria-hidden="true"><sc-for list="{{links}}" as="l" hint-placeholder-count="4"><path class="sh" d="{{l.d}}"></path><path class="tw" d="{{l.d}}"></path></sc-for></svg>
+          <sc-if value="{{noNotes}}" hint-placeholder-val="{{false}}"><p class="blank">Nothing pinned here yet.<br>Double-click the cork for the first note.</p></sc-if>
           <sc-for list="{{notes}}" as="t" hint-placeholder-count="9">
-            <div class="note inote {{t.cls}}" style="--nc: {{t.color}}; --r: {{t.rot}}; --x: {{t.x}}; --y: {{t.y}}; --z: {{t.z}}" tabindex="0" aria-label="{{t.aria}}" onPointerDown="{{t.down}}" onPointerMove="{{t.move}}" onPointerUp="{{t.up}}" onPointerCancel="{{t.up}}" onKeyDown="{{t.key}}">
+            <div class="note inote {{t.cls}}" ref="{{t.ref}}" style="--nc: {{t.color}}; --r: {{t.rot}}; --x: {{t.x}}; --y: {{t.y}}; --z: {{t.z}}" tabindex="0" aria-label="{{t.aria}}" onPointerDown="{{t.down}}" onPointerMove="{{t.move}}" onPointerUp="{{t.up}}" onPointerCancel="{{t.up}}" onKeyDown="{{t.key}}">
               <span class="tack" aria-hidden="true"></span>
               <sc-if value="{{t.viewing}}" hint-placeholder-val="{{true}}">
                 <div class="md">
@@ -408,6 +488,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
                 <div class="ntools" role="group" aria-label="Note colour">
                   <sc-for list="{{t.swatches}}" as="c" hint-placeholder-count="5"><button class="ncol {{c.cls}}" style="--sc: {{c.color}}" aria-label="{{c.label}}" aria-pressed="{{c.on}}" onMouseDown="{{keep}}" onClick="{{c.pick}}"></button></sc-for>
                   <span class="nsp"></span>
+                  <button class="nadd" onMouseDown="{{keep}}" onClick="{{t.addIn}}" aria-label="Add a note under this one" title="Add a note under it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v9h12M14 9l4 4-4 4"></path></svg>under</button>
                   <button class="ntrash" onMouseDown="{{keep}}" onClick="{{t.toss}}" aria-label="Throw the note away" title="Throw it away"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button>
                 </div>
               </sc-if>
@@ -439,19 +520,33 @@ const NAV = [
 const COLORS = [['#fff39b', 'Yellow'], ['#ffc9d2', 'Pink'], ['#c4e4ff', 'Blue'], ['#cdf0b9', 'Green'], ['#ffd9a1', 'Orange']];
 const ROTS = ['-1.5deg', '1deg', '-.6deg', '1.6deg', '-1deg', '.4deg', '-1.2deg'];
 const NW = 208, NH = 236;   // a note's width, and the room one takes up and down when looking for a free spot
-const N = (id, x, y, color, by, when, text) => ({ id, x, y, color, by, when, text, z: id });
+// b: the board a note is pinned to. p: the note it sits under, or null at the top level.
+const N = (id, b, p, x, y, color, by, when, text) => ({ id, b, p, x, y, color, by, when, text, z: id });
+const BOARDS = [{ id: 'b1', name: 'Primepaw' }, { id: 'b2', name: 'Launch week' }, { id: 'b3', name: 'Someday' }];
 const NOTES = [
-  N(1, 24, 34, 0, 'you', '2 h ago', '# Friday digest\nJarvis sends one note a week:\n- what **merged**\n- what got *stuck*\n- what is next'),
-  N(2, 276, 18, 1, 'you', 'yesterday', '## Pet moods\n- [x] dizzy on a failed run\n- [x] cheer on send\n- [ ] sleepy after 6 pm\n- [ ] a wave when a PR merges'),
-  N(3, 534, 46, 2, 'Jarvis', '3 h ago', 'From a session: cache `pnpm install` across factory runs.\n\nSaves about **40 s** a ticket.'),
-  N(4, 792, 22, 3, 'you', '2 d ago', '### Voice notes\nHold `⌥ Space` to talk to Jarvis from anywhere.\n> and Jarvis answers out loud?'),
-  N(5, 1050, 40, 4, 'you', '4 d ago', '## Shortcuts, printed\n1. ⌘K the palette\n2. ⌘N a new session\n3. ⌘. stop the agent'),
-  N(6, 62, 338, 3, 'you', 'last week', '- [ ] try the planner on the docs repo\n- [ ] ask Mara about the billing epic\n- [x] pin the release checklist'),
-  N(7, 322, 362, 0, 'Jarvis', 'yesterday', '## Ticket sizing\nSplit anything over **3 files** before it reaches the factory.\n---\n_ask the curator first_'),
-  N(8, 584, 330, 1, 'you', '5 d ago', 'Share a session as a read-only [link](https://example.com/s/4f2a), for reviews'),
-  N(9, 846, 350, 2, 'you', 'just now', 'Cork at night:\n- darker than the desk\n- pins stay ~~blue~~ red')
+  N(1, 'b1', null, 24, 34, 0, 'you', '2 h ago', '# Friday digest\nJarvis sends one note a week:\n- what **merged**\n- what got *stuck*\n- what is next'),
+  N(2, 'b1', null, 276, 18, 1, 'you', 'yesterday', '## Pet moods\n- [x] dizzy on a failed run\n- [x] cheer on send\n- [ ] sleepy after 6 pm\n- [ ] a wave when a PR merges'),
+  N(7, 'b1', null, 534, 40, 3, 'Jarvis', 'yesterday', '## Ticket sizing\nSplit anything over **3 files** before it reaches the factory.\n---\n_ask the curator first_'),
+  N(4, 'b1', null, 792, 22, 2, 'you', '2 d ago', '### Voice notes\nHold `⌥ Space` to talk to Jarvis from anywhere.\n> and Jarvis answers out loud?'),
+  N(10, 'b1', 1, 58, 322, 0, 'you', 'yesterday', 'Who gets the digest?\n- [x] just me, first\n- [ ] the team, later'),
+  N(11, 'b1', 2, 312, 356, 1, 'you', '3 h ago', 'Sleepy: eyes half shut and a paper **zzz** over the plinth'),
+  N(3, 'b1', 7, 570, 330, 3, 'Jarvis', '3 h ago', 'From a session: cache `pnpm install` across factory runs.\n\nSaves about **40 s** a ticket.'),
+  N(5, 'b1', 4, 828, 318, 2, 'you', '4 d ago', '## Shortcuts, printed\n1. ⌘K the palette\n2. ⌘N a new session\n3. ⌘. stop the agent'),
+  N(12, 'b1', 3, 606, 530, 3, 'you', 'just now', 'Time ten runs *before* and after, then decide'),
+  N(6, 'b1', null, 96, 528, 4, 'you', 'last week', '- [ ] try the planner on the docs repo\n- [ ] ask Mara about the billing epic\n- [x] pin the release checklist'),
+  N(20, 'b2', null, 30, 30, 0, 'you', 'yesterday', '# Launch week\n- [x] changelog\n- [ ] demo video\n- [ ] post on the forum'),
+  N(21, 'b2', 20, 296, 56, 0, 'you', 'yesterday', '## Demo video\n90 seconds, no voice-over:\n1. a session\n2. the factory\n3. Jarvis'),
+  N(22, 'b2', 21, 566, 104, 0, 'Jarvis', '2 h ago', 'Record at **1440 × 900**, day theme, the pet awake'),
+  N(8, 'b2', 20, 70, 318, 1, 'you', '5 d ago', 'Share a session as a read-only [link](https://example.com/s/4f2a), for reviews'),
+  N(30, 'b3', null, 36, 32, 2, 'you', 'last week', 'A paper **calendar** of the week’s sessions'),
+  N(9, 'b3', null, 300, 52, 3, 'you', 'last week', 'Cork at night:\n- darker than the desk\n- pins stay ~~blue~~ red'),
+  N(31, 'b3', null, 560, 28, 4, 'you', '2 w ago', 'Sounds? A soft *thunk* when a note is pinned\n> off by default')
 ].map((n) => ({ ...n, color: COLORS[n.color][0] }));
-const INIT = { notes: NOTES, editing: null, drag: null, trash: null, nextId: 10, top: NOTES.length };
+// fold: notes folded in the tree. sel: the note picked in the tree. lift, over: a tree row being dragged, and what it is over
+// ('n:<id>' a note, 'b:<id>' a board, 'root' the top level). sent: the last note moved to another board, so it can be followed.
+const INIT = { boards: BOARDS, board: 'b1', notes: NOTES, editing: null, drag: null, trash: null, nextId: 40, nextBoard: 4, top: 40, fold: {}, sel: null, lift: null, over: null, sent: null };
+// everything nested under a note, as deep as it goes
+const under = (notes, id) => { const out = []; const walk = (k) => notes.forEach((n) => { if (n.p === k) { out.push(n.id); walk(n.id); } }); walk(id); return out; };
 const clone = (o) => JSON.parse(JSON.stringify(o));
 // markdown, the part a sticky note needs: headings, lists, todos, quotes, a rule, and bold, italic, strike, code and links inside a line
 const INLINE = /(\*\*[^*]+\*\*|__[^_]+__|~~[^~]+~~|`[^`]+`|\[[^\]]+\]\([^)\s]+\)|\*[^*\s][^*]*\*|_[^_\s][^_]*_)/g;
@@ -554,36 +649,134 @@ class Component extends DCLogic {
   state = clone(INIT);
   patch(id, fn) { this.setState((s) => ({ notes: s.notes.map((n) => (n.id === id ? fn({ ...n }) : n)) })); }
   front(id) { this.setState((s) => ({ top: s.top + 1, notes: s.notes.map((n) => (n.id === id ? { ...n, z: s.top + 1 } : n)) })); }
-  edit(id) { this.focusId = id; this.front(id); this.setState({ editing: id }); }
+  edit(id) { this.focusId = id; this.front(id); this.setState({ editing: id, sel: id }); }
+  here() { return this.state.notes.filter((n) => n.b === this.state.board); }
   // a free spot: the first place on a loose grid, from the top left of what you can see, that no note covers yet
   freeSpot() {
-    const cork = this.corkEl, sx = cork ? cork.scrollLeft : 0, sy = cork ? cork.scrollTop : 0, w = cork ? cork.clientWidth : 1300;
+    const cork = this.corkEl, sx = cork ? cork.scrollLeft : 0, sy = cork ? cork.scrollTop : 0, w = cork ? cork.clientWidth : 1040, mine = this.here();
     const cols = Math.max(1, Math.floor((w - 24) / (NW + 46)));
-    const hit = (x, y) => this.state.notes.some((n) => Math.abs(n.x - x) < NW + 20 && Math.abs(n.y - y) < NH - 20);
+    const hit = (x, y) => mine.some((n) => Math.abs(n.x - x) < NW + 20 && Math.abs(n.y - y) < NH - 20);
     for (let r = 0; r < 12; r++) for (let c = 0; c < cols; c++) {
       const x = sx + 30 + c * (NW + 46), y = sy + 28 + r * 300;
       if (!hit(x, y)) return { x, y };
     }
     return { x: sx + 40, y: sy + 40 };
   }
-  add(at) {
-    const s = this.state, id = s.nextId, last = s.notes[s.notes.length - 1];
+  // a spot for a note that goes under another: just below it, else beside it
+  spotUnder(par) {
+    const mine = this.here(), hit = (x, y) => mine.some((n) => Math.abs(n.x - x) < NW - 30 && Math.abs(n.y - y) < NH - 70);
+    const tries = [[34, 272], [252, 64], [-252, 64], [252, 290], [-218, 290], [34, 530]];
+    for (const [dx, dy] of tries) { const x = par.x + dx, y = par.y + dy; if (x >= 0 && !hit(x, y)) return { x, y }; }
+    return { x: par.x + 44, y: par.y + 64 };
+  }
+  // a new note: at a place on the cork, under another note (pid), or in the first free spot
+  add(at, pid) {
+    const s = this.state, id = s.nextId, mine = this.here(), last = mine[mine.length - 1];
+    const par = pid ? s.notes.find((n) => n.id === pid) : null;
     const ci = (COLORS.findIndex((c) => c[0] === (last && last.color)) + 1) % COLORS.length;
-    const p = at || this.freeSpot();
-    const note = { id, x: Math.round(p.x), y: Math.round(p.y), color: COLORS[ci][0], by: 'you', when: 'just now', text: '', z: s.top + 1, fresh: true };
+    const p = at || (par ? this.spotUnder(par) : this.freeSpot());
+    const note = { id, b: par ? par.b : s.board, p: par ? par.id : null, x: Math.round(p.x), y: Math.round(p.y), color: par ? par.color : COLORS[ci][0], by: 'you', when: 'just now', text: '', z: s.top + 1, fresh: true };
     this.focusId = id;
-    this.setState({ notes: [...s.notes, note], nextId: id + 1, top: s.top + 1, editing: id, trash: null });
+    this.setState({ notes: [...s.notes, note], nextId: id + 1, top: s.top + 1, editing: id, sel: id, trash: null, sent: null, fold: par ? { ...s.fold, [par.id]: false } : s.fold });
+    if (par) this.later(() => this.show(id), 30);
   }
   later(fn, ms) { (this.timers = this.timers || []).push(setTimeout(fn, ms)); }
   commit(id) {
     if (this.state.editing !== id) return;
     const n = this.state.notes.find((x) => x.id === id);
-    if (n && !n.text.trim()) { this.setState((s) => ({ editing: null, notes: s.notes.filter((x) => x.id !== id) })); return; }
+    // a note left empty comes down by itself, unless other notes hang under it
+    if (n && !n.text.trim() && !this.state.notes.some((x) => x.p === id)) { this.setState((s) => ({ editing: null, sel: s.sel === id ? null : s.sel, notes: s.notes.filter((x) => x.id !== id) })); return; }
     this.setState({ editing: null });
   }
+  // thrown away, a note leaves the notes under it to the note it was under
   toss(id) {
     const n = this.state.notes.find((x) => x.id === id); if (!n) return;
-    this.setState((s) => ({ editing: null, trash: n.text.trim() ? n : null, notes: s.notes.filter((x) => x.id !== id) }));
+    this.setState((s) => ({ editing: null, sel: s.sel === id ? null : s.sel, sent: null,
+      trash: n.text.trim() ? { note: n, kids: s.notes.filter((x) => x.p === id).map((x) => x.id) } : null,
+      notes: s.notes.filter((x) => x.id !== id).map((x) => (x.p === id ? { ...x, p: n.p } : x)) }));
+  }
+  undo() {
+    this.setState((s) => {
+      const t = s.trash; if (!t) return { trash: null };
+      const n = t.note, p = s.notes.some((x) => x.id === n.p && x.b === n.b) ? n.p : null;
+      return { trash: null, board: n.b, notes: [...s.notes.map((x) => (t.kids.includes(x.id) && x.b === n.b && x.p === n.p ? { ...x, p: n.id } : x)), { ...n, p, fresh: false }] };
+    });
+  }
+  // bring a note into view on the cork
+  show(id) {
+    const c = this.corkEl, n = this.state.notes.find((x) => x.id === id); if (!c || !n) return;
+    const pad = 30; let left = c.scrollLeft, top = c.scrollTop;
+    if (n.x < left + pad) left = n.x - pad; else if (n.x + NW > left + c.clientWidth - pad) left = n.x + NW - c.clientWidth + pad;
+    if (n.y < top + pad) top = n.y - pad; else if (n.y + NH > top + c.clientHeight - pad) top = n.y + NH - c.clientHeight + pad;
+    const still = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (left !== c.scrollLeft || top !== c.scrollTop) c.scrollTo({ left: Math.max(0, left), top: Math.max(0, top), behavior: still ? 'auto' : 'smooth' });
+  }
+  // pick a note from the tree: it comes to the front and into view, ready for Enter
+  pick(id) {
+    if (this.noClick) { this.noClick = false; return; }
+    this.front(id); this.setState({ sel: id });
+    this.later(() => { this.show(id); const el = (this.noteEls || {})[id]; if (el && el.isConnected) el.focus({ preventScroll: true }); }, 30);
+  }
+  openBoard(id) {
+    if (id === this.state.board) return;
+    if (this.corkEl) this.corkEl.scrollTo(0, 0);
+    this.setState({ board: id, editing: null, sel: null, sent: null });
+  }
+  // a new board opens empty, with its name ready to type
+  addBoard() {
+    const s = this.state, id = 'b' + s.nextBoard;
+    this.focusName = true; if (this.corkEl) this.corkEl.scrollTo(0, 0);
+    this.setState({ boards: [...s.boards, { id, name: 'New board' }], nextBoard: s.nextBoard + 1, board: id, editing: null, sel: null, sent: null });
+  }
+  // the tree, dragged: a row onto another row goes under that note, onto a board moves there with everything under it,
+  // onto the bare tree comes back to the top level. The row's button captures the pointer; there is no global handler.
+  dropAt(x, y, id) {
+    const s = this.state, me = s.notes.find((n) => n.id === id), bad = [id, ...under(s.notes, id)];
+    const inside = (el) => { if (!el || !el.isConnected) return false; const r = el.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; };
+    for (const [k, el] of Object.entries(this.rowEls || {})) if (inside(el)) { const nid = Number(k); return bad.includes(nid) || (me && me.p === nid) ? null : 'n:' + nid; }
+    for (const [k, el] of Object.entries(this.boardEls || {})) if (inside(el)) return k === s.board ? null : 'b:' + k;
+    if (inside(this.treeEl)) return me && me.p != null ? 'root' : null;
+    return null;
+  }
+  tdown(e, id) { if (e.button !== undefined && e.button !== 0) return; this.td = { id, pid: e.pointerId, x0: e.clientX, y0: e.clientY, moved: false, el: e.currentTarget }; }
+  tmove(e) {
+    const d = this.td; if (!d || d.pid !== e.pointerId) return;
+    if (!d.moved) { if (Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 5) return; d.moved = true; try { d.el.setPointerCapture(e.pointerId); } catch (_) {} }
+    const over = this.dropAt(e.clientX, e.clientY, d.id);
+    if (this.state.lift !== d.id || this.state.over !== over) this.setState({ lift: d.id, over });
+  }
+  tup(e) {
+    const d = this.td; if (!d || d.pid !== e.pointerId) return;
+    this.td = null; if (!d.moved) return;
+    this.noClick = true; this.later(() => { this.noClick = false; }, 60);
+    const over = e.type === 'pointerup' ? this.dropAt(e.clientX, e.clientY, d.id) : null;
+    this.setState({ lift: null, over: null });
+    if (over) this.moveTo(d.id, over);
+  }
+  moveTo(id, over) {
+    this.setState((s) => {
+      const ids = [id, ...under(s.notes, id)], key = over.slice(2);
+      if (over === 'root') return { notes: s.notes.map((n) => (n.id === id ? { ...n, p: null } : n)) };
+      if (over[0] === 'n') { const pid = Number(key); if (ids.includes(pid)) return null; return { fold: { ...s.fold, [pid]: false }, notes: s.notes.map((n) => (n.id === id ? { ...n, p: pid } : n)) }; }
+      const me = s.notes.find((n) => n.id === id), to = s.boards.find((b) => b.id === key); if (!me || !to) return null;
+      return { editing: ids.includes(s.editing) ? null : s.editing, sel: ids.includes(s.sel) ? null : s.sel, trash: null,
+        sent: { id, board: key, line: 'Moved “' + firstLine(me.text).slice(0, 22) + '”' + (ids.length > 1 ? ' and ' + (ids.length - 1) + ' under it' : '') + ' to ' + (to.name.trim() || 'Untitled board') },
+        notes: s.notes.map((n) => (ids.includes(n.id) ? { ...n, b: key, p: n.id === id ? null : n.p } : n)) };
+    });
+  }
+  // the same from the keys: ⌥→ puts a note under the one above it, ⌥← brings it out a level
+  nest(id, dir) {
+    this.setState((s) => {
+      const n = s.notes.find((x) => x.id === id); if (!n) return null;
+      if (dir > 0) {
+        const sibs = s.notes.filter((x) => x.b === n.b && x.p === n.p), up = sibs[sibs.findIndex((x) => x.id === id) - 1]; if (!up) return null;
+        return { fold: { ...s.fold, [up.id]: false }, notes: s.notes.map((x) => (x.id === id ? { ...x, p: up.id } : x)) };
+      }
+      if (n.p == null) return null;
+      const par = s.notes.find((x) => x.id === n.p);
+      return { notes: s.notes.map((x) => (x.id === id ? { ...x, p: par ? par.p : null } : x)) };
+    });
+    this.later(() => { const row = (this.rowEls || {})[id], b = row && row.isConnected ? row.querySelector('.tr-b') : null; if (b) b.focus(); }, 40);
   }
   scale(el) { const f = el.closest('.field') || el; return (f.getBoundingClientRect().width / (f.offsetWidth || 1)) || 1; }
   down(e, n) {
@@ -620,6 +813,8 @@ class Component extends DCLogic {
   renderValsBoard() { return { ...this.themeVals(), ...this.renderVals0() }; }
   renderVals0() {
     const st = this.state, editing = st.notes.find((n) => n.id === st.editing);
+    const board = st.boards.find((b) => b.id === st.board) || st.boards[0], mine = st.notes.filter((n) => n.b === board.id), byId = Object.fromEntries(mine.map((n) => [n.id, n]));
+    const bname = (b) => b.name.trim() || 'Untitled board';
     const view = (n, i) => {
       const isEdit = st.editing === n.id;
       const blocks = isEdit ? [] : parse(n.text).map((b) => ({
@@ -630,7 +825,8 @@ class Component extends DCLogic {
       }));
       return {
         id: n.id, color: n.color, rot: ROTS[(n.id * 3) % ROTS.length], x: n.x + 'px', y: n.y + 'px', z: String(n.z),
-        cls: (isEdit ? 'is-sel ' : '') + (st.drag === n.id ? 'is-drag ' : '') + (n.fresh ? 'is-new' : ''),
+        cls: (isEdit ? 'is-sel ' : st.sel === n.id ? 'is-pick ' : '') + (st.drag === n.id ? 'is-drag ' : '') + (n.fresh ? 'is-new' : ''),
+        ref: (el) => { if (el) (this.noteEls = this.noteEls || {})[n.id] = el; }, addIn: () => this.add(null, n.id),
         aria: 'Note: ' + firstLine(n.text) + (isEdit ? '' : '. Enter writes on it, the arrow keys move it'),
         viewing: !isEdit, editing: isEdit, blocks, isEmpty: !n.text.trim(), by: n.by, when: '· ' + n.when,
         down: (e) => this.down(e, n), move: (e) => this.move(e), up: (e) => this.up(e, n),
@@ -655,16 +851,57 @@ class Component extends DCLogic {
         toss: () => this.toss(n.id)
       };
     };
-    const far = st.notes.reduce((a, n) => ({ w: Math.max(a.w, n.x + NW + 40), h: Math.max(a.h, n.y + NH + 60) }), { w: 0, h: 0 });
-    const count = st.notes.length;
+    const far = mine.reduce((a, n) => ({ w: Math.max(a.w, n.x + NW + 40), h: Math.max(a.h, n.y + NH + 60) }), { w: 0, h: 0 });
+    const count = mine.length;
+    // the tree at the side: this board's notes as an outline, the notes under a note nested below it
+    const rows = [];
+    const walk = (n, depth) => {
+      const ks = mine.filter((k) => k.p === n.id), open = ks.length > 0 && !st.fold[n.id], title = firstLine(n.text), on = st.sel === n.id || st.editing === n.id;
+      rows.push({ pad: 8 + depth * 14 + 'px', hasKids: ks.length > 0, noKids: !ks.length, caretCls: open ? 'is-open' : '', open: open ? 'true' : 'false',
+        toggle: () => this.setState((s) => ({ fold: { ...s.fold, [n.id]: !s.fold[n.id] } })), toggleAria: (open ? 'Fold ' : 'Unfold ') + title,
+        title, tip: title, color: n.color, count: ks.length ? String(under(mine, n.id).length) : '', cur: on ? 'true' : 'false',
+        cls: [on ? 'is-sel' : '', n.text.trim() ? '' : 'is-blank', st.lift === n.id ? 'is-lift' : '', st.over === 'n:' + n.id ? 'is-over' : ''].filter(Boolean).join(' '),
+        ref: (el) => { if (el) (this.rowEls = this.rowEls || {})[n.id] = el; },
+        pick: () => this.pick(n.id), addIn: () => this.add(null, n.id), addAria: 'Add a note under ' + title,
+        down: (e) => this.tdown(e, n.id), move: (e) => this.tmove(e), up: (e) => this.tup(e),
+        key: (e) => { if (e.altKey && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); this.nest(n.id, e.key === 'ArrowRight' ? 1 : -1); } } });
+      if (open) ks.forEach((k) => walk(k, depth + 1));
+    };
+    mine.filter((n) => n.p == null || !byId[n.p]).forEach((n) => walk(n, 0));
+    // twine on the cork, from a note to each note under it; it runs beneath the paper, so only the stretch between two notes shows
+    const links = mine.filter((n) => n.p != null && byId[n.p]).map((n) => {
+      const p = byId[n.p], ax = p.x + NW / 2, ay = p.y + 76, bx = n.x + NW / 2, by = n.y + 76;
+      return { d: 'M' + ax + ' ' + ay + ' Q' + Math.round((ax + bx) / 2) + ' ' + Math.round((ay + by) / 2 + 24) + ' ' + bx + ' ' + by };
+    });
+    const overNote = st.over && st.over[0] === 'n' ? byId[Number(st.over.slice(2))] : null, overBoard = st.over && st.over[0] === 'b' ? st.boards.find((b) => b.id === st.over.slice(2)) : null;
+    const nested = mine.filter((n) => n.p != null && byId[n.p]).length;
     return {
       nav: NAV.map((n) => ({ ...n, cls: n.id === 'ideas' ? 'is-on' : '', cur: n.id === 'ideas' ? 'page' : false, hasBadge: !!n.badge, badge: n.badge || '' })),
-      notes: st.notes.map(view), fieldW: far.w + 'px', fieldH: far.h + 'px',
+      notes: mine.map(view), fieldW: far.w + 'px', fieldH: far.h + 'px', links, noNotes: !count, corkAria: bname(board) + ', an idea board',
       meta: editing ? 'writing in markdown: **bold**, _italic_, - a list, - [ ] a todo, # a heading · esc pins it' : count + (count === 1 ? ' note' : ' notes') + ' · click one to write on it, drag it anywhere, double-click the cork for a new one',
       metaCls: editing ? 'is-busy' : '',
-      hasTrash: !!st.trash, trashLine: st.trash ? 'Threw away “' + firstLine(st.trash.text).slice(0, 28) + '”' : '',
-      undo: () => this.setState((s) => ({ notes: s.trash ? [...s.notes, { ...s.trash, fresh: false }] : s.notes, trash: null })),
+      hasTrash: !!st.trash, trashLine: st.trash ? 'Threw away “' + firstLine(st.trash.note.text).slice(0, 28) + '”' : '',
+      undo: () => this.undo(),
+      hasSent: !!st.sent && !st.trash, sentLine: st.sent ? st.sent.line : '',
+      goSent: () => { const t = this.state.sent; if (!t) return; if (this.corkEl) this.corkEl.scrollTo(0, 0); this.setState({ board: t.board, editing: null, sent: null }); this.pick(t.id); },
       addNote: () => this.add(),
+      // the side: the boards, then this board's tree
+      boards: st.boards.map((b) => ({ name: bname(b), count: String(st.notes.filter((n) => n.b === b.id).length), cur: b.id === board.id ? 'true' : 'false',
+        cls: (b.id === board.id ? 'is-sel ' : '') + (st.over === 'b:' + b.id ? 'is-over' : ''), open: () => this.openBoard(b.id),
+        ref: (el) => { if (el) (this.boardEls = this.boardEls || {})[b.id] = el; } })),
+      boardsNote: st.lift && overBoard ? 'move it to ' + bname(overBoard) : '', addBoard: () => this.addBoard(),
+      rows, sideCls: st.lift ? 'is-dragging' : '', rootCls: st.over === 'root' ? 'is-over' : '',
+      treeNote: st.lift ? (overNote ? 'under “' + firstLine(overNote.text).slice(0, 18) + '”' : st.over === 'root' ? 'out to the top level' : overBoard ? '' : 'onto a note, a board, or here') : count ? (nested ? nested + ' nested · drag one onto another' : 'drag one onto another to nest it') : 'none yet',
+      treeRef: (el) => { if (el) this.treeEl = el; },
+      nameRef: (el) => {
+        if (!el) return;
+        if (document.activeElement !== el && el.value !== board.name) el.value = board.name;
+        if (this.focusName) { this.focusName = false; el.focus(); el.select(); }
+      },
+      onName: (e) => { const v = e.currentTarget.value; this.setState((s) => ({ boards: s.boards.map((b) => (b.id === board.id ? { ...b, name: v } : b)) })); },
+      nameKey: (e) => { if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.currentTarget.blur(); } },
+      nameBlur: (e) => { if (!e.currentTarget.value.trim()) { e.currentTarget.value = 'Untitled board'; this.setState((s) => ({ boards: s.boards.map((b) => (b.id === board.id ? { ...b, name: 'Untitled board' } : b)) })); } },
+      fieldDown: (e) => { if (e.target === e.currentTarget && this.state.sel != null && this.state.editing == null) this.setState({ sel: null }); },
       keep: (e) => e.preventDefault(),
       corkRef: (el) => { this.corkEl = el; },
       fieldRef: (el) => { this.fieldEl = el; },
@@ -673,7 +910,7 @@ class Component extends DCLogic {
         const f = e.currentTarget, r = f.getBoundingClientRect(), k = (r.width / (f.offsetWidth || 1)) || 1;
         this.add({ x: Math.max(0, (e.clientX - r.left) / k - NW / 2), y: Math.max(0, (e.clientY - r.top) / k - 24) });
       },
-      reset: () => { (this.timers || []).forEach(clearTimeout); this.timers = []; this.setState(clone(INIT)); }
+      reset: () => { (this.timers || []).forEach(clearTimeout); this.timers = []; if (this.corkEl) this.corkEl.scrollTo(0, 0); this.setState(clone(INIT)); }
     };
   }
 }
