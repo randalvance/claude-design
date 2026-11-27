@@ -266,7 +266,7 @@ button{font:inherit}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
 /* pet: Jarvis is a paper robot dog, the character in use; the others stay in the picker. One sprite atlas (pet/robot.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/robot-face.png). The pictures are the canvas's uploads of those files. */
-.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(/_blob/f7824c7f9aac093a02c70a17f4b16938);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(/_blob/23e086b8ad981a28f68779ea464f3e87);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -280,13 +280,13 @@ button{font:inherit}
 @keyframes pet-sad{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-span.jface{display:block;background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9);background-size:contain;background-repeat:no-repeat;background-position:center}
-span.jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9)}
-span.jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
-span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
-span.jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e)}
-span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
-.rb-jarvis span.jface{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+span.jface{display:block;background-image:url(/_blob/625fe6eb704613877014edfced476c60);background-size:contain;background-repeat:no-repeat;background-position:center}
+span.jface.robot{background-image:url(/_blob/625fe6eb704613877014edfced476c60)}
+span.jface.dog{background-image:url(/_blob/90ba5f8795c320ddabc3d7c21733a61b)}
+span.jface.cat{background-image:url(/_blob/9c12f1fc0a0e441f471d2ee81cf45bae)}
+span.jface.pug{background-image:url(/_blob/8a6ac7555ad5b0c9fce37cb1d02f406a)}
+span.jface.kitten{background-image:url(/_blob/206eb3135adb9cb4c1190832166a1c64)}
+.rb-jarvis span.jface{background-image:url(/_blob/625fe6eb704613877014edfced476c60),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

@@ -249,7 +249,7 @@ button,input{font:inherit}
 .rb-jarvis{margin-bottom:6px}
 .rb-jarvis::after{content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;border-radius:2px;background-color:color-mix(in srgb,var(--edge-2) 35%,transparent)}
 /* pet: Jarvis is a paper robot dog, the character in use; the others stay in the picker. One sprite atlas (pet/robot.png) holds a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion. Over the composer it peeks with its paws hooked on the frame, a sticker like the cat was: a white cut, no shadow, tilted tilt-cat. The rail tile and the thread portraits show its face (pet/robot-face.png). The pictures are the canvas's uploads of those files. */
-.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(/_blob/f7824c7f9aac093a02c70a17f4b16938);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
+.pet{--pw:111px;--ph:135px;--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-image:url(/_blob/23e086b8ad981a28f68779ea464f3e87);background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -263,13 +263,13 @@ button,input{font:inherit}
 @keyframes pet-sad{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
-span.jface{display:block;background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9);background-size:contain;background-repeat:no-repeat;background-position:center}
-span.jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9)}
-span.jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
-span.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
-span.jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e)}
-span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
-.rb-jarvis span.jface{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+span.jface{display:block;background-image:url(/_blob/625fe6eb704613877014edfced476c60);background-size:contain;background-repeat:no-repeat;background-position:center}
+span.jface.robot{background-image:url(/_blob/625fe6eb704613877014edfced476c60)}
+span.jface.dog{background-image:url(/_blob/90ba5f8795c320ddabc3d7c21733a61b)}
+span.jface.cat{background-image:url(/_blob/9c12f1fc0a0e441f471d2ee81cf45bae)}
+span.jface.pug{background-image:url(/_blob/8a6ac7555ad5b0c9fce37cb1d02f406a)}
+span.jface.kitten{background-image:url(/_blob/206eb3135adb9cb4c1190832166a1c64)}
+.rb-jarvis span.jface{background-image:url(/_blob/625fe6eb704613877014edfced476c60),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 @media (prefers-reduced-motion:reduce){.pet,.pet.greet,.pet.celebrate,.pet.sad,.pet.error,.pet.ask{animation:none}}
 /* /pet */
 /* fetch: the loading state every page shares. Jarvis is away from his plinth and at a kraft file box on a ledge in the middle of the empty sheet:
@@ -282,7 +282,7 @@ span.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
 .fx-say-t{display:block;font-family:var(--hand);font-size:26px;font-weight:700;line-height:1;color:var(--ink)}
 .fx-dots{display:inline-block;width:.9em;text-align:left}
 .fx-say-tail{position:absolute;top:calc(100% - 3px);left:78px;width:21px;height:18px;background-color:var(--card);background-image:var(--face),var(--pulp);clip-path:polygon(0 0,100% 0,30% 100%)}
-.fx-jw{position:absolute;left:40px;bottom:10px;z-index:2;width:180px;height:225px;background:url(/_blob/21d0915356dadf4fbcb2992c973934bc) -540px -450px/1080px 900px no-repeat;filter:drop-shadow(1px 2px 1px var(--amb));animation:fx-work .38s step-end infinite}
+.fx-jw{position:absolute;left:40px;bottom:10px;z-index:2;width:180px;height:225px;background:url(/_blob/28c5a719d680e376b2b8c9547f3441a2) -540px -450px/1080px 900px no-repeat;filter:drop-shadow(1px 2px 1px var(--amb));animation:fx-work .38s step-end infinite}
 @keyframes fx-work{0%{background-position-x:-540px}50%{background-position-x:-720px}100%{background-position-x:-540px}}
 .fx-box{position:absolute;right:25px;bottom:11px;z-index:3;width:170px;height:78px;box-sizing:border-box;display:grid;place-items:center;padding-top:10px;background-color:var(--board);background-image:var(--face),var(--pulp-board);border:1px solid var(--board-2);border-radius:3px;box-shadow:0 3px 0 var(--board-2),3px 8px 10px -4px var(--amb)}
 .fx-box::before{content:"";position:absolute;left:50%;top:-1px;width:34px;height:15px;transform:translateX(-50%);border-radius:0 0 17px 17px;background:var(--board-2);opacity:.6}

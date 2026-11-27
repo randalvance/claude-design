@@ -74,7 +74,7 @@ Undecided or not recorded:
 
 ## Evidence on Hand
 
-- 26 screens, each light and dark: the `Diorama*.dc.html` boards in this folder, indexed by `canvas.json` and described in `README.md`. Canvas: https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis
+- 26 screens, each light and dark: the `Diorama*.dc.html` boards in this folder, indexed by `canvas.json` and described in `README.md`. Canvas: https://claude.ai/artifact/MLf5TQAHibwnnTJ7KyUvqm
 - The Kraft design system under `design-system-kraft/`: tokens for two themes, the brand book, the material recipes, the component bundle with per-component previews, and 27 single-ink icons. Published at https://claude.ai/artifact/PJrLaykUz6ZwqcxZe7TswV
 - Every name, session, ticket, workspace and integration in the boards is demo data (ORB-272, jira.example.com, fleet/infra). There are no real users, usage data, testimonials, press or a shipped build; future work must not fabricate any.
 

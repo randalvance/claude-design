@@ -93,11 +93,11 @@ button{font:inherit}
 
 /* pet: Jarvis is one of five paper characters, the robot dog (the one every board wears), the puppy, the cat, the pug and the kitten. Each has a sprite atlas (pet/<id>.png) with a row per mood (idle, greet, celebrate, sad, error, ask) and 8 frames across, played frame by frame like paper stop-motion, peeking over a composer frame with its paws hooked on; a sticker like the cut-out was: a white cut, no shadow, tilted tilt-cat. Its face (pet/<id>-face.png) is the round sticker the rail tile and the portraits show. The pictures are the canvas's uploads of those files. */
 .pet{--pet-fx:calc(var(--pw) * -7);position:absolute;right:28px;top:calc(14px - var(--ph));width:var(--pw);height:var(--ph);z-index:2;pointer-events:auto;cursor:pointer;background-repeat:no-repeat;background-size:calc(var(--pw) * 8) calc(var(--ph) * 6);background-position:0 0;transform:rotate(-4deg);transform-origin:50% 100%;animation:pet-idle 1.2s steps(8,jump-none) infinite}
-.pet.robot{--pw:111px;--ph:135px;background-image:url(/_blob/f7824c7f9aac093a02c70a17f4b16938)}
-.pet.dog{--pw:101px;--ph:104px;background-image:url(/_blob/aa865b54704c6c655ac32e0b9f408edd)}
-.pet.cat{--pw:104px;--ph:114px;background-image:url(/_blob/de463a60232188f0d9ab58d74b22409c)}
-.pet.pug{--pw:104px;--ph:114px;background-image:url(/_blob/ffbf61d43d24f99a57e4d1c0f1382102)}
-.pet.kitten{--pw:111px;--ph:124px;background-image:url(/_blob/2ec58a4fd839c5d3adfa10c871803f3a)}
+.pet.robot{--pw:111px;--ph:135px;background-image:url(/_blob/23e086b8ad981a28f68779ea464f3e87)}
+.pet.dog{--pw:101px;--ph:104px;background-image:url(/_blob/6ac6c419d8830e083b6a48a0119ae796)}
+.pet.cat{--pw:104px;--ph:114px;background-image:url(/_blob/ef4eb0830a90fc92c204bea953e70d2f)}
+.pet.pug{--pw:104px;--ph:114px;background-image:url(/_blob/c7a02015d90593a5dba772160e89276b)}
+.pet.kitten{--pw:111px;--ph:124px;background-image:url(/_blob/4e8f98be02f5be6e522aa6d719502bb7)}
 .pet.greet{background-position-y:calc(var(--ph) * -1);animation:pet-greet .9s steps(8,jump-none) 2 forwards}
 .pet.celebrate{background-position-y:calc(var(--ph) * -2);animation:pet-celebrate .8s steps(8,jump-none) 3 forwards}
 .pet.sad{background-position-y:calc(var(--ph) * -3);animation:pet-sad 1.4s steps(8,jump-none) 1 forwards}
@@ -111,16 +111,16 @@ button{font:inherit}
 @keyframes pet-error{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 @keyframes pet-ask{from{background-position-x:0}to{background-position-x:var(--pet-fx)}}
 .jface{display:block;background-size:contain;background-repeat:no-repeat;background-position:center}
-.jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9)}
-.jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8)}
-.jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8)}
-.jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e)}
-.jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209)}
-.rbt.jarvis .jface.robot{background-image:url(/_blob/321765f58f4887563e0759eb6800bbd9),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.rbt.jarvis .jface.dog{background-image:url(/_blob/5d1712d1d487933338e4e819ce4481e8),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.rbt.jarvis .jface.cat{background-image:url(/_blob/10eea8b296bcb5b65d1b9b9d305673d8),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.rbt.jarvis .jface.pug{background-image:url(/_blob/bb52f8293ba00d6783fdc50fa975753e),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
-.rbt.jarvis .jface.kitten{background-image:url(/_blob/e52c6c61dc8e79c5479481be3a128209),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.jface.robot{background-image:url(/_blob/625fe6eb704613877014edfced476c60)}
+.jface.dog{background-image:url(/_blob/90ba5f8795c320ddabc3d7c21733a61b)}
+.jface.cat{background-image:url(/_blob/9c12f1fc0a0e441f471d2ee81cf45bae)}
+.jface.pug{background-image:url(/_blob/8a6ac7555ad5b0c9fce37cb1d02f406a)}
+.jface.kitten{background-image:url(/_blob/206eb3135adb9cb4c1190832166a1c64)}
+.rbt.jarvis .jface.robot{background-image:url(/_blob/625fe6eb704613877014edfced476c60),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.dog{background-image:url(/_blob/90ba5f8795c320ddabc3d7c21733a61b),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.cat{background-image:url(/_blob/9c12f1fc0a0e441f471d2ee81cf45bae),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.pug{background-image:url(/_blob/8a6ac7555ad5b0c9fce37cb1d02f406a),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
+.rbt.jarvis .jface.kitten{background-image:url(/_blob/206eb3135adb9cb4c1190832166a1c64),var(--face),var(--pulp);background-size:contain,auto,auto;background-origin:content-box,padding-box,padding-box;background-repeat:no-repeat,no-repeat,repeat;background-position:center,0 0,0 0}
 .hd p{max-width:none}
 .peekgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0 26px;align-items:end}.peekgrid .moods{margin-top:10px}.peekgrid .legend{flex-wrap:wrap;gap:6px 14px}
 .peeks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 12px}
@@ -211,7 +211,7 @@ const STATES = [{ id: 'roam', t: 'Roam' }, { id: 'working', t: 'Work' }, { id: '
 const onStandee = (fn) => window.PetStandee ? fn(window.PetStandee) : document.addEventListener('pet-standee', () => fn(window.PetStandee), { once: true });
 const FACING = (dx, dy) => Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'right' : 'left') : (dy >= 0 ? 'down' : 'up');
 const BUBBLE = { working: 'Writing the parser', attention: 'Needs a staging token' };
-const SHEETS = {"robot":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/21d0915356dadf4fbcb2992c973934bc"},"dog":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/35aac9300e6736cfcdaad5c2af995090"},"cat":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/eea99f7a9ab642aecf06ca931c83d617"},"pug":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/4628b391a664a7662044706f8797afef"},"kitten":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/8162923a0bbbcf77c1b2178c12b09fe6"}}, WALK_H = 104; // the standing figure's height on the floor
+const SHEETS = {"robot":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/28c5a719d680e376b2b8c9547f3441a2"},"dog":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/4a58b204355f08678ff9eff3d230a540"},"cat":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/440f148219222d7b0dcd49028cc103ae"},"pug":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/a6266a098dc286185c3c07b53dda3c9b"},"kitten":{"layout":"sheet","cols":6,"rows":4,"cell":{"w":256,"h":320},"columns":["stand","stomp-left","stomp-right","work-up","work-forward","wave"],"facings":["down","left","right","up"],"sheet":{"w":1536,"h":1280},"standing":0.86,"src":"/_blob/aa62372dcd25b3c590e682febb11c6b0"}}, WALK_H = 104; // the standing figure's height on the floor
 const SPEED = 92; // px per second
 // the round: feet points on the floor (x as a share of the floor's width, since the floor is as wide as its column;
 // y in px, since it is always 260 tall), what a walker does when it gets to each corner, and the corner each starts at.

@@ -4,7 +4,7 @@ Primepaw is the chat app. Its interface is a paper diorama: cardboard and paper 
 top left so each piece casts one shadow down and to the right. Motion is quick and smooth, and Caveat, Nunito, Fraunces and
 Courier New carry the type. The system behind it is Kraft (see below).
 
-Live canvas: https://claude.ai/artifact/KRFPT94y9P7bNHML3wQxis
+Live canvas: https://claude.ai/artifact/MLf5TQAHibwnnTJ7KyUvqm
 
 ## Boards
 
